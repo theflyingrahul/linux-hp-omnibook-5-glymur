@@ -7,6 +7,10 @@ HP-DOCUMENTED
 UPSTREAM-REFERENCE
     Information from another Linux-supported Glymur machine, used only as a structural or implementation reference.
 
+HP-SOFTWARE
+    Information derived from a driver, firmware, BIOS, utility, or software package that HP publicly associates with the target SKU or applicable product family.
+    HP-SOFTWARE evidence can establish that HP distributes support for a component or hardware ID for this SKU/family, but it does not by itself prove that a particular optional component is physically installed in the target unit.
+
 INFERRED
     Reasoned from evidence but not directly confirmed.
 

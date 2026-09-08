@@ -37,3 +37,10 @@ gcc-aarch64-linux-gnu dtc flex bison bc openssl-devel elfutils-libelf-devel ncur
 
 **Why we are not creating an OmniBook 5 config yet**
 The target machine has not arrived, and a board-specific DTS does not yet exist. Current config work is only for generic Glymur/reference validation. Target config requirements will be derived after Day-0 evidence collection and first target DTS construction. No `omnibook5_defconfig` or similar target config will be created in this phase.
+
+## Build parallelism and memory limits
+
+- simultaneous full GCC and LLVM ARM64 Image builds exhausted available memory;
+- the machine/container restarted;
+- sequential builds with reduced parallelism completed successfully;
+- this was a host-resource issue, not a kernel build failure.
