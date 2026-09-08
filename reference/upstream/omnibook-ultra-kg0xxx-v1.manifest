@@ -1,0 +1,16 @@
+# Patch Provenance Manifest: HP OmniBook Ultra
+
+- **Board:** HP OmniBook Ultra 14-kg0xxx
+- **Series Title:** arm64: dts: qcom: Add HP OmniBook Ultra 14-kg0xxx
+- **Series Version:** v1
+- **Author:** Jason Pettit
+- **Posting Date:** 2026-08-30
+- **Cover-letter Message-ID:** `12240.html` (Indiana University LKML mapping)
+- **Individual Patch Message-IDs:** `12241.html`, `12244.html` (Indiana University LKML mapping)
+- **Source Archive URL(s):** `https://lkml.iu.edu/2608.3/12244.html`
+- **Stated Base Commit:** Unknown (Tested on recent Linus master)
+- **Known Dependencies:** Glymur PCIe3 PHY/Controller (Compile), Glymur DP/QMP combo PHY (Runtime)
+- **Retrieval Method:** HTML curl from lkml.iu.edu due to lore.kernel.org bot protection
+- **SHA256 of local raw patch files:** N/A (Mangled HTML extraction)
+- **Research Snapshot:** 2026-09-08 12:51 UTC
+- **Notes:** Patch application locally fails due to HTML escaping/whitespace mangling by the IU archive. Build validation is logically blocked by toolchain absence. The PCIe3 dependency is explicitly recorded as a compile-time blocker for this DTS.

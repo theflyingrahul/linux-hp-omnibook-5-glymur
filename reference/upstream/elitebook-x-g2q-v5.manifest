@@ -1,0 +1,16 @@
+# Patch Provenance Manifest: HP EliteBook X G2q
+
+- **Board:** HP EliteBook X G2q 14 AI
+- **Series Title:** X2 Elite HP EliteBook X G2q support
+- **Series Version:** v5
+- **Author:** Jason Pettit
+- **Posting Date:** 2026-08-29
+- **Cover-letter Message-ID:** `20260829-glymur-send-v5-0-a11bdf6a4b66`
+- **Individual Patch Message-IDs:** `11352.html`, `11353.html` (Indiana University LKML mapping)
+- **Source Archive URL(s):** `https://lkml.iu.edu/2608.3/11353.html`
+- **Stated Base Commit:** Unknown (Tested on recent Linus master)
+- **Known Dependencies:** Glymur DP PHY series (Runtime only)
+- **Retrieval Method:** HTML curl from lkml.iu.edu due to lore.kernel.org bot protection
+- **SHA256 of local raw patch files:** N/A (Mangled HTML extraction)
+- **Research Snapshot:** 2026-09-08 12:51 UTC
+- **Notes:** Patch application locally fails due to HTML escaping/whitespace mangling by the IU archive. Build validation is logically blocked by toolchain absence.
