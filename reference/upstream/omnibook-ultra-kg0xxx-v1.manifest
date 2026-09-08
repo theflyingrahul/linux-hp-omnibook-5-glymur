@@ -5,12 +5,13 @@
 - **Series Version:** v1
 - **Author:** Jason Pettit
 - **Posting Date:** 2026-08-30
-- **Cover-letter Message-ID:** `12240.html` (Indiana University LKML mapping)
-- **Individual Patch Message-IDs:** `12241.html`, `12244.html` (Indiana University LKML mapping)
-- **Source Archive URL(s):** `https://lkml.iu.edu/2608.3/12244.html`
-- **Stated Base Commit:** Unknown (Tested on recent Linus master)
+- **Cover-letter Message-ID:** `20260830-x2-hp-omnibook-ship-v1-0-9feada71dc79@oss.qualcomm.com`
+- **Source Archive URL(s):** `https://lore.kernel.org/all/20260830-x2-hp-omnibook-ship-v1-0-9feada71dc79@oss.qualcomm.com/t.mbox.gz`
+- **Stated Base Commit:** Unknown (Tested on `28924df2a08f440c73991b83028032c901de2ae4`)
 - **Known Dependencies:** Glymur PCIe3 PHY/Controller (Compile), Glymur DP/QMP combo PHY (Runtime)
-- **Retrieval Method:** HTML curl from lkml.iu.edu due to lore.kernel.org bot protection
-- **SHA256 of local raw patch files:** N/A (Mangled HTML extraction)
+- **Retrieval Method:** lore.kernel.org raw mbox endpoint (`t.mbox.gz`)
+- **SHA256 of local raw patch files:** `0d8ed239ce97a0822f6dea0aff7901f0065cafbae4cdf138ca4b15d5a82be29a`
+- **Verified Target Source Path:** `arch/arm64/boot/dts/qcom/glymur-hp-omnibook-ultra-kg0xxx.dts`
+- **Patch Application Status:** `PASS` (both with and without PCIe3 base)
+- **Resulting Temporary Commit SHAs:** `3fcb88131`, `e53878b8f`, `79002eb42` (when based on PCIe3)
 - **Research Snapshot:** 2026-09-08 12:51 UTC
-- **Notes:** Patch application locally fails due to HTML escaping/whitespace mangling by the IU archive. Build validation is logically blocked by toolchain absence. The PCIe3 dependency is explicitly recorded as a compile-time blocker for this DTS.

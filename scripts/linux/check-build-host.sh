@@ -1,77 +1,62 @@
 #!/bin/bash
-set -u
+set -euo pipefail
 
-MODE="all"
-if [ "${1:-}" = "--dt-only" ]; then
-    MODE="dt"
-elif [ "${1:-}" = "--kernel" ]; then
-    MODE="kernel"
-fi
-
-echo "--- Host Information ---"
-uname -a
-uname -m
+echo "Host:"
 if [ -f /etc/os-release ]; then
-    grep PRETTY_NAME /etc/os-release
+    grep PRETTY_NAME /etc/os-release | cut -d= -f2 | tr -d '"' | awk '{print "    " $0}'
 fi
+uname -m | awk '{print "    " $0}'
 echo ""
 
-echo "--- Tool Inventory ---"
-TOOLS="git make python3 clang ld.lld gcc aarch64-linux-gnu-gcc dtc b4 flex bison bc openssl pahole pkg-config"
+has_cmd() {
+    command -v "$1" >/dev/null 2>&1
+}
 
-missing_any=0
-has_clang=1
-has_gcc_cross=1
-has_dtc=1
-
-for t in $TOOLS; do
-    if command -v "$t" >/dev/null 2>&1; then
-        echo "[OK] $t"
-    else
-        echo "[MISSING] $t"
-        missing_any=1
-        if [ "$t" = "clang" ]; then has_clang=0; fi
-        if [ "$t" = "aarch64-linux-gnu-gcc" ]; then has_gcc_cross=0; fi
-        if [ "$t" = "dtc" ]; then has_dtc=0; fi
-    fi
+echo "GCC ARM64 cross-build:"
+gcc_missing=""
+for t in aarch64-linux-gnu-gcc flex bison bc pkg-config; do
+    if ! has_cmd "$t"; then gcc_missing="$gcc_missing $t"; fi
 done
+if [ -n "$gcc_missing" ]; then
+    echo "    BLOCKED"
+    echo "    missing:$gcc_missing"
+else
+    echo "    READY"
+fi
 echo ""
 
-echo "--- Summary ---"
-can_dt=0
-can_kernel=0
-
-if [ $has_dtc -eq 1 ]; then
-    if [ $has_clang -eq 1 ] || [ $has_gcc_cross -eq 1 ]; then
-        can_dt=1
-    fi
-fi
-
-if [ $has_clang -eq 1 ] || [ $has_gcc_cross -eq 1 ]; then
-    # In reality, need flex, bison, bc, openssl etc. for kernel
-    can_kernel=1
-fi
-
-if [ $can_dt -eq 1 ]; then
-    echo "ready for DT-only build"
+echo "LLVM ARM64 build:"
+llvm_missing=""
+for t in clang ld.lld llvm-config; do
+    if ! has_cmd "$t"; then llvm_missing="$llvm_missing $t"; fi
+done
+if [ -n "$llvm_missing" ]; then
+    echo "    BLOCKED"
+    echo "    missing:$llvm_missing"
 else
-    echo "missing tools for DT-only build"
+    echo "    READY"
 fi
+echo ""
 
-if [ $can_kernel -eq 1 ]; then
-    echo "ready for kernel Image build"
+echo "DTB build:"
+dt_missing=""
+if ! has_cmd dtc; then dt_missing=" dtc"; fi
+if [ -n "$dt_missing" ]; then
+    echo "    BLOCKED"
+    echo "    missing:$dt_missing"
 else
-    echo "missing tools for kernel Image build"
+    echo "    READY"
 fi
+echo ""
 
-if [ $missing_any -eq 1 ]; then
-    echo "missing tools"
+echo "Patch workflow:"
+if has_cmd git; then
+    echo "    git: READY"
+else
+    echo "    git: MISSING"
 fi
-
-if [ "$MODE" = "dt" ] && [ $can_dt -eq 0 ]; then
-    exit 1
-elif [ "$MODE" = "kernel" ] && [ $can_kernel -eq 0 ]; then
-    exit 1
+if has_cmd b4; then
+    echo "    b4: READY"
+else
+    echo "    b4: MISSING"
 fi
-
-exit 0

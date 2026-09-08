@@ -5,12 +5,13 @@
 - **Series Version:** v5
 - **Author:** Jason Pettit
 - **Posting Date:** 2026-08-29
-- **Cover-letter Message-ID:** `20260829-glymur-send-v5-0-a11bdf6a4b66`
-- **Individual Patch Message-IDs:** `11352.html`, `11353.html` (Indiana University LKML mapping)
-- **Source Archive URL(s):** `https://lkml.iu.edu/2608.3/11353.html`
-- **Stated Base Commit:** Unknown (Tested on recent Linus master)
+- **Cover-letter Message-ID:** `20260829-glymur-send-v5-0-a11bdf6a4b66@oss.qualcomm.com`
+- **Source Archive URL(s):** `https://lore.kernel.org/all/20260829-glymur-send-v5-0-a11bdf6a4b66@oss.qualcomm.com/t.mbox.gz`
+- **Stated Base Commit:** Unknown (Tested on `28924df2a08f440c73991b83028032c901de2ae4`)
 - **Known Dependencies:** Glymur DP PHY series (Runtime only)
-- **Retrieval Method:** HTML curl from lkml.iu.edu due to lore.kernel.org bot protection
-- **SHA256 of local raw patch files:** N/A (Mangled HTML extraction)
+- **Retrieval Method:** lore.kernel.org raw mbox endpoint (`t.mbox.gz`)
+- **SHA256 of local raw patch files:** `95d34f18048b93e1215296181927e25f1d9972f4dbc3553871084dd275f72548`
+- **Verified Target Source Path:** `arch/arm64/boot/dts/qcom/glymur-hp-elitebook-x-g2q.dts`
+- **Patch Application Status:** `PASS`
+- **Resulting Temporary Commit SHAs:** `4a0e27597`, `4182a093f`, `0045f63b5`
 - **Research Snapshot:** 2026-09-08 12:51 UTC
-- **Notes:** Patch application locally fails due to HTML escaping/whitespace mangling by the IU archive. Build validation is logically blocked by toolchain absence.

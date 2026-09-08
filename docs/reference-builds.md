@@ -6,34 +6,31 @@ Research snapshot: 2026-09-08 12:51 UTC
 - **Source SHA:** `28924df2a08f440c73991b83028032c901de2ae4`
 - **Config Basis:** `defconfig`
 - **Config Adjustments:** Script verifies `CONFIG_QCOM_CPUCP_MBOX=y`, `CONFIG_INTERCONNECT_QCOM_GLYMUR=y`, `CONFIG_PINCTRL_GLYMUR=y`
-- **Compiler:** `gcc` / `aarch64-linux-gnu-gcc`
-- **dtc:** (Unavailable on host)
 - **Make Command:** `make -C .work/linux-mainline O=../build/mainline ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- qcom/glymur-crd.dtb`
 - **Result:** `BLOCKED` (Toolchain unavailable)
-- **Warnings:** None (Build not run)
-- **Output Artifact:** None
-- **Artifact SHA256:** N/A
 
 ## ELITEBOOK X G2q v5
 - **Source/Base SHA:** `28924df2a08f440c73991b83028032c901de2ae4`
-- **Patch Message-IDs:** `20260829-glymur-send-v5-0-a11bdf6a4b66`
-- **Dependency Series:** None required for compile
-- **Generated Commit SHAs:** N/A (Patch application failed)
-- **Compiler:** `gcc` / `aarch64-linux-gnu-gcc`
-- **Config:** `defconfig` + generic Glymur symbols
-- **Result:** `BLOCKED` (Patch application failed due to mangled HTML archive retrieval; Toolchain unavailable)
-- **Warnings:** `patch fragment without header`
-- **Artifact SHA256:** N/A
-- **DP PHY Present:** No (Runtime dependency only, not required for compilation)
+- **Retrieval:** `PASS` (lore.kernel.org raw mbox endpoint)
+- **Patch Application:** `PASS`
+  - **Commit:** `4a0e27597` dt-bindings: arm: qcom: Add HP EliteBook X G2q 14 AI
+  - **Commit:** `4182a093f` arm64: dts: qcom: Add HP EliteBook X G2q 14 AI
+  - **Commit:** `0045f63b5` firmware: qcom: scm: Allow QSEECOM on HP EliteBook X G2q 14 AI
+- **Compilation:** `BLOCKED` (Toolchain unavailable)
+- **DP PHY Runtime Support:** `NOT RUN` (Runtime-only dependency; compilation untested due to blocked compiler)
+
+*Note: Phase 2 previously resulted in retrieval blocked by bot protection yielding rendered HTML, which prevented patch application. Phase 2.1 successfully fetched raw mbox data and applied it.*
 
 ## OMNIBOOK ULTRA v1
 - **Source/Base SHA:** `28924df2a08f440c73991b83028032c901de2ae4`
-- **Patch Message-IDs:** `12244.html` (LKML)
-- **PCIe3 Dependency:** `20260825-glymur_linkmode_0826-v10-0-56ab597d77e4`
-- **DP PHY Dependency Present:** No (Runtime dependency only, not required for compilation)
-- **Result Before PCIe3 Dependency:** `BLOCKED` (Would fail to compile due to missing `pcie3b` label, and Toolchain is unavailable)
-- **Result After PCIe3 Dependency:** `BLOCKED` (Patch application failed due to mangled HTML archive retrieval; Toolchain unavailable)
-- **Compiler:** `gcc` / `aarch64-linux-gnu-gcc`
-- **Config:** `defconfig` + generic Glymur symbols
-- **Warnings:** None (Build not run)
-- **Artifact SHA256:** N/A
+- **Retrieval:** `PASS` (lore.kernel.org raw mbox endpoint)
+- **Patch Application Without PCIe3:** `PASS` (Commit: `6641dfc35`)
+- **Compilation Without PCIe3:** `EXPECTED FROM SOURCE DEPENDENCY` (Would fail to compile due to missing `pcie3b` label; actual build blocked by toolchain absence)
+- **Patch Application With PCIe3 (v10):** `PASS`
+  - **Base:** `28924df2a08f440c73991b83028032c901de2ae4`
+  - **PCIe3 Commits Applied:** `0bd6f1986`, `0c9c05a18`, `d547325f5`, `82a3bd7b0`
+  - **OmniBook Commits Applied:** `3fcb88131`, `e53878b8f`, `79002eb42`
+- **Compilation With PCIe3:** `BLOCKED` (Toolchain unavailable)
+- **DP PHY Runtime Support:** `NOT RUN` (Runtime-only dependency)
+
+*Note: As with EliteBook, Phase 2.1 successfully bypassed HTML bot protection to retrieve and validate raw patches using lore's `.mbox.gz` endpoints.*
