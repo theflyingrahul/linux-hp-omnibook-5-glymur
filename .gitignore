@@ -1,0 +1,9 @@
+reference/manuals/*.pdf
+captures/*/private/
+captures/*/drivers/
+captures/*/driverstore/
+captures/*/firmware/
+captures/*/efi/
+*.pfx
+*.p12
+*.key
