@@ -13,8 +13,14 @@
 | Touchpad | Precision Clickpad with image sensor | HP-DOCUMENTED | Manual p.47 |
 | Keyboard | Connected via keyboard daughterboard | HP-DOCUMENTED | Part P48630-601 |
 
-HP documentation lists:
+HP service manual documentation lists:
 - Qualcomm FastConnect C7700 Wi-Fi 7 + Bluetooth 6.0
 - Qualcomm FastConnect 6900 Wi-Fi 6E + Bluetooth 5.3
+Evidence: HP-DOCUMENTED / FAMILY-SERVICE
 
-Exact target module: UNKNOWN until machine inspection.
+Target product specification lists:
+- Qualcomm FastConnect C7700 Wi-Fi 7 + Bluetooth 6.0
+Evidence: HP-DOCUMENTED
+
+Physical D3ZN3UA unit:
+NOT OBSERVED YET. Exact target module UNKNOWN until machine inspection.

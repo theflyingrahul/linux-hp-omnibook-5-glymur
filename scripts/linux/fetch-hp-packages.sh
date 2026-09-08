@@ -10,7 +10,7 @@ list_packages() {
         exit 1
     fi
     echo "Packages in manifest:"
-    awk -F'\t' 'NR>1 {print $2 " - " $3 " (" $9 ")"}' "$MANIFEST"
+    awk -F'\t' 'NR>1 {print $2 " - " $3 " (" $8 ")"}' "$MANIFEST"
 }
 
 download_package() {
@@ -28,9 +28,9 @@ download_package() {
     fi
     
     local url
-    url=$(echo "$line" | cut -f10)
+    url=$(echo "$line" | cut -f7)
     local expected_hash
-    expected_hash=$(echo "$line" | cut -f12)
+    expected_hash=$(echo "$line" | cut -f6)
     local filename
     filename=$(basename "$url")
     
