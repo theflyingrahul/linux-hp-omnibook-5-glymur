@@ -1,0 +1,4759 @@
+{
+  "firmware_names": {
+    "8480_ccd_base.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "8480_default_sensors.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "8480_dynamic_sensors.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "8480_irq.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "8480_power_0.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "8480_qsh_ble_0.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "ACDResources.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaucd_ext_crd8480.inf"
+    },
+    "ADC1.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcadc_ext8480.inf"
+    },
+    "ADCMResources.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcacsp_crd8480.inf"
+    },
+    "ASCDResources.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcascd_ext_crd8480.inf"
+    },
+    "BSRC_BT.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbluetooth8480.inf"
+    },
+    "BSRC_QSPI.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcspi8480.inf"
+    },
+    "BSRC_SPI.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcspi8480.inf"
+    },
+    "BSRC_UART_2Wire_1.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcuart8480.inf"
+    },
+    "BSRC_UART_2Wire_2.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcuart8480.inf"
+    },
+    "BSRC_UART_4Wire_1.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcuart8480.inf"
+    },
+    "BSRC_UART_4Wire_2.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcuart8480.inf"
+    },
+    "CRMD.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbcryptcipherkm8480.inf"
+    },
+    "EVMD.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qceva_ext8480.inf"
+    },
+    "EVPF.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qceva_ext8480.inf"
+    },
+    "MptfBlob1.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf"
+    },
+    "MptfBlob2.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf"
+    },
+    "MptfBlob3.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf"
+    },
+    "MptfBlob4.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf"
+    },
+    "QSTFConfigFile.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcqstfconfig8480.inf"
+    },
+    "QdssTrace.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcqdss8480.inf"
+    },
+    "RADS.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf"
+    },
+    "RCDS.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_cdsp8480.inf"
+    },
+    "RNGF.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcRng8480.inf"
+    },
+    "ROOB.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_oob8480.inf"
+    },
+    "RSCP.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_soccp8480.inf"
+    },
+    "RSPU.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_spss8480.inf"
+    },
+    "SCMF.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcscm8480.inf"
+    },
+    "SLM1.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcslimbus8480.inf"
+    },
+    "UCS0.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcusbcucsi8480.inf"
+    },
+    "adsp_dtbs.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf"
+    },
+    "adspr.jsn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf"
+    },
+    "adsps.jsn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf"
+    },
+    "adspua.jsn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf"
+    },
+    "apttestapp.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtQcom8480.inf"
+    },
+    "aux_ucode.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlancol8480_1.inf"
+    },
+    "bdwlan.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "bdwlan_qcc2072_1p0_ncm820A.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlancol8480_1.inf"
+    },
+    "bdwlan_wcn785x_2p0_ncm825.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "bdwlan_wcn785x_2p0_ncm825_AS_S55_SA.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "bdwlan_wcn785x_2p0_ncm825_DE01.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "bdwlan_wcn785x_2p0_ncm825_DE02.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "bdwlan_wcn785x_2p0_ncm825_HO_MoorO.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "bdwlan_wcn785x_2p0_ncm825_LES790.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "bdwlan_wcn785x_2p0_ncm825_LE_Altai.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "bdwlan_wcn785x_2p0_ncm825_LE_C590.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "bdwlan_wcn785x_2p0_ncm825_PZ36.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "bdwlan_wcn785x_2p0_ncm825_QC_revB.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "bdwlan_wcn785x_2p0_ncm825_UX3407Q.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "bdwlan_wcn785x_2p0_ncm865a.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "bdwlan_wcn785x_2p0_ncm865a_LE_S390.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "bdwlan_wcn785x_2p0_ncm865a_QC_revB.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "bsrc_bt.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbluetooth8480.inf"
+    },
+    "cdsp_dtbs.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf"
+    },
+    "clnbtfw10.tlv": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbluetooth8480.inf"
+    },
+    "clnbtnv10.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbluetooth8480.inf"
+    },
+    "dxhdcp2.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtOem8480.inf"
+    },
+    "en-US-Alexa.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QCListenSM_swc_ext8480.inf"
+    },
+    "evass.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qceva8480.inf"
+    },
+    "fingerpr.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtOem8480.inf"
+    },
+    "fipstestapp.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtQcom8480.inf"
+    },
+    "fipstestapp64.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtQcom8480.inf"
+    },
+    "hdcp1.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtQcom8480.inf"
+    },
+    "hdcp2p2.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtQcom8480.inf"
+    },
+    "hdcpsrm.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtQcom8480.inf"
+    },
+    "hmtbtfw20.tlv": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbluetooth8480.inf"
+    },
+    "hmtnv20.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbluetooth8480.inf"
+    },
+    "oobmssn.jsn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_oob8480.inf"
+    },
+    "oobmsst.jsn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_oob8480.inf"
+    },
+    "phy_ucode.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlancol8480_1.inf"
+    },
+    "phy_ucode20.elf": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "pr_3_wp.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtQcom8480.inf"
+    },
+    "qcadsp8480.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf"
+    },
+    "qcav1e8480.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qccdsp8480.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf"
+    },
+    "qcdxkmbase8480.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qcdxkmbase8480_135.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qcdxkmbase8480_170.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qcdxkmbase8480_185.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qcdxkmbase8480_200.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qcdxkmbase8480_ma.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qcdxkmbase8480_ma_091.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qcdxkmbase8480_ma_096.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qcdxkmbase8480_ma_107.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qcdxkmbase8480_ma_118.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qcdxkmbase8480_ma_135.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qcdxkmbase8480_ma_170.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qcdxkmbase8480_ma_185.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qcdxkmbase8480_ma_200.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qcdxkmext8480_CRD.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdxext_crd8480.inf"
+    },
+    "qcdxkmsuc8480.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qcvk_icd_arm64x.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qcvss8480.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf"
+    },
+    "qdss_trace_config_v1.cfg": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "qdss_trace_config_v2.cfg": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "qsh_battery.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "qsh_ble.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "qwes.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtQcom8480.inf"
+    },
+    "regdb.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "rtice.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtQcom8480.inf"
+    },
+    "sns_amd.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_amd_sw_enabled.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_aont.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_cal.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_ccd_v1_0_amd.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_ccd_v3_1_walk.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_ccd_v6_0.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_ccd_v6_0_sensors.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_ccd_v6_0_te_cd_regs.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_cm.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_dae.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_diag_filter.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_direct_channel.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_distance_bound.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_dpc.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_fmv.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_geomag_rv.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_gyro_cal.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_inbag_detect.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_mag_cal.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_offbody_detect_phone.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_pedometer.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_psd_disable.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_rmd.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_rotv.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_sim.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_smd.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_tilt.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_tilt_sw_enabled.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_tilt_to_wake.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "sns_transport_ppe.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "soccpr.jsn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_soccp8480.inf"
+    },
+    "stm_lid_angle.json": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf"
+    },
+    "tzsc.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtQcom8480.inf"
+    },
+    "wlanfw.bin": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlancol8480_1.inf"
+    },
+    "wlanfw.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    },
+    "wlanfw20.mbn": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf"
+    }
+  },
+  "hardware_ids": {
+    "ACPI\\AUI0204": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "ACPI\\IBM0057": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "ACPI\\NCT1001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "ACPI\\QCOM0C6D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcUsb4Bus8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\QCOM0F04": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "HalExtQCWdogTimer8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\QCOM0F0A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qckmbam8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F0B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcspmi8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F0C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcgpio8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F0D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcipcrouter8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\QCOM0F0E": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcspi8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\QCOM0F10": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qci2c8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F11": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcadc_ext8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\QCOM0F12": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdiagcsi8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\QCOM0F13": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdiagrouter8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\QCOM0F16": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcuart8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\QCOM0F17": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd_ext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F1B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\QCOM0F20": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\QCOM0F2A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbattminiclass8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\QCOM0F2B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpmic8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F2C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpmicapps8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F2D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpmicgpio8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F2F": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qccdi8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\QCOM0F37": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F38": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F39": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F3A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F3B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F3C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F3D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F3E": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F3F": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F40": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F41": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F42": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F43": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F44": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F45": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F46": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F47": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F48": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F49": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F4A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F4B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F4C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F4D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F4E": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F4F": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F50": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F51": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F52": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F53": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F54": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F55": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F56": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcqdss8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F58": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F59": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F5A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F5C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcadsprpc8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\QCOM0F5E": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F5F": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F60": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F61": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F62": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F63": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F64": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F65": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F68": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qchwnled8480.inf",
+      "provider": "Qualcomm Technologies Inc"
+    },
+    "ACPI\\QCOM0F77": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcfgbcl8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F82": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcadsprpcd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\QCOM0F83": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsyscache8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F84": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcglink8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F85": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcRng8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F87": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsp8480.inf",
+      "provider": "Qualcomm Technologies Inc."
+    },
+    "ACPI\\QCOM0F88": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcgpi8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\QCOM0F8D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\QCOM0F8E": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpmicglink8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\QCOM0F90": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F91": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F96": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcppx8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0F9A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcXhciFilter8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\QCOM0F9D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcusbcucsi8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\QCOM0FA1": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcconnectionsecurity8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\QCOM0FA5": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcSkExt8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\QCOM0FA6": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\QCOM0FA7": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FA8": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FA9": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FAA": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FAB": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FAC": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FAD": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FAE": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FAF": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FB0": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FB1": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FB2": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FB3": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FB4": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FB5": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FB9": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FBB": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FC6": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpmic8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FCA": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwwanpowerdown.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FCC": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsecapp.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FD7": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qceva8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FD8": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd_ext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FD9": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd_ext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FDA": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd_ext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FDB": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd_ext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FDC": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd_ext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FDD": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd_ext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FDD&SUBSYS_CUST8480&REV_0091": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FDD&SUBSYS_CUST8480&REV_0092": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FDE": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd_ext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FDF": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd_ext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FE1": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd_ext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FE2": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd_ext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FE3": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FE4": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FE5": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FE6": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FE7": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FE8": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FEA": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbtacx_transportdriver8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\QCOM0FEC": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcAlwaysOnSensing.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\QCOM0FEE": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcXhciFilter8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\QCOM0FEF": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcXhciFilter8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\QCOM0FF7": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcDCF8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\QCOM0FF8": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcHumanPresenceSensor8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\QCOM0FF9": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qciommuext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM0FFA": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpdsr8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\QCOM0FFB": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpilfilterext8480.inf",
+      "provider": "Qualcomm Technologies Inc."
+    },
+    "ACPI\\QCOM0FFC": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QCDiagBridge8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\QCOM0FFD": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcSOCPartition8480.inf",
+      "provider": "Qualcomm Technologies Inc."
+    },
+    "ACPI\\QCOM0FFE": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTftpKmdf8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\QCOM0FFF": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qSarMgr8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\QCOM1000": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcrpen8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\QCOM1001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcscm8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1003": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcshutdownsvc8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\QCOM1004": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSSGServicesUMD8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\QCOM1005": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSubsysThermalMgr8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\QCOM1006": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensors8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\QCOM1008": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1009": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM100A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM100B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM100C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM100D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM100E": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM100F": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1010": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1011": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1012": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1013": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1014": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1015": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1016": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1017": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1018": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1019": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM101A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM101B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM101C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM101D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM101E": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM101F": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1020": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1021": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1022": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1023": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1024": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1025": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1026": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1027": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1028": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1029": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM102A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM102B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM102C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM102D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM102E": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM102F": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1030": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1031": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1032": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbcryptcipherkm8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1033": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd_ext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1036": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\QCOM1037": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\QCOM1038": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1039": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM103A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM103B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcSocServiceKMDF8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsbod8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated."
+    },
+    "ACPI\\QCOM103D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM103E": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTrEE8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM103F": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1040": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcrdbg8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\QCOM1042": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ppte.wd8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\QCOM1043": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcqstfconfig8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\QCOM1044": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qc_cpu_audio_processing_ext_ep8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\QCOM1045": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcabd8480.inf",
+      "provider": "Qualcomm Technologies Inc."
+    },
+    "ACPI\\QCOM1046": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcipcc8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\QCOM1047": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSenD8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\QCOM1048": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensors8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\QCOM1049": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcOobWindowsService8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\QCOM104A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "VoiceAssistantDriver8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\QCOMFFDF": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSubsysThermalMgr8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\QCOMFFE1": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcursext.inf",
+      "provider": "Qualcomm Technologies Inc."
+    },
+    "ACPI\\QCOMFFF0": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "MicrosoftEffectPack_extension.inf",
+      "provider": "Microsoft Corporation"
+    },
+    "ACPI\\VEN_QCOM&DEV_0693&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf",
+      "provider": "Qualcomm Technologies Inc"
+    },
+    "ACPI\\VEN_QCOM&DEV_0694&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcSensorsConfigCrd8480.inf",
+      "provider": "Qualcomm Technologies Inc"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0002": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0003": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0005": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0006": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0007": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0008": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0009": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_000A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_000B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_000C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_000D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0015": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0016": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0017": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0018": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0019": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_001A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_001B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_001C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_001D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_001E": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_001F": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0020": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0025": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0026": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0027": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0030": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0033": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0042": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0048": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0049": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_004A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_004B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_004C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_004D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_004E": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_004F": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0050": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0051": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0052": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0053": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0054": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0056": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0057": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0058": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0059": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_005A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0060": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0061": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_007E": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_007F": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0080": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0081": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0082": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0083": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0084": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0085": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0086": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0087": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0088": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0089": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_008A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_008E": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0090": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0091": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0092": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0093": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0094": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0095": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0096": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_0098": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_009C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_009D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00A0": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00A1": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00A2": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00A3": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00A4": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00A5": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00A7": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00A8": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00A9": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00AA": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00AB": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00B0": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00B1": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00B2": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00B3": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00B4": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00B5": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00B6": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00B7": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00B9": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00C0": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00C1": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00C2": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00C4": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00C5": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00C6": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F1B&SUBSYS_8F03103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F1B&SUBSYS_8F46103C&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F1B&SUBSYS_8F46103C&REV_0002": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F1B&SUBSYS_8F46103C&REV_0003": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F1B&SUBSYS_8F46103C&REV_0004": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F1B&SUBSYS_8F47103C&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F1B&SUBSYS_8F47103C&REV_0002": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F1B&SUBSYS_8F47103C&REV_0003": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F1B&SUBSYS_8F47103C&REV_0004": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F1B&SUBSYS_CDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F1B&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F2C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpmicapps8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdxext_qcdpps8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_0002": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_0005": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_0006": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_0027": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_0087": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_0088": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_0089": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_00A0": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_00A1": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_00A2": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_00A3": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_00A4": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_00A5": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_00A7": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_00A8": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_00AA": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_00AB": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_00C1": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_00C2": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_00C4": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&REV_00C5": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&SUBSYS_8F03103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdxext_crd8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&SUBSYS_8F46103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdxext_crd8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&SUBSYS_8F47103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdxext_crd8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F36&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdxext_crd8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F56&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcqdss8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F5A&SUBSYS_CUST8480&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F6B&SUBSYS_CDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbluetooth8480.inf",
+      "provider": "Qualcomm Atheros Communications Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F6B&SUBSYS_CLS08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbluetooth_swiftpair_ext8480.inf",
+      "provider": "Qualcomm Atheros Communications Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F6B&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbluetooth8480.inf",
+      "provider": "Qualcomm Atheros Communications Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F6B&SUBSYS_IDP08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbluetooth8480.inf",
+      "provider": "Qualcomm Atheros Communications Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F6B&SUBSYS_IDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbluetooth8480.inf",
+      "provider": "Qualcomm Atheros Communications Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F6B&SUBSYS_MTP08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbluetooth_swiftpair_ext8480.inf",
+      "provider": "Qualcomm Atheros Communications Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F6B&SUBSYS_QCB08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbluetooth8480.inf",
+      "provider": "Qualcomm Atheros Communications Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F6B&SUBSYS_QRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbluetooth_swiftpair_ext8480.inf",
+      "provider": "Qualcomm Atheros Communications Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F77": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcfgbcl8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F77&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcfgbclext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F77&SUBSYS_IDP08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcfgbclext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0F8D&SUBSYS_CDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_spss8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F8D&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_spss8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0F8D&SUBSYS_QCB08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_spss8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FA6&SUBSYS_CDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_cdsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FA6&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_cdsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FA6&SUBSYS_QCB08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_cdsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FB8&SUBSYS_CDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_cdsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FB8&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_cdsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FB8&SUBSYS_QCB08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_cdsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FC6&SUBSYS_CRD07280": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpmicext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FC6&SUBSYS_IDP07280": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpmicext8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FC7&SUBSYS_CDP08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt_ext8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FC7&SUBSYS_CDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt_ext8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FC7&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt_ext8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FC7&SUBSYS_IDP08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt_ext8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FC7&SUBSYS_IDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt_ext8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FC7&SUBSYS_MTP08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt_ext8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FC7&SUBSYS_QCB08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt_ext8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FC7&SUBSYS_QRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt_ext8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD7&SUBSYS_CDP08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qceva_ext8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD7&SUBSYS_CDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qceva_ext8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD7&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qceva_ext8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD7&SUBSYS_IDP08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qceva_ext8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD7&SUBSYS_IDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qceva_ext8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD7&SUBSYS_MTP08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qceva_ext8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD7&SUBSYS_QCB08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qceva_ext8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD7&SUBSYS_QRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qceva_ext8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD8&SUBSYS_CUST8480&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD8&SUBSYS_CUST8480&REV_0002": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD8&SUBSYS_CUST8480&REV_0003": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD8&SUBSYS_CUST8480&REV_0006": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD8&SUBSYS_CUST8480&REV_0007": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD8&SUBSYS_CUST8480&REV_0081": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD8&SUBSYS_CUST8480&REV_0082": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD8&SUBSYS_CUST8480&REV_0083": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD8&SUBSYS_CUST8480&REV_0084": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD8&SUBSYS_CUST8480&REV_0091": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD8&SUBSYS_CUST8480&REV_0092": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD8&SUBSYS_CUST8480&REV_00A1": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD8&SUBSYS_CUST8480&REV_00A2": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD9&SUBSYS_CUST8480&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD9&SUBSYS_CUST8480&REV_0002": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD9&SUBSYS_CUST8480&REV_0003": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD9&SUBSYS_CUST8480&REV_0006": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD9&SUBSYS_CUST8480&REV_0007": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD9&SUBSYS_CUST8480&REV_0081": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD9&SUBSYS_CUST8480&REV_0082": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD9&SUBSYS_CUST8480&REV_0083": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD9&SUBSYS_CUST8480&REV_0084": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD9&SUBSYS_CUST8480&REV_0091": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD9&SUBSYS_CUST8480&REV_0092": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD9&SUBSYS_CUST8480&REV_00A1": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FD9&SUBSYS_CUST8480&REV_00A2": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDA&SUBSYS_CUST8480&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDA&SUBSYS_CUST8480&REV_0002": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDA&SUBSYS_CUST8480&REV_0003": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDA&SUBSYS_CUST8480&REV_0006": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDA&SUBSYS_CUST8480&REV_0007": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDA&SUBSYS_CUST8480&REV_0081": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDA&SUBSYS_CUST8480&REV_0082": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDA&SUBSYS_CUST8480&REV_0083": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDA&SUBSYS_CUST8480&REV_0084": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDA&SUBSYS_CUST8480&REV_0091": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDA&SUBSYS_CUST8480&REV_0092": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDA&SUBSYS_CUST8480&REV_00A1": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDA&SUBSYS_CUST8480&REV_00A2": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDB&SUBSYS_CUST8480&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDB&SUBSYS_CUST8480&REV_0002": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDB&SUBSYS_CUST8480&REV_0003": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDB&SUBSYS_CUST8480&REV_0006": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDB&SUBSYS_CUST8480&REV_0007": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDB&SUBSYS_CUST8480&REV_0081": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDB&SUBSYS_CUST8480&REV_0082": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDB&SUBSYS_CUST8480&REV_0083": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDB&SUBSYS_CUST8480&REV_0084": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDB&SUBSYS_CUST8480&REV_0091": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDB&SUBSYS_CUST8480&REV_0092": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDB&SUBSYS_CUST8480&REV_00A1": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDB&SUBSYS_CUST8480&REV_00A2": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDC&SUBSYS_CUST8480&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDC&SUBSYS_CUST8480&REV_0002": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDC&SUBSYS_CUST8480&REV_0003": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDC&SUBSYS_CUST8480&REV_0006": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDC&SUBSYS_CUST8480&REV_0007": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDC&SUBSYS_CUST8480&REV_0081": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDC&SUBSYS_CUST8480&REV_0082": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDC&SUBSYS_CUST8480&REV_0083": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDC&SUBSYS_CUST8480&REV_0084": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDC&SUBSYS_CUST8480&REV_0091": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDC&SUBSYS_CUST8480&REV_0092": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDC&SUBSYS_CUST8480&REV_00A1": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FDC&SUBSYS_CUST8480&REV_00A2": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcpep.wd8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0030": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0033": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0048": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0049": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_004A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_004B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_004C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_004D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_004E": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_004F": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0050": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0051": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0052": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0053": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0054": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0056": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0057": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0058": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0059": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_005A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_005C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0061": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0080": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0081": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0082": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0083": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0084": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0085": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0086": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0087": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0088": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0089": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_008A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_008E": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0090": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0091": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0092": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0093": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0094": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0095": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0096": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_0098": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_009C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_009D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_00B0": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_00B1": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_00B2": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_00B3": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_00B4": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_00B5": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_00B6": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_00B7": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_00B9": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_00C0": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_00C1": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_00C2": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_00C4": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_00C5": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF0&REV_00C6": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcnspmcdm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdxext_qcdpps8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5&REV_0033": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5&REV_004A": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5&REV_004B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5&REV_004C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5&REV_004D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5&REV_004F": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5&REV_0051": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5&REV_0095": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5&REV_0096": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5&REV_0098": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5&REV_009C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5&REV_009D": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdx8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5&SUBSYS_8F03103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdxext_crd8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5&SUBSYS_8F46103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdxext_crd8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5&SUBSYS_8F47103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdxext_crd8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FF5&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdxext_crd8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFA&SUBSYS_8F03103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFA&SUBSYS_8F46103C&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFA&SUBSYS_8F46103C&REV_0002": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFA&SUBSYS_8F46103C&REV_0003": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFA&SUBSYS_8F46103C&REV_0004": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFA&SUBSYS_8F47103C&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFA&SUBSYS_8F47103C&REV_0002": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFA&SUBSYS_8F47103C&REV_0003": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFA&SUBSYS_8F47103C&REV_0004": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFA&SUBSYS_CDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_soccp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFA&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_soccp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFA&SUBSYS_QCB08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_soccp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFB&SUBSYS_8F03103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFB&SUBSYS_8F46103C&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFB&SUBSYS_8F46103C&REV_0002": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFB&SUBSYS_8F46103C&REV_0003": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFB&SUBSYS_8F46103C&REV_0004": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFB&SUBSYS_8F47103C&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFB&SUBSYS_8F47103C&REV_0002": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFB&SUBSYS_8F47103C&REV_0003": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFB&SUBSYS_8F47103C&REV_0004": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFB&SUBSYS_CDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_spss8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFB&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_spss8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFB&SUBSYS_QCB08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_spss8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFC&SUBSYS_AGN00000": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QCDiagBridge8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFC&SUBSYS_CDPS8180": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QCDiagBridge8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFC&SUBSYS_CLS07180": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QCDiagBridge8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFC&SUBSYS_CLS08180": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QCDiagBridge8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFC&SUBSYS_IDP07180": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QCDiagBridge8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFC&SUBSYS_IDPS7180": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QCDiagBridge8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFC&SUBSYS_MTP08180": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QCDiagBridge8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFF&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qsarconfig8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFF&SUBSYS_IDP08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qsarconfig8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_0FFF&SUBSYS_QCB08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qsarconfig8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_1036&SUBSYS_CDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_soccp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_1036&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_soccp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_1036&SUBSYS_QCB08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_soccp8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_1037&SUBSYS_CDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_oob8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_1037&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_oob8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_1037&SUBSYS_QCB08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcsubsys_ext_oob8480.inf",
+      "provider": "Qualcomm Technologies, Incorporated"
+    },
+    "ACPI\\VEN_QCOM&DEV_103E&SUBSYS_CDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtQcom8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_103E&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtQcom8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_103E&SUBSYS_IDP08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtQcom8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_103E&SUBSYS_IDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtQcom8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_103E&SUBSYS_QCB08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcTreeExtQcom8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_CDPS8480&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_CDPS8480&REV_0002": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_CDPS8480&REV_0003": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_CDPS8480&REV_0004": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_CDPS8480&REV_0005": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_CDPS8480&REV_0006": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_CRD08480&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_CRD08480&REV_0002": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_CRD08480&REV_0003": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_CRD08480&REV_0004": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_CRD08480&REV_0005": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_CRD08480&REV_0006": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_QCB08480&REV_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_QCB08480&REV_0002": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_QCB08480&REV_0003": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_QCB08480&REV_0004": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_QCB08480&REV_0005": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_QCB08480&REV_0006": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcMptfDevice8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ADCM\\QCOM0FB7": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaucd8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ADCM\\QCOM0FF4": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcadx_ext8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\QCOM0FF6": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcascd8480.inf",
+      "provider": "Qualcomm"
+    },
+    "ADCM\\VEN_QCOM&DEV_0FB7&SUBSYS_8F03103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaucd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FB7&SUBSYS_8F46103C&REV_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaucd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FB7&SUBSYS_8F46103C&REV_02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaucd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FB7&SUBSYS_8F46103C&REV_03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaucd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FB7&SUBSYS_8F46103C&REV_04": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaucd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FB7&SUBSYS_8F47103C&REV_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaucd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FB7&SUBSYS_8F47103C&REV_02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaucd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FB7&SUBSYS_8F47103C&REV_03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaucd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FB7&SUBSYS_8F47103C&REV_04": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaucd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FB7&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaucd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FF6&SUBSYS_8F03103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcascd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FF6&SUBSYS_8F46103C&REV_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcascd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FF6&SUBSYS_8F46103C&REV_02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcascd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FF6&SUBSYS_8F46103C&REV_03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcascd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FF6&SUBSYS_8F46103C&REV_04": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcascd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FF6&SUBSYS_8F47103C&REV_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcascd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FF6&SUBSYS_8F47103C&REV_02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcascd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FF6&SUBSYS_8F47103C&REV_03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcascd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FF6&SUBSYS_8F47103C&REV_04": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcascd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADCM\\VEN_QCOM&DEV_0FF6&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcascd_ext_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADSP\\QCOM0F0F": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcslimbus8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "ADSP\\QCOM0F22": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcadcm8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADSP\\VEN_QCOM&DEV_0F22&SUBSYS_8F46103C&REV_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcacsp_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADSP\\VEN_QCOM&DEV_0F22&SUBSYS_8F46103C&REV_02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcacsp_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADSP\\VEN_QCOM&DEV_0F22&SUBSYS_8F46103C&REV_03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcacsp_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADSP\\VEN_QCOM&DEV_0F22&SUBSYS_8F46103C&REV_04": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcacsp_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADSP\\VEN_QCOM&DEV_0F22&SUBSYS_8F47103C&REV_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcacsp_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADSP\\VEN_QCOM&DEV_0F22&SUBSYS_8F47103C&REV_02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcacsp_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADSP\\VEN_QCOM&DEV_0F22&SUBSYS_8F47103C&REV_03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcacsp_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "ADSP\\VEN_QCOM&DEV_0F22&SUBSYS_8F47103C&REV_04": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcacsp_crd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "AUCD\\QCOM0FCD": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F03103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F46103C&REV_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F46103C&REV_02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F46103C&REV_03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F46103C&REV_04": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F47103C&REV_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F47103C&REV_02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F47103C&REV_03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F47103C&REV_04": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_CDPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QCListenSM8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_QCB08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QCListenSM8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "COMPUTER\\Generic": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qc_cpu_audio_processing_ext_ep8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "HID\\*ELAN0143&Col01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\*ELAN0147&Col01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\*ELAN014B&Col01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\FUJ02E5&Col02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\FUJ02E6&Col02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\ITEirDevice&Col05": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\IrDevice&Col08": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\IrDeviceV2&Col08": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\TOS_BT_MOU_0004&0005": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VEN_ELAN&DEV_0143&Col01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VEN_ELAN&DEV_0143&Col02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETDHCF.inf",
+      "provider": "ELAN HID Device"
+    },
+    "HID\\VEN_ELAN&DEV_0143&Col03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "PTPFilter.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VEN_ELAN&DEV_0143&Col05": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ElanHidConsumerControlDriver.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VEN_ELAN&DEV_0147&Col01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VEN_ELAN&DEV_0147&Col02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETDHCF.inf",
+      "provider": "ELAN HID Device"
+    },
+    "HID\\VEN_ELAN&DEV_0147&Col03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "PTPFilter.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VEN_ELAN&DEV_0147&Col05": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ElanHidConsumerControlDriver.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VEN_ELAN&DEV_014B&Col01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VEN_ELAN&DEV_014B&Col02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETDHCF.inf",
+      "provider": "ELAN HID Device"
+    },
+    "HID\\VEN_ELAN&DEV_014B&Col03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "PTPFilter.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VEN_ELAN&DEV_014B&Col05": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ElanHidConsumerControlDriver.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VEN_ELAN&DEV_0183&Col01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VEN_ELAN&DEV_0183&Col02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETDHCF.inf",
+      "provider": "ELAN HID Device"
+    },
+    "HID\\VEN_ELAN&DEV_0183&Col03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "PTPFilter.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VEN_ELAN&DEV_0183&Col05": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ElanHidConsumerControlDriver.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VEN_ELAN&DEV_0189&Col01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VEN_ELAN&DEV_0189&Col02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETDHCF.inf",
+      "provider": "ELAN HID Device"
+    },
+    "HID\\VEN_ELAN&DEV_0189&Col03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "PTPFilter.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VEN_ELAN&DEV_0189&Col05": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ElanHidConsumerControlDriver.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_044F&PID_B304&REV_0100&COL02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_044F&PID_E000": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_046D&PID_C705&MI_00": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_04F2&PID_0001&MI_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_4503&REV_0100&Col01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8103": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8126": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8127": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8140": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8145": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8146": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8151": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8152": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8154": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8155": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8156": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8158": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8159": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8160": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8162": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8167": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8168": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_0A5C&PID_8169": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_1CB6&PID_6680&MI_00&Col02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_1CB6&PID_6680&MI_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_1CB6&PID_6680&REV_0100&MI_00&Col02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_1CB6&PID_6680&REV_0100&MI_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_413C&PID_8152": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_413C&PID_8154": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_413C&PID_8156": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_413C&PID_8157&REV_0100": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_413C&PID_8158&REV_0100&Col01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\VID_413C&PID_8162&Col01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_0430&Pid_0002&MI_00": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_0430&Pid_0002&MI_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_0430&Pid_0002&Rev_0100&MI_00": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_0430&Pid_0002&Rev_0100&MI_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_0430&Pid_0501": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_0430&Pid_0501&Rev_5001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_0430&Pid_0530": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_0430&Pid_0530&Rev_5001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_046d&Pid_c50e&Rev_2500": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_046d&Pid_c50e&Rev_2510": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_046e&Pid_6782&MI_00": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_046e&Pid_6782&MI_01&Col01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_046e&Pid_6782&MI_01&Col02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_046e&Pid_6782&Rev_2110&MI_00": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_046e&Pid_6782&Rev_2110&MI_01&Col01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_046e&Pid_6782&Rev_2110&MI_01&Col02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_04B8&Pid_030E&Rev_0100&MI_": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_04f2&Pid_0001&Rev_0100&MI_00": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_04f2&Pid_0001&Rev_0100&MI_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_05E3&Pid_FFE2&Rev_0001&MI_": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_0609&Pid_031d": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_0609&Pid_032d": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_0A81&Pid_0103&MI_01&Col02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_0A81&Pid_0103&MI_01&Col03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_0A81&Pid_0103&Rev_0110&MI_": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\Vid_413c&Pid_8162&Rev_0100&Col01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "HID\\WACOMVIRTUALHID&Col03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "PCI\\VEN_17CB&DEV_1107": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_141400AB": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_337C17CB": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_65701A3B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_65801A3B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_65811A3B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_80011EAC": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_80041EAC": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_8D99103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_8E64103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_910A14CD": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_930A17AA": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_940A14CD": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_950A14CD": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_960A14CD": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_961814CD": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_970A14CD": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_980A14CD": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_9F0A14CD": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_9F1814CD": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_E0E917AA": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_E0EB105B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_E0EE105B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_E0EF105B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_E0F3105B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_E107105B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_E114105B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_E11517AA": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_E122105B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_E125105B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_E129105B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1107&SUBSYS_E13D105B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlanhmt8480.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1112&SUBSYS_111017CB&REV_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlancol8480_1.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1112&SUBSYS_8EF3103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlancol8480_1.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1112&SUBSYS_E14B105B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlancol8480_1.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1112&SUBSYS_E14C105B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlancol8480_1.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1112&SUBSYS_E14E17AA": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlancol8480_1.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1112&SUBSYS_E14F105B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlancol8480_1.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1112&SUBSYS_E159105B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlancol8480_1.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "PCI\\VEN_17CB&DEV_1112&SUBSYS_E15A105B": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcwlancol8480_1.inf",
+      "provider": "Qualcomm Communications Inc."
+    },
+    "QCASD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F03103C": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "QCASD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F46103C&REV_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "QCASD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F46103C&REV_02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "QCASD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F46103C&REV_03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "QCASD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F46103C&REV_04": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "QCASD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F47103C&REV_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "QCASD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F47103C&REV_02": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "QCASD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F47103C&REV_03": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "QCASD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F47103C&REV_04": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "QCASD\\VEN_QCOM&DEV_0FCD&SUBSYS_CRD08480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "QCA_SHB\\UART_H4": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbtaddvscregistry8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "QCA_SHB\\UART_H4_CLG": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbtaddvscregistry8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "QCA_SHB\\UART_H4_HMT": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbtaddvscregistry8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "QCA_SHB\\UART_H4_HSP": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbtaddvscregistry8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "ROOT\\SDCAVCodec": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaxu8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "SDCA\\AGGREGATEDSPEAKER": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "SDCA\\DynamicEnumChild": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "SDCA_11\\AUDIOFUNCTION": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaxu8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "SOUNDWIRE\\SDCA_06&MAN_0217&FUNC_0711&TYPE_04&VER_01&ADR_01&LID_00&UID_00&SUBSYS": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaxu8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "SOUNDWIRE\\SDCA_06&MAN_0217&FUNC_0714&TYPE_02&VER_01&ADR_02&LID_00&UID_00&SUBSYS": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaxu8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "SOUNDWIRE\\SDCA_06&MAN_0217&FUNC_1316&TYPE_01&VER_01&ADR_04&LID_00&UID_00&SUBSYS": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcaxu8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "SWC\\MEP_AUD&VEN_MSFT_VOICEFOCUS_V3": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "mep_audio_component.inf",
+      "provider": "Microsoft Corporation"
+    },
+    "SWC\\MEP_CAM&VEN_MSFT_DEV_0FF0": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "mep_camera_component.inf",
+      "provider": "Microsoft Corporation"
+    },
+    "SWC\\VEN_QCOM&DEV_0F36&SWC_QCDPPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdpps8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "SWC\\VEN_QCOM&DEV_0FF5&SWC_QCDPPS8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcdpps8480.inf",
+      "provider": "Qualcomm Incorporated"
+    },
+    "SWC\\VEN_QCOM&DEV_ASDAPO_8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd_apo8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "SWC\\VEN_QCOM&DEV_FLUENCEAPO_8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcfluenceai_apo_effectpack8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "SWC\\VEN_QCOM&DEV_QCListenSoundModel&PLAT_8480": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QCListenSM_swc_ext8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "UEFI\\RES_{84CB55F4-D08A-43BB-BB7D-07FA38476891}": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "BIOS_eFuse_Payload.inf",
+      "provider": "HP Inc."
+    },
+    "URS\\QCOM0F8B&FUNCTION": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcUsbFnSsFilter8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "URS\\QCOM0F8B&HOST": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcXhciFilter8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "URS\\QCOM0F8C&FUNCTION": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcUsbFnSsFilter8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "URS\\QCOM0F8C&HOST": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcXhciFilter8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "URS\\QCOM0FED&FUNCTION": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcUsbFnSsFilter8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "URS\\QCOM0FED&HOST": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcXhciFilter8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "USB4\\QCOM0GD10001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "QcUsb4Filter8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "USBFN\\ADPL_MDM": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ufnserialcomposite.inf",
+      "provider": "Qualcomm"
+    },
+    "USBFN\\CCID": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ufnserialcomposite.inf",
+      "provider": "Qualcomm"
+    },
+    "USBFN\\DIAG": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ufnserialcomposite.inf",
+      "provider": "Qualcomm"
+    },
+    "USBFN\\DIAG_MDM": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ufnserialcomposite.inf",
+      "provider": "Qualcomm"
+    },
+    "USBFN\\DPL": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ufnserialcomposite.inf",
+      "provider": "Qualcomm"
+    },
+    "USBFN\\MODEM": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ufnserialcomposite.inf",
+      "provider": "Qualcomm"
+    },
+    "USBFN\\NMEA": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ufnserialcomposite.inf",
+      "provider": "Qualcomm"
+    },
+    "USBFN\\QDSS_MDM": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ufnserialcomposite.inf",
+      "provider": "Qualcomm"
+    },
+    "USBFN\\RMNET": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ufnserialcomposite.inf",
+      "provider": "Qualcomm"
+    },
+    "USBFN\\TRACE": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ufnserialcomposite.inf",
+      "provider": "Qualcomm"
+    },
+    "USB\\VID_04F2&PID_B809&MI_00": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "CameraExtMEP.inf",
+      "provider": "Huaqin"
+    },
+    "USB\\VID_04F2&PID_B873&MI_00": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "CameraExtMEP.inf",
+      "provider": "Huaqin"
+    },
+    "USB\\VID_0637&PID_0001": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "USB\\VID_0A81&PID_0103&MI_00": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "USB\\VID_0A81&PID_0103&MI_01": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "ETD.inf",
+      "provider": "ELAN"
+    },
+    "USB\\VID_30C9&PID_00D9&MI_00": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "CameraExtMEP.inf",
+      "provider": "Huaqin"
+    },
+    "USB\\VID_30C9&PID_00FB&MI_00": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "CameraExtMEP.inf",
+      "provider": "Huaqin"
+    },
+    "pci\\Parameters": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcppx8480.inf",
+      "provider": "Qualcomm Inc."
+    },
+    "qcasd\\A2dpSpeakerHeadset": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "qcasd\\BluetoothMicHandsFreeProfile": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "qcasd\\BluetoothSpeakerHandsFreeProfile": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "qcasd\\DynamicEnumExternalDisplay": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "{1f8c1c07-fa79-421a-936f-e8f4fb2f3300}\\Capture": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "{1f8c1c07-fa79-421a-936f-e8f4fb2f3300}\\Render": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "{4DCB0606-6415-4A36-BDC5-9B1792117DC9}\\HeadsetCaptureDevice": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "{4DCB0606-6415-4A36-BDC5-9B1792117DC9}\\HeadsetRenderDevice": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "{CE0A1C0B-E0E8-4B1B-B35C-E1B0FF04B148}\\SpeakerRenderDevice": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcasd8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "{DAADDA84-4F1C-4AE4-9AC7-B133A84FF7EF}\\Capture": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbtacx_transportdriver8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    },
+    "{DAADDA84-4F1C-4AE4-9AC7-B133A84FF7EF}\\Render": {
+      "evidence": "HP-SOFTWARE",
+      "inf_source": "qcbtacx_transportdriver8480.inf",
+      "provider": "Qualcomm Technologies, Inc."
+    }
+  }
+}
