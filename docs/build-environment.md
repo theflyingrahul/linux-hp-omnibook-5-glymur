@@ -1,6 +1,6 @@
 # Build Environment
 
-Research / Build Snapshot: 2026-09-08 12:51 UTC
+Research / Build Snapshot: 2026-09-08 13:30 UTC
 
 ## Host Information
 - **OS:** Fedora Linux 44 (Workstation Edition)
@@ -9,42 +9,22 @@ Research / Build Snapshot: 2026-09-08 12:51 UTC
 
 ## Build Strategy
 
-Due to the absence of `aarch64-linux-gnu-gcc`, `clang`, and `dtc` on the host system, compiling DTBs or the Kernel Image is currently **BLOCKED — toolchain unavailable**. 
+Host currently provides the necessary dependencies. The environment is now capable of compiling the reference builds.
+
+## Toolchain Capabilities
+
+- **GCC ARM64:** READY
+- **LLVM ARM64:** READY
+- **DT compilation:** READY
+- **Kernel Image build:** READY
 
 ## Fedora 44 Toolchain Packages
 
-The exact package names required for Fedora 44 have been verified via `dnf repoquery`.
+Host currently provides the following packages for the full GCC + LLVM development toolchain:
 
-### Minimal GCC ARM64 Cross-Build Toolchain
-This profile contains the minimum packages required to cross-compile the ARM64 kernel (`Image`) and Device Trees (`.dtb`) using GCC.
-
-```bash
-sudo dnf install gcc-aarch64-linux-gnu dtc flex bison bc openssl-devel elfutils-libelf-devel ncurses-devel pkgconf-pkg-config zlib-ng-compat-devel dwarves
+```text
+gcc-aarch64-linux-gnu dtc flex bison bc openssl-devel elfutils-libelf-devel ncurses-devel pkgconf-pkg-config zlib-ng-compat-devel dwarves clang lld llvm b4 ShellCheck
 ```
-
-*Package explanations:*
-- `gcc-aarch64-linux-gnu`: The GNU GCC cross-compiler for ARM64 (`aarch64-linux-gnu-gcc`).
-- `dtc`: Device Tree Compiler.
-- `flex` / `bison`: Required for compiling Kconfig and various kernel parsers.
-- `bc`: Required for kernel math operations.
-- `openssl-devel`: Required for kernel certificate and module signing.
-- `elfutils-libelf-devel`: Required by `objtool` for ELF manipulation.
-- `ncurses-devel`: Required for `make menuconfig`.
-- `pkgconf-pkg-config`: Provides `pkg-config` for dependency resolution.
-- `zlib-ng-compat-devel`: Modern Fedora zlib headers for kernel tools.
-- `dwarves`: Provides `pahole` for BTF generation.
-
-### Full GCC + LLVM Development Toolchain
-This profile adds LLVM/Clang support, kernel patch utilities (`b4`), and script analysis tools (`ShellCheck`).
-
-```bash
-sudo dnf install gcc-aarch64-linux-gnu dtc flex bison bc openssl-devel elfutils-libelf-devel ncurses-devel pkgconf-pkg-config zlib-ng-compat-devel dwarves clang lld llvm b4 ShellCheck
-```
-
-*Package explanations:*
-- `clang` / `lld` / `llvm`: Provides LLVM cross-build capability (`make LLVM=1`).
-- `b4`: Kernel patch series retrieval and management tool.
-- `ShellCheck`: Static analysis tool for the repository's bash scripts.
 
 ## Mainline Kernel Source Baseline
 

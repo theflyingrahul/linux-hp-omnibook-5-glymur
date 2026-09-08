@@ -2,66 +2,62 @@
 set -euo pipefail
 
 MODE="gcc"
-TARGET_ELITEBOOK=0
-TARGET_OMNIBOOK=0
+ALLOW_DIRTY=0
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --llvm) MODE="llvm"; shift ;;
         --gcc) MODE="gcc"; shift ;;
-        --elitebook) TARGET_ELITEBOOK=1; shift ;;
-        --omnibook-ultra) TARGET_OMNIBOOK=1; shift ;;
-        --all) TARGET_ELITEBOOK=1; TARGET_OMNIBOOK=1; shift ;;
+        --allow-dirty) ALLOW_DIRTY=1; shift ;;
         *) echo "Unknown option $1"; exit 1 ;;
     esac
 done
 
-if [ "$TARGET_ELITEBOOK" -eq 1 ]; then
-    echo "=== Building EliteBook Reference DTB ==="
-    SRC_DIR=".work/linux-elitebook"
-    OUT_DIR=".work/build/elitebook"
-    if [ ! -d "$SRC_DIR" ]; then
-        echo "Error: $SRC_DIR does not exist. Ensure worktree is prepared."
-        exit 1
-    fi
-    mkdir -p "$OUT_DIR" .work/logs
-    ./scripts/linux/configure-glymur-build.sh --$MODE --source "$SRC_DIR" --out "$OUT_DIR"
+build_dtb() {
+    local label="$1"
+    local src="$2"
+    local dtb_target="$3"
     
+    echo "--- Building $label ---"
+    if [ ! -d "$src" ]; then
+        echo "Error: Source directory $src not found."
+        return 1
+    fi
+    
+    cd "$src"
+    local is_dirty
+    is_dirty=$(git status --short)
+    if [ -n "$is_dirty" ] && [ "$ALLOW_DIRTY" -eq 0 ]; then
+        echo "Error: Tree is dirty. Aborting."
+        cd - >/dev/null
+        return 1
+    fi
+    cd - >/dev/null
+    
+    local out=".work/build/$label"
+    mkdir -p "$out"
+    local abs_src
+    local abs_out
+    abs_src="$(realpath "$src")"
+    abs_out="$(realpath "$out")"
+    
+    ./scripts/linux/configure-glymur-build.sh --"$MODE" --source "$src" --out "$out"
+    
+    local cmd
     if [ "$MODE" = "llvm" ]; then
-        CMD="make -C $SRC_DIR O=../${OUT_DIR#*/} ARCH=arm64 LLVM=1 qcom/glymur-hp-elitebook-x-g2q.dtb"
+        cmd="make -j$(nproc) -C $abs_src O=$abs_out ARCH=arm64 LLVM=1 $dtb_target"
     else
-        CMD="make -C $SRC_DIR O=../${OUT_DIR#*/} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- qcom/glymur-hp-elitebook-x-g2q.dtb"
+        cmd="make -j$(nproc) -C $abs_src O=$abs_out ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- $dtb_target"
     fi
-    echo "Running: $CMD"
-    if $CMD > ".work/logs/build-elitebook.log" 2>&1; then
-        echo "Build EliteBook DTB: PASS"
+    
+    echo "Running: $cmd"
+    if $cmd > ".work/logs/build-${label}.log" 2>&1; then
+        echo "Build $dtb_target: PASS"
     else
-        echo "Build EliteBook DTB: BLOCKED (Toolchain unavailable or error)"
+        echo "Build $dtb_target: FAIL"
     fi
-    echo "*** WARNING: REFERENCE BUILD ONLY - DO NOT BOOT THIS DTB ON THE TARGET OMNIBOOK 5 ***"
-fi
+}
 
-if [ "$TARGET_OMNIBOOK" -eq 1 ]; then
-    echo "=== Building OmniBook Ultra Reference DTB ==="
-    SRC_DIR=".work/linux-omnibook-ultra"
-    OUT_DIR=".work/build/omnibook-ultra"
-    if [ ! -d "$SRC_DIR" ]; then
-        echo "Error: $SRC_DIR does not exist. Ensure worktree is prepared."
-        exit 1
-    fi
-    mkdir -p "$OUT_DIR" .work/logs
-    ./scripts/linux/configure-glymur-build.sh --$MODE --source "$SRC_DIR" --out "$OUT_DIR"
-    
-    if [ "$MODE" = "llvm" ]; then
-        CMD="make -C $SRC_DIR O=../${OUT_DIR#*/} ARCH=arm64 LLVM=1 qcom/glymur-hp-omnibook-ultra-kg0xxx.dtb"
-    else
-        CMD="make -C $SRC_DIR O=../${OUT_DIR#*/} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- qcom/glymur-hp-omnibook-ultra-kg0xxx.dtb"
-    fi
-    echo "Running: $CMD"
-    if $CMD > ".work/logs/build-omnibook.log" 2>&1; then
-        echo "Build OmniBook Ultra DTB: PASS"
-    else
-        echo "Build OmniBook Ultra DTB: BLOCKED (Toolchain unavailable or error)"
-    fi
-    echo "*** WARNING: REFERENCE BUILD ONLY - DO NOT BOOT THIS DTB ON THE TARGET OMNIBOOK 5 ***"
-fi
+mkdir -p .work/logs
+build_dtb "elitebook-v5" ".work/linux-elitebook" "qcom/glymur-hp-elitebook-x-g2q.dtb"
+build_dtb "omnibook-ultra-v1" ".work/linux-omnibook-ultra" "qcom/glymur-hp-omnibook-ultra-kg0xxx.dtb"

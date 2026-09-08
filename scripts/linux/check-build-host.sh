@@ -27,7 +27,7 @@ echo ""
 
 echo "LLVM ARM64 build:"
 llvm_missing=""
-for t in clang ld.lld llvm-config; do
+for t in clang ld.lld llvm-ar llvm-nm llvm-objcopy; do
     if ! has_cmd "$t"; then llvm_missing="$llvm_missing $t"; fi
 done
 if [ -n "$llvm_missing" ]; then

@@ -39,37 +39,42 @@ cd - >/dev/null
 mkdir -p "$OUT_DIR"
 mkdir -p .work/logs
 
+ABS_SRC="$(realpath "$SRC_DIR")"
+ABS_OUT="$(realpath "$OUT_DIR")"
+
 # Run configure
-./scripts/linux/configure-glymur-build.sh --$MODE --source "$SRC_DIR" --out "$OUT_DIR"
+./scripts/linux/configure-glymur-build.sh --"$MODE" --source "$SRC_DIR" --out "$OUT_DIR"
 
 echo "Building glymur-crd.dtb..."
 LOG_FILE=".work/logs/build-mainline-crd.log"
 
 if [ "$MODE" = "llvm" ]; then
-    CMD="make -C $SRC_DIR O=../${OUT_DIR#*/} ARCH=arm64 LLVM=1 qcom/glymur-crd.dtb"
+    CMD="make -j$(nproc) -C $ABS_SRC O=$ABS_OUT ARCH=arm64 LLVM=1 qcom/glymur-crd.dtb"
 else
-    CMD="make -C $SRC_DIR O=../${OUT_DIR#*/} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- qcom/glymur-crd.dtb"
+    CMD="make -j$(nproc) -C $ABS_SRC O=$ABS_OUT ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- qcom/glymur-crd.dtb"
 fi
 
 echo "Running: $CMD"
 if $CMD > "$LOG_FILE" 2>&1; then
     echo "Build glymur-crd.dtb: PASS"
 else
-    echo "Build glymur-crd.dtb: BLOCKED (Toolchain unavailable or error)"
+    echo "Build glymur-crd.dtb: FAIL"
+    exit 1
 fi
 
 if [ "$BUILD_IMAGE" -eq 1 ]; then
     echo "Building Image..."
     if [ "$MODE" = "llvm" ]; then
-        IMG_CMD="make -C $SRC_DIR O=../${OUT_DIR#*/} ARCH=arm64 LLVM=1 Image"
+        IMG_CMD="make -j$(nproc) -C $ABS_SRC O=$ABS_OUT ARCH=arm64 LLVM=1 Image"
     else
-        IMG_CMD="make -C $SRC_DIR O=../${OUT_DIR#*/} ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- Image"
+        IMG_CMD="make -j$(nproc) -C $ABS_SRC O=$ABS_OUT ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- Image"
     fi
     echo "Running: $IMG_CMD"
     if $IMG_CMD >> "$LOG_FILE" 2>&1; then
         echo "Build Image: PASS"
     else
-        echo "Build Image: BLOCKED (Toolchain unavailable or error)"
+        echo "Build Image: FAIL"
+        exit 1
     fi
 fi
 

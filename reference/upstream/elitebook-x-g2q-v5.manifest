@@ -13,5 +13,7 @@
 - **SHA256 of local raw patch files:** `95d34f18048b93e1215296181927e25f1d9972f4dbc3553871084dd275f72548`
 - **Verified Target Source Path:** `arch/arm64/boot/dts/qcom/glymur-hp-elitebook-x-g2q.dts`
 - **Patch Application Status:** `PASS`
-- **Resulting Temporary Commit SHAs:** `4a0e27597`, `4182a093f`, `0045f63b5`
-- **Research Snapshot:** 2026-09-08 12:51 UTC
+- **Compiler(s):** GCC (16.2.1), LLVM (22.1.8)
+- **DTB Build Result:** `PASS` (without DP PHY)
+- **Artifact SHA256 (GCC):** `b97d979e77224977ec6d9d0238059c95bed20470a435007bf18c43c047d9313d`
+- **Research Snapshot:** 2026-09-08 13:30 UTC

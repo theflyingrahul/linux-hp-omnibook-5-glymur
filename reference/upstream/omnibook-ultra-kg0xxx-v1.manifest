@@ -13,5 +13,8 @@
 - **SHA256 of local raw patch files:** `0d8ed239ce97a0822f6dea0aff7901f0065cafbae4cdf138ca4b15d5a82be29a`
 - **Verified Target Source Path:** `arch/arm64/boot/dts/qcom/glymur-hp-omnibook-ultra-kg0xxx.dts`
 - **Patch Application Status:** `PASS` (both with and without PCIe3 base)
-- **Resulting Temporary Commit SHAs:** `3fcb88131`, `e53878b8f`, `79002eb42` (when based on PCIe3)
-- **Research Snapshot:** 2026-09-08 12:51 UTC
+- **Compiler(s):** GCC (16.2.1), LLVM (22.1.8)
+- **DTB Build Result (Without PCIe3):** `EXPECTED FAIL` (`Label or path pcie3_phy not found`)
+- **DTB Build Result (With PCIe3):** `PASS`
+- **Artifact SHA256 (With PCIe3, GCC):** `7af0d2cea5a69ca87d0ec4c15e806df7578cad23ab5b9207c942805a6a1ee490`
+- **Research Snapshot:** 2026-09-08 13:30 UTC
