@@ -9,6 +9,9 @@
 | Display family | 16 inch<br>OLED<br>eDP<br>touchscreen target | HP-DOCUMENTED / target configuration | |
 | Battery family | 3-cell<br>59 Wh | HP-DOCUMENTED | |
 | Ports | 1x USB Type-A 10 Gbps<br>2x USB Type-C 10 Gbps<br>audio combo jack | HP-DOCUMENTED | |
+| Camera | HP True Vision FHD Camera<br>USB2, IR LED, 1080p | HP-DOCUMENTED | Manual p.48 |
+| Touchpad | Precision Clickpad with image sensor | HP-DOCUMENTED | Manual p.47 |
+| Keyboard | Connected via keyboard daughterboard | HP-DOCUMENTED | Part P48630-601 |
 
 HP documentation lists:
 - Qualcomm FastConnect C7700 Wi-Fi 7 + Bluetooth 6.0

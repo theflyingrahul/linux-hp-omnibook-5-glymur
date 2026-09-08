@@ -7,3 +7,4 @@ captures/*/efi/
 *.pfx
 *.p12
 *.key
+.work/
