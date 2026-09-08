@@ -8,3 +8,5 @@ captures/*/efi/
 *.p12
 *.key
 .work/
+analysis/
+__pycache__/

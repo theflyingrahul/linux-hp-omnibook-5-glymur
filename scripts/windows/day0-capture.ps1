@@ -18,8 +18,8 @@ Optional. If specified, copies candidate firmware blobs to private/firmware.
 .PARAMETER AcpiToolsPath
 Optional. Path containing acpidump.exe / iasl.exe.
 
-.PARAMETER Verbose
-Optional. Enables verbose logging.
+.PARAMETER Preflight
+Optional. If specified, performs safety and environment checks and exits without capturing.
 #>
 
 [CmdletBinding()]
@@ -29,16 +29,57 @@ param (
 
     [switch]$ExportDrivers,
     [switch]$CopyFirmware,
+    [switch]$Preflight,
 
     [string]$AcpiToolsPath
 )
 
 $ErrorActionPreference = 'Stop'
-$ScriptVersion = "0.1.0"
+$ScriptVersion = "0.1.1"
 $SchemaVersion = 1
+
+# Check PowerShell Version
+if ($PSVersionTable.PSVersion.Major -lt 5 -or ($PSVersionTable.PSVersion.Major -eq 5 -and $PSVersionTable.PSVersion.Minor -lt 1)) {
+    Write-Warning "This script requires Windows PowerShell 5.1 or newer. Your version is $($PSVersionTable.PSVersion.ToString())."
+    exit 1
+}
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
 . (Join-Path $ScriptDir "helpers.ps1")
+
+$elevated = Test-Elevated
+
+if ($Preflight) {
+    Write-Host "--- DAY-0 CAPTURE PREFLIGHT ---"
+    Write-Host "PowerShell Version: $($PSVersionTable.PSVersion.ToString())"
+    Write-Host "Architecture: $(if ([Environment]::Is64BitOperatingSystem) {'64-bit'} else {'32-bit'})"
+    Write-Host "Elevated: $elevated"
+    
+    $pnpAvail = Get-Command "Get-PnpDevice" -ErrorAction SilentlyContinue
+    Write-Host "Get-PnpDevice available: $(if ($pnpAvail) {'True'} else {'False'})"
+    
+    if (-not $pnpAvail) {
+        Write-Host "STATUS: READY WITH WARNINGS (Missing PnpDevice module, will fallback)"
+    } elseif (-not $elevated) {
+        Write-Host "STATUS: READY WITH WARNINGS (Not elevated, ACPI/Power will be partial)"
+    } else {
+        Write-Host "STATUS: READY"
+    }
+    
+    # Estimate space
+    $drive = Split-Path $OutputPath -Qualifier
+    if ($drive) {
+        $vol = Get-Volume -DriveLetter $drive[0] -ErrorAction SilentlyContinue
+        if ($vol) {
+            $freeGB = [math]::Round($vol.SizeRemaining / 1GB, 2)
+            Write-Host "Free space on $drive : ${freeGB} GB"
+            if ($ExportDrivers -and $freeGB -lt 5) {
+                Write-Host "WARNING: -ExportDrivers may require significant space."
+            }
+        }
+    }
+    exit 0
+}
 
 # Create structure
 $publicDir = Join-Path $OutputPath "public"
@@ -87,7 +128,6 @@ foreach ($d in $dirsToCreate) {
 $global:CaptureLogPath = Join-Path $logsDir "capture.log"
 $global:FailuresLogPath = Join-Path $logsDir "failures.log"
 
-$elevated = Test-Elevated
 Write-Log "Starting Day-0 Capture (Version $ScriptVersion)"
 Write-Log "Elevated execution: $elevated"
 if (-not $elevated) {
@@ -119,11 +159,11 @@ Run-Section "Private Identity" {
     $cs = Get-CimInstance Win32_ComputerSystem -ErrorAction SilentlyContinue
 
     $idData = @{
-        SystemSKUNumber = $csProduct.SKUNumber
-        SMBIOSUUID = $csProduct.UUID
-        BaseBoardSerial = $baseBoard.SerialNumber
-        BIOSSerial = $bios.SerialNumber
-        ComputerName = $cs.Name
+        SystemSKUNumber = if ($csProduct) {$csProduct.SKUNumber} else {$null}
+        SMBIOSUUID = if ($csProduct) {$csProduct.UUID} else {$null}
+        BaseBoardSerial = if ($baseBoard) {$baseBoard.SerialNumber} else {$null}
+        BIOSSerial = if ($bios) {$bios.SerialNumber} else {$null}
+        ComputerName = if ($cs) {$cs.Name} else {$null}
     }
     Export-SafeJson -Data $idData -Path (Join-Path $privateDir "identity\identity.json")
     return "PASS"
@@ -138,21 +178,20 @@ Run-Section "SMBIOS / System" {
     $os = Get-CimInstance Win32_OperatingSystem -ErrorAction SilentlyContinue
     
     $sysData = @{
-        Manufacturer = $cs.Manufacturer
-        Model = $cs.Model
-        SystemFamily = $cs.SystemFamily
-        BaseBoardProduct = $baseBoard.Product
-        BaseBoardVersion = $baseBoard.Version
-        BIOSVersion = $bios.SMBIOSBIOSVersion
-        BIOSDate = $bios.ReleaseDate
-        OSBuild = $os.BuildNumber
-        OSArchitecture = $os.OSArchitecture
-        OSEdition = $os.Caption
+        Manufacturer = if ($cs) {$cs.Manufacturer} else {$null}
+        Model = if ($cs) {$cs.Model} else {$null}
+        SystemFamily = if ($cs) {$cs.SystemFamily} else {$null}
+        BaseBoardProduct = if ($baseBoard) {$baseBoard.Product} else {$null}
+        BaseBoardVersion = if ($baseBoard) {$baseBoard.Version} else {$null}
+        BIOSVersion = if ($bios) {$bios.SMBIOSBIOSVersion} else {$null}
+        BIOSDate = if ($bios) {$bios.ReleaseDate} else {$null}
+        OSBuild = if ($os) {$os.BuildNumber} else {$null}
+        OSArchitecture = if ($os) {$os.OSArchitecture} else {$null}
+        OSEdition = if ($os) {$os.Caption} else {$null}
     }
     Export-SafeJson -Data $sysData -Path (Join-Path $publicDir "system\system-info.json")
     
     Invoke-ExternalCommand -Command "systeminfo.exe" -ArgsList @() -OutFile (Join-Path $rawDir "command-output\systeminfo.txt") | Out-Null
-    # msinfo32 /report is very slow and sometimes hangs. We'll skip it in default or run it asynchronously if needed, but per requirements we run it read-only.
     Write-Log "Invoking msinfo32 /report (this may take a moment)..."
     Invoke-ExternalCommand -Command "msinfo32.exe" -ArgsList @("/report", (Join-Path $rawDir "command-output\msinfo32.txt")) | Out-Null
 
@@ -161,28 +200,32 @@ Run-Section "SMBIOS / System" {
 
 # 3. Complete PnP Inventory
 Run-Section "PnP Inventory" {
-    $devices = Get-PnpDevice -PresentOnly -ErrorAction SilentlyContinue
-    Export-SafeTsv -Data $devices -Path (Join-Path $publicDir "pnp\devices.tsv")
-    
-    $allProps = @()
-    foreach ($dev in $devices) {
-        $props = Get-PnpDeviceProperty -InstanceId $dev.InstanceId -ErrorAction SilentlyContinue
-        foreach ($p in $props) {
-            $allProps += @{
-                InstanceId = $dev.InstanceId
-                KeyName = $p.KeyName
-                Data = $p.Data
-                Type = $p.Type
+    if (Get-Command "Get-PnpDevice" -ErrorAction SilentlyContinue) {
+        $devices = Get-PnpDevice -PresentOnly -ErrorAction SilentlyContinue
+        Export-SafeTsv -Data $devices -Path (Join-Path $publicDir "pnp\devices.tsv")
+        
+        $allProps = @()
+        foreach ($dev in $devices) {
+            $props = Get-PnpDeviceProperty -InstanceId $dev.InstanceId -ErrorAction SilentlyContinue
+            foreach ($p in $props) {
+                $allProps += @{
+                    InstanceId = $dev.InstanceId
+                    KeyName = $p.KeyName
+                    Data = if ($p.Data -ne $null) {$p.Data.ToString()} else {$null}
+                    Type = $p.Type
+                }
             }
         }
+        Export-SafeJson -Data $allProps -Path (Join-Path $rawDir "pnp\all-properties.json")
+    } else {
+        Write-Log "Get-PnpDevice unavailable." -Level "WARNING"
+        return "PARTIAL"
     }
-    Export-SafeJson -Data $allProps -Path (Join-Path $rawDir "pnp\all-properties.json")
     return "PASS"
 }
 
 # 4. PnPUtil Enumeration
 Run-Section "PnPUtil Enumeration" {
-    # Try rich enum
     $pnputilArgs = @("/enum-devices", "/connected", "/ids", "/relations", "/services", "/stack", "/drivers", "/interfaces", "/properties", "/resources")
     $res = Invoke-ExternalCommand -Command "pnputil.exe" -ArgsList $pnputilArgs -OutFile (Join-Path $rawDir "command-output\pnputil-enum-devices-rich.txt")
     if ($res.ExitCode -ne 0) {
@@ -195,8 +238,9 @@ Run-Section "PnPUtil Enumeration" {
 # 5. Driver Inventory
 Run-Section "Driver Inventory" {
     $drivers = Get-CimInstance Win32_PnPSignedDriver -ErrorAction SilentlyContinue
-    Export-SafeTsv -Data $drivers -Path (Join-Path $publicDir "drivers\signed-drivers.tsv")
-    
+    if ($drivers) {
+        Export-SafeTsv -Data $drivers -Path (Join-Path $publicDir "drivers\signed-drivers.tsv")
+    }
     Invoke-ExternalCommand -Command "driverquery.exe" -ArgsList @("/v", "/fo", "csv") -OutFile (Join-Path $rawDir "command-output\driverquery.csv") | Out-Null
     Invoke-ExternalCommand -Command "pnputil.exe" -ArgsList @("/enum-drivers") -OutFile (Join-Path $rawDir "command-output\pnputil-enum-drivers.txt") | Out-Null
     return "PASS"
@@ -207,7 +251,16 @@ Run-Section "Factory DriverStore" {
     $dsPath = Join-Path $env:windir "System32\DriverStore\FileRepository"
     if (Test-Path $dsPath) {
         $files = Get-ChildItem -Path $dsPath -Recurse -File -ErrorAction SilentlyContinue
-        $inventory = $files | Select-Object @{Name="RelativePath";Expression={$_.FullName.Substring($dsPath.Length+1)}}, Name, Extension, Length, LastWriteTime
+        $inventory = @()
+        foreach ($f in $files) {
+            $inventory += @{
+                Name = $f.Name
+                RelativePath = $f.FullName.Substring($dsPath.Length+1)
+                Extension = $f.Extension
+                Length = $f.Length
+                LastWriteTime = $f.LastWriteTime.ToString("o")
+            }
+        }
         Export-SafeTsv -Data $inventory -Path (Join-Path $rawDir "firmware\driverstore-file-inventory.tsv")
         
         $candidates = @()
@@ -227,10 +280,12 @@ Run-Section "Factory DriverStore" {
         
         if ($CopyFirmware) {
             foreach ($c in $candidates) {
+                # Ensure no path traversal
+                $cleanRelPath = $c.RelativePath -replace '\.\.', ''
                 $targetPath = Join-Path $privateDir "firmware\$($c.SourcePackage)\$($c.Filename)"
                 $targetDir = Split-Path $targetPath -Parent
                 if (-not (Test-Path $targetDir)) { New-Item -ItemType Directory -Path $targetDir | Out-Null }
-                Copy-Item -Path (Join-Path $dsPath $c.RelativePath) -Destination $targetPath -ErrorAction SilentlyContinue
+                Copy-Item -Path (Join-Path $dsPath $cleanRelPath) -Destination $targetPath -ErrorAction SilentlyContinue
             }
         }
     }
@@ -265,12 +320,11 @@ Run-Section "ACPI Tools" {
         $hash = (Get-FileHash -Path $acpidump -Algorithm SHA256).Hash
         Write-Log "Using acpidump: $acpidump (SHA256: $hash)"
         Invoke-ExternalCommand -Command $acpidump -ArgsList @("-b") -OutFile (Join-Path $rawDir "acpi\acpidump-output.txt") | Out-Null
-        # acpidump dumps to current working directory. We should move them.
         Move-Item -Path "*.dat" -Destination (Join-Path $rawDir "acpi\tables\") -ErrorAction SilentlyContinue
         return "PASS"
     } else {
         $reason = "acpidump.exe unavailable or not elevated"
-        Set-Content -Path (Join-Path $rawDir "acpi\ACPIDUMP-NOT-CAPTURED.txt") -Value "tool missing or no elevation`ncapture remains outstanding"
+        Set-Content -Path (Join-Path $rawDir "acpi\ACPIDUMP-NOT-CAPTURED.txt") -Value "tool missing or no elevation`ncapture remains outstanding" -Encoding UTF8
         return "SKIPPED"
     }
 }
@@ -295,14 +349,18 @@ Run-Section "EDID Capture" {
             }
         }
     }
-    Export-SafeTsv -Data $edidIndex -Path (Join-Path $rawDir "display\edid-index.tsv")
+    if ($edidIndex.Count -gt 0) {
+        Export-SafeTsv -Data $edidIndex -Path (Join-Path $rawDir "display\edid-index.tsv")
+    }
     return "PASS"
 }
 
 # 10. Storage / NVMe
 Run-Section "Storage" {
     $disks = Get-CimInstance Win32_DiskDrive -ErrorAction SilentlyContinue
-    Export-SafeTsv -Data $disks -Path (Join-Path $publicDir "storage\disk-drives.tsv")
+    if ($disks) {
+        Export-SafeTsv -Data $disks -Path (Join-Path $publicDir "storage\disk-drives.tsv")
+    }
     return "PASS"
 }
 
@@ -316,7 +374,7 @@ Run-Section "Security" {
     }
     
     if ($elevated) {
-        $bde = Invoke-ExternalCommand -Command "manage-bde.exe" -ArgsList @("-status") -OutFile (Join-Path $rawDir "command-output\manage-bde-status.txt")
+        Invoke-ExternalCommand -Command "manage-bde.exe" -ArgsList @("-status") -OutFile (Join-Path $rawDir "command-output\manage-bde-status.txt") | Out-Null
     }
     return "PASS"
 }
@@ -388,7 +446,7 @@ $CaptureMeta = @{
 Export-SafeJson -Data $CaptureMeta -Path (Join-Path $OutputPath "capture.json")
 
 # Completion marker
-Set-Content -Path (Join-Path $OutputPath "CAPTURE-COMPLETE.txt") -Value "Capture Complete`n$($CaptureEnd.ToString('yyyy-MM-ddTHH:mm:ssZ'))`nScript Version $ScriptVersion`nManifest: SHA256SUMS.tsv"
+Set-Content -Path (Join-Path $OutputPath "CAPTURE-COMPLETE.txt") -Value "Capture Complete`n$($CaptureEnd.ToString('yyyy-MM-ddTHH:mm:ssZ'))`nScript Version $ScriptVersion`nManifest: SHA256SUMS.tsv" -Encoding UTF8
 
 Write-Log "Day-0 Capture completed successfully."
 if (-not $elevated) {

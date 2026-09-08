@@ -18,3 +18,13 @@ UNKNOWN
     Not yet established.
 
 Future DTS notes and hardware documentation should distinguish these categories.
+
+## Evidence Semantics Examples
+
+| Observation | Classification | What may be concluded |
+|---|---|---|
+| wlanfw20.mbn exists | OBSERVED-SOFTWARE | C7700-associated firmware package is present |
+| DEV_1107 exists | OBSERVED-HARDWARE | Matching PCI device is physically enumerated |
+| DEV_1107 + HP INF | OBSERVED-HARDWARE + HP-SOFTWARE | C7700/WCN785x identity strongly corroborated |
+| DEV_1107 parent PCI path | OBSERVED-HARDWARE | Host routing evidence is available |
+| only C7700 SoftPaq support | HP-SOFTWARE | HP distributes support; hardware presence unknown |

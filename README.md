@@ -26,3 +26,9 @@ The expected eventual DTS filename is:
 - Unknown values must remain unknown rather than being guessed
 
 Current phase: repository setup; target hardware has not yet arrived.
+
+## PRE-ARRIVAL DEVELOPMENT FREEZE
+The Linux build environment, upstream reference research, HP software archaeology, and Day-0 evidence tooling are prepared. No further target topology should be inferred before the physical HP OmniBook 5 16-bf1107nr arrives.
+
+## NEXT PHASE
+Phase 5 begins with physical inspection, BIOS documentation, and `day0-capture.ps1 -Preflight` on the factory Windows installation. No Linux boot should be attempted before the Day-0 capture is reviewed.

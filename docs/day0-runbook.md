@@ -26,7 +26,10 @@ The goal is to capture the pristine factory state as delivered.
 
 ### STEP 4: First Metadata Capture (Pass 1)
 - Open PowerShell (Elevated / Run as Administrator recommended).
-- Execute:
+- First, verify the environment is ready without changing state:
+  `.\day0-capture.ps1 -Preflight -OutputPath E:\omnibook-day0`
+- Review the preflight output to ensure readiness and sufficient space.
+- Then, execute the actual metadata capture:
   `.\day0-capture.ps1 -OutputPath E:\omnibook-day0`
 - Wait for completion.
 - Review output on a Linux host to ensure hashes and contents look sound.
