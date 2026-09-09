@@ -6,10 +6,10 @@ def promote(manifest_file):
     hwids = set()
     firmware = set()
     
-    with open(manifest_file, 'r') as f:
+    with open(manifest_file, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    blocks = content.split('--- ')
+    blocks = content.split('----------------------------------------')
     for block in blocks:
         if not block.strip(): continue
         lines = block.strip().splitlines()
@@ -31,16 +31,21 @@ def promote(manifest_file):
                 
     # Update TSVs
     print("Promoting Hardware IDs...")
-    with open('reference/hp-software/hardware-id-candidates.tsv', 'w') as f:
+    # NOTE: This overwrites the existing file each time
+    with open('reference/hp-software/hardware-id-candidates.tsv', 'w', encoding='utf-8') as f:
         f.write("hardware_id\tprovider\tinf_source\tevidence\n")
         for hw, prov, inf in sorted(list(hwids)):
             f.write(f"{hw}\t{prov}\t{inf}\tHP-SOFTWARE\n")
             
     print("Promoting Firmware Candidates...")
-    with open('reference/hp-software/firmware-candidates.tsv', 'w') as f:
+    # NOTE: This overwrites the existing file each time
+    with open('reference/hp-software/firmware-candidates.tsv', 'w', encoding='utf-8') as f:
         f.write("firmware_name\tinf_source\tevidence\n")
         for fw, inf in sorted(list(firmware)):
             f.write(f"{fw}\t{inf}\tHP-SOFTWARE\n")
 
 if __name__ == '__main__':
-    promote('.work/hp-software/manifests/sp173974-clean.txt')
+    if len(sys.argv) < 2:
+        print('Usage: promote-hp-analysis.py <manifest-file>')
+        sys.exit(1)
+    promote(sys.argv[1])

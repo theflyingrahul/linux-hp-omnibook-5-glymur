@@ -20,3 +20,8 @@ indent_size = 4
 
 [*.{dts,dtsi}]
 indent_style = tab
+tab_width = 8
+
+[*.py]
+indent_style = space
+indent_size = 4

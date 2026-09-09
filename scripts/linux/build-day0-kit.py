@@ -5,16 +5,17 @@ import hashlib
 import csv
 import zipfile
 import subprocess
+import sys
 
 def get_git_commit():
     try:
         return subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD']).decode('utf-8').strip()
-    except:
+    except Exception:
         return "unknown"
 
 def main():
     commit = get_git_commit()
-    version = "0.1.1"
+    version = "0.2.0"
     
     release_dir = ".work/releases"
     os.makedirs(release_dir, exist_ok=True)
@@ -50,10 +51,17 @@ def main():
     
     # Copy and Hash
     manifest_data = []
+    missing = []
     for src, dst in files:
         if os.path.exists(src):
             shutil.copy2(src, os.path.join(kit_dir, dst))
-            
+        else:
+            print(f"WARNING: Source file missing: {src}")
+            missing.append(src)
+    
+    if missing:
+        print(f"ERROR: {len(missing)} source file(s) missing. Kit is incomplete.")
+        sys.exit(1)
     for root, _, filenames in os.walk(kit_dir):
         for name in filenames:
             if name == 'MANIFEST.tsv': continue

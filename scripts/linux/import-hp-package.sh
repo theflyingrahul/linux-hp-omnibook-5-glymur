@@ -38,12 +38,11 @@ if [[ ! -s "$LOCAL_FILE" ]]; then
 fi
 
 # Detect obvious HTML/error pages
-head -c 256 "$LOCAL_FILE" | grep -qi -E "<!DOCTYPE html|<html|Access Denied|Akamai" && { echo "Error: File appears to be an HTML or blocked page."; exit 1; }
+head -c 256 "$LOCAL_FILE" | grep -qi -E "<!DOCTYPE html|<html|Access Denied|Akamai" && { echo "Error: File appears to be an HTML or blocked page."; exit 1; } || true
 
 # Calculate info
 FILE_SIZE=$(stat -c%s "$LOCAL_FILE")
 FILE_SHA256=$(sha256sum "$LOCAL_FILE" | awk '{print $1}')
-FILE_TYPE=$(file -b "$LOCAL_FILE")
 BASE_NAME=$(basename "$LOCAL_FILE")
 
 # Safe package ID
@@ -88,13 +87,11 @@ echo "Extraction successful."
 
 # Run analysis tools
 MANIFEST_FILE="${MANIFEST_DIR}/${PKG_ID}-manifest.json"
-echo "{" > "$MANIFEST_FILE"
-echo "  \"package_id\": \"$PKG_ID\"," >> "$MANIFEST_FILE"
-echo "  \"file_sha256\": \"$FILE_SHA256\"," >> "$MANIFEST_FILE"
-echo "  \"softpaq\": \"$SOFTPAQ\"," >> "$MANIFEST_FILE"
-echo "  \"title\": \"$TITLE\"," >> "$MANIFEST_FILE"
-echo "  \"scope\": \"$SCOPE\"" >> "$MANIFEST_FILE"
-echo "}" >> "$MANIFEST_FILE"
+python3 -c "
+import json, sys
+data = {'package_id': sys.argv[1], 'file_sha256': sys.argv[2], 'softpaq': sys.argv[3], 'title': sys.argv[4], 'scope': sys.argv[5]}
+with open(sys.argv[6], 'w') as f: json.dump(data, f, indent=2)
+" "$PKG_ID" "$FILE_SHA256" "$SOFTPAQ" "$TITLE" "$SCOPE" "$MANIFEST_FILE"
 
 # Hand off to analysis
 if [[ -x scripts/linux/analyze-hp-packages.sh ]]; then

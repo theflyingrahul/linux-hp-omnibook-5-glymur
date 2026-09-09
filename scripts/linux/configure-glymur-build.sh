@@ -59,5 +59,5 @@ else
     make -C "$ABS_SRC" O="$ABS_OUT" ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- olddefconfig
 fi
 
-grep CONFIG_QCOM_CPUCP_MBOX "$CONFIG_FILE"
+grep CONFIG_QCOM_CPUCP_MBOX "$CONFIG_FILE" || echo "WARNING: CONFIG_QCOM_CPUCP_MBOX not found after olddefconfig"
 echo "Configuration complete."

@@ -104,7 +104,7 @@ fetch_series() {
         
         # Verify expected path is in the mbox
         local path_res="MISSING"
-        if grep -q "$expected_path" "$out_file"; then
+        if grep -qF "$expected_path" "$out_file"; then
             path_res="PASS"
         fi
         printf "%-25s %-12s %-12s %-10s %s\n" "$board_name" "PASS($backend)" "$format_res" "$path_res" "$out_hash"

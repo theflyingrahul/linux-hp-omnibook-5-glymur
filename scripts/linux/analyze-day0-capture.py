@@ -30,14 +30,13 @@ def main():
     with open(manifest_path, 'r', encoding='utf-8') as f:
         reader = csv.reader(f, delimiter='\t')
         headers = next(reader, None)
-        if headers and headers[0] == 'RelativePath':
-            pass
-        else:
+        if not headers or headers[0] != 'RelativePath':
+            # No header row or unexpected format, re-read from start
             f.seek(0)
-            
+            reader = csv.reader(f, delimiter='\t')
+
         for row in reader:
             if not row or row[0].startswith('#') or len(row) < 3: continue
-            if headers and row[0] == 'RelativePath': continue
             rel_path, size, expected_hash = row[0], row[1], row[2]
             full_path = os.path.join(capture_dir, rel_path.replace('\\', '/'))
             
@@ -61,7 +60,9 @@ def main():
     else:
         print("PASS: All hashes validated.")
 
-    candidates_path = 'scripts/windows/day0-candidates.json'
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    repo_root = os.path.dirname(os.path.dirname(script_dir))
+    candidates_path = os.path.join(repo_root, 'scripts', 'windows', 'day0-candidates.json')
     hw_candidates = {}
     fw_candidates = {}
     if os.path.exists(candidates_path):
@@ -70,7 +71,8 @@ def main():
             hw_candidates = cdata.get('hardware_ids', {})
             fw_candidates = cdata.get('firmware_names', {})
 
-    os.makedirs('analysis', exist_ok=True)
+    analysis_dir = os.path.join(repo_root, 'analysis')
+    os.makedirs(analysis_dir, exist_ok=True)
     
     # Process PnP Data
     pnp_devices = []
@@ -100,7 +102,7 @@ def main():
         return fwname in fw_observed
         
     # Generate Summary
-    with open('analysis/day0-summary.md', 'w', encoding='utf-8') as f:
+    with open(os.path.join(analysis_dir, 'day0-summary.md'), 'w', encoding='utf-8') as f:
         f.write("# Day-0 Evidence Summary\n\n")
         f.write("## Status\n")
         f.write("- Hashes: Validated\n\n")
@@ -150,7 +152,28 @@ def main():
         f.write(f"- Hardware: {'USB Camera ID observed' if cam_hw else 'Not observed'}\n")
         f.write("- Assessment: " + ("HARDWARE-ONLY observed" if cam_hw else "NO-MATCH (or software-only)") + "\n")
         
-    with open('analysis/dts-evidence-gate.md', 'w', encoding='utf-8') as f:
+        # Generic candidate scan
+        # NOTE: The above hardcoded WLAN/Input/Camera sections check specific IDs.
+        # This generic section iterates all candidates from day0-candidates.json.
+        if hw_candidates:
+            f.write("\n## All Candidate Matches\n")
+            f.write("| Hardware ID | PnP Match | Category |\n")
+            f.write("|---|---|---|\n")
+            for hwid, info in sorted(hw_candidates.items()):
+                matched = check_hw(hwid)
+                status = "OBSERVED" if matched else "NOT OBSERVED"
+                f.write(f"| {hwid} | {status} | {info.get('evidence', 'HP-SOFTWARE')} |\n")
+
+        if fw_candidates:
+            f.write("\n## All Firmware Matches\n")
+            f.write("| Firmware | Present | Category |\n")
+            f.write("|---|---|---|\n")
+            for fwname, info in sorted(fw_candidates.items()):
+                present = check_fw(fwname)
+                status = "PRESENT" if present else "ABSENT"
+                f.write(f"| {fwname} | {status} | {info.get('evidence', 'HP-SOFTWARE')} |\n")
+        
+    with open(os.path.join(analysis_dir, 'dts-evidence-gate.md'), 'w', encoding='utf-8') as f:
         f.write("# DTS Evidence Gate\n\n")
         f.write("| Requirement | Status | Notes |\n")
         f.write("|---|---|---|\n")

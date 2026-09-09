@@ -1,22 +1,31 @@
 # Helper functions for Day-0 Capture
+# Compatible with Windows PowerShell 5.1
 
 $global:CaptureLogPath = ""
 $global:FailuresLogPath = ""
+
+# UTF-8 encoding without BOM for cross-platform compatibility
+$global:Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+
+function Get-SafeProperty {
+    param($Obj, [string]$Prop)
+    if ($null -ne $Obj) { $Obj.$Prop } else { $null }
+}
 
 function Write-Log {
     param (
         [string]$Message,
         [string]$Level = "INFO"
     )
-    $timestamp = (Get-Date).ToString("yyyy-MM-dd HH:mm:ssZ")
+    $timestamp = (Get-Date).ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ssZ")
     $logLine = "[$timestamp] [$Level] $Message"
     Write-Host $logLine
     if ($global:CaptureLogPath) {
-        Add-Content -Path $global:CaptureLogPath -Value $logLine -Encoding UTF8
+        [System.IO.File]::AppendAllText($global:CaptureLogPath, "$logLine`r`n", $global:Utf8NoBom)
     }
     if ($Level -eq "ERROR" -or $Level -eq "WARNING") {
         if ($global:FailuresLogPath) {
-            Add-Content -Path $global:FailuresLogPath -Value $logLine -Encoding UTF8
+            [System.IO.File]::AppendAllText($global:FailuresLogPath, "$logLine`r`n", $global:Utf8NoBom)
         }
     }
 }
@@ -32,18 +41,13 @@ function Invoke-ExternalCommand {
         [string[]]$ArgsList,
         [string]$OutFile,
         [string]$ErrFile,
-        [bool]$Append = $false
+        [int]$TimeoutSeconds = 0
     )
     Write-Log "Executing: $Command $($ArgsList -join ' ')"
     $startTime = (Get-Date).ToUniversalTime()
-    
+
     # We use Start-Process with Wait and RedirectStandardOutput to safely execute without Invoke-Expression
     try {
-        if ($Append) {
-            # Start-Process redirection overwrites, so we use a temporary file if append is needed
-            # Actually, standard Start-Process redirection does overwrite. We'll simplify and assume overwrite for external commands unless specified.
-            # We'll just run it directly and redirect using standard powershell redirection if possible, but Start-Process is safer.
-        }
         $procArgs = @{
             FilePath = $Command
             ArgumentList = $ArgsList
@@ -53,7 +57,7 @@ function Invoke-ExternalCommand {
         }
         if ($OutFile) { $procArgs.RedirectStandardOutput = $OutFile }
         if ($ErrFile) { $procArgs.RedirectStandardError = $ErrFile }
-        
+
         $proc = Start-Process @procArgs
         $exitCode = $proc.ExitCode
         $endTime = (Get-Date).ToUniversalTime()
@@ -72,7 +76,13 @@ function Export-SafeJson {
         [int]$Depth = 100
     )
     try {
-        $Data | ConvertTo-Json -Depth $Depth -Compress:$false | Out-File -FilePath $Path -Encoding UTF8
+        $parentDir = Split-Path $Path -Parent
+        if ($parentDir -and -not (Test-Path $parentDir)) {
+            New-Item -ItemType Directory -Path $parentDir -Force | Out-Null
+        }
+        # Use -InputObject to preserve array wrapper; pipe serializes elements individually
+        $json = ConvertTo-Json -InputObject $Data -Depth $Depth
+        [System.IO.File]::WriteAllText($Path, $json, $global:Utf8NoBom)
     } catch {
         Write-Log "Failed to export JSON to $Path : $_" -Level "ERROR"
     }
@@ -84,11 +94,31 @@ function Export-SafeTsv {
         [Parameter(Mandatory=$true)] [string]$Path
     )
     try {
-        # PS 5.1 Export-Csv supports -Delimiter but default encoding might be ASCII or UTF8 with BOM
-        # We want UTF8 without BOM ideally, but Out-File -Encoding UTF8 is standard.
-        $Data | Export-Csv -Path $Path -Delimiter "`t" -NoTypeInformation -Encoding UTF8
+        $parentDir = Split-Path $Path -Parent
+        if ($parentDir -and -not (Test-Path $parentDir)) {
+            New-Item -ItemType Directory -Path $parentDir -Force | Out-Null
+        }
+        # Convert hashtables to PSCustomObject for Export-Csv compatibility
+        $converted = foreach ($item in $Data) {
+            if ($item -is [hashtable]) {
+                [PSCustomObject]$item
+            } else {
+                $item
+            }
+        }
+        # Export to temp file, then rewrite without BOM
+        $tempPath = "$Path.tmp"
+        $converted | Export-Csv -Path $tempPath -Delimiter "`t" -NoTypeInformation -Encoding UTF8
+        # Re-read and write without BOM
+        $content = [System.IO.File]::ReadAllText($tempPath, [System.Text.Encoding]::UTF8)
+        # Strip BOM if present
+        if ($content.Length -gt 0 -and $content[0] -eq [char]0xFEFF) {
+            $content = $content.Substring(1)
+        }
+        [System.IO.File]::WriteAllText($Path, $content, $global:Utf8NoBom)
+        Remove-Item $tempPath -ErrorAction SilentlyContinue
     } catch {
         Write-Log "Failed to export TSV to $Path : $_" -Level "ERROR"
+        Remove-Item "$Path.tmp" -ErrorAction SilentlyContinue
     }
 }
-

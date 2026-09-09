@@ -1,3 +1,5 @@
+# Bringup Principles
+
 1. We construct a device tree for this machine.
 2. We do not boot a DTB from another laptop.
 3. Other Glymur DTS files may be consulted for:

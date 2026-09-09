@@ -110,6 +110,7 @@ build_dtb() {
         echo "Build $dtb_target: PASS"
     else
         echo "Build $dtb_target: FAIL"
+        return 1
     fi
 }
 

@@ -23,6 +23,7 @@ The goal is to capture the pristine factory state as delivered.
 
 ### STEP 3: Transfer Scripts
 - Copy the `linux-hp-omnibook-5-glymur` repository or the `scripts/windows` bundle onto a removable USB drive.
+- On the target machine, open the USB drive and `cd` into the kit directory (or `scripts\windows` if using the full repository) so that `.\day0-capture.ps1` resolves correctly.
 
 ### STEP 4: First Metadata Capture (Pass 1)
 - Open PowerShell (Elevated / Run as Administrator recommended).

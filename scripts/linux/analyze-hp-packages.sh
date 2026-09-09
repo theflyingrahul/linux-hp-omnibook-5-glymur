@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -eo pipefail
 
 EXTRACT_DIR=$1
 PKG_ID=$2

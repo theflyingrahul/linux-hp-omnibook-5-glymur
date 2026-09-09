@@ -7,11 +7,11 @@ def parse_inf(inf_path):
     try:
         with open(inf_path, 'r', encoding='utf-16') as f:
             lines = f.read().splitlines()
-    except:
+    except Exception:
         try:
             with open(inf_path, 'r', encoding='utf-8', errors='ignore') as f:
                 lines = f.read().splitlines()
-        except:
+        except Exception:
             return {}
 
     # Strip comments and empty lines
@@ -58,7 +58,6 @@ def parse_inf(inf_path):
     hw_ids = set()
     services = set()
     firmware_refs = set()
-    copy_files = set()
 
     if 'version' in sections:
         for line in sections['version']:
