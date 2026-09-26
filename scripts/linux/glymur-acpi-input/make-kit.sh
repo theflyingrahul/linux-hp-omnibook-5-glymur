@@ -8,7 +8,8 @@ set -euo pipefail
 # stage; it contains Windows-derived board data and must stay out of Git.
 # If GSI_BUILD names a directory with glymur_gpi_dma.ko and
 # glymur_geni_i2c_gsi.ko (derive-gpi-dma.py, derive-geni-i2c.py --gsi), the
-# desktop setup also binds the EC bus.
+# desktop setup also binds the EC bus. GED_BUILD adds glymur_acpi_ged.ko
+# (derive-evged.py --module) for lid and EC events.
 # Copy <kit-output-dir> to <installer>/glymur-tools/acpi-input/ and append
 # grub-entry.cfg to the installer's boot/grub/grub.cfg (after backing it up).
 
@@ -26,10 +27,15 @@ cp "$HERE/glymur-input-counter.py" "$KIT/"
 
 GPI_HASH=none
 GSI_HASH=none
+GED_HASH=none
 if [ -n "${GSI_BUILD:-}" ]; then
     cp "$GSI_BUILD/glymur_gpi_dma.ko" "$GSI_BUILD/glymur_geni_i2c_gsi.ko" "$KIT/"
     GPI_HASH="$(hash_of "$KIT/glymur_gpi_dma.ko")"
     GSI_HASH="$(hash_of "$KIT/glymur_geni_i2c_gsi.ko")"
+fi
+if [ -n "${GED_BUILD:-}" ]; then
+    cp "$GED_BUILD/glymur_acpi_ged.ko" "$KIT/"
+    GED_HASH="$(hash_of "$KIT/glymur_acpi_ged.ko")"
 fi
 
 WIFI_HASH=none
@@ -46,6 +52,7 @@ for script in glymur-acpi-input-test.sh glymur-live-desktop-setup.sh; do
         -e "s/@WIFI_BOARD_SHA256@/$WIFI_HASH/" \
         -e "s/@GPI_SHA256@/$GPI_HASH/" \
         -e "s/@GSI_SHA256@/$GSI_HASH/" \
+        -e "s/@GED_SHA256@/$GED_HASH/" \
         "$HERE/$script" >"$KIT/$script"
     chmod 755 "$KIT/$script"
     if grep -q '@[A-Z0-9_]*_SHA256@' "$KIT/$script"; then

@@ -21,6 +21,7 @@ GPIO_SHA256=@GPIO_SHA256@
 I2C_SHA256=@I2C_SHA256@
 GPI_SHA256=@GPI_SHA256@
 GSI_SHA256=@GSI_SHA256@
+GED_SHA256=@GED_SHA256@
 WIFI_BOARD_SHA256=@WIFI_BOARD_SHA256@
 FW_SRC=/cdrom/glymur-tools/firmware/ath12k/QCC2072/hw1.0/firmware-2.bin
 FW_SHA256=4c6a1be1f5bfad76319755ff76904abb21c4c7ece5293cc5f33a20b1f4c35254
@@ -52,7 +53,9 @@ systemctl mask --runtime sleep.target suspend.target hibernate.target \
 
 if hash_ok "$KIT/glymur_acpi_gpio.ko" "$GPIO_SHA256" &&
     hash_ok "$KIT/glymur_geni_i2c.ko" "$I2C_SHA256"; then
-    insmod "$KIT/glymur_acpi_gpio.ko" enable=1 >>"$LOG" 2>&1
+    # GPIO 66 is the EC event interrupt (ECGE, PDC pin 768) and GPIO 92 the
+    # lid (LIGE, pin 960); both reach _EVT through glymur_acpi_ged.ko.
+    insmod "$KIT/glymur_acpi_gpio.ko" enable=1 pins=3,51,66,67,92 >>"$LOG" 2>&1
     say "GPIO module status $?."
     insmod "$KIT/glymur_geni_i2c.ko" allow="$BUSES" >>"$LOG" 2>&1
     say "I2C module status $?."
@@ -80,6 +83,18 @@ elif hash_ok "$KIT/glymur_gpi_dma.ko" "$GPI_SHA256" &&
     say "EC I2C module status $?."
 else
     say 'EC bus prerequisites not met; IC10 left unbound.'
+fi
+
+# ACPI event devices ECGE (EC events) and LIGE (lid) use GpioInt, which the
+# built-in acpi-ged driver rejects; glymur_acpi_ged.ko is evged.c with
+# GpioInt support. Load it after the EC bus: ECGE's _EVT reads the EC.
+if [ "$GED_SHA256" = none ]; then
+    say 'GED module not in this kit; lid and EC events stay off.'
+elif hash_ok "$KIT/glymur_acpi_ged.ko" "$GED_SHA256"; then
+    insmod "$KIT/glymur_acpi_ged.ko" >>"$LOG" 2>&1
+    say "GED (lid and EC events) module status $?."
+else
+    say 'GED module hash mismatch; lid and EC events stay off.'
 fi
 
 PCI=/sys/bus/pci/devices/0004:01:00.0
