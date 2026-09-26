@@ -1,5 +1,10 @@
 # Project Status
 
+**2026-09-26, reboot with the `_OSC` override: CPU core idle and the EC
+bus work.** `acpi_idle` uses per-core C1/C4; cluster states stay gated behind
+`PEPI`. IC10 transfers over GPI DMA, and the ACPI thermal zones now read real
+temperatures. See `docs/cpuidle-and-ec-bus-results-2026-09-26.md`.
+
 **2026-09-26, live workstation: EC bus (IC10) GPI DMA test.** An ACPI GPI
 DMA module bound `QGP1`, and its allocate commands completed through the
 GPII interrupt. IC10 did not bind: the live image's `async_tx` claimed every
@@ -117,7 +122,7 @@ and I²C remain unvalidated; no new boot artifact was made.
 | lid switch | Linux input enumerated | ACPI `LID0` appeared as the sole input device in the live capture. Lid events need the EC bus (IC10 over GPI DMA) and `_AEI` handling; see `docs/ec-gsi-live-test-2026-09-26.md`. |
 | battery | Not exposed in tested Linux boot | Windows exposes charge and discharge data, but Linux had no `/sys/class/power_supply` device; UPower displayed no battery. |
 | charging | Windows observed; Linux unknown | The charger powers and charges the laptop in Windows; Linux ACPI adapter `_PSR` previously failed because a GenericSerialBus handler was missing. |
-| thermal sensors | Unknown | |
+| thermal sensors | **Linux working (test modules)** | Four `acpitz` zones read real temperatures once IC10 (EC) is on GPI DMA; see `docs/cpuidle-and-ec-bus-results-2026-09-26.md` |
 | fan | Unknown | |
 | Right USB-A | USB 3 storage and USB 2 HID enumeration work | The installer used bus 3 at 5 Gbit/s; a Dell receiver bound to `usbhid` on bus 2 at 12 Mb/s. Mouse motion events remain unproven. See `docs/usb-input-isolation-test.md`. |
 | USB-C port 1 | Timed storage hotplug not detected | Owner connected USB-C storage in the hinge-side port; no USB event or topology change appeared. Earlier installer boot from USB-C also failed. |
@@ -131,6 +136,7 @@ and I²C remain unvalidated; no new boot artifact was made.
 | microphones | Unknown | |
 | RGB camera | Linux USB/UVC enumerated | HP True Vision FHD camera present and bound to `uvcvideo` |
 | IR camera | Windows observed | HP IR camera present |
+| CPU idle | **Core states working (DSDT override)** | `acpi_idle` C1/C4 after the `_OSC` fix; cluster/system states gated by `PEPI` |
 | suspend | Unknown | |
 | resume | Unknown | |
 | RTC | Unknown | |

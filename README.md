@@ -29,6 +29,12 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-26 (after reboot):** CPU core idle works with a BIOS-gated DSDT
+`_OSC` fix, and the EC bus works over GPI DMA (thermal zones now read).
+The remaining power gaps are CPU frequency scaling (no `_CPC`), cluster
+idle, battery (PMIC GLink) and the GPU; these point to the device-tree
+path. See `docs/cpuidle-and-ec-bus-results-2026-09-26.md`.
+
 **2026-09-26 (live workstation):** the EC bus needs the QUP1 GPI DMA
 engine. A derived ACPI GPI driver binds it and its command path works, but
 the first live test lost the channels to `async_tx`. Retry after a reboot;
