@@ -1,15 +1,18 @@
 # Build Environment
 
-Research / Build Snapshot: 2026-09-08 13:30 UTC
+Build validation snapshot: 2026-09-14
 
-## Host Information
-- **OS:** Fedora Linux 44 (Workstation Edition)
-- **Kernel:** Linux 7.1.13-200.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC
-- **Architecture:** x86_64
+## Host and Target
+
+- **Runtime target:** Fedora Workstation for ARM64/aarch64.
+- **Build host:** Ubuntu 26.04.1 LTS in WSL2, aarch64 (`6.18.33.2-microsoft-standard-WSL2`).
+- **Source location:** use a Linux-native checkout; the Windows checkout is subject to Git CRLF conversion.
+
+Fedora is the intended installed OS. The WSL distribution is only a reproducible build host and does not determine the target DTS.
 
 ## Build Strategy
 
-Host currently provides the necessary dependencies. The environment is now capable of compiling the reference builds.
+The WSL host provides the necessary dependencies and is capable of compiling the reference builds.
 
 ## Toolchain Capabilities
 
@@ -18,29 +21,25 @@ Host currently provides the necessary dependencies. The environment is now capab
 - **DT compilation:** READY
 - **Kernel Image build:** READY
 
-## Fedora 44 Toolchain Packages
+## Toolchain Packages
 
-Host currently provides the following packages for the full GCC + LLVM development toolchain:
+The WSL host has GCC AArch64, Clang/LLVM, `dtc`, `flex`, `bison`, `bc`, `pkg-config`, `b4`, and the required kernel build utilities. Fedora equivalents include:
 
 ```text
-gcc-aarch64-linux-gnu dtc flex bison bc openssl-devel elfutils-libelf-devel ncurses-devel pkgconf-pkg-config zlib-ng-compat-devel dwarves clang lld llvm b4 ShellCheck
+gcc-aarch64-linux-gnu dtc flex bison bc pkgconf-pkg-config openssl-devel elfutils-libelf-devel ncurses-devel dwarves clang lld llvm b4
 ```
 
 ## Mainline Kernel Source Baseline
 
 - **Upstream Remote:** `https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git`
-- **Current HEAD SHA:** `28924df2a08f440c73991b83028032c901de2ae4`
-- **Commit Date:** Mon Sep 7 10:26:56 2026 -0700
-- **Git Describe:** `v7.3-rc2-6-g28924df2a`
+- **Validated HEAD:** `704340f1cd0dcef829eb62f5b48ae95a2ce17bdf`
+- **HEAD subject:** merge of `x86_urgent_for_7.3-rc4`
+- **Validation:** generic Glymur CRD DTB passed with GCC and LLVM; the GCC ARM64 `Image` also passed with `--jobs 2`.
 
 ## Target Config Strategy
 
-**Why we are not creating an OmniBook 5 config yet**
-The target machine has not arrived, and a board-specific DTS does not yet exist. Current config work is only for generic Glymur/reference validation. Target config requirements will be derived after Day-0 evidence collection and first target DTS construction. No `omnibook5_defconfig` or similar target config will be created in this phase.
+The Ubuntu ACPI boot shows that a target-specific DTB is not a prerequisite for reaching userspace. An ACPI-focused kernel configuration can be evaluated independently of a board DTS. Before building one, capture the running Ubuntu kernel's `CONFIG_I2C_QCOM_GENI` setting and ACPI/platform device enumeration. The pinned mainline checkout remains a historical build baseline, not evidence that it matches Qualcomm's September 2026 custom-kernel preview. Fedora ARM64 remains the intended runtime target.
 
 ## Build parallelism and memory limits
 
-- simultaneous full GCC and LLVM ARM64 Image builds exhausted available memory;
-- the machine/container restarted;
-- sequential builds with reduced parallelism completed successfully;
-- this was a host-resource issue, not a kernel build failure.
+- Use sequential builds and `--jobs 2` on this WSL host. Do not run GCC and LLVM Image builds simultaneously.

@@ -100,13 +100,13 @@ build_dtb() {
     
     local cmd
     if [ "$MODE" = "llvm" ]; then
-        cmd="make $JOB_FLAG -C $abs_src O=$abs_out ARCH=arm64 LLVM=1 $dtb_target"
+        cmd=(make $JOB_FLAG -C "$abs_src" "O=$abs_out" ARCH=arm64 LLVM=1 "$dtb_target")
     else
-        cmd="make $JOB_FLAG -C $abs_src O=$abs_out ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- $dtb_target"
+        cmd=(make $JOB_FLAG -C "$abs_src" "O=$abs_out" ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- "$dtb_target")
     fi
     
-    echo "Running: $cmd"
-    if $cmd > ".work/logs/build-${label}.log" 2>&1; then
+    echo "Running: ${cmd[*]}"
+    if "${cmd[@]}" > ".work/logs/build-${label}.log" 2>&1; then
         echo "Build $dtb_target: PASS"
     else
         echo "Build $dtb_target: FAIL"

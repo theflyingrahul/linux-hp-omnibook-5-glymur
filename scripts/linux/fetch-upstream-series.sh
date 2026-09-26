@@ -56,7 +56,7 @@ fetch_series() {
 
     # Try Lore raw
     echo "  -> Trying lore.kernel.org/all/$msgid/t.mbox.gz ..."
-    if curl -sL "https://lore.kernel.org/all/$msgid/t.mbox.gz" > "$out_file.gz"; then
+    if curl -fsSL "https://lore.kernel.org/all/$msgid/t.mbox.gz" > "$out_file.gz"; then
         if gzip -t "$out_file.gz" 2>/dev/null; then
             zcat "$out_file.gz" > "$out_file.tmp"
             if validate_patch "$out_file.tmp"; then
@@ -71,7 +71,7 @@ fetch_series() {
     # Try Patchew
     if [ $success -eq 0 ]; then
         echo "  -> Trying patchew.org/linux/$msgid/mbox ..."
-        if curl -sL "https://patchew.org/linux/$msgid/mbox" > "$out_file.tmp"; then
+        if curl -fsSL "https://patchew.org/linux/$msgid/mbox" > "$out_file.tmp"; then
             if validate_patch "$out_file.tmp"; then
                 mv "$out_file.tmp" "$out_file"
                 success=1
@@ -85,7 +85,7 @@ fetch_series() {
     # Try Lore raw single endpoint if series failed
     if [ $success -eq 0 ]; then
         echo "  -> Trying lore.kernel.org/all/$msgid/raw ..."
-        if curl -sL "https://lore.kernel.org/all/$msgid/raw" > "$out_file.tmp"; then
+        if curl -fsSL "https://lore.kernel.org/all/$msgid/raw" > "$out_file.tmp"; then
             if validate_patch "$out_file.tmp"; then
                 mv "$out_file.tmp" "$out_file"
                 success=1
@@ -108,8 +108,13 @@ fetch_series() {
             path_res="PASS"
         fi
         printf "%-25s %-12s %-12s %-10s %s\n" "$board_name" "PASS($backend)" "$format_res" "$path_res" "$out_hash"
+        if [ "$path_res" != "PASS" ]; then
+            return 1
+        fi
+        return 0
     else
         printf "%-25s %-12s %-12s %-10s %s\n" "$board_name" "FAILED" "INVALID" "N/A" "N/A"
+        return 1
     fi
 }
 
@@ -140,11 +145,13 @@ case "$CMD" in
         fetch_series "dp-phy-v3" "20260828-glymur-phy-v3-v3-0-8e73ce7c4636@oss.qualcomm.com" "phy"
         ;;
     all)
-        fetch_series "elitebook-v5" "20260829-glymur-send-v5-0-a11bdf6a4b66@oss.qualcomm.com" "arch/arm64/boot/dts/qcom/glymur-hp-elitebook-x-g2q.dts"
+        status=0
+        fetch_series "elitebook-v5" "20260829-glymur-send-v5-0-a11bdf6a4b66@oss.qualcomm.com" "arch/arm64/boot/dts/qcom/glymur-hp-elitebook-x-g2q.dts" || status=1
         # I need to get the exact message-id for omnibook ultra!
-        fetch_series "omnibook-ultra-v1" "20260830-x2-hp-omnibook-ship-v1-0-9feada71dc79@oss.qualcomm.com" "arch/arm64/boot/dts/qcom/glymur-hp-omnibook-ultra-kg0xxx.dts"
-        fetch_series "pcie3-v10" "20260825-glymur_linkmode_0826-v10-0-56ab597d77e4@oss.qualcomm.com" "pcie"
-        fetch_series "dp-phy-v3" "20260828-glymur-phy-v3-v3-0-8e73ce7c4636@oss.qualcomm.com" "phy"
+        fetch_series "omnibook-ultra-v1" "20260830-x2-hp-omnibook-ship-v1-0-9feada71dc79@oss.qualcomm.com" "arch/arm64/boot/dts/qcom/glymur-hp-omnibook-ultra-kg0xxx.dts" || status=1
+        fetch_series "pcie3-v10" "20260825-glymur_linkmode_0826-v10-0-56ab597d77e4@oss.qualcomm.com" "pcie" || status=1
+        fetch_series "dp-phy-v3" "20260828-glymur-phy-v3-v3-0-8e73ce7c4636@oss.qualcomm.com" "phy" || status=1
+        exit "$status"
         ;;
     *)
         echo "Usage: $0 [--validate-only] {elitebook|omnibook-ultra|pcie3|dp-phy|all}"

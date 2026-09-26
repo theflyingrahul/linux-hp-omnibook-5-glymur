@@ -1,6 +1,6 @@
 # Glymur Reference Comparison
 
-Research snapshot: 2026-09-08 11:34 UTC
+Research snapshot: 2026-09-14
 
 ## Reference Tree Availability
 
@@ -45,7 +45,7 @@ The reference values below are examples of board-specific implementation, not ca
 
 - **NVMe PCIe controller:** EliteBook uses `pcie5`, OmniBook uses `pcie3b`.
 - **WLAN PCIe controller:** Both use `pcie4`, but this must still be verified for the target chassis.
-- **I2C bus assignment:** EliteBook uses `i2c0` and `i2c8`; OmniBook uses `i2c0`, `i2c4`, and `i2c8`.
+- **I2C bus assignment:** The target ACPI confirms controller identities `I2C5` → `i2c4` and `I2C9` → `i2c8`, with target HID addresses `0x15` and `0x10` respectively. GPIO and power details remain board-specific; reference-board values do not establish them.
 - **HID device addresses / HID IRQ GPIOs:** Touchpad, touchscreen, and keyboard addresses differ depending on the IC and wiring.
 - **GPIO polarity / wake GPIOs:** Lid switches and wake lines are heavily board-specific.
 - **GPIO reserved ranges:** Do not blindly reserve ranges like `<4 4>`.

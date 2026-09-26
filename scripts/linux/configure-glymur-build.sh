@@ -59,5 +59,10 @@ else
     make -C "$ABS_SRC" O="$ABS_OUT" ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- olddefconfig
 fi
 
-grep CONFIG_QCOM_CPUCP_MBOX "$CONFIG_FILE" || echo "WARNING: CONFIG_QCOM_CPUCP_MBOX not found after olddefconfig"
+for symbol in CONFIG_QCOM_CPUCP_MBOX CONFIG_INTERCONNECT_QCOM_GLYMUR CONFIG_PINCTRL_GLYMUR; do
+    if ! grep -qx "${symbol}=y" "$CONFIG_FILE"; then
+        echo "Error: required Glymur kernel symbol is not built in: $symbol" >&2
+        exit 1
+    fi
+done
 echo "Configuration complete."

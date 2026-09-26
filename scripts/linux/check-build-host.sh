@@ -1,6 +1,21 @@
 #!/bin/bash
 set -euo pipefail
 
+MODE="all"
+case "${1:-}" in
+    "") ;;
+    --dt-only) MODE="dt" ;;
+    --kernel) MODE="kernel" ;;
+    --help|-h)
+        echo "Usage: $0 [--dt-only|--kernel]"
+        exit 0
+        ;;
+    *)
+        echo "Usage: $0 [--dt-only|--kernel]" >&2
+        exit 2
+        ;;
+esac
+
 echo "Host:"
 if [ -f /etc/os-release ]; then
     grep PRETTY_NAME /etc/os-release | cut -d= -f2 | tr -d '"' | awk '{print "    " $0}'
@@ -13,10 +28,16 @@ has_cmd() {
 }
 
 echo "GCC ARM64 cross-build:"
-gcc_missing=""
-for t in aarch64-linux-gnu-gcc flex bison bc pkg-config; do
-    if ! has_cmd "$t"; then gcc_missing="$gcc_missing $t"; fi
+shared_missing=""
+for t in make flex bison bc pkg-config; do
+    if ! has_cmd "$t"; then shared_missing="$shared_missing $t"; fi
 done
+gcc_compiler_missing=""
+if ! has_cmd aarch64-linux-gnu-gcc; then gcc_compiler_missing=" aarch64-linux-gnu-gcc"; fi
+# Kbuild compiles host tools (including scripts/dtc) with HOSTCC=gcc unless
+# LLVM=1 is used, so a cross compiler alone is not sufficient.
+if ! has_cmd gcc; then gcc_compiler_missing="$gcc_compiler_missing gcc"; fi
+gcc_missing="$gcc_compiler_missing$shared_missing"
 if [ -n "$gcc_missing" ]; then
     echo "    BLOCKED"
     echo "    missing:$gcc_missing"
@@ -30,6 +51,8 @@ llvm_missing=""
 for t in clang ld.lld llvm-ar llvm-nm llvm-objcopy; do
     if ! has_cmd "$t"; then llvm_missing="$llvm_missing $t"; fi
 done
+llvm_compiler_missing="$llvm_missing"
+llvm_missing="$llvm_compiler_missing$shared_missing"
 if [ -n "$llvm_missing" ]; then
     echo "    BLOCKED"
     echo "    missing:$llvm_missing"
@@ -59,4 +82,14 @@ if has_cmd b4; then
     echo "    b4: READY"
 else
     echo "    b4: MISSING"
+fi
+
+if [ "$MODE" = "dt" ]; then
+    if [ -n "$shared_missing" ] || [ -n "$dt_missing" ] || { [ -n "$gcc_compiler_missing" ] && [ -n "$llvm_compiler_missing" ]; }; then
+        exit 1
+    fi
+elif [ "$MODE" = "kernel" ]; then
+    if [ -n "$shared_missing" ] || { [ -n "$gcc_compiler_missing" ] && [ -n "$llvm_compiler_missing" ]; }; then
+        exit 1
+    fi
 fi
