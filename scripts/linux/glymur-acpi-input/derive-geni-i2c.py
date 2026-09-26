@@ -3,6 +3,11 @@ import hashlib
 import sys
 
 src_path, out_path = sys.argv[1], sys.argv[2]
+# --gsi derives a second driver for engines that firmware left in GPI DMA
+# (GSI) mode, such as the EC bus IC10. It needs glymur_gpi_dma.ko. The
+# default output is unchanged.
+gsi = sys.argv[3:] == ['--gsi']
+assert sys.argv[3:] in ([], ['--gsi']), 'usage: derive-geni-i2c.py <src> <out> [--gsi]'
 src = open(src_path, encoding='utf-8').read()
 assert hashlib.sha256(src.encode()).hexdigest() == \
     '74c7e931c34657dc48734e5fbf047de708bb0aff918c0d3d3adfeee480865cc0', 'unexpected source'
@@ -257,4 +262,55 @@ sub('''		.name = "geni_i2c",
 ''')
 sub('MODULE_DESCRIPTION("I2C Controller Driver for GENI based QUP cores");',
     'MODULE_DESCRIPTION("HP Glymur ACPI GENI I2C test driver (derived from i2c-qcom-geni)");')
+
+if gsi:
+    sub('// firmware-owned SE clock untouched, takes SCL timing from the controller\'s\n'
+        '// ACPI CLKD table, and uses FIFO transfers only. Out-of-tree test module;\n',
+        '// firmware-owned SE clock untouched, takes SCL timing from the controller\'s\n'
+        '// ACPI CLKD table, and binds only engines that firmware left in GPI DMA\n'
+        '// (GSI) mode, taking channels from glymur_gpi_dma. Out-of-tree test module;\n')
+    sub('static char allow[96] = "0xb80000,0xb90000";\n',
+        'static char allow[96] = "0xa84000";\n')
+    sub('MODULE_PARM_DESC(allow, "Comma-separated MMIO bases of QCOM0F10 controllers to bind");\n',
+        'MODULE_PARM_DESC(allow, "Comma-separated MMIO bases of QCOM0F10 controllers to bind");\n'
+        '\n'
+        '/* IC10 is QUP1 SE1: DT i2c9 uses dmas = <&gpi_dma1 {0,1} 1 QCOM_GPI_I2C>. */\n'
+        'static unsigned int seid = 1;\n'
+        'module_param(seid, uint, 0444);\n'
+        'MODULE_PARM_DESC(seid, "Serial engine index of the allowed controller within its QUP");\n'
+        '\n'
+        'struct dma_chan *glymur_gpi_dma_request(u32 chid, u32 seid, u32 protocol);\n')
+    sub('#include <linux/dma/qcom-gpi-dma.h>\n',
+        '#include <dt-bindings/dma/qcom-gpi.h>\n#include <linux/dma/qcom-gpi-dma.h>\n')
+    # Invert the firmware-state gate: require FIFO disabled (GSI mode).
+    sub('''		    (readl_relaxed(gi2c->se.base + GENI_IF_DISABLE_RO) & FIFO_IF_DISABLE)) {
+			ret = dev_err_probe(dev, -ENODEV,
+					    "firmware did not leave an I2C FIFO engine (proto=%u clk=0x%08x)\\n",''',
+        '''		    !(readl_relaxed(gi2c->se.base + GENI_IF_DISABLE_RO) & FIFO_IF_DISABLE)) {
+			ret = dev_err_probe(dev, -ENODEV,
+					    "firmware did not leave an I2C GSI engine (proto=%u clk=0x%08x)\\n",''')
+    sub('''	if ((desc && desc->no_dma_support) || !gi2c->se.wrapper) {
+		fifo_disable = false;''', '''	if (desc && desc->no_dma_support) {
+		fifo_disable = false;''')
+    sub('\tgi2c->tx_c = dma_request_chan(gi2c->se.dev, "tx");\n',
+        '\tgi2c->tx_c = glymur_gpi_dma_request(0, seid, QCOM_GPI_I2C);\n')
+    sub('\tgi2c->rx_c = dma_request_chan(gi2c->se.dev, "rx");\n',
+        '\tgi2c->rx_c = glymur_gpi_dma_request(1, seid, QCOM_GPI_I2C);\n')
+    # release_gpi_dma() must not release an ERR_PTR left by a failed request.
+    sub('''err_rx:
+	dma_release_channel(gi2c->tx_c);
+err_tx:
+	return ret;''', '''err_rx:
+	gi2c->rx_c = NULL;
+	dma_release_channel(gi2c->tx_c);
+err_tx:
+	gi2c->tx_c = NULL;
+	return ret;''')
+    sub('\tstrscpy(gi2c->adap.name, "Glymur-ACPI-Geni-I2C", sizeof(gi2c->adap.name));\n',
+        '\tstrscpy(gi2c->adap.name, "Glymur-ACPI-Geni-I2C-GSI", sizeof(gi2c->adap.name));\n')
+    sub('\t\t.name = "glymur_acpi_geni_i2c",\n', '\t\t.name = "glymur_acpi_geni_i2c_gsi",\n')
+    sub('MODULE_DESCRIPTION("HP Glymur ACPI GENI I2C test driver (derived from i2c-qcom-geni)");',
+        'MODULE_DESCRIPTION("HP Glymur ACPI GENI I2C GSI test driver (derived from i2c-qcom-geni)");\n'
+        'MODULE_SOFTDEP("pre: glymur_gpi_dma");')
+
 open(out_path, 'w', encoding='utf-8', newline='\n').write(src)
