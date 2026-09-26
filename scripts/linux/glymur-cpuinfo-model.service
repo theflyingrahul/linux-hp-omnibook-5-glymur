@@ -1,0 +1,13 @@
+[Unit]
+Description=Add the SMBIOS processor name to /proc/cpuinfo (Glymur arm64)
+ConditionArchitecture=arm64
+Before=display-manager.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/sbin/glymur-cpuinfo-model.sh
+ExecStop=/usr/local/sbin/glymur-cpuinfo-model.sh --undo
+
+[Install]
+WantedBy=multi-user.target
