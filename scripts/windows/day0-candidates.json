@@ -30,7 +30,7 @@
     },
     "ADC1.bin": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcadc_ext8480.inf"
+      "inf_source": "qcadc8480.inf; qcadc_ext8480.inf"
     },
     "ADCMResources.bin": {
       "evidence": "HP-SOFTWARE",
@@ -98,7 +98,7 @@
     },
     "QSTFConfigFile.bin": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcqstfconfig8480.inf"
+      "inf_source": "ppte.wd8480.inf; qcqstfconfig8480.inf"
     },
     "QdssTrace.bin": {
       "evidence": "HP-SOFTWARE",
@@ -162,15 +162,15 @@
     },
     "aux_ucode.elf": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlancol8480_1.inf"
+      "inf_source": "qcwlancol8480.inf; qcwlancol8480_1.inf"
     },
     "bdwlan.elf": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlanhmt8480.inf"
+      "inf_source": "qcwlancol8480.inf; qcwlancol8480_1.inf; qcwlanhmt8480.inf"
     },
     "bdwlan_qcc2072_1p0_ncm820A.elf": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlancol8480_1.inf"
+      "inf_source": "qcwlancol8480.inf; qcwlancol8480_1.inf"
     },
     "bdwlan_wcn785x_2p0_ncm825.elf": {
       "evidence": "HP-SOFTWARE",
@@ -227,10 +227,6 @@
     "bdwlan_wcn785x_2p0_ncm865a_QC_revB.elf": {
       "evidence": "HP-SOFTWARE",
       "inf_source": "qcwlanhmt8480.inf"
-    },
-    "bsrc_bt.bin": {
-      "evidence": "HP-SOFTWARE",
-      "inf_source": "qcbluetooth8480.inf"
     },
     "cdsp_dtbs.elf": {
       "evidence": "HP-SOFTWARE",
@@ -298,7 +294,7 @@
     },
     "phy_ucode.elf": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlancol8480_1.inf"
+      "inf_source": "qcwlancol8480.inf; qcwlancol8480_1.inf"
     },
     "phy_ucode20.elf": {
       "evidence": "HP-SOFTWARE",
@@ -394,7 +390,7 @@
     },
     "qdss_trace_config_v1.cfg": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlanhmt8480.inf"
+      "inf_source": "qcwlancol8480.inf; qcwlancol8480_1.inf; qcwlanhmt8480.inf"
     },
     "qdss_trace_config_v2.cfg": {
       "evidence": "HP-SOFTWARE",
@@ -414,7 +410,7 @@
     },
     "regdb.bin": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlanhmt8480.inf"
+      "inf_source": "qcwlancol8480.inf; qcwlancol8480_1.inf; qcwlanhmt8480.inf"
     },
     "rtice.mbn": {
       "evidence": "HP-SOFTWARE",
@@ -558,7 +554,7 @@
     },
     "wlanfw.bin": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlancol8480_1.inf"
+      "inf_source": "qcwlancol8480.inf; qcwlancol8480_1.inf"
     },
     "wlanfw.mbn": {
       "evidence": "HP-SOFTWARE",
@@ -627,7 +623,7 @@
     },
     "ACPI\\QCOM0F11": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcadc_ext8480.inf",
+      "inf_source": "qcadc8480.inf; qcadc_ext8480.inf",
       "provider": "Qualcomm Technologies, Inc."
     },
     "ACPI\\QCOM0F12": {
@@ -647,7 +643,7 @@
     },
     "ACPI\\QCOM0F17": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcpep.wd_ext8480.inf",
+      "inf_source": "qcpep.wd8480.inf; qcpep.wd_ext8480.inf",
       "provider": "Qualcomm Inc."
     },
     "ACPI\\QCOM0F1B": {
@@ -1102,12 +1098,12 @@
     },
     "ACPI\\QCOM0FD8": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcpep.wd_ext8480.inf",
+      "inf_source": "qcpep.wd8480.inf; qcpep.wd_ext8480.inf",
       "provider": "Qualcomm Inc."
     },
     "ACPI\\QCOM0FD9": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcpep.wd_ext8480.inf",
+      "inf_source": "qcpep.wd8480.inf; qcpep.wd_ext8480.inf",
       "provider": "Qualcomm Inc."
     },
     "ACPI\\QCOM0FDA": {
@@ -1127,7 +1123,7 @@
     },
     "ACPI\\QCOM0FDD": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcpep.wd_ext8480.inf",
+      "inf_source": "qcpep.wd8480.inf; qcpep.wd_ext8480.inf",
       "provider": "Qualcomm Inc."
     },
     "ACPI\\QCOM0FDD&SUBSYS_CUST8480&REV_0091": {
@@ -1142,22 +1138,22 @@
     },
     "ACPI\\QCOM0FDE": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcpep.wd_ext8480.inf",
+      "inf_source": "qcpep.wd8480.inf; qcpep.wd_ext8480.inf",
       "provider": "Qualcomm Inc."
     },
     "ACPI\\QCOM0FDF": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcpep.wd_ext8480.inf",
+      "inf_source": "qcpep.wd8480.inf; qcpep.wd_ext8480.inf",
       "provider": "Qualcomm Inc."
     },
     "ACPI\\QCOM0FE1": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcpep.wd_ext8480.inf",
+      "inf_source": "qcpep.wd8480.inf; qcpep.wd_ext8480.inf",
       "provider": "Qualcomm Inc."
     },
     "ACPI\\QCOM0FE2": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcpep.wd_ext8480.inf",
+      "inf_source": "qcpep.wd8480.inf; qcpep.wd_ext8480.inf",
       "provider": "Qualcomm Inc."
     },
     "ACPI\\QCOM0FE3": {
@@ -1222,7 +1218,7 @@
     },
     "ACPI\\QCOM0FF9": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qciommuext8480.inf",
+      "inf_source": "qciommu8480.inf; qciommuext8480.inf",
       "provider": "Qualcomm Inc."
     },
     "ACPI\\QCOM0FFA": {
@@ -1232,8 +1228,8 @@
     },
     "ACPI\\QCOM0FFB": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcpilfilterext8480.inf",
-      "provider": "Qualcomm Technologies Inc."
+      "inf_source": "qcpil8480.inf; qcpilfilterext8480.inf",
+      "provider": "Qualcomm Incorporated"
     },
     "ACPI\\QCOM0FFC": {
       "evidence": "HP-SOFTWARE",
@@ -1502,7 +1498,7 @@
     },
     "ACPI\\QCOM1033": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcpep.wd_ext8480.inf",
+      "inf_source": "qcpep.wd8480.inf; qcpep.wd_ext8480.inf",
       "provider": "Qualcomm Inc."
     },
     "ACPI\\QCOM1036": {
@@ -2182,8 +2178,8 @@
     },
     "ACPI\\VEN_QCOM&DEV_0F1B&SUBSYS_CRD08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcsubsys_ext_adsp8480.inf",
-      "provider": "Qualcomm Technologies, Incorporated"
+      "inf_source": "qcSensorsConfigCrd8480.inf; qcsubsys_ext_adsp8480.inf",
+      "provider": "Qualcomm Technologies Inc"
     },
     "ACPI\\VEN_QCOM&DEV_0F2C": {
       "evidence": "HP-SOFTWARE",
@@ -2192,7 +2188,7 @@
     },
     "ACPI\\VEN_QCOM&DEV_0F36": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcdxext_qcdpps8480.inf",
+      "inf_source": "qcdpps8480.inf; qcdx8480.inf; qcdxext_qcdpps8480.inf",
       "provider": "Qualcomm Incorporated"
     },
     "ACPI\\VEN_QCOM&DEV_0F36&REV_0001": {
@@ -2342,7 +2338,7 @@
     },
     "ACPI\\VEN_QCOM&DEV_0F6B&SUBSYS_CLS08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcbluetooth_swiftpair_ext8480.inf",
+      "inf_source": "qcbluetooth_nvm_ext8480.inf; qcbluetooth_swiftpair_ext8480.inf",
       "provider": "Qualcomm Atheros Communications Inc."
     },
     "ACPI\\VEN_QCOM&DEV_0F6B&SUBSYS_CRD08480": {
@@ -2362,7 +2358,7 @@
     },
     "ACPI\\VEN_QCOM&DEV_0F6B&SUBSYS_MTP08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcbluetooth_swiftpair_ext8480.inf",
+      "inf_source": "qcbluetooth_nvm_ext8480.inf; qcbluetooth_swiftpair_ext8480.inf",
       "provider": "Qualcomm Atheros Communications Inc."
     },
     "ACPI\\VEN_QCOM&DEV_0F6B&SUBSYS_QCB08480": {
@@ -2372,7 +2368,7 @@
     },
     "ACPI\\VEN_QCOM&DEV_0F6B&SUBSYS_QRD08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcbluetooth_swiftpair_ext8480.inf",
+      "inf_source": "qcbluetooth_nvm_ext8480.inf; qcbluetooth_swiftpair_ext8480.inf",
       "provider": "Qualcomm Atheros Communications Inc."
     },
     "ACPI\\VEN_QCOM&DEV_0F77": {
@@ -2447,42 +2443,42 @@
     },
     "ACPI\\VEN_QCOM&DEV_0FC7&SUBSYS_CDP08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlanhmt_ext8480.inf",
+      "inf_source": "qcwlancol_ext8480.inf; qcwlanhmt_ext8480.inf",
       "provider": "Qualcomm Technologies, Incorporated"
     },
     "ACPI\\VEN_QCOM&DEV_0FC7&SUBSYS_CDPS8480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlanhmt_ext8480.inf",
+      "inf_source": "qcwlancol_ext8480.inf; qcwlanhmt_ext8480.inf",
       "provider": "Qualcomm Technologies, Incorporated"
     },
     "ACPI\\VEN_QCOM&DEV_0FC7&SUBSYS_CRD08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlanhmt_ext8480.inf",
+      "inf_source": "qcwlancol_ext8480.inf; qcwlanhmt_ext8480.inf",
       "provider": "Qualcomm Technologies, Incorporated"
     },
     "ACPI\\VEN_QCOM&DEV_0FC7&SUBSYS_IDP08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlanhmt_ext8480.inf",
+      "inf_source": "qcwlancol_ext8480.inf; qcwlanhmt_ext8480.inf",
       "provider": "Qualcomm Technologies, Incorporated"
     },
     "ACPI\\VEN_QCOM&DEV_0FC7&SUBSYS_IDPS8480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlanhmt_ext8480.inf",
+      "inf_source": "qcwlancol_ext8480.inf; qcwlanhmt_ext8480.inf",
       "provider": "Qualcomm Technologies, Incorporated"
     },
     "ACPI\\VEN_QCOM&DEV_0FC7&SUBSYS_MTP08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlanhmt_ext8480.inf",
+      "inf_source": "qcwlancol_ext8480.inf; qcwlanhmt_ext8480.inf",
       "provider": "Qualcomm Technologies, Incorporated"
     },
     "ACPI\\VEN_QCOM&DEV_0FC7&SUBSYS_QCB08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlanhmt_ext8480.inf",
+      "inf_source": "qcwlancol_ext8480.inf; qcwlanhmt_ext8480.inf",
       "provider": "Qualcomm Technologies, Incorporated"
     },
     "ACPI\\VEN_QCOM&DEV_0FC7&SUBSYS_QRD08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlanhmt_ext8480.inf",
+      "inf_source": "qcwlancol_ext8480.inf; qcwlanhmt_ext8480.inf",
       "provider": "Qualcomm Technologies, Incorporated"
     },
     "ACPI\\VEN_QCOM&DEV_0FD7&SUBSYS_CDP08480": {
@@ -3152,7 +3148,7 @@
     },
     "ACPI\\VEN_QCOM&DEV_0FF5": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcdxext_qcdpps8480.inf",
+      "inf_source": "qcdpps8480.inf; qcdx8480.inf; qcdxext_qcdpps8480.inf",
       "provider": "Qualcomm Incorporated"
     },
     "ACPI\\VEN_QCOM&DEV_0FF5&REV_0033": {
@@ -3282,17 +3278,17 @@
     },
     "ACPI\\VEN_QCOM&DEV_0FFA&SUBSYS_CDPS8480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcsubsys_ext_soccp8480.inf",
+      "inf_source": "qcsubsys_ext_adsp8480.inf; qcsubsys_ext_oob8480.inf; qcsubsys_ext_soccp8480.inf",
       "provider": "Qualcomm Technologies, Incorporated"
     },
     "ACPI\\VEN_QCOM&DEV_0FFA&SUBSYS_CRD08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcsubsys_ext_soccp8480.inf",
+      "inf_source": "qcsubsys_ext_adsp8480.inf; qcsubsys_ext_oob8480.inf; qcsubsys_ext_soccp8480.inf",
       "provider": "Qualcomm Technologies, Incorporated"
     },
     "ACPI\\VEN_QCOM&DEV_0FFA&SUBSYS_QCB08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcsubsys_ext_soccp8480.inf",
+      "inf_source": "qcsubsys_ext_oob8480.inf; qcsubsys_ext_soccp8480.inf",
       "provider": "Qualcomm Technologies, Incorporated"
     },
     "ACPI\\VEN_QCOM&DEV_0FFB&SUBSYS_8F03103C": {
@@ -3342,18 +3338,18 @@
     },
     "ACPI\\VEN_QCOM&DEV_0FFB&SUBSYS_CDPS8480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcsubsys_ext_spss8480.inf",
-      "provider": "Qualcomm Technologies, Incorporated"
+      "inf_source": "qcpilEXT8480.inf; qcsubsys_ext_adsp8480.inf; qcsubsys_ext_oob8480.inf; qcsubsys_ext_soccp8480.inf; qcsubsys_ext_spss8480.inf",
+      "provider": "Qualcomm Incorporated"
     },
     "ACPI\\VEN_QCOM&DEV_0FFB&SUBSYS_CRD08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcsubsys_ext_spss8480.inf",
-      "provider": "Qualcomm Technologies, Incorporated"
+      "inf_source": "qcpilEXT8480.inf; qcsubsys_ext_adsp8480.inf; qcsubsys_ext_oob8480.inf; qcsubsys_ext_soccp8480.inf; qcsubsys_ext_spss8480.inf",
+      "provider": "Qualcomm Incorporated"
     },
     "ACPI\\VEN_QCOM&DEV_0FFB&SUBSYS_QCB08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcsubsys_ext_spss8480.inf",
-      "provider": "Qualcomm Technologies, Incorporated"
+      "inf_source": "qcpilEXT8480.inf; qcsubsys_ext_oob8480.inf; qcsubsys_ext_soccp8480.inf; qcsubsys_ext_spss8480.inf",
+      "provider": "Qualcomm Incorporated"
     },
     "ACPI\\VEN_QCOM&DEV_0FFC&SUBSYS_AGN00000": {
       "evidence": "HP-SOFTWARE",
@@ -3437,27 +3433,27 @@
     },
     "ACPI\\VEN_QCOM&DEV_103E&SUBSYS_CDPS8480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "QcTreeExtQcom8480.inf",
+      "inf_source": "QcTreeExtOem8480.inf; QcTreeExtQcom8480.inf",
       "provider": "Qualcomm Inc."
     },
     "ACPI\\VEN_QCOM&DEV_103E&SUBSYS_CRD08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "QcTreeExtQcom8480.inf",
+      "inf_source": "QcTreeExtOem8480.inf; QcTreeExtQcom8480.inf",
       "provider": "Qualcomm Inc."
     },
     "ACPI\\VEN_QCOM&DEV_103E&SUBSYS_IDP08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "QcTreeExtQcom8480.inf",
+      "inf_source": "QcTreeExtOem8480.inf; QcTreeExtQcom8480.inf",
       "provider": "Qualcomm Inc."
     },
     "ACPI\\VEN_QCOM&DEV_103E&SUBSYS_IDPS8480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "QcTreeExtQcom8480.inf",
+      "inf_source": "QcTreeExtOem8480.inf; QcTreeExtQcom8480.inf",
       "provider": "Qualcomm Inc."
     },
     "ACPI\\VEN_QCOM&DEV_103E&SUBSYS_QCB08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "QcTreeExtQcom8480.inf",
+      "inf_source": "QcTreeExtOem8480.inf; QcTreeExtQcom8480.inf",
       "provider": "Qualcomm Inc."
     },
     "ACPI\\VEN_QCOM&DEV_104B&SUBSYS_CDPS8480&REV_0001": {
@@ -3557,7 +3553,7 @@
     },
     "ADCM\\QCOM0FF4": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcadx_ext8480.inf",
+      "inf_source": "qcadx8480.inf; qcadx_ext8480.inf",
       "provider": "Qualcomm Technologies, Inc."
     },
     "ADCM\\QCOM0FF6": {
@@ -3722,47 +3718,47 @@
     },
     "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F03103C": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "inf_source": "QCListenSM8480.inf; qcasd_CRD_Extension8480.inf",
       "provider": "Qualcomm Technologies, Inc."
     },
     "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F46103C&REV_01": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "inf_source": "QCListenSM8480.inf; qcasd_CRD_Extension8480.inf",
       "provider": "Qualcomm Technologies, Inc."
     },
     "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F46103C&REV_02": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "inf_source": "QCListenSM8480.inf; qcasd_CRD_Extension8480.inf",
       "provider": "Qualcomm Technologies, Inc."
     },
     "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F46103C&REV_03": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "inf_source": "QCListenSM8480.inf; qcasd_CRD_Extension8480.inf",
       "provider": "Qualcomm Technologies, Inc."
     },
     "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F46103C&REV_04": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "inf_source": "QCListenSM8480.inf; qcasd_CRD_Extension8480.inf",
       "provider": "Qualcomm Technologies, Inc."
     },
     "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F47103C&REV_01": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "inf_source": "QCListenSM8480.inf; qcasd_CRD_Extension8480.inf",
       "provider": "Qualcomm Technologies, Inc."
     },
     "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F47103C&REV_02": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "inf_source": "QCListenSM8480.inf; qcasd_CRD_Extension8480.inf",
       "provider": "Qualcomm Technologies, Inc."
     },
     "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F47103C&REV_03": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "inf_source": "QCListenSM8480.inf; qcasd_CRD_Extension8480.inf",
       "provider": "Qualcomm Technologies, Inc."
     },
     "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F47103C&REV_04": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "inf_source": "QCListenSM8480.inf; qcasd_CRD_Extension8480.inf",
       "provider": "Qualcomm Technologies, Inc."
     },
     "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_CDPS8480": {
@@ -3772,7 +3768,7 @@
     },
     "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_CRD08480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcasd_CRD_Extension8480.inf",
+      "inf_source": "QCListenSM8480.inf; qcasd_CRD_Extension8480.inf",
       "provider": "Qualcomm Technologies, Inc."
     },
     "AUCD\\VEN_QCOM&DEV_0FCD&SUBSYS_QCB08480": {
@@ -4392,42 +4388,42 @@
     },
     "PCI\\VEN_17CB&DEV_1112&SUBSYS_111017CB&REV_01": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlancol8480_1.inf",
+      "inf_source": "qcwlancol8480.inf; qcwlancol8480_1.inf",
       "provider": "Qualcomm Communications Inc."
     },
     "PCI\\VEN_17CB&DEV_1112&SUBSYS_8EF3103C": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlancol8480_1.inf",
+      "inf_source": "qcwlancol8480.inf; qcwlancol8480_1.inf",
       "provider": "Qualcomm Communications Inc."
     },
     "PCI\\VEN_17CB&DEV_1112&SUBSYS_E14B105B": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlancol8480_1.inf",
+      "inf_source": "qcwlancol8480.inf; qcwlancol8480_1.inf",
       "provider": "Qualcomm Communications Inc."
     },
     "PCI\\VEN_17CB&DEV_1112&SUBSYS_E14C105B": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlancol8480_1.inf",
+      "inf_source": "qcwlancol8480.inf; qcwlancol8480_1.inf",
       "provider": "Qualcomm Communications Inc."
     },
     "PCI\\VEN_17CB&DEV_1112&SUBSYS_E14E17AA": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlancol8480_1.inf",
+      "inf_source": "qcwlancol8480.inf; qcwlancol8480_1.inf",
       "provider": "Qualcomm Communications Inc."
     },
     "PCI\\VEN_17CB&DEV_1112&SUBSYS_E14F105B": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlancol8480_1.inf",
+      "inf_source": "qcwlancol8480.inf; qcwlancol8480_1.inf",
       "provider": "Qualcomm Communications Inc."
     },
     "PCI\\VEN_17CB&DEV_1112&SUBSYS_E159105B": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlancol8480_1.inf",
+      "inf_source": "qcwlancol8480.inf; qcwlancol8480_1.inf",
       "provider": "Qualcomm Communications Inc."
     },
     "PCI\\VEN_17CB&DEV_1112&SUBSYS_E15A105B": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "qcwlancol8480_1.inf",
+      "inf_source": "qcwlancol8480.inf; qcwlancol8480_1.inf",
       "provider": "Qualcomm Communications Inc."
     },
     "QCASD\\VEN_QCOM&DEV_0FCD&SUBSYS_8F03103C": {
@@ -4567,7 +4563,7 @@
     },
     "SWC\\VEN_QCOM&DEV_QCListenSoundModel&PLAT_8480": {
       "evidence": "HP-SOFTWARE",
-      "inf_source": "QCListenSM_swc_ext8480.inf",
+      "inf_source": "QCListenSM_swc8480.inf; QCListenSM_swc_ext8480.inf",
       "provider": "Qualcomm Technologies, Inc."
     },
     "UEFI\\RES_{84CB55F4-D08A-43BB-BB7D-07FA38476891}": {

@@ -6,8 +6,9 @@
 
 OBSERVED-HARDWARE
     A physical device, PnP hardware ID, ACPI identity, or topology relationship
-    directly enumerated or captured from the target HP OmniBook 5 16-bf1107nr.
-    Example: PCI\VEN_17CB&DEV_1107 present in PnP device enumeration.
+    directly enumerated or captured from the target HP OmniBook 5 16-bf1xxx.
+    Example: PCI\VEN_17CB&DEV_1112&SUBSYS_8EF3103C present in PnP
+    enumeration, with the Windows FriendlyName identifying the adapter.
 
 OBSERVED-SOFTWARE
     A firmware file, driver package, or software artifact observed on the target
@@ -45,8 +46,8 @@ UNKNOWN
 CORROBORATED MATCH
     An agreement between independent evidence sources — specifically when an
     OBSERVED-HARDWARE ID aligns with OBSERVED-SOFTWARE or HP-SOFTWARE.
-    Example: PCI\VEN_17CB&DEV_1107 (OBSERVED-HARDWARE) + wlanfw20.mbn (OBSERVED-SOFTWARE)
-    = FastConnect C7700/WCN785x strongly corroborated.
+    Example: a target PnP FriendlyName identifying FastConnect C7700 plus
+    wlanfw20.mbn (OBSERVED-SOFTWARE) = C7700 identity strongly corroborated.
 
 SOFTWARE-ONLY
     HP-SOFTWARE or OBSERVED-SOFTWARE evidence exists, but no OBSERVED-HARDWARE
@@ -73,7 +74,8 @@ CHASSIS-SPECIFIC
 1. Factory firmware file presence (OBSERVED-SOFTWARE) does NOT prove physical
    hardware presence (OBSERVED-HARDWARE).
 2. PnP hardware presence (OBSERVED-HARDWARE) does NOT prove full board routing
-   knowledge (PCIe root path, GPIO assignments, I2C bus/address).
+   knowledge or Linux node mapping (GPIO assignments, I2C bus/address, or DTS
+   controller names).
 3. UPSTREAM-REFERENCE values must never be copied into target DTS without
    independent target evidence.
 4. Only use CORROBORATED MATCH when OBSERVED-HARDWARE and independent software
@@ -84,9 +86,9 @@ CHASSIS-SPECIFIC
 | Observation | Classification | What may be concluded |
 |---|---|---|
 | wlanfw20.mbn in DriverStore | OBSERVED-SOFTWARE | C7700-associated firmware package is present |
-| DEV_1107 in PnP enumeration | OBSERVED-HARDWARE | Matching PCI device is physically enumerated |
-| DEV_1107 + HP INF + wlanfw20.mbn | CORROBORATED MATCH | C7700/WCN785x identity strongly corroborated |
-| DEV_1107 parent PCI path | OBSERVED-HARDWARE | Host routing evidence is available |
+| DEV_1112 plus target subsystem in PnP enumeration | OBSERVED-HARDWARE | A matching PCI function is physically enumerated; model mapping still needs corroboration |
+| Target FriendlyName identifying C7700 + wlanfw20.mbn | CORROBORATED MATCH | C7700 identity is strongly corroborated |
+| Observed PCI parent path | OBSERVED-HARDWARE | Host routing evidence is available |
 | Only C7700 SoftPaq in HP package | HP-SOFTWARE | HP distributes support; hardware presence unknown |
 | EliteBook uses pcie5 for NVMe | UPSTREAM-REFERENCE | Reference only — target may differ |
 

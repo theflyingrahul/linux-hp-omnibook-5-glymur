@@ -15,7 +15,7 @@ def get_git_commit():
 
 def main():
     commit = get_git_commit()
-    version = "0.2.0"
+    version = "0.2.1"
     
     release_dir = ".work/releases"
     os.makedirs(release_dir, exist_ok=True)

@@ -79,6 +79,24 @@ try {
     if ($elev -isnot [bool]) { throw "Test-Elevated did not return bool" }
     Write-Host "  Test-Elevated: PASS"
 
+    # Windows PowerShell 5.1 rejects an empty Start-Process ArgumentList.
+    $commandResult = Invoke-ExternalCommand -Command "hostname.exe" -ArgsList @() -OutFile (Join-Path $testDir "hostname.txt")
+    if ($commandResult.ExitCode -ne 0) { throw "Invoke-ExternalCommand failed with no arguments" }
+    Write-Host "  Invoke-ExternalCommand (no arguments): PASS"
+
+    # Test the checked-in candidate database is consumable by Windows
+    # PowerShell 5.1, whose JSON object properties are case-insensitive.
+    $candidatesPath = Join-Path $ScriptDir "day0-candidates.json"
+    try {
+        $candidateData = Get-Content -Path $candidatesPath -Raw | ConvertFrom-Json
+    } catch {
+        throw "Candidate JSON is not compatible with PowerShell 5.1: $_"
+    }
+    if (-not $candidateData.hardware_ids -or -not $candidateData.firmware_names) {
+        throw "Candidate JSON is missing hardware_ids or firmware_names"
+    }
+    Write-Host "  Candidate JSON compatibility: PASS"
+
     Write-Host "All static tests PASSED."
 
 } finally {

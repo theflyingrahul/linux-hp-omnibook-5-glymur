@@ -50,10 +50,14 @@ function Invoke-ExternalCommand {
     try {
         $procArgs = @{
             FilePath = $Command
-            ArgumentList = $ArgsList
             Wait = $true
             NoNewWindow = $true
             PassThru = $true
+        }
+        # Windows PowerShell 5.1 rejects an empty ArgumentList. Omit the
+        # parameter entirely for commands such as systeminfo.exe.
+        if ($ArgsList -and $ArgsList.Count -gt 0) {
+            $procArgs.ArgumentList = $ArgsList
         }
         if ($OutFile) { $procArgs.RedirectStandardOutput = $OutFile }
         if ($ErrFile) { $procArgs.RedirectStandardError = $ErrFile }
@@ -85,6 +89,7 @@ function Export-SafeJson {
         [System.IO.File]::WriteAllText($Path, $json, $global:Utf8NoBom)
     } catch {
         Write-Log "Failed to export JSON to $Path : $_" -Level "ERROR"
+        throw
     }
 }
 
@@ -120,5 +125,6 @@ function Export-SafeTsv {
     } catch {
         Write-Log "Failed to export TSV to $Path : $_" -Level "ERROR"
         Remove-Item "$Path.tmp" -ErrorAction SilentlyContinue
+        throw
     }
 }

@@ -40,6 +40,7 @@ The goal is to capture the pristine factory state as delivered.
   `.\day0-capture.ps1 -OutputPath E:\omnibook-day0-full -ExportDrivers -CopyFirmware`
   (Optionally provide `-AcpiToolsPath` if you have `acpidump.exe`).
 - This pass copies proprietary firmware and driver blobs. **DO NOT COMMIT THIS DIRECTORY.**
+  When `acpidump.exe` and `iasl.exe` are in the same directory, pass that directory with `-AcpiToolsPath`; the capture runs the combined ASL decompilation automatically.
 
 ### STEP 6: Review & Preservation
 - Complete Windows Recovery Media creation if desired.

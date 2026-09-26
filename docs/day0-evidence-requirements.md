@@ -5,7 +5,7 @@
 | Complete PnP Inventory | `Get-PnpDevice`, `pnputil` | Yes | P0 | Resolves WLAN, Touch, Audio, Camera IDs |
 | ACPI Registry Dump | `HKLM\HARDWARE\ACPI` | Yes | P0 | Fallback if `acpidump` is absent |
 | ACPI Tables | `acpidump.exe` | Optional | P0 | Highly recommended optional tool |
-| SMBIOS Identity | `Win32_ComputerSystemProduct` | Yes | P0 | Validates D3ZN3UA / SKUs |
+| SMBIOS Identity | `Win32_ComputerSystemProduct` | Yes | P0 | Attempts to validate the documented SKU; the live capture may expose only the 16-bf1xxx family |
 | Display EDID | Registry (`DISPLAY\...\EDID`) | Yes | P1 | Identifies OLED panel |
 | Storage NVMe Path | `pnputil` relations | Yes | P0 | Finds which PCIe root port hosts NVMe |
 | USB-C Topology | `pnputil` / USB enumeration | Yes | P1 | Correlates UCSI to physical ports |

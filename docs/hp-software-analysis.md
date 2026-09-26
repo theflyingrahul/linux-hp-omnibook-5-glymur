@@ -1,6 +1,7 @@
 # HP Software Archaeology Analysis
 
-**Target SKU:** HP OmniBook 5 NGAI 16-bf1107nr (Product number: D3ZN3UA)
+**Working documented target:** HP OmniBook 5 NGAI 16-bf1107nr (Product number: D3ZN3UA)
+The live Windows capture identified the 16-bf1xxx family; the photographed BIOS Main page subsequently confirmed product number `D3ZN3UA#ABA`.
 **Hardware Platform:** Qualcomm Snapdragon X2 Elite (Glymur)
 
 ## Phase 3.2 Status
@@ -71,4 +72,4 @@ In this software-analysis documentation we distinguish between three sources of 
 2. **FACTORY WINDOWS IMAGE**: What is preinstalled on the physical machine.
 3. **WINDOWS UPDATE / MICROSOFT DRIVER DELIVERY**: Additional packages that may be installed or updated automatically by the OS.
 
-*These sets are not assumed to be identical. Day 0 will capture the factory image (Source 2). Later comparisons may determine which components originated from the public support page (Source 1).*
+*These sets are not assumed to be identical. The 2026-09-14 elevated pass captured factory Windows metadata (Source 2) but did not copy proprietary drivers or firmware. Later comparisons may determine which components originated from the public support page (Source 1).*

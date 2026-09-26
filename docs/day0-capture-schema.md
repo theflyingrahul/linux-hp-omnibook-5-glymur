@@ -18,4 +18,4 @@ Contains metadata about the run:
 - `enabled_switches`
 
 ## Hash Manifest
-`SHA256SUMS.tsv` is generated at the end of capture, covering all files (except itself) in the output directory.
+`SHA256SUMS.tsv` is generated at the end of capture, covering all non-log files (except itself) in the output directory, including `capture.json` and `CAPTURE-COMPLETE.txt`. Log files are excluded because the script writes completion messages after the manifest is created.

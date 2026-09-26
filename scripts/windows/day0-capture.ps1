@@ -36,7 +36,7 @@ param (
 )
 
 $ErrorActionPreference = 'Stop'
-$ScriptVersion = "0.2.0"
+$ScriptVersion = "0.2.1"
 $SchemaVersion = 1
 
 # Check PowerShell Version
@@ -99,14 +99,34 @@ if ($Preflight) {
     }
 
     # ACPICA tools
-    $acpiStatus = "Not configured"
+    $acpidumpPath = ""
+    $iaslPath = ""
     if ($AcpiToolsPath) {
-        $acpidumpPath = Join-Path $AcpiToolsPath "acpidump.exe"
-        if (Test-Path $acpidumpPath) {
-            $acpiStatus = "Available at $AcpiToolsPath"
-        } else {
-            $acpiStatus = "Path specified but acpidump.exe not found"
-        }
+        $candidateAcpiDump = Join-Path $AcpiToolsPath "acpidump.exe"
+        $candidateIasl = Join-Path $AcpiToolsPath "iasl.exe"
+        if (Test-Path $candidateAcpiDump) { $acpidumpPath = $candidateAcpiDump }
+        if (Test-Path $candidateIasl) { $iaslPath = $candidateIasl }
+    }
+    if (-not $acpidumpPath) {
+        $foundAcpiDump = Get-Command "acpidump.exe" -ErrorAction SilentlyContinue
+        if ($foundAcpiDump) { $acpidumpPath = $foundAcpiDump.Source }
+    }
+    if (-not $iaslPath -and $acpidumpPath) {
+        $siblingIasl = Join-Path (Split-Path -Parent $acpidumpPath) "iasl.exe"
+        if (Test-Path $siblingIasl) { $iaslPath = $siblingIasl }
+    }
+    if (-not $iaslPath) {
+        $foundIasl = Get-Command "iasl.exe" -ErrorAction SilentlyContinue
+        if ($foundIasl) { $iaslPath = $foundIasl.Source }
+    }
+    if ($acpidumpPath -and $iaslPath) {
+        $acpiStatus = "Available (acpidump.exe + iasl.exe)"
+    } elseif ($acpidumpPath) {
+        $acpiStatus = "Available (acpidump.exe only; iasl.exe not found)"
+    } elseif ($AcpiToolsPath) {
+        $acpiStatus = "Path specified but acpidump.exe not found"
+    } else {
+        $acpiStatus = "Not configured"
     }
     Write-Host "ACPICA tools: $acpiStatus"
 
@@ -218,6 +238,16 @@ function Run-Section {
     }
 }
 
+function Get-SectionStatusFromResults {
+    param([object[]]$Results)
+    foreach ($result in $Results) {
+        if ($null -eq $result -or $result.ExitCode -ne 0) {
+            return "PARTIAL"
+        }
+    }
+    return "PASS"
+}
+
 # 1. Private Identity
 Run-Section "Private Identity" {
     $csProduct = Get-CimInstance Win32_ComputerSystemProduct -ErrorAction SilentlyContinue
@@ -258,11 +288,11 @@ Run-Section "SMBIOS / System" {
     }
     Export-SafeJson -Data $sysData -Path (Join-Path $publicDir "system\system-info.json")
 
-    Invoke-ExternalCommand -Command "systeminfo.exe" -ArgsList @() -OutFile (Join-Path $rawDir "command-output\systeminfo.txt") | Out-Null
+    $systemInfoResult = Invoke-ExternalCommand -Command "systeminfo.exe" -ArgsList @() -OutFile (Join-Path $rawDir "command-output\systeminfo.txt")
     Write-Log "Invoking msinfo32 /report (this may take a moment)..."
-    Invoke-ExternalCommand -Command "msinfo32.exe" -ArgsList @("/report", (Join-Path $rawDir "command-output\msinfo32.txt")) | Out-Null
+    $msInfoResult = Invoke-ExternalCommand -Command "msinfo32.exe" -ArgsList @("/report", (Join-Path $rawDir "command-output\msinfo32.txt"))
 
-    return "PASS"
+    return (Get-SectionStatusFromResults @($systemInfoResult, $msInfoResult))
 }
 
 # 3. Complete PnP Inventory
@@ -299,7 +329,8 @@ Run-Section "PnPUtil Enumeration" {
     $res = Invoke-ExternalCommand -Command "pnputil.exe" -ArgsList $pnputilArgs -OutFile (Join-Path $rawDir "command-output\pnputil-enum-devices-rich.txt")
     if ($res.ExitCode -ne 0) {
         Write-Log "Rich pnputil enum failed, falling back to basic." -Level "WARNING"
-        Invoke-ExternalCommand -Command "pnputil.exe" -ArgsList @("/enum-devices", "/connected") -OutFile (Join-Path $rawDir "command-output\pnputil-enum-devices-basic.txt") | Out-Null
+        $fallback = Invoke-ExternalCommand -Command "pnputil.exe" -ArgsList @("/enum-devices", "/connected") -OutFile (Join-Path $rawDir "command-output\pnputil-enum-devices-basic.txt")
+        return (Get-SectionStatusFromResults @($res, $fallback))
     }
     return "PASS"
 }
@@ -310,9 +341,9 @@ Run-Section "Driver Inventory" {
     if ($drivers) {
         Export-SafeTsv -Data $drivers -Path (Join-Path $publicDir "drivers\signed-drivers.tsv")
     }
-    Invoke-ExternalCommand -Command "driverquery.exe" -ArgsList @("/v", "/fo", "csv") -OutFile (Join-Path $rawDir "command-output\driverquery.csv") | Out-Null
-    Invoke-ExternalCommand -Command "pnputil.exe" -ArgsList @("/enum-drivers") -OutFile (Join-Path $rawDir "command-output\pnputil-enum-drivers.txt") | Out-Null
-    return "PASS"
+    $driverQueryResult = Invoke-ExternalCommand -Command "driverquery.exe" -ArgsList @("/v", "/fo", "csv") -OutFile (Join-Path $rawDir "command-output\driverquery.csv")
+    $pnputilResult = Invoke-ExternalCommand -Command "pnputil.exe" -ArgsList @("/enum-drivers") -OutFile (Join-Path $rawDir "command-output\pnputil-enum-drivers.txt")
+    return (Get-SectionStatusFromResults @($driverQueryResult, $pnputilResult))
 }
 
 # 6. Factory DriverStore Inventory
@@ -361,6 +392,8 @@ Run-Section "Factory DriverStore" {
                 Copy-Item -Path $sourceFull -Destination $targetPath -ErrorAction SilentlyContinue
             }
         }
+    } else {
+        return "PARTIAL"
     }
     return "PASS"
 }
@@ -368,26 +401,38 @@ Run-Section "Factory DriverStore" {
 # 7. ACPI Registry
 Run-Section "ACPI Registry" {
     if ($elevated) {
-        Invoke-ExternalCommand -Command "reg.exe" -ArgsList @("export", "HKLM\HARDWARE\ACPI", (Join-Path $rawDir "registry\HKLM_HARDWARE_ACPI.reg"), "/y") | Out-Null
-        Invoke-ExternalCommand -Command "reg.exe" -ArgsList @("export", "HKLM\SYSTEM\CurrentControlSet\Enum\ACPI", (Join-Path $rawDir "registry\HKLM_SYSTEM_CCS_Enum_ACPI.reg"), "/y") | Out-Null
-        Invoke-ExternalCommand -Command "reg.exe" -ArgsList @("export", "HKLM\SYSTEM\CurrentControlSet\Enum\PCI", (Join-Path $rawDir "registry\HKLM_SYSTEM_CCS_Enum_PCI.reg"), "/y") | Out-Null
-        Invoke-ExternalCommand -Command "reg.exe" -ArgsList @("export", "HKLM\SYSTEM\CurrentControlSet\Enum\USB", (Join-Path $rawDir "registry\HKLM_SYSTEM_CCS_Enum_USB.reg"), "/y") | Out-Null
+        $registryResults = @()
+        $registryResults += Invoke-ExternalCommand -Command "reg.exe" -ArgsList @("export", "HKLM\HARDWARE\ACPI", (Join-Path $rawDir "registry\HKLM_HARDWARE_ACPI.reg"), "/y")
+        $registryResults += Invoke-ExternalCommand -Command "reg.exe" -ArgsList @("export", "HKLM\SYSTEM\CurrentControlSet\Enum\ACPI", (Join-Path $rawDir "registry\HKLM_SYSTEM_CCS_Enum_ACPI.reg"), "/y")
+        $registryResults += Invoke-ExternalCommand -Command "reg.exe" -ArgsList @("export", "HKLM\SYSTEM\CurrentControlSet\Enum\PCI", (Join-Path $rawDir "registry\HKLM_SYSTEM_CCS_Enum_PCI.reg"), "/y")
+        $registryResults += Invoke-ExternalCommand -Command "reg.exe" -ArgsList @("export", "HKLM\SYSTEM\CurrentControlSet\Enum\USB", (Join-Path $rawDir "registry\HKLM_SYSTEM_CCS_Enum_USB.reg"), "/y")
+        return (Get-SectionStatusFromResults $registryResults)
     } else {
         return "PARTIAL"
     }
-    return "PASS"
 }
 
 # 8. ACPI Tools (Optional)
 Run-Section "ACPI Tools" {
     $acpidump = ""
+    $iasl = ""
     if ($AcpiToolsPath) {
         $candidate = Join-Path $AcpiToolsPath "acpidump.exe"
         if (Test-Path $candidate) { $acpidump = $candidate }
+        $iaslCandidate = Join-Path $AcpiToolsPath "iasl.exe"
+        if (Test-Path $iaslCandidate) { $iasl = $iaslCandidate }
     }
     if (-not $acpidump) {
         $found = Get-Command "acpidump.exe" -ErrorAction SilentlyContinue
         if ($found) { $acpidump = $found.Source }
+    }
+    if (-not $iasl -and $acpidump) {
+        $siblingIasl = Join-Path (Split-Path -Parent $acpidump) "iasl.exe"
+        if (Test-Path $siblingIasl) { $iasl = $siblingIasl }
+    }
+    if (-not $iasl) {
+        $foundIasl = Get-Command "iasl.exe" -ErrorAction SilentlyContinue
+        if ($foundIasl) { $iasl = $foundIasl.Source }
     }
 
     if ($acpidump -and $elevated) {
@@ -397,9 +442,35 @@ Run-Section "ACPI Tools" {
         $acpiTablesDir = Join-Path $rawDir "acpi\tables"
         Push-Location $acpiTablesDir
         try {
-            Invoke-ExternalCommand -Command $acpidump -ArgsList @("-b") -OutFile (Join-Path $rawDir "acpi\acpidump-output.txt") | Out-Null
+            $acpiResult = Invoke-ExternalCommand -Command $acpidump -ArgsList @("-b") -OutFile (Join-Path $rawDir "acpi\acpidump-output.txt")
         } finally {
             Pop-Location
+        }
+        if ($acpiResult.ExitCode -ne 0) { return "FAIL" }
+
+        if ($iasl) {
+            $iaslHash = (Get-FileHash -Path $iasl -Algorithm SHA256).Hash
+            Write-Log "Using iasl: $iasl (SHA256: $iaslHash)"
+            $dsdtPath = Join-Path $acpiTablesDir "dsdt.dat"
+            $externalTables = @(Get-ChildItem -Path $acpiTablesDir -Filter "ssdt*.dat" -File | Sort-Object Name)
+            $aslDir = Join-Path $rawDir "acpi\asl"
+            New-Item -ItemType Directory -Path $aslDir -Force | Out-Null
+            if ((Test-Path $dsdtPath) -and $externalTables.Count -gt 0) {
+                # Keep -p before input files. ACPICA treats an option appearing
+                # after the DSDT path as another input file.
+                $iaslArgs = @("-p", (Join-Path $aslDir "glymur"), "-e") + @($externalTables | ForEach-Object { $_.FullName }) + @("-d", $dsdtPath)
+                $iaslResult = Invoke-ExternalCommand -Command $iasl -ArgsList $iaslArgs -OutFile (Join-Path $rawDir "acpi\iasl-decompile-output.txt") -ErrFile (Join-Path $rawDir "acpi\iasl-decompile-errors.txt")
+                if ($iaslResult.ExitCode -ne 0) {
+                    Write-Log "iasl combined decompilation failed; binary tables were captured." -Level "WARNING"
+                    return "PARTIAL"
+                }
+            } else {
+                Write-Log "iasl found, but dsdt.dat or ssdt*.dat inputs are missing." -Level "WARNING"
+                return "PARTIAL"
+            }
+        } else {
+            $noteContent = "iasl.exe unavailable; binary ACPI tables were captured but combined ASL decompilation was not run."
+            [System.IO.File]::WriteAllText((Join-Path $rawDir "acpi\IASL-NOT-RUN.txt"), $noteContent, $global:Utf8NoBom)
         }
         return "PASS"
     } else {
@@ -447,6 +518,7 @@ Run-Section "Storage" {
 
 # 11. Secure Boot & BitLocker
 Run-Section "Security" {
+    $status = "PASS"
     try {
         $sb = Confirm-SecureBootUEFI -ErrorAction SilentlyContinue
         Export-SafeJson -Data @{ SecureBoot = $sb } -Path (Join-Path $publicDir "system\secureboot.json")
@@ -456,29 +528,35 @@ Run-Section "Security" {
 
     # BitLocker status goes to private/ since it may contain key protector IDs
     if ($elevated) {
-        Invoke-ExternalCommand -Command "manage-bde.exe" -ArgsList @("-status") -OutFile (Join-Path $privateDir "security\manage-bde-status.txt") | Out-Null
+        $bitlockerResult = Invoke-ExternalCommand -Command "manage-bde.exe" -ArgsList @("-status") -OutFile (Join-Path $privateDir "security\manage-bde-status.txt")
+        if ($bitlockerResult.ExitCode -ne 0) { $status = "PARTIAL" }
+    } else {
+        $status = "PARTIAL"
     }
-    return "PASS"
+    return $status
 }
 
 # 12. Power Baseline
 Run-Section "Power Baseline" {
-    Invoke-ExternalCommand -Command "powercfg.exe" -ArgsList @("/a") -OutFile (Join-Path $rawDir "power\powercfg-a.txt") | Out-Null
-    Invoke-ExternalCommand -Command "powercfg.exe" -ArgsList @("/requests") -OutFile (Join-Path $rawDir "power\powercfg-requests.txt") | Out-Null
+    $powerResults = @()
+    $powerResults += Invoke-ExternalCommand -Command "powercfg.exe" -ArgsList @("/a") -OutFile (Join-Path $rawDir "power\powercfg-a.txt")
+    $powerResults += Invoke-ExternalCommand -Command "powercfg.exe" -ArgsList @("/requests") -OutFile (Join-Path $rawDir "power\powercfg-requests.txt")
     if ($elevated) {
-        Invoke-ExternalCommand -Command "powercfg.exe" -ArgsList @("/batteryreport", "/output", (Join-Path $publicDir "power\batteryreport.html")) | Out-Null
-        Invoke-ExternalCommand -Command "powercfg.exe" -ArgsList @("/sleepstudy", "/output", (Join-Path $publicDir "power\sleepstudy.html")) | Out-Null
-        Invoke-ExternalCommand -Command "powercfg.exe" -ArgsList @("/qh") -OutFile (Join-Path $rawDir "power\powercfg-qh.txt") | Out-Null
+        $powerResults += Invoke-ExternalCommand -Command "powercfg.exe" -ArgsList @("/batteryreport", "/output", (Join-Path $publicDir "power\batteryreport.html"))
+        $powerResults += Invoke-ExternalCommand -Command "powercfg.exe" -ArgsList @("/sleepstudy", "/output", (Join-Path $publicDir "power\sleepstudy.html"))
+        $powerResults += Invoke-ExternalCommand -Command "powercfg.exe" -ArgsList @("/qh") -OutFile (Join-Path $rawDir "power\powercfg-qh.txt")
     }
-    return "PASS"
+    return (Get-SectionStatusFromResults $powerResults)
 }
 
 # 13. Reagent / BCD
 Run-Section "Boot and Recovery" {
     if ($elevated) {
-        Invoke-ExternalCommand -Command "reagentc.exe" -ArgsList @("/info") -OutFile (Join-Path $rawDir "uefi\reagentc-info.txt") | Out-Null
-        Invoke-ExternalCommand -Command "bcdedit.exe" -ArgsList @("/enum", "all") -OutFile (Join-Path $rawDir "uefi\bcdedit-all.txt") | Out-Null
-        Invoke-ExternalCommand -Command "bcdedit.exe" -ArgsList @("/enum", "firmware") -OutFile (Join-Path $rawDir "uefi\bcdedit-firmware.txt") | Out-Null
+        $bootResults = @()
+        $bootResults += Invoke-ExternalCommand -Command "reagentc.exe" -ArgsList @("/info") -OutFile (Join-Path $rawDir "uefi\reagentc-info.txt")
+        $bootResults += Invoke-ExternalCommand -Command "bcdedit.exe" -ArgsList @("/enum", "all") -OutFile (Join-Path $rawDir "uefi\bcdedit-all.txt")
+        $bootResults += Invoke-ExternalCommand -Command "bcdedit.exe" -ArgsList @("/enum", "firmware") -OutFile (Join-Path $rawDir "uefi\bcdedit-firmware.txt")
+        return (Get-SectionStatusFromResults $bootResults)
     } else {
         return "PARTIAL"
     }
@@ -489,8 +567,9 @@ Run-Section "Boot and Recovery" {
 Run-Section "Driver Export" {
     if ($ExportDrivers) {
         Write-Log "Exporting drivers. This will take time..."
-        Invoke-ExternalCommand -Command "pnputil.exe" -ArgsList @("/export-driver", "*", (Join-Path $privateDir "drivers")) -OutFile (Join-Path $rawDir "command-output\pnputil-export-drivers.txt") | Out-Null
-        return "PASS"
+        $exportResult = Invoke-ExternalCommand -Command "pnputil.exe" -ArgsList @("/export-driver", "*", (Join-Path $privateDir "drivers")) -OutFile (Join-Path $rawDir "command-output\pnputil-export-drivers.txt")
+        if ($exportResult.ExitCode -eq 0) { return "PASS" }
+        return "FAIL"
     }
     return "SKIPPED"
 }
@@ -498,22 +577,8 @@ Run-Section "Driver Export" {
 # All logging complete before hash generation
 Write-Log "All capture sections complete. Calculating SHA256 Manifest..."
 
-# Hashes — exclude log files and the manifest itself from hashing since logs are still being written
-$hashManifestPath = Join-Path $OutputPath "SHA256SUMS.tsv"
-$logsFullPath = [System.IO.Path]::GetFullPath($logsDir)
-$filesToHash = Get-ChildItem -Path $OutputPath -Recurse -File | Where-Object {
-    $_.FullName -ne $hashManifestPath -and
-    -not $_.FullName.StartsWith($logsFullPath, [System.StringComparison]::OrdinalIgnoreCase)
-}
-$hashes = [System.Collections.ArrayList]::new()
-foreach ($f in $filesToHash) {
-    $relPath = $f.FullName.Substring($OutputPath.Length+1)
-    $hash = (Get-FileHash -Path $f.FullName -Algorithm SHA256).Hash
-    [void]$hashes.Add([PSCustomObject]@{ RelativePath = $relPath; Size = $f.Length; SHA256 = $hash })
-}
-Export-SafeTsv -Data @($hashes) -Path $hashManifestPath
-
-# Capture JSON
+# Capture metadata and the completion marker are written before hashing so the
+# manifest covers every non-log output file, not just the section outputs.
 $CaptureEnd = (Get-Date).ToUniversalTime()
 $HostHash = (Get-FileHash -InputStream ([System.IO.MemoryStream]::new([System.Text.Encoding]::UTF8.GetBytes($env:COMPUTERNAME))) -Algorithm SHA256).Hash
 
@@ -533,9 +598,23 @@ $CaptureMeta = @{
 }
 Export-SafeJson -Data $CaptureMeta -Path (Join-Path $OutputPath "capture.json")
 
-# Completion marker
 $completionText = "Capture Complete`n$($CaptureEnd.ToString('yyyy-MM-ddTHH:mm:ssZ'))`nScript Version $ScriptVersion`nManifest: SHA256SUMS.tsv"
 [System.IO.File]::WriteAllText((Join-Path $OutputPath "CAPTURE-COMPLETE.txt"), $completionText, $global:Utf8NoBom)
+
+# Hashes — exclude log files and the manifest itself since logs are still being written
+$hashManifestPath = Join-Path $OutputPath "SHA256SUMS.tsv"
+$logsFullPath = [System.IO.Path]::GetFullPath($logsDir)
+$filesToHash = Get-ChildItem -Path $OutputPath -Recurse -File | Where-Object {
+    $_.FullName -ne $hashManifestPath -and
+    -not $_.FullName.StartsWith($logsFullPath, [System.StringComparison]::OrdinalIgnoreCase)
+}
+$hashes = [System.Collections.ArrayList]::new()
+foreach ($f in $filesToHash) {
+    $relPath = $f.FullName.Substring($OutputPath.Length+1)
+    $hash = (Get-FileHash -Path $f.FullName -Algorithm SHA256).Hash
+    [void]$hashes.Add([PSCustomObject]@{ RelativePath = $relPath; Size = $f.Length; SHA256 = $hash })
+}
+Export-SafeTsv -Data @($hashes) -Path $hashManifestPath
 
 Write-Log "Day-0 Capture completed successfully."
 if (-not $elevated) {

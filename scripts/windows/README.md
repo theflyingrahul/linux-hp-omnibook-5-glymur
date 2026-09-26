@@ -1,6 +1,6 @@
 # Windows Day-0 Capture Scripts
 
-**DEVELOPMENT STATUS: prepared and statically tested; target execution pending hardware arrival.**
+**DEVELOPMENT STATUS: prepared, statically tested, and exercised on the target in both non-elevated and elevated metadata passes; ACPICA table capture and combined `iasl` decompilation completed, with platform topology review pending.**
 
 These scripts perform a read-only metadata snapshot of the factory Windows environment. They do NOT install software, modify registry, change drivers, or alter UEFI variables.
 
@@ -19,6 +19,8 @@ Run this first to verify compatibility and free space without changing anything:
 ```powershell
 .\day0-capture.ps1 -OutputPath E:\day0-metadata
 ```
+
+If `acpidump.exe` and `iasl.exe` are in a tools directory, add `-AcpiToolsPath <directory>`; the elevated capture discovers both, saves the binary tables, and runs the combined ASL decompilation.
 
 ## Usage (Pass 2 - Firmware/Driver Preservation)
 ```powershell

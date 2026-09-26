@@ -10,7 +10,6 @@ def main():
     parser = argparse.ArgumentParser(description="Analyze Day-0 Hardware Capture")
     parser.add_argument('--capture', required=True, help="Path to capture directory")
     parser.add_argument('--allow-incomplete', action='store_true', help="Allow missing CAPTURE-COMPLETE.txt")
-    parser.add_argument('--include-private-identity', action='store_true', help="Include private identity info in summary")
     args = parser.parse_args()
 
     capture_dir = args.capture
@@ -81,7 +80,24 @@ def main():
         with open(pnp_tsv, 'r', encoding='utf-8') as f:
             reader = csv.DictReader(f, delimiter='\t')
             for row in reader:
-                pnp_devices.append(row.get('InstanceId', '').upper())
+                pnp_devices.append({
+                    'instance_id': row.get('InstanceId', '').upper(),
+                    'friendly_name': row.get('FriendlyName', '')
+                })
+
+    # The device table carries identity, while all-properties.json carries
+    # Windows parent/location evidence needed to distinguish a PCI function
+    # from its root port. Keep Linux DT node names unresolved until Linux-side
+    # evidence exists.
+    device_properties = {}
+    properties_json = os.path.join(capture_dir, 'raw', 'pnp', 'all-properties.json')
+    if os.path.exists(properties_json):
+        with open(properties_json, 'r', encoding='utf-8') as f:
+            for row in json.load(f):
+                instance_id = row.get('InstanceId', '').upper()
+                key_name = row.get('KeyName', '')
+                if instance_id and key_name:
+                    device_properties.setdefault(instance_id, {})[key_name] = row.get('Data', '')
 
     # Process Firmware Data
     fw_observed = set()
@@ -90,16 +106,64 @@ def main():
         with open(fw_tsv, 'r', encoding='utf-8') as f:
             reader = csv.DictReader(f, delimiter='\t')
             for row in reader:
-                fw_observed.add(row.get('Filename', ''))
+                # Capture filenames come from Windows, whose filesystem is
+                # case-insensitive. Normalize before comparing with the
+                # candidate database.
+                fw_observed.add(row.get('Filename', '').casefold())
 
     def check_hw(hwid):
         for dev in pnp_devices:
-            if hwid.upper() in dev:
+            if hwid.upper() in dev['instance_id']:
                 return True
         return False
+
+    def friendly_matches(text):
+        needle = text.casefold()
+        return [
+            dev for dev in pnp_devices
+            if needle in dev['friendly_name'].casefold()
+        ]
+
+    names_by_instance = {
+        dev['instance_id']: dev['friendly_name']
+        for dev in pnp_devices
+        if dev['instance_id']
+    }
+
+    def device_property(instance_id, key):
+        return device_properties.get(instance_id.upper(), {}).get(key, '')
+
+    def windows_topology(dev):
+        if not dev:
+            return 'Not observed'
+
+        parts = []
+        current = dev['instance_id']
+        visited = set()
+        for level in range(4):
+            if not current or current in visited:
+                break
+            visited.add(current)
+            name = names_by_instance.get(current, '')
+            if current.startswith('ACPI\\PNP0A08') and name:
+                name = f'{name} ({current})'
+            location = device_property(current, 'DEVPKEY_Device_LocationInfo')
+            if name and location:
+                parts.append(f'{name}: {location}')
+            elif location:
+                parts.append(location)
+            elif name:
+                parts.append(name)
+            else:
+                parts.append(current)
+            if current.startswith('ACPI\\PNP0A08'):
+                break
+            current = device_property(current, 'DEVPKEY_Device_Parent')
+
+        return '; '.join(parts)
         
     def check_fw(fwname):
-        return fwname in fw_observed
+        return fwname.casefold() in fw_observed
         
     # Generate Summary
     with open(os.path.join(analysis_dir, 'day0-summary.md'), 'w', encoding='utf-8') as f:
@@ -107,15 +171,27 @@ def main():
         f.write("## Status\n")
         f.write("- Hashes: Validated\n\n")
         
-        # WLAN Example Check
-        c7700_hw = check_hw('PCI\\VEN_17CB&DEV_1107')
+        # WLAN identity is taken from the Windows FriendlyName when present.
+        # Device IDs alone are not sufficient: DEV_1112 is reported as C7700
+        # on the target capture, so do not hard-code a model-to-ID mapping.
+        c7700_devices = friendly_matches('FastConnect C7700')
+        c7700_hw = bool(c7700_devices)
         c7700_fw = check_fw('wlanfw20.mbn')
-        wlan_6900_hw = check_hw('PCI\\VEN_17CB&DEV_1112')
-        wlan_6900_fw = check_fw('wlanfw.bin')
+        alternate_wlan_devices = friendly_matches('FastConnect 6900')
+        alternate_wlan_hw = bool(alternate_wlan_devices)
+        alternate_wlan_fw = check_fw('wlanfw.bin')
+        nvme_devices = [
+            dev for dev in pnp_devices
+            if 'SCSI\\DISK&VEN_NVME' in dev['instance_id']
+            or 'NVME' in dev['friendly_name'].upper()
+        ]
+        wlan_topology = windows_topology(c7700_devices[0] if c7700_devices else None)
+        nvme_topology = windows_topology(nvme_devices[0] if nvme_devices else None)
         
         f.write("## WLAN\n")
-        f.write("### FastConnect C7700 / WCN785x\n")
-        f.write(f"- Hardware: {'PCI\\VEN_17CB&DEV_1107 observed' if c7700_hw else 'Not observed'}\n")
+        f.write("### FastConnect C7700\n")
+        c7700_label = c7700_devices[0]['friendly_name'] if c7700_devices else 'Not observed'
+        f.write(f"- Hardware: {c7700_label}\n")
         f.write(f"- Firmware: {'wlanfw20.mbn present' if c7700_fw else 'wlanfw20.mbn missing'}\n")
         if c7700_hw and c7700_fw:
             f.write("- Assessment: HARDWARE+SOFTWARE strongly corroborated\n")
@@ -126,20 +202,25 @@ def main():
         else:
             f.write("- Assessment: NO-MATCH\n")
             
-        f.write("### FastConnect 6900\n")
-        f.write(f"- Hardware: {'PCI\\VEN_17CB&DEV_1112 observed' if wlan_6900_hw else 'Not observed'}\n")
-        f.write(f"- Firmware: {'wlanfw.bin present' if wlan_6900_fw else 'wlanfw.bin missing'}\n")
-        if wlan_6900_hw and wlan_6900_fw:
-            f.write("- Assessment: HARDWARE+SOFTWARE strongly corroborated\n")
-        elif wlan_6900_hw:
+        f.write("### Alternate WLAN candidate (FastConnect 6900 mapping unconfirmed)\n")
+        alternate_wlan_label = alternate_wlan_devices[0]['friendly_name'] if alternate_wlan_devices else 'Not observed'
+        f.write(f"- Hardware: {alternate_wlan_label}\n")
+        f.write(f"- Firmware: {'wlanfw.bin present' if alternate_wlan_fw else 'wlanfw.bin missing'}\n")
+        if alternate_wlan_hw and alternate_wlan_fw:
+            f.write("- Assessment: HARDWARE+SOFTWARE candidate match\n")
+        elif alternate_wlan_hw:
             f.write("- Assessment: HARDWARE-ONLY observed\n")
-        elif wlan_6900_fw:
-            f.write("- Assessment: SOFTWARE-ONLY match; physical hardware UNKNOWN\n")
+        elif alternate_wlan_fw:
+            f.write("- Assessment: SOFTWARE-ONLY candidate; component identity UNKNOWN\n")
         else:
             f.write("- Assessment: NO-MATCH\n")
             
         # Input Check
-        elan_hw = check_hw('VID_04F3') or check_hw('VID_0A81')
+        elan_hw = (
+            check_hw('HID\\VEN_ELAN') or
+            check_hw('HID\\ELAN') or
+            check_hw('ACPI\\ELAN')
+        )
         f.write("\n## Input\n")
         f.write("### ELAN Touchpad/Touchscreen\n")
         f.write(f"- Hardware: {'ELAN USB/I2C ID observed' if elan_hw else 'Not observed'}\n")
@@ -151,6 +232,11 @@ def main():
         f.write("### Huaqin Candidates\n")
         f.write(f"- Hardware: {'USB Camera ID observed' if cam_hw else 'Not observed'}\n")
         f.write("- Assessment: " + ("HARDWARE-ONLY observed" if cam_hw else "NO-MATCH (or software-only)") + "\n")
+
+        f.write("\n## Windows PCIe Topology Evidence\n")
+        f.write(f"- WLAN: {wlan_topology}\n")
+        f.write(f"- NVMe: {nvme_topology}\n")
+        f.write("- Linux PCIe controller/node mapping: not assessed by this Windows capture analyzer; see docs/linux-node-mapping-2026-09-14.md\n")
         
         # Generic candidate scan
         # NOTE: The above hardcoded WLAN/Input/Camera sections check specific IDs.
@@ -174,12 +260,12 @@ def main():
                 f.write(f"| {fwname} | {status} | {info.get('evidence', 'HP-SOFTWARE')} |\n")
         
     with open(os.path.join(analysis_dir, 'dts-evidence-gate.md'), 'w', encoding='utf-8') as f:
-        f.write("# DTS Evidence Gate\n\n")
+        f.write("# Target Hardware Evidence Gate\n\n")
         f.write("| Requirement | Status | Notes |\n")
         f.write("|---|---|---|\n")
-        f.write(f"| WLAN Identity | {'SATISFIED' if c7700_hw or wlan_6900_hw else 'UNKNOWN'} | Based on PnP hardware enumeration |\n")
-        f.write(f"| WLAN PCIe Root Path | UNKNOWN | Requires PnP location path / ACPI evidence |\n")
-        f.write(f"| NVMe Host Path | UNKNOWN | Requires PnP location path / ACPI evidence |\n")
+        f.write(f"| WLAN Identity | {'SATISFIED' if c7700_hw or alternate_wlan_hw else 'UNKNOWN'} | Based on PnP hardware enumeration |\n")
+        f.write(f"| WLAN Windows PCIe path | {'WINDOWS-OBSERVED' if c7700_devices else 'UNKNOWN'} | {wlan_topology}; Linux node mapping not assessed here |\n")
+        f.write(f"| NVMe Windows PCIe path | {'WINDOWS-OBSERVED' if nvme_devices else 'UNKNOWN'} | {nvme_topology}; Linux node mapping not assessed here |\n")
         
     print("Analysis generated in analysis/")
 
