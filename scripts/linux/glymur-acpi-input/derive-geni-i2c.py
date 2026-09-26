@@ -308,6 +308,17 @@ err_tx:
 	return ret;''')
     sub('\tstrscpy(gi2c->adap.name, "Glymur-ACPI-Geni-I2C", sizeof(gi2c->adap.name));\n',
         '\tstrscpy(gi2c->adap.name, "Glymur-ACPI-Geni-I2C-GSI", sizeof(gi2c->adap.name));\n')
+    # Upstream maps GPI buffers against the SE's parent, the DT GENI wrapper.
+    # Under ACPI the parent is the platform root, which has no DMA mask; the
+    # device that performs the DMA is the GPI engine, so map against it.
+    sub('static void geni_i2c_gpi_unmap(',
+        'static struct device *geni_i2c_dma_dev(struct geni_i2c_dev *gi2c)\n'
+        '{\n'
+        '\treturn gi2c->se.wrapper ? gi2c->se.dev->parent : gi2c->tx_c->device->dev;\n'
+        '}\n'
+        '\n'
+        'static void geni_i2c_gpi_unmap(')
+    sub('gi2c->se.dev->parent,', 'geni_i2c_dma_dev(gi2c),', count=5)
     sub('\t\t.name = "glymur_acpi_geni_i2c",\n', '\t\t.name = "glymur_acpi_geni_i2c_gsi",\n')
     sub('MODULE_DESCRIPTION("HP Glymur ACPI GENI I2C test driver (derived from i2c-qcom-geni)");',
         'MODULE_DESCRIPTION("HP Glymur ACPI GENI I2C GSI test driver (derived from i2c-qcom-geni)");\n'
