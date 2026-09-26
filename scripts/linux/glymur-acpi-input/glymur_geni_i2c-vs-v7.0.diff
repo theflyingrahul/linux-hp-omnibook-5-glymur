@@ -1,0 +1,246 @@
+--- /home/login/glymur-build/.work/ubuntu-src/tree/linux-source-7.0.0/drivers/i2c/busses/i2c-qcom-geni.c	2026-04-12 13:48:06.000000000 -0700
++++ glymur_geni_i2c.c	2026-09-26 09:41:09.831732000 -0700
+@@ -1,5 +1,11 @@
+ // SPDX-License-Identifier: GPL-2.0
+ // Copyright (c) 2017-2018, The Linux Foundation. All rights reserved.
++//
++// HP OmniBook 5 (Glymur) ACPI bring-up variant of Linux v7.0
++// drivers/i2c/busses/i2c-qcom-geni.c. It binds only QCOM0F10, keeps the
++// firmware-owned SE clock untouched, takes SCL timing from the controller's
++// ACPI CLKD table, and uses FIFO transfers only. Out-of-tree test module;
++// not a replacement for the in-tree driver.
+ 
+ #include <linux/acpi.h>
+ #include <linux/clk.h>
+@@ -26,6 +32,22 @@
+ 			M_GP_IRQ_1_EN | M_GP_IRQ_3_EN | M_GP_IRQ_4_EN)
+ #define SE_I2C_ABORT		BIT(1)
+ 
++static char allow[96] = "0xb80000,0xb90000";
++module_param_string(allow, allow, sizeof(allow), 0644);
++MODULE_PARM_DESC(allow, "Comma-separated MMIO bases of QCOM0F10 controllers to bind");
++
++static bool geni_i2c_bus_allowed(resource_size_t start)
++{
++	char list[sizeof(allow)], *cursor = list, *token;
++	unsigned long base;
++
++	strscpy(list, allow, sizeof(list));
++	while ((token = strsep(&cursor, ",")) != NULL)
++		if (*token && !kstrtoul(strim(token), 0, &base) && base == start)
++			return true;
++	return false;
++}
++
+ /* M_CMD OP codes for I2C */
+ #define I2C_WRITE		0x1
+ #define I2C_READ		0x2
+@@ -184,10 +206,87 @@
+ 	{}
+ };
+ 
++#ifdef CONFIG_ACPI
++/*
++ * HP Glymur ACPI I2C controllers carry a CLKD package of seven-integer rows:
++ * (0, source kHz, bus kHz, divider, t_cycle, t_high, t_low). Live register
++ * snapshots of I2C1/I2C5 matched the 400 kHz row exactly, so reuse the row
++ * the firmware already programmed instead of the generic DT timing table.
++ */
++static int geni_i2c_acpi_clkd(struct geni_i2c_dev *gi2c)
++{
++	struct acpi_buffer buf = { ACPI_ALLOCATE_BUFFER, NULL };
++	struct geni_i2c_clk_fld *fld;
++	union acpi_object *pkg, *row;
++	acpi_handle handle = ACPI_HANDLE(gi2c->se.dev);
++	u64 v[7];
++	unsigned int i, j;
++	int ret = -ENOENT;
++
++	if (!handle || ACPI_FAILURE(acpi_evaluate_object(handle, "CLKD", NULL, &buf)))
++		return -ENOENT;
++
++	pkg = buf.pointer;
++	if (!pkg || pkg->type != ACPI_TYPE_PACKAGE)
++		goto out;
++
++	for (i = 0; i < pkg->package.count; i++) {
++		row = &pkg->package.elements[i];
++		if (row->type != ACPI_TYPE_PACKAGE || row->package.count != 7)
++			continue;
++		for (j = 0; j < 7; j++) {
++			if (row->package.elements[j].type != ACPI_TYPE_INTEGER)
++				break;
++			v[j] = row->package.elements[j].integer.value;
++		}
++		if (j != 7 || v[1] != 19200 || v[2] * 1000 != gi2c->clk_freq_out)
++			continue;
++		if (!v[3] || v[3] > 0xfff || !v[4] || v[4] > 0x3ff ||
++		    !v[5] || !v[6] || v[5] + v[6] > v[4]) {
++			dev_err(gi2c->se.dev, "rejecting malformed CLKD row %u\n", i);
++			ret = -EINVAL;
++			goto out;
++		}
++		fld = devm_kzalloc(gi2c->se.dev, sizeof(*fld), GFP_KERNEL);
++		if (!fld) {
++			ret = -ENOMEM;
++			goto out;
++		}
++		fld->clk_freq_out = gi2c->clk_freq_out;
++		fld->clk_div = v[3];
++		fld->t_cycle_cnt = v[4];
++		fld->t_high_cnt = v[5];
++		fld->t_low_cnt = v[6];
++		gi2c->clk_fld = fld;
++		dev_info(gi2c->se.dev, "ACPI CLKD %u Hz: div=%u high=%u low=%u cycle=%u\n",
++			 fld->clk_freq_out, fld->clk_div, fld->t_high_cnt,
++			 fld->t_low_cnt, fld->t_cycle_cnt);
++		ret = 0;
++		break;
++	}
++out:
++	ACPI_FREE(buf.pointer);
++	return ret;
++}
++#else
++static int geni_i2c_acpi_clkd(struct geni_i2c_dev *gi2c)
++{
++	return -ENOENT;
++}
++#endif
++
+ static int geni_i2c_clk_map_idx(struct geni_i2c_dev *gi2c)
+ {
+ 	const struct geni_i2c_clk_fld *itr;
++	int ret;
+ 
++	if (has_acpi_companion(gi2c->se.dev)) {
++		ret = geni_i2c_acpi_clkd(gi2c);
++		if (ret != -ENOENT)
++			return ret;
++	}
++
++	/* clk_get_rate(NULL) is 0: a firmware-owned ACPI clock uses 19.2 MHz. */
+ 	if (clk_get_rate(gi2c->se.clk) == 32 * HZ_PER_MHZ)
+ 		itr = geni_i2c_clk_map_32mhz;
+ 	else
+@@ -933,8 +1032,7 @@
+ 
+ #ifdef CONFIG_ACPI
+ static const struct acpi_device_id geni_i2c_acpi_match[] = {
+-	{ "QCOM0220"},
+-	{ "QCOM0411" },
++	{ "QCOM0F10" },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, geni_i2c_acpi_match);
+@@ -989,8 +1087,13 @@
+ 	if (!gi2c)
+ 		return -ENOMEM;
+ 
++	if (!platform_get_resource(pdev, IORESOURCE_MEM, 0) ||
++	    !geni_i2c_bus_allowed(platform_get_resource(pdev, IORESOURCE_MEM, 0)->start))
++		return -ENODEV;
++
+ 	gi2c->se.dev = dev;
+-	gi2c->se.wrapper = dev_get_drvdata(dev->parent);
++	gi2c->se.wrapper = has_acpi_companion(dev) ? NULL :
++			   dev_get_drvdata(dev->parent);
+ 	gi2c->se.base = devm_platform_ioremap_resource(pdev, 0);
+ 	if (IS_ERR(gi2c->se.base))
+ 		return PTR_ERR(gi2c->se.base);
+@@ -1004,11 +1107,20 @@
+ 	}
+ 
+ 	gi2c->se.clk = devm_clk_get(dev, "se");
+-	if (IS_ERR(gi2c->se.clk) && !has_acpi_companion(dev))
+-		return PTR_ERR(gi2c->se.clk);
++	if (IS_ERR(gi2c->se.clk)) {
++		if (!has_acpi_companion(dev))
++			return PTR_ERR(gi2c->se.clk);
++		gi2c->se.clk = NULL;
++	}
+ 
+ 	ret = device_property_read_u32(dev, "clock-frequency",
+ 				       &gi2c->clk_freq_out);
++	if (ret && has_acpi_companion(dev)) {
++		/* Slowest ConnectionSpeed of this controller's ACPI children. */
++		gi2c->clk_freq_out = i2c_acpi_find_bus_speed(dev);
++		if (gi2c->clk_freq_out)
++			ret = 0;
++	}
+ 	if (ret) {
+ 		dev_info(dev, "Bus frequency not specified, default to 100kHz.\n");
+ 		gi2c->clk_freq_out = I2C_MAX_STANDARD_MODE_FREQ;
+@@ -1041,7 +1153,7 @@
+ 	i2c_set_adapdata(&gi2c->adap, gi2c);
+ 	gi2c->adap.dev.parent = dev;
+ 	gi2c->adap.dev.of_node = dev->of_node;
+-	strscpy(gi2c->adap.name, "Geni-I2C", sizeof(gi2c->adap.name));
++	strscpy(gi2c->adap.name, "Glymur-ACPI-Geni-I2C", sizeof(gi2c->adap.name));
+ 
+ 	ret = geni_icc_get(&gi2c->se, desc ? desc->icc_ddr : "qup-memory");
+ 	if (ret)
+@@ -1070,6 +1182,18 @@
+ 		goto err_clk;
+ 	}
+ 	proto = geni_se_read_proto(&gi2c->se);
++	if (!gi2c->se.wrapper) {
++		u32 clk_cfg = readl_relaxed(gi2c->se.base + GENI_SER_M_CLK_CFG);
++
++		if (proto != GENI_SE_I2C || !(clk_cfg & SER_CLK_EN) ||
++		    (readl_relaxed(gi2c->se.base + GENI_IF_DISABLE_RO) & FIFO_IF_DISABLE)) {
++			ret = dev_err_probe(dev, -ENODEV,
++					    "firmware did not leave an I2C FIFO engine (proto=%u clk=0x%08x)\n",
++					    proto, clk_cfg);
++			goto err_resources;
++		}
++		gi2c->no_dma = true;
++	}
+ 	if (proto == GENI_SE_INVALID_PROTO) {
+ 		ret = geni_load_se_firmware(&gi2c->se, GENI_SE_I2C);
+ 		if (ret) {
+@@ -1081,7 +1205,7 @@
+ 		goto err_resources;
+ 	}
+ 
+-	if (desc && desc->no_dma_support) {
++	if ((desc && desc->no_dma_support) || !gi2c->se.wrapper) {
+ 		fifo_disable = false;
+ 		gi2c->no_dma = true;
+ 	} else {
+@@ -1255,33 +1379,19 @@
+ 									NULL)
+ };
+ 
+-static const struct geni_i2c_desc i2c_master_hub = {
+-	.has_core_clk = true,
+-	.icc_ddr = NULL,
+-	.no_dma_support = true,
+-	.tx_fifo_depth = 16,
+-};
+-
+-static const struct of_device_id geni_i2c_dt_match[] = {
+-	{ .compatible = "qcom,geni-i2c" },
+-	{ .compatible = "qcom,geni-i2c-master-hub", .data = &i2c_master_hub },
+-	{}
+-};
+-MODULE_DEVICE_TABLE(of, geni_i2c_dt_match);
+ 
+ static struct platform_driver geni_i2c_driver = {
+ 	.probe  = geni_i2c_probe,
+ 	.remove = geni_i2c_remove,
+ 	.shutdown = geni_i2c_shutdown,
+ 	.driver = {
+-		.name = "geni_i2c",
++		.name = "glymur_acpi_geni_i2c",
+ 		.pm = &geni_i2c_pm_ops,
+-		.of_match_table = geni_i2c_dt_match,
+ 		.acpi_match_table = ACPI_PTR(geni_i2c_acpi_match),
+ 	},
+ };
+ 
+ module_platform_driver(geni_i2c_driver);
+ 
+-MODULE_DESCRIPTION("I2C Controller Driver for GENI based QUP cores");
++MODULE_DESCRIPTION("HP Glymur ACPI GENI I2C test driver (derived from i2c-qcom-geni)");
+ MODULE_LICENSE("GPL v2");
