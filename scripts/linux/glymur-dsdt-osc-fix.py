@@ -1,6 +1,6 @@
 """Fix the HP Glymur platform _OSC so Linux can negotiate LPI (CPU idle).
 
-Usage: glymur-dsdt-osc-fix.py <DSDT.dat> <out-dir>
+Usage: glymur-dsdt-osc-fix.py <DSDT.dat> <bios-version> <out-dir>
 
 \\_SB._OSC starts with CreateDWordField (Arg3, 0x08, CDW3), but the
 platform-wide _OSC buffer Linux passes has two DWORDs. The method aborts with
@@ -8,19 +8,32 @@ AE_AML_BUFFER_LIMIT before it answers, so Linux never confirms _LPI support
 and registers no cpuidle driver. Only the USB4 branch uses CDW3. This moves
 that one 8-byte CreateDWordField into the USB4 If body, keeping the method's
 size, bumps the OEM revision and fixes the checksum so that
-CONFIG_ACPI_TABLE_UPGRADE accepts the table. It writes dsdt.aml and an
-uncompressed early-initrd cpio (kernel/firmware/acpi/dsdt.aml).
+CONFIG_ACPI_TABLE_UPGRADE accepts the table. It writes dsdt.aml, an
+uncompressed early-initrd cpio (kernel/firmware/acpi/dsdt.aml), a manifest,
+and a GRUB entry that loads the cpio only when SMBIOS reports the BIOS
+version the table came from.
+
+The override replaces the whole DSDT. The kernel only checks the table
+signature, OEM ID, table ID and a higher OEM revision, and HP ships revision
+1, so after a BIOS update that keeps revision 1 a stale override would still
+replace the new DSDT. The GRUB gate prevents that. This is a stopgap until HP
+fixes the AML or Linux works around it; do not carry it into an installed
+system.
 
 The input and output are HP firmware tables: keep both private (.work/ or the
 installer USB), never in Git.
 """
+import hashlib
 import os
+import re
 import struct
 import subprocess
 import sys
 
-src_path, out_dir = sys.argv[1], sys.argv[2]
+src_path, bios_version, out_dir = sys.argv[1], sys.argv[2], sys.argv[3]
+assert re.fullmatch(r'[A-Za-z0-9.]+', bios_version), 'unexpected BIOS version string'
 dsdt = bytearray(open(src_path, 'rb').read())
+src_sha256 = hashlib.sha256(dsdt).hexdigest()
 assert dsdt[:4] == b'DSDT' and struct.unpack_from('<I', dsdt, 4)[0] == len(dsdt), 'not a DSDT'
 assert sum(dsdt) % 256 == 0, 'input checksum is wrong'
 assert dsdt[10:16] == b'HPQOEM' and dsdt[16:24] == b'8F47    ', 'not the HP 8F47 DSDT'
@@ -73,6 +86,27 @@ with open(cpio, 'wb') as f:
                    input=b'kernel\nkernel/firmware\nkernel/firmware/acpi\n'
                          b'kernel/firmware/acpi/dsdt.aml\n',
                    cwd=out_dir, stdout=f, check=True)
+with open(os.path.join(out_dir, 'MANIFEST'), 'w') as f:
+    f.write(f'bios_version={bios_version}\n'
+            f'source_dsdt_sha256={src_sha256}\n'
+            f'patched_dsdt_sha256={hashlib.sha256(dsdt).hexdigest()}\n'
+            f'patch_offset=0x{start:x}\n'
+            f'oem_revision={oem_rev:#x}->{oem_rev + 1:#x}\n')
+# GRUB: smbios type 0, string at offset 5 is the BIOS version.
+with open(os.path.join(out_dir, 'grub-entry.cfg'), 'w') as f:
+    f.write(f"""menuentry 'Glymur workstation + _OSC fix (CPU idle, BIOS {bios_version} only)' {{
+    set gfxpayload=keep
+    smbios --type 0 --get-string 5 --set glymur_bios
+    linux /casper/vmlinuz persistent noprompt $cmdline glymur.workstation=1 systemd.run=/cdrom/glymur-tools/acpi-input/glymur-live-desktop-setup.sh systemd.run_success_action=none systemd.run_failure_action=none --- console=tty0 loglevel=4
+    if [ "$glymur_bios" = "{bios_version}" ]; then
+        initrd /glymur-tools/acpi-override/acpi-override.cpio /casper/initrd
+    else
+        echo "BIOS $glymur_bios is not {bios_version}: booting without the DSDT override"
+        sleep 5
+        initrd /casper/initrd
+    fi
+}}
+""")
 print(f'patched \\_SB._OSC at 0x{start:x}; OEM revision {oem_rev:#x} -> {oem_rev + 1:#x}')
 print(aml)
 print(cpio)

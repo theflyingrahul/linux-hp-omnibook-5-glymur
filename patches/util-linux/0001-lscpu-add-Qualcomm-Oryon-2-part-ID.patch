@@ -1,0 +1,32 @@
+From 36958c5149a375c44afec8bb873303e1bb98fc2b Mon Sep 17 00:00:00 2001
+From: Rahul Pon <theflyingrahul@gmail.com>
+Date: Sat, 26 Sep 2026 20:39:42 +0000
+Subject: [PATCH] lscpu: add Qualcomm Oryon-2 part ID
+
+Snapdragon X2 Elite (Glymur) cores report MIDR implementer 0x51 with
+part 0x002 (variants 0x1 and 0x2), which lscpu shows as "-". Linux's
+glymur.dtsi describes these cores as "qcom,oryon-2-1" and
+"qcom,oryon-2-2", following the "qcom,oryon-1-N" naming of the X1
+Elite's part 0x001, listed here as "Oryon".
+
+Seen on an HP OmniBook 5 16-bf1xxx (X2E84100): CPUs 0-5 MIDR
+0x512f0021, CPUs 6-11 MIDR 0x511f0021.
+---
+ sys-utils/lscpu-arm.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/sys-utils/lscpu-arm.c b/sys-utils/lscpu-arm.c
+index cda86f8..2ac4278 100644
+--- a/sys-utils/lscpu-arm.c
++++ b/sys-utils/lscpu-arm.c
+@@ -157,6 +157,7 @@ static const struct id_part apm_part[] = {
+ 
+ static const struct id_part qcom_part[] = {
+     { 0x001, "Oryon" },
++    { 0x002, "Oryon-2" },
+     { 0x00f, "Scorpion" },
+     { 0x02d, "Scorpion" },
+     { 0x04d, "Krait" },
+-- 
+2.53.0
+
