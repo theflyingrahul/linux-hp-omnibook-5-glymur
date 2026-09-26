@@ -1,0 +1,364 @@
+Subject: [RFC PATCH 3/3] gpio: acpi: translate Glymur PDC GPIO specifiers
+
+The HP Glymur ACPI firmware uses PDC-encoded GPIO pins for its keyboard
+and touchpad. Build a bounded index-to-pin map from GIO0 _CRS IRQ order
+and the PDC _DSM CIPR package; reject malformed or ambiguous data.
+
+Add a controller-specific GPIO ACPI pin translation hook used by consumer
+lookups, ACPI events, and GPIO OpRegions. Preserve raw firmware pin
+numbers for AML event dispatch and wake-policy lookups. This depends on
+0002 for the ACPI GIO0 match. It is an OFFLINE, UNBOOTED RFC: I2C,
+interrupt routing, wake behavior, and hardware safety remain unverified.
+Do not stage this patch on live media or assume it enables input.
+
+---
+diff --git a/drivers/gpio/gpiolib-acpi-core.c b/drivers/gpio/gpiolib-acpi-core.c
+index 220f0ac42..df62c5ce1 100644
+--- a/drivers/gpio/gpiolib-acpi-core.c
++++ b/drivers/gpio/gpiolib-acpi-core.c
+@@ -114,6 +114,17 @@ static int acpi_gpiochip_find(struct gpio_chip *gc, const void *data)
+ 	return false;
+ }
+ 
++static int acpi_gpio_pin_to_offset(struct gpio_chip *chip, unsigned int pin)
++{
++	if (!chip)
++		return -ENODEV;
++
++	if (chip->acpi_pin_to_offset)
++		return chip->acpi_pin_to_offset(chip, pin);
++
++	return pin;
++}
++
+ /**
+  * acpi_get_gpiod() - Translate ACPI GPIO pin to GPIO descriptor usable with GPIO API
+  * @path:	ACPI GPIO controller full path name, (e.g. "\\_SB.GPO1")
+@@ -132,6 +143,7 @@ static struct gpio_desc *acpi_get_gpiod(char *path, unsigned int pin)
+ {
+ 	acpi_handle handle;
+ 	acpi_status status;
++	int offset, srcu_idx;
+ 
+ 	status = acpi_get_handle(NULL, path, &handle);
+ 	if (ACPI_FAILURE(status))
+@@ -142,7 +154,14 @@ static struct gpio_desc *acpi_get_gpiod(char *path, unsigned int pin)
+ 	if (!gdev)
+ 		return ERR_PTR(-EPROBE_DEFER);
+ 
+-	return gpio_device_get_desc(gdev, pin);
++	srcu_idx = srcu_read_lock(&gdev->srcu);
++	offset = acpi_gpio_pin_to_offset(srcu_dereference(gdev->chip, &gdev->srcu),
++					 pin);
++	srcu_read_unlock(&gdev->srcu, srcu_idx);
++	if (offset < 0)
++		return ERR_PTR(offset);
++
++	return gpio_device_get_desc(gdev, offset);
+ }
+ 
+ static irqreturn_t acpi_gpio_irq_handler(int irq, void *data)
+@@ -319,16 +335,19 @@ static struct gpio_desc *acpi_request_own_gpiod(struct gpio_chip *chip,
+ 	enum gpiod_flags flags;
+ 	struct gpio_desc *desc;
+ 	unsigned int pin;
+-	int polarity;
++	int polarity, offset;
+ 
+ 	if (index >= agpio->pin_table_length)
+ 		return ERR_PTR(-EINVAL);
+ 
+ 	pin = agpio->pin_table[index];
++	offset = acpi_gpio_pin_to_offset(chip, pin);
++	if (offset < 0)
++		return ERR_PTR(offset);
+ 	polarity = GPIO_ACTIVE_HIGH;
+ 	flags = acpi_gpio_to_gpiod_flags(agpio, polarity);
+ 
+-	desc = gpiochip_request_own_desc(chip, pin, label, polarity, flags);
++	desc = gpiochip_request_own_desc(chip, offset, label, polarity, flags);
+ 	if (IS_ERR(desc))
+ 		return desc;
+ 
+@@ -409,7 +428,7 @@ static acpi_status acpi_gpiochip_alloc_event(struct acpi_resource *ares,
+ 		return AE_OK;
+ 	}
+ 
+-	ret = gpiochip_lock_as_irq(chip, pin);
++	ret = gpiochip_lock_as_irq(chip, gpiod_hwgpio(desc));
+ 	if (ret) {
+ 		dev_err(chip->parent,
+ 			"Failed to lock GPIO pin 0x%04X as interrupt, err %d\n",
+@@ -462,7 +481,7 @@ static acpi_status acpi_gpiochip_alloc_event(struct acpi_resource *ares,
+ 	return AE_OK;
+ 
+ fail_unlock_irq:
+-	gpiochip_unlock_as_irq(chip, pin);
++	gpiochip_unlock_as_irq(chip, gpiod_hwgpio(desc));
+ fail_free_desc:
+ 	gpiochip_free_own_desc(desc);
+ 
+@@ -544,7 +563,7 @@ void acpi_gpiochip_free_interrupts(struct gpio_chip *chip)
+ 			free_irq(event->irq, event);
+ 		}
+ 
+-		gpiochip_unlock_as_irq(chip, event->pin);
++		gpiochip_unlock_as_irq(chip, gpiod_hwgpio(event->desc));
+ 		gpiochip_free_own_desc(event->desc);
+ 		list_del(&event->node);
+ 		kfree(event);
+diff --git a/drivers/pinctrl/qcom/pinctrl-msm.c b/drivers/pinctrl/qcom/pinctrl-msm.c
+index 27f06bbc1..1b7dd7a34 100644
+--- a/drivers/pinctrl/qcom/pinctrl-msm.c
++++ b/drivers/pinctrl/qcom/pinctrl-msm.c
+@@ -4,6 +4,7 @@
+  * Copyright (c) 2013, The Linux Foundation. All rights reserved.
+  */
+ 
++#include <linux/acpi.h>
+ #include <linux/delay.h>
+ #include <linux/err.h>
+ #include <linux/gpio/driver.h>
+@@ -20,6 +21,7 @@
+ #include <linux/slab.h>
+ #include <linux/spinlock.h>
+ #include <linux/string_choices.h>
++#include <linux/uuid.h>
+ 
+ #include <linux/pinctrl/machine.h>
+ #include <linux/pinctrl/pinconf-generic.h>
+@@ -38,6 +40,7 @@
+ #define MAX_NR_GPIO 300
+ #define MAX_NR_TILES 4
+ #define PS_HOLD_OFFSET 0x820
++#define MSM_ACPI_PDC_MAX_IRQS 64
+ 
+ /**
+  * struct msm_pinctrl - state for a pinctrl-msm device
+@@ -78,6 +81,9 @@ struct msm_pinctrl {
+ 	DECLARE_BITMAP(ever_gpio, MAX_NR_GPIO);
+ 
+ 	const struct msm_pinctrl_soc_data *soc;
++	u32 acpi_pdc_irqs[MSM_ACPI_PDC_MAX_IRQS];
++	int acpi_pdc_pins[MSM_ACPI_PDC_MAX_IRQS];
++	unsigned int acpi_pdc_count;
+ 	void __iomem *regs[MAX_NR_TILES];
+ 	u32 phys_base[MAX_NR_TILES];
+ };
+@@ -1447,6 +1453,141 @@ static const struct irq_chip msm_gpio_irq_chip = {
+ 				   IRQCHIP_IMMUTABLE),
+ };
+ 
++static int msm_gpio_acpi_pin_to_offset(struct gpio_chip *chip, unsigned int pin)
++{
++	struct msm_pinctrl *pctrl = gpiochip_get_data(chip);
++	unsigned int index;
++
++	if (pin < chip->ngpio)
++		return pin;
++
++	index = pin / 64;
++	if (index >= pctrl->acpi_pdc_count || pctrl->acpi_pdc_pins[index] < 0)
++		return -EINVAL;
++
++	return pctrl->acpi_pdc_pins[index];
++}
++
++#ifdef CONFIG_ACPI
++static const guid_t msm_acpi_pdc_guid =
++	GUID_INIT(0x921b0fd4, 0x567c, 0x43a0, 0xbb, 0x14, 0x26, 0x48,
++		  0xf7, 0xb2, 0xa1, 0x8c);
++static const guid_t msm_acpi_gpio_count_guid =
++	GUID_INIT(0x98b9b2a4, 0x1663, 0x4a5f, 0x82, 0xf2, 0xc6, 0xc9,
++		  0x9a, 0x39, 0x47, 0x26);
++
++static acpi_status msm_acpi_pdc_irq_resource(struct acpi_resource *resource,
++					     void *context)
++{
++	struct msm_pinctrl *pctrl = context;
++	struct acpi_resource_extended_irq *irq;
++
++	if (resource->type != ACPI_RESOURCE_TYPE_EXTENDED_IRQ)
++		return AE_OK;
++
++	irq = &resource->data.extended_irq;
++	if (irq->interrupt_count != 1 ||
++	    pctrl->acpi_pdc_count >= MSM_ACPI_PDC_MAX_IRQS)
++		return AE_BAD_DATA;
++
++	pctrl->acpi_pdc_irqs[pctrl->acpi_pdc_count++] = irq->interrupts[0];
++	return AE_OK;
++}
++
++static int msm_acpi_pdc_init(struct msm_pinctrl *pctrl)
++{
++	acpi_handle handle = ACPI_HANDLE(pctrl->dev);
++	union acpi_object *obj, *entry;
++	acpi_status status;
++	u32 seen_irqs[256];
++	u64 pin, irq;
++	unsigned int i, j;
++	int ret = 0;
++
++	if (!handle)
++		return -ENODEV;
++
++	obj = acpi_evaluate_dsm(handle, &msm_acpi_gpio_count_guid, 0, 2, NULL);
++	if (!obj)
++		return -EINVAL;
++	if (obj->type != ACPI_TYPE_INTEGER ||
++	    obj->integer.value != pctrl->soc->ngpios)
++		ret = -EINVAL;
++	ACPI_FREE(obj);
++	if (ret)
++		return dev_err_probe(pctrl->dev, ret,
++				     "ACPI GPIO count does not match pinctrl data\n");
++
++	status = acpi_walk_resources(handle, METHOD_NAME__CRS,
++				     msm_acpi_pdc_irq_resource, pctrl);
++	if (ACPI_FAILURE(status) || !pctrl->acpi_pdc_count)
++		return dev_err_probe(pctrl->dev, -EINVAL,
++				     "invalid ACPI PDC IRQ resources\n");
++
++	for (i = 0; i < pctrl->acpi_pdc_count; i++)
++		pctrl->acpi_pdc_pins[i] = -1;
++
++	obj = acpi_evaluate_dsm(handle, &msm_acpi_pdc_guid, 0, 2, NULL);
++	if (!obj)
++		return -EINVAL;
++	if (obj->type != ACPI_TYPE_PACKAGE || !obj->package.elements ||
++	    !obj->package.count || obj->package.count > 256) {
++		ret = -EINVAL;
++		goto out;
++	}
++
++	for (i = 0; i < obj->package.count; i++) {
++		entry = &obj->package.elements[i];
++		if (entry->type != ACPI_TYPE_PACKAGE || entry->package.count != 3 ||
++		    !entry->package.elements ||
++		    entry->package.elements[0].type != ACPI_TYPE_INTEGER ||
++		    entry->package.elements[1].type != ACPI_TYPE_INTEGER ||
++		    entry->package.elements[2].type != ACPI_TYPE_INTEGER) {
++			ret = -EINVAL;
++			break;
++		}
++
++		pin = entry->package.elements[1].integer.value;
++		irq = entry->package.elements[2].integer.value;
++		if (pin >= pctrl->soc->ngpios || irq > U32_MAX) {
++			ret = -EINVAL;
++			break;
++		}
++		for (j = 0; j < i; j++) {
++			if (seen_irqs[j] == irq) {
++				ret = -EINVAL;
++				break;
++			}
++		}
++		if (ret)
++			break;
++		seen_irqs[i] = irq;
++
++		for (j = 0; j < pctrl->acpi_pdc_count; j++) {
++			if (irq != pctrl->acpi_pdc_irqs[j])
++				continue;
++			if (pctrl->acpi_pdc_pins[j] >= 0) {
++				ret = -EINVAL;
++				break;
++			}
++			pctrl->acpi_pdc_pins[j] = pin;
++		}
++		if (ret)
++			break;
++	}
++out:
++	ACPI_FREE(obj);
++	if (ret)
++		dev_err(pctrl->dev, "invalid ACPI PDC mapping\n");
++	return ret;
++}
++#else
++static int msm_acpi_pdc_init(struct msm_pinctrl *pctrl)
++{
++	return -EOPNOTSUPP;
++}
++#endif
++
+ static int msm_gpio_init(struct msm_pinctrl *pctrl)
+ {
+ 	struct gpio_chip *chip;
+@@ -1465,6 +1606,8 @@ static int msm_gpio_init(struct msm_pinctrl *pctrl)
+ 	chip->label = dev_name(pctrl->dev);
+ 	chip->parent = pctrl->dev;
+ 	chip->owner = THIS_MODULE;
++	if (pctrl->soc->acpi_pdc_gpio)
++		chip->acpi_pin_to_offset = msm_gpio_acpi_pin_to_offset;
+ 	if (msm_gpio_needs_valid_mask(pctrl))
+ 		chip->init_valid_mask = msm_gpio_init_valid_mask;
+ 
+@@ -1604,6 +1747,11 @@ int msm_pinctrl_probe(struct platform_device *pdev,
+ 	pctrl->dev = &pdev->dev;
+ 	pctrl->soc = soc_data;
+ 	pctrl->chip = msm_gpio_template;
++	if (soc_data->acpi_pdc_gpio) {
++		ret = msm_acpi_pdc_init(pctrl);
++		if (ret)
++			return ret;
++	}
+ 	pctrl->intr_target_use_scm = of_device_is_compatible(
+ 					pctrl->dev->of_node,
+ 					"qcom,ipq8064-pinctrl");
+diff --git a/drivers/pinctrl/qcom/pinctrl-msm.h b/drivers/pinctrl/qcom/pinctrl-msm.h
+index b94ba1a41..a1eadd583 100644
+--- a/drivers/pinctrl/qcom/pinctrl-msm.h
++++ b/drivers/pinctrl/qcom/pinctrl-msm.h
+@@ -166,6 +166,8 @@ struct msm_gpio_wakeirq_map {
+  *              function number for eGPIO and any time we see that function
+  *              number used we'll treat it as a request to mux away from
+  *              our TLMM towards another owner.
++ * @acpi_pdc_gpio: ACPI uses PDC-encoded GPIO pin specifiers; build the
++ *                 controller's translation from its _CRS and _DSM.
+  */
+ struct msm_pinctrl_soc_data {
+ 	const struct pinctrl_pin_desc *pins;
+@@ -184,6 +186,7 @@ struct msm_pinctrl_soc_data {
+ 	bool wakeirq_dual_edge_errata;
+ 	unsigned int gpio_func;
+ 	unsigned int egpio_func;
++	bool acpi_pdc_gpio;
+ };
+ 
+ extern const struct dev_pm_ops msm_pinctrl_dev_pm_ops;
+diff --git a/include/linux/gpio/driver.h b/include/linux/gpio/driver.h
+index 17511434e..4eed3cc5c 100644
+--- a/include/linux/gpio/driver.h
++++ b/include/linux/gpio/driver.h
+@@ -361,6 +361,9 @@ struct gpio_irq_chip {
+  *	a negative error number on failure.
+  * @to_irq: optional hook supporting non-static gpiod_to_irq() mappings;
+  *	implementation may not sleep
++ * @acpi_pin_to_offset: optional translation of a controller-relative ACPI
++ *	GPIO pin number to a GPIO chip offset; may sleep and returns a negative
++ *	error for an unsupported or malformed firmware pin
+  * @dbg_show: optional routine to show contents in debugfs; default code
+  *	will be used when this is omitted, but custom code can show extra
+  *	state (such as pullup/pulldown configuration).
+@@ -436,6 +439,8 @@ struct gpio_chip {
+ 					      unsigned long config);
+ 	int			(*to_irq)(struct gpio_chip *gc,
+ 						unsigned int offset);
++	int			(*acpi_pin_to_offset)(struct gpio_chip *gc,
++						      unsigned int pin);
+ 
+ 	void			(*dbg_show)(struct seq_file *s,
+ 						struct gpio_chip *gc);
+diff --git a/drivers/pinctrl/qcom/pinctrl-glymur.c b/drivers/pinctrl/qcom/pinctrl-glymur.c
+--- a/drivers/pinctrl/qcom/pinctrl-glymur.c
++++ b/drivers/pinctrl/qcom/pinctrl-glymur.c
+@@ -1773,5 +1773,6 @@ static const struct msm_pinctrl_soc_data glymur_acpi_tlmm = {
+ 	.ngpios = 250,
+ 	.wakeirq_map = glymur_pdc_map,
+ 	.nwakeirq_map = ARRAY_SIZE(glymur_pdc_map),
+ 	.egpio_func = 11,
++	.acpi_pdc_gpio = true,
+ };

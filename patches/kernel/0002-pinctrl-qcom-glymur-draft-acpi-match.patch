@@ -1,0 +1,87 @@
+Subject: [RFC PATCH] pinctrl: qcom: glymur: draft ACPI GIO0 match
+
+The HP Glymur ACPI GIO0 node has the same TLMM MMIO base and parent IRQ as
+the Glymur DT node. Its GPIO-count _DSM reports 250 lines; pin 250 in the
+Linux table is the separate UFS reset pin, not an ACPI GPIO line.
+
+Add an ACPI match with a 250-line GPIO view and use the common match-data
+helper so the existing DT matches remain intact. This is an offline draft:
+the ACPI IRQ/event and power behavior has not been tested on hardware.
+It does not translate PDC-encoded GPIO specifiers (including the HP
+keyboard and touchpad pins 704 and 896) and must not be used as an
+input-enablement patch.
+
+---
+ drivers/pinctrl/qcom/pinctrl-glymur.c | 27 ++++++++++++++++++++++++++-
+ 1 file changed, 26 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/pinctrl/qcom/pinctrl-glymur.c b/drivers/pinctrl/qcom/pinctrl-glymur.c
+index 20f076e59..4ac7f708c 100644
+--- a/drivers/pinctrl/qcom/pinctrl-glymur.c
++++ b/drivers/pinctrl/qcom/pinctrl-glymur.c
+@@ -3,11 +3,13 @@
+  * Copyright (c) 2025 Qualcomm Technologies, Inc. and/or its subsidiaries.
+  */
+ 
++#include <linux/acpi.h>
+ #include <linux/module.h>
+ #include <linux/of.h>
+ #include <linux/of_device.h>
+ #include <linux/platform_device.h>
+ #include <linux/pinctrl/pinctrl.h>
++#include <linux/property.h>
+ 
+ #include "pinctrl-msm.h"
+ 
+@@ -1759,6 +1761,22 @@ static const struct msm_pinctrl_soc_data glymur_tlmm = {
+ 	.egpio_func = 11,
+ };
+ 
++#ifdef CONFIG_ACPI
++/* ACPI GIO0._DSM reports 250 GPIOs; pin 250 is the separate UFS reset. */
++static const struct msm_pinctrl_soc_data glymur_acpi_tlmm = {
++	.pins = glymur_pins,
++	.npins = ARRAY_SIZE(glymur_pins),
++	.functions = glymur_functions,
++	.nfunctions = ARRAY_SIZE(glymur_functions),
++	.groups = glymur_groups,
++	.ngroups = ARRAY_SIZE(glymur_groups),
++	.ngpios = 250,
++	.wakeirq_map = glymur_pdc_map,
++	.nwakeirq_map = ARRAY_SIZE(glymur_pdc_map),
++	.egpio_func = 11,
++};
++#endif
++
+ static const struct msm_pinctrl_soc_data mahua_tlmm = {
+ 	.pins = glymur_pins,
+ 	.npins = ARRAY_SIZE(glymur_pins),
+@@ -1779,11 +1797,19 @@ static const struct of_device_id glymur_tlmm_of_match[] = {
+ };
+ MODULE_DEVICE_TABLE(of, glymur_tlmm_of_match);
+ 
++#ifdef CONFIG_ACPI
++static const struct acpi_device_id glymur_tlmm_acpi_match[] = {
++	{ "QCOM0F0C", (kernel_ulong_t)&glymur_acpi_tlmm },
++	{ }
++};
++MODULE_DEVICE_TABLE(acpi, glymur_tlmm_acpi_match);
++#endif
++
+ static int glymur_tlmm_probe(struct platform_device *pdev)
+ {
+ 	const struct msm_pinctrl_soc_data *data;
+ 
+-	data = of_device_get_match_data(&pdev->dev);
++	data = device_get_match_data(&pdev->dev);
+ 	if (!data)
+ 		return -ENODEV;
+ 
+@@ -1794,6 +1820,7 @@ static struct platform_driver glymur_tlmm_driver = {
+ 	.driver = {
+ 		.name = "glymur-tlmm",
+ 		.of_match_table = glymur_tlmm_of_match,
++		.acpi_match_table = ACPI_PTR(glymur_tlmm_acpi_match),
+ 	},
+ 	.probe = glymur_tlmm_probe,
+ };

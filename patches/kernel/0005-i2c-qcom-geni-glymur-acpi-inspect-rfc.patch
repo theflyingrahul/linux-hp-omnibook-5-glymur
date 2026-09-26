@@ -1,0 +1,86 @@
+Subject: [RFC PATCH 5/5] i2c: qcom-geni: opt in to HP ACPI controller inspection
+
+Add an opt-in inspection path for the HP Glymur QCOM0F10 controllers
+I2C1 and I2C5. With the module parameter unset, the match returns
+before mapping MMIO. When enabled, it checks the exact ACPI MMIO windows,
+reads the configured protocol, FIFO availability, and SE clock-enable
+bit, logs the result, and declines to register an I2C adapter.
+
+The path does not program registers, load firmware, request an IRQ, or
+issue I2C transfers. Reading MMIO can still fault or hang if firmware
+has not powered the engine; this RFC is unbooted and is not a claim of
+hardware safety. It does not implement the PEP0 resource transitions.
+
+---
+diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
+--- a/drivers/i2c/busses/i2c-qcom-geni.c
++++ b/drivers/i2c/busses/i2c-qcom-geni.c
+@@ -1137,12 +1137,60 @@ static int geni_i2c_resources_init(struct geni_se *se)
+ 				  Bps_to_icc(gi2c->clk_freq_out));
+ }
+ 
++#ifdef CONFIG_ACPI
++static bool qcom0f10_inspect;
++module_param_named(qcom0f10_inspect, qcom0f10_inspect, bool, 0444);
++MODULE_PARM_DESC(qcom0f10_inspect,
++		 "Inspect HP Glymur QCOM0F10 I2C1/I2C5 registers without binding an adapter");
++
++static int geni_i2c_qcom0f10_inspect(struct platform_device *pdev)
++{
++	struct resource *res;
++	void __iomem *base;
++	struct geni_se se = {};
++	u32 proto, fifo_disabled, se_clk_enabled;
++
++	if (!qcom0f10_inspect)
++		return -ENODEV;
++
++	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
++	if (!res || resource_size(res) != 0x4000 ||
++	    (res->start != 0x00b80000 && res->start != 0x00b90000))
++		return -ENODEV;
++
++	base = devm_platform_ioremap_resource(pdev, 0);
++	if (IS_ERR(base))
++		return PTR_ERR(base);
++
++	se.base = base;
++	proto = geni_se_read_proto(&se);
++	if (proto != GENI_SE_I2C) {
++		dev_info(&pdev->dev, "QCOM0F10 inspection: protocol %u (expected I2C %u)\n",
++			 proto, GENI_SE_I2C);
++		return -ENODEV;
++	}
++
++	fifo_disabled = !!(readl_relaxed(base + GENI_IF_DISABLE_RO) & FIFO_IF_DISABLE);
++	se_clk_enabled = !!(readl_relaxed(base + GENI_SER_M_CLK_CFG) & SER_CLK_EN);
++	dev_info(&pdev->dev,
++		 "QCOM0F10 inspection: I2C protocol, fifo_disabled=%u se_clk_enabled=%u\n",
++		 fifo_disabled, se_clk_enabled);
++
++	return -ENODEV;
++}
++#endif
++
+ static int geni_i2c_probe(struct platform_device *pdev)
+ {
+ 	struct geni_i2c_dev *gi2c;
+ 	int ret;
+ 	struct device *dev = &pdev->dev;
+ 
++#ifdef CONFIG_ACPI
++	if (acpi_dev_hid_uid_match(ACPI_COMPANION(dev), "QCOM0F10", NULL))
++		return geni_i2c_qcom0f10_inspect(pdev);
++#endif
++
+ 	gi2c = devm_kzalloc(dev, sizeof(*gi2c), GFP_KERNEL);
+ 	if (!gi2c)
+ 		return -ENOMEM;
+@@ -1341,6 +1389,7 @@ static const struct geni_i2c_desc sa8255p_geni_i2c = {
+ static const struct acpi_device_id geni_i2c_acpi_match[] = {
+ 	{ "QCOM0220", (kernel_ulong_t)&geni_i2c},
+ 	{ "QCOM0411", (kernel_ulong_t)&geni_i2c},
++	{ "QCOM0F10", (kernel_ulong_t)&geni_i2c},
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, geni_i2c_acpi_match);
