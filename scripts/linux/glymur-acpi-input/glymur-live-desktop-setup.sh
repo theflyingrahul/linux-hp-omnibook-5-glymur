@@ -5,8 +5,10 @@
 # touchpad I2C5, touchscreen I2C9; proven in the second input-test run), gives
 # the ath12k QCC2072 its upstream firmware plus the private HP board data in
 # the RAM root, blocks suspend/hibernate (untested), then starts the normal
-# graphical session. It never binds IC10 (EC, GPI DMA mode), never writes
-# internal storage, and leaves the machine running. Only in workstation mode
+# graphical session. If the kit carries them, it also binds the EC bus IC10
+# through the QGP1 GPI DMA engine (glymur_gpi_dma.ko, glymur_geni_i2c_gsi.ko),
+# which gives the ACPI thermal zones and other EC-backed AML their bus. It
+# never writes internal storage and leaves the machine running. Only in workstation mode
 # (persistent boot) does it write, and then only to the installer's casper-rw
 # persistence (the first-boot repository unpack).
 set -u
@@ -17,6 +19,8 @@ KIT=/cdrom/glymur-tools/acpi-input
 LOG=/run/glymur-live-desktop.log
 GPIO_SHA256=@GPIO_SHA256@
 I2C_SHA256=@I2C_SHA256@
+GPI_SHA256=@GPI_SHA256@
+GSI_SHA256=@GSI_SHA256@
 WIFI_BOARD_SHA256=@WIFI_BOARD_SHA256@
 FW_SRC=/cdrom/glymur-tools/firmware/ath12k/QCC2072/hw1.0/firmware-2.bin
 FW_SHA256=4c6a1be1f5bfad76319755ff76904abb21c4c7ece5293cc5f33a20b1f4c35254
@@ -56,6 +60,26 @@ if hash_ok "$KIT/glymur_acpi_gpio.ko" "$GPIO_SHA256" &&
     modprobe hid_multitouch >>"$LOG" 2>&1
 else
     say 'Module hash mismatch; internal input stays disabled.'
+fi
+
+# EC bus: QGP1 (QCOM0F88:01) must be bound before anything else can claim its
+# channels, then IC10 (QCOM0F10:04, QUP1 SE1) in GSI mode. Proven live on
+# 2026-09-26 (docs/cpuidle-and-ec-bus-results-2026-09-26.md).
+EC_GPI=/sys/bus/platform/devices/QCOM0F88:01
+EC_DEV=/sys/bus/platform/devices/QCOM0F10:04
+if [ "$GPI_SHA256" = none ]; then
+    say 'EC bus modules not in this kit; IC10 left unbound.'
+elif hash_ok "$KIT/glymur_gpi_dma.ko" "$GPI_SHA256" &&
+    hash_ok "$KIT/glymur_geni_i2c_gsi.ko" "$GSI_SHA256" &&
+    [ "$(cat "$EC_GPI/firmware_node/path" 2>/dev/null)" = '\_SB_.QGP1' ] &&
+    [ "$(cat "$EC_DEV/firmware_node/path" 2>/dev/null)" = '\_SB_.IC10' ] &&
+    [ ! -e "$EC_GPI/driver" ] && [ ! -e "$EC_DEV/driver" ]; then
+    insmod "$KIT/glymur_gpi_dma.ko" allow=0xa04000 >>"$LOG" 2>&1
+    say "EC GPI DMA module status $?."
+    insmod "$KIT/glymur_geni_i2c_gsi.ko" allow=0xa84000 seid=1 >>"$LOG" 2>&1
+    say "EC I2C module status $?."
+else
+    say 'EC bus prerequisites not met; IC10 left unbound.'
 fi
 
 PCI=/sys/bus/pci/devices/0004:01:00.0
