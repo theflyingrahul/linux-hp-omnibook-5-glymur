@@ -1,0 +1,536 @@
+diff -ruN a/drivers/dma/qcom/gpi.c b/drivers/dma/qcom/gpi.c
+--- a/drivers/dma/qcom/gpi.c	2026-09-26 22:15:19.780949303 +0000
++++ b/drivers/dma/qcom/gpi.c	2026-09-26 22:15:20.723997182 +0000
+@@ -6,6 +6,7 @@
+  */
+ 
+ #include <dt-bindings/dma/qcom-gpi.h>
++#include <linux/acpi.h>
+ #include <linux/bitfield.h>
+ #include <linux/dma-mapping.h>
+ #include <linux/dmaengine.h>
+@@ -2201,6 +2202,82 @@
+ 	return dma_get_slave_channel(&gchan->vc.chan);
+ }
+ 
++/*
++ * ACPI (Snapdragon X2 Glymur, QCOM0F88): _CRS describes only the GPIIs that
++ * belong to the application EE, one interrupt per GPII in order, and the
++ * memory window starts @window_skip bytes into the GPI block.
++ */
++struct gpi_acpi_data {
++	u32 ee_offset;
++	u32 window_skip;
++};
++
++static const struct gpi_acpi_data gpi_acpi_glymur = {
++	.ee_offset = 0x10000,
++	.window_skip = 0x4000,
++};
++
++static struct platform_driver gpi_driver;
++static DEFINE_MUTEX(gpi_acpi_lock);
++
++/**
++ * gpi_acpi_request_chan() - request a channel of an ACPI-described GPI engine
++ * @dev: the GPI engine device (for example found through the client's _DEP)
++ * @chid: 0 for TX, 1 for RX
++ * @seid: serial engine index within the QUP
++ * @protocol: QCOM_GPI_* protocol
++ *
++ * ACPI has no equivalent of the DT "dmas" property for GPI; this performs the
++ * same lookup as the DT translation.
++ *
++ * Return: the channel, or an ERR_PTR (-EPROBE_DEFER until the engine binds).
++ */
++struct dma_chan *gpi_acpi_request_chan(struct device *dev, u32 chid, u32 seid,
++				       u32 protocol)
++{
++	struct of_phandle_args args = {
++		.args_count = 3,
++		.args = { chid, seid, protocol },
++	};
++	struct of_dma ofdma = {};
++	struct dma_chan *chan;
++
++	if (dev->driver != &gpi_driver.driver || !dev_get_drvdata(dev))
++		return ERR_PTR(-EPROBE_DEFER);
++
++	ofdma.of_dma_data = dev_get_drvdata(dev);
++	mutex_lock(&gpi_acpi_lock);
++	chan = gpi_of_dma_xlate(&args, &ofdma);
++	mutex_unlock(&gpi_acpi_lock);
++
++	return chan ?: ERR_PTR(-EBUSY);
++}
++EXPORT_SYMBOL_GPL(gpi_acpi_request_chan);
++
++static int gpi_acpi_init(struct platform_device *pdev, struct gpi_dev *gpi_dev,
++			 u32 *ee_offset)
++{
++	const struct gpi_acpi_data *data = device_get_match_data(&pdev->dev);
++	int nirq;
++
++	if (!data)
++		return -ENODEV;
++	if ((gpi_dev->res->start & 0xffff) != data->window_skip)
++		return dev_err_probe(&pdev->dev, -ENODEV,
++				     "unexpected ACPI window %pR\n", gpi_dev->res);
++
++	nirq = platform_irq_count(pdev);
++	if (nirq < 0)
++		return nirq;
++	if (!nirq || nirq > 16)
++		return dev_err_probe(&pdev->dev, -ENODEV, "%d GPII interrupts\n", nirq);
++
++	gpi_dev->max_gpii = nirq;
++	gpi_dev->gpii_mask = GENMASK(nirq - 1, 0);
++	*ee_offset = data->ee_offset + data->window_skip;
++	return 0;
++}
++
+ static int gpi_probe(struct platform_device *pdev)
+ {
+ 	struct gpi_dev *gpi_dev;
+@@ -2218,21 +2295,27 @@
+ 		return PTR_ERR(gpi_dev->regs);
+ 	gpi_dev->ee_base = gpi_dev->regs;
+ 
+-	ret = of_property_read_u32(gpi_dev->dev->of_node, "dma-channels",
+-				   &gpi_dev->max_gpii);
+-	if (ret) {
+-		dev_err(gpi_dev->dev, "missing 'max-no-gpii' DT node\n");
+-		return ret;
+-	}
++	if (has_acpi_companion(&pdev->dev)) {
++		ret = gpi_acpi_init(pdev, gpi_dev, &ee_offset);
++		if (ret)
++			return ret;
++	} else {
++		ret = of_property_read_u32(gpi_dev->dev->of_node, "dma-channels",
++					   &gpi_dev->max_gpii);
++		if (ret) {
++			dev_err(gpi_dev->dev, "missing 'max-no-gpii' DT node\n");
++			return ret;
++		}
+ 
+-	ret = of_property_read_u32(gpi_dev->dev->of_node, "dma-channel-mask",
+-				   &gpi_dev->gpii_mask);
+-	if (ret) {
+-		dev_err(gpi_dev->dev, "missing 'gpii-mask' DT node\n");
+-		return ret;
+-	}
++		ret = of_property_read_u32(gpi_dev->dev->of_node, "dma-channel-mask",
++					   &gpi_dev->gpii_mask);
++		if (ret) {
++			dev_err(gpi_dev->dev, "missing 'gpii-mask' DT node\n");
++			return ret;
++		}
+ 
+-	ee_offset = (uintptr_t)device_get_match_data(gpi_dev->dev);
++		ee_offset = (uintptr_t)device_get_match_data(gpi_dev->dev);
++	}
+ 	gpi_dev->ee_base = gpi_dev->ee_base - ee_offset;
+ 
+ 	gpi_dev->ev_factor = EV_FACTOR;
+@@ -2328,6 +2411,10 @@
+ 		return ret;
+ 	}
+ 
++	/* ACPI clients use gpi_acpi_request_chan() instead. */
++	if (!gpi_dev->dev->of_node)
++		return 0;
++
+ 	ret = of_dma_controller_register(gpi_dev->dev->of_node,
+ 					 gpi_of_dma_xlate, gpi_dev);
+ 	if (ret) {
+@@ -2355,11 +2442,18 @@
+ };
+ MODULE_DEVICE_TABLE(of, gpi_of_match);
+ 
++static const struct acpi_device_id gpi_acpi_match[] = {
++	{ "QCOM0F88", (kernel_ulong_t)&gpi_acpi_glymur },
++	{ }
++};
++MODULE_DEVICE_TABLE(acpi, gpi_acpi_match);
++
+ static struct platform_driver gpi_driver = {
+ 	.probe = gpi_probe,
+ 	.driver = {
+ 		.name = KBUILD_MODNAME,
+ 		.of_match_table = gpi_of_match,
++		.acpi_match_table = gpi_acpi_match,
+ 	},
+ };
+ 
+diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
+--- a/drivers/i2c/busses/i2c-qcom-geni.c	2026-09-26 22:15:19.286948887 +0000
++++ b/drivers/i2c/busses/i2c-qcom-geni.c	2026-09-26 22:15:20.722555826 +0000
+@@ -9,6 +9,7 @@
+ #include <linux/dmaengine.h>
+ #include <linux/dma-mapping.h>
+ #include <linux/dma/qcom-gpi-dma.h>
++#include <linux/bitfield.h>
+ #include <linux/err.h>
+ #include <linux/i2c.h>
+ #include <linux/interrupt.h>
+@@ -82,7 +83,13 @@
+ #define XFER_TIMEOUT		HZ
+ #define RST_TIMEOUT		HZ
+ 
++/*
++ * @fw_owned: ACPI firmware owns the SE clocks, power and QUP wrapper (Snapdragon
++ * X2 laptops). The driver leaves them untouched and takes the SCL timing from
++ * the controller's ACPI CLKD table.
++ */
+ struct geni_i2c_desc {
++	bool fw_owned;
+ 	bool no_dma_support;
+ 	unsigned int tx_fifo_depth;
+ 	int (*resources_init)(struct geni_se *se);
+@@ -194,6 +201,96 @@
+ 	{}
+ };
+ 
++#ifdef CONFIG_ACPI
++/*
++ * CLKD rows are (0, source kHz, bus kHz, divider, t_cycle, t_high, t_low). On
++ * the HP OmniBook 5 (Glymur) the firmware leaves the SE programmed with exactly
++ * the row for its bus speed.
++ */
++static int geni_i2c_acpi_clkd(struct geni_i2c_dev *gi2c)
++{
++	struct acpi_buffer buf = { ACPI_ALLOCATE_BUFFER, NULL };
++	acpi_handle handle = ACPI_HANDLE(gi2c->se.dev);
++	struct geni_i2c_clk_fld *fld;
++	union acpi_object *pkg, *row;
++	unsigned int i, j;
++	u64 v[7];
++	int ret = -ENOENT;
++
++	if (!handle || ACPI_FAILURE(acpi_evaluate_object(handle, "CLKD", NULL, &buf)))
++		return -ENOENT;
++
++	pkg = buf.pointer;
++	if (!pkg || pkg->type != ACPI_TYPE_PACKAGE)
++		goto out;
++
++	for (i = 0; i < pkg->package.count; i++) {
++		row = &pkg->package.elements[i];
++		if (row->type != ACPI_TYPE_PACKAGE || row->package.count != 7)
++			continue;
++		for (j = 0; j < 7; j++) {
++			if (row->package.elements[j].type != ACPI_TYPE_INTEGER)
++				break;
++			v[j] = row->package.elements[j].integer.value;
++		}
++		if (j != 7 || v[1] != 19200 || v[2] * 1000 != gi2c->clk_freq_out)
++			continue;
++		if (!v[3] || v[3] > 0xfff || !v[4] || v[4] > 0x3ff ||
++		    !v[5] || !v[6] || v[5] + v[6] > v[4]) {
++			dev_err(gi2c->se.dev, "malformed CLKD row %u\n", i);
++			ret = -EINVAL;
++			goto out;
++		}
++		fld = devm_kzalloc(gi2c->se.dev, sizeof(*fld), GFP_KERNEL);
++		if (!fld) {
++			ret = -ENOMEM;
++			goto out;
++		}
++		fld->clk_freq_out = gi2c->clk_freq_out;
++		fld->clk_div = v[3];
++		fld->t_cycle_cnt = v[4];
++		fld->t_high_cnt = v[5];
++		fld->t_low_cnt = v[6];
++		gi2c->clk_fld = fld;
++		ret = 0;
++		break;
++	}
++out:
++	ACPI_FREE(buf.pointer);
++	return ret;
++}
++
++/* The GPI DMA engine an ACPI SE depends on is listed in its _DEP. */
++static struct device *geni_i2c_acpi_gpi_dev(struct geni_i2c_dev *gi2c)
++{
++	struct acpi_handle_list deps;
++	struct device *gpi = NULL;
++	struct acpi_device *adev;
++	u32 i;
++
++	if (!acpi_evaluate_reference(ACPI_HANDLE(gi2c->se.dev), "_DEP", NULL, &deps))
++		return NULL;
++
++	for (i = 0; i < deps.count && !gpi; i++) {
++		adev = acpi_fetch_acpi_dev(deps.handles[i]);
++		if (adev && acpi_dev_hid_uid_match(adev, "QCOM0F88", NULL))
++			gpi = acpi_get_first_physical_node(adev);
++	}
++	acpi_handle_list_free(&deps);
++	return gpi;
++}
++#else
++static int geni_i2c_acpi_clkd(struct geni_i2c_dev *gi2c)
++{
++	return -ENOENT;
++}
++
++static struct device *geni_i2c_acpi_gpi_dev(struct geni_i2c_dev *gi2c)
++{
++	return NULL;
++}
++#endif
++
+ static int geni_i2c_clk_map_idx(struct geni_i2c_dev *gi2c)
+ {
+ 	const struct geni_i2c_clk_fld *itr;
+@@ -234,6 +331,15 @@
+ 	return 0;
+ }
+ 
++/*
++ * GPI buffers belong to the QUP wrapper's DMA domain. Without a wrapper
++ * (firmware-owned ACPI SEs) the GPI engine is the device doing the DMA.
++ */
++static struct device *geni_i2c_dma_dev(struct geni_i2c_dev *gi2c)
++{
++	return gi2c->se.wrapper ? gi2c->se.dev->parent : gi2c->tx_c->device->dev;
++}
++
+ static void geni_i2c_err_misc(struct geni_i2c_dev *gi2c)
+ {
+ 	u32 m_cmd = readl_relaxed(gi2c->se.base + SE_GENI_M_CMD0);
+@@ -589,12 +695,12 @@
+ 			       void *rx_buf, dma_addr_t rx_addr)
+ {
+ 	if (tx_buf) {
+-		dma_unmap_single(gi2c->se.dev->parent, tx_addr, msg->len, DMA_TO_DEVICE);
++		dma_unmap_single(geni_i2c_dma_dev(gi2c), tx_addr, msg->len, DMA_TO_DEVICE);
+ 		i2c_put_dma_safe_msg_buf(tx_buf, msg, !gi2c->err);
+ 	}
+ 
+ 	if (rx_buf) {
+-		dma_unmap_single(gi2c->se.dev->parent, rx_addr, msg->len, DMA_FROM_DEVICE);
++		dma_unmap_single(geni_i2c_dma_dev(gi2c), rx_addr, msg->len, DMA_FROM_DEVICE);
+ 		i2c_put_dma_safe_msg_buf(rx_buf, msg, !gi2c->err);
+ 	}
+ }
+@@ -705,9 +811,9 @@
+ 	else
+ 		map_dirn = DMA_FROM_DEVICE;
+ 
+-	addr = dma_map_single(gi2c->se.dev->parent, dma_buf,
++	addr = dma_map_single(geni_i2c_dma_dev(gi2c), dma_buf,
+ 			      msgs[msg_idx].len, map_dirn);
+-	if (dma_mapping_error(gi2c->se.dev->parent, addr)) {
++	if (dma_mapping_error(geni_i2c_dma_dev(gi2c), addr)) {
+ 		i2c_put_dma_safe_msg_buf(dma_buf, &msgs[msg_idx], false);
+ 		ret = -ENOMEM;
+ 		goto out;
+@@ -798,7 +904,7 @@
+ err_config:
+ 	/* Avoid DMA unmap as the write operation skipped DMA mapping */
+ 	if (dma_buf) {
+-		dma_unmap_single(gi2c->se.dev->parent, addr,
++		dma_unmap_single(geni_i2c_dma_dev(gi2c), addr,
+ 				 msgs[msg_idx].len, map_dirn);
+ 		i2c_put_dma_safe_msg_buf(dma_buf, &msgs[msg_idx], false);
+ 	}
+@@ -1023,6 +1129,33 @@
+ 	int ret;
+ 
+ 	geni_se_select_mode(&gi2c->se, GENI_GPI_DMA);
++	if (gi2c->dev_data->fw_owned) {
++		struct resource *res = platform_get_resource(to_platform_device(gi2c->se.dev),
++							     IORESOURCE_MEM, 0);
++		struct device *gpi = geni_i2c_acpi_gpi_dev(gi2c);
++		/* SEs are 16 KiB apart, eight per QUP. */
++		u32 seid = (res->start >> 14) & 0x7;
++
++		if (!gpi)
++			return dev_err_probe(gi2c->se.dev, -ENODEV,
++					     "no GPI DMA engine in _DEP\n");
++		gi2c->tx_c = gpi_acpi_request_chan(gpi, 0, seid, QCOM_GPI_I2C);
++		if (IS_ERR(gi2c->tx_c)) {
++			ret = dev_err_probe(gi2c->se.dev, PTR_ERR(gi2c->tx_c),
++					    "Failed to get tx DMA ch\n");
++			gi2c->tx_c = NULL;
++			return ret;
++		}
++		gi2c->rx_c = gpi_acpi_request_chan(gpi, 1, seid, QCOM_GPI_I2C);
++		if (IS_ERR(gi2c->rx_c)) {
++			ret = dev_err_probe(gi2c->se.dev, PTR_ERR(gi2c->rx_c),
++					    "Failed to get rx DMA ch\n");
++			gi2c->rx_c = NULL;
++			goto err_rx;
++		}
++		return 0;
++	}
++
+ 	gi2c->tx_c = dma_request_chan(gi2c->se.dev, "tx");
+ 	if (IS_ERR(gi2c->tx_c)) {
+ 		ret = dev_err_probe(gi2c->se.dev, PTR_ERR(gi2c->tx_c),
+@@ -1042,6 +1175,7 @@
+ 
+ err_rx:
+ 	dma_release_channel(gi2c->tx_c);
++	gi2c->tx_c = NULL;
+ err_tx:
+ 	return ret;
+ }
+@@ -1059,6 +1193,14 @@
+ 	}
+ 
+ 	proto = geni_se_read_proto(&gi2c->se);
++	if (gi2c->dev_data->fw_owned &&
++	    (proto != GENI_SE_I2C ||
++	     !(readl_relaxed(gi2c->se.base + GENI_SER_M_CLK_CFG) & SER_CLK_EN))) {
++		/* Loading SE firmware or enabling clocks needs the wrapper. */
++		ret = dev_err_probe(gi2c->se.dev, -ENODEV,
++				    "firmware did not leave an I2C SE (proto %u)\n", proto);
++		goto err;
++	}
+ 	if (proto == GENI_SE_INVALID_PROTO) {
+ 		ret = geni_load_se_firmware(&gi2c->se, GENI_SE_I2C);
+ 		if (ret) {
+@@ -1094,7 +1236,21 @@
+ 			dev_err_probe(gi2c->se.dev, -EINVAL,
+ 				      "I2C sharing not supported in non GSI mode\n");
+ 
+-		tx_depth = geni_se_get_tx_fifo_depth(&gi2c->se);
++		if (gi2c->se.wrapper) {
++			tx_depth = geni_se_get_tx_fifo_depth(&gi2c->se);
++		} else {
++			/*
++			 * The depth field width depends on the QUP version, which
++			 * lives in the wrapper; accept it only if both agree. SE
++			 * DMA also needs the wrapper, so use FIFO transfers only.
++			 */
++			u32 hw = readl_relaxed(gi2c->se.base + SE_HW_PARAM_0);
++
++			tx_depth = FIELD_GET(TX_FIFO_DEPTH_MSK_256_BYTES, hw);
++			if (tx_depth != FIELD_GET(TX_FIFO_DEPTH_MSK, hw))
++				tx_depth = 0;
++			gi2c->no_dma = true;
++		}
+ 
+ 		/* I2C Master Hub Serial Elements doesn't have the HW_PARAM_0 register */
+ 		if (!tx_depth && gi2c->se.core_clk)
+@@ -1137,6 +1293,20 @@
+ 				  Bps_to_icc(gi2c->clk_freq_out));
+ }
+ 
++static int geni_i2c_fw_resources_init(struct geni_se *se)
++{
++	struct geni_i2c_dev *gi2c = dev_get_drvdata(se->dev);
++	int ret;
++
++	ret = geni_i2c_acpi_clkd(gi2c);
++	if (ret == -ENOENT)
++		ret = geni_i2c_clk_map_idx(gi2c);
++	if (ret)
++		return dev_err_probe(se->dev, ret, "no timing for %u Hz\n",
++				     gi2c->clk_freq_out);
++	return 0;
++}
++
+ static int geni_i2c_probe(struct platform_device *pdev)
+ {
+ 	struct geni_i2c_dev *gi2c;
+@@ -1147,18 +1317,26 @@
+ 	if (!gi2c)
+ 		return -ENOMEM;
+ 
++	gi2c->dev_data = device_get_match_data(&pdev->dev);
++	if (!gi2c->dev_data)
++		return -EINVAL;
++
+ 	gi2c->se.dev = dev;
+-	gi2c->se.wrapper = dev_get_drvdata(dev->parent);
++	/* A top-level ACPI device's parent is not a GENI wrapper. */
++	if (!gi2c->dev_data->fw_owned)
++		gi2c->se.wrapper = dev_get_drvdata(dev->parent);
+ 	gi2c->se.base = devm_platform_ioremap_resource(pdev, 0);
+ 	if (IS_ERR(gi2c->se.base))
+ 		return PTR_ERR(gi2c->se.base);
+ 
+-	gi2c->dev_data = device_get_match_data(&pdev->dev);
+-	if (!gi2c->dev_data)
+-		return -EINVAL;
+-
+ 	ret = device_property_read_u32(dev, "clock-frequency",
+ 				       &gi2c->clk_freq_out);
++	if (ret && gi2c->dev_data->fw_owned) {
++		/* Slowest ConnectionSpeed of the controller's ACPI children. */
++		gi2c->clk_freq_out = i2c_acpi_find_bus_speed(dev);
++		if (gi2c->clk_freq_out)
++			ret = 0;
++	}
+ 	if (ret) {
+ 		dev_info(dev, "Bus frequency not specified, default to 100kHz.\n");
+ 		gi2c->clk_freq_out = I2C_MAX_STANDARD_MODE_FREQ;
+@@ -1332,6 +1510,12 @@
+ 	.power_off = geni_se_resources_deactivate,
+ };
+ 
++static const struct geni_i2c_desc glymur_acpi_i2c = {
++	.fw_owned = true,
++	.resources_init = geni_i2c_fw_resources_init,
++	.set_rate = qcom_geni_i2c_conf,
++};
++
+ static const struct geni_i2c_desc sa8255p_geni_i2c = {
+ 	.resources_init = geni_se_domain_attach,
+ 	.set_rate = geni_se_set_perf_opp,
+@@ -1341,6 +1525,7 @@
+ static const struct acpi_device_id geni_i2c_acpi_match[] = {
+ 	{ "QCOM0220", (kernel_ulong_t)&geni_i2c},
+ 	{ "QCOM0411", (kernel_ulong_t)&geni_i2c},
++	{ "QCOM0F10", (kernel_ulong_t)&glymur_acpi_i2c },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(acpi, geni_i2c_acpi_match);
+diff -ruN a/drivers/i2c/busses/Kconfig b/drivers/i2c/busses/Kconfig
+--- a/drivers/i2c/busses/Kconfig	2026-09-26 22:15:20.718950094 +0000
++++ b/drivers/i2c/busses/Kconfig	2026-09-26 22:15:20.724997756 +0000
+@@ -1061,6 +1061,7 @@
+ 	tristate "Qualcomm GENI based I2C controller"
+ 	depends on ARCH_QCOM || COMPILE_TEST
+ 	depends on QCOM_GENI_SE
++	depends on QCOM_GPI_DMA || !QCOM_GPI_DMA
+ 	help
+ 	  This driver supports GENI serial engine based I2C controller in
+ 	  master mode on the Qualcomm Technologies Inc.'s SoCs. If you say
+diff -ruN a/include/linux/dma/qcom-gpi-dma.h b/include/linux/dma/qcom-gpi-dma.h
+--- a/include/linux/dma/qcom-gpi-dma.h	2026-09-26 22:15:20.245634070 +0000
++++ b/include/linux/dma/qcom-gpi-dma.h	2026-09-26 22:15:20.737050370 +0000
+@@ -7,6 +7,9 @@
+ #ifndef QCOM_GPI_DMA_H
+ #define QCOM_GPI_DMA_H
+ 
++#include <linux/err.h>
++#include <linux/types.h>
++
+ /**
+  * enum spi_transfer_cmd - spi transfer commands
+  * @SPI_TX: SPI peripheral TX command
+@@ -101,4 +104,18 @@
+ 	enum gpi_lock_action lock_action;
+ };
+ 
++struct device;
++struct dma_chan;
++
++#if IS_ENABLED(CONFIG_QCOM_GPI_DMA)
++struct dma_chan *gpi_acpi_request_chan(struct device *dev, u32 chid, u32 seid,
++				       u32 protocol);
++#else
++static inline struct dma_chan *gpi_acpi_request_chan(struct device *dev, u32 chid,
++						     u32 seid, u32 protocol)
++{
++	return ERR_PTR(-ENODEV);
++}
++#endif
++
+ #endif /* QCOM_GPI_DMA_H */

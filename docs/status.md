@@ -1,5 +1,9 @@
 # Project Status
 
+**2026-09-26, late: lid events work** through a GpioInt-capable GED driver
+(`patches/kernel/0006`); the port to the qcom-next kernel is in progress. See
+`docs/qcom-next-port-and-lid-2026-09-26.md`.
+
 **2026-09-26, reboot with the `_OSC` override: CPU core idle and the EC
 bus work.** `acpi_idle` uses per-core C1/C4; cluster states stay gated behind
 `PEPI`. IC10 transfers over GPI DMA, and the ACPI thermal zones now read real
@@ -119,7 +123,7 @@ and I²C remain unvalidated; no new boot artifact was made.
 | keyboard | **Linux working (test modules)** | `QTEC0001` 0x3A on I2C1, PDC pin 704 → GPIO 67; `i2c_hid_acpi` |
 | keyboard backlight | Unknown | |
 | function keys | Unknown | |
-| lid switch | Linux input enumerated | ACPI `LID0` appeared as the sole input device in the live capture. Lid events need the EC bus (IC10 over GPI DMA) and `_AEI` handling; see `docs/ec-gsi-live-test-2026-09-26.md`. |
+| lid switch | **Linux working (test modules)** | GED `LIGE` on GPIO 92 plus the EC bus; logind sees open/close. See `docs/qcom-next-port-and-lid-2026-09-26.md` |
 | battery | Not exposed in tested Linux boot | Windows exposes charge and discharge data, but Linux had no `/sys/class/power_supply` device; UPower displayed no battery. |
 | charging | Windows observed; Linux unknown | The charger powers and charges the laptop in Windows; Linux ACPI adapter `_PSR` previously failed because a GenericSerialBus handler was missing. |
 | thermal sensors | **Linux working (test modules)** | Four `acpitz` zones read real temperatures once IC10 (EC) is on GPI DMA; see `docs/cpuidle-and-ec-bus-results-2026-09-26.md` |
