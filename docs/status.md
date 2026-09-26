@@ -1,5 +1,11 @@
 # Project Status
 
+**2026-09-26, live workstation: EC bus (IC10) GPI DMA test.** An ACPI GPI
+DMA module bound `QGP1`, and its allocate commands completed through the
+GPII interrupt. IC10 did not bind: the live image's `async_tx` claimed every
+channel first, because the driver did not set `DMA_PRIVATE`. That is now
+fixed; a retry needs a clean boot. See `docs/ec-gsi-live-test-2026-09-26.md`.
+
 **2026-09-26, second input-test run: keyboard, touchpad, and touchscreen
 work under Linux.** This is the stock Ubuntu `7.0.0-30-generic` live kernel
 with no DTB, plus two out-of-tree ACPI modules. Wi-Fi scanning also works.
@@ -108,7 +114,7 @@ and I²C remain unvalidated; no new boot artifact was made.
 | keyboard | **Linux working (test modules)** | `QTEC0001` 0x3A on I2C1, PDC pin 704 → GPIO 67; `i2c_hid_acpi` |
 | keyboard backlight | Unknown | |
 | function keys | Unknown | |
-| lid switch | Linux input enumerated | ACPI `LID0` appeared as the sole input device in the live capture; lid events were not tested |
+| lid switch | Linux input enumerated | ACPI `LID0` appeared as the sole input device in the live capture. Lid events need the EC bus (IC10 over GPI DMA) and `_AEI` handling; see `docs/ec-gsi-live-test-2026-09-26.md`. |
 | battery | Not exposed in tested Linux boot | Windows exposes charge and discharge data, but Linux had no `/sys/class/power_supply` device; UPower displayed no battery. |
 | charging | Windows observed; Linux unknown | The charger powers and charges the laptop in Windows; Linux ACPI adapter `_PSR` previously failed because a GenericSerialBus handler was missing. |
 | thermal sensors | Unknown | |

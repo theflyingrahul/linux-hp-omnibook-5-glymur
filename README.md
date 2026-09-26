@@ -29,6 +29,11 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-26 (live workstation):** the EC bus needs the QUP1 GPI DMA
+engine. A derived ACPI GPI driver binds it and its command path works, but
+the first live test lost the channels to `async_tx`. Retry after a reboot;
+see `docs/ec-gsi-live-test-2026-09-26.md`.
+
 **2026-09-26 (run 2):** the keyboard, touchpad, and touchscreen work under
 the stock Ubuntu live kernel with two out-of-tree ACPI modules, and Wi-Fi
 scans with HP board data. See `docs/acpi-input-results-run2-2026-09-26.md`.
