@@ -6,7 +6,7 @@ set -euo pipefail
 # MANIFEST.tsv), into /usr/lib/firmware/updates so no packaged file is
 # replaced:
 #   qcom/glymur/HP/omnibook-5-16-bf1xxx/  ADSP and CDSP images, dtbs, .jsn
-#       (the firmware-name paths in glymur-hp-omnibook-5-bf1xxx.dts)
+#       (the firmware-name paths in mahua-hp-omnibook-5-bf1xxx.dts)
 #   qca/ornbtfw10.tlv, qca/ornnv10.*      QCC2072 Bluetooth ROM 0x10: HP's
 #       "Colorado" clnbtfw10.tlv/clnbtnv10.* under btqca's "Orion" names
 #       (linux-firmware ships only ROM 0x11)

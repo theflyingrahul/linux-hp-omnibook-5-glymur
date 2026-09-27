@@ -98,15 +98,25 @@ rm -rf "$STAGE"
 cp "$OUT/arch/arm64/boot/Image" "$OUT/.config" "$OUT/System.map" "$STAGE/"
 
 # HP device trees from the repository's dts/qcom/, compiled against this
-# tree's glymur.dtsi and shipped next to the kernel (stage/dtbs/qcom/).
+# tree's mahua.dtsi/glymur.dtsi and shipped next to the kernel
+# (stage/dtbs/qcom/). Each DTB must pass the GPIO allow-list check.
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-if compgen -G "$REPO_DIR/dts/qcom/glymur-hp-*.dts" >/dev/null; then
-    cp "$REPO_DIR"/dts/qcom/glymur-hp-* "$SRC/arch/arm64/boot/dts/qcom/"
+CHECK="$REPO_DIR/scripts/linux/check-dt-gpio-allowlist.py"
+if compgen -G "$REPO_DIR/dts/qcom/*-hp-*.dts" >/dev/null; then
+    rm -f "$SRC"/arch/arm64/boot/dts/qcom/glymur-hp-omnibook-5-bf1xxx*
+    cp "$REPO_DIR"/dts/qcom/*-hp-* "$SRC/arch/arm64/boot/dts/qcom/"
     mkdir -p "$STAGE/dtbs/qcom"
-    for dts in "$REPO_DIR"/dts/qcom/glymur-hp-*.dts; do
-        dtb="qcom/$(basename "$dts" .dts).dtb"
-        "${MAKE[@]}" "$dtb" >/dev/null
-        cp "$OUT/arch/arm64/boot/dts/$dtb" "$STAGE/dtbs/qcom/"
+    python3 -c 'import libfdt' 2>/dev/null ||
+        echo 'warning: python3-libfdt missing; GPIO allow-list not checked' >&2
+    for dts in "$REPO_DIR"/dts/qcom/*-hp-*.dts; do
+        dtb="$OUT/arch/arm64/boot/dts/qcom/$(basename "$dts" .dts).dtb"
+        rm -f "$dtb"
+        "${MAKE[@]}" "qcom/$(basename "$dtb")" >/dev/null
+        if python3 -c 'import libfdt' 2>/dev/null && ! python3 "$CHECK" "$dtb" >/dev/null; then
+            python3 "$CHECK" "$dtb" | grep FAIL >&2
+            exit 1
+        fi
+        cp "$dtb" "$STAGE/dtbs/qcom/"
     done
 fi
 tar -C "$STAGE" -czf "$OUT/glymur-kernel-$KREL.tar.gz" .

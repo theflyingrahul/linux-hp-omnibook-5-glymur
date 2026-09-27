@@ -63,6 +63,16 @@ if [ -d "$BOOT/dtbs/$krel/qcom" ]; then
     [ -d "$BOOT/dtbs/$running/qcom" ] && ln -sfn "dtbs/$running/qcom" "$BOOT/glymur-dtb.old"
     ln -sfn "dtbs/$krel/qcom" "$BOOT/glymur-dtb"
 fi
+
+# The per-boot report evolves with the kernels (device-tree sections), so
+# refresh it from this checkout too.
+report="$(dirname "${BASH_SOURCE[0]}")/glymur-boot-report.sh"
+if [ -f "$report" ] && [ -f /etc/systemd/system/glymur-boot-report.service ]; then
+    install -m 755 "$report" /usr/local/sbin/glymur-boot-report
+    echo 'Updated /usr/local/sbin/glymur-boot-report.'
+fi
 sync
 ls -l "$BOOT"/vmlinuz-glymur "$BOOT"/vmlinuz-glymur.old "$BOOT"/glymur-dtb "$BOOT"/glymur-dtb.old 2>/dev/null
-echo "Reboot and choose \"Ubuntu on SSD: newest glymur kernel\" to boot $krel."
+ls -l "$BOOT/glymur-dtb/" 2>/dev/null
+echo "Reboot and choose \"Ubuntu on SSD: newest glymur kernel\" (ACPI) or"
+echo "\"Ubuntu on SSD: device tree (full)\" to boot $krel."

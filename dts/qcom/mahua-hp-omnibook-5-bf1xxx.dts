@@ -1,19 +1,23 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
  * HP OmniBook 5 16-bf1xxx, full device tree: the minimal set plus the eDP
- * OLED panel, the Adreno X2-85 GPU, the ADSP/CDSP remoteprocs and PMIC GLink
- * (battery, AC). If the display stays dark, boot the -minimal variant.
+ * OLED panel, the ADSP/CDSP remoteprocs and PMIC GLink (battery, AC). If
+ * the display stays dark, boot the -minimal variant.
+ *
+ * The Adreno GPU stays disabled in this stage (see the .dtsi).
  */
 /dts-v1/;
 
-#include "glymur-hp-omnibook-5-bf1xxx.dtsi"
+#include "mahua-hp-omnibook-5-bf1xxx.dtsi"
 
 / {
 	model = "HP OmniBook 5 Laptop 16-bf1xxx";
-	compatible = "hp,omnibook-5-16-bf1xxx", "qcom,glymur";
+	compatible = "hp,omnibook-5-16-bf1xxx", "qcom,mahua";
 
 	/*
-	 * PMIC GLink on the ADSP: battery and AC (\_SB.PMGK in ACPI). No USB-C
+	 * PMIC GLink (battery, AC, UCSI, RTC; \_SB.PMGK in ACPI) is served by
+	 * the SoCCP, which the boot firmware starts and Linux attaches to
+	 * (remoteproc_soccp, early_boot, enabled in glymur.dtsi). No USB-C
 	 * connectors yet: their PHYs and repeaters are not evidenced.
 	 */
 	pmic-glink {
@@ -24,8 +28,8 @@
 	};
 
 	/*
-	 * eDP panel power: HP's PEP recipe for GPU0 drives GPIO 70 (and 18,
-	 * 119). It is already on from firmware (boot-on).
+	 * eDP panel power: HP's PEP recipe for GPU0 drives GPIO 70 high (and
+	 * 18 high, 119 as edp0_hot). It is already on from firmware (boot-on).
 	 */
 	vreg_edp: regulator-edp {
 		compatible = "regulator-fixed";
@@ -42,14 +46,6 @@
 
 		regulator-boot-on;
 	};
-};
-
-&gpu {
-	status = "okay";
-};
-
-&gmu {
-	status = "okay";
 };
 
 &mdss {
@@ -120,11 +116,11 @@
 	/*
 	 * Allow-list: the minimal set (0-1, 3, 16-17, 32-33, 51, 56-59, 67,
 	 * 92, 116, 146-148, 152-154) plus eDP 18, 70 and 119. Everything
-	 * else is reserved.
+	 * else, up to GPIO 250, is reserved.
 	 */
 	gpio-reserved-ranges = <2 1>, <4 12>, <19 13>, <34 17>, <52 4>,
 			       <60 7>, <68 2>, <71 21>, <93 23>, <117 2>,
-			       <120 26>, <149 3>, <155 95>;
+			       <120 26>, <149 3>, <155 96>;
 
 	edp_bl_en: edp-bl-en-state {
 		pins = "gpio18";

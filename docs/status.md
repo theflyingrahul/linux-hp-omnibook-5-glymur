@@ -29,10 +29,13 @@ Still missing, mostly on the device-tree/remoteproc path:
 - CPU frequency scaling (no `_CPC`) and cluster idle;
 - suspend and the TPM.
 
-**Device tree (2026-09-27):** the owner chose the DT route. HP DTS files
-(`dts/qcom/`, with a minimal and a full variant) and kernel
-`7.3.0-rc2-glymur-2` with the DT boot path built in are staged. The next
-step is the first DT boot. See `docs/device-tree-evidence-2026-09-27.md`.
+**Device tree (2026-09-28):** the owner chose the DT route. A review before
+the first boot corrected the SoC to Mahua (DSDT `SDFE` 0xA8). It also
+disabled the GPU, which msm would have bound into the display device,
+`uart21` and, in the minimal DT, `dispcc`. PERST#/WAKE# are confirmed from
+HP's DSDT. Kernel `7.3.0-rc2-glymur-3` carries the corrected DTBs; the `-2`
+DTBs must not be booted. The next step is the first DT boot. A DT boot has
+no USB, GPU or audio yet. See `docs/device-tree-review-2026-09-28.md`.
 
 The table below is per subsystem. The dated entries after this section are
 history, newest first. A later entry supersedes an earlier one.

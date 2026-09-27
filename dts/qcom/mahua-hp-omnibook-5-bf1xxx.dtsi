@@ -1,19 +1,20 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * HP OmniBook 5 Laptop 16-bf1xxx (Snapdragon X2 Elite X2E84100, "Glymur").
+ * HP OmniBook 5 Laptop 16-bf1xxx (Snapdragon X2 Elite X2E84100, "Mahua").
  *
  * Every board value comes from this machine: HP's DSDT (decoded with
  * scripts/linux/acpi-crs-decode.py), HP's PEP power tables
  * (analyze-acpi-pep.py, parse-bsrc.py on the HP driver pack), the MADT and
- * the Windows device tree. See docs/device-tree-evidence-2026-09-27.md.
- * Qualcomm's glymur.dtsi describes the SoC.
+ * the Windows device tree. See docs/device-tree-review-2026-09-28.md.
+ * Qualcomm's mahua.dtsi describes the SoC.
  *
  * Deliberately conservative:
  *  - no RPMh regulators are declared, so Linux changes no PMIC rail and
  *    every rail stays as HP's firmware left it;
  *  - every TLMM pin that a board file does not use is reserved
- *    (gpio-reserved-ranges, set per .dts), so an unknown pin such as an
- *    EC reset can never be touched.
+ *    (gpio-reserved-ranges, set per .dts and checked by
+ *    scripts/linux/check-dt-gpio-allowlist.py), so an unknown pin such as
+ *    an EC reset can never be touched.
  */
 
 #include <dt-bindings/gpio/gpio.h>
@@ -21,43 +22,16 @@
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/interrupt-controller/irq.h>
 
-#include "glymur.dtsi"
-
 /*
- * X2E84100 is a Glymur die with CPU cluster 2 fused off: the MADT lists 18
- * GICC entries and marks MPIDR 0x20000-0x20500 disabled. Remove that
- * cluster and the thermal zones that cool it; Glymur's other blocks
- * (interconnect, TSENS 6/7, PCIe 3a) stay, unlike on the Mahua die.
+ * The die is Mahua, not a Glymur with a fused cluster. HP's DSDT serves
+ * both dies and selects on \_SB.SDFE, which is 0xA8 here. For 0xA8 it
+ * disables the "CPU Cluster 2" and "QMX2" thermal zones and the cluster 2
+ * limits policy, exactly what mahua.dtsi deletes, and gives GPU0 the
+ * MHID QCOM0FF5, the ID Windows binds on this laptop (0xA1 has GHID
+ * QCOM0F36). mahua.dtsi removes cluster 2, TSENS 6/7 and PCIe 3a and sets
+ * the Mahua interconnect, TLMM and TCSR compatibles.
  */
-/delete-node/ &bwmon_cluster2;
-/delete-node/ &cluster2_pd;
-/delete-node/ &cpu_map_cluster2;
-/delete-node/ &cpu12;
-/delete-node/ &cpu13;
-/delete-node/ &cpu14;
-/delete-node/ &cpu15;
-/delete-node/ &cpu16;
-/delete-node/ &cpu17;
-/delete-node/ &cpu_pd12;
-/delete-node/ &cpu_pd13;
-/delete-node/ &cpu_pd14;
-/delete-node/ &cpu_pd15;
-/delete-node/ &cpu_pd16;
-/delete-node/ &cpu_pd17;
-/delete-node/ &thermal_cpu_2_0_0;
-/delete-node/ &thermal_cpu_2_0_1;
-/delete-node/ &thermal_cpu_2_1_0;
-/delete-node/ &thermal_cpu_2_1_1;
-/delete-node/ &thermal_cpu_2_2_0;
-/delete-node/ &thermal_cpu_2_2_1;
-/delete-node/ &thermal_cpu_2_3_0;
-/delete-node/ &thermal_cpu_2_3_1;
-/delete-node/ &thermal_cpu_2_4_0;
-/delete-node/ &thermal_cpu_2_4_1;
-/delete-node/ &thermal_cpu_2_5_0;
-/delete-node/ &thermal_cpu_2_5_1;
-/delete-node/ &thermal_cpuillc_2_1;
-/delete-node/ &thermal_cpullc_2_0;
+#include "mahua.dtsi"
 
 / {
 	chassis-type = "laptop";
@@ -178,12 +152,16 @@
 };
 
 /*
- * PCIe 4: the QCC2072 Wi-Fi module (17cb:1112, HP 103c:8ef3). PEP drives
- * CLKREQ# GPIO 147. PERST#/WAKE# are not in HP's tables; 146/148 follow
- * the Glymur reference routing that HP's CLKREQ pin matches, confirmed
- * against firmware state by scripts/linux/qcom0f16-snapshot before boot.
- * The module's 3.3 V (GPIO 94) and enables (GPIO 116/117) stay as firmware
- * left them; GPIO 94 and 117 are reserved.
+ * PERST# and WAKE# come from HP's DSDT. The PCIe manager \_SB.QPPX
+ * (QCOM0F96) lists one PERST# GpioIo per root port, PCI0-PCI7 in order:
+ * PCI4 = GPIO 146 and PCI5 = GPIO 152, no pull. PCI4 and PCI5 each carry a
+ * wake GpioInt (edge, active-low, pull-up, wake-capable) on the PDC pins
+ * 384 and 448, which GIO0 maps to GPIO 148 and 154. PEP drives CLKREQ# on
+ * 147 and 153 (function 1, pull-up).
+ *
+ * PCIe 4 (ACPI PCI4, DBI 0x78000000): the QCC2072 Wi-Fi module (17cb:1112,
+ * HP 103c:8ef3). Its 3.3 V (GPIO 94) and enables (GPIO 116/117) stay as
+ * firmware left them; GPIO 94 and 117 are reserved.
  */
 &pcie4 {
 	pinctrl-0 = <&pcie4_default>;
@@ -201,7 +179,7 @@
 	wake-gpios = <&tlmm 148 GPIO_ACTIVE_LOW>;
 };
 
-/* PCIe 5: NVMe (the root filesystem). PEP drives CLKREQ# GPIO 153. */
+/* PCIe 5 (ACPI PCI5, DBI 0x7a000000): NVMe, the root filesystem. */
 &pcie5 {
 	pinctrl-0 = <&pcie5_default>;
 	pinctrl-names = "default";
@@ -291,10 +269,34 @@
 };
 
 /*
+ * The SoC debug UART (glymur.dtsi enables it; GPIO 86/87) is not used on
+ * this laptop's DT boot. Disabled, its pins stay reserved.
+ */
+&uart21 {
+	status = "disabled";
+};
+
+/*
+ * glymur.dtsi enables the Adreno GPU and GMU by default. msm binds an
+ * available GPU into the same DRM device as the display, and the GPU clock
+ * drivers (gpucc-glymur, gxclkctl) are not built yet, so an enabled GPU
+ * would keep the panel dark. The GPU is a later stage.
+ */
+&gpu {
+	status = "disabled";
+};
+
+&gmu {
+	status = "disabled";
+};
+
+/*
  * HP UR15 (QUP_1_SE_6, 4-wire; UART pins 56-59 per HP's
  * BSRC_UART_4Wire_1.bin): QCC2072 Bluetooth (BTH0, QCOM0F6B). Windows runs
  * it at 3.2 Mbaud (qcbluetooth8480.inf BaudRate). BTH0's GpioIo is GPIO
- * 116, the Bluetooth enable (bt-enable on the Glymur reference design).
+ * 116, the Bluetooth enable (bt-enable on the Glymur/Mahua CRD too). With
+ * enable-gpios, hci_qca drives BT_EN itself and needs no regulators for
+ * QCC2072.
  */
 &uart14 {
 	status = "okay";

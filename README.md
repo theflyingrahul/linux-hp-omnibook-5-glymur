@@ -13,9 +13,9 @@ The working project target is:
 The live WMI capture reports the 16-bf1xxx family; the BIOS Main page additionally shows product number `D3ZN3UA#ABA`, confirming the documented D3ZN3UA target family.
 16-bf1xxx is the HP hardware family covered by the service documentation.
 
-If the device-tree route proves appropriate, the proposed board DTS filename is:
-
-    glymur-hp-omnibook-5-bf1xxx.dts
+The board device tree is `dts/qcom/mahua-hp-omnibook-5-bf1xxx.dts`. The SoC is
+the Mahua die, described by Qualcomm's `mahua.dtsi`, which builds on
+`glymur.dtsi`.
 
 ## Project Philosophy
 
@@ -29,11 +29,14 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
-**2026-09-27 (device tree):** a device tree for this laptop, built from its
-ACPI, PEP, driver-pack and Windows evidence, and kernel `7.3.0-rc2-glymur-2`
-(which boots both ACPI and DT) are staged. Before the first DT boot, confirm
-the PCIe PERST#/WAKE# pins with the read-only snapshot module on the running
-SSD install. See `docs/device-tree-evidence-2026-09-27.md`.
+**2026-09-28 (device tree, reviewed):** the review before the first DT boot
+found that the die is Mahua, not Glymur (HP's DSDT `SDFE` 0xA8). It also
+found that the full DT's default-enabled GPU would have kept the display
+dark. The DTS is rebuilt on `mahua.dtsi`, the PCIe PERST#/WAKE# pins are
+confirmed from HP's DSDT, and a GPIO allow-list checker is now part of the
+build. Kernel `7.3.0-rc2-glymur-3` (ACPI and DT) replaces `-2`, whose DTBs
+must not be booted. Next: install `-3` and HP's firmware on the SSD, then
+boot "device tree (full)". See `docs/device-tree-review-2026-09-28.md`.
 
 **2026-09-27 (first boot):** the qcom-next boot kernel (`7.3.0-rc2-glymur`)
 is installed and booted on SSD partition 5, from the USB's GRUB (the SSD's

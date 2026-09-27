@@ -1,5 +1,10 @@
 # HP OmniBook 5 16-bf1xxx Device Tree: Evidence, September 27, 2026
 
+> Corrected by `docs/device-tree-review-2026-09-28.md`. The die is Mahua,
+> not Glymur, so the file names and SoC section below are superseded, and
+> the full DT must keep the GPU disabled. The board values in this document
+> still hold, and the PERST#/WAKE# pins are now confirmed from HP's DSDT.
+
 The owner chose the device-tree route (GPU, audio, USB-C, battery and
 Bluetooth need it). The HP DTS lives in `dts/qcom/`:
 

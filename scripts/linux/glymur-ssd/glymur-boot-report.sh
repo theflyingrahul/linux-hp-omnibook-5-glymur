@@ -66,6 +66,53 @@ run() { printf '$ %s\n' "$*"; "$@" 2>&1; }
     section 'clock'
     run timedatectl show
     ls /sys/class/rtc/ 2>&1
+    if [ -r /proc/device-tree/model ]; then
+        section 'device tree: machine'
+        printf 'model: %s\n' "$(tr -d '\0' </proc/device-tree/model)"
+        printf 'compatible: %s\n' "$(tr '\0' ' ' </proc/device-tree/compatible)"
+        # SMEM socinfo (not the serial number, which stays private).
+        for f in machine family soc_id revision; do
+            [ -r "/sys/devices/soc0/$f" ] && printf 'soc0 %s: %s\n' "$f" "$(cat "/sys/devices/soc0/$f")"
+        done
+        printf 'cpus online: %s\n' "$(cat /sys/devices/system/cpu/online)"
+        for p in /sys/devices/system/cpu/cpufreq/policy*; do
+            [ -d "$p" ] && printf '%s %s cur=%s max=%s\n' "$(basename "$p")" \
+                "$(cat "$p/scaling_driver" 2>/dev/null)" "$(cat "$p/scaling_cur_freq" 2>/dev/null)" \
+                "$(cat "$p/cpuinfo_max_freq" 2>/dev/null)"
+        done
+        section 'device tree: deferred probes and pending sync_state'
+        cat /sys/kernel/debug/devices_deferred 2>&1
+        journalctl -k -b --no-pager | grep -E 'sync_state\(\) pending|deferred probe pending' | head -40
+        section 'device tree: storage and PCIe'
+        run lsblk -o NAME,SIZE,TYPE,FSTYPE,LABEL,MOUNTPOINTS
+        run lspci -nnk
+        section 'device tree: remoteprocs'
+        for r in /sys/class/remoteproc/remoteproc*; do
+            [ -d "$r" ] && printf '%s %s %s %s\n' "$(basename "$r")" "$(cat "$r/name" 2>/dev/null)" \
+                "$(cat "$r/state" 2>/dev/null)" "$(cat "$r/firmware" 2>/dev/null)"
+        done
+        section 'device tree: power supplies, USB-C, RTC'
+        for s in /sys/class/power_supply/*; do
+            [ -d "$s" ] && printf '%s type=%s status=%s capacity=%s online=%s\n' "$(basename "$s")" \
+                "$(cat "$s/type" 2>/dev/null)" "$(cat "$s/status" 2>/dev/null)" \
+                "$(cat "$s/capacity" 2>/dev/null)" "$(cat "$s/online" 2>/dev/null)"
+        done
+        ls /sys/class/typec/ 2>&1
+        section 'device tree: display connectors'
+        for c in /sys/class/drm/card*-*; do
+            [ -d "$c" ] && printf '%s status=%s enabled=%s mode=%s\n' "$(basename "$c")" \
+                "$(cat "$c/status" 2>/dev/null)" "$(cat "$c/enabled" 2>/dev/null)" \
+                "$(head -n 1 "$c/modes" 2>/dev/null)"
+        done
+        cat /sys/class/backlight/*/brightness 2>/dev/null
+        section 'device tree: bluetooth'
+        ls /sys/class/bluetooth/ 2>&1
+        journalctl -k -b --no-pager | grep -iE 'bluetooth|hci_uart|qca' | head -30
+        section 'device tree: power domains (genpd)'
+        head -n 120 /sys/kernel/debug/pm_genpd/pm_genpd_summary 2>&1
+        section 'device tree: SoC driver messages'
+        journalctl -k -b --no-pager | grep -iE 'qcom|pcie|nvme|remoteproc|pmic_glink|msm|dpu|edp|panel|geni|i2c_hid|dispcc|rpmh|interconnect|tsens|pinctrl|gpio|smmu|ath12k|soccp|adsp|cdsp|battmgr|ucsi' | head -300
+    fi
     section 'failed units'
     systemctl --failed --no-legend --no-pager
     section 'kernel warnings and errors (this boot)'
