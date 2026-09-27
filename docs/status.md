@@ -1,5 +1,36 @@
 # Project Status
 
+## Current state (2026-09-27)
+
+These run under the stock Ubuntu 7.0 live kernel with the out-of-tree ACPI
+modules (`scripts/linux/glymur-acpi-input/`):
+
+- ACPI boot without a DTB, with 12 CPUs, NVMe, the right USB-A port and the
+  UVC camera;
+- keyboard, touchpad and touchscreen;
+- Wi-Fi scanning with HP board data;
+- the EC bus over GPI DMA, which brings EC thermal zones, fan RPM and lid
+  events;
+- per-core CPU idle with the BIOS-gated `_OSC` override.
+
+The same logic is now ported into the qcom-next boot kernel
+(`7.3.0-rc2-glymur`), which is built and staged for an Ubuntu root on SSD
+partition 5 but has not been booted yet.
+
+Still missing, mostly on the device-tree/remoteproc path:
+
+- battery, AC and the RTC (PMIC GLink on the ADSP);
+- USB-C;
+- the native GPU;
+- audio and Bluetooth;
+- CPU frequency scaling (no `_CPC`) and cluster idle;
+- suspend and the TPM.
+
+The table below is per subsystem. The dated entries after this section are
+history, newest first. A later entry supersedes an earlier one.
+
+## History
+
 **2026-09-27: qcom-next boot kernel built; Ubuntu root on SSD partition 5 staged.**
 `7.3.0-rc2-glymur` (layered series, board values on the command line) is built
 and staged with an SSD installer and USB GRUB entries; not yet booted. A log
@@ -15,7 +46,8 @@ bus work.** `acpi_idle` uses per-core C1/C4; cluster states stay gated behind
 `PEPI`. IC10 transfers over GPI DMA, and the ACPI thermal zones now read real
 temperatures. See `docs/cpuidle-and-ec-bus-results-2026-09-26.md`.
 
-**2026-09-26, live workstation: EC bus (IC10) GPI DMA test.** An ACPI GPI
+**2026-09-26, live workstation: EC bus (IC10) GPI DMA test** (superseded:
+IC10 bound after the next reboot, see the entry above). An ACPI GPI
 DMA module bound `QGP1`, and its allocate commands completed through the
 GPII interrupt. IC10 did not bind: the live image's `async_tx` claimed every
 channel first, because the driver did not set `DMA_PRIVATE`. That is now
@@ -39,7 +71,8 @@ See `docs/acpi-input-results-2026-09-26.md`.
 (`docs/repository-audit-2026-09-26.md`) corrected the I²C clock analysis
 and replaced RFC patch 0001. A keyboard/touchpad test kit is now staged on
 the installer USB as an optional GRUB entry, "Glymur ACPI keyboard/touchpad
-test (RAM live)"; it has not yet been run. It loads two out-of-tree modules
+test (RAM live)"; it was run twice later that day (see the input-test
+entries above). It loads two out-of-tree modules
 into the stock Ubuntu kernel:
 
 - an ACPI TLMM GPIO driver with PDC pin translation;
@@ -54,12 +87,15 @@ Battery and AC AML read PMIC-GLink fields through the ABD GenericSerialBus
 region (`QCOM1045`), gated by the same `PMGK.LKUP` flag as USB-C. They do not
 use the EC's I²C bus.
 
+### Before the input work (superseded by the entries above)
+
 Ubuntu 26.04.1 ARM64 booted through UEFI/ACPI on 2026-09-15 and 2026-09-25 without a supplied target DTB. The second automated capture confirmed `CONFIG_I2C_QCOM_GENI=m` and a loaded module, but five `QCOM0F10` controllers remained unbound; no I²C adapters or keyboard/touchpad input appeared. Linux started 12 CPUs and enumerated PCI4/WLAN, PCI5/NVMe, two xHCI controllers, the camera, and the right USB-A installer. See `docs/ubuntu-live-boot-results-2026-09-25.md`. An elevated Windows Day-0 metadata capture and ACPICA table capture were completed earlier. Qualcomm's preview validates a separate reference platform; see `docs/qualcomm-preview-review-2026-09-25.md` before applying its boot instructions here.
 
 A September 26 RAM-live whole-system inventory completed all checkpoints and
 powered off without keyboard input. It confirmed the desktop used `simpledrm`
 without a GPU render node; a verified QCC2072 firmware retry reached firmware
-startup but failed to find HP board data, leaving no Wi-Fi interface. The
+startup but failed to find HP board data, leaving no Wi-Fi interface
+(fixed the same day with the HP `board-2.bin`). The
 private capture stays on the installer USB. Its live clock still reports July
 27, so its directory timestamp is not the physical collection date.
 See `docs/system-inventory-results-2026-09-26.md` for the sanitized findings.
@@ -139,7 +175,7 @@ and I²C remain unvalidated; no new boot artifact was made.
 | USB-C port 2 | Timed storage hotplug not detected | Owner repeated the test in the other left port with the same result. Connector routing and cause remain unknown. |
 | USB-C Power Delivery | No Linux Type-C device observed | ACPI `USBC000` reported `status=0`; `/sys/class/typec` and `/sys/class/usb_role` were empty. Negotiation was not tested. |
 | USB-C DisplayPort Alt Mode | Unknown | No Type-C class device appeared; DisplayPort routing was not tested |
-| Wi-Fi | **Working in RAM-live test** (scan only) | Upstream `firmware-2.bin` plus a private HP `board-2.bin` brought up `wlo1`; a scan found 13 BSSs on 2.4, 5, and 6 GHz; no association was attempted. See `docs/acpi-input-results-2026-09-26.md`. Earlier notes: | Windows binds this device to `bdwlan_qcc2072_1p0_ncm820A.elf`; a private `board-2.bin` adds it under the HP name. See `docs/acpi-input-test-2026-09-26.md`. The live-only retry loaded verified upstream `firmware-2.bin` and identified the QCC2072 chip, then failed the `board-2.bin` lookup for PCI `17cb:1112`, HP subsystem `103c:8ef3`, QMI chip 33, board 255. No WLAN interface appeared; a successful bind command did not mean the radio was usable. |
+| Wi-Fi | **Working in RAM-live test** (scan only) | Upstream `firmware-2.bin` plus a private HP `board-2.bin`, built from the `bdwlan_qcc2072_1p0_ncm820A.elf` that Windows binds, brought up `wlo1`. A scan found 13 BSSs on 2.4, 5 and 6 GHz; association is untested. See `docs/acpi-input-results-2026-09-26.md`. Before the HP board data, the `board-2.bin` lookup failed for PCI `17cb:1112`, subsystem `103c:8ef3` (`docs/acpi-input-test-2026-09-26.md`). |
 | Bluetooth | No controller observed in tested boot | Qualcomm FastConnect C7700/NCM820A maps through ACPI `QCOM0F6B`/`QCOM0FEA`; `/sys/class/bluetooth` was empty. |
 | speakers | No ALSA soundcard in tested boot | `aplay` and `/proc/asound/cards` found none. |
 | headphone jack | Physical jack observed | Linux audio behavior untested |
@@ -154,4 +190,4 @@ and I²C remain unvalidated; no new boot artifact was made.
 | ADSP | Unknown | |
 | CDSP | Unknown | |
 | NPU | Unknown | |
-| firmware loading | Partial | Verified upstream QCC2072 firmware started in RAM; the HP-specific board-data lookup failed. Other subsystem firmware paths remain untested. |
+| firmware loading | Partial | QCC2072 Wi-Fi firmware and HP board data load. ADSP, CDSP and GPU firmware need the device-tree/remoteproc path and are untested. |
