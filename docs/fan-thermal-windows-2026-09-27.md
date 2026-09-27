@@ -78,11 +78,44 @@ compared with was also on battery. Protocol: 60 s idle, 60 s with all 12 CPUs bu
 - These zones are identified by ACPI path from now on: the Linux profiler
   now labels each `acpitz` zone with it (`\_SB_.TZ31`).
 
+## Results (Linux, qcom-next boot kernel, SSD install, 2026-09-27)
+
+Run: `scripts/linux/fan-thermal-profile.sh`, on battery, same protocol (60 s
+idle, 60 s all-core load, 120 s recovery, 5 s interval). Raw data is private
+in `.work/linux-fan-profile-20260927T141943.tsv`. Full first-boot context
+(what else was working) is in `docs/qcom-next-first-boot-2026-09-27.md`.
+
+| Zone | Idle | Load peak | End of recovery |
+|---|---|---|---|
+| TZ31 (EC thermistor 1) | 42.8 °C | 53.8 °C | 44.8 °C |
+| TZ32 (EC thermistor 2) | 43.8 °C | 62.8 °C | 46.8 °C |
+| TZ33 (EC thermistor 3) | 43.8 °C | 56.8 °C | 46.8 °C |
+| TZ34 (EC thermistor 4) | 40.8 °C | 40.8 °C | 40.8 °C |
+| Fan | 2501–2546 RPM | 4408 RPM (still rising into recovery, peak 4428 at t=129s) | 2800 RPM (not back to the idle floor within 120 s) |
+
+CPU frequency scaling and cluster idle are still absent (no `_CPC` table),
+unchanged from the stock-Ubuntu run.
+
+## Three-way comparison (stock Ubuntu 7.0 vs qcom-next SSD boot, both Linux, both battery; Windows for reference)
+
+| | Linux (stock 7.0, 09-26) | Linux (qcom-next, SSD, 09-27) | Windows |
+|---|---|---|---|
+| EC thermistors, idle | about 43 °C | 40.8–43.8 °C | 35–40 °C |
+| EC thermistors, load peak | about 59 °C | 40.8–62.8 °C | 38–57 °C |
+| Fan | 2482 → 4028 → 2776 RPM | 2501–2546 → 4408 → 2800 RPM | not exposed |
+| CPU frequency | fixed (no `_CPC`/`_PSS`) | fixed (no `_CPC`/`_PSS`) | 355 MHz idle, 3350 MHz load |
+| CPU idle | core C1/C4, `_OSC` fix | `LPI-0`/`LPI-1` in use | full PEP-managed idle |
+
+The qcom-next boot kernel tracks the stock-Ubuntu run closely on EC
+thermal/fan behavior — same EC driver path, same firmware fan curve — with a
+slightly higher load peak (TZ32 62.8 °C vs 59 °C reported previously) and a
+correspondingly higher fan ceiling (4408 vs 4028 RPM). Neither run's fan
+returned to its idle floor within the 120 s recovery window. CPU frequency
+scaling and cluster idle gaps are unchanged; both still need the
+device-tree path.
+
 ## Next
 
-- Run `scripts/linux/fan-thermal-profile.sh` on the SSD install (qcom-next).
-  The Linux 2026-09-26 TSV is imported from the USB persistence by the SSD
-  installer, for a row-by-row comparison.
 - Optionally repeat the Windows run with the extended script, once on
   battery and once on AC, to separate the thermal passive limit from the
   battery power policy. Keep the Linux runs on the same power source; Linux

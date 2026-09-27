@@ -13,9 +13,10 @@ modules (`scripts/linux/glymur-acpi-input/`):
   events;
 - per-core CPU idle with the BIOS-gated `_OSC` override.
 
-The same logic is now ported into the qcom-next boot kernel
-(`7.3.0-rc2-glymur`), which is built and staged for an Ubuntu root on SSD
-partition 5 but has not been booted yet.
+The same logic is now confirmed on the qcom-next boot kernel
+(`7.3.0-rc2-glymur`), first booted from the Ubuntu root on SSD partition 5:
+input, the EC bus/thermal/fan, and CPU idle all carry over, and Wi-Fi now
+fully associates (not just scans).
 
 Still missing, mostly on the device-tree/remoteproc path:
 
@@ -30,6 +31,19 @@ The table below is per subsystem. The dated entries after this section are
 history, newest first. A later entry supersedes an earlier one.
 
 ## History
+
+**2026-09-27: first boot of the qcom-next kernel on the SSD install.**
+Input, the EC bus/thermal zones/fan, and CPU idle all work as they did
+under stock Ubuntu, entirely from in-kernel drivers driven by the board
+command line (no out-of-tree modules). Wi-Fi now fully associates (6 GHz,
+HE, 160 MHz), beyond the previous scanning-only result. Still absent:
+USB-C, native GPU, Bluetooth, audio, battery/AC/RTC, TPM, CPU frequency
+scaling, suspend (untested). New issue found: `chrony`'s RTC poll against
+`acpi-tad` retries without backoff, flooding the journal with ACPI
+`GenericSerialBus`-handler errors (hundreds/sec) until PMIC GLink lands;
+not yet fixed. The fan/thermal profile closely tracks the stock-Ubuntu
+run. See `docs/qcom-next-first-boot-2026-09-27.md` and
+`docs/fan-thermal-windows-2026-09-27.md`.
 
 **2026-09-27: qcom-next boot kernel built; Ubuntu root on SSD partition 5 staged.**
 `7.3.0-rc2-glymur` (layered series, board values on the command line) is built
