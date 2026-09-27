@@ -1,172 +1,61 @@
-diff -ruN a/drivers/dma/qcom/gpi.c b/drivers/dma/qcom/gpi.c
---- a/drivers/dma/qcom/gpi.c	2026-09-26 22:15:19.780949303 +0000
-+++ b/drivers/dma/qcom/gpi.c	2026-09-26 22:15:20.723997182 +0000
-@@ -6,6 +6,7 @@
-  */
+From a44580e0dd0178de53c9923f482218693237ca29 Mon Sep 17 00:00:00 2001
+From: Rahul Pon <theflyingrahul@gmail.com>
+Date: Sat, 26 Sep 2026 15:33:46 -0700
+Subject: [PATCH 3/3] i2c: qcom-geni: support firmware-owned ACPI controllers
+ (QCOM0F10)
+
+On Snapdragon X2 (Glymur) ACPI laptops the GENI I2C controllers are
+top-level ACPI devices (QCOM0F10) with no GENI wrapper parent and no clock
+provider: firmware leaves each serial engine clocked and configured. The
+existing ACPI path cannot bind them. It reaches clk_get_rate() or the OPP
+core with an absent clock, and dereferences the missing wrapper in
+geni_se_get_tx_fifo_depth().
+
+Add a firmware-owned descriptor that:
+ - takes SCL timing from the controller's CLKD package (rows of
+   reserved, source kHz, bus kHz, divider, cycle, high, low), falling back
+   to the 19.2 MHz table;
+ - uses the slowest ConnectionSpeed of the ACPI children when there is no
+   clock-frequency property;
+ - binds only when firmware left an I2C protocol engine with its serial
+   clock enabled, and never loads SE firmware;
+ - reads the FIFO depth without the wrapper's QUP version, refusing an
+   ambiguous value;
+ - finds the GPI engine through _DEP when firmware left the engine in GSI
+   mode, derives the SE index from the MMIO base, and maps GPI buffers
+   against the engine;
+ - otherwise uses FIFO transfers only.
+
+Tested on an HP OmniBook 5 16-bf1xxx: keyboard, touchpad and touchscreen
+(i2c-hid) and the EC bus over GPI DMA.
+---
+ drivers/i2c/busses/Kconfig         |   1 +
+ drivers/i2c/busses/i2c-qcom-geni.c | 208 +++++++++++++++++++++++++++--
+ 2 files changed, 198 insertions(+), 11 deletions(-)
+
+diff --git a/drivers/i2c/busses/Kconfig b/drivers/i2c/busses/Kconfig
+index 2e18238e0..f930c93a0 100644
+--- a/drivers/i2c/busses/Kconfig
++++ b/drivers/i2c/busses/Kconfig
+@@ -1061,6 +1061,7 @@ config I2C_QCOM_GENI
+ 	tristate "Qualcomm GENI based I2C controller"
+ 	depends on ARCH_QCOM || COMPILE_TEST
+ 	depends on QCOM_GENI_SE
++	depends on QCOM_GPI_DMA || !QCOM_GPI_DMA
+ 	help
+ 	  This driver supports GENI serial engine based I2C controller in
+ 	  master mode on the Qualcomm Technologies Inc.'s SoCs. If you say
+diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
+index bae9863cb..56af17de0 100644
+--- a/drivers/i2c/busses/i2c-qcom-geni.c
++++ b/drivers/i2c/busses/i2c-qcom-geni.c
+@@ -4,11 +4,13 @@
+ #define CREATE_TRACE_POINTS
+ #include <trace/events/qcom_geni_i2c.h>
  
- #include <dt-bindings/dma/qcom-gpi.h>
-+#include <linux/acpi.h>
- #include <linux/bitfield.h>
- #include <linux/dma-mapping.h>
- #include <linux/dmaengine.h>
-@@ -2201,6 +2202,82 @@
- 	return dma_get_slave_channel(&gchan->vc.chan);
- }
- 
-+/*
-+ * ACPI (Snapdragon X2 Glymur, QCOM0F88): _CRS describes only the GPIIs that
-+ * belong to the application EE, one interrupt per GPII in order, and the
-+ * memory window starts @window_skip bytes into the GPI block.
-+ */
-+struct gpi_acpi_data {
-+	u32 ee_offset;
-+	u32 window_skip;
-+};
-+
-+static const struct gpi_acpi_data gpi_acpi_glymur = {
-+	.ee_offset = 0x10000,
-+	.window_skip = 0x4000,
-+};
-+
-+static struct platform_driver gpi_driver;
-+static DEFINE_MUTEX(gpi_acpi_lock);
-+
-+/**
-+ * gpi_acpi_request_chan() - request a channel of an ACPI-described GPI engine
-+ * @dev: the GPI engine device (for example found through the client's _DEP)
-+ * @chid: 0 for TX, 1 for RX
-+ * @seid: serial engine index within the QUP
-+ * @protocol: QCOM_GPI_* protocol
-+ *
-+ * ACPI has no equivalent of the DT "dmas" property for GPI; this performs the
-+ * same lookup as the DT translation.
-+ *
-+ * Return: the channel, or an ERR_PTR (-EPROBE_DEFER until the engine binds).
-+ */
-+struct dma_chan *gpi_acpi_request_chan(struct device *dev, u32 chid, u32 seid,
-+				       u32 protocol)
-+{
-+	struct of_phandle_args args = {
-+		.args_count = 3,
-+		.args = { chid, seid, protocol },
-+	};
-+	struct of_dma ofdma = {};
-+	struct dma_chan *chan;
-+
-+	if (dev->driver != &gpi_driver.driver || !dev_get_drvdata(dev))
-+		return ERR_PTR(-EPROBE_DEFER);
-+
-+	ofdma.of_dma_data = dev_get_drvdata(dev);
-+	mutex_lock(&gpi_acpi_lock);
-+	chan = gpi_of_dma_xlate(&args, &ofdma);
-+	mutex_unlock(&gpi_acpi_lock);
-+
-+	return chan ?: ERR_PTR(-EBUSY);
-+}
-+EXPORT_SYMBOL_GPL(gpi_acpi_request_chan);
-+
-+static int gpi_acpi_init(struct platform_device *pdev, struct gpi_dev *gpi_dev,
-+			 u32 *ee_offset)
-+{
-+	const struct gpi_acpi_data *data = device_get_match_data(&pdev->dev);
-+	int nirq;
-+
-+	if (!data)
-+		return -ENODEV;
-+	if ((gpi_dev->res->start & 0xffff) != data->window_skip)
-+		return dev_err_probe(&pdev->dev, -ENODEV,
-+				     "unexpected ACPI window %pR\n", gpi_dev->res);
-+
-+	nirq = platform_irq_count(pdev);
-+	if (nirq < 0)
-+		return nirq;
-+	if (!nirq || nirq > 16)
-+		return dev_err_probe(&pdev->dev, -ENODEV, "%d GPII interrupts\n", nirq);
-+
-+	gpi_dev->max_gpii = nirq;
-+	gpi_dev->gpii_mask = GENMASK(nirq - 1, 0);
-+	*ee_offset = data->ee_offset + data->window_skip;
-+	return 0;
-+}
-+
- static int gpi_probe(struct platform_device *pdev)
- {
- 	struct gpi_dev *gpi_dev;
-@@ -2218,21 +2295,27 @@
- 		return PTR_ERR(gpi_dev->regs);
- 	gpi_dev->ee_base = gpi_dev->regs;
- 
--	ret = of_property_read_u32(gpi_dev->dev->of_node, "dma-channels",
--				   &gpi_dev->max_gpii);
--	if (ret) {
--		dev_err(gpi_dev->dev, "missing 'max-no-gpii' DT node\n");
--		return ret;
--	}
-+	if (has_acpi_companion(&pdev->dev)) {
-+		ret = gpi_acpi_init(pdev, gpi_dev, &ee_offset);
-+		if (ret)
-+			return ret;
-+	} else {
-+		ret = of_property_read_u32(gpi_dev->dev->of_node, "dma-channels",
-+					   &gpi_dev->max_gpii);
-+		if (ret) {
-+			dev_err(gpi_dev->dev, "missing 'max-no-gpii' DT node\n");
-+			return ret;
-+		}
- 
--	ret = of_property_read_u32(gpi_dev->dev->of_node, "dma-channel-mask",
--				   &gpi_dev->gpii_mask);
--	if (ret) {
--		dev_err(gpi_dev->dev, "missing 'gpii-mask' DT node\n");
--		return ret;
--	}
-+		ret = of_property_read_u32(gpi_dev->dev->of_node, "dma-channel-mask",
-+					   &gpi_dev->gpii_mask);
-+		if (ret) {
-+			dev_err(gpi_dev->dev, "missing 'gpii-mask' DT node\n");
-+			return ret;
-+		}
- 
--	ee_offset = (uintptr_t)device_get_match_data(gpi_dev->dev);
-+		ee_offset = (uintptr_t)device_get_match_data(gpi_dev->dev);
-+	}
- 	gpi_dev->ee_base = gpi_dev->ee_base - ee_offset;
- 
- 	gpi_dev->ev_factor = EV_FACTOR;
-@@ -2328,6 +2411,10 @@
- 		return ret;
- 	}
- 
-+	/* ACPI clients use gpi_acpi_request_chan() instead. */
-+	if (!gpi_dev->dev->of_node)
-+		return 0;
-+
- 	ret = of_dma_controller_register(gpi_dev->dev->of_node,
- 					 gpi_of_dma_xlate, gpi_dev);
- 	if (ret) {
-@@ -2355,11 +2442,18 @@
- };
- MODULE_DEVICE_TABLE(of, gpi_of_match);
- 
-+static const struct acpi_device_id gpi_acpi_match[] = {
-+	{ "QCOM0F88", (kernel_ulong_t)&gpi_acpi_glymur },
-+	{ }
-+};
-+MODULE_DEVICE_TABLE(acpi, gpi_acpi_match);
-+
- static struct platform_driver gpi_driver = {
- 	.probe = gpi_probe,
- 	.driver = {
- 		.name = KBUILD_MODNAME,
- 		.of_match_table = gpi_of_match,
-+		.acpi_match_table = gpi_acpi_match,
- 	},
- };
- 
-diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
---- a/drivers/i2c/busses/i2c-qcom-geni.c	2026-09-26 22:15:19.286948887 +0000
-+++ b/drivers/i2c/busses/i2c-qcom-geni.c	2026-09-26 22:15:20.722555826 +0000
-@@ -9,6 +9,7 @@
++#include <dt-bindings/dma/qcom-gpi.h>
+ #include <linux/acpi.h>
+ #include <linux/clk.h>
  #include <linux/dmaengine.h>
  #include <linux/dma-mapping.h>
  #include <linux/dma/qcom-gpi-dma.h>
@@ -174,7 +63,7 @@ diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-gen
  #include <linux/err.h>
  #include <linux/i2c.h>
  #include <linux/interrupt.h>
-@@ -82,7 +83,13 @@
+@@ -82,7 +84,13 @@ enum geni_i2c_err_code {
  #define XFER_TIMEOUT		HZ
  #define RST_TIMEOUT		HZ
  
@@ -188,7 +77,7 @@ diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-gen
  	bool no_dma_support;
  	unsigned int tx_fifo_depth;
  	int (*resources_init)(struct geni_se *se);
-@@ -194,6 +201,96 @@
+@@ -194,6 +202,96 @@ static const struct geni_i2c_clk_fld geni_i2c_clk_map_32mhz[] = {
  	{}
  };
  
@@ -285,7 +174,7 @@ diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-gen
  static int geni_i2c_clk_map_idx(struct geni_i2c_dev *gi2c)
  {
  	const struct geni_i2c_clk_fld *itr;
-@@ -234,6 +331,15 @@
+@@ -234,6 +332,15 @@ static int qcom_geni_i2c_conf(struct geni_se *se, unsigned long freq)
  	return 0;
  }
  
@@ -301,7 +190,7 @@ diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-gen
  static void geni_i2c_err_misc(struct geni_i2c_dev *gi2c)
  {
  	u32 m_cmd = readl_relaxed(gi2c->se.base + SE_GENI_M_CMD0);
-@@ -589,12 +695,12 @@
+@@ -589,12 +696,12 @@ static void geni_i2c_gpi_unmap(struct geni_i2c_dev *gi2c, struct i2c_msg *msg,
  			       void *rx_buf, dma_addr_t rx_addr)
  {
  	if (tx_buf) {
@@ -316,7 +205,7 @@ diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-gen
  		i2c_put_dma_safe_msg_buf(rx_buf, msg, !gi2c->err);
  	}
  }
-@@ -705,9 +811,9 @@
+@@ -705,9 +812,9 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
  	else
  		map_dirn = DMA_FROM_DEVICE;
  
@@ -328,7 +217,7 @@ diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-gen
  		i2c_put_dma_safe_msg_buf(dma_buf, &msgs[msg_idx], false);
  		ret = -ENOMEM;
  		goto out;
-@@ -798,7 +904,7 @@
+@@ -798,7 +905,7 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
  err_config:
  	/* Avoid DMA unmap as the write operation skipped DMA mapping */
  	if (dma_buf) {
@@ -337,7 +226,7 @@ diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-gen
  				 msgs[msg_idx].len, map_dirn);
  		i2c_put_dma_safe_msg_buf(dma_buf, &msgs[msg_idx], false);
  	}
-@@ -1023,6 +1129,33 @@
+@@ -1023,6 +1130,33 @@ static int setup_gpi_dma(struct geni_i2c_dev *gi2c)
  	int ret;
  
  	geni_se_select_mode(&gi2c->se, GENI_GPI_DMA);
@@ -371,7 +260,7 @@ diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-gen
  	gi2c->tx_c = dma_request_chan(gi2c->se.dev, "tx");
  	if (IS_ERR(gi2c->tx_c)) {
  		ret = dev_err_probe(gi2c->se.dev, PTR_ERR(gi2c->tx_c),
-@@ -1042,6 +1175,7 @@
+@@ -1042,6 +1176,7 @@ static int setup_gpi_dma(struct geni_i2c_dev *gi2c)
  
  err_rx:
  	dma_release_channel(gi2c->tx_c);
@@ -379,7 +268,7 @@ diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-gen
  err_tx:
  	return ret;
  }
-@@ -1059,6 +1193,14 @@
+@@ -1059,6 +1194,14 @@ static int geni_i2c_init(struct geni_i2c_dev *gi2c)
  	}
  
  	proto = geni_se_read_proto(&gi2c->se);
@@ -394,7 +283,7 @@ diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-gen
  	if (proto == GENI_SE_INVALID_PROTO) {
  		ret = geni_load_se_firmware(&gi2c->se, GENI_SE_I2C);
  		if (ret) {
-@@ -1094,7 +1236,21 @@
+@@ -1094,7 +1237,21 @@ static int geni_i2c_init(struct geni_i2c_dev *gi2c)
  			dev_err_probe(gi2c->se.dev, -EINVAL,
  				      "I2C sharing not supported in non GSI mode\n");
  
@@ -417,7 +306,7 @@ diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-gen
  
  		/* I2C Master Hub Serial Elements doesn't have the HW_PARAM_0 register */
  		if (!tx_depth && gi2c->se.core_clk)
-@@ -1137,6 +1293,20 @@
+@@ -1137,6 +1294,20 @@ static int geni_i2c_resources_init(struct geni_se *se)
  				  Bps_to_icc(gi2c->clk_freq_out));
  }
  
@@ -438,7 +327,7 @@ diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-gen
  static int geni_i2c_probe(struct platform_device *pdev)
  {
  	struct geni_i2c_dev *gi2c;
-@@ -1147,18 +1317,26 @@
+@@ -1147,18 +1318,26 @@ static int geni_i2c_probe(struct platform_device *pdev)
  	if (!gi2c)
  		return -ENOMEM;
  
@@ -470,7 +359,7 @@ diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-gen
  	if (ret) {
  		dev_info(dev, "Bus frequency not specified, default to 100kHz.\n");
  		gi2c->clk_freq_out = I2C_MAX_STANDARD_MODE_FREQ;
-@@ -1332,6 +1510,12 @@
+@@ -1332,6 +1511,12 @@ static const struct geni_i2c_desc i2c_master_hub = {
  	.power_off = geni_se_resources_deactivate,
  };
  
@@ -483,7 +372,7 @@ diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-gen
  static const struct geni_i2c_desc sa8255p_geni_i2c = {
  	.resources_init = geni_se_domain_attach,
  	.set_rate = geni_se_set_perf_opp,
-@@ -1341,6 +1525,7 @@
+@@ -1341,6 +1526,7 @@ static const struct geni_i2c_desc sa8255p_geni_i2c = {
  static const struct acpi_device_id geni_i2c_acpi_match[] = {
  	{ "QCOM0220", (kernel_ulong_t)&geni_i2c},
  	{ "QCOM0411", (kernel_ulong_t)&geni_i2c},
@@ -491,46 +380,3 @@ diff -ruN a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-gen
  	{ }
  };
  MODULE_DEVICE_TABLE(acpi, geni_i2c_acpi_match);
-diff -ruN a/drivers/i2c/busses/Kconfig b/drivers/i2c/busses/Kconfig
---- a/drivers/i2c/busses/Kconfig	2026-09-26 22:15:20.718950094 +0000
-+++ b/drivers/i2c/busses/Kconfig	2026-09-26 22:15:20.724997756 +0000
-@@ -1061,6 +1061,7 @@
- 	tristate "Qualcomm GENI based I2C controller"
- 	depends on ARCH_QCOM || COMPILE_TEST
- 	depends on QCOM_GENI_SE
-+	depends on QCOM_GPI_DMA || !QCOM_GPI_DMA
- 	help
- 	  This driver supports GENI serial engine based I2C controller in
- 	  master mode on the Qualcomm Technologies Inc.'s SoCs. If you say
-diff -ruN a/include/linux/dma/qcom-gpi-dma.h b/include/linux/dma/qcom-gpi-dma.h
---- a/include/linux/dma/qcom-gpi-dma.h	2026-09-26 22:15:20.245634070 +0000
-+++ b/include/linux/dma/qcom-gpi-dma.h	2026-09-26 22:15:20.737050370 +0000
-@@ -7,6 +7,9 @@
- #ifndef QCOM_GPI_DMA_H
- #define QCOM_GPI_DMA_H
- 
-+#include <linux/err.h>
-+#include <linux/types.h>
-+
- /**
-  * enum spi_transfer_cmd - spi transfer commands
-  * @SPI_TX: SPI peripheral TX command
-@@ -101,4 +104,18 @@
- 	enum gpi_lock_action lock_action;
- };
- 
-+struct device;
-+struct dma_chan;
-+
-+#if IS_ENABLED(CONFIG_QCOM_GPI_DMA)
-+struct dma_chan *gpi_acpi_request_chan(struct device *dev, u32 chid, u32 seid,
-+				       u32 protocol);
-+#else
-+static inline struct dma_chan *gpi_acpi_request_chan(struct device *dev, u32 chid,
-+						     u32 seid, u32 protocol)
-+{
-+	return ERR_PTR(-ENODEV);
-+}
-+#endif
-+
- #endif /* QCOM_GPI_DMA_H */

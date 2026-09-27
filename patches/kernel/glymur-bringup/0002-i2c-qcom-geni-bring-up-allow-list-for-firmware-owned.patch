@@ -1,0 +1,63 @@
+From fce7d3ac193059b0a911c04ac8288bb04262a1b6 Mon Sep 17 00:00:00 2001
+From: Rahul Pon <theflyingrahul@gmail.com>
+Date: Sat, 26 Sep 2026 15:33:47 -0700
+Subject: [PATCH 2/2] i2c: qcom-geni: bring-up allow-list for firmware-owned
+ controllers
+
+Firmware-owned (ACPI) GENI controllers are only bound when their MMIO base
+is listed in the i2c_qcom_geni.acpi_buses parameter; the default binds
+none. This keeps untested serial engines (whose clocks the OS cannot see or
+enable) from being probed while a board is brought up.
+
+Not an upstream candidate: board-specific values belong to the boot
+configuration.
+---
+ drivers/i2c/busses/i2c-qcom-geni.c | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+
+diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
+index 56af17de0..d554a939a 100644
+--- a/drivers/i2c/busses/i2c-qcom-geni.c
++++ b/drivers/i2c/busses/i2c-qcom-geni.c
+@@ -1294,6 +1294,27 @@ static int geni_i2c_resources_init(struct geni_se *se)
+ 				  Bps_to_icc(gi2c->clk_freq_out));
+ }
+ 
++/*
++ * Bring-up safety: firmware-owned (ACPI) controllers bind only when their MMIO
++ * base is listed in i2c_qcom_geni.acpi_buses. The default binds none; the
++ * board's boot configuration lists the controllers proven on that board.
++ */
++static char acpi_buses[96] = "";
++module_param_string(acpi_buses, acpi_buses, sizeof(acpi_buses), 0644);
++MODULE_PARM_DESC(acpi_buses, "MMIO bases of firmware-owned controllers to bind");
++
++static bool geni_i2c_acpi_bus_allowed(resource_size_t start)
++{
++	char list[sizeof(acpi_buses)], *cursor = list, *token;
++	unsigned long base;
++
++	strscpy(list, acpi_buses, sizeof(list));
++	while ((token = strsep(&cursor, ",")) != NULL)
++		if (*token && !kstrtoul(strim(token), 0, &base) && base == start)
++			return true;
++	return false;
++}
++
+ static int geni_i2c_fw_resources_init(struct geni_se *se)
+ {
+ 	struct geni_i2c_dev *gi2c = dev_get_drvdata(se->dev);
+@@ -1322,6 +1343,13 @@ static int geni_i2c_probe(struct platform_device *pdev)
+ 	if (!gi2c->dev_data)
+ 		return -EINVAL;
+ 
++	if (gi2c->dev_data->fw_owned) {
++		struct resource *res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
++
++		if (!res || !geni_i2c_acpi_bus_allowed(res->start))
++			return -ENODEV;
++	}
++
+ 	gi2c->se.dev = dev;
+ 	/* A top-level ACPI device's parent is not a GENI wrapper. */
+ 	if (!gi2c->dev_data->fw_owned)
