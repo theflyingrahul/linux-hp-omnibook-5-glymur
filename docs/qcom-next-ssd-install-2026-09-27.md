@@ -66,6 +66,30 @@ changed. `scripts/linux/glymur-ssd/`:
       SSH/GPG keys, keyrings, app configuration) are never copied. Windows
       cannot read that partition: `wsl --mount` does not support USB flash
       drives, and a failed attempt leaves the disk offline in Windows.
+- **End-to-end test (WSL):** the installer was run against a 40 GB
+  loop-backed image using the USB's real kit files: the squashfs layers,
+  kernel, repository bundle, firmware and checksums. Only the NVMe
+  identity checks and the password prompt were stubbed; WSL's squashfs
+  lacks xz, so the layers were unpacked with `unsquashfs` and stacked the
+  same way. It completes in about 4.5 minutes and uses 7.8 GB. The test
+  found and fixed:
+    - an abort at the end when no `casper-rw` partition exists (`blkid`
+      exits 2 under `pipefail`);
+    - missing `git`: the desktop image lacks it, so the kit carries `git`,
+      `git-man` and `liberror-perl` (Ubuntu 26.04 arm64 archive, about
+      5.4 MB) and installs them offline;
+    - the kernel unpacks on the target filesystem instead of the live
+      session's `/run` tmpfs (582 MB of modules).
+
+  Verified in the result:
+    - `/lib`, `/bin` and `/sbin` are still symlinks;
+    - `depmod -e` reports no unresolved symbols;
+    - the repository is a clean checkout with a working git;
+    - the masks, diversion, hold, report service, firmware and user groups
+      are in place.
+- The image also contains Ubuntu's own `7.0.0-30-generic` kernel (desktop
+  meta-packages). It stays installed but unused: only the USB's GRUB
+  entries boot this root, and they load the qcom-next kernel.
 - `glymur-boot-report.sh`, installed as `glymur-boot-report.service`,
   writes a bring-up report 60 s after every boot to
   `/var/log/glymur/boot-*.txt`:

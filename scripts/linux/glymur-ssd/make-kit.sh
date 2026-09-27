@@ -13,7 +13,8 @@ set -euo pipefail
 # Usage (repo root, Git Bash or Linux):
 #   scripts/linux/glymur-ssd/make-kit.sh <glymur-kernel-*.tar.gz> <partition-guid> [out-dir]
 # The partition GUID and the output are private: keep them in .work/.
-# Env: DSDT_FIX_DIR (default .work/dsdt-osc-fix-F.06).
+# Env: DSDT_FIX_DIR (default .work/dsdt-osc-fix-F.06), DEBS_DIR
+# (default .work/ssd-debs: git, git-man, liberror-perl .deb files).
 
 KERNEL_TAR="${1:?usage: make-kit.sh <kernel-tarball> <partition-guid> [out-dir]}"
 GUID="$(printf '%s' "${2:?usage: make-kit.sh <kernel-tarball> <partition-guid> [out-dir]}" |
@@ -23,6 +24,7 @@ REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
 HERE="$REPO/scripts/linux/glymur-ssd"
 BOARD="$REPO/boards/hp-omnibook-5-16-bf1xxx"
 DSDT_FIX_DIR="${DSDT_FIX_DIR:-$REPO/.work/dsdt-osc-fix-F.06}"
+DEBS_DIR="${DEBS_DIR:-$REPO/.work/ssd-debs}"
 
 [[ "$GUID" =~ ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$ ]] ||
     { echo "not a partition GUID: $GUID" >&2; exit 1; }
@@ -43,8 +45,17 @@ mkdir -p "$OUT/glymur-tools/ssd" "$OUT/glymur-boot" "$OUT/glymur-tools/acpi-over
 
 echo "kernel $KREL, partition $GUID, BIOS gate $BIOS"
 cp "$HERE/install-ssd-root.sh" "$HERE/glymur-boot-report.sh" "$KERNEL_TAR" "$OUT/glymur-tools/ssd/"
+# git and its two missing dependencies, fetched on an Ubuntu 26.04 arm64
+# host with: apt-get download git git-man liberror-perl
+if compgen -G "$DEBS_DIR/*.deb" >/dev/null; then
+    mkdir -p "$OUT/glymur-tools/ssd/debs"
+    cp "$DEBS_DIR"/*.deb "$OUT/glymur-tools/ssd/debs/"
+else
+    echo "note: no .deb files in $DEBS_DIR; the SSD install will lack git"
+fi
 (cd "$OUT/glymur-tools/ssd" &&
-    sha256sum install-ssd-root.sh glymur-boot-report.sh "$(basename "$KERNEL_TAR")" >SHA256SUMS)
+    sha256sum install-ssd-root.sh glymur-boot-report.sh "$(basename "$KERNEL_TAR")" \
+        $(ls debs/*.deb 2>/dev/null) >SHA256SUMS)
 # One command for the live session, with this machine's partition filled in.
 cat >"$OUT/glymur-setup-ssd.sh" <<EOF
 #!/usr/bin/env bash

@@ -163,14 +163,16 @@ say "Installing the kernel modules and Wi-Fi firmware"
 # aside and copy into usr/lib.
 LIBDIR="$TARGET/usr/lib"
 [ -d "$LIBDIR" ] && [ -L "$TARGET/lib" ] || die 'target is not merged-/usr; refusing to guess'
-KSTAGE=/run/glymur-kernel
+# Unpack on the target filesystem itself: the modules are too large for the
+# live session's /run tmpfs, and a same-filesystem mv is instant.
+KSTAGE="$TARGET/var/tmp/glymur-kernel"
 rm -rf "$KSTAGE" && mkdir -p "$KSTAGE"
 tar -xzf "$KERNEL_TAR" -C "$KSTAGE"
 KREL="$(ls "$KSTAGE/lib/modules" | grep -- '-glymur$' | head -n 1)"
 [ -n "$KREL" ] || die 'kernel modules missing from the kernel tarball'
 rm -f "$KSTAGE/lib/modules/$KREL/build" "$KSTAGE/lib/modules/$KREL/source"
 rm -rf "$LIBDIR/modules/$KREL"
-cp -a "$KSTAGE/lib/modules/$KREL" "$LIBDIR/modules/"
+mv "$KSTAGE/lib/modules/$KREL" "$LIBDIR/modules/"
 mkdir -p "$TARGET/boot"
 cp "$KSTAGE/Image" "$TARGET/boot/vmlinuz-$KREL"
 cp "$KSTAGE/.config" "$TARGET/boot/config-$KREL"
@@ -221,6 +223,16 @@ case "$NEWUSER" in ''|*[!a-z0-9_-]*) die 'invalid username' ;; esac
 mount --bind /dev "$TARGET/dev"
 mount -t proc proc "$TARGET/proc"
 mount -t sysfs sys "$TARGET/sys"
+# The desktop image has no git; the kit carries git, git-man and
+# liberror-perl from the Ubuntu 26.04 arm64 archive (checked by SHA256SUMS).
+if compgen -G "$HERE/debs/*.deb" >/dev/null; then
+    say 'Installing git from the kit (offline)'
+    mkdir -p "$TARGET/var/tmp/glymur-debs"
+    cp "$HERE"/debs/*.deb "$TARGET/var/tmp/glymur-debs/"
+    chroot "$TARGET" sh -c 'dpkg -i /var/tmp/glymur-debs/*.deb' >>"$LOG" 2>&1 ||
+        say 'git install failed; install it later with: sudo apt install git'
+    rm -rf "$TARGET/var/tmp/glymur-debs"
+fi
 chroot "$TARGET" adduser --comment '' "$NEWUSER"
 chroot "$TARGET" usermod -aG sudo,adm,netdev "$NEWUSER" 2>/dev/null ||
     chroot "$TARGET" usermod -aG sudo,adm "$NEWUSER"
@@ -243,8 +255,10 @@ fi
 # large trees (kernel checkouts, caches) are skipped. Private, so into .work.
 import_live_home() {
     local part mnt=/run/glymur-persist src dest
-    part="$(blkid -t LABEL=casper-rw -o device 2>/dev/null | head -n 1)"
-    [ -n "$part" ] || part="$(blkid -t LABEL=writable -o device 2>/dev/null | head -n 1)"
+    # blkid exits 2 when nothing matches; under pipefail that must not abort.
+    part="$(blkid -t LABEL=casper-rw -o device 2>/dev/null | head -n 1 || true)"
+    [ -n "$part" ] ||
+        part="$(blkid -t LABEL=writable -o device 2>/dev/null | head -n 1 || true)"
     if [ -z "$part" ]; then
         say 'No casper-rw persistence partition found; nothing imported'
         return 0
