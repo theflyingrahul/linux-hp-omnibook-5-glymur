@@ -35,11 +35,12 @@ firmware framebuffer. The full DT reaches userspace cleanly, with HP's
 signed ADSP/CDSP firmware attached over the SoCCP, but the eDP panel stays
 dark: an eDP link-training failure at the DP PHY (`ret=-11`, "max v_level
 reached"), not the GPU-component issue the prior review already guarded
-against. A DT boot still has no USB, GPU or audio. Next: root-cause the
-link-training failure (check `vdda-phy`/`vdda-pll` supplies and the
-panel's link rate/lane count against the Glymur/Mahua CRD reference), and
-keep booting the minimal DT meanwhile. See
-`docs/device-tree-first-boot-2026-09-28.md` and
+against. Traced to `phy-qcom-edp.c` falling back to dummy `vdda-phy`/
+`vdda-pll` regulators; a fix is drafted (two RPMh regulators evidenced
+from HP's PEP votes) and validated with a manual `cpp`+`dtc` compile, but
+not yet built or boot-tested — that needs a WSL build next. A DT boot
+still has no USB, GPU or audio. Keep booting the minimal DT meanwhile.
+See `docs/device-tree-first-boot-2026-09-28.md` and
 `docs/device-tree-review-2026-09-28.md`.
 
 **2026-09-27 (first boot):** the qcom-next boot kernel (`7.3.0-rc2-glymur`)

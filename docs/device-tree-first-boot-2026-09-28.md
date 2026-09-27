@@ -82,6 +82,51 @@ supports, AUX/HPD timing relative to `vreg_edp`'s power-up (the
 doesn't provide via `power-supply`/`enable-gpios` framing), or a PHY
 lane-mapping/orientation mismatch.
 
+## Proposed fix: wire the eDP PHY's analog supplies
+
+Traced the link-training failure into `drivers/phy/qualcomm/phy-qcom-edp.c`
+(qcom-next `a47c4c5aa`, the pinned commit): at probe it does
+`devm_regulator_bulk_get(dev, ..., {"vdda-phy", "vdda-pll"})`, then
+`regulator_set_load()` and `regulator_bulk_enable()` on both before any
+link training happens. With no `vdda-phy-supply`/`vdda-pll-supply` in our
+DTS, both resolve to dummy regulators, which report success on `enable()`
+without touching real hardware — if the PHY's actual analog rail isn't
+already on by firmware default (unlike the panel's boot-on GPIO rail),
+the PHY has no real power, which is consistent with training reaching
+"max v_level reached" and failing.
+
+The Glymur/Mahua CRD (`glymur-crd.dtsi`) wires exactly these two supplies
+on `&mdss_dp3_phy` to two RPMh regulators, addressed only by a
+`qcom,pmic-id` string ("F_E1") and an `ldo2`/`ldo4` index — not a raw SPMI
+bus address, so there is no hardware-addressing risk in copying the
+mechanism. HP's own PEP recipe for `GPU0` (`docs/pep-power-tables-2026-09-26.md`)
+votes `LDO2_F_E1=0.880V` and `LDO4_F_E1=1.200V` — the same two PMIC
+rails by the same naming, evidenced from this machine rather than
+guessed, satisfying the project's "no RPMh regulators until evidenced"
+rule for these two specifically.
+
+Added to `dts/qcom/mahua-hp-omnibook-5-bf1xxx.dts` (full DT only): an
+`&apps_rsc` regulator block declaring `vreg_l2f_e1` (880 mV) and
+`vreg_l4f_e1` (1200 mV) at `RPMH_REGULATOR_MODE_HPM`, and
+`vdda-phy-supply`/`vdda-pll-supply` on `&mdss_dp3_phy` pointing at them.
+No new TLMM pins are touched (RPMh regulators aren't GPIOs), so the
+allow-list is unaffected.
+
+**Validated so far:** manually preprocessed and compiled against the
+pinned qcom-next source (`cpp` + `dtc`, not the full kernel build — this
+machine doesn't have the native build toolchain installed yet). The DTB
+built cleanly; the only warnings are the pre-existing ones already in
+`glymur.dtsi` (GENI SE dual i2c/spi/serial unit-address warnings, noted
+in the 09-28 review). Decompiling the built DTB confirms
+`vdda-phy-supply`/`vdda-pll-supply` resolve to the new regulator nodes'
+phandles and the voltages/mode encode correctly.
+
+**Not yet validated:** a real kernel build (`build-qcom-next-glymur.sh`)
+and a boot test. The GPIO allow-list checker
+(`check-dt-gpio-allowlist.py`) couldn't run either, since `pylibfdt`
+isn't installed — not expected to matter here since the change adds no
+GPIO usage, but not directly confirmed by the tool.
+
 ## Remoteproc / PMIC GLink: attached cleanly
 
 Both remoteprocs came up on the full DT boot with HP's signed firmware:
@@ -101,13 +146,22 @@ already notes battery/AC/UCSI/RTC run over the SoCCP here, not the ADSP).
 
 ## Next
 
-- Decide whether `vdda-phy-supply`/`vdda-pll-supply` need real
-  `regulator-fixed` nodes on `&mdss_dp3_phy`, by checking the Glymur/Mahua
-  CRD reference (`glymur-crd.dtsi`) and the Zenbook A16 for how they wire
-  these supplies.
-- Compare the panel's negotiated/attempted link rate and lane count
-  against the CRD reference and the ATNA panel driver's defaults.
+- **Build in WSL**, per the documented flow
+  (`scripts/linux/build-qcom-next-glymur.sh` against the WSL worktree with
+  the layered series applied, a fresh `GLYMUR_SUFFIX`). It copies
+  `dts/qcom/*-hp-*` into the source tree automatically, so the edited
+  `.dts` needs no manual copying. This machine's native toolchain
+  (`scripts/linux/setup-native-kernel-build.sh`'s prerequisites:
+  `build-essential bc bison flex libssl-dev libelf-dev`) isn't installed,
+  so this round went through manual `cpp`+`dtc` validation only, not a
+  real kernel build.
+- Install with `sudo scripts/linux/glymur-ssd/install-kernel.sh <build dir>`
+  and boot "device tree (full)" again.
+- If it's still dark: compare the panel's negotiated/attempted link rate
+  and lane count against the CRD reference and the ATNA panel driver's
+  defaults next, and check the DPCD/AUX read output in the new boot's log
+  (`msm_dp_ctrl` debug lines) for how far training actually got.
 - Check PMIC GLink / battery data on the next full-DT boot's report.
 - Keep booting the minimal DT as the working baseline until the eDP link
-  training issue is root-caused; it is not the same failure mode the
+  training issue is confirmed fixed; it is not the same failure mode the
   09-28 review guarded against, so that review's fixes should stay as-is.

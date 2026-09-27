@@ -42,9 +42,14 @@ thermal, cpuidle, and Wi-Fi all carry over from the ACPI results, on the
 firmware framebuffer. The full DT reached userspace cleanly (SoCCP, ADSP
 and CDSP all attached with HP's signed firmware) but the eDP panel stayed
 dark; the review's GPU-component fix held (that predicted failure mode
-did not recur), and the actual cause is an eDP link-training failure at
-the DP PHY, not yet root-caused. A DT boot still has no USB, GPU or
-audio. See `docs/device-tree-first-boot-2026-09-28.md`.
+did not recur). The cause: `phy-qcom-edp.c` falls back to dummy
+`vdda-phy`/`vdda-pll` regulators when the DTS doesn't supply them, so the
+PHY's analog rail may never actually power on. A fix is drafted (two RPMh
+regulators, evidenced from HP's PEP votes for `GPU0`, wired to
+`&mdss_dp3_phy`), validated with a manual `cpp`+`dtc` compile, but not yet
+built with the real toolchain or boot-tested — that needs a WSL build. A
+DT boot still has no USB, GPU or audio. See
+`docs/device-tree-first-boot-2026-09-28.md`.
 
 The table below is per subsystem. The dated entries after this section are
 history, newest first. A later entry supersedes an earlier one.

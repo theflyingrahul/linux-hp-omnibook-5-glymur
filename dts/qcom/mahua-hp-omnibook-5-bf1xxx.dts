@@ -48,6 +48,35 @@
 	};
 };
 
+/*
+ * eDP PHY analog supplies. HP's PEP recipe for GPU0 votes LDO2_F_E1=0.880V
+ * and LDO4_F_E1=1.200V (docs/pep-power-tables-2026-09-26.md); the Glymur/
+ * Mahua CRD wires the same two RPMh regulators (by PMIC-id "F_E1", ldo2/
+ * ldo4) to &mdss_dp3_phy's vdda-phy/vdda-pll, at its own board voltages.
+ * Without these, phy-qcom-edp.c falls back to dummy regulators, which
+ * report success without powering the PHY's analog domain.
+ */
+&apps_rsc {
+	regulators-0 {
+		compatible = "qcom,pmh0110-rpmh-regulators";
+		qcom,pmic-id = "F_E1";
+
+		vreg_l2f_e1: ldo2 {
+			regulator-name = "vreg_l2f_e1";
+			regulator-min-microvolt = <880000>;
+			regulator-max-microvolt = <880000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
+
+		vreg_l4f_e1: ldo4 {
+			regulator-name = "vreg_l4f_e1";
+			regulator-min-microvolt = <1200000>;
+			regulator-max-microvolt = <1200000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+		};
+	};
+};
+
 &mdss {
 	status = "okay";
 };
@@ -91,6 +120,9 @@
 };
 
 &mdss_dp3_phy {
+	vdda-phy-supply = <&vreg_l2f_e1>;
+	vdda-pll-supply = <&vreg_l4f_e1>;
+
 	status = "okay";
 };
 
