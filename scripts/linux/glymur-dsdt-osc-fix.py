@@ -27,7 +27,6 @@ import hashlib
 import os
 import re
 import struct
-import subprocess
 import sys
 
 src_path, bios_version, out_dir = sys.argv[1], sys.argv[2], sys.argv[3]
@@ -80,12 +79,26 @@ assert sum(dsdt) % 256 == 0
 os.makedirs(os.path.join(out_dir, 'kernel/firmware/acpi'), exist_ok=True)
 aml = os.path.join(out_dir, 'kernel/firmware/acpi/dsdt.aml')
 open(aml, 'wb').write(dsdt)
+def newc_cpio(entries):
+    """Minimal uncompressed newc archive (what the kernel's early initrd
+    parser reads), for hosts without cpio(1). entries: (name, mode, data)."""
+    out = bytearray()
+    for ino, (name, mode, data) in enumerate(entries + [('TRAILER!!!', 0, b'')], 1):
+        raw = name.encode() + b'\0'
+        fields = [ino if name != 'TRAILER!!!' else 0, mode, 0, 0,
+                  2 if mode & 0o040000 else 1, 0, len(data), 0, 0, 0, 0, len(raw), 0]
+        out += b'070701' + b''.join(b'%08X' % v for v in fields) + raw
+        out += b'\0' * (-len(out) % 4) + data
+        out += b'\0' * (-len(out) % 4)
+    return bytes(out + b'\0' * (-len(out) % 512))
+
+
 cpio = os.path.join(out_dir, 'acpi-override.cpio')
 with open(cpio, 'wb') as f:
-    subprocess.run(['cpio', '-H', 'newc', '-o', '--quiet', '-R', '0:0'],
-                   input=b'kernel\nkernel/firmware\nkernel/firmware/acpi\n'
-                         b'kernel/firmware/acpi/dsdt.aml\n',
-                   cwd=out_dir, stdout=f, check=True)
+    f.write(newc_cpio([('kernel', 0o040755, b''),
+                       ('kernel/firmware', 0o040755, b''),
+                       ('kernel/firmware/acpi', 0o040755, b''),
+                       ('kernel/firmware/acpi/dsdt.aml', 0o100644, bytes(dsdt))]))
 with open(os.path.join(out_dir, 'MANIFEST'), 'w') as f:
     f.write(f'bios_version={bios_version}\n'
             f'source_dsdt_sha256={src_sha256}\n'
