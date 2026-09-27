@@ -84,6 +84,15 @@ The gaps:
    `BTH0`'s `GpioIo`, would fail.
 4. An ACPI match for `QCOM0F6B` with the QCC2072 SoC data in `hci_qca`.
 
+The firmware tables do not answer the clock question. HP's PEP tables
+(`scripts/linux/analyze-acpi-pep.py`, 5,117 actions across 38 devices) set
+clock rates only for the five I²C engines, all at 19.2 MHz
+(`gcc_qupv3_wrap{0,1}_s*_clk,8,0x124f800`). They have no entry for
+`UR15`, `BTH0` or `gcc_qupv3_wrap1_s6_clk`, so Windows' UART driver must set
+that clock at runtime. If firmware left SE6's serial clock off, Bluetooth
+under ACPI also needs a way to enable a GCC branch clock, which is more than
+the firmware-owned pattern used for I²C.
+
 Gaps 2 and 3 depend on what firmware left, so the next step is a read-only
 snapshot. `scripts/linux/qcom0f16-snapshot/` binds nothing and writes
 nothing. It records, for `UR15` and `UARD`:
