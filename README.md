@@ -29,14 +29,18 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
-**2026-09-28 (device tree, reviewed):** the review before the first DT boot
-found that the die is Mahua, not Glymur (HP's DSDT `SDFE` 0xA8). It also
-found that the full DT's default-enabled GPU would have kept the display
-dark. The DTS is rebuilt on `mahua.dtsi`, the PCIe PERST#/WAKE# pins are
-confirmed from HP's DSDT, and a GPIO allow-list checker is now part of the
-build. Kernel `7.3.0-rc2-glymur-3` (ACPI and DT) replaces `-2`, whose DTBs
-must not be booted. Next: install `-3` and HP's firmware on the SSD, then
-boot "device tree (full)". See `docs/device-tree-review-2026-09-28.md`.
+**2026-09-28 (first DT boots):** the minimal DT is the new working
+baseline — CPUs, NVMe, native DT input, thermal, cpuidle and Wi-Fi, on the
+firmware framebuffer. The full DT reaches userspace cleanly, with HP's
+signed ADSP/CDSP firmware attached over the SoCCP, but the eDP panel stays
+dark: an eDP link-training failure at the DP PHY (`ret=-11`, "max v_level
+reached"), not the GPU-component issue the prior review already guarded
+against. A DT boot still has no USB, GPU or audio. Next: root-cause the
+link-training failure (check `vdda-phy`/`vdda-pll` supplies and the
+panel's link rate/lane count against the Glymur/Mahua CRD reference), and
+keep booting the minimal DT meanwhile. See
+`docs/device-tree-first-boot-2026-09-28.md` and
+`docs/device-tree-review-2026-09-28.md`.
 
 **2026-09-27 (first boot):** the qcom-next boot kernel (`7.3.0-rc2-glymur`)
 is installed and booted on SSD partition 5, from the USB's GRUB (the SSD's

@@ -34,13 +34,31 @@ the first boot corrected the SoC to Mahua (DSDT `SDFE` 0xA8). It also
 disabled the GPU, which msm would have bound into the display device,
 `uart21` and, in the minimal DT, `dispcc`. PERST#/WAKE# are confirmed from
 HP's DSDT. Kernel `7.3.0-rc2-glymur-3` carries the corrected DTBs; the `-2`
-DTBs must not be booted. The next step is the first DT boot. A DT boot has
-no USB, GPU or audio yet. See `docs/device-tree-review-2026-09-28.md`.
+DTBs must not be booted. See `docs/device-tree-review-2026-09-28.md`.
+
+**First DT boots (2026-09-28):** the minimal DT is now the working
+baseline — CPUs, NVMe, native DT input (keyboard/touchpad/touchscreen),
+thermal, cpuidle, and Wi-Fi all carry over from the ACPI results, on the
+firmware framebuffer. The full DT reached userspace cleanly (SoCCP, ADSP
+and CDSP all attached with HP's signed firmware) but the eDP panel stayed
+dark; the review's GPU-component fix held (that predicted failure mode
+did not recur), and the actual cause is an eDP link-training failure at
+the DP PHY, not yet root-caused. A DT boot still has no USB, GPU or
+audio. See `docs/device-tree-first-boot-2026-09-28.md`.
 
 The table below is per subsystem. The dated entries after this section are
 history, newest first. A later entry supersedes an earlier one.
 
 ## History
+
+**2026-09-28: first device-tree boots.** The minimal DT (firmware
+framebuffer, no GPU/audio/USB) is the new working baseline, matching the
+ACPI results with native DT drivers throughout. The full DT (adds the
+eDP panel, SoCCP-attached ADSP/CDSP with HP's signed firmware) reached
+userspace but the panel stayed dark on an eDP link-training failure at
+the DP PHY — a different failure than the GPU-component issue the
+09-28 review had already guarded against. See
+`docs/device-tree-first-boot-2026-09-28.md`.
 
 **2026-09-27: first boot of the qcom-next kernel on the SSD install.**
 Input, the EC bus/thermal zones/fan, and CPU idle all work as they did
