@@ -1,5 +1,10 @@
 # Hardware Bring-Up Plan: GPU, USB-C, Audio, Battery, Bluetooth, Keyboard Backlight
 
+> **Correction (2026-09-27, Windows-side review):** see
+> `docs/windows-evidence-plan-review-2026-09-27.md`. Wi-Fi does use the HP
+> board data; the keyboard backlight cannot be an `HP_WMI` config change on
+> arm64; Bluetooth is a GENI UART.
+
 Written from the SSD install (qcom-next boot kernel, first boot — see
 `docs/qcom-next-first-boot-2026-09-27.md`). This is a planning document, not
 an implementation: every proposed patch below needs the qcom-next kernel

@@ -23,7 +23,9 @@ Still missing, mostly on the device-tree/remoteproc path:
 - battery, AC and the RTC (PMIC GLink on the ADSP);
 - USB-C;
 - the native GPU;
-- audio and Bluetooth;
+- audio (SoundWire behind LPASS);
+- Bluetooth (a GENI UART, the same ACPI pattern as I²C; see the Windows
+  evidence review);
 - CPU frequency scaling (no `_CPC`) and cluster idle;
 - suspend and the TPM.
 
@@ -177,7 +179,7 @@ and I²C remain unvalidated; no new boot artifact was made.
 | touchscreen | **Linux working (test modules)** | `ELAN2513` 0x10 on I2C9, GPIO 51; `hid-multitouch`; see `docs/acpi-input-results-run2-2026-09-26.md` |
 | touchpad | **Linux working (test modules)** | `ELAN0189` 0x15 on I2C5, PDC pin 896 → GPIO 3; `hid-multitouch` |
 | keyboard | **Linux working (test modules)** | `QTEC0001` 0x3A on I2C1, PDC pin 704 → GPIO 67; `i2c_hid_acpi` |
-| keyboard backlight | Unknown | |
+| keyboard backlight | Unknown | Not a config change: `ACPI_WMI` is x86-only in qcom-next and `HP_WMI` needs an ACPI EC. The control path (EC or `HWMI`) is still open. See `docs/windows-evidence-plan-review-2026-09-27.md` |
 | function keys | Unknown | |
 | lid switch | **Linux working (test modules)** | GED `LIGE` on GPIO 92 plus the EC bus; logind sees open/close. See `docs/qcom-next-port-and-lid-2026-09-26.md` |
 | battery | Not exposed in tested Linux boot | Windows exposes charge and discharge data, but Linux had no `/sys/class/power_supply` device; UPower displayed no battery. |
@@ -189,11 +191,11 @@ and I²C remain unvalidated; no new boot artifact was made.
 | USB-C port 2 | Timed storage hotplug not detected | Owner repeated the test in the other left port with the same result. Connector routing and cause remain unknown. |
 | USB-C Power Delivery | No Linux Type-C device observed | ACPI `USBC000` reported `status=0`; `/sys/class/typec` and `/sys/class/usb_role` were empty. Negotiation was not tested. |
 | USB-C DisplayPort Alt Mode | Unknown | No Type-C class device appeared; DisplayPort routing was not tested |
-| Wi-Fi | **Working in RAM-live test** (scan only) | Upstream `firmware-2.bin` plus a private HP `board-2.bin`, built from the `bdwlan_qcc2072_1p0_ncm820A.elf` that Windows binds, brought up `wlo1`. A scan found 13 BSSs on 2.4, 5 and 6 GHz; association is untested. See `docs/acpi-input-results-2026-09-26.md`. Before the HP board data, the `board-2.bin` lookup failed for PCI `17cb:1112`, subsystem `103c:8ef3` (`docs/acpi-input-test-2026-09-26.md`). |
-| Bluetooth | No controller observed in tested boot | Qualcomm FastConnect C7700/NCM820A maps through ACPI `QCOM0F6B`/`QCOM0FEA`; `/sys/class/bluetooth` was empty. |
-| speakers | No ALSA soundcard in tested boot | `aplay` and `/proc/asound/cards` found none. |
+| Wi-Fi | **Working on the qcom-next SSD install** | Associates and passes traffic: 6 GHz, HE, 160 MHz (2026-09-27). Uses upstream `firmware-2.bin` plus the private HP `board-2.bin` entry for subsystem `103c:8ef3`, board 255, from `/lib/firmware/updates/`. See `docs/qcom-next-first-boot-2026-09-27.md` and the correction in `docs/windows-evidence-plan-review-2026-09-27.md`. Without that entry, no interface comes up (2026-09-26). |
+| Bluetooth | No controller yet; path identified | `QCOM0F6B` (`BTH0`) is QCC2072 Bluetooth over a GENI UART: `UR15` (`QCOM0F16`, QUP_1_SE_6) with BT_EN on GPIO 116. `hci_qca` supports QCC2072. Missing: ACPI support in `qcom_geni_serial`, the 3 Mbaud clock question, and a BT_EN output. A read-only snapshot module is staged. See `docs/windows-evidence-plan-review-2026-09-27.md` |
+| speakers | No ALSA soundcard in tested boot | Windows: SoundWire SDCA peripheral `MAN_0217`/`PART_0110` behind LPASS (ACX). LPASS/ADSP path. |
 | headphone jack | Physical jack observed | Linux audio behavior untested |
-| microphones | Unknown | |
+| microphones | Not in Linux | Windows: SDCA "Microphone Array" on the same SoundWire peripheral as the speakers. LPASS/ADSP path. |
 | RGB camera | Linux USB/UVC enumerated | HP True Vision FHD camera present and bound to `uvcvideo` |
 | IR camera | Windows observed | HP IR camera present |
 | CPU idle | **Core states working (DSDT override)** | `acpi_idle` C1/C4 after the `_OSC` fix; cluster/system states gated by `PEPI` |

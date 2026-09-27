@@ -1,5 +1,10 @@
 # First Boot of the qcom-next Kernel on the SSD Install: September 27, 2026
 
+> **Correction (2026-09-27, Windows-side review):** see
+> `docs/windows-evidence-plan-review-2026-09-27.md`. Wi-Fi does use the HP
+> board data; the keyboard backlight cannot be an `HP_WMI` config change on
+> arm64; Bluetooth is a GENI UART.
+
 The staged install from `docs/qcom-next-ssd-install-2026-09-27.md` was booted
 for the first time: `7.3.0-rc2-glymur` from `/dev/nvme0n1p4` (`glymur-root`,
 SSD partition 5, ext4), via the USB's "Ubuntu on SSD: qcom-next
