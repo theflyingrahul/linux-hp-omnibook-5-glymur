@@ -139,9 +139,10 @@ bootstrap_workstation() {
         say "Workstation: bundle hash check failed ($sums); nothing unpacked."
         return
     fi
-    tar -xzf "$bundle" -C "$home" >>"$LOG" 2>&1 &&
-        chown -R "$user:$user" "$repo" >>"$LOG" 2>&1
-    say "Workstation: unpacked the repository to $repo (status $?)."
+    local status=0
+    tar -xzf "$bundle" -C "$home" >>"$LOG" 2>&1 || status=$?
+    chown -R "$user:$user" "$repo" >>"$LOG" 2>&1 || status=$?
+    say "Workstation: unpacked the repository to $repo (status $status)."
     # The bundle is made on Windows, whose tar marks files executable.
     runuser -u "$user" -- git -C "$repo" config core.filemode false >>"$LOG" 2>&1
 }

@@ -40,7 +40,7 @@ done
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CASPER=/cdrom/casper
-KERNEL_TAR="$(ls "$HERE"/glymur-kernel-*.tar.gz 2>/dev/null | head -n 1)"
+KERNEL_TAR="$(ls "$HERE"/glymur-kernel-*.tar.gz 2>/dev/null | head -n 1 || true)"
 FW_SRC=/cdrom/glymur-tools/firmware/ath12k/QCC2072/hw1.0/firmware-2.bin
 BOARD_SRC=/cdrom/glymur-tools/acpi-input/wifi/board-2.bin
 BUNDLE=/cdrom/glymur-workstation/workstation-bundle.tar.gz
@@ -168,7 +168,7 @@ LIBDIR="$TARGET/usr/lib"
 KSTAGE="$TARGET/var/tmp/glymur-kernel"
 rm -rf "$KSTAGE" && mkdir -p "$KSTAGE"
 tar -xzf "$KERNEL_TAR" -C "$KSTAGE"
-KREL="$(ls "$KSTAGE/lib/modules" | grep -- '-glymur$' | head -n 1)"
+KREL="$(ls "$KSTAGE/lib/modules" | grep -- '-glymur$' | head -n 1 || true)"
 [ -n "$KREL" ] || die 'kernel modules missing from the kernel tarball'
 rm -f "$KSTAGE/lib/modules/$KREL/build" "$KSTAGE/lib/modules/$KREL/source"
 rm -rf "$LIBDIR/modules/$KREL"
@@ -264,7 +264,8 @@ import_live_home() {
         return 0
     fi
     local own_mount=0 existing
-    existing="$(findmnt -rn -S "$part" -o TARGET | head -n 1)"
+    # findmnt exits 1 for an unmounted device (the RAM-live case).
+    existing="$(findmnt -rn -S "$part" -o TARGET | head -n 1 || true)"
     if [ -n "$existing" ]; then
         # Automounted by the desktop: read from there, leave it mounted.
         mnt="$existing"
