@@ -5,7 +5,7 @@ Kernel changes are split by who benefits:
 | Directory | Contents | Upstream? |
 |---|---|---|
 | `kernel/upstream/qcom-next-acpi/` | Generic ACPI mechanisms for Snapdragon X2 (Glymur) laptops, as a `git format-patch` series against Qualcomm `qcom-next` `a47c4c5aa` | Yes, candidates |
-| `kernel/upstream/standalone/` | Independent generic fixes | Yes, candidates |
+| `kernel/upstream/mainline/` | Submission-ready series against current mainline (only `Signed-off-by` missing) | Yes, ready |
 | `kernel/glymur-bringup/` | Interim Glymur code, applied on top of the upstream series | No; replaced later |
 | `kernel/drafts/` | Upstream-form drafts not yet used in a build | Future |
 | `kernel/archive/` | Superseded diagnostics, kept for the record | No |
@@ -43,14 +43,20 @@ Apply to `a47c4c5aa` in order: `upstream/qcom-next-acpi/0001–0003`, then
 The series was verified to reproduce the build tree exactly, except for
 those two board defaults, which moved to the board's command line.
 
-## Standalone upstream candidates
+## Mainline series (ready to send)
 
-- `upstream/standalone/0001-soc-qcom-geni-se-acpi-missing-se-clock.patch`:
-  an absent ACPI `se` clock becomes `NULL` and the OPP clock name is
-  skipped, so the existing `QCOM0220`/`QCOM0411` ACPI IDs can probe again.
-  See `docs/repository-audit-2026-09-26.md`.
-- `upstream/standalone/0004-i2c-qcom-geni-balance-pm-on-rate-error.patch`:
-  releases the runtime-PM reference when `set_rate()` fails.
+`upstream/mainline/` applies to mainline `fd179f8a05` (7.3-rc5 era) and
+compiles cleanly with `W=1`. `checkpatch --strict` flags only the missing
+`Signed-off-by`, which the author adds before sending. See
+`docs/upstreaming-2026-09-27.md` for recipients and status.
+
+1. `ACPI: GED: Support GpioInt event resources`: the same code as
+   `qcom-next-acpi/0001`, tested on this laptop.
+2. `soc: qcom: geni-se: don't fail ACPI probe on a missing SE clock`: a
+   regression fix; `Fixes: 5b8a39dcf909`. It replaces the old
+   `standalone/0001`.
+3. `i2c: qcom-geni: release runtime PM reference when set_rate fails`: a
+   leak fix; `Fixes: 10e74f4c5046`. It replaces the old `standalone/0004`.
 
 ## Drafts and archive
 
@@ -65,11 +71,11 @@ None of these patches carries a `Signed-off-by`; add it when submitting.
 
 | Old path under `patches/kernel/` | Now |
 |---|---|
-| `0001-soc-qcom-geni-se-acpi-missing-se-clock.patch` | `upstream/standalone/` (same file) |
+| `0001-soc-qcom-geni-se-acpi-missing-se-clock.patch` | `upstream/mainline/0002` |
 | `0001-i2c-qcom-geni-reject-missing-se-clock.patch` | Removed on 2026-09-26; see the audit |
 | `0002-pinctrl-qcom-glymur-draft-acpi-match.patch` | `drafts/` |
 | `0003-gpio-acpi-glymur-pdc-translation-rfc.patch` | `drafts/` |
-| `0004-i2c-qcom-geni-balance-pm-on-rate-error.patch` | `upstream/standalone/` |
+| `0004-i2c-qcom-geni-balance-pm-on-rate-error.patch` | `upstream/mainline/0003` |
 | `0005-i2c-qcom-geni-glymur-acpi-inspect-rfc.patch` | `archive/` |
 | `0006-ACPI-GED-Support-GpioInt-event-resources.patch` | `upstream/qcom-next-acpi/0001` |
 | `0007-glymur-acpi-gpi-and-geni-i2c-wip.diff` | `upstream/qcom-next-acpi/0002`, `0003`, plus `glymur-bringup/0002` |

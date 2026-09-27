@@ -6,7 +6,7 @@
 *.md text eol=lf
 *.json text eol=lf
 *.tsv text eol=lf
-*.patch text eol=lf
+*.patch text eol=lf -whitespace
 *.cfg text eol=lf
 *.c text eol=lf
 *.manifest text eol=lf

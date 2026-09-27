@@ -1,0 +1,60 @@
+From 9750510097845d10e1231449448271a87d8c108c Mon Sep 17 00:00:00 2001
+From: Rahul Pon <theflyingrahul@gmail.com>
+Date: Sun, 27 Sep 2026 08:52:44 -0700
+Subject: [PATCH 2/3] soc: qcom: geni-se: don't fail ACPI probe on a missing SE
+ clock
+
+geni_se_resources_init() tolerates a missing "se" clock for devices with an
+ACPI companion, whose firmware manages the serial-engine clocks, but then
+calls devm_pm_opp_set_clkname() for that same clock unconditionally. It
+fails, so ACPI GENI controllers such as the I2C IDs QCOM0220 and QCOM0411
+no longer probe. Before the OPP call, the error pointer left in se->clk
+would also have reached clk_get_rate().
+
+Treat an absent ACPI SE clock as firmware-owned: store NULL, which the
+clock API accepts as a no-op (clk_get_rate() returns 0, so the I2C driver
+selects its 19.2 MHz timing table), and skip the OPP clock name. DT
+behaviour is unchanged.
+
+Found by code review while bringing up an ACPI-booted Snapdragon X2
+laptop; compile-tested with arm64 defconfig plus ACPI and W=1.
+
+Fixes: 5b8a39dcf909 ("soc: qcom: geni-se: Introduce helper API for resource initialization")
+---
+ drivers/soc/qcom/qcom-geni-se.c | 22 ++++++++++++++++------
+ 1 file changed, 16 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/soc/qcom/qcom-geni-se.c b/drivers/soc/qcom/qcom-geni-se.c
+index 873bfbd6b2..5d4b26e95e 100644
+--- a/drivers/soc/qcom/qcom-geni-se.c
++++ b/drivers/soc/qcom/qcom-geni-se.c
+@@ -1203,13 +1203,23 @@ int geni_se_resources_init(struct geni_se *se)
+ 				     "Failed to get optional core clk\n");
+ 
+ 	se->clk = devm_clk_get(se->dev, "se");
+-	if (IS_ERR(se->clk) && !has_acpi_companion(se->dev))
+-		return dev_err_probe(se->dev, PTR_ERR(se->clk),
+-				     "Failed to get SE clk\n");
++	if (IS_ERR(se->clk)) {
++		if (!has_acpi_companion(se->dev))
++			return dev_err_probe(se->dev, PTR_ERR(se->clk),
++					     "Failed to get SE clk\n");
++		/*
++		 * ACPI firmware owns the SE clock and its rate. The clock API
++		 * treats NULL as a no-op, whereas an error pointer must not
++		 * reach clk_get_rate() or the OPP core.
++		 */
++		se->clk = NULL;
++	}
+ 
+-	ret = devm_pm_opp_set_clkname(se->dev, "se");
+-	if (ret)
+-		return ret;
++	if (se->clk) {
++		ret = devm_pm_opp_set_clkname(se->dev, "se");
++		if (ret)
++			return ret;
++	}
+ 
+ 	ret = devm_pm_opp_of_add_table(se->dev);
+ 	if (ret && ret != -ENODEV)

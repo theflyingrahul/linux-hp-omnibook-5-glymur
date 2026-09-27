@@ -1,0 +1,40 @@
+From 2febd05d49e7fa5921351bc4620d9cbddb77ffd4 Mon Sep 17 00:00:00 2001
+From: Rahul Pon <theflyingrahul@gmail.com>
+Date: Sun, 27 Sep 2026 08:52:44 -0700
+Subject: [PATCH 3/3] i2c: qcom-geni: release runtime PM reference when
+ set_rate fails
+
+geni_i2c_xfer() takes a runtime-PM reference with pm_runtime_get_sync()
+and then returns directly if the set_rate() callback fails, leaking the
+reference and keeping the controller resumed for good. Route that error
+through the existing cleanup path, which drops the reference and resets
+the transfer state.
+
+Found by code review; compile-tested with arm64 defconfig plus ACPI and
+W=1.
+
+Fixes: 10e74f4c5046 ("i2c: qcom-geni: Enable I2C on SA8255p Qualcomm platforms")
+---
+ drivers/i2c/busses/i2c-qcom-geni.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
+index e9e41a174c..3a3c87185f 100644
+--- a/drivers/i2c/busses/i2c-qcom-geni.c
++++ b/drivers/i2c/busses/i2c-qcom-geni.c
+@@ -974,13 +974,14 @@ static int geni_i2c_xfer(struct i2c_adapter *adap,
+ 
+ 	ret = gi2c->dev_data->set_rate(&gi2c->se, gi2c->clk_freq_out);
+ 	if (ret)
+-		return ret;
++		goto out_pm;
+ 
+ 	if (gi2c->gpi_mode)
+ 		ret = geni_i2c_gpi_xfer(gi2c, msgs, num);
+ 	else
+ 		ret = geni_i2c_fifo_xfer(gi2c, msgs, num);
+ 
++out_pm:
+ 	pm_runtime_put_autosuspend(gi2c->se.dev);
+ 	gi2c->cur = NULL;
+ 	gi2c->err = 0;
