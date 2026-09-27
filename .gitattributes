@@ -16,3 +16,7 @@ Makefile text eol=lf
 *.pdf binary
 *.png binary
 *.jpg binary
+# Vendor files are committed byte-exact (hashes in MANIFEST.tsv).
+boards/*/firmware/** -text -diff
+boards/*/firmware/README.md text eol=lf
+boards/*/firmware/MANIFEST.tsv text eol=lf

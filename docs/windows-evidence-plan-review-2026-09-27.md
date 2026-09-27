@@ -141,3 +141,46 @@ reads `_STA` 0 until `PMGK.LKUP` is set.
    planning any code.
 3. GPU, audio, USB-C, battery, AC and the RTC: device-tree/remoteproc path,
    as in the plan (battery last).
+
+## Addendum: Bluetooth power and clock, from HP's driver pack
+
+HP's Qualcomm driver pack (`boards/hp-omnibook-5-16-bf1xxx/firmware/`,
+decoded with `scripts/linux/parse-bsrc.py`) answers two of the questions
+above. The Glymur reference DT in qcom-next (`glymur-crd.dtsi`) shows the
+same design.
+
+- **Power.** In D0, `BSRC_BT.bin` drives GPIO 94 high as a plain GPIO
+  output with pull-up (`TLMMGPIO {0x5e, 1, 0, 1, 3, 0}`: pin, state,
+  function, direction, pull, drive), then waits 10 ms. On the CRD, GPIO 94
+  is `VREG_WCN_3P3` (fixed regulator, boot-on); it must already be on here
+  because Wi-Fi works.
+- **Enable lines.** GPIO 116 is `bt-enable-gpios` and GPIO 117 is
+  `wlan-enable-gpios` of the `qcom,wcn7850-pmu` power sequencer. HP's
+  `BTH0` `GpioIo` on 116 is the same BT enable line.
+- **UART.** HP's `UR15` is the CRD's `uart14` (`serial@a98000`,
+  `GCC_QUPV3_WRAP1_S6_CLK`). The CRD's Bluetooth node has
+  `max-speed = <3200000>`, and Windows' `qcbluetooth8480.inf` sets
+  `BaudRate` 3200000. Windows enables DMA for UART instance 15 only.
+- **Clock.** `BSRC_UART_4Wire_1.bin` gives `UR15` F-states that enable
+  `gcc_qupv3_wrap1_s6_clk` with the QUP1 wrapper clocks and bus votes, and
+  ten P-states that set that clock to 7.3728, 14.7456, 29.4912, 32, 48,
+  64, 75, 80, 96 and 100 MHz. This is exactly
+  `ftbl_gcc_qupv3_oob_qspi_s1_clk_src` in qcom-next's `gcc-glymur.c`:
+    - the rate generator is `gcc_qupv3_wrap1_qspi_s6_clk_src` (CMD at GCC
+      `0xb366c`);
+    - it feeds a divider at `0xb352c`;
+    - the branch status is at `0xb351c`;
+    - the enable is vote register `0x62018`, bit 21.
+
+  Windows sets this clock at runtime through PEP. On the CRD, Linux's GCC
+  driver does it. Under ACPI, Linux has neither, so Bluetooth at 3.2 Mbaud
+  over ACPI needs new code that programs those GCC registers. That is a
+  step beyond the firmware-owned I²C pattern, which never writes a clock.
+  The snapshot module now also reads these GCC registers, so it reports
+  whether firmware left the clock running.
+- **Firmware.** `btqca` names QCC2072 "Orion" (`qca/ornbtfw<rom>.tlv`,
+  `qca/ornnv<rom>.b<board>`). HP ships the same chip as "Colorado":
+  `clnbtfw10.tlv` and `clnbtnv10.b03/.b07/.b08/.b0a/.b0d/.b17`.
+  linux-firmware (Ubuntu 26.04) has only ROM 0x11 (`ornbtfw11.tlv`,
+  `ornnv11.bin`). If this chip reports ROM 0x10, the HP files are the
+  match.

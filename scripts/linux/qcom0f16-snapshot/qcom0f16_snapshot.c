@@ -8,15 +8,19 @@
  * on TLMM GPIO 116. Before any serial driver work, this records what
  * firmware left: the SE protocol, serial clock enable and divider, UART
  * word/parity/stop configuration, FIFO/DMA mode, and GPIO 116's mux,
- * direction and level. It also covers \_SB.UARD (QUP_2_SE_5, debug).
+ * direction and level, the UART pins 56-59 (from HP's BSRC_UART_4Wire_1.bin)
+ * and the GCC state of the SE6 serial clock: rate generator, divider,
+ * branch and vote. HP's PEP recipe steps that clock through 7.3728-100 MHz
+ * at runtime, which ACPI gives Linux no way to do. It also covers
+ * \_SB.UARD (QUP_2_SE_5, debug).
  *
  * Safety:
  *  - default-off (snapshot=1 required);
  *  - only the known QCOM0F16 windows are mapped;
- *  - MMIO reads only: no writes, no IRQ, clock, pinctrl or GPIO requests;
+ *  - MMIO reads only (SE, one TLMM pin at a time, a GCC window): no writes,
+ *    no IRQ, clock, pinctrl or GPIO requests;
  *  - probe always returns -ENODEV, so nothing binds and nothing is left
- *    configured. The TLMM window is ioremapped read-only for two registers
- *    of one pin and unmapped again.
+ *    configured.
  */
 
 #include <linux/acpi.h>
@@ -65,14 +69,54 @@ static unsigned int bt_en_gpio = 116;
 module_param(bt_en_gpio, uint, 0444);
 MODULE_PARM_DESC(bt_en_gpio, "TLMM pin of BTH0's GpioIo (read only)");
 
-static void qcom0f16_snapshot_gpio(struct device *dev)
+/*
+ * GCC state of the UR15 serial clock (offsets from qcom-next gcc-glymur.c):
+ * gcc_qupv3_wrap1_qspi_s6_clk_src RCG at 0xb366c (CMD, CFG, M, N, D),
+ * gcc_qupv3_wrap1_s6_clk_src divider at 0xb352c, and the
+ * gcc_qupv3_wrap1_s6_clk branch (status 0xb351c, vote 0x62018 bit 21).
+ * CFG source 0 = TCXO 19.2 MHz, 1 = GPLL0 main, 4 = GPLL1, 6 = GPLL0 even.
+ */
+#define GLYMUR_GCC_BASE		0x00100000
+#define GCC_S6_RCG		0xb366c
+#define GCC_S6_DIV		0xb352c
+#define GCC_S6_CBCR		0xb351c
+#define GCC_QUPV3_VOTE		0x62018
+
+static void qcom0f16_snapshot_gcc(struct device *dev)
+{
+	void __iomem *gcc;
+	u32 cmd, cfg, m, n, d, div, cbcr, vote;
+
+	gcc = ioremap(GLYMUR_GCC_BASE, 0xc0000);
+	if (!gcc)
+		return;
+	cmd = readl_relaxed(gcc + GCC_S6_RCG);
+	cfg = readl_relaxed(gcc + GCC_S6_RCG + 0x4);
+	m = readl_relaxed(gcc + GCC_S6_RCG + 0x8);
+	n = readl_relaxed(gcc + GCC_S6_RCG + 0xc);
+	d = readl_relaxed(gcc + GCC_S6_RCG + 0x10);
+	div = readl_relaxed(gcc + GCC_S6_DIV);
+	cbcr = readl_relaxed(gcc + GCC_S6_CBCR);
+	vote = readl_relaxed(gcc + GCC_QUPV3_VOTE);
+	iounmap(gcc);
+	dev_info(dev,
+		 "snapshot: gcc s6 rcg cmd=0x%08x (root_off=%u) cfg=0x%08x (src=%u hid=%u mode=%u) m=0x%x n=0x%x d=0x%x div=0x%x cbcr=0x%08x (clk_off=%u) vote=0x%08x (s6=%u)\n",
+		 cmd, (cmd >> 31) & 1, cfg, (cfg >> 8) & 7, cfg & 0x1f,
+		 (cfg >> 12) & 3, m, n, d, div, cbcr, (cbcr >> 31) & 1,
+		 vote, (vote >> 21) & 1);
+}
+
+/* UR15's UART lines per HP's BSRC_UART_4Wire_1.bin TLMMGPIO actions. */
+static const unsigned int ur15_pins[] = { 56, 57, 58, 59 };
+
+static void qcom0f16_snapshot_pin(struct device *dev, unsigned int gpio)
 {
 	void __iomem *pin;
 	u32 ctl, io;
 
-	if (bt_en_gpio >= 250)
+	if (gpio >= 250)
 		return;
-	pin = ioremap(GLYMUR_TLMM_BASE + bt_en_gpio * TLMM_PIN_STRIDE, 0x10);
+	pin = ioremap(GLYMUR_TLMM_BASE + gpio * TLMM_PIN_STRIDE, 0x10);
 	if (!pin)
 		return;
 	ctl = readl_relaxed(pin + TLMM_CTL);
@@ -80,7 +124,7 @@ static void qcom0f16_snapshot_gpio(struct device *dev)
 	iounmap(pin);
 	dev_info(dev,
 		 "snapshot: gpio%u ctl=0x%08x mux=%u oe=%u pull=%u drive=%u io=0x%08x in=%u out=%u\n",
-		 bt_en_gpio, ctl, (ctl >> 2) & 0xf, (ctl >> 9) & 1, ctl & 3,
+		 gpio, ctl, (ctl >> 2) & 0xf, (ctl >> 9) & 1, ctl & 3,
 		 (ctl >> 6) & 7, io, io & 1, (io >> 1) & 1);
 }
 
@@ -90,6 +134,7 @@ static int qcom0f16_snapshot_probe(struct platform_device *pdev)
 	struct resource *res;
 	void __iomem *base;
 	u32 rev, m_clk, s_clk, proto;
+	unsigned int bt_pin;
 
 	if (!snapshot)
 		return -ENODEV;
@@ -139,8 +184,12 @@ static int qcom0f16_snapshot_probe(struct platform_device *pdev)
 			 readl_relaxed(base + SE_UART_LOOPBACK_CFG));
 	iounmap(base);
 
-	if (res->start == GLYMUR_UR15_BASE)
-		qcom0f16_snapshot_gpio(dev);
+	if (res->start == GLYMUR_UR15_BASE) {
+		qcom0f16_snapshot_gcc(dev);
+		for (bt_pin = 0; bt_pin < ARRAY_SIZE(ur15_pins); bt_pin++)
+			qcom0f16_snapshot_pin(dev, ur15_pins[bt_pin]);
+		qcom0f16_snapshot_pin(dev, bt_en_gpio);
+	}
 	return -ENODEV;
 }
 

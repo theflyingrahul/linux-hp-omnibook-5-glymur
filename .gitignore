@@ -10,3 +10,4 @@ captures/*/efi/
 .work/
 analysis/
 __pycache__/
+qualcomm-driver-pack/
