@@ -14,13 +14,22 @@ SRC="${1:-.work/linux-qcom-next-glymur}"
 OUT="${2:-.work/build/qcom-next-glymur}"
 JOBS="${3:-8}"
 UBUNTU_CONFIG="${UBUNTU_CONFIG:-/usr/src/linux-headers-7.0.0-30-generic/.config}"
+# GLYMUR_SUFFIX (for example -2) gives each build its own release,
+# 7.3.0-rc2-glymur-2, so installing it never replaces the running kernel's
+# modules (see glymur-ssd/install-kernel.sh). Works in WSL and natively on
+# the SSD install, which also has Ubuntu's 7.0 headers.
+SUFFIX="${GLYMUR_SUFFIX:-}"
+case "$SUFFIX" in
+    '' | -[A-Za-z0-9]*) ;;
+    *) printf 'GLYMUR_SUFFIX must start with - (got %s)\n' "$SUFFIX" >&2; exit 2 ;;
+esac
 
 SRC="$(realpath "$SRC")"
 mkdir -p "$OUT"
 OUT="$(realpath "$OUT")"
 # An empty LOCALVERSION stops setlocalversion appending "+" for an untagged
 # tree, so the release is exactly <version>-glymur.
-MAKE=(make -C "$SRC" "O=$OUT" ARCH=arm64 "-j$JOBS" LOCALVERSION=)
+MAKE=(make -C "$SRC" "O=$OUT" ARCH=arm64 "-j$JOBS" "LOCALVERSION=$SUFFIX")
 
 cat >"$OUT/glymur.config" <<'CFG'
 CONFIG_LOCALVERSION="-glymur"
@@ -68,8 +77,8 @@ done <"$OUT/glymur.config"
 "${MAKE[@]}" Image modules
 KREL="$("${MAKE[@]}" -s kernelrelease)"
 case "$KREL" in
-    *-glymur) ;;
-    *) printf 'unexpected kernel release %s (want *-glymur)\n' "$KREL" >&2; exit 1 ;;
+    *-glymur"$SUFFIX") ;;
+    *) printf 'unexpected kernel release %s (want *-glymur%s)\n' "$KREL" "$SUFFIX" >&2; exit 1 ;;
 esac
 STAGE="$OUT/stage"
 rm -rf "$STAGE"

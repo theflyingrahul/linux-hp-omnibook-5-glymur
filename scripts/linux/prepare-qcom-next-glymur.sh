@@ -15,6 +15,9 @@ if [ -e "$WORKTREE" ]; then
     exit 1
 fi
 git -C "$CLONE" worktree add -q --detach "$WORKTREE" "$BASE"
+# git am needs a committer; a fresh install may have no identity configured.
+export GIT_COMMITTER_NAME="${GIT_COMMITTER_NAME:-$(git config user.name || echo glymur-build)}"
+export GIT_COMMITTER_EMAIL="${GIT_COMMITTER_EMAIL:-$(git config user.email || echo glymur-build@localhost)}"
 git -C "$WORKTREE" am -q \
     "$REPO"/patches/kernel/upstream/qcom-next-acpi/*.patch \
     "$REPO"/patches/kernel/glymur-bringup/*.patch
