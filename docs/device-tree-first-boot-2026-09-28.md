@@ -16,14 +16,53 @@ Boot ID `aa9505e8` (current). `model = "HP OmniBook 5 Laptop 16-bf1xxx
 - Input over native DT I²C (`hid-over-i2c`, not the ACPI shim modules from
   the earlier ACPI-only boots): keyboard, touchpad, touchscreen all
   enumerate.
-- Thermal zones are now DT-native (`cpu-0-0-0-thermal`, `aoss-0-thermal`,
-  etc.), not the four ACPI `acpitz` zones from the ACPI-only boot.
+- Thermal zones are now DT-native — 69 `hwmon` zones (`cpu_0_0_0_thermal`,
+  `aoss_0_thermal`, plus per-core, GPU, NSP, camera, DDR and AOSS zones),
+  not the four ACPI `acpitz` zones from the ACPI-only boot. Fan RPM reads
+  live from the same EC path as before.
 - `cpuidle` has DT-native states (`WFI`, `cpu-sleep-0`), replacing the
   ACPI `LPI-0`/`LPI-1` names from the ACPI-only boot; same mechanism,
   different naming.
-- Wi-Fi (`wlo1`) came up.
+- Wi-Fi (`wlo1`) came up, full association as in the 2026-09-27 ACPI
+  result.
+- **Bluetooth works, confirmed live — not previously verified.** The
+  09-28 review flagged "Bluetooth UART not yet verified" as a known
+  limit; it now is. `hci0` (`hci_qca`, transport `UartSerialBus` on
+  `QUP_1_SE_6`, `BT_EN` GPIO 116) comes up on both the minimal and full
+  DT: firmware loads (`qca/ornbtfw11.tlv`, `qca/ornnv11.b17`/`.bin`),
+  `bluetoothctl scan on` succeeds. One non-fatal gap: the RF calibration
+  file `qca/ornbcscal11.b17`/`.bin` isn't present
+  (`Direct firmware load ... failed with error -2`), so it's running
+  without board-specific calibration — same shape of gap as the `ath12k`
+  board-2.bin issue from `docs/qcom-next-first-boot-2026-09-27.md`.
+
+  **Unlike the Wi-Fi board-data gap, HP's file for this may already be
+  committed, just staged under the wrong ROM version.** `/lib/firmware/qca/`
+  on this install has no HP-installed files at all
+  (`install-firmware.sh` was never run) — the working
+  `ornbtfw11.tlv`/`ornnv11.bin` are generic files from stock Ubuntu
+  `linux-firmware` (dated Jul 13, ROM "11", codename "Orion"), not HP's.
+  `install-firmware.sh`'s own comment says HP's controller is ROM "10"
+  ("Colorado"), staging `clnbtfw10.tlv`/`clnbtnv10.*` as
+  `ornbtfw10.tlv`/`ornnv10.*` — but this hardware's live log shows the
+  driver requesting **ROM "11"** names (`ornbtfw11.tlv`, `ornnv11.b17`,
+  `ornnv11.bin`), which `install-firmware.sh` never stages, so if it were
+  run today its output would go unused. Of HP's six committed
+  `clnbtnv10.*` variants, five share one sha256 (`8dcf1141...`) and one —
+  `clnbtnv10.b17` (`5d136624...`) — is distinct, i.e. board/variant-
+  specific, exactly matching the `.b17` suffix the live driver tried
+  first and fell back from. **Not yet tried:** staging `clnbtnv10.b17` as
+  `qca/ornnv11.b17` (ROM "11", not "10") to see if that's the missing
+  calibration data, and checking whether `clnbtfw10.tlv` differs
+  meaningfully from the stock `ornbtfw11.tlv` already in use.
+  `BSRC_BT.bin` (248 bytes) is too small to be the NVM/calibration
+  payload itself; likely a board-ID marker, same shape as the `BSRC_*`
+  files under `qcuart8480/`.
 - Display is the firmware framebuffer only (`&dispcc` disabled, as
   designed) — no GPU, no native display driver.
+- No USB controller is enabled at this DT stage: the USB-A port, USB-C
+  and the UVC camera are all unavailable, a regression from the ACPI
+  boot where the right USB-A port worked.
 
 ## Full DT: blank screen, root cause found
 
@@ -165,3 +204,9 @@ already notes battery/AC/UCSI/RTC run over the SoCCP here, not the ADSP).
 - Keep booting the minimal DT as the working baseline until the eDP link
   training issue is confirmed fixed; it is not the same failure mode the
   09-28 review guarded against, so that review's fixes should stay as-is.
+- Try staging HP's `clnbtnv10.b17` as `qca/ornnv11.b17` (see the
+  Bluetooth section above) to see whether it's the missing RF
+  calibration data; if so, fix `install-firmware.sh`'s ROM-version
+  assumption (it targets "10", the live hardware requests "11").
+- USB is absent on both DT stages; when USB-A/USB-C bring-up starts, note
+  it's a regression against the ACPI boot, not a new gap.

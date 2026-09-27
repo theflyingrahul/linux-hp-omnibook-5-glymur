@@ -51,8 +51,32 @@ built with the real toolchain or boot-tested — that needs a WSL build. A
 DT boot still has no USB, GPU or audio. See
 `docs/device-tree-first-boot-2026-09-28.md`.
 
-The table below is per subsystem. The dated entries after this section are
+The table below is per subsystem, as of the current boot (minimal DT,
+kernel `7.3.0-rc2-glymur-3`, verified live 2026-09-28). "Full DT" reflects
+the one test boot so far (`docs/device-tree-first-boot-2026-09-28.md`),
+not the current running kernel. The dated entries after this section are
 history, newest first. A later entry supersedes an earlier one.
+
+| Subsystem | Minimal DT (current) | Full DT (last tested) | Notes |
+|---|---|---|---|
+| CPUs (12) | Working | Working | |
+| NVMe / root storage | Working | Working | |
+| Keyboard | Working | Working | native DT `geni_i2c`/`hid-over-i2c`, no out-of-tree modules |
+| Touchpad | Working | Working | |
+| Touchscreen | Working (enumerates; not interactively retested) | Working (same) | one boot-time `i2c_hid_acpi` IRQ-without-data warning, harmless so far |
+| Lid switch | Working | Working | `gpio-keys` |
+| Wi-Fi | Working, full association (6 GHz, HE, 160 MHz) | Working | still on generic `ath12k` board data (`board_id 0xff`); HP's real board file needs Windows-side extraction |
+| **Bluetooth** | **Working** (`hci0`, `hci_qca`, QCC2072, scan-capable) | Working | newly confirmed this session, not previously documented as working; one non-fatal firmware gap: `qca/ornbcscal11.b17`/`.bin` (RF calibration) not found |
+| EC thermal zones / fan | Working — 69 DT-native `hwmon` zones (per-core, GPU, NSP, camera, DDR, AOSS), live fan RPM | Working (same, plus this is where the eDP/GPU zones matter) | |
+| CPU idle | Working (`WFI`, `cpu-sleep-0`) | Working | no cluster idle yet |
+| CPU frequency scaling | Not working | Not working | no `cpufreq` sysfs; SCMI CPU frequency path not yet verified despite being nominally enabled |
+| USB-A / USB-C / UVC camera | Not working | Not working | no USB controller enabled at this DT stage — a regression versus the ACPI boot, where the right USB-A port worked |
+| Native display | Firmware framebuffer only (`dispcc` disabled) | Reaches DPU/DP controller bind; panel stays dark on eDP link training (fix drafted, untested) | |
+| GPU | Not working (deliberately disabled) | Not working (deliberately disabled) | blocked on `CLK_GLYMUR_GPUCC` |
+| Audio | Not working | Not working | SoundWire/LPASS not wired yet |
+| Battery / AC / RTC / UCSI | Not working (no `pmic-glink` node in the minimal DT) | Declared (`pmic-glink` node, SoCCP attached) but **no battery/power-supply data seen** in that boot's logs — not confirmed functional | |
+| TPM | Not working | Not working | |
+| Suspend | Untested (masked) | Untested (masked) | |
 
 ## History
 
