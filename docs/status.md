@@ -1,7 +1,13 @@
 # Project Status
 
+**2026-09-27: qcom-next boot kernel built; Ubuntu root on SSD partition 5 staged.**
+`7.3.0-rc2-glymur` (layered series, board values on the command line) is built
+and staged with an SSD installer and USB GRUB entries; not yet booted. A log
+review added `systemd.tpm2_wait=0` (90 s TPM wait per boot) and found the RTC
+behind PMIC GLink. See `docs/qcom-next-ssd-install-2026-09-27.md`.
+
 **2026-09-26, late: lid events work** through a GpioInt-capable GED driver
-(`patches/kernel/0006`); the port to the qcom-next kernel is in progress. See
+(now `patches/kernel/upstream/qcom-next-acpi/0001`); the port to the qcom-next kernel is in progress. See
 `docs/qcom-next-port-and-lid-2026-09-26.md`.
 
 **2026-09-26, reboot with the `_OSC` override: CPU core idle and the EC
@@ -127,7 +133,7 @@ and I²C remain unvalidated; no new boot artifact was made.
 | battery | Not exposed in tested Linux boot | Windows exposes charge and discharge data, but Linux had no `/sys/class/power_supply` device; UPower displayed no battery. |
 | charging | Windows observed; Linux unknown | The charger powers and charges the laptop in Windows; Linux ACPI adapter `_PSR` previously failed because a GenericSerialBus handler was missing. |
 | thermal sensors | **Linux working (test modules)** | Four `acpitz` zones read real temperatures once IC10 (EC) is on GPI DMA; see `docs/cpuidle-and-ec-bus-results-2026-09-26.md` |
-| fan | Unknown | |
+| fan | **EC-controlled; responds under Linux** | `acpi_fan` `_FST` reads RPM over the EC bus: 2482 -> 4028 -> 2776 RPM in a load test (`docs/boot-log-battery-fan-review-2026-09-26.md`). Windows exposes no fan RPM; on the same EC thermistors (TZ31-34) Linux idles 3-8 °C warmer (no DVFS or cluster idle) and peaks similarly under load. See `docs/fan-thermal-windows-2026-09-27.md` |
 | Right USB-A | USB 3 storage and USB 2 HID enumeration work | The installer used bus 3 at 5 Gbit/s; a Dell receiver bound to `usbhid` on bus 2 at 12 Mb/s. Mouse motion events remain unproven. See `docs/usb-input-isolation-test.md`. |
 | USB-C port 1 | Timed storage hotplug not detected | Owner connected USB-C storage in the hinge-side port; no USB event or topology change appeared. Earlier installer boot from USB-C also failed. |
 | USB-C port 2 | Timed storage hotplug not detected | Owner repeated the test in the other left port with the same result. Connector routing and cause remain unknown. |
@@ -143,8 +149,8 @@ and I²C remain unvalidated; no new boot artifact was made.
 | CPU idle | **Core states working (DSDT override)** | `acpi_idle` C1/C4 after the `_OSC` fix; cluster/system states gated by `PEPI` |
 | suspend | Unknown | |
 | resume | Unknown | |
-| RTC | Unknown | |
-| TPM | Not exposed to Linux | TPM2 table present, but no `/dev/tpm0` or `/dev/tpmrm0` in captured boot; vendor-reserved start method 9 needs investigation |
+| RTC | Not available under ACPI | No `rtc0`. `\_SB.PRTC` (`ACPI000E`) reads and sets time through `\_SB.PMGK` (PMIC GLink), the same missing path as the battery. See `docs/qcom-next-ssd-install-2026-09-27.md` |
+| TPM | Not exposed to Linux | TPM2 table present, but no `/dev/tpm0` or `/dev/tpmrm0` in captured boot; vendor-reserved start method 9 needs investigation. systemd waited 90 s per boot for it; the board command line sets `systemd.tpm2_wait=0` |
 | ADSP | Unknown | |
 | CDSP | Unknown | |
 | NPU | Unknown | |

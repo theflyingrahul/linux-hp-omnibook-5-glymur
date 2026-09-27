@@ -29,6 +29,12 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-27:** the qcom-next boot kernel (`7.3.0-rc2-glymur`) is built and
+staged with an installer for an Ubuntu root on SSD partition 5, booted from the
+USB's GRUB (the SSD's EFI partition stays untouched). Next: install, first
+boot of the new kernel, and the Windows/Linux fan comparison. See
+`docs/qcom-next-ssd-install-2026-09-27.md`.
+
 **2026-09-26 (after reboot):** CPU core idle works with a BIOS-gated DSDT
 `_OSC` fix, and the EC bus works over GPI DMA (thermal zones now read).
 The remaining power gaps are CPU frequency scaling (no `_CPC`), cluster
