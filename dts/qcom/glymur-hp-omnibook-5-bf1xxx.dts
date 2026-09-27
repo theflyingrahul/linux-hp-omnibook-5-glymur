@@ -1,0 +1,148 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * HP OmniBook 5 16-bf1xxx, full device tree: the minimal set plus the eDP
+ * OLED panel, the Adreno X2-85 GPU, the ADSP/CDSP remoteprocs and PMIC GLink
+ * (battery, AC). If the display stays dark, boot the -minimal variant.
+ */
+/dts-v1/;
+
+#include "glymur-hp-omnibook-5-bf1xxx.dtsi"
+
+/ {
+	model = "HP OmniBook 5 Laptop 16-bf1xxx";
+	compatible = "hp,omnibook-5-16-bf1xxx", "qcom,glymur";
+
+	/*
+	 * PMIC GLink on the ADSP: battery and AC (\_SB.PMGK in ACPI). No USB-C
+	 * connectors yet: their PHYs and repeaters are not evidenced.
+	 */
+	pmic-glink {
+		compatible = "qcom,glymur-pmic-glink",
+			     "qcom,pmic-glink";
+		#address-cells = <1>;
+		#size-cells = <0>;
+	};
+
+	/*
+	 * eDP panel power: HP's PEP recipe for GPU0 drives GPIO 70 (and 18,
+	 * 119). It is already on from firmware (boot-on).
+	 */
+	vreg_edp: regulator-edp {
+		compatible = "regulator-fixed";
+
+		regulator-name = "VREG_EDP_3P3";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+
+		gpio = <&tlmm 70 GPIO_ACTIVE_HIGH>;
+		enable-active-high;
+
+		pinctrl-0 = <&edp_pwr_en>;
+		pinctrl-names = "default";
+
+		regulator-boot-on;
+	};
+};
+
+&gpu {
+	status = "okay";
+};
+
+&gmu {
+	status = "okay";
+};
+
+&mdss {
+	status = "okay";
+};
+
+/*
+ * Internal panel: EDID SDC 0x4214, "Integrated Monitor (ATNA60KJ02-0)" in
+ * Windows, a Samsung ATNA OLED, 1920x1200, 8 bpc, eDP. The ATNA driver
+ * handles AUX backlight and the power/enable sequence.
+ */
+&mdss_dp3 {
+	/delete-property/ #sound-dai-cells;
+
+	pinctrl-0 = <&edp0_hpd_default>;
+	pinctrl-names = "default";
+
+	status = "okay";
+
+	aux-bus {
+		panel {
+			compatible = "samsung,atna33xc20";
+			enable-gpios = <&tlmm 18 GPIO_ACTIVE_HIGH>;
+			power-supply = <&vreg_edp>;
+
+			pinctrl-0 = <&edp_bl_en>;
+			pinctrl-names = "default";
+
+			port {
+				edp_panel_in: endpoint {
+					remote-endpoint = <&mdss_dp3_out>;
+				};
+			};
+		};
+	};
+};
+
+&mdss_dp3_out {
+	data-lanes = <0 1 2 3>;
+	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
+
+	remote-endpoint = <&edp_panel_in>;
+};
+
+&mdss_dp3_phy {
+	status = "okay";
+};
+
+/*
+ * HP-signed images from HP's driver pack (qcsubsys_ext_adsp8480,
+ * qcnspmcdm8480); see boards/hp-omnibook-5-16-bf1xxx/firmware/README.md.
+ */
+&remoteproc_adsp {
+	firmware-name = "qcom/glymur/HP/omnibook-5-16-bf1xxx/qcadsp8480.mbn",
+			"qcom/glymur/HP/omnibook-5-16-bf1xxx/adsp_dtbs.elf";
+
+	status = "okay";
+};
+
+&remoteproc_cdsp {
+	firmware-name = "qcom/glymur/HP/omnibook-5-16-bf1xxx/qccdsp8480.mbn",
+			"qcom/glymur/HP/omnibook-5-16-bf1xxx/cdsp_dtbs.elf";
+
+	status = "okay";
+};
+
+&tlmm {
+	/*
+	 * Allow-list: the minimal set (0-1, 3, 16-17, 32-33, 51, 56-59, 67,
+	 * 92, 116, 146-148, 152-154) plus eDP 18, 70 and 119. Everything
+	 * else is reserved.
+	 */
+	gpio-reserved-ranges = <2 1>, <4 12>, <19 13>, <34 17>, <52 4>,
+			       <60 7>, <68 2>, <71 21>, <93 23>, <117 2>,
+			       <120 26>, <149 3>, <155 95>;
+
+	edp_bl_en: edp-bl-en-state {
+		pins = "gpio18";
+		function = "gpio";
+		drive-strength = <16>;
+		bias-disable;
+	};
+
+	edp_pwr_en: edp-pwr-en-state {
+		pins = "gpio70";
+		function = "gpio";
+		drive-strength = <16>;
+		bias-disable;
+	};
+
+	edp0_hpd_default: edp0-hpd-default-state {
+		pins = "gpio119";
+		function = "edp0_hot";
+		bias-disable;
+	};
+};

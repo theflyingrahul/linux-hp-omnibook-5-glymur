@@ -109,13 +109,34 @@ static void qcom0f16_snapshot_gcc(struct device *dev)
 /* UR15's UART lines per HP's BSRC_UART_4Wire_1.bin TLMMGPIO actions. */
 static const unsigned int ur15_pins[] = { 56, 57, 58, 59 };
 
+/*
+ * Device-tree evidence: candidate pins whose firmware state (mux, direction,
+ * level) confirms the board wiring, read once. Defaults: PCIe4/5 PERST# and
+ * WAKE# (146, 148, 152, 154; CLKREQ# 147/153 are in HP's PEP tables), WLAN
+ * enable 117, eDP power/enable/HPD 70/18/119, USB 72, lid 92, EC event 66,
+ * keyboard 67, touchpad 3, touchscreen 51 and a possible touchscreen reset
+ * 48. None is in the secure ranges (4-7, 10-11, 44-47, 90).
+ */
+static unsigned int dt_pins[32] = { 146, 147, 148, 152, 153, 154, 117, 70, 18,
+				    119, 72, 92, 66, 67, 3, 51, 48 };
+static int dt_pins_count = 17;
+module_param_array_named(dt_pins, dt_pins, uint, &dt_pins_count, 0444);
+MODULE_PARM_DESC(dt_pins, "Extra TLMM pins to read (read only)");
+
 static void qcom0f16_snapshot_pin(struct device *dev, unsigned int gpio)
 {
 	void __iomem *pin;
 	u32 ctl, io;
 
-	if (gpio >= 250)
+	/*
+	 * Never read pins the secure world may own (reference-design reserved
+	 * ranges: secure I3C 4-7, OOB UART 10-11, TPM SPI 44-47, TPM 90).
+	 */
+	if (gpio >= 250 || (gpio >= 4 && gpio <= 7) || gpio == 10 || gpio == 11 ||
+	    (gpio >= 44 && gpio <= 47) || gpio == 90) {
+		dev_info(dev, "snapshot: gpio%u skipped (reserved or out of range)\n", gpio);
 		return;
+	}
 	pin = ioremap(GLYMUR_TLMM_BASE + gpio * TLMM_PIN_STRIDE, 0x10);
 	if (!pin)
 		return;
@@ -189,6 +210,8 @@ static int qcom0f16_snapshot_probe(struct platform_device *pdev)
 		for (bt_pin = 0; bt_pin < ARRAY_SIZE(ur15_pins); bt_pin++)
 			qcom0f16_snapshot_pin(dev, ur15_pins[bt_pin]);
 		qcom0f16_snapshot_pin(dev, bt_en_gpio);
+		for (bt_pin = 0; bt_pin < dt_pins_count; bt_pin++)
+			qcom0f16_snapshot_pin(dev, dt_pins[bt_pin]);
 	}
 	return -ENODEV;
 }

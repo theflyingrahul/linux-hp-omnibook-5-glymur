@@ -47,11 +47,22 @@ install -m 644 "$stage/Image" "$BOOT/vmlinuz-$krel"
 [ -f "$stage/.config" ] && install -m 644 "$stage/.config" "$BOOT/config-$krel"
 [ -f "$stage/System.map" ] && install -m 644 "$stage/System.map" "$BOOT/System.map-$krel"
 depmod -a "$krel"
+# Device trees built with this kernel (the USB's device-tree entries load
+# them through /boot/glymur-dtb).
+if [ -d "$stage/dtbs" ]; then
+    rm -rf "$BOOT/dtbs/$krel"
+    mkdir -p "$BOOT/dtbs/$krel"
+    cp -a "$stage/dtbs/." "$BOOT/dtbs/$krel/"
+fi
 
 # Rotate: the kernel that is running now becomes "previous".
-running="vmlinuz-$(uname -r)"
-[ -f "$BOOT/$running" ] && ln -sfn "$running" "$BOOT/vmlinuz-glymur.old"
+running="$(uname -r)"
+[ -f "$BOOT/vmlinuz-$running" ] && ln -sfn "vmlinuz-$running" "$BOOT/vmlinuz-glymur.old"
 ln -sfn "vmlinuz-$krel" "$BOOT/vmlinuz-glymur"
+if [ -d "$BOOT/dtbs/$krel/qcom" ]; then
+    [ -d "$BOOT/dtbs/$running/qcom" ] && ln -sfn "dtbs/$running/qcom" "$BOOT/glymur-dtb.old"
+    ln -sfn "dtbs/$krel/qcom" "$BOOT/glymur-dtb"
+fi
 sync
-ls -l "$BOOT"/vmlinuz-glymur "$BOOT"/vmlinuz-glymur.old 2>/dev/null
+ls -l "$BOOT"/vmlinuz-glymur "$BOOT"/vmlinuz-glymur.old "$BOOT"/glymur-dtb "$BOOT"/glymur-dtb.old 2>/dev/null
 echo "Reboot and choose \"Ubuntu on SSD: newest glymur kernel\" to boot $krel."

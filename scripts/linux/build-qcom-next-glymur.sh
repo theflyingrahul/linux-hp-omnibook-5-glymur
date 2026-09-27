@@ -52,6 +52,18 @@ CONFIG_QCOM_GPI_DMA=m
 CONFIG_I2C_QCOM_GENI=m
 CONFIG_I2C_HID_ACPI=m
 CONFIG_HID_MULTITOUCH=m
+# Device-tree boot without an initramfs: everything between the kernel and
+# the NVMe root is built in (clock, pin and interconnect controllers, TCSR
+# reference clocks, the QMP PCIe PHY). All are inert on an ACPI boot.
+CONFIG_CLK_GLYMUR_GCC=y
+CONFIG_CLK_GLYMUR_TCSRCC=y
+CONFIG_PINCTRL_GLYMUR=y
+CONFIG_INTERCONNECT_QCOM_GLYMUR=y
+CONFIG_PHY_QCOM_QMP=y
+CONFIG_PHY_QCOM_QMP_PCIE=y
+CONFIG_I2C_HID_OF=m
+CONFIG_KEYBOARD_GPIO=m
+CONFIG_DRM_PANEL_SAMSUNG_ATNA33XC20=m
 CFG
 
 cp "$UBUNTU_CONFIG" "$OUT/.config"
@@ -84,6 +96,19 @@ STAGE="$OUT/stage"
 rm -rf "$STAGE"
 "${MAKE[@]}" INSTALL_MOD_PATH="$STAGE" INSTALL_MOD_STRIP=1 modules_install >/dev/null
 cp "$OUT/arch/arm64/boot/Image" "$OUT/.config" "$OUT/System.map" "$STAGE/"
+
+# HP device trees from the repository's dts/qcom/, compiled against this
+# tree's glymur.dtsi and shipped next to the kernel (stage/dtbs/qcom/).
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+if compgen -G "$REPO_DIR/dts/qcom/glymur-hp-*.dts" >/dev/null; then
+    cp "$REPO_DIR"/dts/qcom/glymur-hp-* "$SRC/arch/arm64/boot/dts/qcom/"
+    mkdir -p "$STAGE/dtbs/qcom"
+    for dts in "$REPO_DIR"/dts/qcom/glymur-hp-*.dts; do
+        dtb="qcom/$(basename "$dts" .dts).dtb"
+        "${MAKE[@]}" "$dtb" >/dev/null
+        cp "$OUT/arch/arm64/boot/dts/$dtb" "$STAGE/dtbs/qcom/"
+    done
+fi
 tar -C "$STAGE" -czf "$OUT/glymur-kernel-$KREL.tar.gz" .
 printf 'kernelrelease=%s\n' "$KREL"
 sha256sum "$STAGE/Image" "$OUT/glymur-kernel-$KREL.tar.gz"

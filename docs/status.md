@@ -29,6 +29,11 @@ Still missing, mostly on the device-tree/remoteproc path:
 - CPU frequency scaling (no `_CPC`) and cluster idle;
 - suspend and the TPM.
 
+**Device tree (2026-09-27):** the owner chose the DT route. HP DTS files
+(`dts/qcom/`, with a minimal and a full variant) and kernel
+`7.3.0-rc2-glymur-2` with the DT boot path built in are staged. The next
+step is the first DT boot. See `docs/device-tree-evidence-2026-09-27.md`.
+
 The table below is per subsystem. The dated entries after this section are
 history, newest first. A later entry supersedes an earlier one.
 

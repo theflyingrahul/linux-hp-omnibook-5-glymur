@@ -29,6 +29,12 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-27 (device tree):** a device tree for this laptop, built from its
+ACPI, PEP, driver-pack and Windows evidence, and kernel `7.3.0-rc2-glymur-2`
+(which boots both ACPI and DT) are staged. Before the first DT boot, confirm
+the PCIe PERST#/WAKE# pins with the read-only snapshot module on the running
+SSD install. See `docs/device-tree-evidence-2026-09-27.md`.
+
 **2026-09-27 (first boot):** the qcom-next boot kernel (`7.3.0-rc2-glymur`)
 is installed and booted on SSD partition 5, from the USB's GRUB (the SSD's
 EFI partition stays untouched). Input, the EC bus/thermal/fan, and CPU idle

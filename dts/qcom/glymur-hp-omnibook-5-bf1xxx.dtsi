@@ -1,0 +1,307 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * HP OmniBook 5 Laptop 16-bf1xxx (Snapdragon X2 Elite X2E84100, "Glymur").
+ *
+ * Every board value comes from this machine: HP's DSDT (decoded with
+ * scripts/linux/acpi-crs-decode.py), HP's PEP power tables
+ * (analyze-acpi-pep.py, parse-bsrc.py on the HP driver pack), the MADT and
+ * the Windows device tree. See docs/device-tree-evidence-2026-09-27.md.
+ * Qualcomm's glymur.dtsi describes the SoC.
+ *
+ * Deliberately conservative:
+ *  - no RPMh regulators are declared, so Linux changes no PMIC rail and
+ *    every rail stays as HP's firmware left it;
+ *  - every TLMM pin that a board file does not use is reserved
+ *    (gpio-reserved-ranges, set per .dts), so an unknown pin such as an
+ *    EC reset can never be touched.
+ */
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/input/gpio-keys.h>
+#include <dt-bindings/input/input.h>
+#include <dt-bindings/interrupt-controller/irq.h>
+
+#include "glymur.dtsi"
+
+/*
+ * X2E84100 is a Glymur die with CPU cluster 2 fused off: the MADT lists 18
+ * GICC entries and marks MPIDR 0x20000-0x20500 disabled. Remove that
+ * cluster and the thermal zones that cool it; Glymur's other blocks
+ * (interconnect, TSENS 6/7, PCIe 3a) stay, unlike on the Mahua die.
+ */
+/delete-node/ &bwmon_cluster2;
+/delete-node/ &cluster2_pd;
+/delete-node/ &cpu_map_cluster2;
+/delete-node/ &cpu12;
+/delete-node/ &cpu13;
+/delete-node/ &cpu14;
+/delete-node/ &cpu15;
+/delete-node/ &cpu16;
+/delete-node/ &cpu17;
+/delete-node/ &cpu_pd12;
+/delete-node/ &cpu_pd13;
+/delete-node/ &cpu_pd14;
+/delete-node/ &cpu_pd15;
+/delete-node/ &cpu_pd16;
+/delete-node/ &cpu_pd17;
+/delete-node/ &thermal_cpu_2_0_0;
+/delete-node/ &thermal_cpu_2_0_1;
+/delete-node/ &thermal_cpu_2_1_0;
+/delete-node/ &thermal_cpu_2_1_1;
+/delete-node/ &thermal_cpu_2_2_0;
+/delete-node/ &thermal_cpu_2_2_1;
+/delete-node/ &thermal_cpu_2_3_0;
+/delete-node/ &thermal_cpu_2_3_1;
+/delete-node/ &thermal_cpu_2_4_0;
+/delete-node/ &thermal_cpu_2_4_1;
+/delete-node/ &thermal_cpu_2_5_0;
+/delete-node/ &thermal_cpu_2_5_1;
+/delete-node/ &thermal_cpuillc_2_1;
+/delete-node/ &thermal_cpullc_2_0;
+
+/ {
+	chassis-type = "laptop";
+
+	aliases {
+		i2c0 = &i2c0;
+		i2c4 = &i2c4;
+		i2c8 = &i2c8;
+		serial1 = &uart14;
+	};
+
+	chosen {
+	};
+
+	/*
+	 * Root clocks from the PMK8850 PMIC (PMIC "A": HP's PEP tables vote its
+	 * CLK6_A/CLK7_A buffers). The 38.4 MHz XO and the 32 kHz sleep clock
+	 * are properties of that PMIC, not board choices.
+	 */
+	clocks {
+		sleep_clk: sleep-clk {
+			compatible = "fixed-clock";
+			clock-frequency = <32000>;
+			#clock-cells = <0>;
+		};
+
+		xo_board: xo-board {
+			compatible = "fixed-clock";
+			clock-frequency = <38400000>;
+			#clock-cells = <0>;
+		};
+	};
+
+	/*
+	 * Lid: \_SB.LID0._LID returns GIO0.LIDR, the level of GPIO 92, with
+	 * 1 = open, so the line is low when closed. LIGE signals it on PDC
+	 * pin 960 (GPIO 92), both edges.
+	 */
+	gpio-keys {
+		compatible = "gpio-keys";
+
+		pinctrl-0 = <&hall_int_n_default>;
+		pinctrl-names = "default";
+
+		switch-lid {
+			label = "lid";
+			gpios = <&tlmm 92 GPIO_ACTIVE_LOW>;
+			linux,input-type = <EV_SW>;
+			linux,code = <SW_LID>;
+			wakeup-source;
+			wakeup-event-action = <EV_ACT_DEASSERTED>;
+		};
+	};
+};
+
+/* HP I2C1 (0xb80000, PEP pins 0/1): keyboard ECKB QTEC0001 at 0x3a. */
+&i2c0 {
+	clock-frequency = <400000>;
+
+	status = "okay";
+
+	keyboard@3a {
+		compatible = "hid-over-i2c";
+		reg = <0x3a>;
+
+		/* _DSM 3cdff6f7 function 1 returns 1. */
+		hid-descr-addr = <0x1>;
+		/* GpioInt level-low, wake, pull-up; PDC pin 704 = GPIO 67. */
+		interrupts-extended = <&tlmm 67 IRQ_TYPE_LEVEL_LOW>;
+
+		pinctrl-0 = <&kybd_default>;
+		pinctrl-names = "default";
+
+		wakeup-source;
+	};
+};
+
+/* HP I2C5 (0xb90000, PEP pins 16/17): touchpad TCPD at 0x15. */
+&i2c4 {
+	clock-frequency = <400000>;
+
+	status = "okay";
+
+	/* ELAN0189 on this SKU (\_SB.SPID == 0). */
+	touchpad@15 {
+		compatible = "hid-over-i2c";
+		reg = <0x15>;
+
+		hid-descr-addr = <0x1>;
+		/* GpioInt level-low, wake, pull-up; PDC pin 896 = GPIO 3. */
+		interrupts-extended = <&tlmm 3 IRQ_TYPE_LEVEL_LOW>;
+
+		pinctrl-0 = <&tpad_default>;
+		pinctrl-names = "default";
+
+		wakeup-source;
+	};
+};
+
+/* HP I2C9 (0xa80000, PEP pins 32/33): touchscreen TSC1 at 0x10. */
+&i2c8 {
+	clock-frequency = <400000>;
+
+	status = "okay";
+
+	/* ELAN2513, present on this SKU (\_SB.SKID == 1). */
+	touchscreen@10 {
+		compatible = "hid-over-i2c";
+		reg = <0x10>;
+
+		hid-descr-addr = <0x1>;
+		/* GpioInt level-low, pull-up, GPIO 51. No reset line in _CRS. */
+		interrupts-extended = <&tlmm 51 IRQ_TYPE_LEVEL_LOW>;
+
+		pinctrl-0 = <&ts_default>;
+		pinctrl-names = "default";
+	};
+};
+
+/*
+ * PCIe 4: the QCC2072 Wi-Fi module (17cb:1112, HP 103c:8ef3). PEP drives
+ * CLKREQ# GPIO 147. PERST#/WAKE# are not in HP's tables; 146/148 follow
+ * the Glymur reference routing that HP's CLKREQ pin matches, confirmed
+ * against firmware state by scripts/linux/qcom0f16-snapshot before boot.
+ * The module's 3.3 V (GPIO 94) and enables (GPIO 116/117) stay as firmware
+ * left them; GPIO 94 and 117 are reserved.
+ */
+&pcie4 {
+	pinctrl-0 = <&pcie4_default>;
+	pinctrl-names = "default";
+
+	status = "okay";
+};
+
+&pcie4_phy {
+	status = "okay";
+};
+
+&pcie4_port0 {
+	reset-gpios = <&tlmm 146 GPIO_ACTIVE_LOW>;
+	wake-gpios = <&tlmm 148 GPIO_ACTIVE_LOW>;
+};
+
+/* PCIe 5: NVMe (the root filesystem). PEP drives CLKREQ# GPIO 153. */
+&pcie5 {
+	pinctrl-0 = <&pcie5_default>;
+	pinctrl-names = "default";
+
+	status = "okay";
+};
+
+&pcie5_phy {
+	status = "okay";
+};
+
+&pcie5_port0 {
+	reset-gpios = <&tlmm 152 GPIO_ACTIVE_LOW>;
+	wake-gpios = <&tlmm 154 GPIO_ACTIVE_LOW>;
+};
+
+&tlmm {
+	tpad_default: tpad-default-state {
+		pins = "gpio3";
+		function = "gpio";
+		bias-pull-up;
+	};
+
+	ts_default: ts-default-state {
+		pins = "gpio51";
+		function = "gpio";
+		bias-pull-up;
+	};
+
+	kybd_default: kybd-default-state {
+		pins = "gpio67";
+		function = "gpio";
+		bias-pull-up;
+	};
+
+	hall_int_n_default: hall-int-n-state {
+		pins = "gpio92";
+		function = "gpio";
+		bias-disable;
+	};
+
+	pcie4_default: pcie4-default-state {
+		clkreq-n-pins {
+			pins = "gpio147";
+			function = "pcie4_clk_req_n";
+			drive-strength = <2>;
+			bias-pull-up;
+		};
+
+		perst-n-pins {
+			pins = "gpio146";
+			function = "gpio";
+			drive-strength = <2>;
+			bias-disable;
+		};
+
+		wake-n-pins {
+			pins = "gpio148";
+			function = "gpio";
+			drive-strength = <2>;
+			bias-pull-up;
+		};
+	};
+
+	pcie5_default: pcie5-default-state {
+		clkreq-n-pins {
+			pins = "gpio153";
+			function = "pcie5_clk_req_n";
+			drive-strength = <2>;
+			bias-pull-up;
+		};
+
+		perst-n-pins {
+			pins = "gpio152";
+			function = "gpio";
+			drive-strength = <2>;
+			bias-disable;
+		};
+
+		wake-n-pins {
+			pins = "gpio154";
+			function = "gpio";
+			drive-strength = <2>;
+			bias-pull-up;
+		};
+	};
+};
+
+/*
+ * HP UR15 (QUP_1_SE_6, 4-wire; UART pins 56-59 per HP's
+ * BSRC_UART_4Wire_1.bin): QCC2072 Bluetooth (BTH0, QCOM0F6B). Windows runs
+ * it at 3.2 Mbaud (qcbluetooth8480.inf BaudRate). BTH0's GpioIo is GPIO
+ * 116, the Bluetooth enable (bt-enable on the Glymur reference design).
+ */
+&uart14 {
+	status = "okay";
+
+	bluetooth {
+		compatible = "qcom,qcc2072-bt";
+		enable-gpios = <&tlmm 116 GPIO_ACTIVE_HIGH>;
+		max-speed = <3200000>;
+	};
+};
