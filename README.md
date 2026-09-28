@@ -36,9 +36,10 @@ signed ADSP/CDSP firmware attached over the SoCCP, but the eDP panel stays
 dark: an eDP link-training failure at the DP PHY (`ret=-11`, "max v_level
 reached"), not the GPU-component issue the prior review already guarded
 against. The two-rail regulator fix drafted that day is reverted (see
-`docs/display-lab-2026-09-28.md`). Next: one boot of the USB entry
-"Ubuntu on SSD: display lab (device tree)", then
-`sudo bash "/media/$USER/UBUNTU 26_0/glymur-tools/lab/start-lab.sh"`. It
+`docs/display-lab-2026-09-28.md`). Next: from an ACPI boot ("newest glymur kernel", USB works there) run
+`bash scripts/linux/glymur-lab/stage-kit.sh` to copy the kit from the USB to
+the SSD, then boot "Ubuntu on SSD: display lab (device tree)" and run
+`sudo bash ~/glymur-lab-kit/start-lab.sh` (a DT boot cannot see the USB). It
 captures the firmware's working eDP setup and tries ten link variants at
 runtime, plus Bluetooth, battery and cpufreq checks, in that single boot.
 A DT boot still has no USB, GPU or audio. Keep booting the minimal DT

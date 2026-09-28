@@ -53,32 +53,37 @@ lanes, rate, lane map). A DT boot still has no USB, GPU or audio. See
 `docs/device-tree-first-boot-2026-09-28.md` and
 `docs/display-lab-2026-09-28.md`.
 
-The table below is per subsystem, as of the current boot (minimal DT,
-kernel `7.3.0-rc2-glymur-3`, verified live 2026-09-28). "Full DT" reflects
-the one test boot so far (`docs/device-tree-first-boot-2026-09-28.md`),
-not the current running kernel. The dated entries after this section are
-history, newest first. A later entry supersedes an earlier one.
+The table below is per subsystem. "Lab DT" is the display-lab device tree
+(the full DT with the display disabled at boot, plus ADSP, CDSP and PMIC
+GLink), verified live on 2026-09-28 on kernel `7.3.0-rc2-glymur-3`
+(`docs/lab-boot-state-2026-09-28.md`). "Minimal DT" and "Full DT" are from
+the first DT boots (`docs/device-tree-first-boot-2026-09-28.md`), where
+"same" means the logs showed the same result. The dated entries after this
+section are history, newest first. A later entry supersedes an earlier one.
 
-| Subsystem | Minimal DT (current) | Full DT (last tested) | Notes |
-|---|---|---|---|
-| CPUs (12) | Working | Working | |
-| NVMe / root storage | Working | Working | |
-| Keyboard | Working | Working | native DT `geni_i2c`/`hid-over-i2c`, no out-of-tree modules |
-| Touchpad | Working | Working | |
-| Touchscreen | Working (enumerates; not interactively retested) | Working (same) | one boot-time `i2c_hid_acpi` IRQ-without-data warning, harmless so far |
-| Lid switch | Working | Working | `gpio-keys` |
-| Wi-Fi | Working, full association (6 GHz, HE, 160 MHz) | Working | still on generic `ath12k` board data (`board_id 0xff`); HP's real board file needs Windows-side extraction |
-| **Bluetooth** | **Working** (`hci0`, `hci_qca`, QCC2072, scan-capable) | Working | newly confirmed this session, not previously documented as working; one non-fatal firmware gap: `qca/ornbcscal11.b17`/`.bin` (RF calibration) not found; running on linux-firmware's generic pair, while HP's ROM-1.1 pair (with the board-0x17 NVM) is now installed under the right names and A/B-tested by the lab |
-| EC thermal zones / fan | Working — 69 DT-native `hwmon` zones (per-core, GPU, NSP, camera, DDR, AOSS), live fan RPM | Working (same, plus this is where the eDP/GPU zones matter) | |
-| CPU idle | Working (`WFI`, `cpu-sleep-0`) | Working | no cluster idle yet |
-| CPU frequency scaling | Not working | Not working | no `cpufreq` sysfs; SCMI CPU frequency path not yet verified despite being nominally enabled |
-| USB-A / USB-C / UVC camera | Not working | Not working | no USB controller enabled at this DT stage — a regression versus the ACPI boot, where the right USB-A port worked |
-| Native display | Firmware framebuffer only (`dispcc` disabled) | Reaches DPU/DP controller bind; panel stays dark on eDP link training (cause open; display lab staged) | |
-| GPU | Not working (deliberately disabled) | Not working (deliberately disabled) | blocked on `CLK_GLYMUR_GPUCC` |
-| Audio | Not working | Not working | SoundWire/LPASS not wired yet |
-| Battery / AC / RTC / UCSI | Not working (no `pmic-glink` node in the minimal DT) | Declared (`pmic-glink` node, SoCCP attached) but **no battery/power-supply data seen** in that boot's logs — not confirmed functional | |
-| TPM | Not working | Not working | |
-| Suspend | Untested (masked) | Untested (masked) | |
+| Subsystem | Minimal DT | Full DT | Lab DT (verified live) | Notes |
+|---|---|---|---|---|
+| CPUs (12) | Working | Working | Working | |
+| NVMe / root storage | Working | Working | Working | |
+| Keyboard | Working | Working | Working | native DT `geni_i2c`/`hid-over-i2c`, no out-of-tree modules |
+| Touchpad | Working | Working | Working | |
+| Touchscreen | Enumerates | Enumerates | Enumerates | not interactively retested; one boot-time IRQ-without-data warning |
+| Lid switch | Working | Working | Working | `gpio-keys` |
+| Wi-Fi | Working | Working | Working (6 GHz, HE) | still on generic `ath12k` board data (`board_id 0xff`) |
+| Bluetooth | Working | Working | Working (`hci0`, QCC2072) | runs on linux-firmware's ROM-1.1 pair; RF calibration file `ornbcscal11.*` missing. The corrected `install-firmware.sh` has not been run on this SSD: `/usr/lib/firmware/updates/qca/` still holds the old ROM-10 names |
+| **Battery / AC (PMIC GLink)** | No (no `pmic-glink` node) | Node declared, no data seen in logs | **Working**: `qcom-battmgr-bat` reads capacity, voltage, power, energy (59.9 Wh full, 59.2 Wh design), 15 cycles, temperature; `qcom-battmgr-ac` reads online state; UPower sees it | newly confirmed. The SoCCP, ADSP and CDSP are up. `charge_now`/`charge_full` return no data (energy units only) |
+| USB-C port controllers (UCSI) | No | Not seen | Two `ucsi-source-psy` power supplies register | the ports are not usable: no USB controller or PHY is enabled |
+| RTC | Not working | Not seen | Not checked | |
+| Thermal zones | Working (69) | Working | Working (70) | DT-native TSENS zones (per-core, GPU, NSP, camera, DDR, AOSS) |
+| **Fan RPM / EC** | **Absent** | **Absent** | **Absent** | correction: an earlier version of this table listed live fan RPM under DT. That was wrong. The fan RPM and EC thermistors (`acpi_fan`, `acpitz`) came from the ACPI boot only; no DT node describes the EC (IC10), so there is no fan telemetry. The EC still runs the fan itself |
+| CPU idle | Working (`WFI`, `cpu-sleep-0`) | Working | Working | no cluster idle yet |
+| CPU frequency scaling | No | No | No | SCMI protocol v2.0 is up on both instances and `scmi_dev.1-4` exist, but no `scmi-cpufreq` driver is bound (`CONFIG_ARM_SCMI_CPUFREQ=m`, not loaded). The lab tries `modprobe scmi-cpufreq` |
+| USB-A / USB-C / UVC camera | No | No | No | all five `usb@` nodes and their PHYs are disabled: a regression against the ACPI boot, where the right USB-A port worked. A DT boot cannot see the boot USB either |
+| Native display | Firmware framebuffer | DPU and DP bind; panel dark on eDP clock recovery | Firmware framebuffer (display disabled on purpose) | cause open; the lab is meant to find it |
+| GPU | Disabled | Disabled | Disabled | blocked on `CLK_GLYMUR_GPUCC` (unset); `arm-smmu 3da0000` and `gxclkctl` time out at probe (-110) for the same reason |
+| Audio | No | No | No | SoundWire/LPASS not wired yet |
+| TPM | No | No | No | |
+| Suspend | Untested (masked) | Untested (masked) | Untested (masked) | |
 
 ## History
 
