@@ -44,6 +44,7 @@ say "session starting; output in $OUT"
 } >"$OUT/00-session.txt" 2>&1
 
 # ---------------------------------------------------------------- setup
+mkdir -p /run/modprobe.d
 cat >/run/modprobe.d/glymur-lab.conf <<'EOF'
 # glymur-lab: keep the stock eDP PHY driver out; the instrumented one binds.
 install phy_qcom_edp /bin/true
@@ -73,6 +74,7 @@ say "phase 1: baseline of every subsystem"
 } >"$OUT/10-baseline.txt" 2>&1
 
 # ---------------------------------------------------------------- 2 firmware snapshot
+sync
 say "phase 2: firmware eDP snapshot"
 cat "$LAB/snapshot" >"$OUT/20-fw-snapshot.txt" 2>&1
 python3 "$KIT/analyze-fw-snapshot.py" "$OUT/20-fw-snapshot.txt" >"$OUT/21-fw-analysis.txt" 2>&1
@@ -95,6 +97,10 @@ bt_rebind() {
     [ -n "$dev" ] || { echo "no hci_uart_qca device bound"; return 1; }
     echo "$dev" >"$drv/unbind"; sleep 2; echo "$dev" >"$drv/bind"; sleep 10
 }
+FWDIR=/lib/firmware/updates/qca
+if cmp -s "$KIT/bt/clnbtfw10.tlv" "$FWDIR/ornbtfw11.tlv" && cmp -s "$KIT/bt/clnbtnv10.b17" "$FWDIR/ornnv11.b17"; then
+    say "Bluetooth: HP's firmware pair is already installed and in use; skipping the A/B"
+else
 {
     bt_state 'before (linux-firmware)'
     FWDIR=/lib/firmware/updates/qca
@@ -115,6 +121,8 @@ else
     cp -a "$OUT/bt-backup/." /lib/firmware/updates/qca/ 2>/dev/null
     { mark bt-restore; bt_rebind; since bt-restore; bt_state 'restored'; } >>"$OUT/30-bluetooth.txt" 2>&1
 fi
+fi
+sync
 
 # ---------------------------------------------------------------- 4 battery, cpufreq
 say "phase 4: battery / PMIC GLink and CPU frequency diagnostics"
@@ -131,11 +139,19 @@ say "phase 4: battery / PMIC GLink and CPU frequency diagnostics"
     sect 'after modprobe'; since pmic; ls /sys/class/power_supply/
     sect 'cpufreq'; ls /sys/devices/system/cpu/cpufreq/ /sys/bus/scmi_protocol/devices/
     sect 'kernel log (scmi/cpucp)'; journalctl -k -b --no-pager | grep -iE 'scmi|cpucp|mbox|cpufreq|perf'
-    mark cpufreq
-    run modprobe qcom-cpucp-mbox; run modprobe scmi-cpufreq
-    sleep 3
-    sect 'after modprobe'; since cpufreq; ls /sys/devices/system/cpu/cpufreq/ /sys/bus/scmi_protocol/devices/
+    # Loading these took the whole laptop down in the first lab run (SCMI
+    # timeouts, then a hard hang with no oops): opt in with GLYMUR_LAB_CPUFREQ=1.
+    if [ "${GLYMUR_LAB_CPUFREQ:-0}" = 1 ]; then
+        sync
+        mark cpufreq
+        run modprobe qcom-cpucp-mbox; run modprobe scmi-cpufreq
+        sleep 3
+        sect 'after modprobe'; since cpufreq; ls /sys/devices/system/cpu/cpufreq/ /sys/bus/scmi_protocol/devices/
+    else
+        echo 'scmi-cpufreq load skipped (it hung the first run); GLYMUR_LAB_CPUFREQ=1 enables it'
+    fi
 } >"$OUT/40-power.txt" 2>&1
+sync
 
 # ---------------------------------------------------------------- 5 display
 say "phase 5: display experiments. The desktop stops now and the screen may"

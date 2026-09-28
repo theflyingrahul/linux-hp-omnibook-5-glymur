@@ -36,13 +36,14 @@ signed ADSP/CDSP firmware attached over the SoCCP, but the eDP panel stays
 dark: an eDP link-training failure at the DP PHY (`ret=-11`, "max v_level
 reached"), not the GPU-component issue the prior review already guarded
 against. The two-rail regulator fix drafted that day is reverted (see
-`docs/display-lab-2026-09-28.md`). Next: from an ACPI boot ("newest glymur kernel", USB works there) run
-`bash scripts/linux/glymur-lab/stage-kit.sh` to copy the kit from the USB to
-the SSD, then boot "Ubuntu on SSD: display lab (device tree)" and run
-`sudo bash ~/glymur-lab-kit/start-lab.sh` (a DT boot cannot see the USB). It
-captures the firmware's working eDP setup and tries ten link variants at
-runtime, plus Bluetooth, battery and cpufreq checks, in that single boot.
-A DT boot still has no USB, GPU or audio. Keep booting the minimal DT
+`docs/display-lab-2026-09-28.md`). The first lab run (kit staged from the USB, run on the lab boot) captured
+the firmware's link and finished the Bluetooth test, but the laptop hung in
+phase 4 when the lab loaded `scmi-cpufreq`, so no display variant ran. The
+firmware drives the panel on **2 lanes at 2.7 Gb/s; our DT declares 4 lanes**
+(`docs/display-lab-run1-2026-09-28.md`). The fixed kit is at
+`~/glymur-lab-kit`. Next: on a display-lab boot, `sudo bash
+~/glymur-lab-kit/start-lab.sh` again (phase 5 runs the DPCD dump and ten
+variants), and try `data-lanes = <0 1>` in the full DT regardless. A DT boot still has no USB, GPU or audio. Keep booting the minimal DT
 otherwise.
 See `docs/device-tree-first-boot-2026-09-28.md` and
 `docs/device-tree-review-2026-09-28.md`.
