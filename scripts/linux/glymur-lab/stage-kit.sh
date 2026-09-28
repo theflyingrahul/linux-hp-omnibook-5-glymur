@@ -11,7 +11,13 @@ set -euo pipefail
 # Then boot "Ubuntu on SSD: display lab (device tree)" and run
 #   sudo bash ~/glymur-lab-kit/start-lab.sh
 
-SRC="${1:-$(ls -d /media/"$USER"/*/glymur-tools/lab 2>/dev/null | head -n1)}"
+# The desktop mounts the USB under /run/media/$USER (udisks) or /media/$USER.
+SRC="${1:-}"
+if [ -z "$SRC" ]; then
+    for d in /run/media/"$USER"/*/glymur-tools/lab /media/"$USER"/*/glymur-tools/lab; do
+        [ -f "$d/SHA256SUMS" ] && { SRC="$d"; break; }
+    done
+fi
 DST="$HOME/glymur-lab-kit"
 
 [ -n "$SRC" ] && [ -f "$SRC/SHA256SUMS" ] || { echo 'lab kit not found on the USB; pass its path' >&2; exit 1; }
