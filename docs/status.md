@@ -42,14 +42,16 @@ thermal, cpuidle, and Wi-Fi all carry over from the ACPI results, on the
 firmware framebuffer. The full DT reached userspace cleanly (SoCCP, ADSP
 and CDSP all attached with HP's signed firmware) but the eDP panel stayed
 dark; the review's GPU-component fix held (that predicted failure mode
-did not recur). The cause: `phy-qcom-edp.c` falls back to dummy
-`vdda-phy`/`vdda-pll` regulators when the DTS doesn't supply them, so the
-PHY's analog rail may never actually power on. A fix is drafted (two RPMh
-regulators, evidenced from HP's PEP votes for `GPU0`, wired to
-`&mdss_dp3_phy`), validated with a manual `cpp`+`dtc` compile, but not yet
-built with the real toolchain or boot-tested — that needs a WSL build. A
-DT boot still has no USB, GPU or audio. See
-`docs/device-tree-first-boot-2026-09-28.md`.
+did not recur). The panel fails eDP clock recovery. The two-rail
+regulator fix proposed that day is reverted: the firmware keeps those
+shared rails on (the minimal DT's framebuffer and the Wi-Fi PHY run on
+them), and the fix would have voted them off on every eDP shutdown. The
+cause is open. A display lab is staged on the USB: one boot that captures
+the firmware's working eDP registers and tries ten variants at runtime
+(Windows' five display rails, SSC, swing tables, the firmware's TX values,
+lanes, rate, lane map). A DT boot still has no USB, GPU or audio. See
+`docs/device-tree-first-boot-2026-09-28.md` and
+`docs/display-lab-2026-09-28.md`.
 
 The table below is per subsystem, as of the current boot (minimal DT,
 kernel `7.3.0-rc2-glymur-3`, verified live 2026-09-28). "Full DT" reflects
@@ -66,12 +68,12 @@ history, newest first. A later entry supersedes an earlier one.
 | Touchscreen | Working (enumerates; not interactively retested) | Working (same) | one boot-time `i2c_hid_acpi` IRQ-without-data warning, harmless so far |
 | Lid switch | Working | Working | `gpio-keys` |
 | Wi-Fi | Working, full association (6 GHz, HE, 160 MHz) | Working | still on generic `ath12k` board data (`board_id 0xff`); HP's real board file needs Windows-side extraction |
-| **Bluetooth** | **Working** (`hci0`, `hci_qca`, QCC2072, scan-capable) | Working | newly confirmed this session, not previously documented as working; one non-fatal firmware gap: `qca/ornbcscal11.b17`/`.bin` (RF calibration) not found |
+| **Bluetooth** | **Working** (`hci0`, `hci_qca`, QCC2072, scan-capable) | Working | newly confirmed this session, not previously documented as working; one non-fatal firmware gap: `qca/ornbcscal11.b17`/`.bin` (RF calibration) not found; running on linux-firmware's generic pair, while HP's ROM-1.1 pair (with the board-0x17 NVM) is now installed under the right names and A/B-tested by the lab |
 | EC thermal zones / fan | Working — 69 DT-native `hwmon` zones (per-core, GPU, NSP, camera, DDR, AOSS), live fan RPM | Working (same, plus this is where the eDP/GPU zones matter) | |
 | CPU idle | Working (`WFI`, `cpu-sleep-0`) | Working | no cluster idle yet |
 | CPU frequency scaling | Not working | Not working | no `cpufreq` sysfs; SCMI CPU frequency path not yet verified despite being nominally enabled |
 | USB-A / USB-C / UVC camera | Not working | Not working | no USB controller enabled at this DT stage — a regression versus the ACPI boot, where the right USB-A port worked |
-| Native display | Firmware framebuffer only (`dispcc` disabled) | Reaches DPU/DP controller bind; panel stays dark on eDP link training (fix drafted, untested) | |
+| Native display | Firmware framebuffer only (`dispcc` disabled) | Reaches DPU/DP controller bind; panel stays dark on eDP link training (cause open; display lab staged) | |
 | GPU | Not working (deliberately disabled) | Not working (deliberately disabled) | blocked on `CLK_GLYMUR_GPUCC` |
 | Audio | Not working | Not working | SoundWire/LPASS not wired yet |
 | Battery / AC / RTC / UCSI | Not working (no `pmic-glink` node in the minimal DT) | Declared (`pmic-glink` node, SoCCP attached) but **no battery/power-supply data seen** in that boot's logs — not confirmed functional | |

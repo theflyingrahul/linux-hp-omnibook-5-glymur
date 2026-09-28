@@ -1,0 +1,24 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Display-lab overlay: turn the eDP display path of the full device tree
+ * back on at runtime (dispcc, MDSS with DP3 and the panel, the DP3 PHY and
+ * the panel's 3.3 V switch).
+ */
+/dts-v1/;
+/plugin/;
+
+&dispcc {
+	status = "okay";
+};
+
+&mdss {
+	status = "okay";
+};
+
+&mdss_dp3_phy {
+	status = "okay";
+};
+
+&vreg_edp {
+	status = "okay";
+};

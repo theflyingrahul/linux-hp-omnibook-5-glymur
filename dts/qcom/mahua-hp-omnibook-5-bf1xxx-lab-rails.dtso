@@ -1,0 +1,78 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Display-lab overlay: hold the five rails that HP's PEP recipe votes for
+ * the internal display (\_SB.GPU0 component 0, F-state 0) on, at HP's
+ * voltages and in high-power mode (PEP mode 7), exactly as Windows does
+ * while the panel is on. They are always-on, so no consumer can vote them
+ * off: L2F_E1 and L4F_E1 also feed the Wi-Fi PCIe PHY and the reference
+ * clock repeaters.
+ *
+ *   LDO1_F_E1  0.880 V   LDO2_F_E1  0.880 V   LDO4_F_E1  1.200 V
+ *   LDO18_B_E0 1.200 V   LDO8_B_E0  3.300 V (3.304 V, the nearest step at
+ *                        or above; PMH0101 LDO8 steps 8 mV from 1.504 V)
+ *
+ * PMIC types and IDs as in glymur-crd.dtsi (B_E0 = PMH0101, F_E1 =
+ * PMH0110); the voltages are HP's, not the CRD's (the CRD runs L8B at
+ * 1.504 V for another consumer).
+ */
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
+
+&apps_rsc {
+	regulators-0 {
+		compatible = "qcom,pmh0101-rpmh-regulators";
+		qcom,pmic-id = "B_E0";
+
+		lab_l8b_e0: ldo8 {
+			regulator-name = "lab_l8b_e0_3p3";
+			regulator-min-microvolt = <3304000>;
+			regulator-max-microvolt = <3304000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+			regulator-always-on;
+			regulator-boot-on;
+		};
+
+		lab_l18b_e0: ldo18 {
+			regulator-name = "lab_l18b_e0_1p2";
+			regulator-min-microvolt = <1200000>;
+			regulator-max-microvolt = <1200000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+			regulator-always-on;
+			regulator-boot-on;
+		};
+	};
+
+	regulators-1 {
+		compatible = "qcom,pmh0110-rpmh-regulators";
+		qcom,pmic-id = "F_E1";
+
+		lab_l1f_e1: ldo1 {
+			regulator-name = "lab_l1f_e1_0p88";
+			regulator-min-microvolt = <880000>;
+			regulator-max-microvolt = <880000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+			regulator-always-on;
+			regulator-boot-on;
+		};
+
+		lab_l2f_e1: ldo2 {
+			regulator-name = "lab_l2f_e1_0p88";
+			regulator-min-microvolt = <880000>;
+			regulator-max-microvolt = <880000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+			regulator-always-on;
+			regulator-boot-on;
+		};
+
+		lab_l4f_e1: ldo4 {
+			regulator-name = "lab_l4f_e1_1p2";
+			regulator-min-microvolt = <1200000>;
+			regulator-max-microvolt = <1200000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+			regulator-always-on;
+			regulator-boot-on;
+		};
+	};
+};

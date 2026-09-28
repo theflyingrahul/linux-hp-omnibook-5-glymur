@@ -7,9 +7,13 @@ set -euo pipefail
 # replaced:
 #   qcom/glymur/HP/omnibook-5-16-bf1xxx/  ADSP and CDSP images, dtbs, .jsn
 #       (the firmware-name paths in mahua-hp-omnibook-5-bf1xxx.dts)
-#   qca/ornbtfw10.tlv, qca/ornnv10.*      QCC2072 Bluetooth ROM 0x10: HP's
-#       "Colorado" clnbtfw10.tlv/clnbtnv10.* under btqca's "Orion" names
-#       (linux-firmware ships only ROM 0x11)
+#   qca/ornbtfw11.tlv, qca/ornnv11.*      QCC2072 Bluetooth: HP's "Colorado"
+#       clnbtfw10.tlv/clnbtnv10.* under btqca's "Orion" names. The "10" in
+#       HP's names is not the ROM: the patch header says ROM build 0x0101,
+#       the ROM 1.1 the controller reports, so btqca asks for ornbtfw11.tlv
+#       and ornnv11.b<board> (board 0x17 has its own HP file). These
+#       override linux-firmware's generic ROM-1.1 pair with the files
+#       Windows uses on this laptop.
 #
 #   sudo bash install-firmware.sh
 
@@ -30,9 +34,11 @@ install -m 644 "$adsp/qcadsp8480.mbn" "$adsp/adsp_dtbs.elf" \
 install -m 644 "$cdsp/qccdsp8480.mbn" "$cdsp/cdsp_dtbs.elf" "$soc/"
 
 bt="$FW/qcbluetooth8480_WHQL"
-install -m 644 "$bt/clnbtfw10.tlv" "$DEST/qca/ornbtfw10.tlv"
+install -m 644 "$bt/clnbtfw10.tlv" "$DEST/qca/ornbtfw11.tlv"
 for nvm in "$bt"/clnbtnv10.*; do
-    install -m 644 "$nvm" "$DEST/qca/ornnv10.${nvm##*.}"
+    install -m 644 "$nvm" "$DEST/qca/ornnv11.${nvm##*.}"
 done
+# Earlier versions installed these under ROM-10 names, which btqca never asks for.
+rm -f "$DEST"/qca/ornbtfw10.tlv "$DEST"/qca/ornnv10.*
 ls -l "$soc" "$DEST"/qca/orn*
 echo "Installed HP firmware under $DEST."

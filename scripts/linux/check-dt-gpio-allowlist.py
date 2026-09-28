@@ -7,7 +7,11 @@ parent) must be unreserved, and every other pin must be reserved. A reserved
 pin in use would fail to probe; an unused pin left unreserved could be
 driven by something unexpected.
 
-Usage: check-dt-gpio-allowlist.py [--ngpios 251] DTB [DTB ...]
+Usage: check-dt-gpio-allowlist.py [--ngpios 251] [--spare 18,70,119] DTB [DTB ...]
+
+--spare names pins that may be neither used nor reserved (the display-lab
+DTB leaves the eDP pins free for a runtime overlay); they must still not be
+reserved.
 Needs pylibfdt (python3-libfdt). Exit status 1 on any mismatch.
 """
 
@@ -133,7 +137,7 @@ def used_pins(fdt, tlmm, tlmm_path):
     return used
 
 
-def check(path, ngpios):
+def check(path, ngpios, spare=frozenset()):
     with open(path, 'rb') as handle:
         fdt = libfdt.Fdt(handle.read())
     tlmm, tlmm_path = find_tlmm(fdt)
@@ -154,13 +158,16 @@ def check(path, ngpios):
         print(f'{path}: FAIL GPIO {pin} is reserved but used by '
               + ', '.join(sorted(used[pin])))
         ok = False
-    for pin in sorted(set(range(ngpios)) - reserved - set(used)):
+    for pin in sorted(spare & reserved):
+        print(f'{path}: FAIL spare GPIO {pin} is reserved')
+        ok = False
+    for pin in sorted(set(range(ngpios)) - reserved - set(used) - spare):
         print(f'{path}: FAIL GPIO {pin} is neither used nor reserved')
         ok = False
     for pin in sorted(used):
         print(f'  GPIO {pin:3d}: ' + ', '.join(sorted(used[pin])))
     print(f'{path}: {"OK" if ok else "FAIL"} ({len(used)} pins used, '
-          f'{len(reserved)} reserved, {ngpios} total)')
+          f'{len(reserved)} reserved, {len(spare)} spare, {ngpios} total)')
     return ok
 
 
@@ -168,9 +175,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument('--ngpios', type=int, default=251,
                         help='TLMM pin count (pinctrl-glymur.c ngpios: 251)')
+    parser.add_argument('--spare', default='',
+                        help='comma-separated pins allowed to be unused and unreserved')
     parser.add_argument('dtb', nargs='+')
     args = parser.parse_args()
-    results = [check(path, args.ngpios) for path in args.dtb]
+    spare = frozenset(int(p) for p in args.spare.split(',') if p)
+    results = [check(path, args.ngpios, spare) for path in args.dtb]
     return 0 if all(results) else 1
 
 

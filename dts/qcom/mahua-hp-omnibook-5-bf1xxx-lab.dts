@@ -1,0 +1,36 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * HP OmniBook 5 16-bf1xxx, display-lab device tree: the full device tree
+ * with the display blocks disabled at boot, built with overlay symbols.
+ *
+ * At boot it behaves like the minimal device tree plus the ADSP, CDSP and
+ * PMIC GLink: the firmware keeps driving the eDP panel, so its working
+ * controller and PHY registers can be read. scripts/linux/glymur-lab then
+ * enables the display at runtime with the -lab-display overlay and tries
+ * link-training variants without rebooting. The eDP pins 18, 70 and 119
+ * are left unreserved (spare) so the overlay can use them; nothing touches
+ * them until then.
+ */
+/dts-v1/;
+
+#include "mahua-hp-omnibook-5-bf1xxx.dts"
+
+/ {
+	model = "HP OmniBook 5 Laptop 16-bf1xxx (display lab)";
+};
+
+&dispcc {
+	status = "disabled";
+};
+
+&mdss {
+	status = "disabled";
+};
+
+&mdss_dp3_phy {
+	status = "disabled";
+};
+
+&vreg_edp {
+	status = "disabled";
+};

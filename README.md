@@ -35,11 +35,14 @@ firmware framebuffer. The full DT reaches userspace cleanly, with HP's
 signed ADSP/CDSP firmware attached over the SoCCP, but the eDP panel stays
 dark: an eDP link-training failure at the DP PHY (`ret=-11`, "max v_level
 reached"), not the GPU-component issue the prior review already guarded
-against. Traced to `phy-qcom-edp.c` falling back to dummy `vdda-phy`/
-`vdda-pll` regulators; a fix is drafted (two RPMh regulators evidenced
-from HP's PEP votes) and validated with a manual `cpp`+`dtc` compile, but
-not yet built or boot-tested — that needs a WSL build next. A DT boot
-still has no USB, GPU or audio. Keep booting the minimal DT meanwhile.
+against. The two-rail regulator fix drafted that day is reverted (see
+`docs/display-lab-2026-09-28.md`). Next: one boot of the USB entry
+"Ubuntu on SSD: display lab (device tree)", then
+`sudo bash "/media/$USER/UBUNTU 26_0/glymur-tools/lab/start-lab.sh"`. It
+captures the firmware's working eDP setup and tries ten link variants at
+runtime, plus Bluetooth, battery and cpufreq checks, in that single boot.
+A DT boot still has no USB, GPU or audio. Keep booting the minimal DT
+otherwise.
 See `docs/device-tree-first-boot-2026-09-28.md` and
 `docs/device-tree-review-2026-09-28.md`.
 

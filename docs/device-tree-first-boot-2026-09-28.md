@@ -1,5 +1,11 @@
 # Device Tree: First Boots, September 28, 2026
 
+> Re-assessed in `docs/display-lab-2026-09-28.md`: the two-rail eDP fix
+> proposed below is reverted (its premise is contradicted by this boot's own
+> evidence), HP's Bluetooth files are ROM 1.1 and belong under the ROM-11
+> names, and `install-firmware.sh` had been run (it installs to
+> `/lib/firmware/updates/`).
+
 Three boots today, after `4781096` (the reviewed DT, kernel
 `7.3.0-rc2-glymur-3`): a sanity check on the old ACPI-only kernel, the full
 DT (blank screen), and the minimal DT (current, working). This is the first
