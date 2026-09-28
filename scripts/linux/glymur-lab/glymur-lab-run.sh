@@ -31,6 +31,11 @@ say() {
     local msg="[glymur-lab $(date +%H:%M:%S)] $*"
     echo "$msg" | tee -a "$LOG"
     echo "$msg" >/dev/tty1 2>/dev/null || true
+    echo "$msg" >/dev/kmsg 2>/dev/null || true
+    # The laptop has hung hard twice with no oops; flush every line so the
+    # last one on disk (and on the screen, tty1) names the step that did it.
+    sync
+    journalctl --sync 2>/dev/null || true
 }
 mark() { echo "glymur-lab MARK $1" >/dev/kmsg; }
 since() { journalctl -k -b --no-pager -o short-monotonic | sed -n "/glymur-lab MARK $1\$/,\$p"; }
@@ -159,11 +164,17 @@ say "go dark. Wait; the laptop reboots by itself when the lab is done, or"
 say "shows this console if a variant trains the panel."
 systemd-run --unit=glymur-lab-deadman --on-active=30min -p IgnoreOnIsolate=yes     --timer-property=IgnoreOnIsolate=yes /usr/bin/systemctl reboot >>"$LOG" 2>&1
 sleep 5
+say "step 5.1: stopping the desktop (this ends the logged-in session)"
 # Stop only the desktop (isolate would also stop this transient service).
 systemctl stop display-manager.service
 sleep 5
+say "step 5.2: desktop stopped; switching to this console"
 chvt 1 2>/dev/null
+sleep 2
+say "step 5.3: enabling DRM debug logging"
 echo 0x106 >/sys/module/drm/parameters/debug
+sleep 2
+say "step 5.4: applying the display overlay (dispcc, MDSS, DP3 PHY, panel supply)"
 
 variant_capture() {
     local tag="$1" d
@@ -241,6 +252,7 @@ setp() { echo "$2" >"$PHYP/$1"; }
 # V0: the full device tree's display path exactly as booted before.
 mark v0-baseline
 cat "$KIT/mahua-hp-omnibook-5-bf1xxx-lab-display.dtbo" >"$LAB/overlay"
+say "step 5.5: display overlay applied; waiting for msm and the eDP link"
 attempt v0-baseline "full-DT display, stock settings" && success v0-baseline
 
 # V1: Windows' five display rails held on in high-power mode.
