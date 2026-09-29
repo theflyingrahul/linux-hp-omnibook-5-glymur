@@ -14,12 +14,12 @@ sequence. Keycodes decoded against
 ## F6 (speaker mute) and F9 (mic mute): the same HID usage, not two keys
 
 ```
-F6: MSC scan=0xC0022 KEY_MUTE(113) down/up
-F9: MSC scan=0xC0022 KEY_MUTE(113) down/up   <- identical scancode and keycode
+F6: MSC scan=0xC00E2 KEY_MUTE(113) down/up
+F9: MSC scan=0xC00E2 KEY_MUTE(113) down/up   <- identical scancode and keycode
 ```
 
-`0xC0022` is USB HID Consumer-page usage `0x0022`, literally defined as
-"Mute" in the HID Usage Tables. **Both keys send the exact same HID report.**
+`0xC00E2` (logged as decimal 786658) is USB HID Consumer-page usage
+`0xE2`, defined as "Mute" in the HID Usage Tables. **Both keys send the exact same HID report.**
 This is not a Linux driver gap: the keyboard's own HID report descriptor
 gives F9 no distinct usage (there is no "Mic Mute" consumer-control usage
 being sent at all). Nothing on the Linux side — not `evdev`, not a future
