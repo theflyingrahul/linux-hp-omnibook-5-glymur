@@ -6,6 +6,7 @@ Kernel changes are split by who benefits:
 |---|---|---|
 | `kernel/upstream/qcom-next-acpi/` | Generic ACPI mechanisms for Snapdragon X2 (Glymur) laptops, as a `git format-patch` series against Qualcomm `qcom-next` `a47c4c5aa` | Yes, candidates |
 | `kernel/upstream/mainline/` | Submission-ready series against current mainline (only `Signed-off-by` missing) | Yes, ready |
+| `kernel/backports/` | Fixes posted upstream by others, backported to `a47c4c5aa` until they land | Already posted |
 | `kernel/glymur-bringup/` | Interim Glymur code, applied on top of the upstream series | No; replaced later |
 | `kernel/drafts/` | Upstream-form drafts not yet used in a build | Future |
 | `kernel/archive/` | Superseded diagnostics, kept for the record | No |
@@ -17,8 +18,10 @@ Wi-Fi board data, firmware) are not kernel code. They live in
 
 ## Boot series (built by `scripts/linux/build-qcom-next-glymur.sh`)
 
-Apply to `a47c4c5aa` in order: `upstream/qcom-next-acpi/0001–0003`, then
-`glymur-bringup/0001–0002`.
+Apply to `a47c4c5aa` in order: `upstream/qcom-next-acpi/0001–0003`,
+`backports/0001–0002`, then `glymur-bringup/0001–0002`
+(`scripts/linux/prepare-qcom-next-glymur.sh`). Kernels from
+`7.3.0-rc2-glymur-4` on include the backports.
 
 1. `ACPI: GED: Support GpioInt event resources`: lets GED devices use
    `GpioInt` resources, which is what lid and EC event interrupts use on
@@ -39,6 +42,22 @@ Apply to `a47c4c5aa` in order: `upstream/qcom-next-acpi/0001–0003`, then
 5. `i2c: qcom-geni: bring-up allow-list for firmware-owned controllers`:
    binds only the MMIO bases listed in `i2c_qcom_geni.acpi_buses`; the
    default binds none.
+
+Backports (`backports/`), from Bjorn Andersson's "phy: qcom: edp: Update v8
+programming sequence" v1 (linux-arm-msm, 2026-06-22,
+`20260622-glymur-edp-phy-v1-0-814b45089ac9@oss.qualcomm.com`; reviewed by
+Konrad Dybcio, not merged as of qcom-next `a47c4c5aa`):
+
+- `phy: qcom: edp: split power-on sequencing by PHY version`;
+- `phy: qcom: edp: update v8 power-on programming sequence`.
+
+The series says the v8 PHY's PLL does not lock at 1.62 or 2.7 Gb/s
+without it. This panel's maximum is 2.7 Gb/s, and its power-on fails with
+`-110` at both rates, consistent with that. The series has not yet been
+shown to train a link at 2-lane 2.7 Gb/s. The series is written against mainline. The backport resolves it
+against qcom-next's Nord PHY support: Nord keeps its existing sequence
+through the `_v46` callbacks, and Glymur's v8 code is exactly the posted
+code. See `docs/edp-phy-backport-2026-09-29.md`.
 
 The series was verified to reproduce the build tree exactly, except for
 those two board defaults, which moved to the board's command line.

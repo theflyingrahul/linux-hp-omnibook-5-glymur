@@ -29,6 +29,21 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-29 (eDP PHY fix staged as kernel `-4`, untested):** the eDP
+PHY's `-110` matches a Glymur v8 bug that Qualcomm describes. Their posted
+fix (Bjorn Andersson, "phy: qcom: edp: Update v8 programming sequence",
+June 2026) says the PLL does not lock at 1.62 or 2.7 Gb/s without it, and
+this panel tops out at 2.7 Gb/s. On an ASUS Zenbook A16 the same series
+cleared the same `-110`, and that panel then trained at 5.4 Gb/s. Training
+at 2-lane 2.7 Gb/s with it has not been reported. It is backported in
+`patches/kernel/backports/` and built into `7.3.0-rc2-glymur-4`, now on the
+USB. The minimal DT is now the lab configuration: full DT minus the native
+display, which adds battery and AC over PMIC GLink. The ADSP/CDSP boot, but
+there is still no audio, USB, GPU or TPM. Next: from
+"Ubuntu on SSD: ACPI, newest glymur kernel", install `-4` from the USB,
+then boot "device tree (full, DRM debug)". See
+`docs/edp-phy-backport-2026-09-29.md`.
+
 **2026-09-29 (lane/rate mismatch ruled out; the fault is in the PHY
 driver):** the boot-time eDP 2-lane test (below) came back dark. Its
 journal shows the panel's own DPCD ceiling is exactly 2 lanes at 2.7 Gb/s —

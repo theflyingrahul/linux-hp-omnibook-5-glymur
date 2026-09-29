@@ -2,7 +2,8 @@
 set -euo pipefail
 
 # Create a qcom-next worktree with the layered Glymur series applied:
-# patches/kernel/upstream/qcom-next-acpi/*, then patches/kernel/glymur-bringup/*.
+# patches/kernel/upstream/qcom-next-acpi/*, patches/kernel/backports/*, then
+# patches/kernel/glymur-bringup/*.
 # Usage: prepare-qcom-next-glymur.sh <qcom-next-clone> <new-worktree> [repo-root]
 
 CLONE="${1:?usage: prepare-qcom-next-glymur.sh <qcom-next-clone> <new-worktree> [repo]}"
@@ -20,5 +21,6 @@ export GIT_COMMITTER_NAME="${GIT_COMMITTER_NAME:-$(git config user.name || echo 
 export GIT_COMMITTER_EMAIL="${GIT_COMMITTER_EMAIL:-$(git config user.email || echo glymur-build@localhost)}"
 git -C "$WORKTREE" am -q \
     "$REPO"/patches/kernel/upstream/qcom-next-acpi/*.patch \
+    "$REPO"/patches/kernel/backports/*.patch \
     "$REPO"/patches/kernel/glymur-bringup/*.patch
 git -C "$WORKTREE" log --oneline "$BASE..HEAD"
