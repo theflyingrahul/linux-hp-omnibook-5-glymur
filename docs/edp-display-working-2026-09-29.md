@@ -3,9 +3,9 @@
 Booted "Ubuntu on SSD: device tree (full, DRM debug)" on kernel
 `7.3.0-rc2-glymur-4` (the WSL-built PHY backport,
 `docs/edp-phy-backport-2026-09-29.md`). **The panel lit.** This is the
-first successful full-DT boot with a working native display. Private logs:
-`.work/edp-display-working-2026-09-29/` (boot report
-`boot-20260929T153652-c1b5250d.txt`, full `journalctl -k -b`).
+first successful full-DT boot with a working native display. Full logs
+(identifiers masked): `captures/2026-09-29-edp-display-working/`
+(`boot-report.txt`, full `journalctl-k-b.txt`).
 
 ## The fix worked
 

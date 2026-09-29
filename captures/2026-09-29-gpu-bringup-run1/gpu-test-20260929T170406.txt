@@ -1,0 +1,499 @@
+
+==== system (17:04:06.380804734)
+$ uname -a
+Linux glymur 7.3.0-rc2-glymur-5 #6 SMP PREEMPT_DYNAMIC Tue Sep 29 03:51:44 PDT 2026 aarch64 GNU/Linux
+$ cat /proc/cmdline
+BOOT_IMAGE=(hd1,gpt4)/boot/vmlinuz-glymur root=PARTUUID=[REDACTED-PARTUUID] rootfstype=ext4 ro rootwait clk_ignore_unused pd_ignore_unused arm64.nopauth log_buf_len=16M console=tty0 loglevel=4
+$ cat /sys/firmware/devicetree/base/model
+HP OmniBook 5 Laptop 16-bf1xxx (GPU test)
+
+==== GPU and display: kernel log (17:04:06.388319766)
+Jul 28 02:14:02 glymur kernel: Machine model: HP OmniBook 5 Laptop 16-bf1xxx (GPU test)
+Jul 28 02:14:02 glymur kernel: OF: reserved mem: 0x00000000919fe000..0x00000000919fffff (8 KiB) nomap non-reusable gpu-microcode@919fe000
+Jul 28 02:14:02 glymur kernel: psci: PSCIv1.1 detected in firmware.
+Jul 28 02:14:02 glymur kernel: psci: [Firmware Bug]: failed to set PC mode: -3
+Jul 28 02:14:02 glymur kernel: msm_serial: driver initialized
+Jul 28 02:14:02 glymur kernel: arm-smmu-v3 15480000.iommu: oas 40-bit (features 0x001c1fcf)
+Jul 28 02:14:02 glymur kernel: arm-smmu-v3 15480000.iommu: allocated 65536 entries for cmdq
+Jul 28 02:14:02 glymur kernel: arm-smmu-v3 15480000.iommu: allocated 32768 entries for evtq
+Jul 28 02:14:02 glymur kernel: arm-smmu-v3 15480000.iommu: SMMU currently enabled! Resetting...
+Jul 28 02:14:02 glymur kernel: arm-smmu-v3 15480000.iommu: msi_domain absent - falling back to wired irqs
+Jul 28 02:14:02 glymur kernel: simple-framebuffer simple-framebuffer.0: [drm] Registered 1 planes with drm panic
+Jul 28 02:14:02 glymur kernel: [drm] Initialized simpledrm 1.0.0 for simple-framebuffer.0 on minor 0
+Jul 28 02:14:02 glymur kernel: simple-framebuffer simple-framebuffer.0: [drm] fb0: simpledrmdrmfb frame buffer device
+Jul 28 02:14:02 glymur kernel: qcom_scm firmware:scm: qseecom: found qseecom with version 0x1402000
+Jul 28 02:14:02 glymur kernel: qcom_scm firmware:scm: qseecom: untested machine, skipping
+Jul 28 02:14:02 glymur kernel: arm-smmu 3da0000.iommu: probing hardware configuration...
+Jul 28 02:14:02 glymur kernel: arm-smmu 3da0000.iommu: SMMUv2 with:
+Jul 28 02:14:02 glymur kernel: arm-smmu 3da0000.iommu:         stage 1 translation
+Jul 28 02:14:02 glymur kernel: arm-smmu 3da0000.iommu:         stage 2 translation
+Jul 28 02:14:02 glymur kernel: arm-smmu 3da0000.iommu:         nested translation
+Jul 28 02:14:02 glymur kernel: arm-smmu 3da0000.iommu:         coherent table walk
+Jul 28 02:14:02 glymur kernel: arm-smmu 3da0000.iommu:         stream matching with 25 register groups
+Jul 28 02:14:02 glymur kernel: arm-smmu 3da0000.iommu:         25 context banks (0 stage-2 only)
+Jul 28 02:14:02 glymur kernel: arm-smmu 3da0000.iommu:         Supported page sizes: 0x61311000
+Jul 28 02:14:02 glymur kernel: arm-smmu 3da0000.iommu:         Stage-1: 48-bit VA -> 40-bit IPA
+Jul 28 02:14:02 glymur kernel: arm-smmu 3da0000.iommu:         Stage-2: 40-bit IPA -> 40-bit PA
+Jul 28 02:14:02 glymur kernel: arm-smmu 3da0000.iommu:         preserved 0 boot mappings
+Jul 28 02:14:02 glymur kernel: platform 3d00000.gpu: Adding to iommu group 0
+Jul 28 02:14:02 glymur kernel: platform 3d6c000.gmu: Adding to iommu group 1
+Jul 28 02:14:02 glymur kernel: arm-smmu 15000000.iommu: probing hardware configuration...
+Jul 28 02:14:02 glymur kernel: arm-smmu 15000000.iommu: SMMUv2 with:
+Jul 28 02:14:02 glymur kernel: arm-smmu 15000000.iommu:         stage 1 translation
+Jul 28 02:14:02 glymur kernel: arm-smmu 15000000.iommu:         stage 2 translation
+Jul 28 02:14:02 glymur kernel: arm-smmu 15000000.iommu:         nested translation
+Jul 28 02:14:02 glymur kernel: arm-smmu 15000000.iommu:         coherent table walk
+Jul 28 02:14:02 glymur kernel: arm-smmu 15000000.iommu:         stream matching with 186 register groups
+Jul 28 02:14:02 glymur kernel: arm-smmu 15000000.iommu:         111 context banks (0 stage-2 only)
+Jul 28 02:14:02 glymur kernel: arm-smmu 15000000.iommu:         Supported page sizes: 0x61311000
+Jul 28 02:14:02 glymur kernel: arm-smmu 15000000.iommu:         Stage-1: 40-bit VA -> 40-bit IPA
+Jul 28 02:14:02 glymur kernel: arm-smmu 15000000.iommu:         Stage-2: 40-bit IPA -> 40-bit PA
+Jul 28 02:14:02 glymur kernel: arm-smmu 15000000.iommu:         preserved 0 boot mappings
+Jul 28 02:14:02 glymur kernel: a98000.serial: ttyHS1 MMIO:0x0000000000a98000 (irq = 162, base_baud = 0) is a MSM
+Jul 28 02:14:02 glymur systemd[1]: modprobe@drm.service - Load Kernel Module drm skipped, unmet condition check ConditionKernelModuleLoaded=!drm
+Jul 28 02:14:02 glymur systemd[1]: systemd-hibernate-clear.service - Clear Stale Hibernate Storage Info skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/HibernateLocation-[REDACTED-UUID-2]
+Jul 28 02:14:02 glymur kernel: arm-scmi arm-scmi.0.auto: SCMI Protocol v2.0 'Qualcomm:PDP0' Firmware version 0x0
+Jul 28 02:14:02 glymur kernel: arm-scmi arm-scmi.1.auto: SCMI Protocol v2.0 'Qualcomm:' Firmware version 0x20000
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: bound af6c000.displayport-controller (ops msm_dp_display_comp_ops [msm])
+Jul 28 02:14:03 glymur kernel: adreno 3d00000.gpu: supply vdd not found, using dummy regulator
+Jul 28 02:14:03 glymur kernel: adreno 3d00000.gpu: supply vddcx not found, using dummy regulator
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: bound 3d00000.gpu (ops a3xx_ops [msm])
+Jul 28 02:14:03 glymur kernel: [drm:dpu_kms_hw_init:1193] dpu hardware revision:0xc0020000
+Jul 28 02:14:03 glymur kernel: [drm] Initialized msm 1.13.0 for ae01000.display-controller on minor 1
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:adreno_request_fw [msm]] loaded qcom/gen80100_sqe.fw from new location
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:adreno_request_fw [msm]] loaded qcom/gen80100_gmu.bin from new location
+Jul 28 02:14:03 glymur kernel: [drm] Loaded GMU firmware v5.2.38
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: Zap shader not enabled - using SECVID_TRUST_CNTL instead
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm] fb0: msmdrmfb frame buffer device
+Jul 28 02:14:03 glymur kernel: bluetooth hci0: Direct firmware load for qca/ornbcscal11.b17 failed with error -2
+Jul 28 02:14:03 glymur kernel: bluetooth hci0: Direct firmware load for qca/ornbcscal11.bin failed with error -2
+Sep 29 17:03:09 glymur kernel: gxclkctl-kaanapali 3d64000.clock-controller: sync_state() pending due to 3d6c000.gmu
+Sep 29 17:03:09 glymur kernel: gcc-glymur 100000.clock-controller: sync_state() pending due to 3d6c000.gmu
+Sep 29 17:03:09 glymur kernel: gpucc-glymur 3d90000.clock-controller: sync_state() pending due to 3d6c000.gmu
+
+==== DRM devices (17:04:06.398759623)
+$ ls -l /dev/dri /dev/dri/by-path
+/dev/dri:
+total 0
+drwxr-xr-x 2 root root         80 Jul 28 02:14 by-path
+crw-rw----+1 root video  226,   1 Jul 28 02:14 card1
+crw-rw----+1 root render 226, 128 Jul 28 02:14 renderD128
+
+/dev/dri/by-path:
+total 0
+lrwxrwxrwx+1 root root  8 Jul 28 02:14 platform-ae01000.display-controller-card -> ../card1
+lrwxrwxrwx+1 root root 13 Jul 28 02:14 platform-ae01000.display-controller-render -> ../renderD128
+/sys/class/drm/card1 -> msm_dpu
+card1-Writeback-1 status=unknown enabled=disabled modes=
+card1-eDP-1 status=connected enabled=enabled modes=1920x1200
+$ ls /sys/bus/platform/drivers/msm_dpu /sys/bus/platform/drivers/adreno
+/sys/bus/platform/drivers/adreno:
+3d00000.gpu
+bind
+module
+uevent
+unbind
+
+/sys/bus/platform/drivers/msm_dpu:
+ae01000.display-controller
+bind
+module
+uevent
+unbind
+
+==== GPU devfreq and debugfs (17:04:06.418328019)
+/sys/class/devfreq/3d00000.gpu: governor=simple_ondemand cur=310000000 min=310000000 max=1350000000
+avail=310000000 410000000 572000000 760000000 820000000 915000000 1070000000 1185000000 1350000000
+--- /sys/kernel/debug/dri/1/gpu
+head: cannot open '/sys/kernel/debug/dri/1/gpu' for reading: No such device
+--- /sys/kernel/debug/dri/128/gpu
+head: cannot open '/sys/kernel/debug/dri/128/gpu' for reading: No such device
+--- /sys/kernel/debug/dri/ae01000.display-controller/gpu
+head: cannot open '/sys/kernel/debug/dri/ae01000.display-controller/gpu' for reading: No such device
+
+==== userspace GL/Vulkan (if the tools are installed) (17:04:06.432201873)
+glxinfo not installed (apt install mesa-utils) or no desktop user
+
+==== thermal (GPU zones) (17:04:06.435979884)
+gpu-0-0-thermal 41600
+gpu-0-1-thermal 42000
+gpu-0-2-thermal 42000
+gpu-1-0-thermal 42000
+gpu-1-1-thermal 42000
+gpu-1-2-thermal 42000
+gpu-2-0-thermal 42400
+gpu-2-1-thermal 42400
+gpu-2-2-thermal 42000
+gpuss-0-thermal 42000
+gpuss-1-thermal 42400
+gpuss-2-thermal 42400
+gpuss-3-thermal 42000
+gpuss-4-thermal 42000
+
+==== power snapshot: now (17:04:06.527104864)
+--- /sys/class/power_supply/qcom-battmgr-ac
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=qcom-battmgr-ac
+POWER_SUPPLY_TYPE=Mains
+POWER_SUPPLY_ONLINE=0
+POWER_SUPPLY_TYPE=Mains
+--- /sys/class/power_supply/qcom-battmgr-bat
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=qcom-battmgr-bat
+POWER_SUPPLY_TYPE=Battery
+POWER_SUPPLY_STATUS=Discharging
+POWER_SUPPLY_PRESENT=1
+POWER_SUPPLY_TECHNOLOGY=Li-ion
+POWER_SUPPLY_CYCLE_COUNT=16
+POWER_SUPPLY_VOLTAGE_MAX_DESIGN=0
+POWER_SUPPLY_VOLTAGE_NOW=11494000
+POWER_SUPPLY_POWER_NOW=-7700000
+POWER_SUPPLY_CHARGE_CONTROL_START_THRESHOLD=0
+POWER_SUPPLY_CHARGE_CONTROL_END_THRESHOLD=0
+POWER_SUPPLY_ENERGY_FULL_DESIGN=59160000
+POWER_SUPPLY_ENERGY_FULL=59920000
+POWER_SUPPLY_ENERGY_EMPTY=3595000
+POWER_SUPPLY_ENERGY_NOW=31980000
+POWER_SUPPLY_CAPACITY=53
+POWER_SUPPLY_TEMP=309
+POWER_SUPPLY_TYPE=Battery
+POWER_SUPPLY_MANUFACTURE_YEAR=2026
+POWER_SUPPLY_MANUFACTURE_MONTH=3
+POWER_SUPPLY_MANUFACTURE_DAY=27
+POWER_SUPPLY_MODEL_NAME=GD03059XL
+POWER_SUPPLY_MANUFACTURER=[REDACTED]
+POWER_SUPPLY_SERIAL_NUMBER=[REDACTED]
+--- /sys/class/power_supply/qcom-battmgr-usb
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=qcom-battmgr-usb
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_ONLINE=0
+POWER_SUPPLY_VOLTAGE_MAX=0
+POWER_SUPPLY_VOLTAGE_NOW=0
+POWER_SUPPLY_CURRENT_MAX=0
+POWER_SUPPLY_CURRENT_NOW=0
+POWER_SUPPLY_INPUT_CURRENT_LIMIT=0
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_USB_TYPE=[Unknown] SDP DCP CDP ACA C PD PD_DRP PD_PPS BrickID
+--- /sys/class/power_supply/qcom-battmgr-wls
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=qcom-battmgr-wls
+POWER_SUPPLY_TYPE=Wireless
+POWER_SUPPLY_ONLINE=0
+POWER_SUPPLY_TYPE=Wireless
+--- /sys/class/power_supply/ucsi-source-psy-pmic_glink.ucsi.01
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=ucsi-source-psy-pmic_glink.ucsi.01
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_STATUS=Not charging
+POWER_SUPPLY_CHARGE_TYPE=N/A
+POWER_SUPPLY_ONLINE=0
+POWER_SUPPLY_VOLTAGE_MAX=0
+POWER_SUPPLY_VOLTAGE_MIN=0
+POWER_SUPPLY_VOLTAGE_NOW=0
+POWER_SUPPLY_CURRENT_MAX=0
+POWER_SUPPLY_CURRENT_NOW=0
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_USB_TYPE=[C] PD PD_PPS
+POWER_SUPPLY_SCOPE=System
+--- /sys/class/power_supply/ucsi-source-psy-pmic_glink.ucsi.02
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=ucsi-source-psy-pmic_glink.ucsi.02
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_STATUS=Not charging
+POWER_SUPPLY_CHARGE_TYPE=N/A
+POWER_SUPPLY_ONLINE=0
+POWER_SUPPLY_VOLTAGE_MAX=0
+POWER_SUPPLY_VOLTAGE_MIN=0
+POWER_SUPPLY_VOLTAGE_NOW=0
+POWER_SUPPLY_CURRENT_MAX=0
+POWER_SUPPLY_CURRENT_NOW=0
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_USB_TYPE=[C] PD PD_PPS
+POWER_SUPPLY_SCOPE=System
+--- /sys/class/typec/port0
+data_role=host [device]
+power_role=source [sink]
+power_operation_mode=default
+orientation=unknown
+--- /sys/class/typec/port1
+data_role=host [device]
+power_role=source [sink]
+power_operation_mode=default
+orientation=unknown
+Unplug the charger, then press Enter. 
+==== power snapshot: unplugged (17:04:24.079274423)
+--- /sys/class/power_supply/qcom-battmgr-ac
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=qcom-battmgr-ac
+POWER_SUPPLY_TYPE=Mains
+POWER_SUPPLY_ONLINE=0
+POWER_SUPPLY_TYPE=Mains
+--- /sys/class/power_supply/qcom-battmgr-bat
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=qcom-battmgr-bat
+POWER_SUPPLY_TYPE=Battery
+POWER_SUPPLY_STATUS=Discharging
+POWER_SUPPLY_PRESENT=1
+POWER_SUPPLY_TECHNOLOGY=Li-ion
+POWER_SUPPLY_CYCLE_COUNT=16
+POWER_SUPPLY_VOLTAGE_MAX_DESIGN=0
+POWER_SUPPLY_VOLTAGE_NOW=11495000
+POWER_SUPPLY_POWER_NOW=-7195000
+POWER_SUPPLY_CHARGE_CONTROL_START_THRESHOLD=0
+POWER_SUPPLY_CHARGE_CONTROL_END_THRESHOLD=0
+POWER_SUPPLY_ENERGY_FULL_DESIGN=59160000
+POWER_SUPPLY_ENERGY_FULL=59920000
+POWER_SUPPLY_ENERGY_EMPTY=3595000
+POWER_SUPPLY_ENERGY_NOW=31940000
+POWER_SUPPLY_CAPACITY=53
+POWER_SUPPLY_TEMP=309
+POWER_SUPPLY_TYPE=Battery
+POWER_SUPPLY_MANUFACTURE_YEAR=2026
+POWER_SUPPLY_MANUFACTURE_MONTH=3
+POWER_SUPPLY_MANUFACTURE_DAY=27
+POWER_SUPPLY_MODEL_NAME=GD03059XL
+POWER_SUPPLY_MANUFACTURER=[REDACTED]
+POWER_SUPPLY_SERIAL_NUMBER=[REDACTED]
+--- /sys/class/power_supply/qcom-battmgr-usb
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=qcom-battmgr-usb
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_ONLINE=0
+POWER_SUPPLY_VOLTAGE_MAX=0
+POWER_SUPPLY_VOLTAGE_NOW=0
+POWER_SUPPLY_CURRENT_MAX=0
+POWER_SUPPLY_CURRENT_NOW=0
+POWER_SUPPLY_INPUT_CURRENT_LIMIT=0
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_USB_TYPE=[Unknown] SDP DCP CDP ACA C PD PD_DRP PD_PPS BrickID
+--- /sys/class/power_supply/qcom-battmgr-wls
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=qcom-battmgr-wls
+POWER_SUPPLY_TYPE=Wireless
+POWER_SUPPLY_ONLINE=0
+POWER_SUPPLY_TYPE=Wireless
+--- /sys/class/power_supply/ucsi-source-psy-pmic_glink.ucsi.01
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=ucsi-source-psy-pmic_glink.ucsi.01
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_STATUS=Not charging
+POWER_SUPPLY_CHARGE_TYPE=N/A
+POWER_SUPPLY_ONLINE=0
+POWER_SUPPLY_VOLTAGE_MAX=0
+POWER_SUPPLY_VOLTAGE_MIN=0
+POWER_SUPPLY_VOLTAGE_NOW=0
+POWER_SUPPLY_CURRENT_MAX=0
+POWER_SUPPLY_CURRENT_NOW=0
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_USB_TYPE=[C] PD PD_PPS
+POWER_SUPPLY_SCOPE=System
+--- /sys/class/power_supply/ucsi-source-psy-pmic_glink.ucsi.02
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=ucsi-source-psy-pmic_glink.ucsi.02
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_STATUS=Not charging
+POWER_SUPPLY_CHARGE_TYPE=N/A
+POWER_SUPPLY_ONLINE=0
+POWER_SUPPLY_VOLTAGE_MAX=0
+POWER_SUPPLY_VOLTAGE_MIN=0
+POWER_SUPPLY_VOLTAGE_NOW=0
+POWER_SUPPLY_CURRENT_MAX=0
+POWER_SUPPLY_CURRENT_NOW=0
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_USB_TYPE=[C] PD PD_PPS
+POWER_SUPPLY_SCOPE=System
+--- /sys/class/typec/port0
+data_role=host [device]
+power_role=source [sink]
+power_operation_mode=default
+orientation=unknown
+--- /sys/class/typec/port1
+data_role=host [device]
+power_role=source [sink]
+power_operation_mode=default
+orientation=unknown
+Plug the charger into the same port, then press Enter. 
+==== power snapshot: replugged (20 s) (17:04:50.323317770)
+--- /sys/class/power_supply/qcom-battmgr-ac
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=qcom-battmgr-ac
+POWER_SUPPLY_TYPE=Mains
+POWER_SUPPLY_ONLINE=0
+POWER_SUPPLY_TYPE=Mains
+--- /sys/class/power_supply/qcom-battmgr-bat
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=qcom-battmgr-bat
+POWER_SUPPLY_TYPE=Battery
+POWER_SUPPLY_STATUS=Discharging
+POWER_SUPPLY_PRESENT=1
+POWER_SUPPLY_TECHNOLOGY=Li-ion
+POWER_SUPPLY_CYCLE_COUNT=16
+POWER_SUPPLY_VOLTAGE_MAX_DESIGN=0
+POWER_SUPPLY_VOLTAGE_NOW=11505000
+POWER_SUPPLY_POWER_NOW=-6408000
+POWER_SUPPLY_CHARGE_CONTROL_START_THRESHOLD=0
+POWER_SUPPLY_CHARGE_CONTROL_END_THRESHOLD=0
+POWER_SUPPLY_ENERGY_FULL_DESIGN=59160000
+POWER_SUPPLY_ENERGY_FULL=59920000
+POWER_SUPPLY_ENERGY_EMPTY=3595000
+POWER_SUPPLY_ENERGY_NOW=31890000
+POWER_SUPPLY_CAPACITY=53
+POWER_SUPPLY_TEMP=309
+POWER_SUPPLY_TYPE=Battery
+POWER_SUPPLY_MANUFACTURE_YEAR=2026
+POWER_SUPPLY_MANUFACTURE_MONTH=3
+POWER_SUPPLY_MANUFACTURE_DAY=27
+POWER_SUPPLY_MODEL_NAME=GD03059XL
+POWER_SUPPLY_MANUFACTURER=[REDACTED]
+POWER_SUPPLY_SERIAL_NUMBER=[REDACTED]
+--- /sys/class/power_supply/qcom-battmgr-usb
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=qcom-battmgr-usb
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_ONLINE=0
+POWER_SUPPLY_VOLTAGE_MAX=0
+POWER_SUPPLY_VOLTAGE_NOW=0
+POWER_SUPPLY_CURRENT_MAX=0
+POWER_SUPPLY_CURRENT_NOW=0
+POWER_SUPPLY_INPUT_CURRENT_LIMIT=0
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_USB_TYPE=[Unknown] SDP DCP CDP ACA C PD PD_DRP PD_PPS BrickID
+--- /sys/class/power_supply/qcom-battmgr-wls
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=qcom-battmgr-wls
+POWER_SUPPLY_TYPE=Wireless
+POWER_SUPPLY_ONLINE=0
+POWER_SUPPLY_TYPE=Wireless
+--- /sys/class/power_supply/ucsi-source-psy-pmic_glink.ucsi.01
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=ucsi-source-psy-pmic_glink.ucsi.01
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_STATUS=Not charging
+POWER_SUPPLY_CHARGE_TYPE=N/A
+POWER_SUPPLY_ONLINE=0
+POWER_SUPPLY_VOLTAGE_MAX=0
+POWER_SUPPLY_VOLTAGE_MIN=0
+POWER_SUPPLY_VOLTAGE_NOW=0
+POWER_SUPPLY_CURRENT_MAX=0
+POWER_SUPPLY_CURRENT_NOW=0
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_USB_TYPE=[C] PD PD_PPS
+POWER_SUPPLY_SCOPE=System
+--- /sys/class/power_supply/ucsi-source-psy-pmic_glink.ucsi.02
+DEVTYPE=power_supply
+OF_NAME=pmic-glink
+OF_FULLNAME=/pmic-glink
+OF_COMPATIBLE_0=qcom,glymur-pmic-glink
+OF_COMPATIBLE_1=qcom,pmic-glink
+OF_COMPATIBLE_N=2
+POWER_SUPPLY_NAME=ucsi-source-psy-pmic_glink.ucsi.02
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_STATUS=Not charging
+POWER_SUPPLY_CHARGE_TYPE=N/A
+POWER_SUPPLY_ONLINE=0
+POWER_SUPPLY_VOLTAGE_MAX=0
+POWER_SUPPLY_VOLTAGE_MIN=0
+POWER_SUPPLY_VOLTAGE_NOW=0
+POWER_SUPPLY_CURRENT_MAX=0
+POWER_SUPPLY_CURRENT_NOW=0
+POWER_SUPPLY_TYPE=USB
+POWER_SUPPLY_USB_TYPE=[C] PD PD_PPS
+POWER_SUPPLY_SCOPE=System
+--- /sys/class/typec/port0
+data_role=host [device]
+power_role=source [sink]
+power_operation_mode=default
+orientation=unknown
+--- /sys/class/typec/port1
+data_role=host [device]
+power_role=source [sink]
+power_operation_mode=default
+orientation=unknown
+
+Saved to /var/log/glymur/gpu-test-20260929T170406.txt

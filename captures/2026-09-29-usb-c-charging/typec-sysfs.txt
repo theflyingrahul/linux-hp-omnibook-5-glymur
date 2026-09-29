@@ -1,0 +1,31 @@
+=== port0 ===
+data_role: host [device]
+orientation: unknown
+power_operation_mode: default
+power_role: source [sink]
+preferred_role: 
+supported_accessory_modes: none
+usb_capability: usb2 [usb3]
+usb_power_delivery_revision: 3.1
+usb_typec_revision: 2.2
+vconn_source: no
+=== port1 ===
+data_role: host [device]
+orientation: normal
+power_operation_mode: usb_power_delivery
+power_role: source [sink]
+preferred_role: 
+supported_accessory_modes: none
+usb_capability: usb2 [usb3]
+usb_power_delivery_revision: 3.1
+usb_typec_revision: 2.2
+vconn_source: no
+=== port1-partner ===
+accessory_mode: none
+usb_power_delivery_revision: 1.0
+number_of_alternate_modes: 0
+supports_usb_power_delivery: yes
+pd1/revision: 3.1
+=== usb_power_delivery ===
+pd0/revision: 3.1
+pd1/revision: 3.1

@@ -130,8 +130,8 @@ if charging worked correctly.
 ## The unplug/replug test (kernel `-5`, GPU test DT): total silence, not partial
 
 Two `check-gpu-test.sh --charging` attempts, from the "device tree (GPU
-test)" boot (`docs/gpu-bringup-run1-2026-09-29.md`), private logs in
-`.work/gpu-bringup-run1-2026-09-29/`:
+test)" boot (`docs/gpu-bringup-run1-2026-09-29.md`), full logs (identifiers
+masked) in `captures/2026-09-29-gpu-bringup-run1/`:
 
 - `gpu-test-20260929T170344.txt`: stopped right after the first prompt
   ("Unplug the charger, then press Enter.") — an aborted attempt, not a
@@ -181,7 +181,7 @@ would work correctly if the connection were stable.
 
 ## Third attempt: reseated cable, other port, same result
 
-`gpu-test-20260929T171413.txt` (`.work/gpu-bringup-run1-2026-09-29/`): the
+`gpu-test-20260929T171413.txt` (`captures/2026-09-29-gpu-bringup-run1/`): the
 owner reseated the cable and used the other physical port, then repeated
 the full unplug/replug sequence (`now` 17:14:13, `unplugged` 17:14:29,
 `replugged` 17:14:55, plugged in throughout except the deliberate 16 s

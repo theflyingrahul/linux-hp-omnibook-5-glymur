@@ -2,9 +2,9 @@
 
 Booted "Ubuntu on SSD: device tree (GPU test)" on kernel `7.3.0-rc2-glymur-5`
 (`docs/gpu-bringup-2026-09-29.md`). **Both the Adreno GPU and SCMI cpufreq
-work.** Four `sudo bash check-gpu-test.sh [...]` runs from this boot are
-preserved privately in `.work/gpu-bringup-run1-2026-09-29/`, alongside the
-full `journalctl -k -b`.
+work.** Five `sudo bash check-gpu-test.sh [...]` runs from this boot are
+preserved (identifiers masked) in `captures/2026-09-29-gpu-bringup-run1/`,
+alongside the full `journalctl -k -b`.
 
 ## GPU: bound, GMU loaded, devfreq scaling live
 
