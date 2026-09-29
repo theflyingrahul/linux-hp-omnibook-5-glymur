@@ -29,6 +29,53 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30 (kernel `-6`: the charging fix, USB-C ports and system-wide
+Mesa, built; waiting for the USB stick to stage):**
+
+- **Kernel `7.3.0-rc2-glymur-6`.** Same qcom-next base (re-fetched: the
+  tip is still `e428097a36d`; mainline has nothing newer for these
+  drivers). It adds one patch: `pmic_glink_altmode` now acknowledges port
+  notifications for ports without a connector node. The missing
+  acknowledgement is the likely cause of charging stopping after the
+  first unplug (`docs/usb-c-ports-2026-09-29.md`).
+- **Device tree ("GPU and USB-A test" entry, shipped in the `-6`
+  package).** Both USB-C ports are described from HP's tables: connector
+  0 (hinge side) → `usb_0`, connector 1 → `usb_1`, each with its eUSB2
+  and QMP PHYs. The firmware's notifications are now carried out and
+  acknowledged, and the USB-C ports can carry data.
+- **Mesa `26.2.3-2`.** Adds llvmpipe on Ubuntu's LLVM 21.
+  `install-from-usb.sh` turns on `mesa-glymur-run --system on`, a
+  dynamic-linker switch that should bring gnome-shell onto the GPU.
+  `check-mesa.sh` shows which libraries it actually loaded
+  (`docs/mesa-x2-85-2026-09-29.md`).
+- **Next:**
+    1. Once `-6` and Mesa are staged, from "device tree (GPU and USB-A
+       test)" (its USB-A port works) run `install-from-usb.sh`.
+    2. Reboot into the same entry.
+    3. Run `check-mesa.sh`, `check-usb.sh` (with USB-C and USB 2.0
+       devices plugged in) and `charging-watch.sh`.
+
+**2026-09-29 (charging lead: unacknowledged port notifications; fix
+staged):**
+
+- **Re-timed charging run.** Re-timed with kernel timestamps (the trace
+  lines were read late), `charging-watch.sh`'s run shows the 41 W session
+  ending at 22:14:55. In the same second the kernel logged
+  `pmic_glink_altmode: notification on undefined port 1`. After that, the
+  firmware's own connector status never showed a connection again on
+  either port.
+- **Why.** Our `pmic-glink` node has no connector nodes, and
+  `pmic_glink_altmode` only sends the firmware `ALTMODE_PAN_ACK` for
+  defined ports. No notification had ever been acknowledged.
+- **Staged.** The "device tree (GPU and USB-A test)" DTB on the USB now
+  declares two bare `usb-c-connector` nodes (DTB-only, `398b335e…`).
+- **Next boot of that entry:** run `sudo bash ~/charging-watch.sh` and
+  plug, unplug and replug on both ports. See
+  `docs/usb-c-charging-2026-09-29.md`, last section.
+- **eDP.** The one blank boot matches a known post-fix eDP link-training
+  intermittency (Zenbook A16: `-110` in about 1 of 3 boots). It is
+  probably not caused by USB-A (`docs/usb-a-bringup-2026-09-29.md`).
+
 **2026-09-29 (charging: real sessions, unstable negotiation):**
 `charging-watch.sh`'s first live run (kernel `-5`): the owner plugged in
 about a minute before starting it, and by the time it started a real 41 W
