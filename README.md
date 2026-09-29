@@ -42,7 +42,9 @@ display, which adds battery and AC over PMIC GLink. The ADSP/CDSP boot, but
 there is still no audio, USB, GPU or TPM. Next: from
 "Ubuntu on SSD: ACPI, newest glymur kernel", install `-4` from the USB,
 then boot "device tree (full, DRM debug)". See
-`docs/edp-phy-backport-2026-09-29.md`.
+`docs/edp-phy-backport-2026-09-29.md`. Other upstream patches worth taking
+next (PUSH_IDLE reset fix, SCMI polling for cpufreq, USB votes) are in
+`docs/upstream-patch-survey-2026-09-29.md`.
 
 **2026-09-29 (lane/rate mismatch ruled out; the fault is in the PHY
 driver):** the boot-time eDP 2-lane test (below) came back dark. Its
