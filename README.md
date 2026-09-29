@@ -29,22 +29,24 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
-**2026-09-29 (eDP PHY fix staged as kernel `-4`, untested):** the eDP
-PHY's `-110` matches a Glymur v8 bug that Qualcomm describes. Their posted
-fix (Bjorn Andersson, "phy: qcom: edp: Update v8 programming sequence",
-June 2026) says the PLL does not lock at 1.62 or 2.7 Gb/s without it, and
-this panel tops out at 2.7 Gb/s. On an ASUS Zenbook A16 the same series
-cleared the same `-110`, and that panel then trained at 5.4 Gb/s. Training
-at 2-lane 2.7 Gb/s with it has not been reported. It is backported in
-`patches/kernel/backports/` and built into `7.3.0-rc2-glymur-4`, now on the
-USB. The minimal DT is now the lab configuration: full DT minus the native
-display, which adds battery and AC over PMIC GLink. The ADSP/CDSP boot, but
-there is still no audio, USB, GPU or TPM. Next: from
-"Ubuntu on SSD: ACPI, newest glymur kernel", install `-4` from the USB,
-then boot "device tree (full, DRM debug)". See
-`docs/edp-phy-backport-2026-09-29.md`. Other upstream patches worth taking
-next (PUSH_IDLE reset fix, SCMI polling for cpufreq, USB votes) are in
-`docs/upstream-patch-survey-2026-09-29.md`.
+**2026-09-29 (the eDP panel works):** kernel `7.3.0-rc2-glymur-4`
+backports Qualcomm's posted v8 eDP PHY programming-sequence fix (Bjorn
+Andersson, "phy: qcom: edp: Update v8 programming sequence", June 2026;
+`patches/kernel/backports/`, `docs/edp-phy-backport-2026-09-29.md`) and it
+works: booted on the **unmodified full DTS**, no `phy poweron failed`
+anywhere in the log, link training succeeds on the first attempt at 2
+lanes/2.7 Gb/s (the panel's own limit), `eDP-1` shows
+`connected`/`enabled` at 1920x1200, and DP-AUX backlight control is live.
+This is the first confirmed 2-lane 2.7 Gb/s training report for this
+series (the only other public report, an ASUS Zenbook A16, trained at
+5.4 Gb/s). Same boot: battery/AC/USB-C power supplies, Bluetooth, Wi-Fi,
+and ADSP/CDSP all work; GPU stays safely disabled as designed; there is
+still no audio, USB or TPM. See `docs/edp-display-working-2026-09-29.md`
+and `docs/edp-phy-backport-2026-09-29.md`. Next: confirm the plain
+"device tree (full)" entry (no `drm.debug`) behaves the same, then start
+on audio (SoundWire/LPASS, ADSP is already up). Other upstream patches
+worth taking next (PUSH_IDLE reset fix, SCMI polling for cpufreq, USB
+votes) are in `docs/upstream-patch-survey-2026-09-29.md`.
 
 **2026-09-29 (lane/rate mismatch ruled out; the fault is in the PHY
 driver):** the boot-time eDP 2-lane test (below) came back dark. Its
