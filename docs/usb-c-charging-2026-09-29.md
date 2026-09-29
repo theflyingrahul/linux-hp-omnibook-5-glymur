@@ -1,5 +1,12 @@
 # USB-C Charging: Plugged In, Not Charging, September 29, 2026
 
+> **Second correction (later the same day).** The `-4` session's own
+> `power-supplies.txt` shows the battery **charging at 40 W** over PD on
+> connector 2. The `qcom-battmgr-ac`/`-usb` `ONLINE=0` values cited below
+> do not track the charger on this platform. Charging on the device-tree
+> boot is intermittent, not absent. See "Re-reading the `-4` captures"
+> near the end.
+
 > **Correction (same day, from the pinned source).** The observations below
 > contradict each other, and the causal chain ("no PDOs fetched, so no PD
 > contract, so no charging") does not hold.
@@ -239,8 +246,86 @@ lit during either of these two attempts was not confirmed before this
 investigating session ended — that is the single most useful thing to
 check first next time, watched together with the sysfs state in real time.
 
+## Kernel `-4` vs `-5`: no charging-path code changed
+
+Checked afterwards against the sources, this rules out the kernel
+regression the third attempt pointed toward:
+
+- **Base:** qcom-next `a47c4c5aa..e428097a36d` is six commits: five Shikra
+  board device trees (`arch/arm64/boot/dts/qcom/shikra-*`) and one revert
+  in `sound/soc/qcom/qdsp6/audioreach.c`.
+- **Backports `0003`-`0012`** touch only `drivers/gpu/drm/msm/`,
+  `drivers/bluetooth/hci_qca.c` and `drivers/i2c/busses/i2c-qcom-geni.c`.
+- **Config:** only `CONFIG_CLK_GLYMUR_GPUCC=y` was added.
+- **Device tree:** the `pmic-glink` node, ADSP and firmware names are the
+  same (above). The GPU test DT adds the GPU block and
+  `arm,no-completion-irq` on `/firmware/scmi`.
+
+`drivers/usb/typec/`, `drivers/soc/qcom/pmic_glink*`,
+`drivers/power/supply/qcom_battmgr.c` and `drivers/remoteproc/` are
+byte-identical between `-4` and `-5`. The difference between the `-4`
+partner and the `-5` silence is not kernel code. That leaves the physical
+connection or charger state, the GPU-test-only DT additions (unlikely), or
+the charger/PMIC state carried over from before Linux started.
+
+Note also that "device tree (full)" follows `/boot/vmlinuz-glymur`, which
+is `-5` since the `-5` install, not `-4`. The same-kernel A/B is therefore
+"device tree (full)" against "device tree (GPU test)" on `-5`, with the
+same charger, cable and port.
+
+## Re-reading the `-4` captures: it did charge
+
+`captures/2026-09-29-usb-c-charging/` holds the `-4` session's files.
+`lsmod.txt` has no `scmi_cpufreq`, which was only ever loaded on the `-5`
+GPU test boot, and `typec-sysfs.txt` has the port1 PD partner that only
+`-4` showed. In `power-supplies.txt` the laptop **is charging**:
+
+| Supply | State in `power-supplies.txt` |
+|---|---|
+| `qcom-battmgr-bat` | `STATUS=Charging`, `POWER_NOW=40448000` (+40.4 W), `CAPACITY=66`, `ENERGY_NOW=39.66 Wh` |
+| `ucsi-source-psy-pmic_glink.ucsi.02` | `ONLINE=1`, `USB_TYPE=C [PD] PD_PPS`, `CURRENT_NOW=3250000` (3.25 A), `CHARGE_TYPE=Standard` |
+| `ucsi-source-psy-pmic_glink.ucsi.01` | `ONLINE=0` |
+| `qcom-battmgr-ac`, `qcom-battmgr-usb` | `ONLINE=0` |
+
+That snapshot is self-consistent: port1 PD partner, connector 2 online in
+PD, 3.25 A in, battery charging at 40 W. The `-8.6 W` discharge and
+`ONLINE=0` readings quoted at the top were taken at another moment of the
+same session. The internal contradiction the correction note flagged is
+therefore two moments, not one broken state. The `-5` GPU test boot at
+17:04 found the battery at 53 % (31.98 Wh), so it had been discharging
+since this snapshot.
+
+Two conclusions:
+
+- **Charging works on the device-tree boot**, at least sometimes: HP's
+  ADSP firmware, PMIC GLink and UCSI all did their part on `-4`. The
+  fault is intermittent, not missing support.
+- **`qcom-battmgr-ac`/`-usb` `ONLINE` do not track the charger here.**
+  Both read 0 while the battery took 40 W. Use the battery's `STATUS` and
+  `POWER_NOW` and the UCSI supplies' `ONLINE` instead. The earlier "What
+  stands" line at the top of this document relied on them.
+
+On `-4`, the charger was seen as a PD partner before charging began. The
+`-5` boot never showed a partner at all, over roughly 15 minutes and five
+replugs. The difference is at the UCSI level, and the next test has to
+show whether the firmware saw those replugs and Linux missed the
+notification, or the firmware never saw them. `glymur-ssd/charging-watch.sh`
+records exactly that:
+
+- the connector status asked directly from the firmware every 2 s (UCSI
+  debugfs, read-only `GET_CONNECTOR_STATUS`);
+- the UCSI tracepoints (every command and connector-change event);
+- dynamic debug for `ucsi_glink`, `typec_ucsi`, `pmic_glink` and
+  `qcom_battmgr`;
+- every sysfs state change, with timestamped notes typed by the person at
+  the laptop ("LED on").
+
 ## Next
 
+- **Run `sudo bash charging-watch.sh`** on a device-tree boot, then plug,
+  unplug and replug, typing a note at each step and whenever the LED
+  changes. Leave it running for several minutes after a replug, since
+  charging on `-4` started some time after the PD contract.
 - **Watch the LED and the sysfs state together, live**, on the next
   attempt: if the LED lights but sysfs never shows a partner even at 0.5 s
   resolution, the drop-out happens deep in firmware/hardware, before UCSI
@@ -248,15 +333,10 @@ check first next time, watched together with the sysfs state in real time.
   If sysfs does catch a brief `power_operation_mode=usb_power_delivery` or
   `ONLINE=1` blink, that pins down the actual duration of the session and
   gives something concrete to search the driver for.
-- **The decisive test**: reboot to "Ubuntu on SSD: device tree (full)"
-  (kernel `-4`) with the exact same charger, cable, and port just used on
-  `-5`, and check `/sys/class/typec/port*` immediately. If a partner
-  registers there and not on `-5`, that is a real kernel-version
-  regression between `e428097a36d`+backports and the earlier base — worth
-  bisecting. If it stays silent on `-4` too, the fault is either the
-  charger/cable/port combination itself or something that changed on the
-  laptop/charger between the original observation and now (e.g. the
-  charger's own state), not a Linux regression.
+- **The A/B test** (revised; see the section above): boot "device tree
+  (full)" (`-5`, GPU off) with the same charger, cable and port, and check
+  `/sys/class/typec/port*` straight away. A kernel-version bisect is not
+  needed, because no charging-path code differs between `-4` and `-5`.
 - Identify which physical port is `port0` and which is `port1` (unplug one
   at a time and watch `/sys/class/typec/port*/port*-partner` appear/
   disappear) so future tests aren't ambiguous about which port was used.
