@@ -179,20 +179,56 @@ results (sustained-but-PDO-less on `-4`, versus zero detection on `-5`)
 that share identical DT and firmware. It has not been shown that charging
 would work correctly if the connection were stable.
 
+## Third attempt: reseated cable, other port, same result
+
+`gpu-test-20260929T171413.txt` (`.work/gpu-bringup-run1-2026-09-29/`): the
+owner reseated the cable and used the other physical port, then repeated
+the full unplug/replug sequence (`now` 17:14:13, `unplugged` 17:14:29,
+`replugged` 17:14:55, plugged in throughout except the deliberate 16 s
+gap). **Identical to the second attempt**: `power_operation_mode=default`
+and no partner on both typec ports at every snapshot, every power supply
+`ONLINE=0`, and `journalctl -k --since "17:14:00" --until "17:15:00"` again
+has no UCSI/typec/pmic_glink lines at all.
+
+**This weakens the marginal-connection theory.** A reseated cable on a
+different port should rule out one bad contact point; getting the same
+flat result twice in a row, on two different physical ports, points more
+toward something that changed between kernel `-4` and `-5` than toward
+connector wear. Two things are still unverified, though, and matter before
+concluding it's a kernel regression:
+
+- **Which physical port maps to which typec node was never established.**
+  Only `port1` ever showed a partner (once, on `-4`). If "the other port"
+  this time was actually the port that maps to `port0` — which has *never*
+  once shown a partner, on any boot — this result says nothing new; it
+  would just be testing an already-different, still-unconfirmed port.
+- **No same-session A/B test exists.** Every `-4` and `-5` observation so
+  far comes from separate boots, so a kernel difference and a connection
+  difference (a charger that intermittently makes a good contact) remain
+  confounded. The decisive test is the same charger, same port, same
+  cable orientation, on kernel `-4` right after a `-5` failure — a real A/B,
+  not sequential attempts hours apart.
+
 ## Next
 
-- Re-run the unplug/replug test with deliberate attention to a firm,
-  fully-seated connection (try the other port too — only port1 was ever
-  observed with a partner). If a stable connection reproduces the kernel
-  `-4` result (partner registered, no PDOs, still `ONLINE=0`), that
-  isolates the remaining question to the `UCSI_CAP_PDO_DETAILS` gap alone.
-  If a firm connection still shows nothing, the PDO explanation is not
-  sufficient and the attach path itself needs more evidence.
+- **The decisive test**: reboot to "Ubuntu on SSD: device tree (full)"
+  (kernel `-4`) with the exact same charger, cable, and port just used on
+  `-5`, and check `/sys/class/typec/port*` immediately. If a partner
+  registers there and not on `-5`, that is a real kernel-version
+  regression between `e428097a36d`+backports and the earlier base — worth
+  bisecting. If it stays silent on `-4` too, the fault is either the
+  charger/cable/port combination itself or something that changed on the
+  laptop/charger between the original observation and now (e.g. the
+  charger's own state), not a Linux regression.
+- Identify which physical port is `port0` and which is `port1` (unplug one
+  at a time and watch `/sys/class/typec/port*/port*-partner` appear/
+  disappear) so future tests aren't ambiguous about which port was used.
 - Check charging under the ACPI boot ("Ubuntu on SSD: ACPI, newest glymur
   kernel") with the same charger, to see whether the gap is DT-path-
   specific or universal to this firmware.
-- If a stable connection is confirmed and PDOs still never populate, this
-  is worth a note to HP/Qualcomm (or an upstream `ucsi_glink` quirk
-  request) rather than something fixable from this repository.
+- If a stable connection is confirmed on some boot and PDOs still never
+  populate, that remaining gap is worth a note to HP/Qualcomm (or an
+  upstream `ucsi_glink` quirk request) rather than something fixable from
+  this repository.
 - No DT or kernel change is proposed here; this is a diagnostic finding
   only.
