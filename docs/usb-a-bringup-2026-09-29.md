@@ -124,3 +124,70 @@ Possible outcomes, and what each means:
 | Stick at 5000 Mb/s | Port works as on ACPI |
 | Stick at 480 Mb/s only | High speed works; SuperSpeed needs HP's `PHYC` tuning or a lane/orientation setting on the combo PHY |
 | No device, PHY or controller errors in the log | Evidence for the next step: supplies, repeater, or the PHY reset sequence |
+
+## Live test, September 29: USB-A works; eDP failed on the very next reboot
+
+Booted twice back-to-back, same DTB, same kernel (`-5`), no other change.
+
+**First boot (~21:33, `usb-test-20260929T213337.txt`, `boot-20260929T213352-723bbc98.txt`): everything worked.**
+`qcom-m31eusb2-phy` and `qcom-qmp-combo-phy` both bind at `0x088e0000`/
+`0x088e1000`, `dwc3_qcom`/`xhci_plat_hcd` come up, and the boot USB stick
+itself enumerates through the new internal controller:
+
+```
+2-1          speed=5000   SanDisk Ultra
+usb2         speed=10000  ... xHCI Host Controller
+```
+
+`lsusb -t` shows it as `Bus 002.Port 001: ... Driver=usb-storage, 5000M` —
+the right-hand USB-A port works as a host port at full SuperSpeed, with no
+supplies, repeater or `PHYC` tuning declared. This is the first working
+USB on any device-tree boot. The same boot's saved connector state also
+shows `card1-eDP-1 status=connected enabled=enabled mode=1920x1200` — GPU,
+cpufreq, eDP and USB-A all live together on one boot for the first time.
+
+**Second boot (~21:35, two minutes later, `journalctl -b` on this
+machine): blank screen, keyboard responsive.** Identical DTB and kernel.
+This time:
+
+```
+[    2.407006] [drm:msm_dp_ctrl_link_train_1_2 [msm]] *ERROR* link training #2 on phy 0 failed. ret=-110
+[    2.407035] [drm:msm_dp_ctrl_setup_main_link [msm]] *ERROR* link training on sink failed. ret=-110
+```
+
+This is **not** the old `phy poweron failed --> -110` bug the v8 backport
+fixed (`docs/edp-phy-backport-2026-09-29.md`) — the PHY itself came up
+fine this time; link training got underway and then timed out partway
+through. `gdm`/`gnome-shell` started normally afterwards (`Added device
+'/dev/dri/card1' (msm)`, `GPU /dev/dri/card1 selected primary from
+builtin panel presence`) — the whole session came up, including a working
+console/keyboard, exactly as the owner reported. There is simply no
+connector to show it on, because training never completed. `check-usb.sh`
+was not run this boot, so whether USB-A itself still worked is unconfirmed
+for this attempt.
+
+**Reading this:** the same DTB link-trained cleanly once and failed two
+minutes later on an immediate reboot, with a different failure signature
+than the pre-backport bug. That is evidence against "the USB-A addition
+broke eDP" as a deterministic DT-level regression — a real regression
+would be expected to fail the same way every time. It looks more like the
+same class of marginal, boot-to-boot power/reference-clock sequencing
+flakiness already seen in the USB-C charging investigation
+(`docs/usb-c-charging-2026-09-29.md`): the eDP PHY and the new
+`usb_2_qmpphy` are both combo/reference-clock consumers off the same
+`tcsrcc-glymur` reference-generator block, and everything here still runs
+on dummy regulators with no PEP-evidenced rail sequencing. Not yet
+isolated:
+
+- Whether the plain "GPU test" DT (no USB-A) shows the same reboot-to-
+  reboot eDP flakiness on its own — if so, USB-A is unrelated. If eDP is
+  reliable on "GPU test" but flaky on "GPU and USB-A test" across several
+  back-to-back reboots of each, that would point at the shared
+  reference-clock theory instead.
+- Whether USB-A itself is equally intermittent, or only eDP is affected.
+
+**Bottom line for the owner:** USB-A bring-up succeeded — this is a real,
+new result, not a failure. The blank screen on the second boot was the
+eDP panel not training, and the machine was fully alive underneath it
+(hence the keyboard responding); it was not a hang and nothing here
+needs a fresh DTB or kernel change yet.
