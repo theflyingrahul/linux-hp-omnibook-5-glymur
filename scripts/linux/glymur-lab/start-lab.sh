@@ -2,7 +2,8 @@
 set -euo pipefail
 
 # Start the display-lab session on a boot of the USB entry
-# "Ubuntu on SSD: display lab (device tree)". A device-tree boot has no USB,
+# "Ubuntu on SSD: display lab (device tree)" (off the USB menu since
+# 2026-09-29; see stage-kit.sh). A device-tree boot has no USB,
 # so run it from the copy that stage-kit.sh put on the SSD (from an ACPI boot):
 #
 #   sudo bash ~/glymur-lab-kit/start-lab.sh

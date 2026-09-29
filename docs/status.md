@@ -79,7 +79,7 @@ section are history, newest first. A later entry supersedes an earlier one.
 | CPU idle | Working (`WFI`, `cpu-sleep-0`) | Working | Working | no cluster idle yet |
 | CPU frequency scaling | No | No | No | SCMI protocol v2.0 is up on both instances and `scmi_dev.1-4` exist, but no `scmi-cpufreq` driver is bound (`CONFIG_ARM_SCMI_CPUFREQ=m`, not loaded). **Do not `modprobe scmi-cpufreq`**: the SCMI perf protocol times out (protocol 0x13) and the laptop hangs hard within seconds (display-lab run 1, `docs/display-lab-run1-2026-09-28.md`) |
 | USB-A / USB-C / UVC camera | No | No | No | all five `usb@` nodes and their PHYs are disabled: a regression against the ACPI boot, where the right USB-A port worked. A DT boot cannot see the boot USB either |
-| Native display | Firmware framebuffer | DPU and DP bind; panel dark on eDP clock recovery | Firmware framebuffer (display disabled on purpose) | cause open; the lab is meant to find it |
+| Native display | Firmware framebuffer | DPU and DP bind; panel dark on eDP clock recovery | Firmware framebuffer (display disabled on purpose) | firmware runs 2 lanes at 2.7 Gb/s, the full DT offers 4 lanes up to 8.1 Gb/s; a boot-time 2-lane test DTB is staged (`docs/edp-2lane-test-2026-09-29.md`) |
 | GPU | Disabled | Disabled | Disabled | blocked on `CLK_GLYMUR_GPUCC` (unset); `arm-smmu 3da0000` and `gxclkctl` time out at probe (-110) for the same reason |
 | Audio | No | No | No | SoundWire/LPASS not wired yet |
 | TPM | No | No | No | |

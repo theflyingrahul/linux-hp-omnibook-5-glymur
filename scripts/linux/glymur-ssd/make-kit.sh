@@ -60,7 +60,7 @@ fi
 cat >"$OUT/glymur-setup-ssd.sh" <<EOF
 #!/usr/bin/env bash
 # Glymur: install Ubuntu onto the internal SSD's Linux partition, then boot
-# "Ubuntu on SSD: qcom-next $KREL" from this USB. Run in the RAM live desktop:
+# "Ubuntu on SSD: ACPI, newest glymur kernel" from this USB. Run in the RAM live desktop:
 #   bash /cdrom/glymur-setup-ssd.sh
 # It asks you to type INSTALL, then for a username and password. It never
 # touches Windows, Recovery or the SSD's EFI partition.

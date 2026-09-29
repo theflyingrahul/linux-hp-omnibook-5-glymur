@@ -306,8 +306,8 @@ say "Done. Kernel $KREL; filesystem UUID $FS_UUID; partition GUID $GUID."
 cat <<EOF | tee -a "$LOG"
 
 Next:
-  1. Reboot and choose "Ubuntu on SSD: qcom-next $KREL".
-     If it misbehaves, photograph the screen and try the "(no DSDT override)" entry.
+  1. Reboot and choose "Ubuntu on SSD: ACPI, newest glymur kernel" ($KREL).
+     If it misbehaves, photograph the screen and try "Ubuntu on SSD: device tree (minimal)".
   2. After logging in:
        POWER_SOURCE=battery bash ~/linux-hp-omnibook-5-glymur/scripts/linux/fan-thermal-profile.sh
   A bring-up report is written 60 s after every boot to /var/log/glymur/,

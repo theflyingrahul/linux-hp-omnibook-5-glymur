@@ -3,13 +3,17 @@ set -euo pipefail
 
 # Copy the display-lab kit from the USB to the SSD. A device-tree boot has no
 # USB controller enabled, so the lab session cannot read the kit from the USB;
-# stage it first from an ACPI boot ("Ubuntu on SSD: newest glymur kernel"),
+# stage it first from an ACPI boot ("Ubuntu on SSD: ACPI, newest glymur kernel"),
 # where the right USB-A port works:
 #
 #   bash scripts/linux/glymur-lab/stage-kit.sh [USB-KIT-DIR]
 #
-# Then boot "Ubuntu on SSD: display lab (device tree)" and run
+# Then boot the display-lab entry and run
 #   sudo bash ~/glymur-lab-kit/start-lab.sh
+#
+# The display-lab GRUB entry was taken off the USB menu on 2026-09-29 (its
+# display phase hung the laptop twice); restore it from
+# scripts/linux/glymur-ssd/grub-entry.cfg at commit 1f18e2f to run the lab.
 
 # The desktop mounts the USB under /run/media/$USER (udisks) or /media/$USER.
 SRC="${1:-}"

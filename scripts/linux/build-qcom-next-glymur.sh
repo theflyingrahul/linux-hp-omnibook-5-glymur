@@ -109,8 +109,9 @@ if compgen -G "$REPO_DIR/dts/qcom/*-hp-*.dts" >/dev/null; then
     python3 -c 'import libfdt' 2>/dev/null ||
         echo 'warning: python3-libfdt missing; GPIO allow-list not checked' >&2
     for dts in "$REPO_DIR"/dts/qcom/*-hp-*.dts; do
-        # The display-lab DTB ships in the lab kit (glymur-lab/build-lab.sh).
-        case "$dts" in *-lab.dts) continue ;; esac
+        # The display-lab DTB ships in the lab kit (glymur-lab/build-lab.sh)
+        # and test DTBs on the USB (glymur-lab/build-test-dtb.sh).
+        case "$dts" in *-lab.dts | *-edp-2lane.dts) continue ;; esac
         dtb="$OUT/arch/arm64/boot/dts/qcom/$(basename "$dts" .dts).dtb"
         rm -f "$dtb"
         "${MAKE[@]}" "qcom/$(basename "$dtb")" >/dev/null

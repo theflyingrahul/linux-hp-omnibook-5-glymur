@@ -1,0 +1,25 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * HP OmniBook 5 16-bf1xxx, eDP test device tree: the full device tree with
+ * the eDP link limited to what the boot firmware runs on this panel.
+ *
+ * The firmware's DP3 controller registers (display lab, 2026-09-28) show 2
+ * lanes (CONFIGURATION_CTRL lanes field 1) at 2.7 Gb/s (Mvid/Nvid
+ * 0x4100/0x7530 at the panel's 149.76 MHz pixel clock). The full device
+ * tree offers 4 lanes up to 8.1 Gb/s, and msm's retries only step the rate
+ * down, so it never reaches this configuration. Booted from the USB with
+ * the stock eDP PHY driver; if the panel trains, this goes into the full
+ * device tree.
+ */
+/dts-v1/;
+
+#include "mahua-hp-omnibook-5-bf1xxx.dts"
+
+/ {
+	model = "HP OmniBook 5 Laptop 16-bf1xxx (eDP 2-lane test)";
+};
+
+&mdss_dp3_out {
+	data-lanes = <0 1>;
+	link-frequencies = /bits/ 64 <1620000000 2700000000>;
+};

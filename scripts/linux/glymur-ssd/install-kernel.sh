@@ -2,8 +2,8 @@
 set -euo pipefail
 
 # Install a glymur kernel build on the SSD root and make it the one the USB's
-# "Ubuntu on SSD: newest glymur kernel" entry boots, keeping the previous one
-# for the "previous glymur kernel" entry. Nothing on the USB or the SSD's EFI
+# "Ubuntu on SSD: ACPI, newest glymur kernel" entry boots, keeping the previous
+# one for the "ACPI, previous glymur kernel" entry. Nothing on the USB or the SSD's EFI
 # partition changes: GRUB follows these symlinks in /boot.
 #
 #   sudo bash install-kernel.sh <glymur-kernel-*.tar.gz | build-output-dir>
@@ -74,5 +74,5 @@ fi
 sync
 ls -l "$BOOT"/vmlinuz-glymur "$BOOT"/vmlinuz-glymur.old "$BOOT"/glymur-dtb "$BOOT"/glymur-dtb.old 2>/dev/null
 ls -l "$BOOT/glymur-dtb/" 2>/dev/null
-echo "Reboot and choose \"Ubuntu on SSD: newest glymur kernel\" (ACPI) or"
+echo "Reboot and choose \"Ubuntu on SSD: ACPI, newest glymur kernel\" or"
 echo "\"Ubuntu on SSD: device tree (full)\" to boot $krel."

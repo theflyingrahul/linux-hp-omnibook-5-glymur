@@ -29,6 +29,17 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-29 (eDP 2-lane test staged):** the lab's display phase hung the
+laptop twice, so the firmware's link configuration is now tested at boot
+time with the stock drivers. The USB entry "Ubuntu on SSD: eDP test, 2
+lanes (device tree)" boots the `-3` kernel with the full DT limited to 2
+lanes at up to 2.7 Gb/s, the configuration the firmware runs. msm's retries
+never reach it from the full DT's 4 lanes at up to 8.1 Gb/s. It adds DRM
+DP debug logging. If the panel lights, the two endpoint properties go into
+the full DTS. If it stays dark, wait three minutes before powering off, and
+read `journalctl -k -b -1` from the next boot. The GRUB menu was also
+cleaned up to 9 entries. See `docs/edp-2lane-test-2026-09-29.md`.
+
 **2026-09-28 (first DT boots):** the minimal DT is the new working
 baseline — CPUs, NVMe, native DT input, thermal, cpuidle and Wi-Fi, on the
 firmware framebuffer. The full DT reaches userspace cleanly, with HP's
