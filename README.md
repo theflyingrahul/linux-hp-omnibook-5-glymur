@@ -29,18 +29,19 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
-**2026-09-29 (GPU test staged, kernel `-5`):** kernel `7.3.0-rc2-glymur-5`
-is on the USB. It moves the base to the qcom-next tip (`e428097a36d`), adds
-the PUSH_IDLE reset fix (ported to qcom-next) and nine mainline 7.3-rc3..rc5
-fixes, four of them for the Adreno GPU, and builds the GPU clock drivers
-in. A separate "device tree (GPU test)" entry turns the Adreno X2-85 on
-(capped at 1.35 GHz, no zap shader, linux-firmware `gen80100` firmware
-installed separately) and adds the SCMI polling fix for cpufreq. The full
-and minimal DTs keep the GPU off. Next: from "ACPI, newest glymur kernel",
-run `bash "/media/$USER/UBUNTU 26_0/glymur-tools/kernels/install-from-usb.sh"`,
-which installs `-5` and the GPU firmware. Then boot "device tree (GPU
-test)" and run `sudo bash ~/check-gpu-test.sh --charging`, then `--cpufreq`. See
-`docs/gpu-bringup-2026-09-29.md`.
+**2026-09-29 (GPU and CPU frequency scaling both work, on the GPU test
+DT):** booted kernel `7.3.0-rc2-glymur-5`'s "device tree (GPU test)" entry.
+The Adreno X2-85 binds, loads GMU firmware (v5.2.38), needs no zap shader
+(as on upstream Glymur boards), and `devfreq` actively scales it
+310 MHz-1.35 GHz, with the display still live on the same boot. `modprobe
+scmi-cpufreq` — which hung the laptop hard in lab run 1 — now falls back to
+polling (the upstream SCMI completion-IRQ fix) and gives real frequency
+policies up to 4.03 GHz. See `docs/gpu-bringup-run1-2026-09-29.md`. Neither
+is carried by the full/minimal DTs yet. Not yet tested: a real GL/Vulkan
+workload, and the USB-C charging unplug/replug test (`sudo bash
+~/check-gpu-test.sh --charging`, needs a charger and someone at the
+machine) — see the correction in `docs/usb-c-charging-2026-09-29.md`, which
+still leaves the actual charging failure unexplained.
 
 **2026-09-29 (the eDP panel works):** kernel `7.3.0-rc2-glymur-4`
 backports Qualcomm's posted v8 eDP PHY programming-sequence fix (Bjorn
