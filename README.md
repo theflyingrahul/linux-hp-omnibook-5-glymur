@@ -29,6 +29,20 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-29 (real GPU acceleration confirmed; GNOME's compositor still isn't
+using it):** `check-mesa.sh` (Mesa 26.2.3, `/opt/mesa-glymur`) on the GPU
+test DT: `mesa-glymur-run eglinfo -B -p gbm`/`-p surfaceless` and
+`vulkaninfo` all report the real `Adreno (TM) X2-85` device (not a
+fallback), `glmark2` scores 29, and devfreq genuinely ramps to 1.35 GHz
+under load — this is real, working hardware rendering and compute, not
+just a bound-but-idle GPU. Only GNOME's own compositor (`gnome-shell`)
+still shows software rendering: the desktop-wide `environment.d` switch
+hasn't taken effect for it across two attempts (once after a disruptive
+`systemctl restart user@1000.service`, once after a clean full reboot with
+the file genuinely present), even though `gnome-shell` runs as a proper
+systemd user unit that should inherit it. Cause not yet found. See
+`docs/mesa-x2-85-2026-09-29.md`.
+
 **2026-09-29 (USB-A works; eDP is boot-to-boot flaky on that DT):** the
 "device tree (GPU and USB-A test)" entry was booted twice back-to-back,
 same DTB and kernel. First boot: everything worked together for the first
