@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# One command for an ACPI boot ("Ubuntu on SSD: ACPI, newest glymur kernel"),
-# run from the USB's glymur-tools/kernels directory as your normal user
-# (it asks for your password through sudo):
+# One command for any boot that can see the USB stick (an ACPI boot, or
+# "device tree (GPU and USB-A test)" once its USB-A port works), run from
+# the USB's glymur-tools/kernels directory as your normal user (it asks for
+# your password through sudo):
 #
 #   bash "/media/$USER/UBUNTU 26_0/glymur-tools/kernels/install-from-usb.sh"
 #
@@ -50,13 +51,14 @@ echo "== test tools from Ubuntu (glxinfo/eglinfo, vulkaninfo/vkcube, glmark2)"
 sudo apt-get install -y mesa-utils mesa-utils-bin vulkan-tools glmark2-es2-wayland ||
     echo 'apt failed (offline?); install them later, check-mesa.sh names them'
 
-for f in check-gpu-test.sh check-mesa.sh charging-watch.sh; do
+for f in check-gpu-test.sh check-mesa.sh charging-watch.sh check-usb.sh; do
     if [ -f "$K/$f" ]; then cp "$K/$f" "$HOME/$f"; fi
 done
 sync
 echo
-echo "Done. Reboot into \"Ubuntu on SSD: device tree (GPU test)\" and, from a"
-echo "terminal on the desktop, run:"
+echo "Done. Reboot into \"Ubuntu on SSD: device tree (GPU and USB-A test)\""
+echo "(or \"GPU test\" if the USB-A port does not come up) and, from a terminal"
+echo "on the desktop, run:"
 echo "  bash ~/check-mesa.sh"
 echo "and, with the charger at hand (type notes as you plug and unplug):"
 echo "  sudo bash ~/charging-watch.sh"
