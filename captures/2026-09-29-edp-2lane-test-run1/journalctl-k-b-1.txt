@@ -1,0 +1,310 @@
+Jul 28 02:14:02 glymur kernel: Booting Linux on physical CPU 0x0000000000 [0x512f0021]
+Jul 28 02:14:02 glymur kernel: Machine model: HP OmniBook 5 Laptop 16-bf1xxx (eDP 2-lane test)
+Jul 28 02:14:02 glymur kernel: OF: reserved mem: 0x0000000081400000..0x00000000814fffff (1024 KiB) nomap non-reusable pdp@81400000
+Jul 28 02:14:02 glymur kernel: OF: reserved mem: 0x0000000081e00000..0x0000000081ffffff (2048 KiB) nomap non-reusable pdp-ns-shared@81e00000
+Jul 28 02:14:02 glymur kernel: NET: Registered PF_NETLINK/PF_ROUTE protocol family
+Jul 28 02:14:02 glymur kernel: audit: initializing netlink subsys (disabled)
+Jul 28 02:14:02 glymur kernel: /soc@0/clock-controller@af00000: Fixed dependency cycle(s) with /soc@0/phy@faac00
+Jul 28 02:14:02 glymur kernel: /soc@0/phy@faac00: Fixed dependency cycle(s) with /soc@0/clock-controller@af00000
+Jul 28 02:14:02 glymur kernel: UDP hash table entries: 16384 (order: 8, 1048576 bytes, linear)
+Jul 28 02:14:02 glymur kernel: NET: Registered PF_XDP protocol family
+Jul 28 02:14:02 glymur kernel: qcom-qmp-pcie-phy 1bf6000.phy: supply vdda-phy not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-pcie-phy 1bf6000.phy: supply vdda-pll not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-pcie-phy 1b50000.phy: supply vdda-phy not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-pcie-phy 1b50000.phy: supply vdda-pll not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: simple-framebuffer simple-framebuffer.0: [drm] Registered 1 planes with drm panic
+Jul 28 02:14:02 glymur kernel: Modules linked in:
+Jul 28 02:14:02 glymur kernel: qcom-pcie 1bf0000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-pcie 1b40000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-pcie 1b40000.pcie: PCIe Gen.4 x4 link up
+Jul 28 02:14:02 glymur kernel: qcom-pcie 1bf0000.pcie: PCIe Gen.3 x1 link up
+Jul 28 02:14:02 glymur kernel: pci 0004:01:00.0: [17cb:1112] type 00 class 0x028000 PCIe Endpoint
+Jul 28 02:14:02 glymur kernel: pci 0005:01:00.0: [144d:a80f] type 00 class 0x010802 PCIe Endpoint
+Jul 28 02:14:02 glymur systemd[1]: Created slice system-modprobe.slice - Slice /system/modprobe.
+Jul 28 02:14:02 glymur systemd[1]: Listening on systemd-resolved-monitor.socket - Resolve Monitor Varlink Socket.
+Jul 28 02:14:02 glymur systemd[1]: Listening on systemd-resolved-varlink.socket - Resolve Service Varlink Socket.
+Jul 28 02:14:02 glymur systemd[1]: Listening on systemd-udevd-varlink.socket - udev Varlink Socket.
+Jul 28 02:14:02 glymur systemd[1]: modprobe@configfs.service - Load Kernel Module configfs skipped, unmet condition check ConditionKernelModuleLoaded=!configfs
+Jul 28 02:14:02 glymur systemd[1]: modprobe@drm.service - Load Kernel Module drm skipped, unmet condition check ConditionKernelModuleLoaded=!drm
+Jul 28 02:14:02 glymur systemd[1]: Starting modprobe@efi_pstore.service - Load Kernel Module efi_pstore...
+Jul 28 02:14:02 glymur systemd[1]: modprobe@fuse.service - Load Kernel Module fuse skipped, unmet condition check ConditionKernelModuleLoaded=!fuse
+Jul 28 02:14:02 glymur systemd[1]: Starting systemd-udev-trigger.service - Coldplug All udev Devices...
+Jul 28 02:14:02 glymur systemd[1]: modprobe@efi_pstore.service: Deactivated successfully.
+Jul 28 02:14:02 glymur systemd[1]: Finished modprobe@efi_pstore.service - Load Kernel Module efi_pstore.
+Jul 28 02:14:02 glymur kernel: arm-scmi arm-scmi.0.auto: SCMI Protocol v2.0 'Qualcomm:PDP0' Firmware version 0x0
+Jul 28 02:14:02 glymur kernel: qcom-edp-phy faac00.phy: supply vdda-phy not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-edp-phy faac00.phy: supply vdda-pll not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: [drm:msm_mdp_register [msm]]
+Jul 28 02:14:02 glymur kernel: [drm:msm_dp_pm_runtime_resume [msm]] type=14 core_init=0 phy_init=0
+Jul 28 02:14:02 glymur kernel: [drm:msm_dp_ctrl_core_clk_enable [msm]] enable core clocks
+Jul 28 02:14:02 glymur kernel: [drm:msm_dp_ctrl_core_clk_enable [msm]] stream_clks:off link_clks:off core_clks:on
+Jul 28 02:14:02 glymur kernel: [drm:msm_dp_display_host_phy_init [msm]] type=14 core_init=1 phy_init=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_display_host_phy_exit [msm]] type=14 core_init=1 phy_init=1
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_pm_runtime_suspend [msm]] type=14 core_init=1 phy_init=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_core_clk_disable [msm]] disable core clocks
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_core_clk_disable [msm]] stream_clks:off link_clks:off core_clks:off
+Jul 28 02:14:03 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@1: Adding to iommu group 16
+Jul 28 02:14:03 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@2: Adding to iommu group 17
+Jul 28 02:14:03 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@3: Adding to iommu group 18
+Jul 28 02:14:03 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@4: Adding to iommu group 19
+Jul 28 02:14:03 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@5: Adding to iommu group 20
+Jul 28 02:14:03 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@6: Adding to iommu group 21
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_pm_runtime_resume [msm]] type=14 core_init=0 phy_init=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_core_clk_enable [msm]] enable core clocks
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_core_clk_enable [msm]] stream_clks:off link_clks:off core_clks:on
+Jul 28 02:14:03 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@7: Adding to iommu group 22
+Jul 28 02:14:03 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@8: Adding to iommu group 23
+Jul 28 02:14:03 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@10: Adding to iommu group 24
+Jul 28 02:14:03 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@11: Adding to iommu group 25
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_display_host_phy_init [msm]] type=14 core_init=1 phy_init=0
+Jul 28 02:14:03 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@12: Adding to iommu group 26
+Jul 28 02:14:03 glymur kernel: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00700 AUX -> (ret=  5) 06 9b 86 f4 00
+Jul 28 02:14:03 glymur kernel: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00724 AUX -> (ret=  1) 0b
+Jul 28 02:14:03 glymur kernel: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00725 AUX -> (ret=  1) 0b
+Jul 28 02:14:03 glymur kernel: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00726 AUX -> (ret=  1) 0b
+Jul 28 02:14:03 glymur kernel: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00721 AUX -> (ret=  1) 02
+Jul 28 02:14:03 glymur kernel: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00722 AUX -> (ret=  2) 01 99
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: bound af6c000.displayport-controller (ops msm_dp_display_comp_ops [msm])
+Jul 28 02:14:03 glymur kernel: [drm:dpu_kms_hw_init:1193] dpu hardware revision:0xc0020000
+Jul 28 02:14:03 glymur kernel: [drm:dpu_encoder_init [msm]] dsi_info->num_of_h_tiles 1
+Jul 28 02:14:03 glymur kernel: [drm:dpu_encoder_init [msm]] h_tile_instance 0 = 3, split_role 0
+Jul 28 02:14:03 glymur kernel: [drm:dpu_encoder_phys_vid_init [msm]] enc-1 intf-1
+Jul 28 02:14:03 glymur kernel: [drm:dpu_encoder_phys_vid_init [msm]] enc35 intf5 created intf idx:6
+Jul 28 02:14:03 glymur kernel: [drm:dpu_encoder_init [msm]] dsi_info->num_of_h_tiles 1
+Jul 28 02:14:03 glymur kernel: [drm:dpu_encoder_init [msm]] h_tile_instance 0 = 3, split_role 0
+Jul 28 02:14:03 glymur kernel: [drm:dpu_encoder_phys_wb_init [msm]]
+Jul 28 02:14:03 glymur kernel: [drm:dpu_encoder_phys_wb_init [msm]] Created dpu_encoder_phys for wb 3
+Jul 28 02:14:03 glymur kernel: [drm:_dpu_kms_drm_obj_init [msm]] Create plane type 1 with features 2da4 (cur 0)
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_common.isra.0 [msm]] plane-0 created for pipe:0 id:43
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_virtual [msm]] plane-0 created virtual id:43
+Jul 28 02:14:03 glymur kernel: [drm:_dpu_kms_drm_obj_init [msm]] Create plane type 1 with features 2da4 (cur 0)
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_common.isra.0 [msm]] plane-1 created for pipe:0 id:49
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_virtual [msm]] plane-1 created virtual id:49
+Jul 28 02:14:03 glymur kernel: [drm:_dpu_kms_drm_obj_init [msm]] Create plane type 0 with features 2da4 (cur 0)
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_common.isra.0 [msm]] plane-2 created for pipe:0 id:55
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_virtual [msm]] plane-2 created virtual id:55
+Jul 28 02:14:03 glymur kernel: [drm:_dpu_kms_drm_obj_init [msm]] Create plane type 0 with features 2da4 (cur 0)
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_common.isra.0 [msm]] plane-3 created for pipe:0 id:61
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_virtual [msm]] plane-3 created virtual id:61
+Jul 28 02:14:03 glymur kernel: [drm:_dpu_kms_drm_obj_init [msm]] Create plane type 0 with features 3d80 (cur 0)
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_common.isra.0 [msm]] plane-4 created for pipe:0 id:67
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_virtual [msm]] plane-4 created virtual id:67
+Jul 28 02:14:03 glymur kernel: [drm:_dpu_kms_drm_obj_init [msm]] Create plane type 0 with features 3d80 (cur 0)
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_common.isra.0 [msm]] plane-5 created for pipe:0 id:73
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_virtual [msm]] plane-5 created virtual id:73
+Jul 28 02:14:03 glymur kernel: [drm:_dpu_kms_drm_obj_init [msm]] Create plane type 0 with features 3d80 (cur 0)
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_common.isra.0 [msm]] plane-6 created for pipe:0 id:79
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_virtual [msm]] plane-6 created virtual id:79
+Jul 28 02:14:03 glymur kernel: [drm:_dpu_kms_drm_obj_init [msm]] Create plane type 0 with features 3d80 (cur 0)
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_common.isra.0 [msm]] plane-7 created for pipe:0 id:85
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_virtual [msm]] plane-7 created virtual id:85
+Jul 28 02:14:03 glymur kernel: [drm:_dpu_kms_drm_obj_init [msm]] Create plane type 2 with features 3dc0 (cur 40)
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_common.isra.0 [msm]] plane-8 created for pipe:0 id:91
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_virtual [msm]] plane-8 created virtual id:91
+Jul 28 02:14:03 glymur kernel: [drm:_dpu_kms_drm_obj_init [msm]] Create plane type 2 with features 3dc0 (cur 40)
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_common.isra.0 [msm]] plane-9 created for pipe:0 id:97
+Jul 28 02:14:03 glymur kernel: [drm:dpu_plane_init_virtual [msm]] plane-9 created virtual id:97
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: no GPU device was found
+Jul 28 02:14:03 glymur kernel: qcom,fastrpc 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1: assigned reserved memory node adsp-rpc-remote-heap
+Jul 28 02:14:03 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@3: Adding to iommu group 27
+Jul 28 02:14:03 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@4: Adding to iommu group 28
+Jul 28 02:14:03 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@5: Adding to iommu group 29
+Jul 28 02:14:03 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@6: Adding to iommu group 30
+Jul 28 02:14:03 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@7: Adding to iommu group 31
+Jul 28 02:14:03 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@8: Adding to iommu group 32
+Jul 28 02:14:03 glymur kernel: [drm:dpu_rm_reserve [msm]] CTL_0 caps 0x0
+Jul 28 02:14:03 glymur kernel: [drm:dpu_rm_reserve [msm]] CTL_0 match
+Jul 28 02:14:03 glymur kernel: [drm:dpu_kms_wait_flush [msm]] [crtc:104] not enable
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_init_panel_info [msm]] SET NEW RESOLUTION:
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_init_panel_info [msm]] 1920x1200@60fps
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_init_panel_info [msm]] h_porches(back|front|width) = (40|8|32)
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_init_panel_info [msm]] v_porches(back|front|width) = (6|34|8)
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_init_panel_info [msm]] pixel clock (KHz)=(149761)
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_init_panel_info [msm]] bpp = 24
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_init_panel_info [msm]] updated bpp = 18
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:msm_dp_display_prepare_link [msm]] sink_count=0
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:msm_dp_hpd_plug_handle.isra.0 [msm]] Before, type=14 sink_count=0
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:msm_dp_display_host_phy_init [msm]] type=14 core_init=1 phy_init=1
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00000 AUX -> (ret= 15) 14 0a c2 01 00 00 01 c0 02 14 00 00 00 09 82
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x02200 AUX -> (ret= 15) 14 0a c2 01 00 00 01 c0 02 14 00 00 00 09 82
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0xf0000 AUX -> (ret=  8) 00 00 00 00 00 00 00 00
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00000 AUX -> (ret= 15) 14 0a c2 01 00 00 01 c0 02 14 00 00 00 09 82
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x02200 AUX -> (ret= 15) 14 0a c2 01 00 00 01 c0 02 14 00 00 00 09 82
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x02210 AUX -> (ret=  1) 02
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_read_link_caps [msm]] max_lanes=2 max_link_rate=270000
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00700 AUX -> (ret=  1) 06
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_read_link_caps [msm]] edp_rev=0x6
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00010 AUX -> (ret= 16) a4 1f bc 34 00 00 00 00 00 00 00 00 00 00 00 00
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00100 AUX -> (ret=  1) 0a
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_read_link_caps [msm]] SUPPORTED_LINK_RATES[0]: 162000
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_read_link_caps [msm]] SUPPORTED_LINK_RATES[1]: 270000
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_read_link_caps [msm]] version: 1.4
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_read_link_caps [msm]] link_rate=270000
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_read_link_caps [msm]] link_rate_set=1
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_read_link_caps [msm]] use_rate_set=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_read_link_caps [msm]] lane_count=2
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00070 AUX -> (ret=  2) 00 38
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_panel_read_link_caps [msm]] psr version: 0x0, psr_cap: 0x38
+Jul 28 02:14:03 glymur kernel: qcom,apr 6800000.remoteproc:glink-edge.adsp_apps.-1.-1: Adding APR/GPR dev: gprsvc:service:2:1
+Jul 28 02:14:03 glymur kernel: qcom,apr 6800000.remoteproc:glink-edge.adsp_apps.-1.-1: Adding APR/GPR dev: gprsvc:service:2:2
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00200 AUX -> (ret=  1) 01
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00202 AUX -> (ret=  6) 00 00 80 00 11 00
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00201 AUX -> (ret=  1) 00
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_process_request [msm]] device service irq vector = 0x0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_process_request [msm]] no test requested
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_process_request [msm]] sink request=0x200
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 23
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00600 AUX -> (ret=  1) 01
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00600 AUX <- (ret=  1) 01
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:msm_dp_hpd_plug_handle.isra.0 [msm]] After, type=14 sink_count=1
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:msm_dp_display_host_phy_init [msm]] type=14 core_init=1 phy_init=1
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_core_clk_enable [msm]] core clks already enabled
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_on_link [msm]] rate=270000, num_lanes=2, pixel_rate=149761
+Jul 28 02:14:03 glymur kernel: phy phy-faac00.phy.2: phy poweron failed --> -110
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_enable_mainlink_clocks [msm]] enable link clocks
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_enable_mainlink_clocks [msm]] stream_clks:off link_clks:on core_clks:on
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_enable_mainlink_clocks [msm]] link rate=270000
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_setup_main_link [msm]] enable
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_setup_main_link [msm]] link DP_CONFIGURATION_CTRL=0x4457
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_config_ctrl_streams [msm]] stream DP_CONFIGURATION_CTRL=0x4457
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00101 AUX <- (ret=  1) 82
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_setup_main_link [msm]] using LINK_BW_SET: 0x0a
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00100 AUX <- (ret=  1) 0a
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00107 AUX <- (ret=  2) 10 01
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x0010a AUX <- (ret=  1) 01
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_set_pattern_state_bit [msm]] hw: bit=1 train=1
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_train_pattern_set.isra.0 [msm]] sink: pattern=21
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00102 AUX <- (ret=  1) 21
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] voltage level: 0 emphasis level: 0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] sink: p|v=0x0
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00103 AUX <- (ret=  2) 00 00
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 21
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00202 AUX -> (ret=  6) 00 00 00 00 11 00
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] lane=0 req_vol_swing=1 req_pre_emphasis=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] lane=1 req_vol_swing=1 req_pre_emphasis=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] adjusted: v_level=1, p_level=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] voltage level: 1 emphasis level: 0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] sink: p|v=0x1
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00103 AUX <- (ret=  2) 01 01
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 21
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00202 AUX -> (ret=  6) 00 00 00 00 22 00
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] lane=0 req_vol_swing=2 req_pre_emphasis=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] lane=1 req_vol_swing=2 req_pre_emphasis=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] adjusted: v_level=2, p_level=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] voltage level: 2 emphasis level: 0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] sink: p|v=0x2
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00103 AUX <- (ret=  2) 02 02
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 21
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00202 AUX -> (ret=  6) 00 00 00 00 33 00
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] lane=0 req_vol_swing=3 req_pre_emphasis=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] lane=1 req_vol_swing=3 req_pre_emphasis=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] adjusted: v_level=3, p_level=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] voltage level: 3 emphasis level: 0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] max. voltage swing level reached 3
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] sink: p|v=0x3
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00103 AUX <- (ret=  2) 07 07
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 21
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00202 AUX -> (ret=  6) 00 00 00 00 33 00
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_link_train_1_2 [msm]] *ERROR* max v_level reached
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_link_train_1_2 [msm]] *ERROR* link training #1 on phy 0 failed. ret=-11
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_setup_main_link [msm]] *ERROR* link training on sink failed. ret=-11
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 21
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00202 AUX -> (ret=  6) 00 00 00 00 33 00
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_link_rate_down_shift [msm]] new rate=0x278d0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_mainlink_disable [msm]] disable
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_link_clk_disable [msm]] disabled link clocks
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_link_clk_disable [msm]] stream_clks:off link_clks:off core_clks:on
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_enable_mainlink_clocks [msm]] enable link clocks
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_enable_mainlink_clocks [msm]] stream_clks:off link_clks:on core_clks:on
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_enable_mainlink_clocks [msm]] link rate=162000
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_setup_main_link [msm]] enable
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_setup_main_link [msm]] link DP_CONFIGURATION_CTRL=0x4457
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_config_ctrl_streams [msm]] stream DP_CONFIGURATION_CTRL=0x4457
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00101 AUX <- (ret=  1) 82
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_setup_main_link [msm]] using LINK_BW_SET: 0x06
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00100 AUX <- (ret=  1) 06
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00107 AUX <- (ret=  2) 10 01
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x0010a AUX <- (ret=  1) 01
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_set_pattern_state_bit [msm]] hw: bit=1 train=1
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_train_pattern_set.isra.0 [msm]] sink: pattern=21
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00102 AUX <- (ret=  1) 21
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] voltage level: 0 emphasis level: 0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] sink: p|v=0x0
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00103 AUX <- (ret=  2) 00 00
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 21
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00202 AUX -> (ret=  6) 00 00 00 00 11 00
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] lane=0 req_vol_swing=1 req_pre_emphasis=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] lane=1 req_vol_swing=1 req_pre_emphasis=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] adjusted: v_level=1, p_level=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] voltage level: 1 emphasis level: 0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] sink: p|v=0x1
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00103 AUX <- (ret=  2) 01 01
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 21
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00202 AUX -> (ret=  6) 00 00 00 00 22 00
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] lane=0 req_vol_swing=2 req_pre_emphasis=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] lane=1 req_vol_swing=2 req_pre_emphasis=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] adjusted: v_level=2, p_level=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] voltage level: 2 emphasis level: 0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] sink: p|v=0x2
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00103 AUX <- (ret=  2) 02 02
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 21
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00202 AUX -> (ret=  6) 00 00 00 00 33 00
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] lane=0 req_vol_swing=3 req_pre_emphasis=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] lane=1 req_vol_swing=3 req_pre_emphasis=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_link_adjust_levels [msm]] adjusted: v_level=3, p_level=0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] voltage level: 3 emphasis level: 0
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] max. voltage swing level reached 3
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_update_phy_vx_px [msm]] sink: p|v=0x3
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00103 AUX <- (ret=  2) 07 07
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 21
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00202 AUX -> (ret=  6) 00 00 00 00 33 00
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_link_train_1_2 [msm]] *ERROR* max v_level reached
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_link_train_1_2 [msm]] *ERROR* link training #1 on phy 0 failed. ret=-11
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_setup_main_link [msm]] *ERROR* link training on sink failed. ret=-11
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_probe [drm_display_helper]] dpu_dp_aux: 0x00102 AUX -> (ret=  1) 21
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_read [drm_display_helper]] dpu_dp_aux: 0x00202 AUX -> (ret=  6) 00 00 00 00 33 00
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_train_pattern_set.isra.0 [msm]] sink: pattern=0
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00102 AUX <- (ret=  1) 00
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_mainlink_disable [msm]] disable
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_link_clk_disable [msm]] disabled link clocks
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_ctrl_link_clk_disable [msm]] stream_clks:off link_clks:off core_clks:on
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_display_prepare_link [msm]] *ERROR* Failed link training (rc=-104)
+Jul 28 02:14:03 glymur kernel: [drm:msm_dp_display_atomic_pre_enable [msm]] *ERROR* DP display prepare failed, rc=-104
+Jul 28 02:14:03 glymur kernel: [drm:dpu_encoder_phys_vid_enable [msm]] enc35 intf5
+Jul 28 02:14:03 glymur kernel: [drm:dpu_encoder_phys_vid_setup_timing_engine [msm]] enc35 intf5 enabling mode:
+Jul 28 02:14:03 glymur kernel: [drm:dpu_encoder_phys_vid_setup_timing_engine [msm]] enc35 intf5 fmt_fourcc 0x34324752
+Jul 28 02:14:03 glymur kernel: [drm:dpu_encoder_phys_vid_setup_timing_engine [msm]] enc35 intf5 prog fetch is not needed, large vbp+vsw
+Jul 28 02:14:03 glymur kernel: [drm:dpu_encoder_phys_vid_setup_timing_engine [msm]] enc35 intf5 v_front_porch 0 v_back_porch 40 vsync_pulse_width 8
+Jul 28 02:14:03 glymur kernel: [drm:dpu_encoder_phys_vid_setup_timing_engine [msm]] enc35 intf5 wc_lines 24 needed_vfp_lines 4294967272 actual_vfp_lines 0
+Jul 28 02:14:03 glymur kernel: [drm:dpu_encoder_phys_vid_setup_timing_engine [msm]] enc35 intf5 vfp_fetch_lines 0 vfp_fetch_start_vsync_counter 0
+Jul 28 02:14:03 glymur kernel: [drm:dpu_encoder_phys_vid_enable [msm]] enc35 intf5 update pending flush ctl 0 intf 6
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:msm_dp_display_enable_helper [msm]] type=14 Done
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00721 AUX <- (ret=  1) 02
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00722 AUX <- (ret=  2) 01 99
+Jul 28 02:14:03 glymur kernel: [drm:dpu_kms_wait_flush [msm]] [crtc:104] not enable
+Jul 28 02:14:03 glymur kernel: [drm:dpu_kms_wait_flush [msm]] [crtc:104] not enable
+Jul 28 02:14:03 glymur kernel: [drm:dpu_kms_wait_flush [msm]] [crtc:104] not enable
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm] fb0: msmdrmfb frame buffer device
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:drm_dp_dpcd_write [drm_display_helper]] dpu_dp_aux: 0x00722 AUX <- (ret=  2) 01 99
+Jul 28 02:14:04 glymur kernel: [drm:dpu_kms_wait_flush [msm]] [crtc:104] not enable
+Jul 28 02:14:04 glymur kernel: [drm:dpu_kms_wait_flush [msm]] [crtc:104] not enable
+Jul 28 02:14:08 glymur kernel: platform 6800000.remoteproc:glink-edge:gpr:service@1:dais: Adding to iommu group 33

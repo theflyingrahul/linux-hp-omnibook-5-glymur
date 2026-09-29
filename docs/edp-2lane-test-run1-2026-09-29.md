@@ -4,7 +4,9 @@ Booted "Ubuntu on SSD: eDP test, 2 lanes (device tree)"
 (`docs/edp-2lane-test-2026-09-29.md`), kernel `7.3.0-rc2-glymur-3`, model
 "HP OmniBook 5 Laptop 16-bf1xxx (eDP 2-lane test)". **Result: dark, same as
 the full DT.** `journalctl -k -b -1` (pasted by the owner from the next
-boot) has the full sequence. Not yet copied into `.work/`.
+boot) has the full sequence. Full log:
+`captures/2026-09-29-edp-2lane-test-run1/journalctl-k-b-1.txt` (identifiers
+masked).
 
 ## The lane/rate mismatch theory is now ruled out
 

@@ -1,0 +1,131 @@
+Module                  Size  Used by
+q6apm_lpass_dais       20480  0
+q6prm_clocks           16384  20
+q6apm_dai              32768  0
+snd_q6dsp_common       57344  2 q6apm_lpass_dais,q6prm_clocks
+q6prm                  12288  1 q6prm_clocks
+snd_seq_dummy          16384  0
+snd_hrtimer            16384  1
+rfcomm                102400  4
+bnep                   32768  2
+binfmt_misc            36864  1
+qrtr_mhi               16384  0
+snd_q6apm              69632  3 q6apm_dai,q6prm,q6apm_lpass_dais
+apr                    20480  2 snd_q6apm,q6prm
+joydev                 36864  0
+input_leds             12288  0
+hid_multitouch         40960  0
+hid_generic            12288  0
+fastrpc                53248  0
+panel_samsung_atna33xc20    12288  0
+rpmsg_ctrl             12288  0
+i2c_hid_of             12288  0
+i2c_hid_acpi_prp0001    12288  0
+rpmsg_char             24576  1 rpmsg_ctrl
+qcom_pd_mapper         28672  0
+qrtr_smd               16384  0
+i2c_hid                40960  2 i2c_hid_acpi_prp0001,i2c_hid_of
+hid                   299008  3 i2c_hid,hid_multitouch,hid_generic
+socinfo                32768  0
+pmic_glink_altmode     20480  0
+ucsi_glink             20480  0
+typec_ucsi             73728  1 ucsi_glink
+aux_hpd_bridge         16384  1 pmic_glink_altmode
+qcom_battmgr           32768  0
+typec                 135168  3 pmic_glink_altmode,typec_ucsi,ucsi_glink
+thunderbolt           540672  1 typec
+hci_uart              204800  0
+btqca                  28672  1 hci_uart
+btrtl                  40960  1 hci_uart
+snd_soc_lpass_wsa_macro    73728  0
+snd_soc_lpass_va_macro    61440  5
+btbcm                  24576  1 hci_uart
+ath12k_wifi7          135168  0
+snd_soc_lpass_macro_common    12288  2 snd_soc_lpass_wsa_macro,snd_soc_lpass_va_macro
+btintel                77824  1 hci_uart
+aes_ce_blk             20480  1
+ath12k                929792  1 ath12k_wifi7
+ghash_ce               20480  0
+bluetooth            1052672  34 btrtl,btqca,btintel,hci_uart,btbcm,bnep,rfcomm
+snd_soc_core          446464  5 snd_q6apm,q6apm_dai,q6apm_lpass_dais,snd_soc_lpass_wsa_macro,snd_soc_lpass_va_macro
+gf128mul               16384  1 ghash_ce
+sm4_ce_gcm             16384  0
+snd_compress           36864  1 snd_soc_core
+sm4_ce_ccm             16384  0
+msm                  2105344  3
+ac97_bus               12288  1 snd_soc_core
+mac80211             1851392  2 ath12k,ath12k_wifi7
+sm4_ce                 28672  2 sm4_ce_gcm,sm4_ce_ccm
+snd_pcm_dmaengine      16384  1 snd_soc_core
+snd_pcm               208896  5 q6apm_dai,q6apm_lpass_dais,snd_compress,snd_soc_core,snd_pcm_dmaengine
+sm4_ce_cipher          12288  0
+sm4                    12288  4 sm4_ce,sm4_ce_cipher,sm4_ce_gcm,sm4_ce_ccm
+ubwc_config            24576  1 msm
+snd_seq_midi           24576  0
+ocmem                  24576  1 msm
+gpu_sched              77824  1 msm
+cfg80211             1478656  3 ath12k,ath12k_wifi7,mac80211
+snd_seq_midi_event     20480  1 snd_seq_midi
+drm_gpuvm              53248  1 msm
+drm_exec               16384  2 msm,drm_gpuvm
+spmi_pmic_arb          45056  0
+mhi                   135168  3 ath12k,ath12k_wifi7,qrtr_mhi
+spmi_devres            12288  1 spmi_pmic_arb
+drm_dp_aux_bus         16384  2 msm,panel_samsung_atna33xc20
+libarc4                12288  1 mac80211
+snd_rawmidi            57344  1 snd_seq_midi
+spmi                   45056  1 spmi_devres
+drm_display_helper    352256  2 msm,panel_samsung_atna33xc20
+qcom_q6v5_pas          57344  0
+i2c_qcom_geni          53248  0
+phy_qcom_edp           77824  1
+snd_seq               131072  9 snd_seq_midi,snd_seq_midi_event,snd_seq_dummy
+qmi_tmd                16384  1 qcom_q6v5_pas
+qcom_spel              24576  0
+qcom_stats             16384  0
+qcom_pil_info          16384  1 qcom_q6v5_pas
+qcom_q6v5              16384  1 qcom_q6v5_pas
+snd_seq_device         16384  3 snd_seq,snd_seq_midi,snd_rawmidi
+qcom_sysmon            24576  2 qcom_q6v5_pas,qcom_q6v5
+cec                    94208  1 drm_display_helper
+snd_timer              53248  3 snd_seq,snd_hrtimer,snd_pcm
+qcom_common            20480  2 ath12k,qcom_q6v5_pas
+qcom_glink_smem        12288  1 qcom_common
+rc_core                73728  1 cec
+qcom_tsens             81920  0
+qcom_glink             98304  2 qcom_glink_smem,qcom_common
+snd                   151552  9 snd_seq,snd_seq_device,snd_timer,snd_compress,snd_soc_core,snd_pcm,snd_rawmidi
+mdt_loader             12288  3 ath12k,msm,qcom_q6v5_pas
+evacc_glymur           20480  0
+dispcc_glymur          45056  15
+camcc_glymur           53248  0
+videocc_glymur         20480  0
+pinctrl_sm8650_lpass_lpi    20480  0
+gpi                    53248  1 i2c_qcom_geni
+qcom_aoss              32768  3 qcom_stats,msm,qcom_q6v5
+pinctrl_lpass_lpi      24576  1 pinctrl_sm8650_lpass_lpi
+soundcore              16384  1 snd
+qrtr                   49152  22 qrtr_smd,qrtr_mhi
+gxclkctl_kaanapali     16384  0
+qcom_smd               28672  1 qcom_common
+nvmem_qfprom           16384  0
+bam_dma                40960  0
+qcom_hwspinlock        12288  1
+llcc_qcom              65536  1 msm
+pmic_glink             16384  3 pmic_glink_altmode,qcom_battmgr,ucsi_glink
+qcom_cpucp_mbox        16384  4
+qcomtee                49152  0
+pdr_interface          24576  2 apr,pmic_glink
+fixed                  16384  1
+qcom_pdr_msg           16384  2 qcom_pd_mapper,pdr_interface
+smp2p                  36864  0
+qmi_helpers            32768  6 qcom_pd_mapper,qmi_tmd,ath12k,qcom_sysmon,qcom_pdr_msg,pdr_interface
+icc_bwmon              28672  0
+tee                    69632  1 qcomtee
+rpmsg_core             24576  9 rpmsg_char,rpmsg_ctrl,qcom_sysmon,qcom_glink,fastrpc,qrtr_smd,apr,qcom_smd,pmic_glink
+gpio_keys              24576  0
+qcom_smem              32768  9 smp2p,ubwc_config,qcom_stats,qcom_glink_smem,qcom_common,socinfo,qcom_q6v5_pas,qcom_q6v5,qcom_smd
+sch_fq_codel           24576  1
+efi_pstore             12288  0
+dmi_sysfs              24576  0
+autofs4                57344  2
