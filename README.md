@@ -36,12 +36,28 @@ The Adreno X2-85 binds, loads GMU firmware (v5.2.38), needs no zap shader
 310 MHz-1.35 GHz, with the display still live on the same boot. `modprobe
 scmi-cpufreq` — which hung the laptop hard in lab run 1 — now falls back to
 polling (the upstream SCMI completion-IRQ fix) and gives real frequency
-policies up to 4.03 GHz. See `docs/gpu-bringup-run1-2026-09-29.md`. Neither
-is carried by the full/minimal DTs yet. Not yet tested: a real GL/Vulkan
-workload, and the USB-C charging unplug/replug test (`sudo bash
-~/check-gpu-test.sh --charging`, needs a charger and someone at the
-machine) — see the correction in `docs/usb-c-charging-2026-09-29.md`, which
-still leaves the actual charging failure unexplained.
+policies up to 4.03 GHz. GL/Vulkan still show "Software Rendering": the
+installed Mesa (`26.0.8`) has no hardware-table entry for this chip ID yet
+— a userspace/Mesa version gap, not a kernel or DT problem. See
+`docs/gpu-bringup-run1-2026-09-29.md`. Neither GPU nor cpufreq is carried
+by the full/minimal DTs yet.
+
+USB-C charging is still unresolved after five unplug/replug attempts across
+this session, but the picture changed: the owner directly saw the charging
+LED light once during a replug, so a charging session can start — it just
+doesn't persist long enough for any snapshot (20 s delay) or live poll
+(0.5 s resolution, ~60 s each, twice) to catch it, and neither Linux's UCSI
+state nor the kernel log ever shows it. The next session should watch the
+LED and `/sys/class/typec/port*`/`power_supply` together in real time on a
+fresh attempt. See `docs/usb-c-charging-2026-09-29.md`.
+
+**Next, in priority order:** (1) watch the charging LED and sysfs
+simultaneously on a fresh unplug/replug, ideally also comparing against the
+ACPI/Windows charging path with the same charger; (2) audio (SoundWire/
+LPASS — the ADSP is already up); (3) once GPU + cpufreq are trusted more,
+carry them into the full DT alongside the working display; (4) USB-C data
+and USB in general still need a controller enabled in DT; (5) suspend and
+TPM are untouched.
 
 **2026-09-29 (the eDP panel works):** kernel `7.3.0-rc2-glymur-4`
 backports Qualcomm's posted v8 eDP PHY programming-sequence fix (Bjorn

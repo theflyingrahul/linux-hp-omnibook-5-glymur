@@ -85,18 +85,47 @@ this laptop under Linux, on any boot path.
   and minimal DTs still keep the GPU block off by design and are
   unaffected.
 
+## "Software Rendering" explained: a Mesa version gap, not a kernel problem
+
+GNOME Settings' About page (and any GL/Vulkan client) reports software
+rendering. Traced to the journal (`org.gnome.Settings`, `gnome-shell`,
+`xdg-terminal-exec`, all sessions on this boot):
+
+```
+MESA: error: fd_pipe_new2:49: unsupported GPU id 0x0 / chip id 0x16544070031
+TU: error: .../tu_device.cc:1553: device (chip_id = 16544070031, gpu_id = 0) is unsupported (VK_ERROR_INCOMPATIBLE_DRIVER)
+libEGL warning: MESA-LOADER: failed to retrieve device information
+Xwayland glamor: GBM Wayland interfaces not available
+Failed to initialize glamor, falling back to sw
+```
+
+`msm_dri.so` (freedreno's OpenGL driver) and `TU` (turnip, its Vulkan
+driver) are both present (installed Mesa `26.0.8-1ubuntu0.3`), but neither
+recognizes this chip ID — the Adreno X2-85 (`qcom,adreno-44070001`) is new
+enough that Ubuntu 26.04's shipped Mesa predates its entry in freedreno's
+hardware table. This is entirely a **userspace** gap: everything this
+session confirmed at the kernel level (bind, GMU firmware, devfreq
+scaling) is real hardware bring-up, unaffected by this. GNOME falls back
+to `llvmpipe`/`swrast` (CPU rendering) because libEGL can't get a working
+DRI2/GBM device for the GPU, and Xwayland's glamor acceleration fails the
+same way. A newer Mesa (once one ships with X2-85/gen8 support, likely
+needed upstream first) would be required to see real acceleration; nothing
+in this repository can fix a missing Mesa hardware-table entry.
+
 ## Not yet done
 
-- **USB-C charging** (`docs/usb-c-charging-2026-09-29.md`): none of the
-  four runs used `--charging` (it needs the owner to physically unplug and
-  replug the charger, which the script prompts for interactively). No
-  charger is attached on this boot as of writing (`power_operation_mode`
-  reads `default` on both typec ports, no partner). This is the clear next
-  step while already on this boot/kernel: `sudo bash ~/check-gpu-test.sh
-  --charging` (add `--cpufreq` too, harmless to repeat) gives the
-  timestamped-snapshot-plus-unplug/replug sequence the charging doc's
-  correction asked for.
-- A real GL/Vulkan workload, once `mesa-utils`/`vulkan-tools` are
-  available, to confirm the GPU renders and not just clocks.
+- **USB-C charging**: still open. Two live, tightly-polled (0.5 s
+  resolution, ~60 s each) attempts at a fresh unplug/replug on this boot
+  both stayed completely flat — no partner, no `ONLINE=1`, not even a
+  brief blip — in contrast to the owner's report that the charging LED lit
+  once during an earlier replug on the hinge-side port. Whether the LED
+  lit on these two live-polled attempts was not confirmed before wrapping
+  up. See `docs/usb-c-charging-2026-09-29.md` for the full timeline; this
+  needs a session where the LED state and the sysfs poll are watched
+  together in real time, ideally also compared against the ACPI/Windows
+  path.
+- A real GL/Vulkan workload once Mesa ships X2-85 support, to confirm the
+  GPU renders and not just clocks (devfreq activity is strong but indirect
+  evidence).
 - Whether GPU + cpufreq survive being carried into the full DT alongside
   the working display, rather than only the GPU-only test DT.

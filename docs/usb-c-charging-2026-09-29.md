@@ -209,8 +209,45 @@ concluding it's a kernel regression:
   cable orientation, on kernel `-4` right after a `-5` failure — a real A/B,
   not sequential attempts hours apart.
 
+## The owner's report: the charging LED did light once, briefly
+
+After reviewing the logs above, the owner reported that during one of the
+kernel `-5` `--charging` tests, on the port close to the hinge, the
+charging LED **did** come on during the replug half of the sequence — real
+hardware evidence of a charging attempt starting — but a subsequent
+unplug/replug on the same session showed no charging. This does not
+contradict the flat snapshots above: the script's replug snapshot is taken
+20 s after the owner presses Enter (already after plugging in), so a
+charging session that started and then dropped out within that window
+would be invisible to a single delayed sample. It also does not resolve
+which of the two completed attempts this was, since the physical
+port-to-`port0`/`port1` mapping is still unconfirmed (a gap already noted
+above).
+
+**This is the clearest lead yet.** It reframes the problem from "the
+connector never detects anything" to "a charging session can start (real
+LED, so real VBUS/negotiation activity) but does not persist long enough
+for Linux's own polling, or the hardware itself, to hold it" — a drop-out,
+not a total absence.
+
+Two further attempts, live and tightly polled (0.5 s resolution, custom
+poller, not `check-gpu-test.sh`) for about 60 s each around a fresh
+unplug/replug, both stayed **completely flat** for the full window — no
+partner, no `ONLINE=1`, no `POWER_NOW` deviation from the ongoing discharge
+trend, at any of the ~240 total samples across both runs. Whether the LED
+lit during either of these two attempts was not confirmed before this
+investigating session ended — that is the single most useful thing to
+check first next time, watched together with the sysfs state in real time.
+
 ## Next
 
+- **Watch the LED and the sysfs state together, live**, on the next
+  attempt: if the LED lights but sysfs never shows a partner even at 0.5 s
+  resolution, the drop-out happens deep in firmware/hardware, before UCSI
+  ever surfaces it to Linux — a firmware/PMIC question, not a kernel one.
+  If sysfs does catch a brief `power_operation_mode=usb_power_delivery` or
+  `ONLINE=1` blink, that pins down the actual duration of the session and
+  gives something concrete to search the driver for.
 - **The decisive test**: reboot to "Ubuntu on SSD: device tree (full)"
   (kernel `-4`) with the exact same charger, cable, and port just used on
   `-5`, and check `/sys/class/typec/port*` immediately. If a partner
