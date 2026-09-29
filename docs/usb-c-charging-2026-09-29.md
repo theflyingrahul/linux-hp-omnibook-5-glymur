@@ -127,13 +127,72 @@ if charging worked correctly.
   a different UCSI capability answer requested via GLink vs. ACPI
   `_DSM`/`_PSR`).
 
+## The unplug/replug test (kernel `-5`, GPU test DT): total silence, not partial
+
+Two `check-gpu-test.sh --charging` attempts, from the "device tree (GPU
+test)" boot (`docs/gpu-bringup-run1-2026-09-29.md`), private logs in
+`.work/gpu-bringup-run1-2026-09-29/`:
+
+- `gpu-test-20260929T170344.txt`: stopped right after the first prompt
+  ("Unplug the charger, then press Enter.") — an aborted attempt, not a
+  result.
+- `gpu-test-20260929T170406.txt`: completed the full sequence — a baseline
+  snapshot, "Unplug the charger" (10 s settle), a snapshot, "Plug the
+  charger into the same port" (20 s settle), a final snapshot.
+
+All three snapshots (`now` at 17:04:06, `unplugged` at 17:04:24, `replugged`
+at 17:04:50) are **identical** on every port/power-supply field:
+`power_operation_mode=default`, no partner directory on either port,
+`qcom-battmgr-ac`/`-usb` `ONLINE=0`, both `ucsi-source-psy-*`
+`ONLINE=0`/`USB_TYPE=[C]` (unresolved). Even the *baseline* snapshot, taken
+with the charger already connected per the owner, shows no detection —
+unlike the original kernel `-4` finding, where port1 had a sustained
+partner (just no PDOs). `journalctl -k --since "17:03:50" --until
+"17:05:00"` — spanning the entire deliberate unplug-then-replug — has
+**zero lines**: not one UCSI/typec/pmic_glink kernel message of any kind,
+during a window that included two real physical connector events.
+
+The owner separately reported the charger "came up momentarily during the
+test" — something was observed (likely on the charger's own indicator, or
+a brief on-screen change) that neither the kernel log nor the 10-20 s
+settle-and-snapshot timing caught.
+
+**This changes the leading explanation.** The `UCSI_CAP_PDO_DETAILS` gap
+above still stands as read (it explains why PDOs never populate *when a
+partner is registered*), but it cannot explain total silence: on kernel
+`-4`, the same firmware, the same UCSI stack, and (per the DT diff between
+`-4`'s full DT and `-5`'s GPU test DT — `git show 6d57a98 --
+dts/qcom/mahua-hp-omnibook-5-bf1xxx.dtsi`, no `pmic-glink` node changes at
+all) the same `pmic-glink` device tree node, *did* register a partner and
+hold that state through several minutes of live inspection. A real,
+sustained physical connection should produce at least a partner
+registration here too, DT and firmware being unchanged. The most likely
+explanation is a **marginal physical connection** on this attempt — a
+"momentary" appearance is exactly what a connector that isn't fully seated,
+or a cable/port with a bad contact, would produce: a brief UCSI attach that
+drops before the driver stack settles into a stable state, too fast to
+show up in a snapshot taken 10-20 s later or even in the kernel log if the
+bounce is filtered/debounced before it reaches a loggable event.
+
+This is not confirmed — it is the best-fit explanation for two different
+results (sustained-but-PDO-less on `-4`, versus zero detection on `-5`)
+that share identical DT and firmware. It has not been shown that charging
+would work correctly if the connection were stable.
+
 ## Next
 
+- Re-run the unplug/replug test with deliberate attention to a firm,
+  fully-seated connection (try the other port too — only port1 was ever
+  observed with a partner). If a stable connection reproduces the kernel
+  `-4` result (partner registered, no PDOs, still `ONLINE=0`), that
+  isolates the remaining question to the `UCSI_CAP_PDO_DETAILS` gap alone.
+  If a firm connection still shows nothing, the PDO explanation is not
+  sufficient and the attach path itself needs more evidence.
 - Check charging under the ACPI boot ("Ubuntu on SSD: ACPI, newest glymur
   kernel") with the same charger, to see whether the gap is DT-path-
   specific or universal to this firmware.
-- If it is universal, this is worth a note to HP/Qualcomm (or an upstream
-  `ucsi_glink` quirk request) rather than something fixable from this
-  repository.
+- If a stable connection is confirmed and PDOs still never populate, this
+  is worth a note to HP/Qualcomm (or an upstream `ucsi_glink` quirk
+  request) rather than something fixable from this repository.
 - No DT or kernel change is proposed here; this is a diagnostic finding
   only.
