@@ -37,7 +37,17 @@ ls /opt/mesa-glymur/lib/aarch64-linux-gnu/libgallium-*.so
 [ -d "$DF" ] && echo "devfreq: $(cat "$DF/governor") cur=$(cat "$DF/cur_freq") max=$(cat "$DF/max_freq")"
 ls -l /dev/dri
 
-sect "before: Ubuntu's Mesa"
+sect "system-wide mode and the compositor"
+mesa-glymur-run --system status
+pid="$(pgrep -u "$(id -u)" -x gnome-shell | head -1)"
+if [ -n "$pid" ]; then
+    echo "gnome-shell ($pid) has loaded:"
+    grep -oE '/[^ ]*(libgallium|libgbm|libEGL_mesa|libGLX_mesa)[^ ]*' "/proc/$pid/maps" | sort -u
+else
+    echo 'no gnome-shell process for this user'
+fi
+
+sect "what programs get without the wrapper (Ubuntu's Mesa unless --system on)"
 have eglinfo && eglinfo -B -p wayland 2>&1 | head -15
 
 sect "EGL (Wayland, GBM, surfaceless)"
