@@ -29,6 +29,23 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-29 (USB-A works; eDP is boot-to-boot flaky on that DT):** the
+"device tree (GPU and USB-A test)" entry was booted twice back-to-back,
+same DTB and kernel. First boot: everything worked together for the first
+time — `usb_2`'s M31 eUSB2 and QMP combo PHYs both bind, and the boot
+stick itself enumerates through the internal controller at 5000 Mb/s,
+*and* the eDP panel was connected/enabled at 1920x1200 on the same boot.
+Second boot, two minutes later: blank screen. Keyboard and the rest of the
+system were alive (gdm/gnome-shell started normally, GPU bound) — this was
+`msm_dp_ctrl_link_train_1_2` timing out (`ret=-110`) partway through
+training, a different failure than the pre-backport `phy poweron failed`
+bug, not a hang. Same DTB succeeding once and failing the next boot rules
+out a deterministic DT regression; it looks like more of the same
+boot-to-boot power/reference-clock marginality already seen in USB-C
+charging. Next: reboot "GPU test" (no USB-A) a few times back-to-back to
+see if eDP is equally flaky there, to tell a shared-reference-clock
+interaction from a general one. See `docs/usb-a-bringup-2026-09-29.md`.
+
 **2026-09-29 (hardware rendering and a USB-A test staged; charging re-read):**
 
 - **Hardware rendering.** "Software Rendering" is a Mesa version gap:
