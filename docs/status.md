@@ -273,7 +273,10 @@ and I²C remain unvalidated; no new boot artifact was made.
 | touchscreen | **Linux working (test modules)** | `ELAN2513` 0x10 on I2C9, GPIO 51; `hid-multitouch`; see `docs/acpi-input-results-run2-2026-09-26.md` |
 | touchpad | **Linux working (test modules)** | `ELAN0189` 0x15 on I2C5, PDC pin 896 → GPIO 3; `hid-multitouch` |
 | keyboard | **Linux working (test modules)** | `QTEC0001` 0x3A on I2C1, PDC pin 704 → GPIO 67; `i2c_hid_acpi` |
-| keyboard backlight | Unknown | Not a config change: `ACPI_WMI` is x86-only in qcom-next and `HP_WMI` needs an ACPI EC. The control path (EC or `HWMI`) is still open. See `docs/windows-evidence-plan-review-2026-09-27.md` |
+| keyboard backlight | **Works, but entirely outside Linux's view**: on/off and its auto-off timeout both function, but no `/sys/class/backlight` device, HP platform driver, or any control/status path exists for it. Confirms the EC/`HWMI` theory: it runs autonomously in firmware. See `docs/keyboard-hotkeys-2026-09-29.md` | Not a config change: `ACPI_WMI` is x86-only in qcom-next and `HP_WMI` needs an ACPI EC. The control path (EC or `HWMI`) is still open. See `docs/windows-evidence-plan-review-2026-09-27.md` |
+| F6/F9 mute/mic-mute keys and their LEDs | Keycode raw-captured live: **F6 and F9 send the identical HID usage (Consumer/Mute, 0xC0022), not distinct keys** — Linux cannot tell them apart. Neither LED is on the keyboard's own LED bitmap (only the 5 standard lock LEDs) | Likely EC- or codec-driven, neither present in any DT yet. See `docs/keyboard-hotkeys-2026-09-29.md` |
+| Copilot key / other special Fn keys | Keycode raw-captured live: **arrive correctly** (e.g. Copilot = `Meta+Shift+F23`, a known OEM pattern for keys with no native Windows driver) | Nothing is bound to them in GNOME yet — a desktop-config gap, not a kernel/DT problem. See `docs/keyboard-hotkeys-2026-09-29.md` |
+| Power key LED | Lights correctly (autonomous) | Suspend "breathing" behavior not tested — suspend is masked |
 | function keys | Unknown | |
 | lid switch | **Linux working (test modules)** | GED `LIGE` on GPIO 92 plus the EC bus; logind sees open/close. See `docs/qcom-next-port-and-lid-2026-09-26.md` |
 | battery | Not exposed in tested Linux boot | Windows exposes charge and discharge data, but Linux had no `/sys/class/power_supply` device; UPower displayed no battery. |
