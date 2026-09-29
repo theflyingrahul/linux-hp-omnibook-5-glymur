@@ -1,0 +1,51 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * HP OmniBook 5 16-bf1xxx, USB-A test device tree: the GPU test device tree
+ * plus the right-hand USB-A port, so that device-tree boots can read the
+ * USB stick. Kept apart from the GPU test device tree until it is proven.
+ *
+ * Evidence (HP DSDT, docs/usb-a-bringup-2026-09-29.md):
+ * - \_SB.USB2 (QCOM0F9A) is the xHCI at 0x0a000000 with interrupts GIC SPI
+ *   871 and 370: glymur.dtsi's usb_2. On ACPI boots the USB stick in the
+ *   right USB-A port enumerates on it at 5 Gb/s.
+ * - Its root-hub ports return _UPC type 0x03, USB 3 Standard-A, so the
+ *   controller is host-only here.
+ * - HP's PEP entry for \_SB.USB2 votes the usb30_tert and usb_2_phy GDSCs
+ *   and the tcsr_usb2_4 / tcsr_usb4_2 reference clocks, which are exactly
+ *   usb_2, usb_2_hsphy and usb_2_qmpphy in glymur.dtsi.
+ *
+ * Not declared yet:
+ * - PHY supplies. HP's PEP votes eight rails for this controller in D0
+ *   (S7F, L15B, L4C, L7B, L4F, L1C, L2F, L1F), but there are no RPMh
+ *   regulators in this device tree yet. The rails stay as the firmware
+ *   left them, and they are on, because GRUB boots from this port. The
+ *   PHY drivers get dummy regulators.
+ * - The eUSB2 repeater. No repeater is described anywhere in HP's ACPI
+ *   tables; UEFI configures it and the M31 eUSB2 driver treats it as
+ *   optional.
+ * - HP's USB3 PHY tuning (\_SB.USB2.PHYC: two register writes in the QMP
+ *   PHY). Without them SuperSpeed may train worse; high speed is not
+ *   affected.
+ */
+/dts-v1/;
+
+#include "mahua-hp-omnibook-5-bf1xxx-gpu.dts"
+
+/ {
+	model = "HP OmniBook 5 Laptop 16-bf1xxx (GPU and USB-A test)";
+};
+
+&usb_2 {
+	dr_mode = "host";
+	/delete-property/ usb-role-switch;
+
+	status = "okay";
+};
+
+&usb_2_hsphy {
+	status = "okay";
+};
+
+&usb_2_qmpphy {
+	status = "okay";
+};

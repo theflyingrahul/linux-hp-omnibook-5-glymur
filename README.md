@@ -29,7 +29,7 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
-**2026-09-29 (hardware rendering staged; charging re-read):**
+**2026-09-29 (hardware rendering and a USB-A test staged; charging re-read):**
 
 - **Hardware rendering.** "Software Rendering" is a Mesa version gap:
   Ubuntu 26.04's Mesa 26.0.8 has no X2-85 entry, and Mesa **26.2**
@@ -47,12 +47,22 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
   charger. `charging-watch.sh` records the firmware's connector status and
   the UCSI tracepoints live. See `docs/usb-c-charging-2026-09-29.md`.
 
+- **USB-A on device-tree boots (staged, untested).** A new entry, "device
+  tree (GPU and USB-A test)", is the GPU test DT plus the right-hand USB-A
+  port (`usb_2` in host mode and its two PHYs). HP's DSDT and PEP evidence
+  map the port onto them. It needs no new kernel. If it works, installs
+  from the stick no longer need an ACPI reboot. See
+  `docs/usb-a-bringup-2026-09-29.md`.
+
 Next:
 
-1. From "ACPI, newest glymur kernel", run
-   `bash "/media/$USER/UBUNTU 26_0/glymur-tools/kernels/install-from-usb.sh"`.
-2. Boot "device tree (GPU test)".
-3. On the desktop, run `bash ~/check-mesa.sh`.
+1. Boot "device tree (GPU and USB-A test)".
+2. If the stick shows up, run
+   `sudo bash "/media/$USER/UBUNTU 26_0/glymur-tools/kernels/check-usb.sh"`,
+   then `bash ".../install-from-usb.sh"` from the same directory. If it
+   doesn't, run the installer from "ACPI, newest glymur kernel" instead.
+3. Reboot into the same entry and run `bash ~/check-mesa.sh` on the
+   desktop.
 4. Run `sudo bash ~/charging-watch.sh`, then plug, unplug and replug,
    typing a note at each step.
 
