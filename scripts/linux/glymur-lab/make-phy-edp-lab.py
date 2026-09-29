@@ -15,8 +15,13 @@ link-training attempts without reloading):
                 and LDO values captured at probe instead of the tables
   lab_uefi_misc 1: after power-on, restore the firmware's polarity, drive
                 offset, resistor codes and TX band
+  lab_fw_pll    1: after the driver programs the PLL, overwrite the rate-
+                dependent v8 PLL registers with the firmware's values
+                captured at probe (the firmware's PLL locks; the driver's
+                does not, "phy poweron failed --> -110")
   lab_dump      1: log PHY registers at probe (firmware state) and after
-                every power-on, and every set_voltages decision
+                every power-on, and every set_voltages decision; on a
+                power-on failure, log which wait timed out and dump the PHY
 The driver registers as "qcom-edp-phy-lab"; the stock phy_qcom_edp module
 must be kept from loading.
 """
@@ -45,6 +50,9 @@ EDITS = [
      'static bool lab_uefi_misc;\n'
      'module_param(lab_uefi_misc, bool, 0644);\n'
      'MODULE_PARM_DESC(lab_uefi_misc, "restore firmware polarity/offsets/band after power-on");\n'
+     'static bool lab_fw_pll;\n'
+     'module_param(lab_fw_pll, bool, 0644);\n'
+     'MODULE_PARM_DESC(lab_fw_pll, "overwrite the rate-dependent PLL registers with the firmware values");\n'
      'static bool lab_dump = true;\n'
      'module_param(lab_dump, bool, 0644);\n'
      'MODULE_PARM_DESC(lab_dump, "log PHY registers and swing decisions");\n'),
@@ -57,6 +65,7 @@ EDITS = [
      '\tu32 fw_drv[2], fw_emp[2], fw_ldo[2], fw_band[2], fw_pol[2];\n'
      '\tu32 fw_drv_ofs[2], fw_res0[2], fw_res1[2];\n'
      '\tresource_size_t sz_edp, sz_tx, sz_pll;\n'
+     '\tu32 fw_pll[0xd8];\n'
      '};\n'
      '\n'
      'static void lab_dump_region(const char *what, const char *name,\n'
@@ -154,6 +163,92 @@ EDITS = [
      '\treturn 0;\n'
      '}\n'),
 
+    # After the driver programs the PLL: optionally apply the firmware's values.
+    ('\tret = qcom_edp_configure_pll(edp);\n'
+     '\tif (ret)\n'
+     '\t\treturn ret;\n'
+     '\n'
+     '\t/* TX Lane configuration */\n',
+     '\tret = qcom_edp_configure_pll(edp);\n'
+     '\tif (ret)\n'
+     '\t\treturn ret;\n'
+     '\n'
+     '\tif (lab_fw_pll && edp->fw_valid &&\n'
+     '\t    edp->cfg->ver_ops->com_power_on == qcom_edp_phy_power_on_v8) {\n'
+     '\t\tstatic const u16 pll_regs[] = {\n'
+     '\t\t\tDP_QSERDES_V8_COM_DEC_START_MODE0,\n'
+     '\t\t\tDP_QSERDES_V8_COM_DIV_FRAC_START1_MODE0,\n'
+     '\t\t\tDP_QSERDES_V8_COM_DIV_FRAC_START2_MODE0,\n'
+     '\t\t\tDP_QSERDES_V8_COM_DIV_FRAC_START3_MODE0,\n'
+     '\t\t\tDP_QSERDES_V8_COM_LOCK_CMP1_MODE0,\n'
+     '\t\t\tDP_QSERDES_V8_COM_LOCK_CMP2_MODE0,\n'
+     '\t\t\tDP_QSERDES_V8_COM_CORECLK_DIV_MODE0,\n'
+     '\t\t\tDP_QSERDES_V8_COM_VCO_TUNE1_MODE0,\n'
+     '\t\t\tDP_QSERDES_V8_COM_VCO_TUNE2_MODE0,\n'
+     '\t\t\tDP_QSERDES_V8_COM_BIN_VCOCAL_CMP_CODE1_MODE0,\n'
+     '\t\t\tDP_QSERDES_V8_COM_BIN_VCOCAL_CMP_CODE2_MODE0,\n'
+     '\t\t\tDP_QSERDES_V8_COM_SSC_STEP_SIZE1_MODE0,\n'
+     '\t\t\tDP_QSERDES_V8_COM_SSC_STEP_SIZE2_MODE0,\n'
+     '\t\t};\n'
+     '\t\tint r;\n'
+     '\n'
+     '\t\tfor (r = 0; r < ARRAY_SIZE(pll_regs); r++) {\n'
+     '\t\t\tu32 want = edp->fw_pll[pll_regs[r] / 4] & 0xff;\n'
+     '\t\t\tu32 had = readl(edp->pll + pll_regs[r]) & 0xff;\n'
+     '\n'
+     '\t\t\tif (lab_dump)\n'
+     '\t\t\t\tpr_info("glymur-lab phy fw_pll: +0x%03x driver 0x%02x -> firmware 0x%02x\\n",\n'
+     '\t\t\t\t\tpll_regs[r], had, want);\n'
+     '\t\t\twritel(want, edp->pll + pll_regs[r]);\n'
+     '\t\t}\n'
+     '\t}\n'
+     '\n'
+     '\t/* TX Lane configuration */\n'),
+
+    # Say which wait failed, and what the PHY looks like, when power-on fails.
+    ('\tret = edp->cfg->ver_ops->com_power_on(edp);\n'
+     '\tif (ret)\n'
+     '\t\treturn ret;\n'
+     '\n'
+     '\tret = edp->cfg->ver_ops->com_ldo_config(edp);\n',
+     '\tret = edp->cfg->ver_ops->com_power_on(edp);\n'
+     '\tif (ret) {\n'
+     '\t\tpr_info("glymur-lab phy power-on FAILED at com_power_on (CMN_STATUS wait): %d\\n", ret);\n'
+     '\t\tlab_dump_all(edp, "poweron-failed");\n'
+     '\t\treturn ret;\n'
+     '\t}\n'
+     '\n'
+     '\tret = edp->cfg->ver_ops->com_ldo_config(edp);\n'),
+
+    ('\tret = edp->cfg->ver_ops->com_resetsm_cntrl(edp);\n'
+     '\tif (ret)\n'
+     '\t\treturn ret;\n'
+     '\n'
+     '\twritel(0x19, edp->edp + DP_PHY_CFG);\n',
+     '\tret = edp->cfg->ver_ops->com_resetsm_cntrl(edp);\n'
+     '\tif (ret) {\n'
+     '\t\tpr_info("glymur-lab phy power-on FAILED at com_resetsm_cntrl (C_READY wait, PLL lock): %d, rate %u lanes %u ssc %d\\n",\n'
+     '\t\t\tret, edp->dp_opts.link_rate, edp->dp_opts.lanes, edp->dp_opts.ssc);\n'
+     '\t\tlab_dump_all(edp, "poweron-failed");\n'
+     '\t\treturn ret;\n'
+     '\t}\n'
+     '\n'
+     '\twritel(0x19, edp->edp + DP_PHY_CFG);\n'),
+
+    ('\tret = readl_poll_timeout(edp->edp + (edp->is_nord ? DP_PHY_STATUS_NORD : DP_PHY_STATUS),\n'
+     '\t\t\t\t val, val & BIT(1), 500, 10000);\n'
+     '\tif (ret)\n'
+     '\t\treturn ret;\n',
+     '\tret = readl_poll_timeout(edp->edp + (edp->is_nord ? DP_PHY_STATUS_NORD : DP_PHY_STATUS),\n'
+     '\t\t\t\t val, val & BIT(1), 500, 10000);\n'
+     '\tif (ret) {\n'
+     '\t\tpr_info("glymur-lab phy power-on FAILED at DP_PHY_STATUS bit 1 (PHY ready), status 0x%08x: %d, rate %u lanes %u ssc %d fw_pll %d\\n",\n'
+     '\t\t\tval, ret, edp->dp_opts.link_rate, edp->dp_opts.lanes,\n'
+     '\t\t\tedp->dp_opts.ssc, lab_fw_pll);\n'
+     '\t\tlab_dump_all(edp, "poweron-failed");\n'
+     '\t\treturn ret;\n'
+     '\t}\n'),
+
     ('\tedp->num_clks = devm_clk_bulk_get_all(dev, &edp->clks);\n'
      '\tif (edp->num_clks < 0)\n'
      '\t\treturn dev_err_probe(dev, edp->num_clks, "failed to get clocks\\n");\n',
@@ -188,6 +283,8 @@ EDITS = [
      '\t\t\t\tedp->fw_band[t], edp->fw_pol[t], edp->fw_drv_ofs[t],\n'
      '\t\t\t\tedp->fw_res0[t], edp->fw_res1[t]);\n'
      '\t\t}\n'
+     '\t\tfor (t = 0; t < ARRAY_SIZE(edp->fw_pll) && t * 4 < edp->sz_pll; t++)\n'
+     '\t\t\tedp->fw_pll[t] = readl(edp->pll + t * 4);\n'
      '\t\tedp->fw_valid = true;\n'
      '\t\tlab_dump_all(edp, "firmware");\n'
      '\t} else {\n'

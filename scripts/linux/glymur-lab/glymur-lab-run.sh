@@ -255,6 +255,43 @@ cat "$KIT/mahua-hp-omnibook-5-bf1xxx-lab-display.dtbo" >"$LAB/overlay"
 say "step 5.5: display overlay applied; waiting for msm and the eDP link"
 attempt v0-baseline "full-DT display, stock settings" && success v0-baseline
 
+# Run 3 of the lab showed the real failure: every attempt logs "phy poweron
+# failed --> -110" (the PHY PLL does not lock), and the driver's PLL
+# coefficients for 2.7 Gb/s differ from the firmware's (ten registers, see
+# docs/display-lab-run3-2026-09-28.md). The variants below therefore change
+# only the PHY driver's module parameters and re-run link training on the
+# bound msm without unbinding it: unbinding msm-mdss hung the whole laptop
+# (run 2) and is only done with GLYMUR_LAB_REBIND=1.
+retrain() {
+    local tag="$1" fb=/sys/class/graphics/fb0
+    echo 1 >"$fb/blank" 2>>"$LOG"
+    sleep 2
+    mark "$tag"
+    echo 0 >"$fb/blank" 2>>"$LOG"
+}
+
+# W1: the firmware's PLL coefficients over the driver's.
+setp lab_fw_pll 1
+retrain w1-fw-pll
+attempt w1-fw-pll "firmware PLL coefficients" && success w1-fw-pll
+
+# W2: firmware PLL plus the firmware's TX drive, polarity, offsets and band.
+setp lab_uefi_tx 1; setp lab_uefi_misc 1
+retrain w2-fw-pll-tx
+attempt w2-fw-pll-tx "firmware PLL + firmware TX values" && success w2-fw-pll-tx
+setp lab_uefi_tx 0; setp lab_uefi_misc 0
+
+# W3, W4: firmware PLL with SSC forced off / on.
+setp lab_ssc 0
+retrain w3-fw-pll-ssc-off
+attempt w3-fw-pll-ssc-off "firmware PLL, SSC off" && success w3-fw-pll-ssc-off
+setp lab_ssc 1
+retrain w4-fw-pll-ssc-on
+attempt w4-fw-pll-ssc-on "firmware PLL, SSC on" && success w4-fw-pll-ssc-on
+setp lab_ssc -1
+setp lab_fw_pll 0
+
+if [ "${GLYMUR_LAB_REBIND:-0}" = 1 ]; then
 # V1: Windows' five display rails held on in high-power mode.
 rebind v1-rails sh -c "cat '$KIT/mahua-hp-omnibook-5-bf1xxx-lab-rails.dtbo' >'$LAB/overlay'; sleep 5"
 attempt v1-rails "HP display rails always-on HPM" && success v1-rails
@@ -288,6 +325,7 @@ spec=''
 [ -n "$FW_RATE_HZ" ] && spec="$spec link-frequencies=$FW_RATE_HZ"
 rebind v9-fw-mimic sh -c "echo 1 >'$LAB/dp_out_reset'; [ -n '$spec' ] && echo '$spec' >'$LAB/dp_out'; echo 1 >'$PHYP/lab_uefi_tx'; echo 1 >'$PHYP/lab_uefi_misc'"
 attempt v9-fw-mimic "firmware lanes/map/rate + firmware TX ($spec)" && success v9-fw-mimic
+fi
 
 say "no variant trained the panel; rebooting in 30 s (results in $OUT)"
 sync

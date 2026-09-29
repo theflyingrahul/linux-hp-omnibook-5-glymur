@@ -29,6 +29,24 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-29 (lane/rate mismatch ruled out; the fault is in the PHY
+driver):** the boot-time eDP 2-lane test (below) came back dark. Its
+journal shows the panel's own DPCD ceiling is exactly 2 lanes at 2.7 Gb/s —
+the same limit the test DTB declares — so msm was never being held back by
+the device tree. The failure is `phy phy-faac00.phy.2: phy poweron failed
+--> -110`, thrown by the PHY driver itself before link training starts,
+identical to the failure the display lab found independently
+(`docs/display-lab-run3-2026-09-28.md`) in its own instrumented copy of the
+driver. Two different code paths now show the same fault, so it is inside
+`phy_qcom_edp_phy_power_on_v8()`/PLL configuration in
+`drivers/phy/qualcomm/phy-qcom-edp.c`, not fixable from the DTS. Leading
+hypothesis: a 10-register PLL coefficient mismatch between the driver's
+hardcoded 2.7 Gb/s table and the firmware's live PLL values. The lab
+already has (uncommitted, unbuilt) instrumentation — `lab_fw_pll` — that
+substitutes the firmware's PLL values at power-on and four variants (W1-W4)
+to test it; that needs a WSL rebuild and a fourth lab run. See
+`docs/edp-2lane-test-run1-2026-09-29.md`.
+
 **2026-09-29 (eDP 2-lane test staged):** the lab's display phase hung the
 laptop twice, so the firmware's link configuration is now tested at boot
 time with the stock drivers. The USB entry "Ubuntu on SSD: eDP test, 2

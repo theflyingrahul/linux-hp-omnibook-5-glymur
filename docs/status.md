@@ -53,6 +53,18 @@ lanes, rate, lane map). A DT boot still has no USB, GPU or audio. See
 `docs/device-tree-first-boot-2026-09-28.md` and
 `docs/display-lab-2026-09-28.md`.
 
+**2026-09-29: the lane/rate mismatch theory is ruled out.** A boot-time DTB
+limits the full DT's eDP link to exactly the panel's own DPCD maximum (2
+lanes, 2.7 Gb/s — read fresh on this boot, matching the firmware's link).
+It still goes dark, with the identical `phy poweron failed --> -110` the
+display lab found inside the PHY driver's power-on sequence, before link
+training even starts. Two independent code paths (the stock driver here,
+the instrumented lab driver in lab run 3) now show the same failure, so the
+cause is inside `phy_qcom_edp_phy_power_on_v8()`/PLL configuration in
+`drivers/phy/qualcomm/phy-qcom-edp.c`, not anything the device tree
+controls. See `docs/edp-2lane-test-run1-2026-09-29.md` and
+`docs/display-lab-run3-2026-09-28.md`.
+
 The table below is per subsystem. "Lab DT" is the display-lab device tree
 (the full DT with the display disabled at boot, plus ADSP, CDSP and PMIC
 GLink), verified live on 2026-09-28 on kernel `7.3.0-rc2-glymur-3`
@@ -79,7 +91,7 @@ section are history, newest first. A later entry supersedes an earlier one.
 | CPU idle | Working (`WFI`, `cpu-sleep-0`) | Working | Working | no cluster idle yet |
 | CPU frequency scaling | No | No | No | SCMI protocol v2.0 is up on both instances and `scmi_dev.1-4` exist, but no `scmi-cpufreq` driver is bound (`CONFIG_ARM_SCMI_CPUFREQ=m`, not loaded). **Do not `modprobe scmi-cpufreq`**: the SCMI perf protocol times out (protocol 0x13) and the laptop hangs hard within seconds (display-lab run 1, `docs/display-lab-run1-2026-09-28.md`) |
 | USB-A / USB-C / UVC camera | No | No | No | all five `usb@` nodes and their PHYs are disabled: a regression against the ACPI boot, where the right USB-A port worked. A DT boot cannot see the boot USB either |
-| Native display | Firmware framebuffer | DPU and DP bind; panel dark on eDP clock recovery | Firmware framebuffer (display disabled on purpose) | firmware runs 2 lanes at 2.7 Gb/s, the full DT offers 4 lanes up to 8.1 Gb/s; a boot-time 2-lane test DTB is staged (`docs/edp-2lane-test-2026-09-29.md`) |
+| Native display | Firmware framebuffer | DPU and DP bind; panel dark. `phy poweron failed --> -110` inside the PHY driver, before link training, at exactly the panel's own DPCD ceiling (2 lanes, 2.7 Gb/s) | Firmware framebuffer (display disabled on purpose) | The lane/rate mismatch theory is ruled out: a boot-time test limited to the panel's own advertised maximum (2 lanes, 2.7 Gb/s) fails with the identical PHY power-on error found in the display lab. The cause is inside `phy_qcom_edp_phy_power_on_v8()`/PLL configuration in `phy-qcom-edp.c`, not the DT. Leading hypothesis: a 10-register PLL coefficient mismatch between the driver's hardcoded table and the firmware's live values (`docs/display-lab-run3-2026-09-28.md`, `docs/edp-2lane-test-run1-2026-09-29.md`) |
 | GPU | Disabled | Disabled | Disabled | blocked on `CLK_GLYMUR_GPUCC` (unset); `arm-smmu 3da0000` and `gxclkctl` time out at probe (-110) for the same reason |
 | Audio | No | No | No | SoundWire/LPASS not wired yet |
 | TPM | No | No | No | |
