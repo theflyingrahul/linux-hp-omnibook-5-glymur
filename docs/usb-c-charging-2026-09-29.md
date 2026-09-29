@@ -349,3 +349,72 @@ records exactly that:
   this repository.
 - No DT or kernel change is proposed here; this is a diagnostic finding
   only.
+
+## `charging-watch.sh`, first live run: connector-change events fire, but never latch "connected"
+
+Ran on "device tree (GPU and USB-A test)" (kernel `-5`), ~7 minutes,
+`captures/2026-09-29-usb-c-charging/charging-watch-221357.txt`. This is the
+first run to also poll the firmware's own connector status directly (UCSI
+debugfs `GET_CONNECTOR_STATUS`, independent of Linux notifications) and
+capture the UCSI tracepoints, not just sysfs.
+
+**It started already mid-charge.** The very first `STATE` line, before the
+owner touched anything, shows port1 with a PD partner and `ucsi-source-
+psy-USB0C000:02` at `on=1, PD, 3250000 A`; the first heartbeat reads
+`bat_power_uW=40951000` (41 W) — the same sustained session the `-4`
+capture caught earlier, now confirmed to carry over a reboot into `-5`
+with nothing plugged/unplugged in between. It disconnected on its own
+about a minute in (`STATE ... port1:default ... bat=Discharging`), with a
+`pmic_glink_altmode: notification on undefined port 1` logged at the same
+moment. **The very next heartbeat, 2 s later, still read `+45658000`
+(45.6 W, positive/charging) even though `STATE` already said
+`Discharging`** — a direct, independent hint of another brief reconnect
+too short for the 0.5 s `STATE` loop to catch, caught only because the
+heartbeat happened to land inside it.
+
+**Then, for the next ~5.5 minutes, the owner plugged and unplugged both
+ports repeatedly ("connected near hinge, no charging yet", "away from the
+hinge... nothing", "no leds too") — and both `STATE` (sysfs) and `FW` (the
+direct firmware poll) stayed completely flat at disconnected the whole
+time.** No sysfs event, no LED, and — new this run — no change in what the
+firmware itself reports when asked directly, bypassing any Linux
+notification path entirely. That rules out "Linux missed a notification"
+as the explanation for this stretch: the firmware's own live answer to
+"what's connected right now" was consistently "nothing," for over five
+minutes of physical plug/unplug on both ports.
+
+**But two real hardware connector-change interrupts fired anyway, one per
+port, each already resolved back to disconnected by the time it was
+read:**
+
+```
+22:18:33 ucsi_connector_change: port1 status: change=5804, connected=0, ...
+22:19:33 ucsi_connector_change: port0 status: change=5804, connected=0, ...
+```
+
+Both carry the identical `change=5804` bitmask. These are genuine
+firmware-raised UCSI change notifications — not polling, not a Linux
+timeout — so something real happened electrically on each port. By the
+time the handler read the connector status in response, it had already
+reverted to disconnected: the same "resolves faster than anything can
+observe `connected=1`" shape as the 45.6 W heartbeat artifact above, and
+the same shape as the owner's earlier report of the charging LED lighting
+once and then not again.
+
+**Reading this together with the `-4` capture:** the laptop clearly *can*
+hold a real, sustained PD charging session (41 W, carried across a
+reboot) — this is not a dead port or a fundamentally broken negotiation.
+What's inconsistent is whether a given plug event latches into one of
+those sessions or collapses back out within under a second, seemingly on
+either port. Two independent instruments (a raw power reading and a raw
+UCSI interrupt) each caught a sub-2-second-resolution glimpse of that
+collapse happening. This looks like a negotiation-stability problem on
+this firmware/PMIC path, not a missing driver feature — nothing here
+points at a kernel or DT fix.
+
+**Next**, sharper than before: `change=5804` is worth decoding fully
+against the UCSI spec's `CONNECTOR_STATUS_CHANGE` bit layout, to see
+exactly which fields the firmware says changed on each blip (power-
+direction, power-operation-mode, connect-change, etc. are separate bits).
+If a future run can catch `connected=1` in the same tracepoint even once,
+that pins down how far the negotiation actually gets before collapsing.

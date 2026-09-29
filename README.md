@@ -29,6 +29,18 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-29 (charging: real sessions, unstable negotiation):**
+`charging-watch.sh`'s first live run (kernel `-5`) started already mid a
+sustained 41 W PD session on port1, carried over from a previous boot —
+proof the port and negotiation can work for real. After it dropped on its
+own, ~5.5 minutes of plugging/unplugging both ports left sysfs *and* the
+firmware's own directly-polled connector status both flat at disconnected
+— but two genuine `ucsi_connector_change` hardware interrupts fired
+anyway, one per port, each already collapsed back to `connected=0` by the
+time it was read. Together with a stray +45.6 W heartbeat read right after
+a disconnect, this points at unstable/collapsing negotiation rather than a
+missing driver feature. See `docs/usb-c-charging-2026-09-29.md`.
+
 **2026-09-29 (real GPU acceleration confirmed; GNOME's compositor still isn't
 using it):** `check-mesa.sh` (Mesa 26.2.3, `/opt/mesa-glymur`) on the GPU
 test DT: `mesa-glymur-run eglinfo -B -p gbm`/`-p surfaceless` and
