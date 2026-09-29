@@ -1,0 +1,44 @@
+From 58b6fdce1615eb2af9fdee3cdaa9c857772cd6bd Mon Sep 17 00:00:00 2001
+From: Shengzhuo Wei <me@cherr.cc>
+Date: Thu, 27 Aug 2026 23:43:03 +0800
+Subject: [PATCH 12/12] i2c: qcom-geni: release DMA channels on probe error
+
+geni_i2c_init() grabs exclusive GPI tx/rx DMA channels when the serial
+engine runs in GPI mode. If i2c_add_adapter() subsequently fails, probe
+returns without releasing the channels, because the remove callback is
+not invoked after a failed probe.
+
+The adapter-registration failure path used to release the channels via
+its err_dma label; that release was dropped when the probe tail was
+restructured into geni_i2c_init().
+
+Release the channels on the adapter-registration failure path, mirroring
+geni_i2c_remove().
+
+Fixes: d8d3bb127ad1 ("i2c: qcom-geni: Isolate serial engine setup")
+Assisted-by: GLM:5.3
+Signed-off-by: Shengzhuo Wei <me@cherr.cc>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Reviewed-by: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>
+Signed-off-by: Andi Shyti <andi.shyti@kernel.org>
+Link: https://patch.msgid.link/20260827-i2c-dma-channel-leak-v1-3-271d4adc03a0@cherr.cc
+---
+ drivers/i2c/busses/i2c-qcom-geni.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
+index d554a939aacd..a832e1e5f4c1 100644
+--- a/drivers/i2c/busses/i2c-qcom-geni.c
++++ b/drivers/i2c/busses/i2c-qcom-geni.c
+@@ -1427,8 +1427,10 @@ static int geni_i2c_probe(struct platform_device *pdev)
+ 		return ret;
+ 
+ 	ret = i2c_add_adapter(&gi2c->adap);
+-	if (ret)
++	if (ret) {
++		release_gpi_dma(gi2c);
+ 		return dev_err_probe(dev, ret, "Error adding i2c adapter\n");
++	}
+ 
+ 	dev_dbg(dev, "Geni-I2C adaptor successfully added\n");
+ 

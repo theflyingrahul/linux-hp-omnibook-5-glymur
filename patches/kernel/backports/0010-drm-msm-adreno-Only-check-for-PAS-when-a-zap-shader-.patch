@@ -1,0 +1,102 @@
+From 4d6568091a2b0ba375bc1879bc26ae61eee16ae0 Mon Sep 17 00:00:00 2001
+From: Paul Hollinsky <phollinsky@holtechnik.com>
+Date: Fri, 21 Aug 2026 01:13:25 -0700
+Subject: [PATCH 10/12] drm/msm/adreno: Only check for PAS when a zap shader is
+ present
+
+Commit 0be72be03ca7 ("drm/msm: Switch to generic PAS TZ APIs") replaced
+the qcom_scm_is_available() check in adreno_zap_shader_load() with
+qcom_pas_is_available(). These are not equivalent: the former reports
+whether the SCM transport is up, the latter whether the TrustZone
+firmware implements the peripheral authentication service.
+
+On SC7180 Chromebooks (trogdor) TZ does not implement PAS at all. SCM
+call-availability queries return 0 for every PAS command while other
+services answer normally:
+
+  svc 0x06 cmd 0x01 IS_CALL_AVAIL    -> 1
+  svc 0x02 cmd 0x01 PAS_INIT_IMAGE   -> 0
+  svc 0x02 cmd 0x05 PAS_AUTH_RESET   -> 0
+  svc 0x02 cmd 0x07 PAS_IS_SUPPORTED -> 0
+  svc 0x0c cmd 0x16 MP_ASSIGN        -> 1
+  svc 0x05 cmd 0x01 IO_READ          -> 1
+
+so qcom_scm_probe() never registers a PAS backend and
+qcom_pas_is_available() is false for the lifetime of the boot.
+
+That on its own need not matter, because sc7180-trogdor.dtsi does
+/delete-node/ &gpu_zap_shader;, and the intended path for such a board
+is for zap_shader_load_mdt() to find no zap-shader child, clear
+zap_available, return -ENODEV, and let the caller fall back to
+SECVID_TRUST_CNTL.
+
+The problem is the ordering. zap_available is a static initialised to
+true and is only ever cleared inside zap_shader_load_mdt(), but
+adreno_zap_shader_load() consults PAS before calling it. The discovery
+that decides whether a zap shader is needed at all can therefore never
+run, the flag is never cleared, and every call returns -EPROBE_DEFER:
+
+  adreno 5000000.gpu: [drm:adreno_zap_shader_load] *ERROR* PAS is not available
+  msm_dpu ae01000.display-controller: [drm:adreno_load_gpu] *ERROR* gpu hw init failed: -517
+
+Nothing retries that deferral, either. adreno_zap_shader_load() is
+called from a6xx_hw_init() rather than from probe, so the -EPROBE_DEFER
+is not a probe return value: it propagates up until adreno_load_gpu()
+returns NULL. load_gpu() re-attempts on every DRM open while priv->gpu
+is NULL, each open fails identically, and PAS cannot become available in
+between - which is why the error repeats and userspace stays on
+llvmpipe.
+
+Move the availability check into zap_shader_load_mdt(), behind the
+zap-shader node lookup, so the driver only consults PAS once it knows it
+needs PAS. Boards with no zap-shader node take the intended -ENODEV
+fallback without ever asking, and boards that do have one keep the
+qcom_pas_is_available() gate.
+
+Fixes: 0be72be03ca7 ("drm/msm: Switch to generic PAS TZ APIs")
+Link: https://lore.kernel.org/r/20260808034716.58888-1-phollinsky@holtechnik.com
+Signed-off-by: Paul Hollinsky <phollinsky@holtechnik.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Patchwork: https://patchwork.freedesktop.org/patch/747583/
+Message-ID: <20260821081325.89088-1-phollinsky@holtechnik.com>
+Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
+---
+ drivers/gpu/drm/msm/adreno/adreno_gpu.c | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
+
+diff --git a/drivers/gpu/drm/msm/adreno/adreno_gpu.c b/drivers/gpu/drm/msm/adreno/adreno_gpu.c
+index e7486d52798c..5832dc25d6bf 100644
+--- a/drivers/gpu/drm/msm/adreno/adreno_gpu.c
++++ b/drivers/gpu/drm/msm/adreno/adreno_gpu.c
+@@ -52,6 +52,12 @@ static int zap_shader_load_mdt(struct msm_gpu *gpu, const char *fwname,
+ 		return -ENODEV;
+ 	}
+ 
++	/* We need PAS to be able to load the firmware */
++	if (!qcom_pas_is_available()) {
++		DRM_DEV_ERROR(dev, "PAS is not available\n");
++		return -EPROBE_DEFER;
++	}
++
+ 	ret = of_reserved_mem_region_to_resource(np, 0, &r);
+ 	if (ret) {
+ 		zap_available = false;
+@@ -170,18 +176,11 @@ static int zap_shader_load_mdt(struct msm_gpu *gpu, const char *fwname,
+ int adreno_zap_shader_load(struct msm_gpu *gpu, u32 pasid)
+ {
+ 	struct adreno_gpu *adreno_gpu = to_adreno_gpu(gpu);
+-	struct platform_device *pdev = gpu->pdev;
+ 
+ 	/* Short cut if we determine the zap shader isn't available/needed */
+ 	if (!zap_available)
+ 		return -ENODEV;
+ 
+-	/* We need PAS to be able to load the firmware */
+-	if (!qcom_pas_is_available()) {
+-		DRM_DEV_ERROR(&pdev->dev, "PAS is not available\n");
+-		return -EPROBE_DEFER;
+-	}
+-
+ 	return zap_shader_load_mdt(gpu, adreno_gpu->info->zapfw, pasid);
+ }
+ 

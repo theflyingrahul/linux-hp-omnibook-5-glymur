@@ -2,14 +2,15 @@
 set -euo pipefail
 
 # Create a qcom-next worktree with the layered Glymur series applied:
-# patches/kernel/upstream/qcom-next-acpi/*, patches/kernel/backports/*, then
-# patches/kernel/glymur-bringup/*.
+# patches/kernel/upstream/qcom-next-acpi/*, patches/kernel/glymur-bringup/*,
+# then patches/kernel/backports/* (one mainline fix touches a file the
+# bring-up layer also changes).
 # Usage: prepare-qcom-next-glymur.sh <qcom-next-clone> <new-worktree> [repo-root]
 
 CLONE="${1:?usage: prepare-qcom-next-glymur.sh <qcom-next-clone> <new-worktree> [repo]}"
 WORKTREE="${2:?usage: prepare-qcom-next-glymur.sh <qcom-next-clone> <new-worktree> [repo]}"
 REPO="${3:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
-BASE=a47c4c5aa34b866136077d023d7c9e78d5a2225b
+BASE=e428097a36d210c50991063f17ee0848e9eb68a8
 
 if [ -e "$WORKTREE" ]; then
     printf 'Refusing to reuse existing path: %s\n' "$WORKTREE" >&2
@@ -21,6 +22,6 @@ export GIT_COMMITTER_NAME="${GIT_COMMITTER_NAME:-$(git config user.name || echo 
 export GIT_COMMITTER_EMAIL="${GIT_COMMITTER_EMAIL:-$(git config user.email || echo glymur-build@localhost)}"
 git -C "$WORKTREE" am -q \
     "$REPO"/patches/kernel/upstream/qcom-next-acpi/*.patch \
-    "$REPO"/patches/kernel/backports/*.patch \
-    "$REPO"/patches/kernel/glymur-bringup/*.patch
+    "$REPO"/patches/kernel/glymur-bringup/*.patch \
+    "$REPO"/patches/kernel/backports/*.patch
 git -C "$WORKTREE" log --oneline "$BASE..HEAD"

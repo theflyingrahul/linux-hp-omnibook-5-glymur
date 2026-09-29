@@ -61,6 +61,10 @@ CONFIG_PINCTRL_GLYMUR=y
 CONFIG_INTERCONNECT_QCOM_GLYMUR=y
 CONFIG_PHY_QCOM_QMP=y
 CONFIG_PHY_QCOM_QMP_PCIE=y
+# Adreno X2-85: the GPU clock controller and GX clock controller
+# (gpucc-glymur, gxclkctl), built in so the GPU SMMU and GMU do not wait on
+# a module past the deferred-probe timeout. Used only by the -gpu DTB.
+CONFIG_CLK_GLYMUR_GPUCC=y
 CONFIG_I2C_HID_OF=m
 CONFIG_KEYBOARD_GPIO=m
 CONFIG_DRM_PANEL_SAMSUNG_ATNA33XC20=m

@@ -29,6 +29,19 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-29 (GPU test staged, kernel `-5`):** kernel `7.3.0-rc2-glymur-5`
+is on the USB. It moves the base to the qcom-next tip (`e428097a36d`), adds
+the PUSH_IDLE reset fix (ported to qcom-next) and nine mainline 7.3-rc3..rc5
+fixes, four of them for the Adreno GPU, and builds the GPU clock drivers
+in. A separate "device tree (GPU test)" entry turns the Adreno X2-85 on
+(capped at 1.35 GHz, no zap shader, linux-firmware `gen80100` firmware
+installed separately) and adds the SCMI polling fix for cpufreq. The full
+and minimal DTs keep the GPU off. Next: from "ACPI, newest glymur kernel",
+run `bash "/media/$USER/UBUNTU 26_0/glymur-tools/kernels/install-from-usb.sh"`,
+which installs `-5` and the GPU firmware. Then boot "device tree (GPU
+test)" and run `sudo bash ~/check-gpu-test.sh --charging`, then `--cpufreq`. See
+`docs/gpu-bringup-2026-09-29.md`.
+
 **2026-09-29 (the eDP panel works):** kernel `7.3.0-rc2-glymur-4`
 backports Qualcomm's posted v8 eDP PHY programming-sequence fix (Bjorn
 Andersson, "phy: qcom: edp: Update v8 programming sequence", June 2026;
@@ -42,9 +55,11 @@ series (the only other public report, an ASUS Zenbook A16, trained at
 5.4 Gb/s). Same boot: battery/AC/USB-C power supplies, Bluetooth, Wi-Fi,
 and ADSP/CDSP all work; GPU stays safely disabled as designed; there is
 still no audio, USB or TPM. See `docs/edp-display-working-2026-09-29.md`
-and `docs/edp-phy-backport-2026-09-29.md`. Next: confirm the plain
-"device tree (full)" entry (no `drm.debug`) behaves the same, then start
-on audio (SoundWire/LPASS, ADSP is already up). Other upstream patches
+and `docs/edp-phy-backport-2026-09-29.md`. The plain
+"device tree (full)" entry (no `drm.debug`) also brings the display up.
+USB-C charging does not work yet (cause open,
+`docs/usb-c-charging-2026-09-29.md`). Next: audio (SoundWire/LPASS; the
+ADSP is already up). Other upstream patches
 worth taking next (PUSH_IDLE reset fix, SCMI polling for cpufreq, USB
 votes) are in `docs/upstream-patch-survey-2026-09-29.md`.
 

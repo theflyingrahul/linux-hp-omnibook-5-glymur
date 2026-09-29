@@ -67,12 +67,16 @@ plus a native picture.
   the plain "full" entry should work identically without the debug
   logging once this is confirmed stable.
 
+## Follow-up: plain full DT
+
+The owner then booted the plain "Ubuntu on SSD: device tree (full)" entry
+(kernel `-4`, no `drm.debug`). The display was live. The fix does not
+depend on the debug logging.
+
 ## Next
 
-- Boot the plain "Ubuntu on SSD: device tree (full)" entry (no
-  `drm.debug`) to confirm the fix holds without the extra logging
-  overhead, and check whether the boot-time firmware framebuffer hands off
-  to msm cleanly with a visible desktop, not just a trained link.
+- ~~Boot the plain "device tree (full)" entry~~: done, display live (see
+  above).
 - Audio (SoundWire/LPASS) is now the next open subsystem with the ADSP
   already up.
 - Consider sending the upstream fix + Mahua/HP panel confirmation back to

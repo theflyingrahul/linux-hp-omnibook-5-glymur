@@ -277,16 +277,30 @@
 };
 
 /*
- * glymur.dtsi enables the Adreno GPU and GMU by default. msm binds an
- * available GPU into the same DRM device as the display, and the GPU clock
- * drivers (gpucc-glymur, gxclkctl) are not built yet, so an enabled GPU
- * would keep the panel dark. The GPU is a later stage.
+ * glymur.dtsi enables the Adreno GPU, its GMU, clock controllers and SMMU
+ * by default. msm binds an available GPU into the same DRM device as the
+ * display, so a GPU that fails to come up would also take the panel down.
+ * Until the GPU is proven on this laptop, the whole GPU block stays off
+ * here and only the -gpu test device tree turns it on. From kernel -5 the
+ * GPU clock drivers (CLK_GLYMUR_GPUCC: gpucc-glymur, gxclkctl) are built.
  */
 &gpu {
 	status = "disabled";
 };
 
 &gmu {
+	status = "disabled";
+};
+
+&gpucc {
+	status = "disabled";
+};
+
+&gxclkctl {
+	status = "disabled";
+};
+
+&adreno_smmu {
 	status = "disabled";
 };
 

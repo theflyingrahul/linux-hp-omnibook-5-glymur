@@ -1,5 +1,32 @@
 # USB-C Charging: Plugged In, Not Charging, September 29, 2026
 
+> **Correction (same day, from the pinned source).** The observations below
+> contradict each other, and the causal chain ("no PDOs fetched, so no PD
+> contract, so no charging") does not hold.
+>
+> - `ucsi_psy_get_online()` reports `ONLINE=1` whenever the connector is
+>   connected and sinking. `ucsi_psy_get_usb_type()` reports `PD` whenever
+>   the power operation mode is PD (`drivers/usb/typec/ucsi/psy.c`). The
+>   typec attributes come from the same cached connector status. A single
+>   snapshot cannot show port1 with a partner, a sink role and
+>   `power_operation_mode=usb_power_delivery` while both UCSI supplies
+>   show `ONLINE=0` and `USB_TYPE=[C]`. The reads came from different
+>   moments, or the typec state is stale from a missed UCSI notification.
+> - `power_operation_mode=usb_power_delivery` (UCSI power operation mode 3)
+>   means an explicit PD contract *was* reached.
+> - Linux reading PDOs over UCSI (`ucsi_get_pdos()`) is informational only.
+>   The PD contract is negotiated by the PMIC/charger firmware, so a skipped
+>   `GET_PDOS` cannot stop charging. The `UCSI_CAP_PDO_DETAILS` explanation
+>   may still be why no PDOs appear, but it is not why the battery
+>   discharges.
+>
+> What stands: the charger firmware's own view, `qcom-battmgr-ac`/`-usb`
+> `ONLINE=0`, and the battery discharging at about 8.6 W. The cause is
+> open. Next test, on one boot: record the charger (wattage, which port);
+> take a timestamped snapshot of typec, all power supplies and `journalctl
+> -k` together; unplug, wait, replug, and snapshot again. Also note whether
+> the charger was plugged in before or after boot.
+
 Reported live: charger plugged in on the full DT (kernel `7.3.0-rc2-glymur-4`,
 same boot as `docs/edp-display-working-2026-09-29.md`), no charging LED, and
 the battery kept discharging. This is a scan of every layer between the
