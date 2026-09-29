@@ -1,0 +1,87 @@
+# GPU-Rendered Desktop Corruption, September 30, 2026
+
+## What happened
+
+On kernel `7.3.0-rc2-glymur-6` with Mesa `26.2.3-2` switched on
+system-wide (`mesa-glymur-run --system on`), "device tree (GPU and USB-A
+test)" came up with GNOME composited on the GPU. GNOME Settings, About:
+
+- Graphics: **Adreno X2-85**
+- Kernel: 7.3.0-rc2-glymur-6
+
+So the compositor is on the new Mesa. But the screen is corrupted, from
+the owner's photos:
+
+- speckled, dashed noise bands across the top and through the middle;
+- a dotted overlay over otherwise readable windows (the About dialog's
+  text is legible);
+- later, large black rectangles with block-shaped garbage and only parts
+  of the wallpaper and windows drawn.
+
+The eDP link and the display pipeline are not the problem: the same panel
+was clean with software rendering on `-5`. The corruption comes with the
+GPU rendering the desktop.
+
+("Processor: (null) × 12" is a separate, cosmetic gap: the CPU name comes
+from the DT or SMBIOS processor strings and is not set here.)
+
+## Ruled out so far (sources, not tests)
+
+- **Kernel UBWC table.** `drivers/soc/qcom/ubwc_config.c` has
+  `qcom,mahua` → `glymur_data` (UBWC 5.0, swizzle levels 2 and 3 off,
+  highest bank bit 16, or SMEM's value). The GPU driver and the display
+  controller (`msm_mdss.c`) both read this one table, so the two halves
+  of the kernel agree with each other.
+- **GMEM size and slice count.** The kernel has one catalog entry for
+  this GPU family, `0x44070001` (21 MB GMEM, `max_slices = 4`), which
+  both dies match. qcom-next's `mahua.dtsi` deletes the slice-3 GPU
+  thermal zones, so Mahua runs 3 slices. That is not a mismatch:
+    - msm reads the active-slice mask from hardware and writes the count
+      into the chip ID (`a8xx_gpu_get_slice_info`), which is how Mesa
+      sees `0x44070031`;
+    - Qualcomm's own driver does the same. KGSL (`qualcomm-linux/kgsl`,
+      `adreno-gpulist.h`) has one entry for `0x44070001`, "Adreno X2-85",
+      with `gmem_size = 21 MB` and the note "bits[7:4] patched at runtime
+      with active slice count". KGSL uses 21 MB for 3-slice parts too.
+- **The reference setup works.** Rob Clark reports GNOME Shell working on
+  a Glymur laptop (chip `0x44070041`, 4 slices) with Mesa 26.1.6.
+    - Mesa describes our 3-slice part differently: 6 CCUs and 96×32 tile
+      alignment, against 8 CCUs and 64×64 for `0x44070041`.
+    - Qualcomm added another 3-slice X2-85 ID to Mesa main on 2026-09-25,
+      noting only that "basic functionality" was verified.
+    - So the 3-slice gen8 configuration is the least-tested path.
+- **Mesa main after 26.2.3.** It has gen8 fixes: a barrier for indirect
+  buffers, query barriers, LRZ fast-clear size, multisample-resolve blits
+  and a register layout. None names this symptom. The 26.2 branch has no
+  commits after 26.2.3.
+
+## The test that decides it
+
+`scripts/linux/glymur-ssd/gpu-corruption-test.sh` runs from a text
+console, with the desktop logged in and switched away from. It uses
+`kmscube`, which renders on the GPU and scans out through KMS, the same
+path as the compositor. The cases:
+
+- llvmpipe, as the reference;
+- the GPU default;
+- a linear scanout buffer;
+- `FD_MESA_DEBUG=noubwc`, `nolrz` and `sysmem`, each alone;
+- all three together.
+
+After each case the owner answers whether the screen looked clean, and
+the script records the kernel's GPU messages with the answers. What each
+result points to:
+
+| Clean only with | Points to |
+|---|---|
+| linear scanout (and `noubwc`) | Compressed scanout: GPU encode and display decode disagree (kernel DPU or Mesa UBWC 5 layout) |
+| `noubwc`, not linear scanout | UBWC in textures or intermediate buffers inside Mesa |
+| `nolrz` | Mesa's gen8 LRZ on 3-slice parts |
+| `sysmem` | GMEM tiling (bin layout) for the 3-slice configuration |
+| none of them | Something outside these paths: kernel command stream or GPU state, or power (`vdd`/`vddcx` are dummy regulators) |
+
+## Until then
+
+The desktop can go back to software rendering: on a text console, run
+`sudo mesa-glymur-run --system off` and reboot. Per-program GPU use
+through `mesa-glymur-run` stays available.

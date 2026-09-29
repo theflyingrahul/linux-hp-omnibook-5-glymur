@@ -29,6 +29,23 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30 (GNOME on the GPU, but corrupted):**
+
+- **What happened.** With `-6` and Mesa `26.2.3-2` system-wide, GNOME
+  composites on the Adreno X2-85 (About: "Adreno X2-85"). The screen shows
+  noise bands and block-shaped garbage.
+- **What isn't the cause.** The kernel's UBWC, GMEM and slice setup match
+  Qualcomm's own KGSL driver, and the display was clean with software
+  rendering.
+- **Suspect.** Mesa's barely tested 3-slice gen8 path.
+- **Next.** On a text console (Ctrl+Alt+F3), run `sudo apt install
+  kmscube` and then `bash "/media/$USER/UBUNTU 26_0/glymur-tools/kernels/gpu-corruption-test.sh"`.
+  It runs a GPU cube with compression, LRZ and GMEM tiling switched off
+  one at a time, asks whether each looked clean, and logs the kernel's
+  GPU messages.
+- **Clean desktop meanwhile.** `sudo mesa-glymur-run --system off`, then
+  reboot. See `docs/gpu-corruption-2026-09-30.md`.
+
 **2026-09-30 (kernel `-6`: the charging fix, USB-C ports and system-wide
 Mesa, built; waiting for the USB stick to stage):**
 
