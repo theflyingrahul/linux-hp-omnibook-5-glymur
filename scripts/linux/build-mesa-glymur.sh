@@ -4,17 +4,21 @@ set -euo pipefail
 # Build upstream Mesa with the freedreno OpenGL (gallium) and turnip Vulkan
 # drivers for the Adreno X2-85, for Ubuntu 26.04 arm64. Ubuntu 26.04 ships
 # Mesa 26.0.8, whose freedreno device table has no entry for this GPU
-# (chip 0x44070031); Mesa 26.2 adds "Adreno (TM) X2-85".
+# (chip 0x44070031); Mesa 26.2 adds "Adreno (TM) X2-85". llvmpipe is built
+# too, linked against the same LLVM (21) as Ubuntu's Mesa, so that this
+# Mesa can serve the whole system, including boots without the GPU.
 #
 # Runs as a normal user on an Ubuntu 26.04 aarch64 host (the WSL build host
 # or the laptop itself): no root, no apt install. Build dependencies are
 # fetched with `apt-get download` and unpacked into a private sysroot.
-# Output: <out>/mesa-glymur-<version>.tar.gz, which installs under
+# Output: <out>/mesa-glymur-<version>-<rev>.tar.gz, which installs under
 # /opt/mesa-glymur (see glymur-ssd/install-mesa.sh).
 #
 #   scripts/linux/build-mesa-glymur.sh <work dir> [jobs]
 
 VER=26.2.3
+# Package revision: 1 = freedreno/turnip/softpipe, 2 = adds llvmpipe.
+PKGREL=2
 # From docs/relnotes/26.2.3.rst.
 SHA256=1628058a8d2c0615975de5a15ab7bbb9638c50000b5bed9456ff423ea034a81f
 WORK="${1:?usage: build-mesa-glymur.sh <work dir> [jobs]}"
@@ -37,7 +41,9 @@ PKGS=(meson python3-mako python3-pycparser glslang-tools libwayland-bin
       libx11-dev libxext-dev libxfixes-dev libxcb-glx0-dev libxcb-shm0-dev
       libx11-xcb-dev libxcb-dri3-dev libxcb-present-dev libxshmfence-dev
       libxxf86vm-dev libxrandr-dev libxcb-randr0-dev libxcb-sync-dev
-      libxcb-xfixes0-dev libudev-dev libvulkan-dev libglvnd-dev)
+      libxcb-xfixes0-dev libudev-dev libvulkan-dev libglvnd-dev
+      llvm-21-dev)
+LLVM_CONFIG=/usr/lib/llvm-21/bin/llvm-config
 
 echo "== build dependencies into $SYSROOT"
 mkdir -p "$DEBS" "$SYSROOT" "$WORK/apt/lists/partial" "$WORK/apt/cache/archives/partial"
@@ -60,10 +66,19 @@ find "$SYSROOT" -type l -lname '/*' | while read -r l; do
     t="$(readlink "$l")"
     if [ -e "$SYSROOT$t" ]; then ln -sfn "$SYSROOT$t" "$l"; fi
 done
-find "$SYSROOT/usr/lib/aarch64-linux-gnu" -maxdepth 1 -xtype l | while read -r l; do
-    t="$(basename "$(readlink "$l")")"
+find "$SYSROOT" -xtype l | while read -r l; do
+    t="$(readlink "$l")"
+    rel="${l#"$SYSROOT"}"
+    case "$t" in
+        /*) host="$t" ;;
+        *) host="$(realpath -m "$(dirname "$rel")/$t")" ;;
+    esac
+    if [ -e "$host" ]; then
+        ln -sfn "$host" "$l"
+        continue
+    fi
     for d in /usr/lib/aarch64-linux-gnu /lib/aarch64-linux-gnu; do
-        if [ -e "$d/$t" ]; then ln -sfn "$d/$t" "$l"; break; fi
+        if [ -e "$d/$(basename "$t")" ]; then ln -sfn "$d/$(basename "$t")" "$l"; break; fi
     done
 done
 find "$SYSROOT/usr/lib/aarch64-linux-gnu" -maxdepth 1 -name '*.a' -delete
@@ -87,12 +102,21 @@ rm -rf "$WORK/mesa-$VER" "$WORK/build" "$WORK/stage"
 tar -C "$WORK" -xf "$TARBALL"
 
 echo "== configure"
+# llvm-config derives its paths from its own location, so the sysroot copy
+# reports the sysroot's headers and libraries. If llvm-21-dev is already
+# installed on the host, apt unpacked nothing and the host copy is used.
+if [ -x "$SYSROOT$LLVM_CONFIG" ]; then LLVM_CONFIG="$SYSROOT$LLVM_CONFIG"; fi
+[ "$("$LLVM_CONFIG" --version | cut -d. -f1)" = 21 ] ||
+    { echo "need LLVM 21 (Ubuntu's Mesa links libllvm21), got $("$LLVM_CONFIG" --version)" >&2; exit 1; }
+"$LLVM_CONFIG" --version --includedir --libdir --shared-mode
+printf "[binaries]\nllvm-config = '%s'\n" "$LLVM_CONFIG" > "$WORK/native.ini"
 python3 "$SYSROOT/usr/bin/meson" setup "$WORK/build" "$WORK/mesa-$VER" \
+    --native-file "$WORK/native.ini" \
     --prefix="$PREFIX" --libdir="$LIBDIR" --buildtype=release \
-    -Dgallium-drivers=freedreno,softpipe -Dvulkan-drivers=freedreno \
+    -Dgallium-drivers=freedreno,llvmpipe,softpipe -Dvulkan-drivers=freedreno \
     -Dfreedreno-kmds=msm -Dplatforms=x11,wayland \
     -Degl=enabled -Dgbm=enabled -Dglx=dri -Dglvnd=enabled \
-    -Dllvm=disabled -Dvalgrind=disabled -Dlibunwind=disabled \
+    -Dllvm=enabled -Dshared-llvm=enabled -Dvalgrind=disabled -Dlibunwind=disabled \
     -Dlmsensors=disabled -Dvideo-codecs= -Dtools= -Dbuild-tests=false
 
 echo "== build"
@@ -108,7 +132,10 @@ for f in "$S/$LIBDIR"/*.so* "$S/$LIBDIR"/*/*.so; do
     [ -L "$f" ] && continue
     if readelf -d "$f" | grep -q 'NEEDED.*libarchive'; then echo "$f needs libarchive" >&2; exit 1; fi
 done
+# The only LLVM dependency must be Ubuntu's libllvm21 runtime.
+echo "== LLVM libraries needed: $(for f in "$S/$LIBDIR"/*.so*; do [ -L "$f" ] || readelf -d "$f"; done |
+    sed -n 's/.*NEEDED.*\[\(libLLVM[^]]*\)\]/\1/p' | sort -u | tr '\n' ' ')"
 
-OUT="$WORK/mesa-glymur-$VER.tar.gz"
+OUT="$WORK/mesa-glymur-$VER-$PKGREL.tar.gz"
 tar -C "$WORK/stage${PREFIX%/*}" -czf "$OUT" "${PREFIX##*/}"
 echo "== $(sha256sum "$OUT")"
