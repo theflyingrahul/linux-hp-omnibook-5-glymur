@@ -1,0 +1,17 @@
+# Load scmi-cpufreq at boot, but only on a device tree whose SCMI node has
+# the polling fix (arm,no-completion-irq; the "device tree (GPU test)"
+# entry since kernel -5). Without it, loading scmi-cpufreq hangs the laptop
+# (docs/display-lab-run1-2026-09-28.md), so ACPI, full and minimal boots
+# skip this unit. Installed by install-cpufreq-service.sh.
+[Unit]
+Description=Glymur: load scmi-cpufreq where the SCMI transport polls
+ConditionPathExists=/sys/firmware/devicetree/base/firmware/scmi/arm,no-completion-irq
+After=systemd-modules-load.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/modprobe scmi-cpufreq
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
