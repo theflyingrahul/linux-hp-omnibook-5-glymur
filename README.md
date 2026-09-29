@@ -30,10 +30,11 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 ## CURRENT GATE
 
 **2026-09-29 (charging: real sessions, unstable negotiation):**
-`charging-watch.sh`'s first live run (kernel `-5`) started already mid a
-sustained 41 W PD session on port1, carried over from a previous boot —
-proof the port and negotiation can work for real. After it dropped on its
-own, ~5.5 minutes of plugging/unplugging both ports left sysfs *and* the
+`charging-watch.sh`'s first live run (kernel `-5`): the owner plugged in
+about a minute before starting it, and by the time it started a real 41 W
+PD session was already up on port1 — proof the port and negotiation can
+work for real. After it dropped on its own about a minute later, ~5.5
+minutes of plugging/unplugging both ports left sysfs *and* the
 firmware's own directly-polled connector status both flat at disconnected
 — but two genuine `ucsi_connector_change` hardware interrupts fired
 anyway, one per port, each already collapsed back to `connected=0` by the

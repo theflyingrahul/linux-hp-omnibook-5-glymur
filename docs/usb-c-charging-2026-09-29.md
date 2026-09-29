@@ -358,13 +358,14 @@ first run to also poll the firmware's own connector status directly (UCSI
 debugfs `GET_CONNECTOR_STATUS`, independent of Linux notifications) and
 capture the UCSI tracepoints, not just sysfs.
 
-**It started already mid-charge.** The very first `STATE` line, before the
-owner touched anything, shows port1 with a PD partner and `ucsi-source-
+**It started already mid-charge.** The owner plugged the charger in about
+a minute before launching the script, in this same boot. By the time the
+script started, port1 already had a PD partner and `ucsi-source-
 psy-USB0C000:02` at `on=1, PD, 3250000 A`; the first heartbeat reads
-`bat_power_uW=40951000` (41 W) — the same sustained session the `-4`
-capture caught earlier, now confirmed to carry over a reboot into `-5`
-with nothing plugged/unplugged in between. It disconnected on its own
-about a minute in (`STATE ... port1:default ... bat=Discharging`), with a
+`bat_power_uW=40951000` (41 W) — the same order of magnitude as the `-4`
+capture caught earlier, established well within that one minute. It
+disconnected on its own about a minute into the script's run
+(`STATE ... port1:default ... bat=Discharging`), with a
 `pmic_glink_altmode: notification on undefined port 1` logged at the same
 moment. **The very next heartbeat, 2 s later, still read `+45658000`
 (45.6 W, positive/charging) even though `STATE` already said
@@ -402,8 +403,9 @@ the same shape as the owner's earlier report of the charging LED lighting
 once and then not again.
 
 **Reading this together with the `-4` capture:** the laptop clearly *can*
-hold a real, sustained PD charging session (41 W, carried across a
-reboot) — this is not a dead port or a fundamentally broken negotiation.
+hold a real PD charging session (41 W, established within about a minute
+of plugging in and holding for roughly another minute before dropping) —
+this is not a dead port or a fundamentally broken negotiation.
 What's inconsistent is whether a given plug event latches into one of
 those sessions or collapses back out within under a second, seemingly on
 either port. Two independent instruments (a raw power reading and a raw
