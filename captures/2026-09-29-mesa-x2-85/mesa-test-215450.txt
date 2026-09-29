@@ -1,0 +1,238 @@
+
+==== system (21:54:50)
+Linux glymur 7.3.0-rc2-glymur-5 #6 SMP PREEMPT_DYNAMIC Tue Sep 29 03:51:44 PDT 2026 aarch64 GNU/Linux
+HP OmniBook 5 Laptop 16-bf1xxx (GPU and USB-A test)
+/opt/mesa-glymur/lib/aarch64-linux-gnu/libgallium-26.2.3.so
+devfreq: simple_ondemand cur=310000000 max=1350000000
+total 0
+drwxr-xr-x 2 root root         80 Jul 28 02:14 by-path
+crw-rw----+1 root video  226,   1 Jul 28 02:14 card1
+crw-rw----+1 root render 226, 128 Jul 28 02:14 renderD128
+
+==== before: Ubuntu's Mesa (21:54:50)
+libEGL warning: failed to get driver name for fd -1
+
+libEGL warning: MESA-LOADER: failed to retrieve device information
+
+libEGL warning: failed to get driver name for fd -1
+
+TU: error: ../src/freedreno/vulkan/tu_device.cc:1553: device (chip_id = 16544070031, gpu_id = 0) is unsupported (VK_ERROR_INCOMPATIBLE_DRIVER)
+MESA: error: ZINK: failed to choose pdev
+libEGL warning: egl: failed to create dri2 screen
+Wayland platform:
+EGL API version: 1.5
+EGL vendor string: Mesa Project
+EGL version string: 1.5
+EGL client APIs: OpenGL OpenGL_ES 
+OpenGL core profile vendor: Mesa
+
+==== EGL (Wayland, GBM, surfaceless) (21:54:50)
+$ mesa-glymur-run eglinfo -B -p wayland
+MESA-EGL: warning: failed to get driver name for fd -1
+MESA-EGL: warning: MESA-LOADER: failed to retrieve device information
+MESA-EGL: warning: failed to get driver name for fd -1
+MESA-EGL: warning: egl: failed to create dri2 screen
+Wayland platform:
+EGL API version: 1.5
+EGL vendor string: Mesa Project
+EGL version string: 1.5
+EGL client APIs: OpenGL OpenGL_ES 
+OpenGL core profile vendor: Mesa
+OpenGL core profile renderer: softpipe
+OpenGL core profile version: 3.3 (Core Profile) Mesa 26.2.3
+OpenGL core profile shading language version: 3.30
+OpenGL compatibility profile vendor: Mesa
+OpenGL compatibility profile renderer: softpipe
+OpenGL compatibility profile version: 3.3 (Compatibility Profile) Mesa 26.2.3
+OpenGL compatibility profile shading language version: 3.30
+OpenGL ES profile vendor: Mesa
+OpenGL ES profile renderer: softpipe
+OpenGL ES profile version: OpenGL ES 3.1 Mesa 26.2.3
+OpenGL ES profile shading language version: OpenGL ES GLSL ES 3.10
+
+exit=0
+$ mesa-glymur-run eglinfo -B -p gbm
+GBM platform:
+EGL API version: 1.5
+EGL vendor string: Mesa Project
+EGL version string: 1.5
+EGL client APIs: OpenGL OpenGL_ES 
+OpenGL core profile vendor: freedreno
+OpenGL core profile renderer: Adreno (TM) X2-85
+OpenGL core profile version: 4.6 (Core Profile) Mesa 26.2.3
+OpenGL core profile shading language version: 4.60
+OpenGL compatibility profile vendor: freedreno
+OpenGL compatibility profile renderer: Adreno (TM) X2-85
+OpenGL compatibility profile version: 4.6 (Compatibility Profile) Mesa 26.2.3
+OpenGL compatibility profile shading language version: 4.60
+OpenGL ES profile vendor: freedreno
+OpenGL ES profile renderer: Adreno (TM) X2-85
+OpenGL ES profile version: OpenGL ES 3.2 Mesa 26.2.3
+OpenGL ES profile shading language version: OpenGL ES GLSL ES 3.20
+
+exit=0
+$ mesa-glymur-run eglinfo -B -p surfaceless
+Surfaceless platform:
+EGL API version: 1.5
+EGL vendor string: Mesa Project
+EGL version string: 1.5
+EGL client APIs: OpenGL OpenGL_ES 
+OpenGL core profile vendor: freedreno
+OpenGL core profile renderer: Adreno (TM) X2-85
+OpenGL core profile version: 4.6 (Core Profile) Mesa 26.2.3
+OpenGL core profile shading language version: 4.60
+OpenGL compatibility profile vendor: freedreno
+OpenGL compatibility profile renderer: Adreno (TM) X2-85
+OpenGL compatibility profile version: 4.6 (Compatibility Profile) Mesa 26.2.3
+OpenGL compatibility profile shading language version: 4.60
+OpenGL ES profile vendor: freedreno
+OpenGL ES profile renderer: Adreno (TM) X2-85
+OpenGL ES profile version: OpenGL ES 3.2 Mesa 26.2.3
+OpenGL ES profile shading language version: OpenGL ES GLSL ES 3.20
+
+exit=0
+
+==== GLX through Xwayland (21:54:50)
+$ mesa-glymur-run glxinfo -B
+name of display: :0
+display: :0  screen: 0
+direct rendering: Yes
+Extended renderer info (GLX_MESA_query_renderer):
+    Vendor: Mesa (0xffffffff)
+    Device: softpipe (0xffffffff)
+    Version: 26.2.3
+    Accelerated: no
+    Video memory: 31606MB
+    Unified memory: no
+    Preferred profile: core (0x1)
+    Max core profile version: 3.3
+    Max compat profile version: 3.3
+    Max GLES1 profile version: 1.1
+    Max GLES[23] profile version: 3.1
+Memory info (GL_ATI_meminfo):
+    VBO free memory - total: 63 MB, largest block: 63 MB
+    VBO free aux. memory - total: 27917 MB, largest block: 27917 MB
+    Texture free memory - total: 63 MB, largest block: 63 MB
+    Texture free aux. memory - total: 27917 MB, largest block: 27917 MB
+    Renderbuffer free memory - total: 63 MB, largest block: 63 MB
+    Renderbuffer free aux. memory - total: 27917 MB, largest block: 27917 MB
+Memory info (GL_NVX_gpu_memory_info):
+    Dedicated video memory: 4294626442 MB
+    Total available memory: 4294658049 MB
+    Currently available dedicated video memory: 63 MB
+OpenGL vendor string: Mesa
+OpenGL renderer string: softpipe
+OpenGL core profile version string: 3.3 (Core Profile) Mesa 26.2.3
+
+==== Vulkan (21:54:50)
+$ mesa-glymur-run vulkaninfo --summary
+MESA: info: vulkan: No DRI3 support detected - required for presentation
+Note: you can probably enable DRI3 in your Xorg config
+MESA: info: vulkan: No DRI3 support detected - required for presentation
+Note: you can probably enable DRI3 in your Xorg config
+MESA: info: vulkan: No DRI3 support detected - required for presentation
+Note: you can probably enable DRI3 in your Xorg config
+MESA: info: vulkan: No DRI3 support detected - required for presentation
+Note: you can probably enable DRI3 in your Xorg config
+MESA: info: vulkan: No DRI3 support detected - required for presentation
+Note: you can probably enable DRI3 in your Xorg config
+MESA: info: vulkan: No DRI3 support detected - required for presentation
+Note: you can probably enable DRI3 in your Xorg config
+==========
+VULKANINFO
+==========
+
+Vulkan Instance Version: 1.4.341
+
+
+Instance Extensions: count = 26
+-------------------------------
+VK_EXT_acquire_drm_display             : extension revision 1
+VK_EXT_acquire_xlib_display            : extension revision 1
+VK_EXT_debug_report                    : extension revision 10
+VK_EXT_debug_utils                     : extension revision 2
+VK_EXT_direct_mode_display             : extension revision 1
+VK_EXT_display_surface_counter         : extension revision 1
+VK_EXT_headless_surface                : extension revision 1
+VK_EXT_layer_settings                  : extension revision 2
+VK_EXT_surface_maintenance1            : extension revision 1
+VK_EXT_swapchain_colorspace            : extension revision 5
+VK_KHR_device_group_creation           : extension revision 1
+VK_KHR_display                         : extension revision 23
+VK_KHR_external_fence_capabilities     : extension revision 1
+VK_KHR_external_memory_capabilities    : extension revision 1
+VK_KHR_external_semaphore_capabilities : extension revision 1
+VK_KHR_get_display_properties2         : extension revision 1
+VK_KHR_get_physical_device_properties2 : extension revision 2
+VK_KHR_get_surface_capabilities2       : extension revision 1
+VK_KHR_portability_enumeration         : extension revision 1
+VK_KHR_surface                         : extension revision 25
+VK_KHR_surface_maintenance1            : extension revision 1
+VK_KHR_surface_protected_capabilities  : extension revision 1
+VK_KHR_wayland_surface                 : extension revision 6
+VK_KHR_xcb_surface                     : extension revision 6
+VK_KHR_xlib_surface                    : extension revision 6
+VK_LUNARG_direct_driver_loading        : extension revision 1
+
+Instance Layers: count = 5
+--------------------------
+VK_LAYER_INTEL_nullhw       INTEL NULL HW                                                1.1.73   version 1
+VK_LAYER_MESA_anti_lag      Open-source implementation of the VK_AMD_anti_lag extension. 1.4.303  version 1
+VK_LAYER_MESA_device_select Linux device selection layer                                 1.4.303  version 1
+VK_LAYER_MESA_overlay       Mesa Overlay layer                                           1.4.303  version 1
+VK_LAYER_MESA_screenshot    Mesa Screenshot layer                                        1.4.303  version 1
+
+Devices:
+========
+GPU0:
+
+==== load: glmark2 (GLES 2, Wayland), about 50 s (21:54:50)
+$ mesa-glymur-run glmark2-es2-wayland --size 1280x800 -b build:use-vbo=true:duration=10 -b texture:duration=10 -b shading:shading=phong:duration=10 -b refract:duration=10 -b terrain:duration=10
+MESA-EGL: warning: failed to get driver name for fd -1
+MESA-EGL: warning: MESA-LOADER: failed to retrieve device information
+MESA-EGL: warning: failed to get driver name for fd -1
+MESA-EGL: warning: egl: failed to create dri2 screen
+=======================================================
+    glmark2 2023.01
+=======================================================
+    OpenGL Information
+    GL_VENDOR:      Mesa
+    GL_RENDERER:    softpipe
+    GL_VERSION:     OpenGL ES 3.1 Mesa 26.2.3
+    Surface Config: buf=32 r=8 g=8 b=8 a=8 depth=32 stencil=0 samples=0
+    Surface Size:   1280x800 windowed
+=======================================================
+[build] duration=10:use-vbo=true: FPS: 88 FrameTime: 11.373 ms
+[texture] duration=10: FPS: 51 FrameTime: 19.874 ms
+[shading] duration=10:shading=phong: FPS: 17 FrameTime: 61.460 ms
+[refract] duration=10: FPS: 2 FrameTime: 590.122 ms
+[terrain] duration=10: FPS: 1 FrameTime: 3515.833 ms
+=======================================================
+                                  glmark2 Score: 30 
+=======================================================
+exit=0
+GPU clock during run (Hz, count):     104 310000000 
+
+==== load: vkcube, 1000 frames (21:55:42)
+$ mesa-glymur-run vkcube --wsi wayland --c 1000
+Selected GPU 0: Adreno (TM) X2-85, type: IntegratedGpu
+exit=0
+GPU clock during run (Hz, count):      34 310000000 
+
+==== kernel log since the start (21:55:59)
+devfreq after: cur=310000000 trans_stat:
+     From  :   To
+           : 310000000 410000000 572000000 760000000 820000000 915000000107000000011850000001350000000   time(ms)
+* 310000000:         0         0         0         2         0         0         0         0         0     16824
+  410000000:         0         0         0         0         0         0         0         0         0         0
+  572000000:         0         0         0         0         0         0         0         0         0         0
+  760000000:         2         0         0         0         0         0         0         0         0       100
+  820000000:         0         0         0         0         0         0         0         0         0         0
+  915000000:         0         0         0         0         0         0         0         0         0         0
+ 1070000000:         0         0         0         0         0         0         0         0         0         0
+ 1185000000:         0         0         0         0         0         0         0         0         0         0
+ 1350000000:         1         0         0         0         0         0         0         0         0        52
+Total transition : 5
+
+Saved to /home/rahul/glymur-logs/mesa-test-20260929T215450.txt
+If everything above rendered, try the whole desktop: mesa-glymur-run --desktop on, then log out and in.
