@@ -420,3 +420,89 @@ exactly which fields the firmware says changed on each blip (power-
 direction, power-operation-mode, connect-change, etc. are separate bits).
 If a future run can catch `connected=1` in the same tracepoint even once,
 that pins down how far the negotiation actually gets before collapsing.
+
+## Re-timing that run, and the unacknowledged port notification
+
+A second pass over `charging-watch-221357.txt` changes the reading above.
+
+**The trace lines are late.** `TRACE` lines are timestamped when
+`trace_pipe` delivered them, not when they happened. Their kernel times
+advance 151 s over 398 s of log time, and the run ended with events still
+unread. The `KERN` line fixes the clock: `[610.379567]` was logged at
+22:14:55.67. Mapped that way:
+
+| Kernel time | Wall time | Event |
+|---|---|---|
+| — | 22:14:36 | Owner: charging, LED on, port **away from** the hinge (UCSI connector 2, typec `port1`) |
+| — | 22:14:55.39 | `STATE`/`FW`: connector 2 disconnected; battery discharging |
+| 610.380 | 22:14:55.67 | `pmic_glink_altmode: notification on undefined port 1` |
+| 610.393 | 22:14:55.68 | `ucsi_connector_change: port1 change=5804 connected=0` |
+| — | 22:15:10 | Owner: "connected to port near hinge, no charging yet" |
+| 635.604 | ≈22:15:20.9 | `ucsi_connector_change: port0 change=5804 connected=0` |
+| — | 22:15:38 to 22:20:39 | Owner: more replugs on both ports, no charging, no LED. `FW` stays at "not connected" on both connectors |
+
+`change=5804` is connect change (bit 14), power direction change (12),
+partner change (11) and power operation mode change (2)
+(`drivers/usb/typec/ucsi/ucsi.h`). With `connected=0` it is a full detach
+report.
+
+So the port1 event is the 22:14:55 disconnect itself, not a blip minutes
+later. The owner's next note, moving the cable to the hinge port, suggests
+that disconnect was the unplug, not a spontaneous drop. The port0 event is
+the only trace of the hinge-port plug: a detach report about 10 s later,
+with no attach ever read. Trace coverage ends at kernel 706 (22:16:31);
+after that only the 2-s `FW` poll covers the run.
+
+The `+45.6 W` heartbeat at 22:14:57 came 2 s after the firmware's own
+connector status read "not connected". That is most likely the battery
+monitor's cached power value, not a hidden reconnect.
+
+**The lead: the firmware's port notification is never acknowledged.**
+
+- `pmic_glink_altmode` asks the firmware for port notifications
+  (`ALTMODE_PAN_EN`) when it starts.
+- It acknowledges each one (`ALTMODE_PAN_ACK`) only at the end of the
+  worker of a port that has a connector node
+  (`drivers/soc/qcom/pmic_glink_altmode.c`, `pmic_glink_altmode_worker`).
+- For any other port it logs "notification on undefined port" at debug
+  level and returns without acknowledging.
+- Our `pmic-glink` node has no connector children, so no notification has
+  ever been acknowledged. The message only appeared here because
+  `charging-watch.sh` switched on dynamic debug.
+
+The firmware sent a notification for connector 2 at the disconnect. From
+then on its own connector status never showed a connection on either
+port, through five minutes of replugging.
+
+The `-4` capture fits the same shape: the session charged, then later
+attempts failed. That is consistent with the first connection being made
+before any notification was left pending. It is not proven: the capture
+cannot show whether the firmware waits for the acknowledgement.
+
+**Fix staged (device tree only).** The "device tree (GPU and USB-A test)"
+DTB now declares `connector@0` and `connector@1` under `pmic-glink` as
+bare `usb-c-connector` nodes: `reg`, dual power and data roles, and no
+graph.
+
+- With no graph, `fwnode_typec_mux_get`, `_switch_get` and
+  `_retimer_get` return `NULL`, and the `typec_*_set` calls accept that.
+- Both ports become defined, so every notification is handled and
+  acknowledged.
+- `ucsi_glink` also parses these children; its orientation GPIOs are
+  optional.
+
+No PHY, repeater or rail is declared. The new DTB is on the USB as
+`glymur-tools/usb-test/mahua-hp-omnibook-5-bf1xxx-usb.dtb` (SHA-256
+`398b335e…6543`); `grub.cfg` is unchanged.
+
+**Next test** (one boot of the same entry):
+
+1. Run `sudo bash ~/charging-watch.sh` and plug the charger into either
+   port.
+2. Unplug it, then plug it into the other port, typing notes as before.
+3. Check the watch log: its `KERN` lines should no longer contain
+   "notification on undefined port". That is a debug message, visible only
+   while the script has dynamic debug on.
+
+If the firmware's connector status follows every plug and unplug, the
+missing acknowledgement was the cause.

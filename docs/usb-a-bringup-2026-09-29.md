@@ -191,3 +191,44 @@ new result, not a failure. The blank screen on the second boot was the
 eDP panel not training, and the machine was fully alive underneath it
 (hence the keyboard responding); it was not a hang and nothing here
 needs a fresh DTB or kernel change yet.
+
+## Follow-up: what enabling `usb_2_qmpphy` changes for the display
+
+A lead for the eDP flake, not a conclusion.
+
+In `glymur.dtsi`, `usb_2_qmpphy` is a clock parent of:
+
+- the display clock controller (`<&usb_2_qmpphy QMP_USB43DP_DP_LINK_CLK>`
+  and `..._DP_VCO_DIV_CLK`, the dp2 inputs);
+- GCC (`QMP_USB43DP_USB3_PIPE_CLK`).
+
+While the PHY was disabled, those parents were simply absent. With it
+enabled, fw_devlink makes the display clock controller wait for
+`phy-qcom-qmp-combo`, which is a module loaded from the root filesystem.
+So on this DT the eDP bring-up starts later and at a boot-dependent time.
+
+The eDP itself runs on `mdss_dp3` with its own PHY and does not use
+`usb_2_qmpphy` clocks. The failing boot's error is link training timing
+out (`-110`) after the PHY powered on. That matches a known failure after
+the same PHY fix: the ASUS Zenbook A16 report saw a black screen with
+`-110` in about 1 of 3 boots. FixItFoundry/zenbook-a16-linux carries
+unposted eDP `LINK_RATE_SET` patches for it, and our panel uses that eDP
+1.4 rate-table path (`docs/upstream-patch-survey-2026-09-29.md`). The
+likelier explanation is that intermittency, independent of USB-A. Those
+patches are the next thing to review for eDP.
+
+The comparison the doc already suggests would settle it: several
+back-to-back boots of "GPU test" and of "GPU and USB-A test". If only the
+USB-A entry flakes, the next step is building `PHY_QCOM_QMP_COMBO` into
+the kernel so the dependency resolves at the same point every boot.
+
+## Update: USB-C connector nodes added to the same DTB
+
+The "GPU and USB-A test" DTB now also carries bare USB-C connector nodes
+under `pmic-glink`, so that port notifications from the firmware are
+acknowledged (`docs/usb-c-charging-2026-09-29.md`, last section).
+
+- New DTB SHA-256: `398b335e…6543`.
+- The USB-A part is unchanged.
+- The connector nodes add no pins, and the DTB still passes the GPIO
+  allow-list check.
