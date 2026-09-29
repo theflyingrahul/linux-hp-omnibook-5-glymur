@@ -29,6 +29,33 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-29 (hardware rendering staged; charging re-read):**
+
+- **Hardware rendering.** "Software Rendering" is a Mesa version gap:
+  Ubuntu 26.04's Mesa 26.0.8 has no X2-85 entry, and Mesa **26.2**
+  (`0xffff44070031`, both freedreno GL and turnip Vulkan) has one. Mesa
+  26.2.3 is built as a normal user, hash-checked against its release notes,
+  and staged on the USB. It installs under `/opt/mesa-glymur` beside
+  Ubuntu's Mesa: per program with `mesa-glymur-run`, and for the whole
+  desktop only after `mesa-glymur-run --desktop on`. See
+  `docs/mesa-x2-85-2026-09-29.md`.
+- **cpufreq at boot.** A boot service loads `scmi-cpufreq` only on device
+  trees that carry the SCMI polling fix.
+- **Charging.** The `-4` session's own capture shows the battery
+  **charging at 40 W** over PD. Charging on the DT boot is intermittent,
+  not absent, and `qcom-battmgr-ac`/`-usb` `ONLINE` do not track the
+  charger. `charging-watch.sh` records the firmware's connector status and
+  the UCSI tracepoints live. See `docs/usb-c-charging-2026-09-29.md`.
+
+Next:
+
+1. From "ACPI, newest glymur kernel", run
+   `bash "/media/$USER/UBUNTU 26_0/glymur-tools/kernels/install-from-usb.sh"`.
+2. Boot "device tree (GPU test)".
+3. On the desktop, run `bash ~/check-mesa.sh`.
+4. Run `sudo bash ~/charging-watch.sh`, then plug, unplug and replug,
+   typing a note at each step.
+
 **2026-09-29 (GPU and CPU frequency scaling both work, on the GPU test
 DT):** booted kernel `7.3.0-rc2-glymur-5`'s "device tree (GPU test)" entry.
 The Adreno X2-85 binds, loads GMU firmware (v5.2.38), needs no zap shader
@@ -42,22 +69,9 @@ installed Mesa (`26.0.8`) has no hardware-table entry for this chip ID yet
 `docs/gpu-bringup-run1-2026-09-29.md`. Neither GPU nor cpufreq is carried
 by the full/minimal DTs yet.
 
-USB-C charging is still unresolved after five unplug/replug attempts across
-this session, but the picture changed: the owner directly saw the charging
-LED light once during a replug, so a charging session can start — it just
-doesn't persist long enough for any snapshot (20 s delay) or live poll
-(0.5 s resolution, ~60 s each, twice) to catch it, and neither Linux's UCSI
-state nor the kernel log ever shows it. The next session should watch the
-LED and `/sys/class/typec/port*`/`power_supply` together in real time on a
-fresh attempt. See `docs/usb-c-charging-2026-09-29.md`.
-
-**Next, in priority order:** (1) watch the charging LED and sysfs
-simultaneously on a fresh unplug/replug, ideally also comparing against the
-ACPI/Windows charging path with the same charger; (2) audio (SoundWire/
-LPASS — the ADSP is already up); (3) once GPU + cpufreq are trusted more,
-carry them into the full DT alongside the working display; (4) USB-C data
-and USB in general still need a controller enabled in DT; (5) suspend and
-TPM are untouched.
+USB-C charging: five unplug/replug attempts on `-5` showed nothing in
+sysfs or the kernel log, although the owner saw the charging LED light
+once. The later entry above re-reads this with the `-4` capture.
 
 **2026-09-29 (the eDP panel works):** kernel `7.3.0-rc2-glymur-4`
 backports Qualcomm's posted v8 eDP PHY programming-sequence fix (Bjorn

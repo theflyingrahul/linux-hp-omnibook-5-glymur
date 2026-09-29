@@ -32,6 +32,13 @@ the full 9-step OPP table available (310/410/572/760/820/915/1070/1185/1350
 MHz) — the test DT's 1.35 GHz cap, as designed. This is a real devfreq
 governor actively managing the GPU clock, not just a bound-but-idle device.
 
+At 22 s, `gcc-glymur`, `gpucc-glymur` and `gxclkctl-kaanapali` report
+`sync_state() pending due to 3d6c000.gmu`. The GMU node is used by msm's
+a6xx code but never gets a driver of its own, so fw_devlink keeps waiting.
+The clock controllers then never drop their boot-time votes on unused
+clocks. That costs power, not function, and the command line's
+`clk_ignore_unused` has the same effect anyway.
+
 Display kept working on the same boot: `card1-eDP-1`
 `status=connected enabled=enabled`, `1920x1200` — the GPU and display bind
 together cleanly, as expected (msm treats them as one component).
@@ -56,9 +63,13 @@ arm-scmi arm-scmi.0.auto: Trying version 0x40000. Backward compatibility is NOT 
 arm-scmi arm-scmi.0.auto: Failed to get FC for protocol 13 [...] - ret:-22. Using regular messaging.
 ```
 
-Still logs warnings (the fast-channel negotiation fails, same as before),
-but this time it falls back to **regular (polling) messaging instead of
-hanging**, and cpufreq comes up for real:
+It still logs warnings: the firmware refuses SCMI fast channels ("FC"), so
+the perf protocol falls back to regular mailbox messages. Those messages
+now complete by **polling instead of waiting for a doorbell that never
+comes**. Polling was already on from boot, set by the DT property
+(`scmi_protocol scmi_dev.1: Enabled polling mode TX channel - prot_id:16`
+at 1.49 s in `journalctl-k-b.txt`). There is no hang, and cpufreq comes up
+for real:
 
 ```
 policy0: cpus=0 1 2 3 4 5   cur=902400   min=355200 max=3417600 driver=scmi
