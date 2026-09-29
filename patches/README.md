@@ -5,6 +5,7 @@ Kernel changes are split by who benefits:
 | Directory | Contents | Upstream? |
 |---|---|---|
 | `kernel/upstream/qcom-next-acpi/` | Generic ACPI mechanisms for Snapdragon X2 (Glymur) laptops, as a `git format-patch` series against Qualcomm `qcom-next` (written on `a47c4c5aa`, applied since kernel `-5` on `e428097a36d`) | Yes, candidates |
+| `kernel/upstream/qcom-next/` | Generic fixes against `qcom-next`, not ACPI-specific (since kernel `-6`) | Yes, candidates |
 | `kernel/upstream/mainline/` | Submission-ready series against current mainline (only `Signed-off-by` missing) | Yes, ready |
 | `kernel/backports/` | Fixes by others, posted or already in mainline, carried on our qcom-next base until qcom-next picks them up | Already posted or merged |
 | `kernel/glymur-bringup/` | Interim Glymur code, applied on top of the upstream series | No; replaced later |
@@ -20,10 +21,14 @@ Wi-Fi board data, firmware) are not kernel code. They live in
 
 Apply to qcom-next `e428097a36d` (the qcom-next tip on 2026-09-28; the
 base was `a47c4c5aa` up to kernel `-4`) in order:
-`upstream/qcom-next-acpi/0001–0003`, `glymur-bringup/0001–0002`, then
-`backports/0001–0012` (`scripts/linux/prepare-qcom-next-glymur.sh`).
-Kernel `-4` carried backports 0001–0002; `-5` carries all twelve. A fresh
-`prepare` reproduces the `-5` build tree's source exactly.
+`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001`,
+`glymur-bringup/0001–0002`, then `backports/0001–0012`
+(`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
+backports 0001–0002; `-5` carries all twelve; `-6` adds
+`upstream/qcom-next/0001`. A fresh `prepare` reproduces the build tree's
+source exactly. qcom-next was fetched again before `-6` (2026-09-29): its
+tip is still `e428097a36d`, and mainline has nothing new for these drivers
+since v7.3-rc5.
 
 1. `ACPI: GED: Support GpioInt event resources`: lets GED devices use
    `GpioInt` resources, which is what lid and EC event interrupts use on
@@ -44,6 +49,15 @@ Kernel `-4` carried backports 0001–0002; `-5` carries all twelve. A fresh
 5. `i2c: qcom-geni: bring-up allow-list for firmware-owned controllers`:
    binds only the MMIO bases listed in `i2c_qcom_geni.acpi_buses`; the
    default binds none.
+
+`upstream/qcom-next/`:
+
+- `soc: qcom: pmic_glink_altmode: acknowledge notifications on undescribed
+  ports`. The driver enables the firmware's USB-C port notifications but
+  acknowledged only those for ports with a connector node. On this laptop
+  an unacknowledged one left the firmware reporting no connection on
+  either port (`docs/usb-c-ports-2026-09-29.md`). Notifications for other
+  ports are now acknowledged from a work item. Not ACPI- or board-specific.
 
 Backports (`backports/`), from Bjorn Andersson's "phy: qcom: edp: Update v8
 programming sequence" v1 (linux-arm-msm, 2026-06-22,
