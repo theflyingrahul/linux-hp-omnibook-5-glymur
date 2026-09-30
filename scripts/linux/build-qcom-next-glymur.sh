@@ -1,23 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Build Qualcomm's qcom-next kernel with the Glymur ACPI patches for booting
-# the HP OmniBook 5 from the internal-SSD Ubuntu root (no initramfs; the only
-# initrd is the early ACPI-table cpio). Run from ~/glymur-build in WSL.
-#
-# Config: Ubuntu's config-7.0.0-30-generic + arch/arm64/configs/qcom.config +
-# glymur.config below (the combination chosen in the Linux live session).
-# NVMe, ext4 and the PCI/ACPI host path are built in so the kernel can mount
-# root=PARTUUID=... directly.
+# Build the qcom-next boot kernel for the SSD root. See README.md.
 
 SRC="${1:-.work/linux-qcom-next-glymur}"
 OUT="${2:-.work/build/qcom-next-glymur}"
 JOBS="${3:-8}"
 UBUNTU_CONFIG="${UBUNTU_CONFIG:-/usr/src/linux-headers-7.0.0-30-generic/.config}"
-# GLYMUR_SUFFIX (for example -2) gives each build its own release,
-# 7.3.0-rc2-glymur-2, so installing it never replaces the running kernel's
-# modules (see glymur-ssd/install-kernel.sh). Works in WSL and natively on
-# the SSD install, which also has Ubuntu's 7.0 headers.
+# GLYMUR_SUFFIX gives each build its own release, e.g. 7.3.0-rc2-glymur-2.
 SUFFIX="${GLYMUR_SUFFIX:-}"
 case "$SUFFIX" in
     '' | -[A-Za-z0-9]*) ;;
@@ -27,8 +17,7 @@ esac
 SRC="$(realpath "$SRC")"
 mkdir -p "$OUT"
 OUT="$(realpath "$OUT")"
-# An empty LOCALVERSION stops setlocalversion appending "+" for an untagged
-# tree, so the release is exactly <version>-glymur.
+# Empty LOCALVERSION: no "+" for an untagged tree.
 MAKE=(make -C "$SRC" "O=$OUT" ARCH=arm64 "-j$JOBS" "LOCALVERSION=$SUFFIX")
 
 cat >"$OUT/glymur.config" <<'CFG'
@@ -52,18 +41,14 @@ CONFIG_QCOM_GPI_DMA=m
 CONFIG_I2C_QCOM_GENI=m
 CONFIG_I2C_HID_ACPI=m
 CONFIG_HID_MULTITOUCH=m
-# Device-tree boot without an initramfs: everything between the kernel and
-# the NVMe root is built in (clock, pin and interconnect controllers, TCSR
-# reference clocks, the QMP PCIe PHY). All are inert on an ACPI boot.
+# Device-tree boot without an initramfs: built-in providers.
 CONFIG_CLK_GLYMUR_GCC=y
 CONFIG_CLK_GLYMUR_TCSRCC=y
 CONFIG_PINCTRL_GLYMUR=y
 CONFIG_INTERCONNECT_QCOM_GLYMUR=y
 CONFIG_PHY_QCOM_QMP=y
 CONFIG_PHY_QCOM_QMP_PCIE=y
-# Adreno X2-85: the GPU clock controller and GX clock controller
-# (gpucc-glymur, gxclkctl), built in so the GPU SMMU and GMU do not wait on
-# a module past the deferred-probe timeout. Used only by the -gpu DTB.
+# GPU clock controllers, built in to beat the deferred-probe timeout.
 CONFIG_CLK_GLYMUR_GPUCC=y
 CONFIG_I2C_HID_OF=m
 CONFIG_KEYBOARD_GPIO=m
@@ -75,7 +60,6 @@ cp "$UBUNTU_CONFIG" "$OUT/.config"
     "$SRC/arch/arm64/configs/qcom.config" "$OUT/glymur.config" >"$OUT/merge.log"
 "${MAKE[@]}" olddefconfig >/dev/null
 
-# Refuse to build if a required symbol did not survive olddefconfig.
 missing=0
 while IFS= read -r line; do
     case "$line" in
@@ -101,9 +85,7 @@ rm -rf "$STAGE"
 "${MAKE[@]}" INSTALL_MOD_PATH="$STAGE" INSTALL_MOD_STRIP=1 modules_install >/dev/null
 cp "$OUT/arch/arm64/boot/Image" "$OUT/.config" "$OUT/System.map" "$STAGE/"
 
-# HP device trees from the repository's dts/qcom/, compiled against this
-# tree's mahua.dtsi/glymur.dtsi and shipped next to the kernel
-# (stage/dtbs/qcom/). Each DTB must pass the GPIO allow-list check.
+# HP DTBs, each checked against the GPIO allow-list.
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 CHECK="$REPO_DIR/scripts/linux/check-dt-gpio-allowlist.py"
 if compgen -G "$REPO_DIR/dts/qcom/*-hp-*.dts" >/dev/null; then
@@ -113,8 +95,7 @@ if compgen -G "$REPO_DIR/dts/qcom/*-hp-*.dts" >/dev/null; then
     python3 -c 'import libfdt' 2>/dev/null ||
         echo 'warning: python3-libfdt missing; GPIO allow-list not checked' >&2
     for dts in "$REPO_DIR"/dts/qcom/*-hp-*.dts; do
-        # The display-lab DTB ships in the lab kit (glymur-lab/build-lab.sh)
-        # and test DTBs on the USB (glymur-lab/build-test-dtb.sh).
+        # Lab and test DTBs are built by glymur-lab/.
         case "$dts" in *-lab.dts | *-edp-2lane.dts) continue ;; esac
         dtb="$OUT/arch/arm64/boot/dts/qcom/$(basename "$dts" .dts).dtb"
         rm -f "$dtb"

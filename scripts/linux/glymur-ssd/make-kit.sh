@@ -1,20 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Assemble the files that go onto the installer USB's FAT partition for the
-# SSD install and boot of the qcom-next Glymur kernel:
-#   glymur-tools/ssd/          install-ssd-root.sh, kernel tarball, SHA256SUMS
-#   glymur-boot/               vmlinuz-<krel> (fallback copy; GRUB prefers the SSD's)
-#   glymur-tools/acpi-override/acpi-override.cpio  (BIOS-gated _OSC fix)
-#   glymur-workstation/        fresh repository bundle, SHA256SUMS
-#   grub-entry.cfg             entries to append to boot/grub/grub.cfg
-#   MANIFEST.sha256            every staged file, for checking the USB copy
-#
-# Usage (repo root, Git Bash or Linux):
+# Assemble the USB kit for the SSD install. See README.md.
 #   scripts/linux/glymur-ssd/make-kit.sh <glymur-kernel-*.tar.gz> <partition-guid> [out-dir]
-# The partition GUID and the output are private: keep them in .work/.
-# Env: DSDT_FIX_DIR (default .work/dsdt-osc-fix-F.06), DEBS_DIR
-# (default .work/ssd-debs: git, git-man, liberror-perl .deb files).
 
 KERNEL_TAR="${1:?usage: make-kit.sh <kernel-tarball> <partition-guid> [out-dir]}"
 GUID="$(printf '%s' "${2:?usage: make-kit.sh <kernel-tarball> <partition-guid> [out-dir]}" |
@@ -45,8 +33,6 @@ mkdir -p "$OUT/glymur-tools/ssd" "$OUT/glymur-boot" "$OUT/glymur-tools/acpi-over
 
 echo "kernel $KREL, partition $GUID, BIOS gate $BIOS"
 cp "$HERE/install-ssd-root.sh" "$HERE/glymur-boot-report.sh" "$KERNEL_TAR" "$OUT/glymur-tools/ssd/"
-# git and its two missing dependencies, fetched on an Ubuntu 26.04 arm64
-# host with: apt-get download git git-man liberror-perl
 if compgen -G "$DEBS_DIR/*.deb" >/dev/null; then
     mkdir -p "$OUT/glymur-tools/ssd/debs"
     cp "$DEBS_DIR"/*.deb "$OUT/glymur-tools/ssd/debs/"
@@ -74,8 +60,7 @@ sed -e "s|@KREL@|$KREL|g" -e "s|@PARTUUID@|$GUID|g" -e "s|@BIOS@|$BIOS|g" \
     -e "s|@BOARD_CMDLINE@|$BOARD_CMDLINE|g" -e '/^# Template/d' \
     "$HERE/grub-entry.cfg" >"$OUT/grub-entry.cfg"
 
-# Repository bundle: the working tree with .git and the private .work
-# evidence, minus large or regenerable directories.
+# Repository bundle, minus large or regenerable directories.
 echo "bundling $REPO"
 name="$(basename "$REPO")"
 out_abs="$(cd "$OUT" && pwd)"

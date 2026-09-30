@@ -1,19 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Build the display-lab kit in WSL, from ~/glymur-build, against the kernel
-# build the SSD runs (7.3.0-rc2-glymur-3):
-#
+# Build and check the display-lab kit in WSL. See README.md.
 #   scripts/linux/glymur-lab/build-lab.sh [SRC] [OUT] [KIT]
-#
-# Builds and checks, before anything reaches the laptop:
-#   - the display-lab DTB (with overlay symbols) and its two overlays; each
-#     overlay is applied offline with fdtoverlay and the merged tree must
-#     pass the GPIO allow-list check with the eDP pins in use;
-#   - glymur_lab.ko and the instrumented phy-qcom-edp-lab.ko, whose
-#     vermagic must be the target release;
-# and assembles KIT with the run scripts, HP's Bluetooth pair and
-# SHA256SUMS.
 
 SRC="$(realpath "${1:-.work/linux-qcom-next-glymur}")"
 OUT="$(realpath "${2:-.work/build/qcom-next-glymur}")"

@@ -1,22 +1,8 @@
 #!/usr/bin/env bash
 set -u
 
-# Watch USB-C charging live, on a device-tree boot, until you type q.
-#
+# Watch USB-C charging live; type notes, q to stop. See README.md.
 #   sudo bash charging-watch.sh
-#
-# While it runs, type a note and press Enter whenever something happens
-# ("unplugged", "plugged left port", "LED on", "LED off"); each note is
-# timestamped into the same log as the machine state. Recorded:
-#   - every change of the Type-C ports, the UCSI and battmgr power supplies
-#     and the battery status (a heartbeat line with power every 30 s);
-#   - the connector status as the firmware (PPM) reports it, asked directly
-#     every 2 s through the UCSI debugfs command interface (read-only
-#     GET_CONNECTOR_STATUS), so a missed notification cannot hide it;
-#   - the UCSI tracepoints (every command and connector-change event) and
-#     debug messages from ucsi_glink, typec_ucsi, pmic_glink and
-#     qcom_battmgr.
-# Output: /var/log/glymur/charging-watch-<time>.txt
 
 [ "$(id -u)" -eq 0 ] || { echo 'run with sudo' >&2; exit 1; }
 [ -d /sys/firmware/devicetree/base ] || { echo 'not a device-tree boot' >&2; exit 1; }
@@ -32,13 +18,7 @@ mountpoint -q "$T" || mount -t tracefs none "$T"
 DD=/sys/kernel/debug/dynamic_debug/control
 MODS="ucsi_glink typec_ucsi pmic_glink qcom_battmgr pmic_glink_altmode"
 
-# The background readers run with job control on, so each is its own
-# process group, and cleanup kills whole groups. (Killing only the $! of a
-# `( ... ) &` subshell left its children running: on 2026-09-30 a `cat
-# trace_pipe | while read` pair outlived the script, and the reader, blocked
-# on the pipe lock that cat's splice holds while it waits for trace events,
-# set off hung-task warnings every two minutes.) A watchdog also kills the
-# groups if this script dies without running its trap.
+# Readers run as their own process groups; cleanup kills the groups.
 set -m
 READERS=()
 cleanup() {
@@ -57,7 +37,6 @@ say "cmdline: $(sed 's/root=[^ ]*/root=…/' /proc/cmdline)"
 for m in $MODS; do echo "module $m +p" > "$DD" 2>/dev/null || say "no dynamic debug for $m"; done
 if [ -e "$T/events/ucsi/enable" ]; then
     echo > "$T/trace"; echo 1 > "$T/events/ucsi/enable"
-    # read(2) straight from trace_pipe: no cat, no pipe, no pipe lock.
     (while IFS= read -r l; do log "TRACE $l"; done < "$T/trace_pipe") </dev/null &
     READERS+=("$!")
 else
@@ -70,8 +49,7 @@ READERS+=("$!")
 
 UD="$(ls -d /sys/kernel/debug/usb/ucsi/*/ 2>/dev/null | head -1)"
 [ -n "$UD" ] || say 'no UCSI debugfs directory; firmware connector status not polled'
-# Decode GET_CONNECTOR_STATUS bits 0-31 (UCSI: change 0-15, power opmode
-# 16-18, connected 19, power direction 20, partner type 29-31).
+# GET_CONNECTOR_STATUS: opmode 16-18, connected 19, direction 20, partner 29-31.
 constat() {
     local c="$1" r lo
     echo "$(( 0x12 | (c << 16) ))" > "$UD/command" 2>/dev/null || { echo "con$c:cmd-failed"; return; }

@@ -1,16 +1,8 @@
 #!/usr/bin/env bash
 set -u
 
-# Live (no reboot) EC bus test on the Glymur workstation boot. Run it once
-# per boot, before anything else touches QGP1.
+# Live EC bus test (QGP1, then IC10). See README.md.
 # Usage: sudo glymur-ec-gsi-live-test.sh <module-dir> <log-root> [--transfer]
-#
-# Binds the QGP1 GPI DMA engine (glymur_gpi_dma.ko) and then IC10, the EC's
-# GSI-mode I2C engine (glymur_geni_i2c_gsi.ko). Linux's ACPI I2C OpRegion
-# handler then runs IC10._REG, which only sets AVBL. With --transfer it also
-# reads one byte from EC register 0xB2 at 0x76, the same access the lid
-# _EVT handlers make through \_SB.IC10.CMB2. Neither module can be unloaded;
-# a failure that wedges the bus needs a reboot.
 
 MODDIR="${1:?usage: glymur-ec-gsi-live-test.sh <module-dir> <log-root> [--transfer]}"
 LOGROOT="${2:?usage: glymur-ec-gsi-live-test.sh <module-dir> <log-root> [--transfer]}"

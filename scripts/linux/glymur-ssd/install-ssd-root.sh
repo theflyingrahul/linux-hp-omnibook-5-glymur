@@ -1,28 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Install an Ubuntu 26.04 root filesystem onto the empty internal-SSD
-# partition, for booting the Glymur qcom-next kernel from the USB's GRUB.
-#
-# Run as root from the "Glymur live desktop (RAM live)" session:
+# Install Ubuntu 26.04 onto the SSD's Linux partition. See README.md.
 #   sudo bash /cdrom/glymur-tools/ssd/install-ssd-root.sh <partition-guid>
-#
-# Safety:
-# - touches only the partition whose unique GPT GUID is given, and only if it
-#   has the Linux filesystem type, is 150-300 GB, is on the internal NVMe,
-#   is not mounted and carries no filesystem (or is our own glymur-root with
-#   --reuse), and the operator types INSTALL;
-# - never mounts or writes the SSD's EFI partition, never installs a boot
-#   loader, and diverts grub-install in the target so package upgrades
-#   cannot touch the SSD's EFI partition either;
-# - leaves Windows (BitLocker C:) and Recovery untouched.
-#
-# The target is built the way Ubuntu's installer (curtin) builds the full
-# "Ubuntu Desktop" source: the name prefixes of minimal.standard.<lang>
-# (minimal, minimal.standard, minimal.standard.<lang>) are stacked with
-# overlayfs and copied. Language layers are deltas that delete the other
-# languages; minimal.<lang> belongs to the minimized source, not this one.
-# The live layer is excluded.
 
 usage() { printf 'usage: %s <partition-guid> [--reuse] [--lang en]\n' "$0" >&2; exit 2; }
 [ $# -ge 1 ] || usage
@@ -121,31 +101,25 @@ say 'Configuring fstab, hostname, machine-id'
 FS_UUID="$(blkid -p -s UUID -o value "$DEV")"
 [ -n "$FS_UUID" ] || die "could not read the filesystem UUID of $DEV"
 cat >"$TARGET/etc/fstab" <<EOF
-# Glymur SSD root. The SSD's EFI partition is intentionally not mounted.
+# The SSD's EFI partition is intentionally not mounted.
 UUID=$FS_UUID / ext4 errors=remount-ro 0 1
 EOF
 printf 'glymur\n' >"$TARGET/etc/hostname"
 printf '127.0.0.1 localhost\n127.0.1.1 glymur\n::1 localhost ip6-localhost ip6-loopback\n' \
     >"$TARGET/etc/hosts"
-# A real machine-id, so systemd does not treat the first boot as unconfigured
-# and stop at interactive firstboot prompts.
+# A real machine-id avoids the firstboot prompts.
 tr -d '-' </proc/sys/kernel/random/uuid >"$TARGET/etc/machine-id"
 # Keep the live session's locale, keyboard and time zone.
 for f in default/locale default/keyboard timezone; do
     [ -f "/etc/$f" ] && cp "/etc/$f" "$TARGET/etc/$f"
 done
 [ -L /etc/localtime ] && ln -sfn "$(readlink /etc/localtime)" "$TARGET/etc/localtime"
-# What Ubuntu's desktop installer writes: NetworkManager manages everything.
 mkdir -p "$TARGET/etc/netplan"
 printf 'network:\n  version: 2\n  renderer: NetworkManager\n' \
     >"$TARGET/etc/netplan/01-network-manager-all.yaml"
 chmod 600 "$TARGET/etc/netplan/01-network-manager-all.yaml"
-# Persistent journal, so a failed boot can be read from the live session.
 mkdir -p "$TARGET/var/log/journal"
-# No RTC under ACPI: \_SB.PRTC (ACPI000E) reads the time through PMIC GLink,
-# which is not up, and UEFI GetTime is unavailable. The clock starts wrong
-# until chrony syncs, so e2fsck must not treat superblock times "in the
-# future" as errors (the Debian setting for systems without an RTC).
+# No RTC: allow superblock times in the future (see README.md).
 printf '[options]\n\tbroken_system_clock = 1\n' >"$TARGET/etc/e2fsck.conf"
 
 say 'Guarding the SSD EFI partition from package scripts'
@@ -158,13 +132,10 @@ EOF
 chmod 755 "$TARGET/usr/sbin/grub-install"
 
 say "Installing the kernel modules and Wi-Fi firmware"
-# Ubuntu is merged-/usr (/lib -> usr/lib). Extracting ./lib/... straight into
-# the target would let tar replace that symlink with a directory, so unpack
-# aside and copy into usr/lib.
+# Merged /usr: unpack aside and copy into usr/lib.
 LIBDIR="$TARGET/usr/lib"
 [ -d "$LIBDIR" ] && [ -L "$TARGET/lib" ] || die 'target is not merged-/usr; refusing to guess'
-# Unpack on the target filesystem itself: the modules are too large for the
-# live session's /run tmpfs, and a same-filesystem mv is instant.
+# Unpack on the target: the modules don't fit the live /run tmpfs.
 KSTAGE="$TARGET/var/tmp/glymur-kernel"
 rm -rf "$KSTAGE" && mkdir -p "$KSTAGE"
 tar -xzf "$KERNEL_TAR" -C "$KSTAGE"
@@ -186,17 +157,13 @@ say 'Masking suspend and hibernate (untested on this kernel)'
 chroot "$TARGET" systemctl mask sleep.target suspend.target hibernate.target \
     hybrid-sleep.target suspend-then-hibernate.target >/dev/null
 
-# The owner's rules forbid firmware flashing and boot-loader changes from
-# this system: fwupd stays off, and boot-loader packages are held so an
-# upgrade cannot try to reach the SSD's EFI partition.
+# No firmware updates, no boot-loader upgrades.
 say 'Disabling fwupd and holding boot-loader packages'
 chroot "$TARGET" systemctl mask fwupd.service fwupd-refresh.timer \
     fwupd-refresh.service >/dev/null 2>&1 || true
 chroot "$TARGET" dpkg-query -W -f '${Package}\n' 'grub*' 'shim*' 2>/dev/null |
     xargs -r chroot "$TARGET" apt-mark hold >>"$LOG" 2>&1 || true
 
-# Evidence without a login: if input fails on a boot, the live USB can still
-# read /var/log/glymur/ from the SSD.
 say 'Installing the per-boot bring-up report (/var/log/glymur)'
 install -m 755 "$HERE/glymur-boot-report.sh" "$TARGET/usr/local/sbin/glymur-boot-report"
 cat >"$TARGET/etc/systemd/system/glymur-boot-report.service" <<'EOF'
@@ -223,8 +190,7 @@ case "$NEWUSER" in ''|*[!a-z0-9_-]*) die 'invalid username' ;; esac
 mount --bind /dev "$TARGET/dev"
 mount -t proc proc "$TARGET/proc"
 mount -t sysfs sys "$TARGET/sys"
-# The desktop image has no git; the kit carries git, git-man and
-# liberror-perl from the Ubuntu 26.04 arm64 archive (checked by SHA256SUMS).
+# git, git-man and liberror-perl from the kit.
 if compgen -G "$HERE/debs/*.deb" >/dev/null; then
     say 'Installing git from the kit (offline)'
     mkdir -p "$TARGET/var/tmp/glymur-debs"
@@ -249,10 +215,7 @@ else
     say 'Workstation bundle not found or failed its checksum; skipped'
 fi
 
-# Results the Linux live sessions left in the persistent home (casper-rw on
-# the installer USB: boot logs, fan and lid tests). Mounted read-only with
-# noload, so the unreplayed journal of a stick that lost power is not written;
-# large trees (kernel checkouts, caches) are skipped. Private, so into .work.
+# Import the live USB's persistent home into .work (read-only, noload).
 import_live_home() {
     local part mnt=/run/glymur-persist src dest
     # blkid exits 2 when nothing matches; under pipefail that must not abort.
@@ -282,8 +245,7 @@ import_live_home() {
         dest="$HOMEDIR/linux-hp-omnibook-5-glymur/.work/live-persistence-home-$(basename "$src")"
         say "Importing $src (read-only) into ${dest#"$TARGET"}"
         mkdir -p "$dest"
-        # Never import credentials: logins, SSH/GPG keys,
-        # keyrings, browser and app configuration.
+        # Never import credentials, keys or app settings.
         rsync -a --max-size=64M \
             --exclude='/.ssh/' \
             --exclude='/.gnupg/' --exclude='/.pki/' --exclude='/.local/share/keyrings/' \
