@@ -29,6 +29,16 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30, the battery manager hung mid-session (not a real
+battery-empty event).** From 12:21:12, every `qcom-battmgr-*` property
+failed with `-110` continuously for 14+ minutes, GNOME showed a false
+"0%". ADSP/CDSP stayed running; UCSI (a different client on the same PMIC
+GLink transport) kept working the whole time. No PDR/servreg down event
+was ever logged for the stuck service — looks like a firmware-side
+battery-manager hang, not a Linux bug. Don't trust the percentage if this
+recurs; plug in the charger regardless of what's shown. See
+`docs/battmgr-hang-2026-09-30.md`.
+
 **2026-09-30, USB full/low-speed devices fail on all three host ports —
 an eUSB2 repeater gap, not a bad port.** The owner's mouse was tried on
 `usb_0` (hinge), `usb_1` (away from the hinge) and USB-A this boot, and

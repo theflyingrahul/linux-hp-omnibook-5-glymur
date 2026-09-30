@@ -1,0 +1,39 @@
+Sep 30 12:21:12.785828 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `manufacturer' property: -110
+Sep 30 12:21:15.855839 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `model_name' property: -110
+Sep 30 12:21:17.903984 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `serial_number' property: -110
+Sep 30 12:21:20.975862 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 12:21:23.024209 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_max_design' property: -110
+Sep 30 12:21:25.071831 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 12:21:27.121555 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_now' property: -110
+Sep 30 12:21:29.167774 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `cycle_count' property: -110
+Sep 30 12:21:30.230119 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 12:21:32.239826 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `energy_full' property: -110
+Sep 30 12:21:33.265597 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 12:21:35.313541 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `energy_full_design' property: -110
+Sep 30 12:21:37.361534 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 12:21:40.433407 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_full' property: -110
+Sep 30 12:21:41.455817 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 12:21:43.505551 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_full_design' property: -110
+Sep 30 12:21:45.551817 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 12:21:46.576079 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 12:21:47.601397 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `technology' property: -110
+Sep 30 12:21:48.625588 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+... (562 total occurrences, still ongoing at capture time) ...
+Sep 30 12:35:29.039840 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_full_design' property: -110
+Sep 30 12:35:32.111825 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 12:35:33.135770 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `energy_full' property: -110
+Sep 30 12:35:36.207834 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `technology' property: -110
+Sep 30 12:35:38.255788 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 12:35:40.303801 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `temp' property: -110
+Sep 30 12:35:42.351841 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `temp' property: -110
+Sep 30 12:35:43.376203 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_max_design' property: -110
+Sep 30 12:35:44.399797 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 12:35:45.423855 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `temp' property: -110
+
+=== upowerd NaN warning (first occurrence) ===
+Sep 30 12:21:44.529346 glymur upowerd[2054]: value "nan" of type 'gdouble' is invalid or out of range for property 'percentage' of type 'gdouble'
+
+=== live status at capture time ===
+date: Wed Sep 30 12:35:47 IST 2026
+ADSP: running, CDSP: running, SoCCP: attached
+UCSI port0 online: 0
