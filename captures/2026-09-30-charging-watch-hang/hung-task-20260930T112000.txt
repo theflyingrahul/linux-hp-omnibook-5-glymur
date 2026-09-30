@@ -1,0 +1,48 @@
+=== orphaned processes, Wed Sep 30 11:28:31 IST 2026 ===
+root       17961       1  0 11:16 ?        00:00:00 cat /sys/kernel/tracing/trace_pipe
+root       17963       1  0 11:16 ?        00:00:00 journalctl -k -f -n 0 --no-pager -o short-monotonic
+root       17964       1  0 11:16 ?        00:00:00 bash /home/rahul/charging-watch.sh
+root       17965       1  0 11:16 ?        00:00:00 bash /home/rahul/charging-watch.sh
+
+=== kernel hung-task warnings, journalctl -b 0, first through fifth occurrence ===
+Sep 30 11:20:02.886794 glymur kernel: INFO: task bash:17964 blocked for more than 122 seconds.
+Sep 30 11:20:02.886881 glymur kernel:       Tainted: G        W           7.3.0-rc2-glymur-6 #7
+Sep 30 11:20:02.886894 glymur kernel: "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+Sep 30 11:20:02.886902 glymur kernel: task:bash            state:D stack:0     pid:17964 tgid:17964 ppid:1      task_flags:0x400040 flags:0x00000010
+Sep 30 11:20:02.886911 glymur kernel: Call trace:
+Sep 30 11:20:02.886923 glymur kernel:  __switch_to+0x17c/0x428 (T)
+Sep 30 11:20:02.886929 glymur kernel:  __schedule+0x438/0x1af8
+Sep 30 11:20:02.886936 glymur kernel:  schedule+0x40/0x110
+Sep 30 11:20:02.886947 glymur kernel:  schedule_preempt_disabled+0x30/0x68
+Sep 30 11:20:02.886955 glymur kernel:  __mutex_lock.constprop.0+0x624/0xb08
+Sep 30 11:20:02.886963 glymur kernel:  __mutex_lock_slowpath+0x20/0x50
+Sep 30 11:20:02.886970 glymur kernel:  mutex_lock+0x8c/0xc0
+Sep 30 11:20:02.886976 glymur kernel:  anon_pipe_read+0x68/0x438
+Sep 30 11:20:02.886983 glymur kernel:  vfs_read+0x344/0x380
+Sep 30 11:20:02.886991 glymur kernel:  ksys_read+0x108/0x130
+Sep 30 11:20:02.886998 glymur kernel:  __arm64_sys_read+0x24/0x50
+Sep 30 11:20:02.887004 glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+Sep 30 11:20:02.887011 glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+Sep 30 11:20:02.887018 glymur kernel:  do_el0_svc+0x28/0x58
+Sep 30 11:20:02.887025 glymur kernel:  el0_svc+0x48/0x310
+Sep 30 11:20:02.887032 glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+Sep 30 11:20:02.887042 glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+Sep 30 11:20:02.887049 glymur kernel: INFO: task bash:17964 is blocked on a mutex likely owned by task cat:17961.
+Sep 30 11:20:02.887056 glymur kernel: task:cat             state:S stack:0     pid:17961 tgid:17961 ppid:1      task_flags:0x400000 flags:0x00000000
+Sep 30 11:20:02.887063 glymur kernel: Call trace:
+Sep 30 11:20:02.887069 glymur kernel:  __switch_to+0x17c/0x428 (T)
+Sep 30 11:20:02.887073 glymur kernel:  __schedule+0x438/0x1af8
+Sep 30 11:20:02.887079 glymur kernel:  schedule+0x40/0x110
+Sep 30 11:20:02.887085 glymur kernel:  ring_buffer_wait+0x11c/0x238
+Sep 30 11:20:02.887089 glymur kernel:  wait_on_pipe+0xc4/0x128
+Sep 30 11:20:02.887096 glymur kernel:  tracing_wait_pipe+0x48/0xf0
+Sep 30 11:20:02.887103 glymur kernel:  tracing_splice_read_pipe+0xe4/0x480
+Sep 30 11:20:02.887111 glymur kernel:  do_splice_read+0x88/0x1a0
+Sep 30 11:20:02.887118 glymur kernel:  splice_file_to_pipe+0xac/0x140
+Sep 30 11:20:02.887125 glymur kernel:  do_splice+0x5d0/0x820
+Sep 30 11:20:02.887132 glymur kernel:  __arm64_sys_splice+0xf0/0x348
+Sep 30 11:20:02.887139 glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+Sep 30 11:20:02.887148 glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+Sep 30 11:20:02.887152 glymur kernel:  do_el0_svc+0x28/0x58
+Sep 30 11:20:02.887158 glymur kernel:  el0_svc+0x48/0x310
+Sep 30 11:20:02.887164 glymur kernel:  el0t_64_sync_handler+0xc0/0x110

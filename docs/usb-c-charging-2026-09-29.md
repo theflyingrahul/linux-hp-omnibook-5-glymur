@@ -506,3 +506,46 @@ No PHY, repeater or rail is declared. The new DTB is on the USB as
 
 If the firmware's connector status follows every plug and unplug, the
 missing acknowledgement was the cause.
+
+## `charging-watch.sh` bug, September 30: an orphaned trace reader spams hung-task warnings
+
+Confirmed the fix worked (`docs/usb-c-ports-2026-09-29.md`), but the
+script's own `charging-watch-20260930T111637.txt` session left processes
+running after it ended. Found live, still running, on the next boot:
+
+```
+root  17961  1  cat /sys/kernel/tracing/trace_pipe
+root  17963  1  journalctl -k -f -n 0 --no-pager -o short-monotonic
+root  17964  1  bash /home/rahul/charging-watch.sh   (the "TRACE" while-read loop, state D)
+root  17965  1  bash /home/rahul/charging-watch.sh   (the "KERN" while-read loop)
+```
+
+All four have `ppid=1`: their original script invocation is gone, so the
+`trap cleanup EXIT` that's supposed to `kill $(jobs -p)` never ran against
+them — whatever ended the script (closing the terminal, a signal stronger
+than the trap catches) didn't take its background readers with it. `cat
+trace_pipe`'s blocking read never returns on its own once nothing is
+producing new events, so it and its paired `while read` loop wait forever.
+The kernel's hung-task detector then logs a growing warning every ~2
+minutes indefinitely (`captures/2026-09-30-charging-watch-hang/
+hung-task-20260930T112000.txt`, five occurrences by the time this was
+caught, `INFO: task bash:17964 blocked for more than 122/245/368/491/614
+seconds`) — printed straight to the console at `loglevel=4`, which is what
+showed up as stray lines at the bottom of the owner's terminal.
+
+**Not data loss or corruption** — the earlier charging-watch capture and
+its findings are unaffected; this is purely a leftover process. Killed
+with `sudo kill -9 17961 17963 17964 17965` (find current PIDs with
+`ps -ef | grep -E 'charging-watch|trace_pipe|journalctl -k -f'` if this
+recurs; the exact numbers change between runs).
+
+**Cause, for next time `charging-watch.sh` is touched:** the `trap cleanup
+EXIT` relies on bash actually delivering EXIT to the script's own process
+for its background jobs to be reachable via `jobs -p`. That's fragile
+against whatever killed this session. A more robust version would track
+the backgrounded PIDs explicitly (`$!` right after each `&`) and `kill -9`
+them by number in cleanup, and/or close the tracing pipe's read end
+directly (`exec {fd}</dev/null` redirection trick, or just always
+`kill -9` rather than the default `kill`) so a stuck blocking read can't
+survive the trap. Not fixed in this pass; flagging for the next time this
+script is edited.
