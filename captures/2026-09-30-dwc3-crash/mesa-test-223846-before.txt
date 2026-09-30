@@ -1,0 +1,257 @@
+
+==== system (22:38:46)
+Linux glymur 7.3.0-rc2-glymur-11 #12 SMP PREEMPT_DYNAMIC Wed Sep 30 08:31:19 PDT 2026 aarch64 GNU/Linux
+HP OmniBook 5 Laptop 16-bf1xxx
+/opt/mesa-glymur/lib/aarch64-linux-gnu/libgallium-26.3.0-devel.so
+devfreq: simple_ondemand cur=1350000000 max=1350000000
+total 0
+drwxr-xr-x 2 root root         80 Jul 28 02:14 by-path
+crw-rw----+1 root video  226,   1 Jul 28 02:14 card1
+crw-rw----+1 root render 226, 128 Jul 28 02:14 renderD128
+
+==== what the kernel reports to Mesa (MSM_GET_PARAM) (22:38:46)
+/dev/dri/renderD128 GPU_ID = 0x0
+/dev/dri/renderD128 GMEM_SIZE = 0xfc0000
+/dev/dri/renderD128 CHIP_ID = 0x16544060030
+/dev/dri/renderD128 GMEM_BASE = 0x0
+Jul 28 02:14:02 glymur kernel: platform 3d6c000.gmu: Adding to iommu group 1
+Jul 28 02:14:03 glymur kernel: adreno 3d00000.gpu: supply vdd not found, using dummy regulator
+Jul 28 02:14:03 glymur kernel: adreno 3d00000.gpu: supply vddcx not found, using dummy regulator
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:adreno_request_fw [msm]] loaded qcom/gen80100_sqe.fw from new location
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:adreno_request_fw [msm]] loaded qcom/gen80100_gmu.bin from new location
+Jul 28 02:14:03 glymur kernel: msm_dpu ae01000.display-controller: [drm:adreno_request_fw [msm]] loaded qcom/gen80100_aqe.fw from new location
+Jul 28 02:14:03 glymur kernel: [drm] Loaded GMU firmware v5.2.38
+
+==== system-wide mode and the compositor (22:38:46)
+ld.so.conf entry: present
+libgbm.so.1        -> /opt/mesa-glymur/lib/aarch64-linux-gnu/libgbm.so.1
+libEGL_mesa.so.0   -> /opt/mesa-glymur/lib/aarch64-linux-gnu/libEGL_mesa.so.0
+libGLX_mesa.so.0   -> /opt/mesa-glymur/lib/aarch64-linux-gnu/libGLX_mesa.so.0
+Vulkan ICD: /etc/vulkan/icd.d/freedreno_glymur_icd.aarch64.json
+gnome-shell (3652) has loaded:
+/opt/mesa-glymur/lib/aarch64-linux-gnu/libEGL_mesa.so.0.0.0
+/opt/mesa-glymur/lib/aarch64-linux-gnu/libgallium-26.3.0-devel.so
+/opt/mesa-glymur/lib/aarch64-linux-gnu/libgbm.so.1.0.0
+
+==== what programs get without the wrapper (Ubuntu's Mesa unless --system on) (22:38:46)
+Wayland platform:
+EGL API version: 1.5
+EGL vendor string: Mesa Project
+EGL version string: 1.5
+EGL client APIs: OpenGL OpenGL_ES 
+OpenGL core profile vendor: freedreno
+OpenGL core profile renderer: Adreno (TM) X2-85
+OpenGL core profile version: 4.6 (Core Profile) Mesa 26.3.0-devel (git-cec59b2997)
+OpenGL core profile shading language version: 4.60
+OpenGL compatibility profile vendor: freedreno
+OpenGL compatibility profile renderer: Adreno (TM) X2-85
+OpenGL compatibility profile version: 4.6 (Compatibility Profile) Mesa 26.3.0-devel (git-cec59b2997)
+OpenGL compatibility profile shading language version: 4.60
+OpenGL ES profile vendor: freedreno
+OpenGL ES profile renderer: Adreno (TM) X2-85
+
+==== EGL (Wayland, GBM, surfaceless) (22:38:46)
+$ mesa-glymur-run eglinfo -B -p wayland
+Wayland platform:
+EGL API version: 1.5
+EGL vendor string: Mesa Project
+EGL version string: 1.5
+EGL client APIs: OpenGL OpenGL_ES 
+OpenGL core profile vendor: freedreno
+OpenGL core profile renderer: Adreno (TM) X2-85
+OpenGL core profile version: 4.6 (Core Profile) Mesa 26.3.0-devel (git-cec59b2997)
+OpenGL core profile shading language version: 4.60
+OpenGL compatibility profile vendor: freedreno
+OpenGL compatibility profile renderer: Adreno (TM) X2-85
+OpenGL compatibility profile version: 4.6 (Compatibility Profile) Mesa 26.3.0-devel (git-cec59b2997)
+OpenGL compatibility profile shading language version: 4.60
+OpenGL ES profile vendor: freedreno
+OpenGL ES profile renderer: Adreno (TM) X2-85
+OpenGL ES profile version: OpenGL ES 3.2 Mesa 26.3.0-devel (git-cec59b2997)
+OpenGL ES profile shading language version: OpenGL ES GLSL ES 3.20
+
+exit=0
+$ mesa-glymur-run eglinfo -B -p gbm
+GBM platform:
+EGL API version: 1.5
+EGL vendor string: Mesa Project
+EGL version string: 1.5
+EGL client APIs: OpenGL OpenGL_ES 
+OpenGL core profile vendor: freedreno
+OpenGL core profile renderer: Adreno (TM) X2-85
+OpenGL core profile version: 4.6 (Core Profile) Mesa 26.3.0-devel (git-cec59b2997)
+OpenGL core profile shading language version: 4.60
+OpenGL compatibility profile vendor: freedreno
+OpenGL compatibility profile renderer: Adreno (TM) X2-85
+OpenGL compatibility profile version: 4.6 (Compatibility Profile) Mesa 26.3.0-devel (git-cec59b2997)
+OpenGL compatibility profile shading language version: 4.60
+OpenGL ES profile vendor: freedreno
+OpenGL ES profile renderer: Adreno (TM) X2-85
+OpenGL ES profile version: OpenGL ES 3.2 Mesa 26.3.0-devel (git-cec59b2997)
+OpenGL ES profile shading language version: OpenGL ES GLSL ES 3.20
+
+exit=0
+$ mesa-glymur-run eglinfo -B -p surfaceless
+Surfaceless platform:
+EGL API version: 1.5
+EGL vendor string: Mesa Project
+EGL version string: 1.5
+EGL client APIs: OpenGL OpenGL_ES 
+OpenGL core profile vendor: freedreno
+OpenGL core profile renderer: Adreno (TM) X2-85
+OpenGL core profile version: 4.6 (Core Profile) Mesa 26.3.0-devel (git-cec59b2997)
+OpenGL core profile shading language version: 4.60
+OpenGL compatibility profile vendor: freedreno
+OpenGL compatibility profile renderer: Adreno (TM) X2-85
+OpenGL compatibility profile version: 4.6 (Compatibility Profile) Mesa 26.3.0-devel (git-cec59b2997)
+OpenGL compatibility profile shading language version: 4.60
+OpenGL ES profile vendor: freedreno
+OpenGL ES profile renderer: Adreno (TM) X2-85
+OpenGL ES profile version: OpenGL ES 3.2 Mesa 26.3.0-devel (git-cec59b2997)
+OpenGL ES profile shading language version: OpenGL ES GLSL ES 3.20
+
+exit=0
+
+==== GLX through Xwayland (22:38:47)
+$ mesa-glymur-run glxinfo -B
+name of display: :0
+display: :0  screen: 0
+direct rendering: Yes
+Extended renderer info (GLX_MESA_query_renderer):
+    Vendor: freedreno (0x5143)
+    Device: Adreno (TM) X2-85 (0xffffffff)
+    Version: 26.3.0
+    Accelerated: yes
+    Video memory: 15803MB
+    Unified memory: yes
+    Preferred profile: core (0x1)
+    Max core profile version: 4.6
+    Max compat profile version: 4.6
+    Max GLES1 profile version: 1.1
+    Max GLES[23] profile version: 3.2
+Memory info (GL_ATI_meminfo):
+    VBO free memory - total: 15803 MB, largest block: 15803 MB
+    VBO free aux. memory - total: 0 MB, largest block: 0 MB
+    Texture free memory - total: 15803 MB, largest block: 15803 MB
+    Texture free aux. memory - total: 0 MB, largest block: 0 MB
+    Renderbuffer free memory - total: 15803 MB, largest block: 15803 MB
+    Renderbuffer free aux. memory - total: 0 MB, largest block: 0 MB
+Memory info (GL_NVX_gpu_memory_info):
+    Dedicated video memory: 15803 MB
+    Total available memory: 15803 MB
+    Currently available dedicated video memory: 15803 MB
+OpenGL vendor string: freedreno
+OpenGL renderer string: Adreno (TM) X2-85
+OpenGL core profile version string: 4.6 (Core Profile) Mesa 26.3.0-devel (git-cec59b2997)
+
+==== Vulkan (22:38:47)
+$ mesa-glymur-run vulkaninfo --summary
+==========
+VULKANINFO
+==========
+
+Vulkan Instance Version: 1.4.341
+
+
+Instance Extensions: count = 26
+-------------------------------
+VK_EXT_acquire_drm_display             : extension revision 1
+VK_EXT_acquire_xlib_display            : extension revision 1
+VK_EXT_debug_report                    : extension revision 10
+VK_EXT_debug_utils                     : extension revision 2
+VK_EXT_direct_mode_display             : extension revision 1
+VK_EXT_display_surface_counter         : extension revision 1
+VK_EXT_headless_surface                : extension revision 1
+VK_EXT_layer_settings                  : extension revision 2
+VK_EXT_surface_maintenance1            : extension revision 1
+VK_EXT_swapchain_colorspace            : extension revision 5
+VK_KHR_device_group_creation           : extension revision 1
+VK_KHR_display                         : extension revision 23
+VK_KHR_external_fence_capabilities     : extension revision 1
+VK_KHR_external_memory_capabilities    : extension revision 1
+VK_KHR_external_semaphore_capabilities : extension revision 1
+VK_KHR_get_display_properties2         : extension revision 1
+VK_KHR_get_physical_device_properties2 : extension revision 2
+VK_KHR_get_surface_capabilities2       : extension revision 1
+VK_KHR_portability_enumeration         : extension revision 1
+VK_KHR_surface                         : extension revision 25
+VK_KHR_surface_maintenance1            : extension revision 1
+VK_KHR_surface_protected_capabilities  : extension revision 1
+VK_KHR_wayland_surface                 : extension revision 6
+VK_KHR_xcb_surface                     : extension revision 6
+VK_KHR_xlib_surface                    : extension revision 6
+VK_LUNARG_direct_driver_loading        : extension revision 1
+
+Instance Layers: count = 5
+--------------------------
+VK_LAYER_INTEL_nullhw       INTEL NULL HW                                                1.1.73   version 1
+VK_LAYER_MESA_anti_lag      Open-source implementation of the VK_AMD_anti_lag extension. 1.4.303  version 1
+VK_LAYER_MESA_device_select Linux device selection layer                                 1.4.303  version 1
+VK_LAYER_MESA_overlay       Mesa Overlay layer                                           1.4.303  version 1
+VK_LAYER_MESA_screenshot    Mesa Screenshot layer                                        1.4.303  version 1
+
+Devices:
+========
+GPU0:
+	apiVersion         = 1.4.363
+	driverVersion      = 26.2.99
+	vendorID           = 0x5143
+	deviceID           = 0x44060030
+	deviceType         = PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU
+	deviceName         = Adreno (TM) X2-85
+	driverID           = DRIVER_ID_MESA_TURNIP
+	driverName         = turnip Mesa driver
+	driverInfo         = Mesa 26.3.0-devel (git-cec59b2997)
+	conformanceVersion = 1.4.6.1
+	deviceUUID         = e7e9ef2b-9ca1-f8ec-de2d-305159426551
+	driverUUID         = b91c90f1-2cd7-c043-2541-161b4bc376d4
+
+==== load: glmark2 (GLES 2, Wayland), about 50 s (22:38:47)
+$ mesa-glymur-run glmark2-es2-wayland --size 1280x800 -b build:use-vbo=true:duration=10 -b texture:duration=10 -b shading:shading=phong:duration=10 -b refract:duration=10 -b terrain:duration=10
+=======================================================
+    glmark2 2023.01
+=======================================================
+    OpenGL Information
+    GL_VENDOR:      freedreno
+    GL_RENDERER:    Adreno (TM) X2-85
+    GL_VERSION:     OpenGL ES 3.2 Mesa 26.3.0-devel (git-cec59b2997)
+    Surface Config: buf=32 r=8 g=8 b=8 a=8 depth=32 stencil=0 samples=0
+    Surface Size:   1280x800 windowed
+=======================================================
+[build] duration=10:use-vbo=true: FPS: 19540 FrameTime: 0.051 ms
+[texture] duration=10: FPS: 18061 FrameTime: 0.055 ms
+[shading] duration=10:shading=phong: FPS: 14892 FrameTime: 0.067 ms
+[refract] duration=10: FPS: 1711 FrameTime: 0.585 ms
+[terrain] duration=10: FPS: 835 FrameTime: 1.198 ms
+=======================================================
+                                  glmark2 Score: 11006 
+=======================================================
+exit=0
+GPU clock during run (Hz, count):       1 310000000       1 760000000      99 1350000000 
+
+==== load: vkcube, 1000 frames (22:39:38)
+$ mesa-glymur-run vkcube --wsi wayland --c 1000
+Selected GPU 0: Adreno (TM) X2-85, type: IntegratedGpu
+exit=0
+GPU clock during run (Hz, count):      34 310000000 
+
+==== kernel log since the start (22:39:54)
+Sep 30 22:38:47 glymur kernel: gxclkctl-kaanapali 3d64000.clock-controller: sync_state() pending due to 3d6c000.gmu
+Sep 30 22:38:47 glymur kernel: gcc-glymur 100000.clock-controller: sync_state() pending due to 3d6c000.gmu
+Sep 30 22:38:47 glymur kernel: gpucc-glymur 3d90000.clock-controller: sync_state() pending due to 3d6c000.gmu
+devfreq after: cur=310000000 trans_stat:
+     From  :   To
+           : 310000000 410000000 572000000 760000000 820000000 915000000107000000011850000001350000000   time(ms)
+* 310000000:         0         0         0        51         0         0         0         0         4     23684
+  410000000:         0         0         0         0         0         0         0         0         0         0
+  572000000:         0         0         0         0         0         0         0         0         0         0
+  760000000:        21         0         0         0         0         0         0         0        33      1280
+  820000000:         0         0         0         0         0         0         0         0         1         3
+  915000000:         0         0         0         0         0         0         0         0         1         2
+ 1070000000:         0         0         0         0         0         0         0         0         6       235
+ 1185000000:         0         0         0         0         0         0         0         0        10       426
+ 1350000000:        35         0         0         3         1         1         6        10         0     50704
+Total transition : 183
+
+Saved to /home/rahul/glymur-logs/mesa-test-20260930T223846.txt
+If everything above rendered, try the whole desktop: mesa-glymur-run --desktop on, then log out and in.

@@ -1,0 +1,163 @@
+
+==== system
+7.3.0-rc2-glymur-11
+HP OmniBook 5 Laptop 16-bf1xxx
+
+==== kernel log: EC bus and driver
+Jul 28 02:14:02 glymur kernel: platform 8c0000.geniqup: Adding to iommu group 3
+Jul 28 02:14:02 glymur kernel: platform ac0000.geniqup: Adding to iommu group 5
+Jul 28 02:14:02 glymur kernel: platform bc0000.geniqup: Adding to iommu group 7
+Jul 28 02:14:02 glymur kernel: input: gpio-keys as /devices/platform/gpio-keys/input/input0
+Jul 28 02:14:03 glymur kernel: input: HP OmniBook 5 EC hotkeys as /devices/platform/soc@0/ac0000.geniqup/a84000.i2c/i2c-9/9-0076/input/input1
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF Touchscreen as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input2
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input3
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input4
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Mouse as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input6
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Touchpad as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input8
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Consumer Control as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input9
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 0416:C300 Keyboard as /devices/platform/soc@0/bc0000.geniqup/b80000.i2c/i2c-0/0-003a/0018:0416:C300.0003/input/input10
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input11
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF UNKNOWN as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input12
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF UNKNOWN as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input13
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Mouse as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input15
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Touchpad as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input17
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Consumer Control as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input18
+
+==== kernel warnings and errors, in full
+[    1.224335] glymur kernel: ------------[ cut here ]------------
+[    1.224343] glymur kernel: WARNING: kernel/sched/idle.c:269 at do_idle+0x148/0x3c8, CPU#6: swapper/6/0
+[    1.224349] glymur kernel: Modules linked in:
+[    1.224356] glymur kernel: CPU: 6 UID: 0 PID: 0 Comm: swapper/6 Not tainted 7.3.0-rc2-glymur-11 #12 PREEMPT(lazy) 
+[    1.224362] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[    1.224370] glymur kernel: pstate: 410000c9 (nZcv daIF -PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[    1.224376] glymur kernel: pc : do_idle+0x148/0x3c8
+[    1.224382] glymur kernel: lr : do_idle+0x2d4/0x3c8
+[    1.224388] glymur kernel: sp : ffff800080183e10
+[    1.224394] glymur kernel: x29: ffff800080183e30 x28: 0000000000000000 x27: 0000000000000000
+[    1.224399] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: 0000000000000001
+[    1.224405] glymur kernel: x23: ffff000800a47080 x22: ffffd9c526d6a730 x21: 00000000000000c0
+[    1.224412] glymur kernel: x20: ffffd9c5279cc000 x19: ffff000f5beb6738 x18: ffff800080125018
+[    1.224418] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[    1.224424] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[    1.224430] glymur kernel: x11: 00000000000000c0 x10: 0000000000000000 x9 : ffffd9c5243a9f64
+[    1.224438] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[    1.224444] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[    1.224450] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 00000000000000c0
+[    1.224457] glymur kernel: Call trace:
+[    1.224464] glymur kernel:  do_idle+0x148/0x3c8 (P)
+[    1.224472] glymur kernel:  cpu_startup_entry+0x44/0x50
+[    1.224478] glymur kernel:  secondary_start_kernel+0x130/0x170
+[    1.224484] glymur kernel:  __secondary_switched+0xc8/0xd0
+[    1.224492] glymur kernel: ---[ end trace 0000000000000000 ]---
+[    1.224585] glymur kernel: qcom-pcie 1bf0000.pcie: supply vdda not found, using dummy regulator
+[    1.224674] glymur kernel: qcom-pcie 1bf0000.pcie: supply vddpe-3v3 not found, using dummy regulator
+[    1.224764] glymur kernel: qcom-pcie 1bf0000.pcie: host bridge /soc@0/pcie@1bf0000 ranges:
+[    1.224851] glymur kernel: qcom-pcie 1bf0000.pcie:       IO 0x0078105000..0x0078204fff -> 0x0000000000
+[    1.224938] glymur kernel: qcom-pcie 1bf0000.pcie:      MEM 0x0078205000..0x0079ffffff -> 0x0078205000
+[    1.225028] glymur kernel: qcom-pcie 1bf0000.pcie:      MEM 0x0780000000..0x079fffffff -> 0x0780000000
+[    1.225125] glymur kernel: qcom-pcie 1b40000.pcie: supply vdda not found, using dummy regulator
+[    1.225213] glymur kernel: qcom-pcie 1b40000.pcie: supply vddpe-3v3 not found, using dummy regulator
+[    1.225301] glymur kernel: qcom-pcie 1b40000.pcie: host bridge /soc@0/pcie@1b40000 ranges:
+[    1.225388] glymur kernel: qcom-pcie 1b40000.pcie:       IO 0x007a200000..0x007a2fffff -> 0x0000000000
+[    1.225482] glymur kernel: qcom-pcie 1b40000.pcie:      MEM 0x007a300000..0x007dffffff -> 0x007a300000
+[    1.225577] glymur kernel: qcom-pcie 1b40000.pcie:      MEM 0x07a0000000..0x07dfffffff -> 0x07a0000000
+[    1.225680] glymur kernel: arm-smmu 3da0000.iommu: probing hardware configuration...
+[    1.225776] glymur kernel: arm-smmu 3da0000.iommu: SMMUv2 with:
+[    1.225866] glymur kernel: arm-smmu 3da0000.iommu:         stage 1 translation
+[    1.225956] glymur kernel: arm-smmu 3da0000.iommu:         stage 2 translation
+[    1.226051] glymur kernel: arm-smmu 3da0000.iommu:         nested translation
+[    1.226144] glymur kernel: arm-smmu 3da0000.iommu:         coherent table walk
+[    1.226235] glymur kernel: arm-smmu 3da0000.iommu:         stream matching with 25 register groups
+[    1.226327] glymur kernel: arm-smmu 3da0000.iommu:         25 context banks (0 stage-2 only)
+[    1.226419] glymur kernel: arm-smmu 3da0000.iommu:         Supported page sizes: 0x61311000
+
+==== EC device and driver
+i2c bus for a84000: 9
+client: /sys/bus/i2c/devices/9-0076
+driver: hp-omnibook-5-ec
+hp_omnibook_5_ec       16384  0
+sparse_keymap          12288  1 hp_omnibook_5_ec
+i2c_qcom_geni          53248  0
+gpi                    53248  3 i2c_qcom_geni
+gpio_keys              24576  0
+
+==== hwmon (5 samples, 2 s apart)
+fan1 2784 rpm | EC thermistor 1: 44000 | EC thermistor 2: 46000 | EC thermistor 3: 47000 | EC thermistor 4: 40000
+fan1 2808 rpm | EC thermistor 1: 43000 | EC thermistor 2: 46000 | EC thermistor 3: 47000 | EC thermistor 4: 40000
+fan1 2792 rpm | EC thermistor 1: 43000 | EC thermistor 2: 46000 | EC thermistor 3: 46000 | EC thermistor 4: 40000
+fan1 2841 rpm | EC thermistor 1: 43000 | EC thermistor 2: 46000 | EC thermistor 3: 46000 | EC thermistor 4: 40000
+fan1 2816 rpm | EC thermistor 1: 43000 | EC thermistor 2: 46000 | EC thermistor 3: 46000 | EC thermistor 4: 40000
+
+==== keyboard backlight timeout
+timeout now: 3min (Windows: 30 sec, 3 min, Always)
+set 30s, reads back 30s
+Turn the backlight on with F5, then keep off the keyboard and touchpad for 45 s.
+After 45 s untouched with '30s': is the backlight on or off? answer: on
+set always, reads back always
+Turn the backlight on with F5, then keep off the keyboard and touchpad for 45 s.
+After 45 s untouched with 'always': is the backlight on or off? answer: on
+restored: 3min
+
+==== keyboard backlight level
+level now: 2
+Press F5 once (press 1 of 3), then Enter. Is the backlight off, dim or bright? answer: dim
+level reads: 1
+Press F5 once (press 2 of 3), then Enter. Is the backlight off, dim or bright? answer: off
+level reads: 0
+Press F5 once (press 3 of 3), then Enter. Is the backlight off, dim or bright? answer: bright
+level reads: 2
+
+==== mute LEDs
+platform::mute reads 0
+platform::micmute reads 1
+In the last Windows session, were the speakers or the microphone muted (speaker, mic, both, none, unsure)? Was this boot a restart from Windows, or from power off? answer: mic muted
+Before any change, which key LEDs are lit: F6, F9, both or none? answer: none
+both off, read back: mute 0, micmute 0
+Both set off. Which are lit now: F6, F9, both or none? answer: none
+platform::mute on, read back: mute 1, micmute 0
+Only platform::mute set on. Which are lit now: F6, F9, both or none? answer: F6
+platform::micmute on, read back: mute 0, micmute 1
+Only platform::micmute set on. Which are lit now: F6, F9, both or none? answer: F9
+restored: mute 0, micmute 1
+
+==== EC event line before the capture
+no hp-omnibook-5-ec interrupt
+/sys/kernel/debug/pinctrl/f100000.pinctrl/pinconf-pins:pin 66 (GPIO_66): 
+
+==== hotkeys (30 s capture)
+Press, slowly and in order: F6, F9, F11, F5, then Fn alone (Fn lock).
+devices: ['HP OmniBook 5 EC hotkeys', 'gpio-keys', 'hid-over-i2c 0416:C300 Keyboard', 'hid-over-i2c 04F3:32EF Consumer Control']
+1790788401.894442 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=786658
+1790788401.894442 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=1
+1790788402.146925 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=2
+1790788402.180959 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=2
+1790788402.214926 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=2
+1790788402.231338 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=786658
+1790788402.231338 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=0
+1790788411.169166 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458976
+1790788411.169166 hid-over-i2c 0416:C300 Keyboard: KEY code=29 value=1
+1790788411.171416 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458860
+1790788411.171416 hid-over-i2c 0416:C300 Keyboard: KEY code=187 value=1
+1790788411.175964 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458860
+1790788411.175964 hid-over-i2c 0416:C300 Keyboard: KEY code=187 value=0
+1790788411.178272 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458976
+1790788411.178272 hid-over-i2c 0416:C300 Keyboard: KEY code=29 value=0
+capture done
+interrupts after: none
+
+==== keyboard HID report descriptor
+/sys/bus/hid/devices/0018:0416:C300.0003
+ 05 01 09 06 a1 01 85 08 05 07 19 e0 29 e7 15 00
+ 25 01 75 01 95 08 81 02 95 01 75 08 81 03 95 05
+ 75 01 05 08 19 01 29 05 91 02 95 01 75 03 91 03
+ 95 06 75 10 15 00 26 00 80 05 07 19 00 2a 00 80
+ 81 00 c0 05 0c 09 01 a1 01 85 09 19 00 2a 3c 02
+ 15 00 26 3c 02 95 01 75 10 81 00 c0 06 85 ff 09
+ 68 a1 01 85 0a 09 01 15 00 26 ff 00 75 08 95 08
+ b1 00 85 0b 09 01 15 00 26 ff 00 75 08 95 20 b1
+ 00 c0
+
+==== manual mailbox probe (only without the driver)
+skipped: the driver is bound
+
+saved to /var/log/glymur/ec-test-20260930T224023.txt

@@ -29,7 +29,21 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
-**2026-09-30, kernel `-11`: a real crash — a USB-C role-switch hit a CPU
+**2026-09-30, kernel `-11`: the USB-C crash is deterministic — it
+reproduced again on a fresh reboot.** After the first crash (below),
+rebooting did not help: within ~8 minutes, `check-usb.sh` hit the
+identical signature again, this time unambiguous — `refcount_t:
+underflow; use-after-free` tearing down a USB-C controller's xhci device,
+then the next probe on that corrupted `software_node` dereferences
+leftover string data as if it were a pointer, and faults. This is a real,
+reproducible kernel bug in `software_node` registration/refcounting for
+the dwc3 USB-C controllers on this consolidated test DTB — it will keep
+happening on every role-switch cycle until fixed at the kernel level.
+Mesa/GPU and the EC both ran clean on the fresh boot beforehand, so
+this stays isolated to the USB-C role-switch path. See
+`docs/usb-dwc3-crash-2026-09-30.md`.
+
+**2026-09-30, kernel `-11`, first occurrence: a USB-C role-switch hit a CPU
 exception, `usb_1` and the battery manager both still broken.** A
 wireless mouse receiver enumerated cleanly on `usb_1`, then ~13 s later a
 genuine `SP/PC alignment exception` (a jump to a garbage program counter)
