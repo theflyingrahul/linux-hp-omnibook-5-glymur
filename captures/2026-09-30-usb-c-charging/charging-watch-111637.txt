@@ -1,0 +1,214 @@
+11:16:37.305450039 charging-watch on 7.3.0-rc2-glymur-6, HP OmniBook 5 Laptop 16-bf1xxx (GPU and USB test)
+11:16:37.308393119 cmdline: BOOT_IMAGE=(hd1,gpt4)/boot/vmlinuz-glymur root=… rootfstype=ext4 ro rootwait clk_ignore_unused pd_ignore_unused arm64.nopauth log_buf_len=16M console=tty0 loglevel=4
+11:16:37.344076616 Watching. Type notes + Enter (e.g. "unplugged", "LED on"); q + Enter to stop.
+11:16:37.868914156 STATE port0:usb_power_delivery+partner port1:usb_power_delivery+partner 01:on=1,PD,3250000uA 02:on=0,PD,3000000uA ac=0 usb=0 bat=Charging
+11:16:39.449292626 FW con1:conn=1 opmode=3 dir=0 partner=1 con2:conn=1 opmode=3 dir=1 partner=4
+11:16:41.28066110 TRACE            <...>-18062   [010] .....   657.741222: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:16:49.126254485 NOTE charging, led on
+11:16:49.151780593 TRACE            <...>-18065   [001] .....   657.745691: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:16:51.871688749 TRACE            <...>-18138   [010] .....   659.325521: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:16:52.319464285 STATE port0:default port1:usb_power_delivery+partner 01:on=0,C,0uA 02:on=0,PD,3000000uA ac=0 usb=0 bat=Discharging
+11:16:53.389393671 FW con1:conn=0 opmode=0 dir=0 partner=0 con2:conn=1 opmode=3 dir=1 partner=4
+11:16:54.575634659 NOTE off
+11:16:57.248685965 TRACE            <...>-18142   [001] .....   659.330398: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:00.172260484 TRACE            <...>-18237   [000] .....   661.429001: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:00.414825400 STATE port0:default port1:usb_power_delivery+partner 01:on=0,C,0uA 02:on=1,PD,2750000uA ac=0 usb=0 bat=Charging
+11:17:01.222968975 TRACE            <...>-18240   [011] .....   661.433519: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:01.262059176 TRACE            <...>-18337   [003] .....   663.535933: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:01.465400240 TRACE            <...>-18340   [006] .....   663.541342: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:01.472368443 FW con1:conn=0 opmode=0 dir=0 partner=0 con2:conn=1 opmode=3 dir=0 partner=4
+11:17:01.603202361 KERN [  679.490017] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 1, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.605919661 KERN [  679.493004] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 2, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.608343823 KERN [  679.496003] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 3, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.610497557 KERN [  679.499006] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 4, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.612740774 KERN [  679.501004] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 5, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.614894665 KERN [  679.504004] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 6, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.616976209 KERN [  679.507003] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 7, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.619128849 KERN [  679.510005] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 8, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.621435090 KERN [  679.513017] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 9, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.623610596 KERN [  679.516008] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 10, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.625718964 KERN [  679.519005] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 11, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.627799570 KERN [  679.522004] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 12, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.629896896 KERN [  679.525004] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 13, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.631965106 KERN [  679.528006] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 14, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.634069932 KERN [  679.531006] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 15, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.636159653 KERN [  679.534005] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 16, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.638258437 KERN [  679.537005] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 17, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.640298521 KERN [  679.540005] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 18, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.642378242 KERN [  679.543004] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 19, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.644527185 KERN [  679.545619] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 20, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.646614198 KERN [  679.549004] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 21, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.648688866 KERN [  679.552008] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 22, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.650766347 KERN [  679.555004] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 23, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.652839297 KERN [  679.558005] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 24, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.654904017 KERN [  679.561007] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 25, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.656996864 KERN [  679.564005] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 26, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.659039552 KERN [  679.566005] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 27, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.661180369 KERN [  679.569005] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 28, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:01.663222484 KERN [  679.572005] glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 29, ignoring but please contact the BIOS vendor to fix this issue.
+11:17:07.283255157 TRACE            <...>-18436   [001] .....   665.642902: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:07.295683845 BEAT bat_power_uW=13437000 capacity=71
+11:17:09.401880763 TRACE            <...>-18439   [008] .....   665.647845: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:11.507544118 TRACE            <...>-18535   [000] .....   667.448757: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:13.91302119 TRACE            <...>-18539   [010] .....   667.453193: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:15.447868701 NOTE connected to usb hub's port, looks like charging
+11:17:17.48093004 TRACE            <...>-18634   [011] .....   669.563444: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:19.143956008 STATE port0:default port1:default 01:on=0,C,0uA 02:on=0,C,0uA ac=0 usb=0 bat=Charging
+11:17:19.152873041 FW con1:conn=0 opmode=0 dir=0 partner=0 con2:conn=0 opmode=0 dir=0 partner=0
+11:17:19.352797038 KERN [  697.349639] glymur kernel: usb 3-1: USB disconnect, device number 2
+11:17:19.355540120 KERN [  697.350145] glymur kernel: usb 3-1.1: USB disconnect, device number 3
+11:17:19.357922405 KERN [  697.387007] glymur kernel: xhci-hcd xhci-hcd.3.auto: remove, state 4
+11:17:19.360101349 KERN [  697.387096] glymur kernel: usb usb4: USB disconnect, device number 1
+11:17:19.362170704 KERN [  697.387129] glymur kernel: xhci-hcd xhci-hcd.3.auto: USB bus 4 deregistered
+11:17:19.364233914 KERN [  697.387177] glymur kernel: xhci-hcd xhci-hcd.3.auto: remove, state 1
+11:17:19.366479319 KERN [  697.387226] glymur kernel: usb usb3: USB disconnect, device number 1
+11:17:19.368791341 KERN [  697.401006] glymur kernel: xhci-hcd xhci-hcd.3.auto: USB bus 3 deregistered
+11:17:19.370927054 KERN [  697.489013] glymur kernel: xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+11:17:19.373203866 KERN [  697.489218] glymur kernel: xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 3
+11:17:19.375299786 KERN [  697.491006] glymur kernel: xhci-hcd xhci-hcd.3.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x0000808000000810
+11:17:19.377396955 KERN [  697.491130] glymur kernel: xhci-hcd xhci-hcd.3.auto: irq 267, io mem 0x0a800000
+11:17:19.379475739 KERN [  697.491227] glymur kernel: xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+11:17:19.381582492 KERN [  697.491336] glymur kernel: xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 4
+11:17:19.383790291 KERN [  697.491443] glymur kernel: xhci-hcd xhci-hcd.3.auto: Host supports USB 3.1 Enhanced SuperSpeed
+11:17:19.386071583 KERN [  697.491536] glymur kernel: usb usb3: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+11:17:19.388276725 KERN [  697.491659] glymur kernel: usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+11:17:19.390488847 KERN [  697.491766] glymur kernel: usb usb3: Product: xHCI Host Controller
+11:17:19.392316631 KERN [  697.491855] glymur kernel: usb usb3: Manufacturer: Linux 7.3.0-rc2-glymur-6 xhci-hcd
+11:17:19.394009877 KERN [  697.491957] glymur kernel: usb usb3: SerialNumber: xhci-hcd.3.auto
+11:17:19.395605776 KERN [  697.492056] glymur kernel: hub 3-0:1.0: USB hub found
+11:17:19.397222978 KERN [  697.492183] glymur kernel: hub 3-0:1.0: 1 port detected
+11:17:19.398812887 KERN [  697.492301] glymur kernel: usb usb4: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+11:17:19.400432850 KERN [  697.492429] glymur kernel: usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+11:17:19.402048593 KERN [  697.492536] glymur kernel: usb usb4: Product: xHCI Host Controller
+11:17:19.403750799 KERN [  697.492622] glymur kernel: usb usb4: Manufacturer: Linux 7.3.0-rc2-glymur-6 xhci-hcd
+11:17:19.405863646 KERN [  697.492718] glymur kernel: usb usb4: SerialNumber: xhci-hcd.3.auto
+11:17:19.408005453 KERN [  697.492813] glymur kernel: hub 4-0:1.0: USB hub found
+11:17:19.410005431 KERN [  697.492939] glymur kernel: hub 4-0:1.0: 1 port detected
+11:17:19.631188478 TRACE            <...>-18637   [005] .....   669.568104: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:19.674208840 STATE port0:default port1:usb_power_delivery+partner 01:on=0,C,0uA 02:on=0,PD,3000000uA ac=0 usb=0 bat=Discharging
+11:17:19.771174752 TRACE            <...>-17427   [000] .....   670.166898: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:20.92374462 KERN [  697.896013] glymur kernel: usb 3-1: new high-speed USB device number 2 using xhci-hcd
+11:17:20.95189057 KERN [  698.022107] glymur kernel: usb 3-1: New USB device found, idVendor=14cd, idProduct=8601, bcdDevice= 0.00
+11:17:20.97329145 KERN [  698.023009] glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=3, SerialNumber=0
+11:17:20.99409751 KERN [  698.023151] glymur kernel: usb 3-1: Product: USB 2.0 Hub            
+11:17:20.101429157 KERN [  698.023241] glymur kernel: usb 3-1: Manufacturer: USB Device  
+11:17:20.103474137 KERN [  698.069070] glymur kernel: hub 3-1:1.0: USB hub found
+11:17:20.105480001 KERN [  698.069311] glymur kernel: hub 3-1:1.0: 4 ports detected
+11:17:20.107534616 KERN [  698.354010] glymur kernel: usb 3-1.1: new high-speed USB device number 3 using xhci-hcd
+11:17:20.356681053 KERN [  698.440060] glymur kernel: usb 3-1.1: New USB device found, idVendor=14cd, idProduct=1212, bcdDevice= 1.00
+11:17:20.361089047 KERN [  698.440303] glymur kernel: usb 3-1.1: New USB device strings: Mfr=1, Product=3, SerialNumber=2
+11:17:20.363439716 KERN [  698.440424] glymur kernel: usb 3-1.1: Product: Mass Storage Device
+11:17:20.365628243 KERN [  698.440522] glymur kernel: usb 3-1.1: Manufacturer: Generic
+11:17:20.367838855 KERN [  698.440607] glymur kernel: usb 3-1.1: SerialNumber: [REDACTED-SERIAL]
+11:17:20.369827635 KERN [  698.440694] glymur kernel: usb-storage 3-1.1:1.0: USB Mass Storage device detected
+11:17:20.371553852 KERN [  698.442005] glymur kernel: scsi host1: usb-storage 3-1.1:1.0
+11:17:21.241366523 STATE port0:default port1:default 01:on=0,C,0uA 02:on=0,C,0uA ac=0 usb=0 bat=Discharging
+11:17:21.358262108 KERN [  699.348613] glymur kernel: usb 3-1: USB disconnect, device number 2
+11:17:21.361045817 KERN [  699.348954] glymur kernel: usb 3-1.1: USB disconnect, device number 3
+11:17:21.362812868 KERN [  699.382007] glymur kernel: xhci-hcd xhci-hcd.3.auto: remove, state 4
+11:17:21.364447884 KERN [  699.382171] glymur kernel: usb usb4: USB disconnect, device number 1
+11:17:21.366048470 KERN [  699.383012] glymur kernel: xhci-hcd xhci-hcd.3.auto: USB bus 4 deregistered
+11:17:21.367594679 KERN [  699.383079] glymur kernel: xhci-hcd xhci-hcd.3.auto: remove, state 1
+11:17:21.369161306 KERN [  699.383133] glymur kernel: usb usb3: USB disconnect, device number 1
+11:17:21.370698453 KERN [  699.408045] glymur kernel: xhci-hcd xhci-hcd.3.auto: USB bus 3 deregistered
+11:17:25.468967131 TRACE            <...>-17427   [000] .....   670.166904: ucsi_connector_change: port0 status: change=5804, opmode=0, connected=0, sourcing=0, partner_flags=0, partner_type=0, request_data_obj=00000000, BC status=0
+11:17:25.583375895 TRACE            <...>-18737   [010] .....   671.677501: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:25.828179236 TRACE            <...>-18740   [003] .....   671.684905: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:25.992652193 STATE port0:default port1:usb_power_delivery+partner 01:on=0,C,0uA 02:on=1,PD,3250000uA ac=0 usb=0 bat=Not charging
+11:17:26.520584670 STATE port0:default port1:usb_power_delivery+partner 01:on=0,C,0uA 02:on=1,PD,3250000uA ac=0 usb=0 bat=Charging
+11:17:27.53597199 FW con1:conn=0 opmode=0 dir=0 partner=0 con2:conn=1 opmode=3 dir=0 partner=1
+11:17:31.266722211 TRACE            <...>-18837   [009] .....   673.424587: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:33.388072982 TRACE            <...>-18840   [003] .....   673.431578: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:34.779184420 NOTE looks like charging...
+11:17:35.332914936 TRACE            <...>-18935   [007] .....   675.540835: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:37.450337576 TRACE            <...>-18938   [001] .....   675.545716: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:37.455012351 BEAT bat_power_uW=23804000 capacity=71
+11:17:39.38421275 TRACE            <...>-19034   [009] .....   677.656593: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:40.86791598 STATE port0:default port1:default 01:on=0,C,0uA 02:on=0,C,0uA ac=0 usb=0 bat=Discharging
+11:17:41.142974793 FW con1:conn=0 opmode=0 dir=0 partner=0 con2:conn=0 opmode=0 dir=0 partner=0
+11:17:43.237841298 TRACE            <...>-19037   [001] .....   677.661236: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+11:17:43.843783178 NOTE disconnect
+11:20:03.357094222 KERN [  861.152051] glymur kernel: INFO: task bash:17964 blocked for more than 122 seconds.
+11:20:03.361544320 KERN [  861.152138] glymur kernel:       Tainted: G        W           7.3.0-rc2-glymur-6 #7
+11:20:03.363717701 KERN [  861.152151] glymur kernel: "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+11:20:03.365811234 KERN [  861.152159] glymur kernel: task:bash            state:D stack:0     pid:17964 tgid:17964 ppid:1      task_flags:0x400040 flags:0x00000010
+11:20:03.367941279 KERN [  861.152168] glymur kernel: Call trace:
+11:20:03.370061011 KERN [  861.152180] glymur kernel:  __switch_to+0x17c/0x428 (T)
+11:20:03.372073811 KERN [  861.152186] glymur kernel:  __schedule+0x438/0x1af8
+11:20:03.374197606 KERN [  861.152193] glymur kernel:  schedule+0x40/0x110
+11:20:03.376277336 KERN [  861.152204] glymur kernel:  schedule_preempt_disabled+0x30/0x68
+11:20:03.378513896 KERN [  861.152212] glymur kernel:  __mutex_lock.constprop.0+0x624/0xb08
+11:20:03.380222255 KERN [  861.152219] glymur kernel:  __mutex_lock_slowpath+0x20/0x50
+11:20:03.381806130 KERN [  861.152227] glymur kernel:  mutex_lock+0x8c/0xc0
+11:20:03.383353127 KERN [  861.152233] glymur kernel:  anon_pipe_read+0x68/0x438
+11:20:03.384906844 KERN [  861.152240] glymur kernel:  vfs_read+0x344/0x380
+11:20:03.386452852 KERN [  861.152247] glymur kernel:  ksys_read+0x108/0x130
+11:20:03.387982817 KERN [  861.152255] glymur kernel:  __arm64_sys_read+0x24/0x50
+11:20:03.389553149 KERN [  861.152261] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+11:20:03.391120044 KERN [  861.152268] glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+11:20:03.392653395 KERN [  861.152275] glymur kernel:  do_el0_svc+0x28/0x58
+11:20:03.394189298 KERN [  861.152282] glymur kernel:  el0_svc+0x48/0x310
+11:20:03.395726035 KERN [  861.152289] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+11:20:03.397286887 KERN [  861.152299] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+11:20:03.398770809 KERN [  861.152306] glymur kernel: INFO: task bash:17964 is blocked on a mutex likely owned by task cat:17961.
+11:20:03.400316296 KERN [  861.152313] glymur kernel: task:cat             state:S stack:0     pid:17961 tgid:17961 ppid:1      task_flags:0x400000 flags:0x00000000
+11:20:03.401878555 KERN [  861.152320] glymur kernel: Call trace:
+11:20:03.403406645 KERN [  861.152326] glymur kernel:  __switch_to+0x17c/0x428 (T)
+11:20:03.404944424 KERN [  861.152330] glymur kernel:  __schedule+0x438/0x1af8
+11:20:03.406533871 KERN [  861.152336] glymur kernel:  schedule+0x40/0x110
+11:20:03.408120246 KERN [  861.152342] glymur kernel:  ring_buffer_wait+0x11c/0x238
+11:20:03.410089710 KERN [  861.152346] glymur kernel:  wait_on_pipe+0xc4/0x128
+11:20:03.412091416 KERN [  861.152353] glymur kernel:  tracing_wait_pipe+0x48/0xf0
+11:20:03.413997180 KERN [  861.152360] glymur kernel:  tracing_splice_read_pipe+0xe4/0x480
+11:20:03.416162591 KERN [  861.152367] glymur kernel:  do_splice_read+0x88/0x1a0
+11:20:03.418153620 KERN [  861.152375] glymur kernel:  splice_file_to_pipe+0xac/0x140
+11:20:03.420088708 KERN [  861.152382] glymur kernel:  do_splice+0x5d0/0x820
+11:20:03.422093904 KERN [  861.152389] glymur kernel:  __arm64_sys_splice+0xf0/0x348
+11:20:03.424094880 KERN [  861.152396] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+11:20:03.426125181 KERN [  861.152404] glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+11:20:03.428254445 KERN [  861.152409] glymur kernel:  do_el0_svc+0x28/0x58
+11:20:03.430288340 KERN [  861.152415] glymur kernel:  el0_svc+0x48/0x310
+11:20:03.432234314 KERN [  861.152421] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+11:20:03.433815948 KERN [  861.152426] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+11:22:06.104705464 KERN [  984.032054] glymur kernel: INFO: task bash:17964 blocked for more than 245 seconds.
+11:22:06.107545386 KERN [  984.068405] glymur kernel:       Tainted: G        W           7.3.0-rc2-glymur-6 #7
+11:22:06.109837309 KERN [  984.068439] glymur kernel: "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+11:22:06.112027739 KERN [  984.068448] glymur kernel: task:bash            state:D stack:0     pid:17964 tgid:17964 ppid:1      task_flags:0x400040 flags:0x00000010
+11:22:06.114070203 KERN [  984.068459] glymur kernel: Call trace:
+11:22:06.116266364 KERN [  984.068467] glymur kernel:  __switch_to+0x17c/0x428 (T)
+11:22:06.118368432 KERN [  984.068474] glymur kernel:  __schedule+0x438/0x1af8
+11:22:06.120439603 KERN [  984.068482] glymur kernel:  schedule+0x40/0x110
+11:22:06.122525258 KERN [  984.068489] glymur kernel:  schedule_preempt_disabled+0x30/0x68
+11:22:06.124586843 KERN [  984.068493] glymur kernel:  __mutex_lock.constprop.0+0x624/0xb08
+11:22:06.126632016 KERN [  984.068500] glymur kernel:  __mutex_lock_slowpath+0x20/0x50
+11:22:06.128670103 KERN [  984.068506] glymur kernel:  mutex_lock+0x8c/0xc0
+11:22:06.130768679 KERN [  984.068512] glymur kernel:  anon_pipe_read+0x68/0x438
+11:22:06.132807235 KERN [  984.068519] glymur kernel:  vfs_read+0x344/0x380
+11:22:06.134730127 KERN [  984.068525] glymur kernel:  ksys_read+0x108/0x130
+11:22:06.136640306 KERN [  984.068533] glymur kernel:  __arm64_sys_read+0x24/0x50
+11:22:06.138737476 KERN [  984.068540] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+11:22:06.140851579 KERN [  984.068548] glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+11:22:06.142893313 KERN [  984.068554] glymur kernel:  do_el0_svc+0x28/0x58
+11:22:06.144918323 KERN [  984.068560] glymur kernel:  el0_svc+0x48/0x310
+11:22:06.146963391 KERN [  984.068567] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+11:22:06.149076243 KERN [  984.068572] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+11:22:06.151172944 KERN [  984.068578] glymur kernel: INFO: task bash:17964 is blocked on a mutex likely owned by task cat:17961.
+11:22:06.153221035 KERN [  984.068584] glymur kernel: task:cat             state:S stack:0     pid:17961 tgid:17961 ppid:1      task_flags:0x400000 flags:0x00000000
+11:22:06.155290174 KERN [  984.068591] glymur kernel: Call trace:
+11:22:06.157342068 KERN [  984.068597] glymur kernel:  __switch_to+0x17c/0x428 (T)
+11:22:06.159362962 KERN [  984.068603] glymur kernel:  __schedule+0x438/0x1af8
+11:22:06.161439864 KERN [  984.068609] glymur kernel:  schedule+0x40/0x110
+11:22:06.163505617 KERN [  984.068616] glymur kernel:  ring_buffer_wait+0x11c/0x238
+11:22:06.165537556 KERN [  984.068620] glymur kernel:  wait_on_pipe+0xc4/0x128
+11:22:06.167556470 KERN [  984.068624] glymur kernel:  tracing_wait_pipe+0x48/0xf0
+11:22:06.169517135 KERN [  984.068638] glymur kernel:  tracing_splice_read_pipe+0xe4/0x480
+11:22:06.171502496 KERN [  984.068644] glymur kernel:  do_splice_read+0x88/0x1a0
+11:22:06.173597894 KERN [  984.068650] glymur kernel:  splice_file_to_pipe+0xac/0x140
+11:22:06.175623894 KERN [  984.068656] glymur kernel:  do_splice+0x5d0/0x820
+11:22:06.177654843 KERN [  984.068662] glymur kernel:  __arm64_sys_splice+0xf0/0x348
+11:22:06.179740290 KERN [  984.068668] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+11:22:06.181770302 KERN [  984.068674] glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+11:22:06.183813026 KERN [  984.068680] glymur kernel:  do_el0_svc+0x28/0x58
+11:22:06.185839182 KERN [  984.068686] glymur kernel:  el0_svc+0x48/0x310
+11:22:06.187912333 KERN [  984.068693] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+11:22:06.189948232 KERN [  984.068698] glymur kernel:  el0t_64_sync+0x1b8/0x1c0

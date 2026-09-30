@@ -1,0 +1,271 @@
+
+==== system
+Linux glymur 7.3.0-rc2-glymur-6 #7 SMP PREEMPT_DYNAMIC Tue Sep 29 10:19:39 PDT 2026 aarch64 GNU/Linux
+HP OmniBook 5 Laptop 16-bf1xxx (GPU and USB test)
+Jul 28 02:14:02 glymur kernel: Machine model: HP OmniBook 5 Laptop 16-bf1xxx (GPU and USB test)
+Jul 28 02:14:02 glymur kernel: Kernel command line: BOOT_IMAGE=(hd1,gpt4)/boot/vmlinuz-glymur root=… rootfstype=ext4 ro rootwait clk_ignore_unused pd_ignore_unused arm64.nopauth log_buf_len=16M console=tty0 loglevel=4
+
+==== kernel log: USB controllers, PHYs, Type-C, enumeration
+Sep 30 11:13:40 glymur kernel: usb 3-1: New USB device found, idVendor=14cd, idProduct=8601, bcdDevice= 0.00
+Sep 30 11:13:40 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=3, SerialNumber=0
+Sep 30 11:13:40 glymur kernel: usb 3-1: Product: USB 2.0 Hub            
+Sep 30 11:13:40 glymur kernel: usb 3-1: Manufacturer: USB Device  
+Sep 30 11:13:40 glymur kernel: hub 3-1:1.0: USB hub found
+Sep 30 11:13:40 glymur kernel: usb 3-1.1: new high-speed USB device number 3 using xhci-hcd
+Sep 30 11:13:41 glymur kernel: usb 3-1.1: New USB device found, idVendor=14cd, idProduct=1212, bcdDevice= 1.00
+Sep 30 11:13:41 glymur kernel: usb 3-1.1: New USB device strings: Mfr=1, Product=3, SerialNumber=2
+Sep 30 11:13:41 glymur kernel: usb 3-1.1: Product: Mass Storage Device
+Sep 30 11:13:41 glymur kernel: usb 3-1.1: Manufacturer: Generic
+Sep 30 11:13:41 glymur kernel: usb 3-1.1: SerialNumber: [REDACTED-SERIAL]
+Sep 30 11:13:41 glymur kernel: usb-storage 3-1.1:1.0: USB Mass Storage device detected
+Sep 30 11:13:41 glymur kernel: scsi host1: usb-storage 3-1.1:1.0
+Sep 30 11:13:42 glymur kernel: scsi 1:0:0:0: Direct-Access     Mass     Storage Device   1.00 PQ: 0 ANSI: 0 CCS
+Sep 30 11:13:42 glymur kernel: sd 1:0:0:0: Attached scsi generic sg1 type 0
+Sep 30 11:13:42 glymur kernel: sd 1:0:0:0: [sdb] 249737216 512-byte logical blocks: (128 GB/119 GiB)
+Sep 30 11:13:42 glymur kernel: sd 1:0:0:0: [sdb] Write Protect is off
+Sep 30 11:13:42 glymur kernel: sd 1:0:0:0: [sdb] Mode Sense: 03 00 00 00
+Sep 30 11:13:42 glymur kernel: sd 1:0:0:0: [sdb] No Caching mode page found
+Sep 30 11:13:42 glymur kernel: sd 1:0:0:0: [sdb] Assuming drive cache: write through
+Sep 30 11:13:42 glymur kernel:  sdb: sdb1
+Sep 30 11:13:42 glymur kernel: sd 1:0:0:0: [sdb] Attached SCSI removable disk
+Sep 30 11:13:43 glymur kernel: audit: type=1400 audit(1790747023.169:373): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a600000.usb/xhci-hcd.3.auto/uevent" pid=17502 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:13:43 glymur kernel: audit: type=1400 audit(1790747023.169:374): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a600000.usb/uevent" pid=17502 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:13:43 glymur kernel: audit: type=1400 audit(1790747023.170:377): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.2.auto/uevent" pid=17502 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:13:43 glymur kernel: audit: type=1400 audit(1790747023.170:378): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=17502 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:13:43 glymur kernel: audit: type=1400 audit(1790747023.170:381): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.2.auto/uevent" pid=17502 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:13:43 glymur kernel: audit: type=1400 audit(1790747023.170:382): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=17502 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:13:46 glymur kernel: usb 3-1: USB disconnect, device number 2
+Sep 30 11:13:46 glymur kernel: usb 3-1.1: USB disconnect, device number 3
+Sep 30 11:13:46 glymur kernel: xhci-hcd xhci-hcd.3.auto: remove, state 4
+Sep 30 11:13:46 glymur kernel: usb usb4: USB disconnect, device number 1
+Sep 30 11:13:46 glymur kernel: xhci-hcd xhci-hcd.3.auto: USB bus 4 deregistered
+Sep 30 11:13:46 glymur kernel: xhci-hcd xhci-hcd.3.auto: remove, state 1
+Sep 30 11:13:46 glymur kernel: usb usb3: USB disconnect, device number 1
+Sep 30 11:13:46 glymur kernel:  phy_qcom_qmp_combo drm_gpuvm i2c_qcom_geni dwc3_qcom drm_exec drm_dp_aux_bus qcom_eud qcom_glink_smem qcom_tsens aux_bridge drm_display_helper snd typec dwc3 qcom_glink pinctrl_sm8650_lpass_lpi ulpi cec thunderbolt dispcc_glymur videocc_glymur mdt_loader pinctrl_lpass_lpi camcc_glymur evacc_glymur nvmem_qfprom udc_core soundcore gpi phy_qcom_m31_eusb2 rc_core qcom_smd qcom_aoss llcc_qcom qrtr qcom_hwspinlock bam_dma pmic_glink smp2p qcomtee pdr_interface gpio_keys qcom_pdr_msg tee qcom_cpucp_mbox qmi_helpers fixed rpmsg_core icc_bwmon qcom_smem sch_fq_codel efi_pstore dmi_sysfs autofs4
+Sep 30 11:13:46 glymur kernel: Workqueue: events_freezable __dwc3_set_mode [dwc3]
+Sep 30 11:13:46 glymur kernel:  xhci_plat_remove+0x150/0x1b0 [xhci_plat_hcd]
+Sep 30 11:13:46 glymur kernel:  dwc3_host_exit+0x3c/0x98 [dwc3]
+Sep 30 11:13:46 glymur kernel:  __dwc3_set_mode+0x218/0x430 [dwc3]
+Sep 30 11:13:46 glymur kernel: xhci-hcd xhci-hcd.3.auto: USB bus 3 deregistered
+Sep 30 11:13:49 glymur kernel: xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+Sep 30 11:13:49 glymur kernel: xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 3
+Sep 30 11:13:49 glymur kernel: xhci-hcd xhci-hcd.3.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x000080a000000810
+Sep 30 11:13:49 glymur kernel: xhci-hcd xhci-hcd.3.auto: irq 267, io mem 0x0a800000
+Sep 30 11:13:49 glymur kernel: xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+Sep 30 11:13:49 glymur kernel: xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 4
+Sep 30 11:13:49 glymur kernel: xhci-hcd xhci-hcd.3.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Sep 30 11:13:49 glymur kernel: usb usb3: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Sep 30 11:13:49 glymur kernel: usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 30 11:13:49 glymur kernel: usb usb3: Product: xHCI Host Controller
+Sep 30 11:13:49 glymur kernel: usb usb3: Manufacturer: Linux 7.3.0-rc2-glymur-6 xhci-hcd
+Sep 30 11:13:49 glymur kernel: usb usb3: SerialNumber: xhci-hcd.3.auto
+Sep 30 11:13:49 glymur kernel: hub 3-0:1.0: USB hub found
+Sep 30 11:13:49 glymur kernel: usb usb4: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+Sep 30 11:13:49 glymur kernel: usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 30 11:13:49 glymur kernel: usb usb4: Product: xHCI Host Controller
+Sep 30 11:13:49 glymur kernel: usb usb4: Manufacturer: Linux 7.3.0-rc2-glymur-6 xhci-hcd
+Sep 30 11:13:49 glymur kernel: usb usb4: SerialNumber: xhci-hcd.3.auto
+Sep 30 11:13:49 glymur kernel: hub 4-0:1.0: USB hub found
+Sep 30 11:13:49 glymur kernel: usb 3-1: new high-speed USB device number 2 using xhci-hcd
+Sep 30 11:13:50 glymur kernel: usb 3-1: New USB device found, idVendor=14cd, idProduct=8601, bcdDevice= 0.00
+Sep 30 11:13:50 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=3, SerialNumber=0
+Sep 30 11:13:50 glymur kernel: usb 3-1: Product: USB 2.0 Hub            
+Sep 30 11:13:50 glymur kernel: usb 3-1: Manufacturer: USB Device  
+Sep 30 11:13:50 glymur kernel: hub 3-1:1.0: USB hub found
+Sep 30 11:13:50 glymur kernel: usb 3-1.1: new high-speed USB device number 3 using xhci-hcd
+Sep 30 11:13:50 glymur kernel: usb 3-1.1: New USB device found, idVendor=14cd, idProduct=1212, bcdDevice= 1.00
+Sep 30 11:13:50 glymur kernel: usb 3-1.1: New USB device strings: Mfr=1, Product=3, SerialNumber=2
+Sep 30 11:13:50 glymur kernel: usb 3-1.1: Product: Mass Storage Device
+Sep 30 11:13:50 glymur kernel: usb 3-1.1: Manufacturer: Generic
+Sep 30 11:13:50 glymur kernel: usb 3-1.1: SerialNumber: [REDACTED-SERIAL]
+Sep 30 11:13:50 glymur kernel: usb-storage 3-1.1:1.0: USB Mass Storage device detected
+Sep 30 11:13:50 glymur kernel: scsi host1: usb-storage 3-1.1:1.0
+Sep 30 11:13:51 glymur kernel: scsi 1:0:0:0: Direct-Access     Mass     Storage Device   1.00 PQ: 0 ANSI: 0 CCS
+Sep 30 11:13:51 glymur kernel: sd 1:0:0:0: Attached scsi generic sg1 type 0
+Sep 30 11:13:51 glymur kernel: sd 1:0:0:0: [sdb] 249737216 512-byte logical blocks: (128 GB/119 GiB)
+Sep 30 11:13:51 glymur kernel: sd 1:0:0:0: [sdb] Write Protect is off
+Sep 30 11:13:51 glymur kernel: sd 1:0:0:0: [sdb] Mode Sense: 03 00 00 00
+Sep 30 11:13:51 glymur kernel: sd 1:0:0:0: [sdb] No Caching mode page found
+Sep 30 11:13:51 glymur kernel: sd 1:0:0:0: [sdb] Assuming drive cache: write through
+Sep 30 11:13:51 glymur kernel:  sdb: sdb1
+Sep 30 11:13:51 glymur kernel: sd 1:0:0:0: [sdb] Attached SCSI removable disk
+Sep 30 11:13:51 glymur kernel: usb 3-1.1: reset high-speed USB device number 3 using xhci-hcd
+Sep 30 11:13:51 glymur kernel: sd 1:0:0:0: [sdb] tag#0 FAILED Result: hostbyte=DID_ERROR driverbyte=DRIVER_OK cmd_age=0s
+Sep 30 11:13:51 glymur kernel: sd 1:0:0:0: [sdb] tag#0 CDB: Read(10) 28 00 0e e2 af fc 00 00 01 00
+Sep 30 11:13:51 glymur kernel: I/O error, dev sdb, sector 249737212 op 0x0:(READ) flags 0x880700 phys_seg 1 prio class 2
+Sep 30 11:13:52 glymur kernel: usb 3-1.1: reset high-speed USB device number 3 using xhci-hcd
+Sep 30 11:13:55 glymur kernel: audit: type=1400 audit(1790747035.599:393): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a800000.usb/xhci-hcd.3.auto/uevent" pid=17582 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:13:55 glymur kernel: audit: type=1400 audit(1790747035.599:394): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a800000.usb/uevent" pid=17582 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:13:55 glymur kernel: audit: type=1400 audit(1790747035.600:397): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.2.auto/uevent" pid=17582 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:13:55 glymur kernel: audit: type=1400 audit(1790747035.600:398): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=17582 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:13:55 glymur kernel: audit: type=1400 audit(1790747035.600:401): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.2.auto/uevent" pid=17582 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:13:55 glymur kernel: audit: type=1400 audit(1790747035.600:402): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=17582 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:14:43 glymur kernel: xhci-hcd xhci-hcd.4.auto: xHCI Host Controller
+Sep 30 11:14:43 glymur kernel: xhci-hcd xhci-hcd.4.auto: new USB bus registered, assigned bus number 5
+Sep 30 11:14:43 glymur kernel: xhci-hcd xhci-hcd.4.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x0000808000000810
+Sep 30 11:14:43 glymur kernel: xhci-hcd xhci-hcd.4.auto: irq 265, io mem 0x0a600000
+Sep 30 11:14:43 glymur kernel: xhci-hcd xhci-hcd.4.auto: xHCI Host Controller
+Sep 30 11:14:43 glymur kernel: xhci-hcd xhci-hcd.4.auto: new USB bus registered, assigned bus number 6
+Sep 30 11:14:43 glymur kernel: xhci-hcd xhci-hcd.4.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Sep 30 11:14:43 glymur kernel: usb usb5: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Sep 30 11:14:43 glymur kernel: usb usb5: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 30 11:14:43 glymur kernel: usb usb5: Product: xHCI Host Controller
+Sep 30 11:14:43 glymur kernel: usb usb5: Manufacturer: Linux 7.3.0-rc2-glymur-6 xhci-hcd
+Sep 30 11:14:43 glymur kernel: usb usb5: SerialNumber: xhci-hcd.4.auto
+Sep 30 11:14:43 glymur kernel: hub 5-0:1.0: USB hub found
+Sep 30 11:14:43 glymur kernel: usb usb6: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+Sep 30 11:14:43 glymur kernel: usb usb6: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 30 11:14:43 glymur kernel: usb usb6: Product: xHCI Host Controller
+Sep 30 11:14:43 glymur kernel: usb usb6: Manufacturer: Linux 7.3.0-rc2-glymur-6 xhci-hcd
+Sep 30 11:14:43 glymur kernel: usb usb6: SerialNumber: xhci-hcd.4.auto
+Sep 30 11:14:43 glymur kernel: hub 6-0:1.0: USB hub found
+Sep 30 11:14:44 glymur kernel: usb 5-1: new low-speed USB device number 2 using xhci-hcd
+Sep 30 11:14:44 glymur kernel: usb 5-1: device descriptor read/64, error -71
+Sep 30 11:14:44 glymur kernel: usb 5-1: device descriptor read/64, error -71
+Sep 30 11:14:44 glymur kernel: usb 5-1: new low-speed USB device number 3 using xhci-hcd
+Sep 30 11:14:45 glymur kernel: usb 5-1: device descriptor read/64, error -71
+Sep 30 11:14:45 glymur kernel: usb 5-1: device descriptor read/64, error -71
+Sep 30 11:14:45 glymur kernel: usb usb5-port1: attempt power cycle
+Sep 30 11:14:47 glymur kernel: usb usb5-port1: unable to enumerate USB device
+Sep 30 11:14:54 glymur kernel: audit: type=1400 audit(1790747094.588:413): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a600000.usb/xhci-hcd.4.auto/uevent" pid=17614 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:14:54 glymur kernel: audit: type=1400 audit(1790747094.588:414): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a600000.usb/uevent" pid=17614 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:14:54 glymur kernel: audit: type=1400 audit(1790747094.589:417): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a800000.usb/xhci-hcd.3.auto/uevent" pid=17614 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:14:54 glymur kernel: audit: type=1400 audit(1790747094.589:418): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a800000.usb/uevent" pid=17614 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:14:54 glymur kernel: audit: type=1400 audit(1790747094.589:421): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.2.auto/uevent" pid=17614 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:14:54 glymur kernel: audit: type=1400 audit(1790747094.589:422): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=17614 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:14:57 glymur kernel: xhci-hcd xhci-hcd.4.auto: remove, state 4
+Sep 30 11:14:57 glymur kernel: usb usb6: USB disconnect, device number 1
+Sep 30 11:14:57 glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 6 deregistered
+Sep 30 11:14:57 glymur kernel: xhci-hcd xhci-hcd.4.auto: remove, state 4
+Sep 30 11:14:57 glymur kernel: usb usb5: USB disconnect, device number 1
+Sep 30 11:14:57 glymur kernel: kernfs: can not remove 'usb5', no directory
+Sep 30 11:14:57 glymur kernel:  phy_qcom_qmp_combo drm_gpuvm i2c_qcom_geni dwc3_qcom drm_exec drm_dp_aux_bus qcom_eud qcom_glink_smem qcom_tsens aux_bridge drm_display_helper snd typec dwc3 qcom_glink pinctrl_sm8650_lpass_lpi ulpi cec thunderbolt dispcc_glymur videocc_glymur mdt_loader pinctrl_lpass_lpi camcc_glymur evacc_glymur nvmem_qfprom udc_core soundcore gpi phy_qcom_m31_eusb2 rc_core qcom_smd qcom_aoss llcc_qcom qrtr qcom_hwspinlock bam_dma pmic_glink smp2p qcomtee pdr_interface gpio_keys qcom_pdr_msg tee qcom_cpucp_mbox qmi_helpers fixed rpmsg_core icc_bwmon qcom_smem sch_fq_codel efi_pstore dmi_sysfs autofs4
+Sep 30 11:14:57 glymur kernel: Workqueue: events_freezable __dwc3_set_mode [dwc3]
+Sep 30 11:14:57 glymur kernel:  xhci_plat_remove+0x150/0x1b0 [xhci_plat_hcd]
+Sep 30 11:14:57 glymur kernel:  dwc3_host_exit+0x3c/0x98 [dwc3]
+Sep 30 11:14:57 glymur kernel:  __dwc3_set_mode+0x218/0x430 [dwc3]
+Sep 30 11:14:57 glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 5 deregistered
+Sep 30 11:14:57 glymur kernel: kernfs: can not remove 'xhci-hcd.4.auto', no directory
+Sep 30 11:14:57 glymur kernel:  phy_qcom_qmp_combo drm_gpuvm i2c_qcom_geni dwc3_qcom drm_exec drm_dp_aux_bus qcom_eud qcom_glink_smem qcom_tsens aux_bridge drm_display_helper snd typec dwc3 qcom_glink pinctrl_sm8650_lpass_lpi ulpi cec thunderbolt dispcc_glymur videocc_glymur mdt_loader pinctrl_lpass_lpi camcc_glymur evacc_glymur nvmem_qfprom udc_core soundcore gpi phy_qcom_m31_eusb2 rc_core qcom_smd qcom_aoss llcc_qcom qrtr qcom_hwspinlock bam_dma pmic_glink smp2p qcomtee pdr_interface gpio_keys qcom_pdr_msg tee qcom_cpucp_mbox qmi_helpers fixed rpmsg_core icc_bwmon qcom_smem sch_fq_codel efi_pstore dmi_sysfs autofs4
+Sep 30 11:14:57 glymur kernel: Workqueue: events_freezable __dwc3_set_mode [dwc3]
+Sep 30 11:14:57 glymur kernel:  dwc3_host_exit+0x3c/0x98 [dwc3]
+Sep 30 11:14:57 glymur kernel:  __dwc3_set_mode+0x218/0x430 [dwc3]
+Sep 30 11:15:04 glymur kernel: xhci-hcd xhci-hcd.4.auto: xHCI Host Controller
+Sep 30 11:15:04 glymur kernel: xhci-hcd xhci-hcd.4.auto: new USB bus registered, assigned bus number 5
+Sep 30 11:15:04 glymur kernel: xhci-hcd xhci-hcd.4.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x0000808000000810
+Sep 30 11:15:04 glymur kernel: xhci-hcd xhci-hcd.4.auto: irq 265, io mem 0x0a600000
+Sep 30 11:15:04 glymur kernel: xhci-hcd xhci-hcd.4.auto: xHCI Host Controller
+Sep 30 11:15:04 glymur kernel: xhci-hcd xhci-hcd.4.auto: new USB bus registered, assigned bus number 6
+Sep 30 11:15:04 glymur kernel: xhci-hcd xhci-hcd.4.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Sep 30 11:15:04 glymur kernel: usb usb5: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Sep 30 11:15:04 glymur kernel: usb usb5: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 30 11:15:04 glymur kernel: usb usb5: Product: xHCI Host Controller
+Sep 30 11:15:04 glymur kernel: usb usb5: Manufacturer: Linux 7.3.0-rc2-glymur-6 xhci-hcd
+Sep 30 11:15:04 glymur kernel: usb usb5: SerialNumber: xhci-hcd.4.auto
+Sep 30 11:15:04 glymur kernel: hub 5-0:1.0: USB hub found
+Sep 30 11:15:04 glymur kernel: usb usb6: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+Sep 30 11:15:04 glymur kernel: usb usb6: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 30 11:15:04 glymur kernel: usb usb6: Product: xHCI Host Controller
+Sep 30 11:15:04 glymur kernel: usb usb6: Manufacturer: Linux 7.3.0-rc2-glymur-6 xhci-hcd
+Sep 30 11:15:04 glymur kernel: usb usb6: SerialNumber: xhci-hcd.4.auto
+Sep 30 11:15:04 glymur kernel: hub 6-0:1.0: USB hub found
+Sep 30 11:15:04 glymur kernel: usb 5-1: new low-speed USB device number 2 using xhci-hcd
+Sep 30 11:15:04 glymur kernel: usb 5-1: device descriptor read/64, error -71
+Sep 30 11:15:05 glymur kernel: usb 5-1: device descriptor read/64, error -71
+Sep 30 11:15:05 glymur kernel: usb 5-1: new low-speed USB device number 3 using xhci-hcd
+Sep 30 11:15:05 glymur kernel: usb 5-1: device descriptor read/64, error -71
+Sep 30 11:15:05 glymur kernel: usb 5-1: device descriptor read/64, error -71
+Sep 30 11:15:05 glymur kernel: usb usb5-port1: attempt power cycle
+Sep 30 11:15:07 glymur kernel: usb usb5-port1: unable to enumerate USB device
+Sep 30 11:15:09 glymur kernel: audit: type=1400 audit(1790747109.500:441): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a600000.usb/xhci-hcd.4.auto/uevent" pid=17665 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:15:09 glymur kernel: audit: type=1400 audit(1790747109.500:442): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a600000.usb/uevent" pid=17665 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:15:09 glymur kernel: audit: type=1400 audit(1790747109.501:445): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a800000.usb/xhci-hcd.3.auto/uevent" pid=17665 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:15:09 glymur kernel: audit: type=1400 audit(1790747109.501:446): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a800000.usb/uevent" pid=17665 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:15:09 glymur kernel: audit: type=1400 audit(1790747109.501:449): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.2.auto/uevent" pid=17665 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:15:09 glymur kernel: audit: type=1400 audit(1790747109.501:450): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=17665 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:15:18 glymur kernel: xhci-hcd xhci-hcd.4.auto: remove, state 4
+Sep 30 11:15:18 glymur kernel: usb usb6: USB disconnect, device number 1
+Sep 30 11:15:18 glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 6 deregistered
+Sep 30 11:15:18 glymur kernel: xhci-hcd xhci-hcd.4.auto: remove, state 4
+Sep 30 11:15:18 glymur kernel: usb usb5: USB disconnect, device number 1
+Sep 30 11:15:18 glymur kernel: kernfs: can not remove 'usb5', no directory
+Sep 30 11:15:18 glymur kernel:  phy_qcom_qmp_combo drm_gpuvm i2c_qcom_geni dwc3_qcom drm_exec drm_dp_aux_bus qcom_eud qcom_glink_smem qcom_tsens aux_bridge drm_display_helper snd typec dwc3 qcom_glink pinctrl_sm8650_lpass_lpi ulpi cec thunderbolt dispcc_glymur videocc_glymur mdt_loader pinctrl_lpass_lpi camcc_glymur evacc_glymur nvmem_qfprom udc_core soundcore gpi phy_qcom_m31_eusb2 rc_core qcom_smd qcom_aoss llcc_qcom qrtr qcom_hwspinlock bam_dma pmic_glink smp2p qcomtee pdr_interface gpio_keys qcom_pdr_msg tee qcom_cpucp_mbox qmi_helpers fixed rpmsg_core icc_bwmon qcom_smem sch_fq_codel efi_pstore dmi_sysfs autofs4
+Sep 30 11:15:18 glymur kernel: Workqueue: events_freezable __dwc3_set_mode [dwc3]
+Sep 30 11:15:18 glymur kernel:  xhci_plat_remove+0x150/0x1b0 [xhci_plat_hcd]
+Sep 30 11:15:18 glymur kernel:  dwc3_host_exit+0x3c/0x98 [dwc3]
+Sep 30 11:15:18 glymur kernel:  __dwc3_set_mode+0x218/0x430 [dwc3]
+Sep 30 11:15:18 glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 5 deregistered
+Sep 30 11:15:18 glymur kernel: kernfs: can not remove 'xhci-hcd.4.auto', no directory
+Sep 30 11:15:18 glymur kernel:  phy_qcom_qmp_combo drm_gpuvm i2c_qcom_geni dwc3_qcom drm_exec drm_dp_aux_bus qcom_eud qcom_glink_smem qcom_tsens aux_bridge drm_display_helper snd typec dwc3 qcom_glink pinctrl_sm8650_lpass_lpi ulpi cec thunderbolt dispcc_glymur videocc_glymur mdt_loader pinctrl_lpass_lpi camcc_glymur evacc_glymur nvmem_qfprom udc_core soundcore gpi phy_qcom_m31_eusb2 rc_core qcom_smd qcom_aoss llcc_qcom qrtr qcom_hwspinlock bam_dma pmic_glink smp2p qcomtee pdr_interface gpio_keys qcom_pdr_msg tee qcom_cpucp_mbox qmi_helpers fixed rpmsg_core icc_bwmon qcom_smem sch_fq_codel efi_pstore dmi_sysfs autofs4
+Sep 30 11:15:18 glymur kernel: Workqueue: events_freezable __dwc3_set_mode [dwc3]
+Sep 30 11:15:18 glymur kernel:  dwc3_host_exit+0x3c/0x98 [dwc3]
+Sep 30 11:15:18 glymur kernel:  __dwc3_set_mode+0x218/0x430 [dwc3]
+Sep 30 11:15:46 glymur kernel: audit: type=1400 audit(1790747146.125:469): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a800000.usb/xhci-hcd.3.auto/uevent" pid=17791 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:15:46 glymur kernel: audit: type=1400 audit(1790747146.125:470): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a800000.usb/uevent" pid=17791 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:15:46 glymur kernel: audit: type=1400 audit(1790747146.126:473): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.2.auto/uevent" pid=17791 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:15:46 glymur kernel: audit: type=1400 audit(1790747146.126:474): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=17791 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:15:46 glymur kernel: audit: type=1400 audit(1790747146.126:477): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.2.auto/uevent" pid=17791 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 11:15:46 glymur kernel: audit: type=1400 audit(1790747146.126:478): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=17791 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+
+==== drivers bound
+a000000.usb    -> dwc3-qcom
+88e0000.phy    -> qcom-m31eusb2-phy
+88e1000.phy    -> qcom-qmp-combo-phy
+a600000.usb    -> dwc3-qcom
+fd3000.phy     -> qcom-m31eusb2-phy
+fd5000.phy     -> qcom-qmp-combo-phy
+a800000.usb    -> dwc3-qcom
+fdd000.phy     -> qcom-m31eusb2-phy
+fde000.phy     -> qcom-qmp-combo-phy
+uas                    28672  0
+usb_storage            94208  2 uas
+xhci_plat_hcd          24576  0
+ucsi_glink             20480  0
+pmic_glink_altmode     20480  0
+typec_ucsi             73728  1 ucsi_glink
+phy_qcom_edp           77824  1
+phy_qcom_qmp_combo    159744  15
+dwc3_qcom              32768  2
+typec                 135168  4 pmic_glink_altmode,phy_qcom_qmp_combo,typec_ucsi,ucsi_glink
+dwc3                  212992  1 dwc3_qcom
+phy_qcom_m31_eusb2     16384  5
+pmic_glink             16384  3 pmic_glink_altmode,qcom_battmgr,ucsi_glink
+
+==== USB-C: ports, partners, data roles
+port0: data_role=host [device] power_role=source [sink] opmode=usb_power_delivery orientation=normal partner=yes
+port1: data_role=[host] device power_role=[source] sink opmode=usb_power_delivery orientation=reverse partner=yes
+a600000.usb-role-switch: role=device
+a800000.usb-role-switch: role=host
+
+==== USB topology and speeds
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+    |__ Port 001: Dev 003, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
+/:  Bus 003.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+    |__ Port 001: Dev 002, If 0, Class=Hub, Driver=hub/4p, 480M
+        |__ Port 001: Dev 003, If 0, Class=Mass Storage, Driver=usb-storage, 480M
+/:  Bus 004.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+2-1          speed=5000   SanDisk Ultra
+3-1          speed=480    USB Device   USB 2.0 Hub            
+3-1.1        speed=480    Generic Mass Storage Device
+usb1         speed=480    Linux 7.3.0-rc2-glymur-6 xhci-hcd xHCI Host Controller
+usb2         speed=10000  Linux 7.3.0-rc2-glymur-6 xhci-hcd xHCI Host Controller
+usb3         speed=480    Linux 7.3.0-rc2-glymur-6 xhci-hcd xHCI Host Controller
+usb4         speed=10000  Linux 7.3.0-rc2-glymur-6 xhci-hcd xHCI Host Controller
+
+==== block devices and mounts
+NAME          SIZE TRAN   LABEL                           FSTYPE    MOUNTPOINTS
+sda          57.3G usb                                              
+├─sda1        7.3G        UBUNTU 26_0                     vfat      /run/media/rahul/UBUNTU 26_0
+└─sda2         50G        casper-rw                       ext3      
+sdb         119.1G usb                                              
+└─sdb1      119.1G                                        ntfs      
+zram0           0B                                                  
+nvme0n1     953.9G nvme                                             
+├─nvme0n1p1   512M nvme   SYSTEM                          vfat      
+├─nvme0n1p2    16M nvme                                             
+├─nvme0n1p3 696.4G nvme   RAHULS-X2ELITE Windows 9/9/2026 BitLocker 
+├─nvme0n1p4   256G nvme   glymur-root                     ext4      /
+└─nvme0n1p5   954M nvme                                   ntfs      
+
+Saved to /var/log/glymur/usb-test-20260930T111617.txt

@@ -29,6 +29,29 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30 (three results in from kernel `-6`: charging fixed, USB-C data
+works on one port, GPU corruption isolated to GMEM tiling):**
+
+- **Charging: fixed.** `charging-watch.sh`, ~5.5 minutes of plug/unplug on
+  both ports, logged zero "undefined port" lines (every prior run had one,
+  then total silence). Every plug/unplug now tracks correctly in sysfs and
+  the firmware's own polled status, battery `Charging`/`Discharging`
+  transitions included. See `docs/usb-c-ports-2026-09-29.md`.
+- **USB-C data: one port confirmed, one unsettled.** Connector 1 (away
+  from the hinge) works as host: `partner=yes`, PD, and a real USB 2.0 hub
+  + mass-storage device enumerated and read at 480 Mb/s. Connector 0
+  (hinge side) shows a partner but churned through a failed host-mode
+  enumeration (`error -71` ×3) before settling as `device` — needs a
+  retest with a known-good USB-C drive to isolate. See
+  `docs/usb-c-ports-2026-09-29.md`.
+- **GPU corruption: isolated to `sysmem` (GMEM tiling).**
+  `gpu-corruption-test.sh`'s first run: only the two cases including
+  `FD_MESA_DEBUG=sysmem` were clean; linear scanout, `noubwc` and `nolrz`
+  alone all stayed corrupted. Points specifically at Mesa's 3-slice
+  GMEM/bin-layout tiling, not UBWC compression or LRZ. Workaround:
+  `sudo mesa-glymur-run --system off`, or force `FD_MESA_DEBUG=sysmem`.
+  Worth reporting upstream. See `docs/gpu-corruption-2026-09-30.md`.
+
 **2026-09-30 (GNOME on the GPU, but corrupted):**
 
 - **What happened.** With `-6` and Mesa `26.2.3-2` system-wide, GNOME
