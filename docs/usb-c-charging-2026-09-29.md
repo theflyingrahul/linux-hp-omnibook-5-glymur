@@ -549,3 +549,27 @@ directly (`exec {fd}</dev/null` redirection trick, or just always
 `kill -9` rather than the default `kill`) so a stuck blocking read can't
 survive the trap. Not fixed in this pass; flagging for the next time this
 script is edited.
+
+### Correction and fix (September 30, later)
+
+The captured log shows the cleanup trap **did** run: `charging-watch.sh`
+disabled the UCSI tracepoints, and the orphaned `journalctl` kept writing
+hung-task reports into the same log file after the owner's last note. The
+bug was in what the trap killed. `kill $(jobs -p)` signals the `( ... ) &`
+subshell of each background reader, not the `cat` and `while read`
+processes inside it. Those were reparented to init (`ppid=1`, all four in
+the listing are the pipeline members). The `bash` in state D was blocked
+on the pipe's mutex (`anon_pipe_read` → `mutex_lock`), held by `cat`,
+whose `splice()` from `trace_pipe` holds that lock while it sleeps
+waiting for trace events. That wait never ends once tracing is off, and a
+mutex wait cannot be interrupted, which is why it tripped the hung-task
+detector.
+
+Fixed in `charging-watch.sh`:
+- the trace reader is a `while read` loop reading `trace_pipe` directly:
+  no `cat`, no pipe, no pipe lock;
+- job control is on, so each reader is its own process group, and cleanup
+  kills the groups;
+- HUP, INT and TERM run the cleanup too;
+- a watchdog kills the groups if the script dies without running its
+  trap.

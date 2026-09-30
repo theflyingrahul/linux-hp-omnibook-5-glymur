@@ -29,6 +29,31 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30, later (kernel `-7`: the GPU corruption's root cause is in
+the kernel; log review corrects the USB-C picture):**
+
+- **GPU corruption: root cause found, fix built.** msm tells Mesa the
+  X2-85 has 21 MB of GMEM, the size for all four slices, but this part
+  runs three. Qualcomm's KGSL reports 21 MB / 4 × 3 = 15.75 MB. Mesa put
+  tiles and its caches past the end of real GMEM, so only `sysmem` was
+  clean. `-7` adds `upstream/qcom-next/0002`, which reports GMEM for the
+  active slices (OpenGL and Vulkan both). `gpu-corruption-test.sh` now
+  tests it on either kernel with Mesa's `FD_MESA_GMEM` override. See
+  `docs/gpu-corruption-2026-09-30.md`.
+- **USB-C, corrected** (`docs/usb-c-ports-2026-09-29.md`):
+    - port0 ending as `device` was the charger plugged into it, which is
+      correct;
+    - the mouse that failed on port0 was low-speed and the hub that worked
+      on port1 was high-speed, so a speed problem (eUSB2 repeater) fits as
+      well as a port problem. Swap them to tell;
+    - every host-to-device role switch logs a kernel WARN (Type-C partner
+      links removed out of order);
+    - charging through the hub turned the laptop into the USB device and
+      the stick disappeared (no data-role swap);
+    - SuperSpeed on USB-C is still untested.
+- **`charging-watch.sh` fixed:** its trace reader could outlive it and
+  trip the hung-task detector.
+
 **2026-09-30 (three results in from kernel `-6`: charging fixed, USB-C data
 works on one port, GPU corruption isolated to GMEM tiling):**
 

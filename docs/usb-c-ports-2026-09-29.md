@@ -151,3 +151,76 @@ issue.` — the firmware reports the same alternate-mode SVID dozens of
 times per connector-status read; the kernel already handles it
 (de-duplicates and logs), so this is cosmetic journal noise from HP's
 firmware, not a functional bug. Not worth chasing from this repository.
+
+## Second read of the September 30 logs: corrections and missed findings
+
+A line-by-line pass over `usb-test-111617.txt` and
+`charging-watch-111637.txt` changes two conclusions above and adds three
+findings.
+
+**Correction 1: port0 ending as `device` was the charger, not a failure.**
+At the end of `check-usb.sh`, port0 reads `power_role=sink`,
+`data_role=device`, PD, and 20 seconds later `charging-watch.sh` shows the
+charger on it (`01:on=1,PD,3250000uA`, `bat=Charging`). A port with a PD
+charger is a sink and USB device; that is correct behaviour. The mouse
+failures before it are real, but the role change is the owner swapping
+the mouse for the charger.
+
+**Correction 2: the evidence cannot yet tell a bad port from a bad
+speed.** The only device tried on port0 was **low-speed** (the mouse:
+`new low-speed USB device`, then `error -71` twice, re-tried twice, `unable
+to enumerate`). The only device tried on port1 was **high-speed** (the
+hub). The two ports use the same M31 eUSB2 PHY design. On eUSB2, low and
+full speed depend on the repeater translating signalling; we declare no
+repeater and rely on the firmware's setup. So "low speed fails
+everywhere" fits the log as well as "port0 fails". Test: swap the mouse
+and the hub between the ports. The mouse also fails on port1 → a
+low-speed or repeater problem. The hub also fails on port0 → port0.
+`check-usb.sh` now says this and labels each device with its controller.
+
+**Missed 1: a kernel WARN on every host-to-device role switch.** Each time
+a controller left host mode (11:13:46 on `a800000`, 11:14:57 and 11:15:18
+on `a600000`), the log has a module list and a trace through
+`__dwc3_set_mode` → `dwc3_host_exit` → `xhci_plat_remove`: the body of a
+`WARNING`, whose first line the old grep filter dropped. On `a600000`
+it comes with `kernfs: can not remove 'usb5', no directory` and `...
+'xhci-hcd.4.auto', no directory`. The names match
+`typec_partner_unlink_device()`, which removes a link named after the USB
+device from the Type-C partner, so the partner's sysfs directory was
+already gone when the xHCI host was torn down: likely an ordering race
+between UCSI partner removal and the dwc3 role switch. The kernel is now
+tainted `W` (visible in the hung-task report). There is no functional
+effect seen (both ports re-enumerated afterwards), and no patch until the
+full WARNING (file and line) is captured: `check-usb.sh` now prints
+warnings in full.
+
+**Missed 2: charging through the hub cost the hub's data.** At 11:17:15
+the owner plugged the charger into the hub on port1 ("connected to usb
+hub's port, looks like charging"). The hub dropped and re-attached, the
+host came back and re-enumerated the hub and stick (698.4 s), then port1
+dropped again. It reattached with the laptop as **sink** and the firmware
+reporting the partner as **DFP** (`con2 ... dir=0 partner=1`), and the
+xHCI host was removed and not re-added. So while charging through the
+hub, the laptop was the USB device and the stick was gone. With PD, the
+power source starts out as the data host, and staying host after the
+hub becomes the source needs a data-role swap. Windows presumably gets
+one; here nothing asked. Next test: with the charger in the hub,
+`echo host | sudo tee /sys/class/typec/port1/data_role` (a UCSI DR_Swap
+request), then see if the stick comes back.
+
+**Missed 3: SuperSpeed on USB-C is still untested.** The stick on port1
+ran at 480 Mb/s behind a USB 2.0 hub; the 10 Gb/s root hubs on both USB-C
+controllers had nothing attached. A USB 3 stick directly in each port
+(both orientations) is needed to test the QMP PHY lanes and the
+orientation switch.
+
+**Minor:**
+- One read error at the stick's last sectors (`I/O error, dev sdb, sector
+  249737212`) after two resets, right after attach. That is common with
+  cheap "Generic" flash probing its end and says nothing about the port on
+  its own.
+- The firmware lists the same partner alternate mode (SVID 0xff01) 29
+  times for con2; the kernel ignores the duplicates (noise only).
+- Ubuntu's AppArmor profile for `lsusb` denies reading
+  `/sys/devices/platform/soc@0/*.usb/uevent`; `lsusb -t` still works. Noise
+  only; `check-usb.sh` now filters it.

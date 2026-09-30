@@ -21,14 +21,16 @@ Wi-Fi board data, firmware) are not kernel code. They live in
 
 Apply to qcom-next `e428097a36d` (the qcom-next tip on 2026-09-28; the
 base was `a47c4c5aa` up to kernel `-4`) in order:
-`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001`,
+`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0002`,
 `glymur-bringup/0001–0002`, then `backports/0001–0012`
 (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
-`upstream/qcom-next/0001`. A fresh `prepare` reproduces the build tree's
-source exactly. qcom-next was fetched again before `-6` (2026-09-29): its
-tip is still `e428097a36d`, and mainline has nothing new for these drivers
-since v7.3-rc5.
+`upstream/qcom-next/0001`; `-7` adds `upstream/qcom-next/0002`. A fresh
+`prepare` reproduces the build tree's source exactly. qcom-next was
+fetched again before `-6` (2026-09-29) and before `-7` (2026-09-30): its
+tip is still `e428097a36d`. Mainline (v7.3-rc5+37 on 2026-09-30) and
+msm-next (`d33622598496`, 2026-09-26) have nothing new for these drivers,
+and neither changes how msm reports GMEM.
 
 1. `ACPI: GED: Support GpioInt event resources`: lets GED devices use
    `GpioInt` resources, which is what lid and EC event interrupts use on
@@ -58,6 +60,13 @@ since v7.3-rc5.
   an unacknowledged one left the firmware reporting no connection on
   either port (`docs/usb-c-ports-2026-09-29.md`). Notifications for other
   ports are now acknowledged from a work item. Not ACPI- or board-specific.
+- `drm/msm/a8xx: report the GMEM size of the active slices`. msm told
+  userspace the catalog GMEM size for all four slices (21 MB) while this
+  X2-85 runs three. Mesa then put tiles and its CCU caches past the end of
+  real GMEM, and GPU-rendered output was corrupted
+  (`docs/gpu-corruption-2026-09-30.md`). Qualcomm's KGSL reports
+  `gmem_size / 4 × active slices` (15.75 MB here); msm now does the same
+  when it reads the slice mask. Not board-specific: any partial-slice A8xx.
 
 Backports (`backports/`), from Bjorn Andersson's "phy: qcom: edp: Update v8
 programming sequence" v1 (linux-arm-msm, 2026-06-22,
