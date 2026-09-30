@@ -179,3 +179,31 @@ that. On `-6`, cases 1, 3 and 4 should be clean and case 2 corrupted; on
 did not select llvmpipe on the GBM path at all; the crash (`exit 139`)
 happened on the GPU driver. The new script drops that case and uses
 `sysmem` as the clean reference.
+
+## Second run: `FD_MESA_GMEM` confirms the root cause exactly as predicted
+
+Ran the updated `gpu-corruption-test.sh` on kernel `-6` (not yet `-7`;
+this tests the explanation without a new kernel),
+`captures/2026-09-30-gpu-corruption/gpu-corruption-115735.txt`:
+
+| Case | Setting | Predicted | Actual |
+|---|---|---|---|
+| 1 | `sysmem` (reference) | clean | **clean** |
+| 2 | GPU default (kernel-reported 21 MB) | corrupted | **corrupted** |
+| 3 | `FD_MESA_GMEM=16515072` (15.75 MB, the real 3-slice size) | clean | **clean** |
+| 4 | `FD_MESA_GMEM=8257536` (half of that) | clean | **clean** |
+
+Exactly the predicted split. Case 2 is the only corrupted one — Mesa
+using the kernel's (wrong) 21 MB value. Telling Mesa the correct 15.75 MB,
+or even less than that, renders clean: an *under*-estimate of GMEM is
+safe (Mesa just bins more conservatively than it needs to), while the
+kernel's *over*-estimate is what let tiles and caches land past real
+GMEM. This is about as clean a confirmation as a software-only test can
+give without booting `-7` itself: the root cause is the GMEM size number
+the kernel hands to userspace, not anything else in Mesa's gen8 path.
+
+**Still open:** an actual boot of kernel `-7` with `upstream/qcom-next/
+0002` applied, to confirm the in-kernel fix reports the corrected value
+by itself (no `FD_MESA_GMEM` override needed) and that GNOME's own
+compositor — not just kmscube — renders clean with `mesa-glymur-run
+--system on`.
