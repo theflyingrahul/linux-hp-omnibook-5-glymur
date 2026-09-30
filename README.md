@@ -29,6 +29,19 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30, kernel `-10` booted: backlight timeout and independent mute
+LEDs confirmed; the hotkey event line is silent.** Both `-10` corrections
+are now proven live, not just argued from ACPI tables: the keyboard
+backlight timeout (`30s`/`3min`/`always`) behaves exactly as set, and the
+two mute LEDs are genuinely independent — `-9`'s "LED 8 lights both keys"
+was residual state left over from a prior Windows session (the EC's LED
+state really does persist across reboots and across OSes, confirmed).
+New open item: the EC's own hotkey event line (GPIO 66) produced no
+events at all in a 30 s capture across F6/F9/F11/F5/Fn — only the generic
+keyboard HID path reported anything. The USB-C repeater fix still hasn't
+been retested against an actual full/low-speed device (nothing was
+plugged into either USB-C port this boot). See `docs/ec-2026-09-30.md`.
+
 **2026-09-30, kernel `-10` staged: EC corrections and hotkeys.** On `-9`
 the fan and thermistors worked. The keyboard-backlight command turned out
 to be HP's backlight *timeout* (30 s / 3 min / always, as Windows offers),

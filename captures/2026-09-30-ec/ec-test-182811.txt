@@ -1,0 +1,184 @@
+
+==== system
+7.3.0-rc2-glymur-10
+HP OmniBook 5 Laptop 16-bf1xxx (GPU and USB test)
+
+==== kernel log: EC bus and driver
+Jul 28 02:14:02 glymur kernel: platform 8c0000.geniqup: Adding to iommu group 3
+Jul 28 02:14:02 glymur kernel: platform ac0000.geniqup: Adding to iommu group 5
+Jul 28 02:14:02 glymur kernel: platform bc0000.geniqup: Adding to iommu group 7
+Jul 28 02:14:02 glymur kernel: input: gpio-keys as /devices/platform/gpio-keys/input/input0
+Jul 28 02:14:03 glymur kernel: input: HP OmniBook 5 EC hotkeys as /devices/platform/soc@0/ac0000.geniqup/a84000.i2c/i2c-9/9-0076/input/input1
+Jul 28 02:14:03 glymur kernel: Modules linked in: ucsi_glink qcom_spmi_pmic(+) regmap_spmi hid pmic_glink_altmode aux_hpd_bridge typec_ucsi qcom_battmgr hp_omnibook_5_ec(+) sparse_keymap socinfo aes_ce_blk ghash_ce snd_soc_lpass_wsa_macro snd_soc_lpass_va_macro gf128mul sm4_ce_gcm snd_soc_lpass_macro_common sm4_ce_ccm snd_soc_core sm4_ce sm4_ce_cipher snd_compress sm4 ac97_bus snd_pcm_dmaengine ath12k_wifi7(+) snd_pcm ath12k msm snd_seq_midi snd_seq_midi_event mac80211 ubwc_config snd_rawmidi qcom_q6v5_pas ocmem hci_uart qmi_tmd gpu_sched qcom_pil_info btqca drm_gpuvm qcom_q6v5 drm_exec snd_seq btrtl cfg80211 qcom_sysmon drm_dp_aux_bus btbcm dwc3_qcom drm_display_helper phy_qcom_qmp_combo btintel qcom_common snd_seq_device qcom_eud qcom_glink_smem aux_bridge qrtr typec dwc3 mhi cec snd_timer qcom_stats qcom_glink spmi_pmic_arb bluetooth rc_core ulpi mdt_loader spmi_devres thunderbolt snd libarc4 udc_core pmic_glink spmi qcom_spel i2c_qcom_geni phy_qcom_edp soundcore qcom_aoss pdr_interface camcc_glymur dispcc_glymur
+Jul 28 02:14:03 glymur kernel:  pinctrl_sm8650_lpass_lpi evacc_glymur videocc_glymur qcom_tsens qcomtee qcom_smd pinctrl_lpass_lpi qcom_pdr_msg bam_dma gpi phy_qcom_m31_eusb2 qmi_helpers gpio_keys smp2p qcom_hwspinlock tee fixed llcc_qcom nvmem_qfprom qcom_cpucp_mbox rpmsg_core icc_bwmon qcom_smem sch_fq_codel efi_pstore dmi_sysfs autofs4
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF Touchscreen as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input2
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input3
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input4
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Mouse as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input6
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Touchpad as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input8
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Consumer Control as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input9
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 0416:C300 Keyboard as /devices/platform/soc@0/bc0000.geniqup/b80000.i2c/i2c-0/0-003a/0018:0416:C300.0003/input/input10
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input11
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF UNKNOWN as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input12
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF UNKNOWN as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input13
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Mouse as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input15
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Touchpad as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input17
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Consumer Control as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input18
+
+==== kernel warnings and errors, in full
+[    1.304703] glymur kernel: ------------[ cut here ]------------
+[    1.304709] glymur kernel: WARNING: kernel/sched/idle.c:269 at do_idle+0x148/0x3c8, CPU#6: swapper/6/0
+[    1.304716] glymur kernel: Modules linked in:
+[    1.304724] glymur kernel: CPU: 6 UID: 0 PID: 0 Comm: swapper/6 Not tainted 7.3.0-rc2-glymur-10 #11 PREEMPT(lazy) 
+[    1.304730] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[    1.304739] glymur kernel: pstate: 410000c9 (nZcv daIF -PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[    1.304745] glymur kernel: pc : do_idle+0x148/0x3c8
+[    1.304751] glymur kernel: lr : do_idle+0x2d4/0x3c8
+[    1.304758] glymur kernel: sp : ffff800080183e10
+[    1.304765] glymur kernel: x29: ffff800080183e30 x28: 0000000000000000 x27: 0000000000000000
+[    1.304772] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: 0000000000000001
+[    1.304779] glymur kernel: x23: ffff000801af2080 x22: ffffa3d40b25a730 x21: 00000000000000c0
+[    1.304787] glymur kernel: x20: ffffa3d40bebc000 x19: ffff000f5beb6738 x18: ffff800080125018
+[    1.304795] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[    1.304802] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[    1.304808] glymur kernel: x11: 00000000000000c0 x10: 0000000000000000 x9 : ffffa3d408899f64
+[    1.304815] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[    1.304823] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[    1.304829] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 00000000000000c0
+[    1.304836] glymur kernel: Call trace:
+[    1.304843] glymur kernel:  do_idle+0x148/0x3c8 (P)
+[    1.304849] glymur kernel:  cpu_startup_entry+0x44/0x50
+[    1.304855] glymur kernel:  secondary_start_kernel+0x130/0x170
+[    1.304861] glymur kernel:  __secondary_switched+0xc8/0xd0
+[    1.304868] glymur kernel: ---[ end trace 0000000000000000 ]---
+[    1.304874] glymur kernel: hw perfevents: enabled with armv8_pmuv3 PMU driver, 13 (0,80000fff) counters available
+[    1.304881] glymur kernel: drop_monitor: Initializing network drop monitor service
+[    1.304887] glymur kernel: NET: Registered PF_INET6 protocol family
+[    1.304894] glymur kernel: watchdog: NMI not fully supported
+[    1.304900] glymur kernel: watchdog: Hard watchdog permanently disabled
+[    1.304907] glymur kernel: Segment Routing with IPv6
+[    1.304913] glymur kernel: In-situ OAM (IOAM) with IPv6
+[    1.304920] glymur kernel: NET: Registered PF_PACKET protocol family
+[    1.304927] glymur kernel: can: controller area network core
+[    1.304933] glymur kernel: NET: Registered PF_CAN protocol family
+[    1.304939] glymur kernel: Key type dns_resolver registered
+[    1.304946] glymur kernel: NET: Registered PF_VSOCK protocol family
+[    1.304952] glymur kernel: registered taskstats version 1
+[    1.304959] glymur kernel: Loading compiled-in X.509 certificates
+[    1.304966] glymur kernel: Loaded X.509 cert 'Build time autogenerated kernel key: f920b957b4effabfaa49952283f2961bd913c95c'
+[    1.304972] glymur kernel: Demotion targets for Node 0: null
+[    1.304978] glymur kernel: Key type .fscrypt registered
+[    1.304985] glymur kernel: Key type fscrypt-provisioning registered
+[    1.304990] glymur kernel: Key type big_key registered
+[    1.304997] glymur kernel: Key type encrypted registered
+[    1.305010] glymur kernel: AppArmor: AppArmor sha256 policy hashing enabled
+[    1.974342] glymur kernel: ------------[ cut here ]------------
+[    1.974352] glymur kernel: WARNING: drivers/spmi/spmi-pmic-arb.c:316 at pmic_arb_check_chnl_status_v1+0x114/0x128 [spmi_pmic_arb], CPU#10: (udev-worker)/334
+[    1.974361] glymur kernel: Modules linked in: ucsi_glink qcom_spmi_pmic(+) regmap_spmi hid pmic_glink_altmode aux_hpd_bridge typec_ucsi qcom_battmgr hp_omnibook_5_ec(+) sparse_keymap socinfo aes_ce_blk ghash_ce snd_soc_lpass_wsa_macro snd_soc_lpass_va_macro gf128mul sm4_ce_gcm snd_soc_lpass_macro_common sm4_ce_ccm snd_soc_core sm4_ce sm4_ce_cipher snd_compress sm4 ac97_bus snd_pcm_dmaengine ath12k_wifi7(+) snd_pcm ath12k msm snd_seq_midi snd_seq_midi_event mac80211 ubwc_config snd_rawmidi qcom_q6v5_pas ocmem hci_uart qmi_tmd gpu_sched qcom_pil_info btqca drm_gpuvm qcom_q6v5 drm_exec snd_seq btrtl cfg80211 qcom_sysmon drm_dp_aux_bus btbcm dwc3_qcom drm_display_helper phy_qcom_qmp_combo btintel qcom_common snd_seq_device qcom_eud qcom_glink_smem aux_bridge qrtr typec dwc3 mhi cec snd_timer qcom_stats qcom_glink spmi_pmic_arb bluetooth rc_core ulpi mdt_loader spmi_devres thunderbolt snd libarc4 udc_core pmic_glink spmi qcom_spel i2c_qcom_geni phy_qcom_edp soundcore qcom_aoss pdr_interface camcc_glymur dispcc_glymur
+[    1.974402] glymur kernel:  pinctrl_sm8650_lpass_lpi evacc_glymur videocc_glymur qcom_tsens qcomtee qcom_smd pinctrl_lpass_lpi qcom_pdr_msg bam_dma gpi phy_qcom_m31_eusb2 qmi_helpers gpio_keys smp2p qcom_hwspinlock tee fixed llcc_qcom nvmem_qfprom qcom_cpucp_mbox rpmsg_core icc_bwmon qcom_smem sch_fq_codel efi_pstore dmi_sysfs autofs4
+[    1.974409] glymur kernel: CPU: 10 UID: 0 PID: 334 Comm: (udev-worker) Tainted: G        W           7.3.0-rc2-glymur-10 #11 PREEMPT(lazy) 
+[    1.974414] glymur kernel: Tainted: [W]=WARN
+[    1.974422] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[    1.974426] glymur kernel: pstate: 614000c9 (nZCv daIF +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[    1.974432] glymur kernel: pc : pmic_arb_check_chnl_status_v1+0x114/0x128 [spmi_pmic_arb]
+[    1.974438] glymur kernel: lr : pmic_arb_check_chnl_status_v1+0x114/0x128 [spmi_pmic_arb]
+[    1.974445] glymur kernel: sp : ffff800083573390
+[    1.974450] glymur kernel: x29: ffff800083573390 x28: ffff000803843358 x27: 00000000000110a8
+[    1.974456] glymur kernel: x26: ffffa3d39aa4dc94 x25: ffff000802ed9d80 x24: 0000000000000104
+[    1.974460] glymur kernel: x23: 000000000000000b x22: ffff000803843000 x21: ffff8000874110a8
+[    1.974466] glymur kernel: x20: 0000000000000003 x19: 00000000000003e5 x18: ffff8000835350f8
+[    1.974473] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[    1.974480] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[    1.974485] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffa3d408aaa4d0
+[    1.974493] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[    1.974499] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[    1.974505] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[    1.974510] glymur kernel: Call trace:
+[    1.974516] glymur kernel:  pmic_arb_check_chnl_status_v1+0x114/0x128 [spmi_pmic_arb] (P)
+[    1.974523] glymur kernel:  pmic_arb_wait_for_done+0xbc/0x190 [spmi_pmic_arb]
+[    1.974530] glymur kernel:  pmic_arb_read_cmd+0xfc/0x238 [spmi_pmic_arb]
+[    1.974537] glymur kernel:  spmi_ext_register_readl+0x88/0x770 [spmi]
+[    1.974548] glymur kernel:  regmap_spmi_ext_read+0xf8/0x148 [regmap_spmi]
+[    1.974556] glymur kernel:  _regmap_raw_read+0xf8/0x3e0
+[    1.974562] glymur kernel:  _regmap_bus_read+0x50/0xe0
+[    1.974569] glymur kernel:  _regmap_read+0x7c/0x2c8
+[    1.974575] glymur kernel:  regmap_read+0x54/0xa0
+[    1.974581] glymur kernel:  pmic_spmi_probe+0x1d8/0x4a8 [qcom_spmi_pmic]
+[    1.974586] glymur kernel:  spmi_drv_probe+0x54/0x120 [spmi]
+[    1.974590] glymur kernel:  really_probe+0xd8/0x430
+[    1.974596] glymur kernel:  __driver_probe_device+0x194/0x230
+[    1.974601] glymur kernel:  driver_probe_device+0x48/0x1b0
+[    1.974608] glymur kernel:  __driver_attach+0x10c/0x2c8
+[    1.974614] glymur kernel:  bus_for_each_dev+0x88/0x110
+[    1.974618] glymur kernel:  driver_attach+0x30/0x60
+[    1.974626] glymur kernel:  bus_add_driver+0x17c/0x2e0
+[    1.974632] glymur kernel:  driver_register+0x74/0x178
+[    1.974639] glymur kernel:  __spmi_driver_register+0x2c/0x60 [spmi]
+[    1.974645] glymur kernel:  pmic_spmi_driver_init+0x2c/0xfd0 [qcom_spmi_pmic]
+[    1.974651] glymur kernel:  do_one_initcall+0x60/0x4b8
+[    1.974657] glymur kernel:  do_init_module+0xa0/0x300
+[    1.974662] glymur kernel:  load_module+0x1c5c/0x2558
+
+==== EC device and driver
+i2c bus for a84000: 9
+client: /sys/bus/i2c/devices/9-0076
+driver: hp-omnibook-5-ec
+hp_omnibook_5_ec       16384  0
+sparse_keymap          12288  1 hp_omnibook_5_ec
+i2c_qcom_geni          53248  0
+gpi                    53248  3 i2c_qcom_geni
+gpio_keys              24576  0
+
+==== hwmon (5 samples, 2 s apart)
+fan1 0 rpm | EC thermistor 1: 38000 | EC thermistor 2: 40000 | EC thermistor 3: 39000 | EC thermistor 4: 33000
+fan1 0 rpm | EC thermistor 1: 38000 | EC thermistor 2: 40000 | EC thermistor 3: 39000 | EC thermistor 4: 33000
+fan1 0 rpm | EC thermistor 1: 38000 | EC thermistor 2: 40000 | EC thermistor 3: 40000 | EC thermistor 4: 33000
+fan1 0 rpm | EC thermistor 1: 38000 | EC thermistor 2: 40000 | EC thermistor 3: 40000 | EC thermistor 4: 33000
+fan1 0 rpm | EC thermistor 1: 38000 | EC thermistor 2: 40000 | EC thermistor 3: 40000 | EC thermistor 4: 33000
+
+==== keyboard backlight timeout
+timeout now: 3min (Windows: 30 sec, 3 min, Always)
+set 30s, reads back 30s
+Turn the backlight on with F5, then keep off the keyboard and touchpad for 45 s.
+After 45 s untouched with '30s': is the backlight on or off? answer: off
+set always, reads back always
+Turn the backlight on with F5, then keep off the keyboard and touchpad for 45 s.
+After 45 s untouched with 'always': is the backlight on or off? answer: on
+restored: 3min
+
+==== mute LEDs
+platform::mute reads 0
+platform::micmute reads 1
+In the last Windows session, were the speakers or the microphone muted (speaker, mic, both, none, unsure)? Was this boot a restart from Windows, or from power off? answer: mic alone was muted, restarted from Windows
+Before any change, which key LEDs are lit: F6, F9, both or none? answer: none
+both off, read back: mute 0, micmute 1
+Both set off. Which are lit now: F6, F9, both or none? answer: none
+platform::mute on, read back: mute 1, micmute 0
+Only platform::mute set on. Which are lit now: F6, F9, both or none? answer: mute
+platform::micmute on, read back: mute 0, micmute 1
+Only platform::micmute set on. Which are lit now: F6, F9, both or none? answer: micmute (f9(
+restored: mute 0, micmute 1
+
+==== hotkeys (30 s capture)
+Press, slowly and in order: F6, F9, F11, F5, then Fn alone (Fn lock).
+devices: ['HP OmniBook 5 EC hotkeys', 'gpio-keys', 'hid-over-i2c 0416:C300 Keyboard', 'hid-over-i2c 04F3:32EF Consumer Control']
+1790773273.238192 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458792
+1790773273.238192 hid-over-i2c 0416:C300 Keyboard: KEY code=28 value=0
+1790773282.170781 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=786658
+1790773282.170781 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=1
+1790773282.301362 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=786658
+1790773282.301362 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=0
+1790773289.664957 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458976
+1790773289.664957 hid-over-i2c 0416:C300 Keyboard: KEY code=29 value=1
+1790773289.668901 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458860
+1790773289.668901 hid-over-i2c 0416:C300 Keyboard: KEY code=187 value=1
+1790773289.673460 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458860
+1790773289.673460 hid-over-i2c 0416:C300 Keyboard: KEY code=187 value=0
+1790773289.675094 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458976
+1790773289.675094 hid-over-i2c 0416:C300 Keyboard: KEY code=29 value=0
+capture done
+
+==== manual mailbox probe (only without the driver)
+skipped: the driver is bound
+
+saved to /var/log/glymur/ec-test-20260930T182811.txt
