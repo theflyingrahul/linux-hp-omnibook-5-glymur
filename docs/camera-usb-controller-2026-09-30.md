@@ -91,3 +91,21 @@ No DT change is staged. Following the exact precedent from `usb_0`/
   successfully for the other three controllers.
 - A DTB enabling `usb_hs` + its PHY, alongside the existing test DT,
   would be the next boot-time test — not staged this session.
+
+## Live confirmation, kernel `-9`: both RGB and IR functions present
+
+`usb_hs` was booted (part of `-8`/`-9`'s staged changes). The camera
+enumerates as `30c9:00d9 HP True Vision FHD Camera` with four V4L2
+nodes, not just one:
+
+```
+/dev/video0, video1: "HP True Vision FHD Camera: HP T..." (RGB)
+/dev/video2, video3: "HP True Vision FHD Camera: HP I..." (IR)
+```
+
+So both the RGB camera and the **IR camera** — previously only
+Windows-observed, status "Unknown" in `docs/status.md` — are the same
+USB composite device and both come up under Linux once `usb_hs` is
+enabled. Not yet tried: an actual frame capture (`v4l2-ctl`/`ffmpeg`
+aren't installed on this boot); the device nodes existing with plausible
+names is strong but not final proof of a working capture path.
