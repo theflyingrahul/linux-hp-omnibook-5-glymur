@@ -129,16 +129,20 @@ couple of resets and one transient I/O error before it settled, so it's
 not flawless, but it works.
 
 **port0 (hinge side) is unsettled.** It shows `partner=yes`, PD, but
-`data_role=device` at the end of the run. The kernel log shows it first
-came up in host mode (an `xhci-hcd` registered on `a600000.usb`), tried to
-enumerate a low-speed device, failed three times with `error -71`
-(`EPROTO`) and "unable to enumerate", then the controller cycled through
+`data_role=device` at the end of the run. The device plugged in was a
+plain USB mouse (low-speed, the class of device HP's own driver stack has
+no reason to route specially) — a simple HID device that ordinarily
+enumerates without incident, which weighs against "the far end negotiated
+a role swap" and toward a real host-mode enumeration problem on this
+controller. The kernel log shows it first came up in host mode (an
+`xhci-hcd` registered on `a600000.usb`), tried three times to read the
+mouse's device descriptor, failed each time with `error -71` (`EPROTO`)
+and "unable to enumerate", then the controller cycled through
 `dwc3_host_exit`/re-register a few times before settling with the
-role-switch reporting `device`. Not yet known whether that's the far-end
-device negotiating the role swap correctly (expected UCSI behavior) or a
-real enumeration problem independent of the role — needs a retest with a
-known-good USB-C flash drive on port0 specifically, the same way port1
-was tested.
+role-switch reporting `device`. Needs a retest with the same mouse (or
+another known-good low-speed device) on port0 specifically, the same way
+port1 was tested, ideally also trying a USB-C storage device to see if
+the failure is speed/class-specific.
 
 **New, minor: a firmware log-spam bug.** `ucsi_glink`, once per port1
 reconnect: `con2: Firmware bug: duplicate partner altmode SVID 0xff01 at
