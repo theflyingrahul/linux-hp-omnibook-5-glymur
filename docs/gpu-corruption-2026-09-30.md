@@ -207,3 +207,44 @@ the kernel hands to userspace, not anything else in Mesa's gen8 path.
 by itself (no `FD_MESA_GMEM` override needed) and that GNOME's own
 compositor — not just kmscube — renders clean with `mesa-glymur-run
 --system on`.
+
+## Confirmed on kernel `-7`, the real desktop: clean, and dramatically faster
+
+Booted `7.3.0-rc2-glymur-7` (installed 2026-09-30, `patches/kernel/
+upstream/qcom-next/0002` applied, no `FD_MESA_GMEM` override). Same
+"device tree (GPU and USB-A test)" entry, Mesa `26.2.3-2` still switched
+on system-wide.
+
+**No corruption, and no fallback.** This boot's journal has zero
+`fd_pipe_new2`/`unsupported GPU id`/`VK_ERROR_INCOMPATIBLE_DRIVER`/
+"falling back to sw" lines — the first boot in this whole investigation
+with none of them. `gnome-shell`'s own process (not a test program) has
+`/opt/mesa-glymur/lib/aarch64-linux-gnu/libEGL_mesa.so.0.0.0` and
+`libgbm.so.1.0.0` mapped in — the compositor itself is on the real GPU
+driver, not just `mesa-glymur-run`-wrapped test programs. No GPU faults,
+hangs, or SMMU errors anywhere in the boot log.
+
+**`glmark2` (GBM/Wayland, GPU default, no overrides needed):**
+
+```
+GL_VENDOR:      freedreno
+GL_RENDERER:    Adreno (TM) X2-85
+GL_VERSION:     OpenGL ES 3.2 Mesa 26.2.3
+glmark2 Score: 11570   (was 29 on -6's uncorrected default)
+```
+
+A ~400× jump from the corrupted-default score on `-6`
+(`captures/2026-09-30-gpu-corruption/gpu-corruption-111000.txt`, case 2).
+That score wasn't just "corrupted-looking" — it was a GPU stumbling over
+its own out-of-range GMEM accesses on nearly every frame. `vulkaninfo`
+and `vkcube` both select the real device with no override; devfreq shows
+469 clock transitions across the whole run, spending real time at
+760 MHz–1.35 GHz under load
+(`captures/2026-09-30-gpu-corruption/mesa-test-kernel-7-120925.txt`).
+
+**This closes the GPU corruption investigation.** Root cause (wrong GMEM
+size reported to userspace for a 3-slice part), fix
+(`upstream/qcom-next/0002`), and confirmation (kmscube on `-6` with an
+override, then the real desktop on `-7` with none) all line up. Worth
+upstreaming: qcom-next and mainline msm both still report the 4-slice
+GMEM size regardless of the active slice count.
