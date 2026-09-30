@@ -224,3 +224,58 @@ orientation switch.
 - Ubuntu's AppArmor profile for `lsusb` denies reading
   `/sys/devices/platform/soc@0/*.usb/uevent`; `lsusb -t` still works. Noise
   only; `check-usb.sh` now filters it.
+
+## Swap test result, September 30 (kernel `-7`): the mouse fails everywhere, not just port0
+
+The predicted swap test — try the same low-speed device on both ports —
+turned out broader than planned: the owner's mouse was tried on **all
+three** host ports this boot (`captures/2026-09-30-usb-fs-ls-failure/
+journal-excerpt-121500-121702.txt`), and failed on every one:
+
+| Attempt | Port | `xhci-hcd` io mem | Reported speed | Result |
+|---|---|---|---|---|
+| 1–2 | `usb_0` (hinge, connector 0) | `0x0a600000` | low-speed | `error -71` ×4, "unable to enumerate" |
+| 3 | **USB-A** (`usb_2`) | `0x0a000000` | full-speed | `error -71` ×4, then "Device not responding to setup address" ×2, `WARN: invalid context state for evaluate context command`, "unable to enumerate" |
+| 4 | `usb_1` (away from the hinge, connector 1) | `0x0a800000` | full-speed | same escalating failure as attempt 3, twice |
+
+**This rules out "port0 is bad."** The exact same mouse fails on the
+USB-A port that has cleanly enumerated a SuperSpeed stick on every boot
+since `docs/usb-a-bringup-2026-09-29.md`, and on `usb_1`, which — in the
+very same boot, on the very same connector's SuperSpeed side — was
+simultaneously enumerating that stick without issue. The failure tracks
+the **device's speed class**, not the port: every full/low-speed attempt
+failed everywhere; the one thing that has ever worked over USB 2.0 here
+was the 480 Mb/s (high-speed) hub in the September 30 morning test.
+High-speed and SuperSpeed both work on every controller tried; full-speed
+and low-speed fail on all three.
+
+**This matches the eUSB2 repeater gap, predicted and left undeclared on
+purpose** (`docs/usb-a-bringup-2026-09-29.md`: "the M31 eUSB2 driver
+treats the repeater as optional"; this doc's "Not declared" section: "HP's
+ACPI has none"). eUSB2 is a reduced-voltage-swing variant of USB 2.0
+meant for short on-board traces between an SoC and a redriver/repeater
+chip near the actual connector; the repeater is commonly what does the
+speed negotiation and signal-level translation down to legacy full-speed
+and low-speed voltage swings. Native eUSB2 without a repeater is commonly
+high-speed-only. That fits this board exactly: HS/SS clean, FS/LS
+uniformly broken on all three controllers that share the same M31 eUSB2
+PHY design (`usb_0`, `usb_1`, `usb_2` all use `qcom-m31eusb2-phy`).
+
+**Also new:** repeated full-speed failures escalate past plain `-71` read
+errors into `WARN: invalid context state for evaluate context command.`
+and "Device not responding to setup address" — a deeper xHCI-level
+failure (the address-device command itself failing, not just a
+descriptor read), consistent with a real signaling problem rather than a
+timing fluke.
+
+**Next:** this is very likely a hardware-description gap (a real eUSB2
+repeater IC that HP's ACPI doesn't describe, or a repeater the DT would
+need to model with actual GPIO/I²C control that firmware normally
+handles), not something fixable by retrying or DT tuning without more
+evidence. Two ways to narrow it further without new hardware evidence:
+- A full-speed **hub** (not a HID device) on each port, to see whether
+  the failure is device-class-specific (unlikely, given the theory) or
+  genuinely just speed-class-specific.
+- Check HP's Windows driver package / ACPI for any repeater-related
+  device or GPIO that hasn't been mapped yet — the PEP entries checked so
+  far list only the controller's own GDSCs and clocks, no repeater.

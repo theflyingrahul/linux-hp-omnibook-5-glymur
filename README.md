@@ -29,6 +29,21 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30, USB full/low-speed devices fail on all three host ports —
+an eUSB2 repeater gap, not a bad port.** The owner's mouse was tried on
+`usb_0` (hinge), `usb_1` (away from the hinge) and USB-A this boot, and
+failed identically on all three — `error -71`, escalating to `WARN:
+invalid context state for evaluate context command` — including on USB-A,
+which has cleanly enumerated a SuperSpeed stick on every prior boot, and
+on `usb_1`, which enumerated that same stick on its SuperSpeed side in
+this very boot. High-speed and SuperSpeed work everywhere tried;
+full-speed and low-speed fail everywhere tried. This is the predicted,
+deliberately-undeclared eUSB2 repeater gap confirmed board-wide: all
+three controllers share the same `qcom-m31eusb2-phy` design, and native
+eUSB2 without a repeater is typically high-speed-only. Not something a DT
+retry fixes without more hardware evidence (a real repeater IC HP's ACPI
+doesn't describe). See `docs/usb-c-ports-2026-09-29.md`.
+
 **2026-09-30, GPU bring-up done: confirmed clean on kernel `-7`, the real
 desktop.** Booted `7.3.0-rc2-glymur-7`. Zero corruption, and the first
 boot in this whole investigation with no `fd_pipe_new2`/`unsupported GPU
