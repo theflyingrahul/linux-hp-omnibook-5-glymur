@@ -28,7 +28,9 @@ kernel `-8`; it was `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to
 backports 0001–0002; `-5` carries all twelve; `-6` adds
 `upstream/qcom-next/0001`; `-7` adds `upstream/qcom-next/0002`; `-8` moves
 to the new base and adds `upstream/qcom-next/0003`; `-9` adds `0004`–`0005`
-(the HP EC; qcom-next was still `6b4daa845239` when fetched before it). A fresh `prepare`
+(the HP EC; qcom-next was still `6b4daa845239` when fetched before it);
+`-10` reworks `0005` (backlight timeout instead of a level LED, EC events
+and hotkeys; qcom-next unchanged again). A fresh `prepare`
 reproduces the build tree's source exactly.
 
 Base move for `-8` (2026-09-30): the 52 new qcom-next commits are all
@@ -101,7 +103,8 @@ and neither changes how msm reports GMEM.
   `platform: arm64: add HP OmniBook 5 16 embedded controller driver`
   (from `-9`). Board-specific, but upstreamable like the other
   `drivers/platform/arm64` EC drivers: hwmon for the fan speed and four
-  thermistors, and the keyboard backlight and mute LEDs, over HP's EC mailbox
+  thermistors, the mute LEDs, the keyboard backlight timeout and the F9/F11
+  hotkeys, over HP's EC mailbox and event line
   (`docs/ec-2026-09-30.md`). Unproven until `-9` boots.
 
 Backports (`backports/`), from Bjorn Andersson's "phy: qcom: edp: Update v8

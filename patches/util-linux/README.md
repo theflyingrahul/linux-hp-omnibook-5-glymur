@@ -13,6 +13,14 @@ https://github.com/util-linux/util-linux/pull/4657 (branch
 before: no pull request or issue mentions Oryon-2, X2 Elite or Glymur,
 and master lists only part `0x001`.
 
+Test build on the laptop (from kernel `-10`'s staging): lscpu built from
+the PR branch, with its own libsmartcols, in
+`.work/releases/lscpu-oryon2.tar.gz`. `install-from-usb.sh` puts it in
+`/usr/local/lib/glymur-lscpu/` with a wrapper at `/usr/local/bin/lscpu`,
+which comes before `/usr/bin` in `PATH`. As a user it shows "Oryon-2"; as
+root it shows the SMBIOS name. To remove it:
+`sudo rm -r /usr/local/bin/lscpu /usr/local/lib/glymur-lscpu`.
+
 Why this matters: GNOME Settings shows the CPU as "(null) × 12" here. The
 cause is a chain across three projects:
 

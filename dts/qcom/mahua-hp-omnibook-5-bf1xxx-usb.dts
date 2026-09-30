@@ -92,8 +92,12 @@
  * PEP entry votes gcc_qupv3_wrap1_s1_clk and pins 36/37 (function 1,
  * pull-up), which is qup_i2c9_data_clk; firmware leaves the controller in
  * GSI (GPI DMA) mode, which i2c-qcom-geni detects and runs through
- * gpi_dma1. The EC event line (ECGE GpioInt, GPIO 66) is not declared
- * yet: the driver polls and GPIO 66 stays reserved.
+ * gpi_dma1.
+ *
+ * Event line (from kernel -10): HP's ECGE (ACPI0013) GpioInt, edge
+ * triggered, active low, PDC pin 768 = GPIO 66, default pull. ECGE._EVT
+ * reads the event from EC register 0x05 and writes 0 back. No pinctrl
+ * state: the pin stays as firmware configured it.
  */
 &i2c9 {
 	clock-frequency = <400000>;
@@ -103,6 +107,7 @@
 	embedded-controller@76 {
 		compatible = "hp,omnibook-5-16-bf1xxx-ec";
 		reg = <0x76>;
+		interrupts-extended = <&tlmm 66 IRQ_TYPE_EDGE_FALLING>;
 	};
 };
 
@@ -279,8 +284,11 @@
 };
 
 &tlmm {
-	/* The GPU test allow-list plus the EC bus pins 36 and 37 (i2c9). */
+	/*
+	 * The GPU test allow-list plus the EC bus pins 36 and 37 (i2c9) and
+	 * the EC event line, GPIO 66.
+	 */
 	gpio-reserved-ranges = <2 1>, <4 12>, <19 13>, <34 2>, <38 13>,
-			       <52 4>, <60 7>, <68 2>, <71 21>, <93 23>,
+			       <52 4>, <60 6>, <68 2>, <71 21>, <93 23>,
 			       <117 2>, <120 26>, <149 3>, <155 96>;
 };

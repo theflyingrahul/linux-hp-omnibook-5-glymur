@@ -3,11 +3,11 @@ set -euo pipefail
 
 # Install everything staged on the USB. See README.md.
 #   bash install-from-usb.sh [--keep-ubuntu-mesa] [kernel release]
-# Default kernel: 7.3.0-rc2-glymur-9.
+# Default kernel: 7.3.0-rc2-glymur-10.
 
 SYSTEM_MESA=1
 if [ "${1:-}" = --keep-ubuntu-mesa ]; then SYSTEM_MESA=0; shift; fi
-KREL="${1:-7.3.0-rc2-glymur-9}"
+KREL="${1:-7.3.0-rc2-glymur-10}"
 K="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 [ "$(id -u)" -ne 0 ] || { echo 'run as your normal user, not with sudo' >&2; exit 1; }
 [ "$(findmnt -n -o LABEL /)" = glymur-root ] || { echo 'not booted from the SSD install (glymur-root); refusing' >&2; exit 1; }
@@ -43,6 +43,18 @@ if [ -f "$K/glymur-cpufreq.service" ]; then
     sudo bash "$K/install-cpufreq-service.sh"
 fi
 
+# lscpu with the Oryon-2 part ID (util-linux PR #4657), beside Ubuntu's.
+if [ -f "$K/lscpu-oryon2.tar.gz" ]; then
+    echo "== installing lscpu with the Oryon-2 part ID into /usr/local"
+    L=/usr/local/lib/glymur-lscpu
+    sudo rm -rf "$L"
+    sudo mkdir -p "$L"
+    sudo tar -xzf "$K/lscpu-oryon2.tar.gz" -C "$L" --strip-components=1 lib/
+    sudo tar -xzf "$K/lscpu-oryon2.tar.gz" -C /usr/local/bin lscpu
+    echo "as user: $(lscpu | grep 'Model name')"
+    echo "as root: $(sudo lscpu | grep 'Model name' | head -1)"
+fi
+
 echo "== test tools from Ubuntu (glxinfo/eglinfo, vulkaninfo/vkcube, glmark2, kmscube)"
 sudo apt-get install -y mesa-utils mesa-utils-bin vulkan-tools glmark2-es2-wayland kmscube ||
     echo 'apt failed (offline?); install them later, check-mesa.sh names them'
@@ -55,7 +67,7 @@ echo
 echo "Done. Reboot into \"Ubuntu on SSD: device tree (GPU and USB-A test)\" and,"
 echo "from a terminal on the desktop, run:"
 echo "  bash ~/check-mesa.sh"
-echo "  sudo bash ~/check-ec.sh         (fan, EC temperatures, keyboard backlight)"
+echo "  sudo bash ~/check-ec.sh         (fan, EC temperatures, backlight timeout, mute LEDs, hotkeys)"
 echo "  sudo bash ~/check-usb.sh        (plug USB-C and USB 2.0 devices in first)"
 echo "  sudo bash ~/charging-watch.sh   (plug, unplug, replug; type notes)"
 echo "If the desktop is still corrupted, press Ctrl+Alt+F3, log in, and run"

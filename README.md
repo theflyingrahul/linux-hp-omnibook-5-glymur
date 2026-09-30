@@ -29,6 +29,19 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30, kernel `-10` staged: EC corrections and hotkeys.** On `-9`
+the fan and thermistors worked. The keyboard-backlight command turned out
+to be HP's backlight *timeout* (30 s / 3 min / always, as Windows offers),
+not the level, which only F5 sets inside the EC; `-10` exposes it as
+`kbd_backlight_timeout` and no longer claims a backlight LED. The
+"LED 8 lights both keys" reading is unproven: F9's LED was already on
+before its own test. `-10` also takes the EC's event line (GPIO 66), so
+F9 reports mic mute and F11 its programmable key, as on Windows. The next
+boot also installs lscpu from util-linux PR #4657. **Test:**
+`install-from-usb.sh`, boot "GPU and USB-A test", `sudo bash
+~/check-ec.sh` (interactive), and a mouse in a USB-C port for the
+repeater. See `docs/ec-2026-09-30.md`.
+
 **2026-09-30, kernel `-9` booted: EC driver confirmed live, mixed
 results.** `hp-omnibook-5-ec` binds cleanly. Fan and thermistor readings
 are real and stable (idle fan, 31-36 °C across four sensors). The
