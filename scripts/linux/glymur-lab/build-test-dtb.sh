@@ -1,17 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Build one HP test device tree in WSL, from ~/glymur-build, against the
-# kernel build the SSD runs, for booting from the USB with that kernel:
-#
-#   [GLYMUR_KREL=7.3.0-rc2-glymur-N] \
-#       scripts/linux/glymur-lab/build-test-dtb.sh NAME [SRC] [OUT] [DEST]
-#
-# NAME is a dts/qcom/NAME.dts in this repository. GLYMUR_KREL (default
-# 7.3.0-rc2-glymur-5) must be the release OUT was built as. The DTB must pass
-# the GPIO allow-list check; its model is printed for review (diff the
-# decompiled DTB against its parent), and it is copied to DEST (default
-# .work/test-dtbs) with a SHA256SUMS line.
+# Build one HP test DTB against the SSD's kernel build. See README.md.
+#   [GLYMUR_KREL=7.3.0-rc2-glymur-N] scripts/linux/glymur-lab/build-test-dtb.sh NAME [SRC] [OUT] [DEST]
 
 NAME="${1:?usage: build-test-dtb.sh NAME [SRC] [OUT] [DEST]}"
 SRC="$(realpath "${2:-.work/linux-qcom-next-glymur}")"

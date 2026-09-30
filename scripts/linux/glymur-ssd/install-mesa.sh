@@ -1,20 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Install the Mesa build from build-mesa-glymur.sh under /opt/mesa-glymur,
-# next to (not over) Ubuntu's Mesa, and add /usr/local/bin/mesa-glymur-run,
-# which runs one program with it:
-#
+# Install a Mesa build under /opt/mesa-glymur. See README.md.
 #   sudo bash install-mesa.sh mesa-glymur-<version>.tar.gz
-#   mesa-glymur-run eglinfo -B
-#
-# Nothing else changes until you opt in. The whole system (login screen,
-# GNOME Shell, Xwayland, every program) switches with
-#   sudo mesa-glymur-run --system on      (undo: sudo mesa-glymur-run --system off)
-# which puts /opt/mesa-glymur ahead of Ubuntu's Mesa for the dynamic linker
-# (/etc/ld.so.conf.d/00-mesa-glymur.conf) and adds its Vulkan driver; it
-# takes effect for programs started afterwards, so reboot. If the desktop
-# does not come up, log in on a text console (Ctrl+Alt+F3) and run the undo.
 
 TARBALL="${1:?usage: install-mesa.sh mesa-glymur-<version>.tar.gz}"
 [ "$(id -u)" -eq 0 ] || { echo 'run with sudo' >&2; exit 1; }

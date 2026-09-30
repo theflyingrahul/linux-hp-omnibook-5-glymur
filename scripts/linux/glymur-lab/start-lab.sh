@@ -1,17 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Start the display-lab session on a boot of the USB entry
-# "Ubuntu on SSD: display lab (device tree)" (off the USB menu since
-# 2026-09-29; see stage-kit.sh). A device-tree boot has no USB,
-# so run it from the copy that stage-kit.sh put on the SSD (from an ACPI boot):
-#
+# Start the display-lab session. See README.md.
 #   sudo bash ~/glymur-lab-kit/start-lab.sh
-#
-# It checks the kit and the running kernel and device tree, copies the kit
-# to /run/glymur-lab and starts glymur-lab-run.sh as the transient system
-# service glymur-lab, so it survives the desktop being stopped. Output goes
-# to /var/log/glymur/lab-<time>/ on the SSD.
 
 KIT_SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 KREL=7.3.0-rc2-glymur-3

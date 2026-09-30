@@ -39,6 +39,104 @@ This directory contains shell scripts for validating the build environment, retr
 
     See `docs/acpi-input-test-2026-09-26.md` and `docs/acpi-input-results-run2-2026-09-26.md`.
 
+## Boot kernel, Mesa and profiles
+
+### `prepare-qcom-next-glymur.sh`
+
+    prepare-qcom-next-glymur.sh <qcom-next-clone> <new-worktree> [repo-root]
+
+Creates a qcom-next worktree at the pinned `BASE` and applies the layered
+series in order:
+1. `patches/kernel/upstream/qcom-next-acpi/`
+2. `upstream/qcom-next/`
+3. `glymur-bringup/`
+4. `backports/` (one mainline fix touches a file the bring-up layer also
+   changes)
+
+See `patches/README.md`.
+
+### `build-qcom-next-glymur.sh`
+
+    GLYMUR_SUFFIX=-N build-qcom-next-glymur.sh <source> <out> [jobs]
+
+Builds the boot kernel for the SSD root, from `~/glymur-build` in WSL or
+natively on the SSD install.
+- **No initramfs.** The only initrd is the early ACPI-table cpio, so NVMe,
+  ext4 and the PCI/ACPI host path are built in, and so is everything between
+  the kernel and the NVMe root on a device-tree boot:
+    - clock, pin and interconnect controllers;
+    - TCSR reference clocks;
+    - the QMP PCIe PHY.
+- **GPU clock controllers.** `gpucc-glymur` and `gxclkctl` are built in, so
+  the GPU SMMU and GMU don't wait past the deferred-probe timeout.
+- **Config.** Ubuntu's `config-7.0.0-30-generic`, then
+  `arch/arm64/configs/qcom.config`, then the script's own `glymur.config`.
+  The build refuses to continue if a required symbol didn't survive
+  `olddefconfig`.
+- **Release name.** `GLYMUR_SUFFIX` gives each build its own release
+  (`7.3.0-rc2-glymur-N`), so installing it never replaces the running
+  kernel's modules. An empty `LOCALVERSION` keeps the release exact.
+- **Device trees.** The HP DTBs from `dts/qcom/` are compiled against the
+  tree's `mahua.dtsi` and shipped in `stage/dtbs/qcom/`. Each one must pass
+  `check-dt-gpio-allowlist.py`. Lab and test DTBs are built by
+  `glymur-lab/`.
+
+### `setup-native-kernel-build.sh`
+
+    bash scripts/linux/setup-native-kernel-build.sh [src-root]
+
+Prepares a kernel build on the laptop itself, with no Windows round trip. It
+never runs sudo.
+1. It checks the build prerequisites and prints the `apt` command for any
+   that are missing.
+2. It shallow-fetches qcom-next at `BASE` into `<src-root>/linux-qcom-next`
+   (default `~/src`, about 250 MB).
+3. It applies the series in `<src-root>/linux-qcom-next-glymur`.
+
+Then build and install:
+
+    GLYMUR_SUFFIX=-N bash scripts/linux/build-qcom-next-glymur.sh ~/src/linux-qcom-next-glymur ~/src/build-glymur "$(nproc)"
+    sudo bash scripts/linux/glymur-ssd/install-kernel.sh ~/src/build-glymur
+
+### `build-mesa-glymur.sh`
+
+    scripts/linux/build-mesa-glymur.sh <work dir> [jobs]
+
+Builds upstream Mesa for the Adreno X2-85 on Ubuntu 26.04 arm64. It includes
+freedreno (OpenGL), turnip (Vulkan), softpipe and llvmpipe. Ubuntu's Mesa
+26.0.8 has no entry for chip `0x44070031`; Mesa 26.2 does.
+- **llvmpipe** links against Ubuntu's LLVM 21, so this Mesa can serve the
+  whole system, including boots without the GPU.
+- **No root and no `apt install`.** Dependencies are fetched with
+  `apt-get download`, using a private copy of the package lists, and
+  unpacked into a sysroot.
+    - Absolute and dangling symlinks there are retargeted to the sysroot or
+      the host.
+    - Static archives are removed, so a missing shared library fails the
+      build instead of silently linking statically.
+- **LLVM.** The sysroot's `llvm-config` is used if apt unpacked one, the
+  host's otherwise, and it must be LLVM 21.
+- **Packaging.**
+    - Only the runtime is packaged: headers, pkgconfig and meson's
+      libarchive fallback are removed.
+    - The only LLVM dependency must be `libLLVM.so.21.1`.
+    - Output: `mesa-glymur-<version>-<rev>.tar.gz`, installed by
+      `glymur-ssd/install-mesa.sh`.
+    - Revisions: `-1` had freedreno, turnip and softpipe; `-2` adds llvmpipe.
+
+### `fan-thermal-profile.sh`
+
+    [POWER_SOURCE=battery|ac] fan-thermal-profile.sh [out-dir]
+
+The twin of `scripts/windows/fan-thermal-profile.ps1`: the same phases (60 s
+idle, 60 s with every CPU busy, 120 s recovery), a 5 s interval and the same
+TSV columns, so the two runs compare row by row.
+- It samples the `acpi_fan` RPM (read from the EC over IC10), every thermal
+  zone, CPU use, cpufreq and the AC state.
+- `acpitz` zones carry their ACPI path (`\_SB_.TZ31` is "EC thermistor 1"),
+  which matches the Windows instance names.
+- Pass `POWER_SOURCE` by hand, because Linux cannot see the AC state yet.
+
 ## Rules
 
 - Build and analysis scripts do not install packages. The live collector may remount the installer media writable and writes logs there.

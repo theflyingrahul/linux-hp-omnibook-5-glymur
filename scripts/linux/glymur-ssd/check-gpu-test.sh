@@ -1,17 +1,8 @@
 #!/usr/bin/env bash
 set -u
 
-# One-boot check for the "device tree (GPU test)" entry: GPU, display, CPU
-# frequency scaling and USB-C charging, written to
-# /var/log/glymur/gpu-test-<time>.txt on the SSD.
-#
-#   sudo bash check-gpu-test.sh               GPU and display only
-#   sudo bash check-gpu-test.sh --charging    plus an unplug/replug charger test
-#   sudo bash check-gpu-test.sh --cpufreq     plus loading scmi-cpufreq, last
-#
-# Loading scmi-cpufreq hung the laptop in lab run 1 (SCMI timeouts). The GPU
-# test DTB adds the upstream polling fix, but run --cpufreq only with
-# nothing unsaved; everything before it is already on disk.
+# One-boot check for "device tree (GPU test)". See README.md.
+#   sudo bash check-gpu-test.sh [--charging] [--cpufreq]
 
 [ "$(id -u)" -eq 0 ] || { echo 'run with sudo' >&2; exit 1; }
 CHARGING=0 CPUFREQ=0

@@ -1,16 +1,6 @@
 #!/usr/bin/env bash
 
-# Interactive Ubuntu live desktop with internal input and Wi-Fi.
-# Loads the hash-pinned ACPI GPIO and GENI I2C test modules (keyboard I2C1,
-# touchpad I2C5, touchscreen I2C9; proven in the second input-test run), gives
-# the ath12k QCC2072 its upstream firmware plus the private HP board data in
-# the RAM root, blocks suspend/hibernate (untested), then starts the normal
-# graphical session. If the kit carries them, it also binds the EC bus IC10
-# through the QGP1 GPI DMA engine (glymur_gpi_dma.ko, glymur_geni_i2c_gsi.ko),
-# which gives the ACPI thermal zones and other EC-backed AML their bus. It
-# never writes internal storage and leaves the machine running. Only in workstation mode
-# (persistent boot) does it write, and then only to the installer's casper-rw
-# persistence (the first-boot repository unpack).
+# Live desktop with internal input, Wi-Fi and the EC bus. See README.md.
 set -u
 export PATH=/usr/sbin:/usr/bin:/sbin:/bin
 
@@ -53,8 +43,7 @@ systemctl mask --runtime sleep.target suspend.target hibernate.target \
 
 if hash_ok "$KIT/glymur_acpi_gpio.ko" "$GPIO_SHA256" &&
     hash_ok "$KIT/glymur_geni_i2c.ko" "$I2C_SHA256"; then
-    # GPIO 66 is the EC event interrupt (ECGE, PDC pin 768) and GPIO 92 the
-    # lid (LIGE, pin 960); both reach _EVT through glymur_acpi_ged.ko.
+    # GPIO 66: EC events (ECGE); GPIO 92: lid (LIGE).
     insmod "$KIT/glymur_acpi_gpio.ko" enable=1 pins=3,51,66,67,92 >>"$LOG" 2>&1
     say "GPIO module status $?."
     insmod "$KIT/glymur_geni_i2c.ko" allow="$BUSES" >>"$LOG" 2>&1
@@ -65,9 +54,7 @@ else
     say 'Module hash mismatch; internal input stays disabled.'
 fi
 
-# EC bus: QGP1 (QCOM0F88:01) must be bound before anything else can claim its
-# channels, then IC10 (QCOM0F10:04, QUP1 SE1) in GSI mode. Proven live on
-# 2026-09-26 (docs/cpuidle-and-ec-bus-results-2026-09-26.md).
+# EC bus: QGP1 first, then IC10 in GSI mode.
 EC_GPI=/sys/bus/platform/devices/QCOM0F88:01
 EC_DEV=/sys/bus/platform/devices/QCOM0F10:04
 if [ "$GPI_SHA256" = none ]; then
@@ -85,9 +72,7 @@ else
     say 'EC bus prerequisites not met; IC10 left unbound.'
 fi
 
-# ACPI event devices ECGE (EC events) and LIGE (lid) use GpioInt, which the
-# built-in acpi-ged driver rejects; glymur_acpi_ged.ko is evged.c with
-# GpioInt support. Load it after the EC bus: ECGE's _EVT reads the EC.
+# glymur_acpi_ged.ko (GpioInt events), after the EC bus.
 if [ "$GED_SHA256" = none ]; then
     say 'GED module not in this kit; lid and EC events stay off.'
 elif hash_ok "$KIT/glymur_acpi_ged.ko" "$GED_SHA256"; then
@@ -113,9 +98,7 @@ else
     say 'Wi-Fi prerequisites not met; Wi-Fi left as is.'
 fi
 
-# Workstation mode (glymur.workstation=1, persistent boot only): on first boot,
-# unpack the repository and its private .work evidence
-# into the live user's persistent home. Never overwrites an existing checkout.
+# Workstation mode: first-boot unpack into the persistent home.
 bootstrap_workstation() {
     local bundle=/cdrom/glymur-workstation/workstation-bundle.tar.gz
     local sums=/cdrom/glymur-workstation/SHA256SUMS
@@ -150,8 +133,7 @@ bootstrap_workstation() {
 if grep -qw 'glymur.workstation=1' /proc/cmdline &&
     grep -qw persistent /proc/cmdline && findmnt -rn -S LABEL=casper-rw >/dev/null; then
     bootstrap_workstation
-    # casper always boots /casper/vmlinuz from the FAT partition; a kernel
-    # upgraded into persistence would leave /lib/modules out of step with it.
+    # casper boots /casper/vmlinuz; keep the kernel packages held.
     dpkg-query -W -f '${Package}\n' 'linux-image-*' 'linux-modules-*' \
         'linux-generic*' 'linux-headers-generic*' 'linux-signed-*' 2>/dev/null |
         xargs -r apt-mark hold >>"$LOG" 2>&1

@@ -1,18 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Install a glymur kernel build on the SSD root and make it the one the USB's
-# "Ubuntu on SSD: ACPI, newest glymur kernel" entry boots, keeping the previous
-# one for the "ACPI, previous glymur kernel" entry. Nothing on the USB or the SSD's EFI
-# partition changes: GRUB follows these symlinks in /boot.
-#
+# Install a glymur kernel build and make it the newest. See README.md.
 #   sudo bash install-kernel.sh <glymur-kernel-*.tar.gz | build-output-dir>
-#
-# The input is the tarball from build-qcom-next-glymur.sh, or its output
-# directory (which has stage/Image and stage/lib/modules/<krel>). Build with
-# GLYMUR_SUFFIX=-N so each build has its own release; installing the
-# release that is running now is refused, because it would replace the
-# modules of the live kernel.
 
 SRC="${1:?usage: install-kernel.sh <kernel tarball | build output dir>}"
 BOOT=/boot
@@ -47,15 +37,12 @@ install -m 644 "$stage/Image" "$BOOT/vmlinuz-$krel"
 [ -f "$stage/.config" ] && install -m 644 "$stage/.config" "$BOOT/config-$krel"
 [ -f "$stage/System.map" ] && install -m 644 "$stage/System.map" "$BOOT/System.map-$krel"
 depmod -a "$krel"
-# Device trees built with this kernel (the USB's device-tree entries load
-# them through /boot/glymur-dtb).
 if [ -d "$stage/dtbs" ]; then
     rm -rf "$BOOT/dtbs/$krel"
     mkdir -p "$BOOT/dtbs/$krel"
     cp -a "$stage/dtbs/." "$BOOT/dtbs/$krel/"
 fi
 
-# Rotate: the kernel that is running now becomes "previous".
 running="$(uname -r)"
 [ -f "$BOOT/vmlinuz-$running" ] && ln -sfn "vmlinuz-$running" "$BOOT/vmlinuz-glymur.old"
 ln -sfn "vmlinuz-$krel" "$BOOT/vmlinuz-glymur"
@@ -64,8 +51,6 @@ if [ -d "$BOOT/dtbs/$krel/qcom" ]; then
     ln -sfn "dtbs/$krel/qcom" "$BOOT/glymur-dtb"
 fi
 
-# The per-boot report evolves with the kernels (device-tree sections), so
-# refresh it from this checkout too.
 report="$(dirname "${BASH_SOURCE[0]}")/glymur-boot-report.sh"
 if [ -f "$report" ] && [ -f /etc/systemd/system/glymur-boot-report.service ]; then
     install -m 755 "$report" /usr/local/sbin/glymur-boot-report

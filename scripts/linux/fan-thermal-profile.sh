@@ -1,16 +1,8 @@
 #!/usr/bin/env bash
 set -u
 
-# Linux fan/thermal profile, the twin of scripts/windows/fan-thermal-profile.ps1:
-# the same phases (60 s idle, 60 s with every CPU busy, 120 s recovery), the
-# same 5 s interval and the same TSV columns, so both runs compare row by row.
-#
-# Samples: acpi_fan RPM (PNP0C0B _FST, read from the EC over IC10), every
-# thermal zone, CPU utilisation from /proc/stat, cpufreq (when a driver is
-# bound) and AC state. Read-only apart from the temporary CPU load; no root
-# needed. Output: <out-dir>/linux-fan-profile-<timestamp>.tsv
-#
-# Usage: [POWER_SOURCE=battery|ac] fan-thermal-profile.sh [out-dir] (default: the repository's .work)
+# Linux twin of scripts/windows/fan-thermal-profile.ps1. See README.md.
+# Usage: [POWER_SOURCE=battery|ac] fan-thermal-profile.sh [out-dir]
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 OUT_DIR="${1:-$REPO/.work}"
@@ -22,8 +14,7 @@ INTERVAL=${INTERVAL_SECONDS:-5}
 mkdir -p "$OUT_DIR"
 OUT="$OUT_DIR/linux-fan-profile-$(date +%Y%m%dT%H%M%S).tsv"
 printf 'time\tphase\telapsed_s\tsource\tname\tvalue\tunit\n' >"$OUT"
-# Linux cannot see AC/battery until PMIC GLink works: pass it by hand, e.g.
-# POWER_SOURCE=battery. Windows applies different power limits on battery.
+# Linux cannot see the AC state yet: pass POWER_SOURCE by hand.
 {
     printf '# power_source %s\n' "${POWER_SOURCE:-unknown}"
     printf '# kernel %s\n' "$(uname -r)"
@@ -46,8 +37,6 @@ sample() {
     done
     for f in /sys/class/thermal/thermal_zone*; do
         v="$(cat "$f/temp" 2>/dev/null)" || continue
-        # acpitz zones carry their ACPI path (\_SB_.TZ31 = "EC thermistor 1"),
-        # which matches the instance names in the Windows profile.
         name="$(basename "$f"):$(cat "$f/type" 2>/dev/null)"
         [ -r "$f/device/path" ] && name="$name:$(cat "$f/device/path")"
         printf '%s\t%s\t%s\tthermal_zone\t%s\t%s\tC\n' "$stamp" "$phase" "$elapsed" "$name" \

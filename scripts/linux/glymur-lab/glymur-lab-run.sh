@@ -1,22 +1,8 @@
 #!/usr/bin/env bash
 set -u
 
-# Display-lab session for the HP OmniBook 5 16-bf1xxx, run as the transient
-# service glymur-lab (start-lab.sh starts it). One boot of the display-lab
-# device tree collects evidence across subsystems and then tries eDP
-# link-training variants at runtime, so no experiment needs its own reboot.
-#
+# Display-lab session (transient service glymur-lab). See README.md.
 #   glymur-lab-run.sh KIT_DIR OUT_DIR
-#
-# Phases (everything is logged to OUT_DIR and the journal):
-#   1 baseline: every subsystem as booted
-#   2 firmware eDP snapshot (the working link, read-only)
-#   3 Bluetooth: HP's Windows firmware pair versus linux-firmware
-#   4 battery / PMIC GLink and CPU frequency diagnostics
-#   5 display: stop the desktop, enable the eDP path by overlay and try
-#     variants until the panel trains; on success the panel shows the
-#     console and the lab stops there, otherwise it reboots at the end.
-# Collectors record failures and carry on (set -u, not -e).
 
 KIT="$1"
 OUT="$2"
@@ -32,8 +18,7 @@ say() {
     echo "$msg" | tee -a "$LOG"
     echo "$msg" >/dev/tty1 2>/dev/null || true
     echo "$msg" >/dev/kmsg 2>/dev/null || true
-    # The laptop has hung hard twice with no oops; flush every line so the
-    # last one on disk (and on the screen, tty1) names the step that did it.
+    # Flush every line: after a hard hang the last line names the step.
     sync
     journalctl --sync 2>/dev/null || true
 }
@@ -144,8 +129,7 @@ say "phase 4: battery / PMIC GLink and CPU frequency diagnostics"
     sect 'after modprobe'; since pmic; ls /sys/class/power_supply/
     sect 'cpufreq'; ls /sys/devices/system/cpu/cpufreq/ /sys/bus/scmi_protocol/devices/
     sect 'kernel log (scmi/cpucp)'; journalctl -k -b --no-pager | grep -iE 'scmi|cpucp|mbox|cpufreq|perf'
-    # Loading these took the whole laptop down in the first lab run (SCMI
-    # timeouts, then a hard hang with no oops): opt in with GLYMUR_LAB_CPUFREQ=1.
+    # Opt in with GLYMUR_LAB_CPUFREQ=1: it hung the laptop in run 1.
     if [ "${GLYMUR_LAB_CPUFREQ:-0}" = 1 ]; then
         sync
         mark cpufreq
@@ -255,13 +239,7 @@ cat "$KIT/mahua-hp-omnibook-5-bf1xxx-lab-display.dtbo" >"$LAB/overlay"
 say "step 5.5: display overlay applied; waiting for msm and the eDP link"
 attempt v0-baseline "full-DT display, stock settings" && success v0-baseline
 
-# Run 3 of the lab showed the real failure: every attempt logs "phy poweron
-# failed --> -110" (the PHY PLL does not lock), and the driver's PLL
-# coefficients for 2.7 Gb/s differ from the firmware's (ten registers, see
-# docs/display-lab-run3-2026-09-28.md). The variants below therefore change
-# only the PHY driver's module parameters and re-run link training on the
-# bound msm without unbinding it: unbinding msm-mdss hung the whole laptop
-# (run 2) and is only done with GLYMUR_LAB_REBIND=1.
+# PHY module parameters only, no msm unbind (it hung run 2). See README.md.
 retrain() {
     local tag="$1" fb=/sys/class/graphics/fb0
     echo 1 >"$fb/blank" 2>>"$LOG"

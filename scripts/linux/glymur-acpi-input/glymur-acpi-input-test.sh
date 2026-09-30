@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-# Default-off ACPI input bring-up test on the Ubuntu ARM64 live image.
-# Loads two hash-pinned out-of-tree modules (ACPI TLMM GPIO, ACPI GENI I2C)
-# into the stock 7.0.0-30-generic kernel in stages and saves a checkpoint to
-# the serial-verified installer FAT volume before each riskier step. It writes
-# no internal storage and changes no firmware settings.
+# Default-off staged ACPI input test on the live image. See README.md.
 set -u
 export PATH=/usr/sbin:/usr/bin:/sbin:/bin
 
@@ -20,8 +16,7 @@ I2C_SHA256=@I2C_SHA256@
 COUNTER_SHA256=@COUNTER_SHA256@
 # Private HP board-2.bin (never committed); "none" skips the Wi-Fi stage.
 WIFI_BOARD_SHA256=@WIFI_BOARD_SHA256@
-# MMIO bases: I2C1 keyboard, I2C5 touchpad (both read-tested), then I2C9
-# touchscreen and IC10 embedded controller (not previously read).
+# I2C1 keyboard, I2C5 touchpad, I2C9 touchscreen, IC10 EC.
 BASE_HID="0xb80000,0xb90000"
 BASE_TOUCH=0xa80000
 BASE_EC=0xa84000
@@ -242,10 +237,7 @@ kernel_oopsed() {
     dmesg 2>/dev/null | grep -qE 'Internal error: Oops|Unable to handle kernel|BUG: '
 }
 
-# Save the final checkpoint and power off. After a kernel oops a normal
-# poweroff blocks in device_shutdown() on the crashed probe's device lock
-# (first run), so force an immediate restart instead; it runs no device
-# shutdown callbacks and the installer is already unmounted by save_logs.
+# Save and restart: after an oops a normal poweroff hangs (see README.md).
 finish() {
     capture late-journal journalctl -b -k --no-pager -o short-monotonic
     printf 'finished_utc=%s\n' "$(date -u +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || true)" \
@@ -305,10 +297,6 @@ snapshot early
 checkpoint EARLY
 
 # ---- Stage 0: Wi-Fi with the HP board data (RAM only) ---------------------
-# Same bounded retry as the September 26 inventory, which reached QCC2072
-# firmware start and failed only on the missing HP board entry. The private
-# board-2.bin adds that entry (Windows bdwlan_qcc2072_1p0_ncm820A.elf, which
-# the Windows INF binds to SUBSYS_8EF3103C) to the upstream container.
 wifi_trial() {
     local pci=/sys/bus/pci/devices/0004:01:00.0
     local driver=/sys/bus/pci/drivers/ath12k_wifi7_pci
@@ -381,8 +369,7 @@ timeout --kill-after=5s 30s insmod "$I2C_KO" allow="$BASE_HID" >"$DATA/insmod-i2
 I2C_STATUS=$?
 say "I2C insmod exit status $I2C_STATUS."
 if kernel_oopsed || [ "$I2C_STATUS" -ne 0 ]; then
-    # A crashed probe keeps its device lock, so later binds fail and a normal
-    # poweroff blocks on it (first run, 2026-09-26). Save and stop here.
+    # A crashed probe keeps its device lock: save and stop here.
     say 'I2C module failed to load; skipping the input, touchscreen, and EC stages.'
     snapshot i2c
     finish
@@ -411,10 +398,7 @@ snapshot touch
 checkpoint TOUCH
 
 # ---- Stage 4: embedded-controller bus (lid/EC AML) --------------------------
-# IC10 carries the HP EC at 0x76 (SSDT "8F47"): lid state, HP WMI, keyboard
-# backlight settings. Battery/AC use \_SB.ABD (PMIC GLink), not this bus.
-# Ubuntu's arm64 7.0.0-30 kernel ships no hp_wmi (first run), so only
-# firmware-initiated AML (lid _LID/_EVT) should use the EC in this test.
+# See README.md for what uses the EC in this test.
 say 'Stage 4: binding IC10 (embedded controller) for lid/EC availability only.'
 capture ec-lid-before bash -c 'cat /proc/acpi/button/lid/*/state 2>&1'
 capture ec-wmi-modules bash -c 'lsmod | grep -iE "wmi" || echo "no wmi modules loaded"'
