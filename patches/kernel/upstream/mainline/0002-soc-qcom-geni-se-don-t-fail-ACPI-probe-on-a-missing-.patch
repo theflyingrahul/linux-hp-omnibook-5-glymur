@@ -1,7 +1,7 @@
-From 9750510097845d10e1231449448271a87d8c108c Mon Sep 17 00:00:00 2001
+From b321b0aa77133026b8728bb38ec56d64dccdbe84 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Sun, 27 Sep 2026 08:52:44 -0700
-Subject: [PATCH 2/3] soc: qcom: geni-se: don't fail ACPI probe on a missing SE
+Subject: [PATCH] soc: qcom: geni-se: don't fail ACPI probe on a missing SE
  clock
 
 geni_se_resources_init() tolerates a missing "se" clock for devices with an
@@ -20,6 +20,7 @@ Found by code review while bringing up an ACPI-booted Snapdragon X2
 laptop; compile-tested with arm64 defconfig plus ACPI and W=1.
 
 Fixes: 5b8a39dcf909 ("soc: qcom: geni-se: Introduce helper API for resource initialization")
+Signed-off-by: Rahul Pon <theflyingrahul@gmail.com>
 ---
  drivers/soc/qcom/qcom-geni-se.c | 22 ++++++++++++++++------
  1 file changed, 16 insertions(+), 6 deletions(-)
@@ -58,3 +59,8 @@ index 873bfbd6b2..5d4b26e95e 100644
  
  	ret = devm_pm_opp_of_add_table(se->dev);
  	if (ret && ret != -ENODEV)
+
+base-commit: 551c722f40809618230001baccf219193e22fc5a
+-- 
+2.53.0
+
