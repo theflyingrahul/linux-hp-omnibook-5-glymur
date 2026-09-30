@@ -1,7 +1,7 @@
 # HP OmniBook 5 16-bf1xxx Device Tree: Review, September 28, 2026
 
 This review rechecked every assumption behind the first device tree
-(`docs/device-tree-evidence-2026-09-27.md`, commit `addd317`) before its
+(`docs/device-tree-evidence-2026-09-27.md`, commit `7abd76d`) before its
 first boot. Five of them were wrong, and three of those would have hurt the
 first DT boot. The DTS is now `dts/qcom/mahua-hp-omnibook-5-bf1xxx{.dtsi,.dts,-minimal.dts}`
 and ships in kernel `7.3.0-rc2-glymur-3`. The `-2` package has the old
@@ -9,7 +9,7 @@ DTBs and must not be used for a DT boot.
 
 ## Findings
 
-| # | Assumption in `addd317` | What the evidence shows | Effect on a DT boot | Fix |
+| # | Assumption in `7abd76d` | What the evidence shows | Effect on a DT boot | Fix |
 |---|---|---|---|---|
 | 1 | The die is Glymur with cluster 2 fused off | **Mahua.** HP's DSDT serves both dies and switches on `\_SB.SDFE`, which is **0xA8** here. For 0xA8 it disables the "CPU Cluster 2" (`TZ2`) and "QMX2" (`TZ5`) thermal zones and the cluster 2 limits policy (`TZ19`), which is exactly what `mahua.dtsi` deletes. It also gives `GPU0` its `MHID`, `QCOM0FF5`; 0xA1 would give `GHID` `QCOM0F36`. Windows binds `ACPI\VEN_QCOM&DEV_0FF5` ("Adreno X2-85"). | Wrong interconnect topology (Mahua has its own NoC compatibles), wrong TLMM wake map, wrong TCSR, and TSENS 6/7, which Mahua lacks | Base the board on `mahua.dtsi`, which includes `glymur.dtsi` and removes cluster 2, TSENS 6/7 and PCIe 3a |
 | 2 | Every unused TLMM pin is reserved | The TLMM has **251** pins (`pinctrl-glymur.c`, `ngpios`), not 250. `<155 95>` left GPIO 250 unreserved. | One pin outside the allow-list | `<155 96>` |

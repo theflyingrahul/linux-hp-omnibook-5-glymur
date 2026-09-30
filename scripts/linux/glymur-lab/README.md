@@ -3,7 +3,7 @@
 A one-boot display lab on the SSD install (`docs/display-lab-2026-09-28.md`).
 Its GRUB entry was taken off the USB menu on 2026-09-29, after its display
 phase hung the laptop twice. To use it again, restore the entry from
-`scripts/linux/glymur-ssd/grub-entry.cfg` at commit `1f18e2f`. Display
+`scripts/linux/glymur-ssd/grub-entry.cfg` at commit `7fc1d8e`. Display
 changes are now tested at boot time with `build-test-dtb.sh`.
 
 ## `build-lab.sh`

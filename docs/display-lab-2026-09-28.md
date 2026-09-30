@@ -45,7 +45,7 @@ firmware's working eDP setup and tries every candidate fix at runtime.
 
 ## Re-assessment of the proposed fixes
 
-- **Two-rail eDP fix (`d3d29b5`): reverted.**
+- **Two-rail eDP fix (`7d6f532`): reverted.**
     - Its premise, that dummy regulators left the PHY unpowered, is
       contradicted by the boot itself. The firmware framebuffer stays lit on
       the minimal DT, and the Wi-Fi PCIe PHY runs on the same L2F/L4F rails

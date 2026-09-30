@@ -87,8 +87,8 @@ The ACPI boot in step 1 is also a chance to run anything else that needs USB.
 
 ## Corrections to my own earlier work
 
-- The two-rail eDP regulator fix I committed in `d3d29b5` and the
-  "root cause" wording around it were wrong; the pulled commit `1f18e2f`
+- The two-rail eDP regulator fix I committed in `7d6f532` and the
+  "root cause" wording around it were wrong; the pulled commit `7fc1d8e`
   reverts it for good reasons (the firmware keeps those shared rails on,
   and the fix would have voted them off on every eDP shutdown). The
   dummy-regulator observation was real, but it was never shown to cause the

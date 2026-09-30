@@ -6,7 +6,7 @@
 > names, and `install-firmware.sh` had been run (it installs to
 > `/lib/firmware/updates/`).
 
-Three boots today, after `4781096` (the reviewed DT, kernel
+Three boots today, after `3b39f9e` (the reviewed DT, kernel
 `7.3.0-rc2-glymur-3`): a sanity check on the old ACPI-only kernel, the full
 DT (blank screen), and the minimal DT (current, working). This is the first
 real evidence from booting the reviewed DT, not just the compile-time checks
