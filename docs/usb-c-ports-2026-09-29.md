@@ -278,4 +278,19 @@ evidence. Two ways to narrow it further without new hardware evidence:
   genuinely just speed-class-specific.
 - Check HP's Windows driver package / ACPI for any repeater-related
   device or GPIO that hasn't been mapped yet — the PEP entries checked so
-  far list only the controller's own GDSCs and clocks, no repeater.
+  far list only the controller's own GDSCs and clocks, no repeater. No
+  such evidence is captured locally yet (checked: no fetched HP driver
+  pack, no INF, nothing under `reference/` or `boards/` mentions
+  `QcXhciFilter8480` or an NXP repeater ID); getting it needs a live
+  Windows session or the SoftPaq driver pack, not anything already on
+  hand.
+
+**USB-C SuperSpeed, partially confirmed.** The same boot's `usb_1`
+SuperSpeed enumeration (this doc's swap-test section above) went through
+a USB-A-to-C adapter, not a native USB-C cable or a stick with its own
+USB-C plug. That confirms the SS data path through the QMP combo PHY
+works, but an adapter typically fixes the orientation rather than
+exercising it, so the PHY's own orientation/lane-swap handling (relevant
+for `orientation=reverse`, already seen on this connector in
+`docs/usb-c-charging-2026-09-29.md`) is still unconfirmed. A native
+USB-C 3.x device, tried both ways up, would close this out.
