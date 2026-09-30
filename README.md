@@ -29,6 +29,19 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30, later still still (kernel `-7` installed):** `install-kernel.sh`
+and `install-gpu-firmware.sh` run natively on the SSD install (no WSL/
+Windows involved). `/boot/vmlinuz-glymur` and `/boot/glymur-dtb` now point
+at `7.3.0-rc2-glymur-7` and its device trees; the previous kernel and DTBs
+stay reachable as `.old`. Mesa `26.2.3-2` (already switched on
+system-wide) and the cpufreq boot service were already current, so
+nothing else needed reinstalling; `charging-watch.sh`, `check-usb.sh` and
+`gpu-corruption-test.sh` were refreshed from the USB's newer versions.
+**Next: reboot into "device tree (GPU and USB-A test)"** (no GRUB change
+needed) and check whether the desktop itself renders clean — the real
+test of the GMEM fix, beyond `gpu-corruption-test.sh`'s kmscube-only
+confirmation on `-6`.
+
 **2026-09-30, later still (GMEM root cause confirmed exactly as
 predicted, without booting `-7` yet):** `gpu-corruption-test.sh`'s second
 run, still on kernel `-6`: `sysmem` and `FD_MESA_GMEM=16515072` (the
