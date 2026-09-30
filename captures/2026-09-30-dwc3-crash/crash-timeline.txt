@@ -1,0 +1,564 @@
+Jul 28 02:14:02.753732 glymur kernel: sysfs: cannot create duplicate filename '/devices/platform/soc@0/a600000.usb/software_node'
+Jul 28 02:14:02.753959 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier fd5000.phy for /pmic-glink/connector@0
+Jul 28 02:14:02.757402 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier fde000.phy for /pmic-glink/connector@1
+Jul 28 02:14:02.760822 glymur kernel: sysfs: cannot create duplicate filename '/devices/platform/soc@0/a800000.usb/software_node'
+Jul 28 02:14:02.795493 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier a800000.usb for /pmic-glink/connector@1
+Jul 28 02:14:02.798616 glymur kernel: sysfs: cannot create duplicate filename '/devices/platform/soc@0/a600000.usb/software_node'
+Jul 28 02:14:02.831489 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier a600000.usb for /pmic-glink/connector@0
+Jul 28 02:14:02.857489 glymur kernel: sysfs: cannot create duplicate filename '/devices/platform/soc@0/a000000.usb/software_node'
+Sep 30 22:44:51.756003 glymur kernel: xhci-hcd xhci-hcd.4.auto: xHCI Host Controller
+Sep 30 22:44:51.756216 glymur kernel: xhci-hcd xhci-hcd.4.auto: new USB bus registered, assigned bus number 4
+Sep 30 22:44:51.757769 glymur kernel: xhci-hcd xhci-hcd.4.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x000080a000000810
+Sep 30 22:44:51.757879 glymur kernel: xhci-hcd xhci-hcd.4.auto: irq 287, io mem 0x0a600000
+Sep 30 22:44:51.757973 glymur kernel: xhci-hcd xhci-hcd.4.auto: xHCI Host Controller
+Sep 30 22:44:51.758067 glymur kernel: xhci-hcd xhci-hcd.4.auto: new USB bus registered, assigned bus number 5
+Sep 30 22:44:51.758174 glymur kernel: xhci-hcd xhci-hcd.4.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Sep 30 22:44:51.758270 glymur kernel: usb usb4: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Sep 30 22:44:51.758440 glymur kernel: usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 30 22:44:51.758538 glymur kernel: usb usb4: Product: xHCI Host Controller
+Sep 30 22:44:51.758630 glymur kernel: usb usb4: Manufacturer: Linux 7.3.0-rc2-glymur-11 xhci-hcd
+Sep 30 22:44:51.758725 glymur kernel: usb usb4: SerialNumber: xhci-hcd.4.auto
+Sep 30 22:44:51.758824 glymur kernel: hub 4-0:1.0: USB hub found
+Sep 30 22:44:51.758976 glymur kernel: hub 4-0:1.0: 1 port detected
+Sep 30 22:44:51.759115 glymur kernel: usb usb5: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+Sep 30 22:44:51.759256 glymur kernel: usb usb5: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 30 22:44:51.759363 glymur kernel: usb usb5: Product: xHCI Host Controller
+Sep 30 22:44:51.759467 glymur kernel: usb usb5: Manufacturer: Linux 7.3.0-rc2-glymur-11 xhci-hcd
+Sep 30 22:44:51.759562 glymur kernel: usb usb5: SerialNumber: xhci-hcd.4.auto
+Sep 30 22:44:51.759658 glymur kernel: hub 5-0:1.0: USB hub found
+Sep 30 22:44:51.759800 glymur kernel: hub 5-0:1.0: 1 port detected
+Sep 30 22:44:52.150981 glymur kernel: usb 4-1: new low-speed USB device number 2 using xhci-hcd
+Sep 30 22:44:52.264977 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Sep 30 22:44:52.492882 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Sep 30 22:44:52.709982 glymur kernel: usb 4-1: new low-speed USB device number 3 using xhci-hcd
+Sep 30 22:44:52.828031 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Sep 30 22:44:53.047980 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Sep 30 22:44:53.156979 glymur kernel: usb usb4-port1: attempt power cycle
+Sep 30 22:44:54.996981 glymur kernel: usb usb4-port1: unable to enumerate USB device
+Sep 30 22:45:02.793978 glymur kernel: xhci-hcd xhci-hcd.4.auto: remove, state 4
+Sep 30 22:45:02.794126 glymur kernel: usb usb5: USB disconnect, device number 1
+Sep 30 22:45:02.795927 glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 5 deregistered
+Sep 30 22:45:02.795973 glymur kernel: xhci-hcd xhci-hcd.4.auto: remove, state 4
+Sep 30 22:45:02.796014 glymur kernel: usb usb4: USB disconnect, device number 1
+Sep 30 22:45:02.796043 glymur kernel: ------------[ cut here ]------------
+Sep 30 22:45:02.796057 glymur kernel: refcount_t: underflow; use-after-free.
+Sep 30 22:45:02.796069 glymur kernel: WARNING: lib/refcount.c:28 at refcount_warn_saturate+0x13c/0x2a0, CPU#0: kworker/0:2/447
+Sep 30 22:45:02.796081 glymur kernel: Modules linked in: nls_iso8859_1 q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm sg bnep scmi_cpufreq binfmt_misc uas usb_storage uvcvideo uvc videobuf2_vmalloc videobuf2_memops videobuf2_v4l2 videobuf2_common videodev mc qrtr_mhi joydev snd_q6apm input_leds hid_multitouch apr hid_generic panel_samsung_atna33xc20 fastrpc i2c_hid_of i2c_hid_acpi_prp0001 i2c_hid hid qrtr_smd xhci_plat_hcd hp_omnibook_5_ec sparse_keymap rpmsg_ctrl qcom_pd_mapper rpmsg_char ucsi_glink pmic_glink_altmode qcom_battmgr aux_hpd_bridge typec_ucsi socinfo hci_uart btqca btrtl btbcm btintel bluetooth aes_ce_blk snd_soc_lpass_wsa_macro snd_soc_lpass_va_macro ghash_ce gf128mul snd_soc_lpass_macro_common sm4_ce_gcm sm4_ce_ccm snd_soc_core sm4_ce sm4_ce_cipher snd_compress sm4 ac97_bus ath12k_wifi7 snd_pcm_dmaengine ath12k snd_pcm snd_seq_midi snd_seq_midi_event msm mac80211 snd_rawmidi spmi_pmic_arb phy_qcom_edp ubwc_config spmi_devres ocmem spmi snd_seq gpu_sched qcom_stats cfg80211
+Sep 30 22:45:02.796127 glymur kernel:  drm_gpuvm phy_qcom_qmp_combo drm_exec qcom_q6v5_pas snd_seq_device qcom_tsens i2c_qcom_geni qcom_spel drm_dp_aux_bus aux_bridge snd_timer qmi_tmd mhi qcom_pil_info dwc3_qcom typec drm_display_helper qcom_q6v5 qcom_eud qcom_sysmon libarc4 snd qcom_common dwc3 cec thunderbolt qcom_glink_smem pinctrl_sm8650_lpass_lpi evacc_glymur soundcore pinctrl_lpass_lpi phy_qcom_m31_eusb2 ulpi videocc_glymur qcom_glink gpi dispcc_glymur camcc_glymur udc_core rc_core mdt_loader qrtr qcom_aoss llcc_qcom nvmem_qfprom qcom_smd bam_dma qcomtee pmic_glink qcom_hwspinlock qcom_cpucp_mbox pdr_interface tee qcom_pdr_msg gpio_keys smp2p fixed qmi_helpers qcom_smem icc_bwmon rpmsg_core sch_fq_codel efi_pstore dmi_sysfs autofs4
+Sep 30 22:45:02.796156 glymur kernel: CPU: 0 UID: 0 PID: 447 Comm: kworker/0:2 Tainted: G        W           7.3.0-rc2-glymur-11 #12 PREEMPT(lazy) 
+Sep 30 22:45:02.796172 glymur kernel: Tainted: [W]=WARN
+Sep 30 22:45:02.796182 glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+Sep 30 22:45:02.796192 glymur kernel: Workqueue: events_freezable __dwc3_set_mode [dwc3]
+Sep 30 22:45:02.796203 glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+Sep 30 22:45:02.796214 glymur kernel: pc : refcount_warn_saturate+0x13c/0x2a0
+Sep 30 22:45:02.796224 glymur kernel: lr : refcount_warn_saturate+0x13c/0x2a0
+Sep 30 22:45:02.796233 glymur kernel: sp : ffff80008153b980
+Sep 30 22:45:02.796243 glymur kernel: x29: ffff80008153b980 x28: 0000000000000000 x27: 0000000000000000
+Sep 30 22:45:02.796254 glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: 0000000000000000
+Sep 30 22:45:02.796286 glymur kernel: x23: ffffd9c52611df68 x22: ffff00082c0e0810 x21: 0000000004288060
+Sep 30 22:45:02.796295 glymur kernel: x20: ffff00080214b100 x19: ffff0008011da0b0 x18: ffff800081ac60a0
+Sep 30 22:45:02.796303 glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+Sep 30 22:45:02.796314 glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+Sep 30 22:45:02.796324 glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffd9c5243ea4a8
+Sep 30 22:45:02.796334 glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+Sep 30 22:45:02.796344 glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+Sep 30 22:45:02.796354 glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+Sep 30 22:45:02.796364 glymur kernel: Call trace:
+Sep 30 22:45:02.796375 glymur kernel:  refcount_warn_saturate+0x13c/0x2a0 (P)
+Sep 30 22:45:02.796385 glymur kernel:  kobject_put+0x208/0x340
+Sep 30 22:45:02.796394 glymur kernel:  software_node_notify_remove+0x104/0x140
+Sep 30 22:45:02.796404 glymur kernel:  device_del+0x16c/0x3c0
+Sep 30 22:45:02.796414 glymur kernel:  usb_disconnect+0x314/0x350
+Sep 30 22:45:02.796423 glymur kernel:  usb_remove_hcd+0x18c/0x2a0
+Sep 30 22:45:02.796433 glymur kernel:  xhci_plat_remove+0x150/0x1b0 [xhci_plat_hcd]
+Sep 30 22:45:02.796442 glymur kernel:  platform_remove+0x2c/0x68
+Sep 30 22:45:02.796452 glymur kernel:  device_remove+0x58/0xc0
+Sep 30 22:45:02.796461 glymur kernel:  device_release_driver_internal+0x218/0x2f8
+Sep 30 22:45:02.796469 glymur kernel:  device_release_driver+0x24/0x50
+Sep 30 22:45:02.796484 glymur kernel:  bus_remove_device+0xfc/0x260
+Sep 30 22:45:02.796494 glymur kernel:  device_del+0x154/0x3c0
+Sep 30 22:45:02.796505 glymur kernel:  platform_device_del+0x38/0xe0
+Sep 30 22:45:02.796515 glymur kernel:  platform_device_unregister+0x20/0x68
+Sep 30 22:45:02.796521 glymur kernel:  dwc3_host_exit+0x3c/0x98 [dwc3]
+Sep 30 22:45:02.796532 glymur kernel:  __dwc3_set_mode+0x218/0x430 [dwc3]
+Sep 30 22:45:02.796543 glymur kernel:  process_one_work+0x1c4/0x5b0
+Sep 30 22:45:02.796554 glymur kernel:  worker_thread+0x194/0x330
+Sep 30 22:45:02.796564 glymur kernel:  kthread+0x138/0x150
+Sep 30 22:45:02.796574 glymur kernel:  ret_from_fork+0x10/0x20
+Sep 30 22:45:02.796584 glymur kernel: ---[ end trace 0000000000000000 ]---
+Sep 30 22:45:02.798929 glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 4 deregistered
+Sep 30 22:45:06.593989 glymur kernel: xhci-hcd xhci-hcd.4.auto: xHCI Host Controller
+Sep 30 22:45:06.594190 glymur kernel: xhci-hcd xhci-hcd.4.auto: new USB bus registered, assigned bus number 4
+Sep 30 22:45:06.596926 glymur kernel: xhci-hcd xhci-hcd.4.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x000080a000000810
+Sep 30 22:45:06.597037 glymur kernel: xhci-hcd xhci-hcd.4.auto: irq 270, io mem 0x0a800000
+Sep 30 22:45:06.597128 glymur kernel: xhci-hcd xhci-hcd.4.auto: xHCI Host Controller
+Sep 30 22:45:06.597219 glymur kernel: xhci-hcd xhci-hcd.4.auto: new USB bus registered, assigned bus number 5
+Sep 30 22:45:06.597308 glymur kernel: xhci-hcd xhci-hcd.4.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Sep 30 22:45:06.597397 glymur kernel: usb usb4: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Sep 30 22:45:06.597535 glymur kernel: usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 30 22:45:06.597632 glymur kernel: usb usb4: Product: xHCI Host Controller
+Sep 30 22:45:06.597720 glymur kernel: usb usb4: Manufacturer: Linux 7.3.0-rc2-glymur-11 xhci-hcd
+Sep 30 22:45:06.597813 glymur kernel: usb usb4: SerialNumber: xhci-hcd.4.auto
+Sep 30 22:45:06.598929 glymur kernel: hub 4-0:1.0: USB hub found
+Sep 30 22:45:06.599142 glymur kernel: hub 4-0:1.0: 1 port detected
+Sep 30 22:45:06.599263 glymur kernel: usb usb5: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+Sep 30 22:45:06.599398 glymur kernel: usb usb5: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 30 22:45:06.599514 glymur kernel: usb usb5: Product: xHCI Host Controller
+Sep 30 22:45:06.599619 glymur kernel: usb usb5: Manufacturer: Linux 7.3.0-rc2-glymur-11 xhci-hcd
+Sep 30 22:45:06.599722 glymur kernel: usb usb5: SerialNumber: xhci-hcd.4.auto
+Sep 30 22:45:06.599821 glymur kernel: hub 5-0:1.0: USB hub found
+Sep 30 22:45:06.599962 glymur kernel: hub 5-0:1.0: 1 port detected
+Sep 30 22:45:06.980944 glymur kernel: usb 4-1: new low-speed USB device number 2 using xhci-hcd
+Sep 30 22:45:07.094939 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Sep 30 22:45:07.316997 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Sep 30 22:45:07.532954 glymur kernel: usb 4-1: new low-speed USB device number 3 using xhci-hcd
+Sep 30 22:45:07.645938 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Sep 30 22:45:07.866945 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Sep 30 22:45:07.973000 glymur kernel: usb usb4-port1: attempt power cycle
+Sep 30 22:45:08.976844 glymur kernel: usb 4-1: new full-speed USB device number 4 using xhci-hcd
+Sep 30 22:45:08.993987 glymur kernel: usb 4-1: New USB device found, idVendor=413c, idProduct=301b, bcdDevice=11.23
+Sep 30 22:45:08.998981 glymur kernel: usb 4-1: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+Sep 30 22:45:08.999285 glymur kernel: usb 4-1: Product: Dell Universal Receiver
+Sep 30 22:45:08.999404 glymur kernel: usb 4-1: Manufacturer: Dell
+Sep 30 22:45:09.052968 glymur kernel: input: Dell Dell Universal Receiver as /devices/platform/soc@0/a800000.usb/xhci-hcd.4.auto/usb4/4-1/4-1:1.0/0003:413C:301B.0004/input/input19
+Sep 30 22:45:09.133888 glymur kernel: hid-generic 0003:413C:301B.0004: input,hidraw3: USB HID v1.11 Keyboard [Dell Dell Universal Receiver] on usb-xhci-hcd.4.auto-1/input0
+Sep 30 22:45:09.135937 glymur kernel: input: Dell Dell Universal Receiver Mouse as /devices/platform/soc@0/a800000.usb/xhci-hcd.4.auto/usb4/4-1/4-1:1.1/0003:413C:301B.0005/input/input20
+Sep 30 22:45:09.135951 glymur kernel: input: Dell Dell Universal Receiver Consumer Control as /devices/platform/soc@0/a800000.usb/xhci-hcd.4.auto/usb4/4-1/4-1:1.1/0003:413C:301B.0005/input/input21
+Sep 30 22:45:09.189971 glymur kernel: input: Dell Dell Universal Receiver System Control as /devices/platform/soc@0/a800000.usb/xhci-hcd.4.auto/usb4/4-1/4-1:1.1/0003:413C:301B.0005/input/input22
+Sep 30 22:45:09.190054 glymur kernel: hid-generic 0003:413C:301B.0005: input,hidraw4: USB HID v1.11 Mouse [Dell Dell Universal Receiver] on usb-xhci-hcd.4.auto-1/input1
+Sep 30 22:45:09.190930 glymur kernel: hid-generic 0003:413C:301B.0006: hiddev0,hidraw5: USB HID v1.11 Device [Dell Dell Universal Receiver] on usb-xhci-hcd.4.auto-1/input2
+Sep 30 22:45:09.191072 glymur kernel: usbcore: registered new interface driver usbhid
+Sep 30 22:45:09.191084 glymur kernel: usbhid: USB HID core driver
+Sep 30 22:45:14.163532 glymur kernel: usb 4-1: USB disconnect, device number 4
+Sep 30 22:45:14.303970 glymur kernel: xhci-hcd xhci-hcd.4.auto: remove, state 4
+Sep 30 22:45:14.304064 glymur kernel: usb usb5: USB disconnect, device number 1
+Sep 30 22:45:14.304934 glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 5 deregistered
+Sep 30 22:45:14.305044 glymur kernel: xhci-hcd xhci-hcd.4.auto: remove, state 1
+Sep 30 22:45:14.305102 glymur kernel: usb usb4: USB disconnect, device number 1
+Sep 30 22:45:14.313928 glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 4 deregistered
+Sep 30 22:45:22.752938 glymur kernel: Internal error: SP/PC alignment exception: 000000008a000000 [#1]  SMP
+Sep 30 22:45:22.753089 glymur kernel: Modules linked in: usbhid nls_iso8859_1 q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm sg bnep scmi_cpufreq binfmt_misc uas usb_storage uvcvideo uvc videobuf2_vmalloc videobuf2_memops videobuf2_v4l2 videobuf2_common videodev mc qrtr_mhi joydev snd_q6apm input_leds hid_multitouch apr hid_generic panel_samsung_atna33xc20 fastrpc i2c_hid_of i2c_hid_acpi_prp0001 i2c_hid hid qrtr_smd xhci_plat_hcd hp_omnibook_5_ec sparse_keymap rpmsg_ctrl qcom_pd_mapper rpmsg_char ucsi_glink pmic_glink_altmode qcom_battmgr aux_hpd_bridge typec_ucsi socinfo hci_uart btqca btrtl btbcm btintel bluetooth aes_ce_blk snd_soc_lpass_wsa_macro snd_soc_lpass_va_macro ghash_ce gf128mul snd_soc_lpass_macro_common sm4_ce_gcm sm4_ce_ccm snd_soc_core sm4_ce sm4_ce_cipher snd_compress sm4 ac97_bus ath12k_wifi7 snd_pcm_dmaengine ath12k snd_pcm snd_seq_midi snd_seq_midi_event msm mac80211 snd_rawmidi spmi_pmic_arb phy_qcom_edp ubwc_config spmi_devres ocmem spmi snd_seq gpu_sched qcom_stats
+Sep 30 22:45:22.753175 glymur kernel:  cfg80211 drm_gpuvm phy_qcom_qmp_combo drm_exec qcom_q6v5_pas snd_seq_device qcom_tsens i2c_qcom_geni qcom_spel drm_dp_aux_bus aux_bridge snd_timer qmi_tmd mhi qcom_pil_info dwc3_qcom typec drm_display_helper qcom_q6v5 qcom_eud qcom_sysmon libarc4 snd qcom_common dwc3 cec thunderbolt qcom_glink_smem pinctrl_sm8650_lpass_lpi evacc_glymur soundcore pinctrl_lpass_lpi phy_qcom_m31_eusb2 ulpi videocc_glymur qcom_glink gpi dispcc_glymur camcc_glymur udc_core rc_core mdt_loader qrtr qcom_aoss llcc_qcom nvmem_qfprom qcom_smd bam_dma qcomtee pmic_glink qcom_hwspinlock qcom_cpucp_mbox pdr_interface tee qcom_pdr_msg gpio_keys smp2p fixed qmi_helpers qcom_smem icc_bwmon rpmsg_core sch_fq_codel efi_pstore dmi_sysfs autofs4
+Sep 30 22:45:22.753200 glymur kernel: CPU: 0 UID: 0 PID: 8384 Comm: kworker/0:4 Tainted: G        W           7.3.0-rc2-glymur-11 #12 PREEMPT(lazy) 
+Sep 30 22:45:22.753213 glymur kernel: Tainted: [W]=WARN
+Sep 30 22:45:22.753224 glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+Sep 30 22:45:22.753235 glymur kernel: Workqueue: events_freezable __dwc3_set_mode [dwc3]
+Sep 30 22:45:22.753245 glymur kernel: pstate: 81400809 (Nzcv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=-c)
+Sep 30 22:45:22.753261 glymur kernel: pc : 0x405a60d2800022
+Sep 30 22:45:22.753271 glymur kernel: lr : fwnode_property_read_bool+0x84/0x100
+Sep 30 22:45:22.753288 glymur kernel: sp : ffff80009382b7d0
+Sep 30 22:45:22.753299 glymur kernel: x29: ffff80009382b7d0 x28: ffff000801b60000 x27: ffff000801b6028e
+Sep 30 22:45:22.753309 glymur kernel: x26: ffff000801b9cc10 x25: 000000000000011f x24: ffff000801b60248
+Sep 30 22:45:22.753320 glymur kernel: x23: ffff000801b60000 x22: ffff000801b60518 x21: ffff00082c0e0810
+Sep 30 22:45:22.753330 glymur kernel: x20: ffff000801b9cc10 x19: ffff00082c0e0800 x18: ffff8000929dd0a0
+Sep 30 22:45:22.753339 glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 3d52455649524400
+Sep 30 22:45:22.753353 glymur kernel: x14: 0000000000000001 x13: 682d696368783a6d x12: 726f6674616c703d
+Sep 30 22:45:22.753363 glymur kernel: x11: 0000000000000000 x10: ffffffffc2c3dbf0 x9 : ffffd9c525875794
+Sep 30 22:45:22.753372 glymur kernel: x8 : 0101010101010101 x7 : 656c62617369642d x6 : 1b120f57adecf0ed
+Sep 30 22:45:22.753384 glymur kernel: x5 : 6d706c2d570f121b x4 : 8080808000000000 x3 : ffffd9c4e92db9f8
+Sep 30 22:45:22.753397 glymur kernel: x2 : f9405a60d2800022 x1 : ffffd9c4e92db9f8 x0 : ffff00080214b140
+Sep 30 22:45:22.753408 glymur kernel: Call trace:
+Sep 30 22:45:22.753418 glymur kernel:  0x405a60d2800022 (P)
+Sep 30 22:45:22.753428 glymur kernel:  device_property_read_bool+0x28/0x78
+Sep 30 22:45:22.753437 glymur kernel:  xhci_plat_probe+0x3f0/0x860 [xhci_plat_hcd]
+Sep 30 22:45:22.753448 glymur kernel:  xhci_generic_plat_probe+0xac/0x120 [xhci_plat_hcd]
+Sep 30 22:45:22.753458 glymur kernel:  platform_probe+0x70/0x128
+Sep 30 22:45:22.753466 glymur kernel:  really_probe+0xd8/0x430
+Sep 30 22:45:22.753480 glymur kernel:  __driver_probe_device+0x194/0x230
+Sep 30 22:45:22.753490 glymur kernel:  driver_probe_device+0x48/0x1b0
+Sep 30 22:45:22.753499 glymur kernel:  __device_attach_driver+0x10c/0x250
+Sep 30 22:45:22.753509 glymur kernel:  bus_for_each_drv+0x94/0x118
+Sep 30 22:45:22.753520 glymur kernel:  __device_attach+0xa8/0x218
+Sep 30 22:45:22.753530 glymur kernel:  device_initial_probe+0x78/0x88
+Sep 30 22:45:22.753539 glymur kernel:  bus_probe_device+0x40/0xc0
+Sep 30 22:45:22.753549 glymur kernel:  device_add+0x6b0/0x940
+Sep 30 22:45:22.753559 glymur kernel:  platform_device_add+0x108/0x2d8
+Sep 30 22:45:22.753569 glymur kernel:  dwc3_host_init+0x4a4/0x680 [dwc3]
+Sep 30 22:45:22.753578 glymur kernel:  __dwc3_set_mode+0x100/0x430 [dwc3]
+Sep 30 22:45:22.753588 glymur kernel:  process_one_work+0x1c4/0x5b0
+Sep 30 22:45:22.753598 glymur kernel:  worker_thread+0x194/0x330
+Sep 30 22:45:22.753606 glymur kernel:  kthread+0x138/0x150
+Sep 30 22:45:22.753617 glymur kernel:  ret_from_fork+0x10/0x20
+Sep 30 22:45:22.753626 glymur kernel: ---[ end trace 0000000000000000 ]---
+Sep 30 22:45:32.819976 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: GET_CURRENT_CAM command failed
+Sep 30 22:45:39.297972 glymur kernel: kauditd_printk_skb: 1 callbacks suppressed
+Sep 30 22:45:39.298024 glymur kernel: audit: type=1400 audit(1790788539.296:264): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/uevent" pid=8653 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:39.298036 glymur kernel: audit: type=1400 audit(1790788539.297:265): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=8653 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:39.298047 glymur kernel: audit: type=1400 audit(1790788539.297:266): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/uevent" pid=8653 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:39.298057 glymur kernel: audit: type=1400 audit(1790788539.297:267): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/uevent" pid=8653 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:39.298962 glymur kernel: audit: type=1400 audit(1790788539.297:268): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a200000.usb/xhci-hcd.2.auto/uevent" pid=8653 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:39.298978 glymur kernel: audit: type=1400 audit(1790788539.297:269): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a200000.usb/uevent" pid=8653 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:39.298990 glymur kernel: audit: type=1400 audit(1790788539.297:270): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/uevent" pid=8653 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:39.298998 glymur kernel: audit: type=1400 audit(1790788539.297:271): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/uevent" pid=8653 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:39.299962 glymur kernel: audit: type=1400 audit(1790788539.298:272): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/uevent" pid=8653 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:39.299986 glymur kernel: audit: type=1400 audit(1790788539.298:273): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=8653 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:39.987979 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `manufacturer' property: -110
+Sep 30 22:45:43.060987 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `model_name' property: -110
+Sep 30 22:45:45.108919 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `serial_number' property: -110
+Sep 30 22:45:46.132954 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:45:48.180991 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: GET_CONNECTOR_STATUS failed (-110)
+Sep 30 22:45:48.181370 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_max_design' property: -110
+Sep 30 22:45:50.228967 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:45:52.275379 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:45:54.356687 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_now' property: -110
+Sep 30 22:45:57.397041 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:45:59.479753 glymur kernel: kauditd_printk_skb: 2 callbacks suppressed
+Sep 30 22:45:59.479833 glymur kernel: audit: type=1400 audit(1790788548.797:276): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/uevent" pid=8823 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:59.479848 glymur kernel: audit: type=1400 audit(1790788548.797:277): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=8823 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:59.479861 glymur kernel: audit: type=1400 audit(1790788548.797:278): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/uevent" pid=8823 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:59.479874 glymur kernel: audit: type=1400 audit(1790788548.797:279): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/uevent" pid=8823 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:59.479886 glymur kernel: audit: type=1400 audit(1790788548.797:280): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a200000.usb/xhci-hcd.2.auto/uevent" pid=8823 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:59.479897 glymur kernel: audit: type=1400 audit(1790788548.797:281): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a200000.usb/uevent" pid=8823 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:59.479911 glymur kernel: audit: type=1400 audit(1790788548.797:282): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/uevent" pid=8823 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:59.479922 glymur kernel: audit: type=1400 audit(1790788548.797:283): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/uevent" pid=8823 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:59.479955 glymur kernel: audit: type=1400 audit(1790788548.798:284): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/uevent" pid=8823 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:59.479967 glymur kernel: audit: type=1400 audit(1790788548.798:285): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=8823 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:45:59.479979 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `cycle_count' property: -110
+Sep 30 22:46:01.491288 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: timeout waiting for UCSI write response
+Sep 30 22:46:01.491449 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: GET_CONNECTOR_STATUS failed (-110)
+Sep 30 22:46:01.491555 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:03.540948 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `energy_full' property: -110
+Sep 30 22:46:05.588959 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:07.635261 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `energy_full_design' property: -110
+Sep 30 22:46:08.660964 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:10.708955 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_full' property: -110
+Sep 30 22:46:12.756943 glymur kernel: kauditd_printk_skb: 2 callbacks suppressed
+Sep 30 22:46:12.757364 glymur kernel: audit: type=1400 audit(1790788556.099:288): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/uevent" pid=8847 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:46:12.757378 glymur kernel: audit: type=1400 audit(1790788556.099:289): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=8847 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:46:12.757388 glymur kernel: audit: type=1400 audit(1790788556.099:290): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/uevent" pid=8847 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:46:12.757400 glymur kernel: audit: type=1400 audit(1790788556.099:291): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/uevent" pid=8847 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:46:12.757411 glymur kernel: audit: type=1400 audit(1790788556.099:292): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a200000.usb/xhci-hcd.2.auto/uevent" pid=8847 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:46:12.757424 glymur kernel: audit: type=1400 audit(1790788556.099:293): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a200000.usb/uevent" pid=8847 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:46:12.757436 glymur kernel: audit: type=1400 audit(1790788556.099:294): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/uevent" pid=8847 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:46:12.757448 glymur kernel: audit: type=1400 audit(1790788556.099:295): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/uevent" pid=8847 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:46:12.757458 glymur kernel: audit: type=1400 audit(1790788556.100:296): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/uevent" pid=8847 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:46:12.757469 glymur kernel: audit: type=1400 audit(1790788556.100:297): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=8847 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:46:12.757481 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_full_design' property: -110
+Sep 30 22:46:13.779236 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:14.804812 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `technology' property: -110
+Sep 30 22:46:15.829003 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:16.853013 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_max_design' property: -110
+Sep 30 22:46:18.899244 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:19.924804 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_now' property: -110
+Sep 30 22:46:20.948934 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:21.973022 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_now' property: -110
+Sep 30 22:46:22.995207 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:24.056304 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `capacity' property: -110
+Sep 30 22:46:26.069174 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:28.117166 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:30.164826 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:32.212947 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:34.260995 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `temp' property: -110
+Sep 30 22:46:36.308948 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:38.356815 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:40.403120 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:42.453277 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:44.499718 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:46.547977 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `present' property: -110
+Sep 30 22:46:48.595816 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:50.644312 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:52.699441 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:54.741672 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:56.787443 glymur kernel: set_capacity_and_notify: 7 callbacks suppressed
+Sep 30 22:46:56.787496 glymur kernel: sda: detected capacity change from 120176640 to 0
+Sep 30 22:46:56.787511 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:58.837011 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:46:59.861253 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `manufacturer' property: -110
+Sep 30 22:47:00.883230 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:01.908953 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `model_name' property: -110
+Sep 30 22:47:02.932943 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:04.980821 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `serial_number' property: -110
+Sep 30 22:47:07.028821 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:09.075500 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_max_design' property: -110
+Sep 30 22:47:11.124886 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:13.171398 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_now' property: -110
+Sep 30 22:47:15.219315 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:17.267405 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `cycle_count' property: -110
+Sep 30 22:47:19.315639 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:22.387234 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `energy_full' property: -110
+Sep 30 22:47:24.436956 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:26.483318 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `energy_full_design' property: -110
+Sep 30 22:47:28.533014 glymur kernel: kauditd_printk_skb: 2 callbacks suppressed
+Sep 30 22:47:28.533036 glymur kernel: audit: type=1400 audit(1790788600.392:300): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/uevent" pid=8904 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:28.533051 glymur kernel: audit: type=1400 audit(1790788600.392:301): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=8904 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:28.533068 glymur kernel: audit: type=1400 audit(1790788600.392:302): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/uevent" pid=8904 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:28.533081 glymur kernel: audit: type=1400 audit(1790788600.392:303): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/uevent" pid=8904 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:28.533101 glymur kernel: audit: type=1400 audit(1790788600.392:304): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a200000.usb/xhci-hcd.2.auto/uevent" pid=8904 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:28.533112 glymur kernel: audit: type=1400 audit(1790788600.392:305): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a200000.usb/uevent" pid=8904 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:28.533123 glymur kernel: audit: type=1400 audit(1790788600.392:306): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/uevent" pid=8904 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:28.533135 glymur kernel: audit: type=1400 audit(1790788600.392:307): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/uevent" pid=8904 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:28.533146 glymur kernel: audit: type=1400 audit(1790788600.393:308): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/uevent" pid=8904 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:28.533157 glymur kernel: audit: type=1400 audit(1790788600.393:309): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=8904 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:28.533169 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:30.581014 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_full' property: -110
+Sep 30 22:47:32.627181 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:34.677009 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_full_design' property: -110
+Sep 30 22:47:36.724814 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:37.747463 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `technology' property: -110
+Sep 30 22:47:38.771216 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:39.795210 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_max_design' property: -110
+Sep 30 22:47:40.819183 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:41.843237 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_now' property: -110
+Sep 30 22:47:42.867288 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:43.891175 glymur kernel: kauditd_printk_skb: 14 callbacks suppressed
+Sep 30 22:47:43.891197 glymur kernel: audit: type=1400 audit(1790788610.647:324): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/uevent" pid=9004 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:43.891213 glymur kernel: audit: type=1400 audit(1790788610.647:325): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=9004 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:43.891229 glymur kernel: audit: type=1400 audit(1790788610.647:326): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/uevent" pid=9004 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:43.891269 glymur kernel: audit: type=1400 audit(1790788610.647:327): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/uevent" pid=9004 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:43.891280 glymur kernel: audit: type=1400 audit(1790788610.647:328): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a200000.usb/xhci-hcd.2.auto/uevent" pid=9004 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:43.891292 glymur kernel: audit: type=1400 audit(1790788610.647:329): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a200000.usb/uevent" pid=9004 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:43.891305 glymur kernel: audit: type=1400 audit(1790788610.647:330): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/uevent" pid=9004 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:43.891315 glymur kernel: audit: type=1400 audit(1790788610.647:331): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/uevent" pid=9004 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:43.891327 glymur kernel: audit: type=1400 audit(1790788610.648:332): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/uevent" pid=9004 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:43.891338 glymur kernel: audit: type=1400 audit(1790788610.648:333): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=9004 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:43.891349 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_now' property: -110
+Sep 30 22:47:44.915226 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:45.940850 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `capacity' property: -110
+Sep 30 22:47:46.969295 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:47.988842 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:49.011189 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:50.035251 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `temp' property: -110
+Sep 30 22:47:51.061022 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:52.083270 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:53.107182 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:54.131232 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:55.155265 glymur kernel: kauditd_printk_skb: 2 callbacks suppressed
+Sep 30 22:47:55.155286 glymur kernel: audit: type=1400 audit(1790788622.053:336): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/uevent" pid=9008 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:55.155303 glymur kernel: audit: type=1400 audit(1790788622.053:337): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=9008 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:55.155316 glymur kernel: audit: type=1400 audit(1790788622.053:338): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/uevent" pid=9008 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:55.155331 glymur kernel: audit: type=1400 audit(1790788622.053:339): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/uevent" pid=9008 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:55.155345 glymur kernel: audit: type=1400 audit(1790788622.053:340): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a200000.usb/xhci-hcd.2.auto/uevent" pid=9008 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:55.155358 glymur kernel: audit: type=1400 audit(1790788622.054:341): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a200000.usb/uevent" pid=9008 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:55.155370 glymur kernel: audit: type=1400 audit(1790788622.054:342): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/uevent" pid=9008 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:55.155381 glymur kernel: audit: type=1400 audit(1790788622.054:343): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/uevent" pid=9008 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:55.155392 glymur kernel: audit: type=1400 audit(1790788622.054:344): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/uevent" pid=9008 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:55.155405 glymur kernel: audit: type=1400 audit(1790788622.054:345): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=9008 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+Sep 30 22:47:55.155416 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:56.180846 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `manufacturer' property: -110
+Sep 30 22:47:57.203237 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:47:58.265482 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `model_name' property: -110
+Sep 30 22:47:59.315172 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:00.340952 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `serial_number' property: -110
+Sep 30 22:48:01.363170 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:02.387165 glymur kernel: kauditd_printk_skb: 26 callbacks suppressed
+Sep 30 22:48:02.387188 glymur kernel: audit: type=1400 audit(1790788629.284:372): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/uevent" pid=9175 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:48:02.387203 glymur kernel: audit: type=1400 audit(1790788629.284:373): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=9175 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:48:02.387215 glymur kernel: audit: type=1400 audit(1790788629.284:374): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/uevent" pid=9175 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:48:02.387227 glymur kernel: audit: type=1400 audit(1790788629.284:375): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/uevent" pid=9175 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:48:02.387238 glymur kernel: audit: type=1400 audit(1790788629.285:376): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a200000.usb/xhci-hcd.2.auto/uevent" pid=9175 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:48:02.387248 glymur kernel: audit: type=1400 audit(1790788629.285:377): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a200000.usb/uevent" pid=9175 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:48:02.387263 glymur kernel: audit: type=1400 audit(1790788629.285:378): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/uevent" pid=9175 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:48:02.387275 glymur kernel: audit: type=1400 audit(1790788629.285:379): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/uevent" pid=9175 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:48:02.387286 glymur kernel: audit: type=1400 audit(1790788629.285:380): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/uevent" pid=9175 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:48:02.387297 glymur kernel: audit: type=1400 audit(1790788629.285:381): apparmor="DENIED" operation="open" class="file" profile="lsusb" name="/sys/devices/platform/soc@0/a000000.usb/uevent" pid=9175 comm="lsusb" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+Sep 30 22:48:02.387309 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_max_design' property: -110
+Sep 30 22:48:03.414375 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:04.436856 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_now' property: -110
+Sep 30 22:48:05.459300 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:06.483189 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `cycle_count' property: -110
+Sep 30 22:48:08.532816 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:10.579280 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `energy_full' property: -110
+Sep 30 22:48:12.627241 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:14.675246 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `energy_full_design' property: -110
+Sep 30 22:48:16.723228 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:18.772840 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_full' property: -110
+Sep 30 22:48:20.819252 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_full_design' property: -110
+Sep 30 22:48:22.868848 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:24.916990 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `technology' property: -110
+Sep 30 22:48:26.963230 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:29.011157 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_max_design' property: -110
+Sep 30 22:48:31.059268 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:33.107304 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_now' property: -110
+Sep 30 22:48:35.155323 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:37.205012 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_now' property: -110
+Sep 30 22:48:39.251244 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:41.299398 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `capacity' property: -110
+Sep 30 22:48:42.325528 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:43.347242 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:44.371270 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:45.396996 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `temp' property: -110
+Sep 30 22:48:46.420854 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:47.444955 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:48.467175 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:49.491226 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:50.515169 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:51.539247 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:52.565019 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:53.587139 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:54.612191 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:55.636889 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:56.659262 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:57.683238 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:58.707280 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:48:59.731196 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:00.755233 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:01.779158 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:02.803160 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:03.827207 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:04.851232 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:05.875270 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:06.899204 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:07.923264 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:08.981017 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:10.035258 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:11.060851 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:13.107211 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:15.155264 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:18.228069 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:21.299566 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:23.347485 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:25.401907 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `manufacturer' property: -110
+Sep 30 22:49:27.444910 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:29.491278 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `model_name' property: -110
+Sep 30 22:49:31.539237 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:33.587225 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `serial_number' property: -110
+Sep 30 22:49:35.635231 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:37.683280 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_max_design' property: -110
+Sep 30 22:49:39.731188 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:41.779235 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_now' property: -110
+Sep 30 22:49:43.827204 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:45.875223 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `cycle_count' property: -110
+Sep 30 22:49:47.923211 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:48.947580 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `energy_full' property: -110
+Sep 30 22:49:49.971271 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:50.996816 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `energy_full_design' property: -110
+Sep 30 22:49:52.019203 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:53.043247 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_full' property: -110
+Sep 30 22:49:54.102150 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:55.155249 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_full_design' property: -110
+Sep 30 22:49:56.180805 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:57.203204 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `technology' property: -110
+Sep 30 22:49:58.228147 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:49:59.251188 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_max_design' property: -110
+Sep 30 22:50:00.275258 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:01.300987 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_now' property: -110
+Sep 30 22:50:02.323268 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:03.347277 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_now' property: -110
+Sep 30 22:50:04.372811 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:05.398391 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `capacity' property: -110
+Sep 30 22:50:06.419222 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:07.443238 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:08.467220 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:09.491234 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `temp' property: -110
+Sep 30 22:50:10.552113 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:11.603233 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:12.627165 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:13.651253 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:14.675280 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:15.699286 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:16.723281 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:17.747240 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:19.795199 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:21.877351 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:23.896621 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:25.939541 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:27.987519 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:30.035254 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:32.084811 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:34.131301 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:36.179272 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:38.228817 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:40.276847 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:43.347239 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:46.419278 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:49.491292 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:51.540186 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:53.588848 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:54.611632 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:55.635264 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:56.659270 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:57.683280 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:58.707298 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:50:59.731209 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:00.755229 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `manufacturer' property: -110
+Sep 30 22:51:01.780881 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:02.803191 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `model_name' property: -110
+Sep 30 22:51:03.827210 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:04.851230 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `serial_number' property: -110
+Sep 30 22:51:05.875271 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `capacity' property: -110
+Sep 30 22:51:06.899281 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:07.923279 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_max_design' property: -110
+Sep 30 22:51:08.947275 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `capacity' property: -110
+Sep 30 22:51:09.971273 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:10.997002 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_now' property: -110
+Sep 30 22:51:12.019215 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:13.043229 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `cycle_count' property: -110
+Sep 30 22:51:14.067220 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:15.091245 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `energy_full' property: -110
+Sep 30 22:51:16.115106 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:17.139246 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `energy_full_design' property: -110
+Sep 30 22:51:18.163211 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:19.187277 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_full' property: -110
+Sep 30 22:51:20.211240 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:21.235217 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_full_design' property: -110
+Sep 30 22:51:22.264909 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:23.283282 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `technology' property: -110
+Sep 30 22:51:26.356824 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:28.403264 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_max_design' property: -110
+Sep 30 22:51:30.451224 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:32.499212 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_now' property: -110
+Sep 30 22:51:34.547249 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:37.619260 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_now' property: -110
+Sep 30 22:51:40.692825 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:43.763260 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `capacity' property: -110
+Sep 30 22:51:45.811281 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:47.859200 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:49.907237 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:51.955251 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `temp' property: -110
+Sep 30 22:51:52.982355 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:55.027869 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:56.051597 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:57.075188 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:58.099273 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:51:59.123273 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:00.147289 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:01.171291 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:02.195199 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:03.219173 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:04.243205 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:05.267186 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:06.291285 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:07.315244 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:08.340810 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:09.369614 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:10.390271 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:11.411243 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:12.435229 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:13.459236 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:14.483812 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:15.508857 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:16.531289 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:17.555155 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:18.580845 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:19.603223 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:20.627221 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:21.654362 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:22.675286 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:23.700814 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:24.723198 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `manufacturer' property: -110
+Sep 30 22:52:26.771242 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:28.819269 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `model_name' property: -110
+Sep 30 22:52:30.868805 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:32.915207 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `serial_number' property: -110
+Sep 30 22:52:34.963203 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:37.047603 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_max_design' property: -110
+Sep 30 22:52:39.059235 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:41.107173 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_now' property: -110
+Sep 30 22:52:43.155259 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:45.203267 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `cycle_count' property: -110
+Sep 30 22:52:47.251229 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:49.299277 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `energy_full' property: -110
+Sep 30 22:52:51.347206 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:53.395201 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `energy_full_design' property: -110
+Sep 30 22:52:55.444908 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:52:57.491298 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_full' property: -110
+Sep 30 22:52:58.515226 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:53:00.563215 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_full_design' property: -110
+Sep 30 22:53:01.587569 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:53:02.614354 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `technology' property: -110
+Sep 30 22:53:03.635273 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:53:04.660905 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_max_design' property: -110
+Sep 30 22:53:05.683254 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_now' property: -110
+Sep 30 22:53:06.707211 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `status' property: -110
+Sep 30 22:53:07.731162 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `charge_now' property: -110
+Sep 30 22:53:08.755254 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `capacity' property: -110

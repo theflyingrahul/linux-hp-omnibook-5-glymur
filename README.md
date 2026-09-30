@@ -29,6 +29,26 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30, kernel `-11`: a real crash — a USB-C role-switch hit a CPU
+exception, `usb_1` and the battery manager both still broken.** A
+wireless mouse receiver enumerated cleanly on `usb_1`, then ~13 s later a
+genuine `SP/PC alignment exception` (a jump to a garbage program counter)
+hit inside `xhci_plat_probe()` during a dwc3 role-switch for that same
+controller. `usb_1` has had no bound `xhci-hcd` since, confirmed across
+three `check-usb.sh` runs afterward. A real boot-time bug traces back to
+it: `sysfs: cannot create duplicate filename .../software_node` for
+*all three* dwc3 controllers (not just the USB-C ones), which also broke
+`pmic_glink`'s device-links to the Type-C PHYs — the likely source of the
+stale fwnode the crash dereferenced. Within the same ~26 s window UCSI
+failed and recovered on its own; the battery manager failed the same way
+it has before and has **not** recovered — still hung now, the same false
+"0%" as the earlier hang. USB-A and the camera, on separate controllers,
+kept working throughout, and GPU/Mesa and the EC (tested minutes earlier)
+were unaffected — this is isolated to the USB-C role-switch path, not a
+general meltdown. Needs a real kernel fix; a reboot is the only way back
+to a fully working system right now. See
+`docs/usb-dwc3-crash-2026-09-30.md`.
+
 **2026-09-30, kernel `-10` booted: backlight timeout and independent mute
 LEDs confirmed; the hotkey event line is silent.** Both `-10` corrections
 are now proven live, not just argued from ACPI tables: the keyboard
