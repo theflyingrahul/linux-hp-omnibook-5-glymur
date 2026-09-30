@@ -1,0 +1,56 @@
+Jul 28 02:14:03.043243 glymur kernel: xhci-hcd xhci-hcd.2.auto: irq 289, io mem 0x0a000000
+Sep 30 12:15:14.598610 glymur kernel: xhci-hcd xhci-hcd.3.auto: irq 265, io mem 0x0a600000
+Sep 30 12:15:14.985621 glymur kernel: usb 3-1: new low-speed USB device number 2 using xhci-hcd
+Sep 30 12:15:15.099557 glymur kernel: usb 3-1: device descriptor read/64, error -71
+Sep 30 12:15:15.318616 glymur kernel: usb 3-1: device descriptor read/64, error -71
+Sep 30 12:15:15.537562 glymur kernel: usb 3-1: new low-speed USB device number 3 using xhci-hcd
+Sep 30 12:15:15.650562 glymur kernel: usb 3-1: device descriptor read/64, error -71
+Sep 30 12:15:15.868562 glymur kernel: usb 3-1: device descriptor read/64, error -71
+Sep 30 12:15:17.817547 glymur kernel: usb usb3-port1: unable to enumerate USB device
+Sep 30 12:15:26.007613 glymur kernel: xhci-hcd xhci-hcd.3.auto: irq 267, io mem 0x0a800000
+Sep 30 12:15:26.385562 glymur kernel: usb 3-1: new low-speed USB device number 2 using xhci-hcd
+Sep 30 12:15:26.500565 glymur kernel: usb 3-1: device descriptor read/64, error -71
+Sep 30 12:15:26.721614 glymur kernel: usb 3-1: device descriptor read/64, error -71
+Sep 30 12:15:26.937564 glymur kernel: usb 3-1: new low-speed USB device number 3 using xhci-hcd
+Sep 30 12:15:27.051614 glymur kernel: usb 3-1: device descriptor read/64, error -71
+Sep 30 12:15:27.269562 glymur kernel: usb 3-1: device descriptor read/64, error -71
+Sep 30 12:15:29.217561 glymur kernel: usb usb3-port1: unable to enumerate USB device
+Sep 30 12:15:56.708449 glymur kernel: usb 1-1: new full-speed USB device number 3 using xhci-hcd
+Sep 30 12:16:03.978559 glymur kernel: usb 1-1: new full-speed USB device number 4 using xhci-hcd
+Sep 30 12:16:04.092563 glymur kernel: usb 1-1: device descriptor read/64, error -71
+Sep 30 12:16:04.315073 glymur kernel: usb 1-1: device descriptor read/64, error -71
+Sep 30 12:16:04.531943 glymur kernel: usb 1-1: new full-speed USB device number 5 using xhci-hcd
+Sep 30 12:16:04.645084 glymur kernel: usb 1-1: device descriptor read/64, error -71
+Sep 30 12:16:04.860557 glymur kernel: usb 1-1: device descriptor read/64, error -71
+Sep 30 12:16:05.350081 glymur kernel: usb 1-1: new full-speed USB device number 6 using xhci-hcd
+Sep 30 12:16:05.350224 glymur kernel: usb 1-1: Device not responding to setup address.
+Sep 30 12:16:05.553083 glymur kernel: usb 1-1: Device not responding to setup address.
+Sep 30 12:16:05.761603 glymur kernel: usb 1-1: device not accepting address 6, error -71
+Sep 30 12:16:05.761713 glymur kernel: usb 1-1: WARN: invalid context state for evaluate context command.
+Sep 30 12:16:05.873557 glymur kernel: usb 1-1: new full-speed USB device number 7 using xhci-hcd
+Sep 30 12:16:05.873694 glymur kernel: usb 1-1: Device not responding to setup address.
+Sep 30 12:16:06.083559 glymur kernel: usb 1-1: Device not responding to setup address.
+Sep 30 12:16:06.291069 glymur kernel: usb 1-1: device not accepting address 7, error -71
+Sep 30 12:16:06.291203 glymur kernel: usb 1-1: WARN: invalid context state for evaluate context command.
+Sep 30 12:16:06.291243 glymur kernel: usb usb1-port1: unable to enumerate USB device
+Sep 30 12:16:40.287897 glymur kernel: xhci-hcd xhci-hcd.3.auto: irq 265, io mem 0x0a600000
+Sep 30 12:16:40.672561 glymur kernel: usb 3-1: new full-speed USB device number 2 using xhci-hcd
+Sep 30 12:16:40.784561 glymur kernel: usb 3-1: device descriptor read/64, error -71
+Sep 30 12:16:59.348600 glymur kernel: xhci-hcd xhci-hcd.3.auto: irq 267, io mem 0x0a800000
+Sep 30 12:16:59.736613 glymur kernel: usb 3-1: new full-speed USB device number 2 using xhci-hcd
+Sep 30 12:16:59.848559 glymur kernel: usb 3-1: device descriptor read/64, error -71
+Sep 30 12:17:00.065615 glymur kernel: usb 3-1: device descriptor read/64, error -71
+Sep 30 12:17:00.284427 glymur kernel: usb 3-1: new full-speed USB device number 3 using xhci-hcd
+Sep 30 12:17:00.397560 glymur kernel: usb 3-1: device descriptor read/64, error -71
+Sep 30 12:17:00.618561 glymur kernel: usb 3-1: device descriptor read/64, error -71
+Sep 30 12:17:01.165568 glymur kernel: usb 3-1: new full-speed USB device number 4 using xhci-hcd
+Sep 30 12:17:01.165706 glymur kernel: usb 3-1: Device not responding to setup address.
+Sep 30 12:17:01.369558 glymur kernel: usb 3-1: Device not responding to setup address.
+Sep 30 12:17:01.577560 glymur kernel: usb 3-1: device not accepting address 4, error -71
+Sep 30 12:17:01.577708 glymur kernel: usb 3-1: WARN: invalid context state for evaluate context command.
+Sep 30 12:17:01.689599 glymur kernel: usb 3-1: new full-speed USB device number 5 using xhci-hcd
+Sep 30 12:17:01.689729 glymur kernel: usb 3-1: Device not responding to setup address.
+Sep 30 12:17:01.896555 glymur kernel: usb 3-1: Device not responding to setup address.
+Sep 30 12:17:02.106097 glymur kernel: usb 3-1: device not accepting address 5, error -71
+Sep 30 12:17:02.106231 glymur kernel: usb 3-1: WARN: invalid context state for evaluate context command.
+Sep 30 12:17:02.106271 glymur kernel: usb usb3-port1: unable to enumerate USB device
