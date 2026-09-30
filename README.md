@@ -29,6 +29,19 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30, GPU bring-up done: confirmed clean on kernel `-7`, the real
+desktop.** Booted `7.3.0-rc2-glymur-7`. Zero corruption, and the first
+boot in this whole investigation with no `fd_pipe_new2`/`unsupported GPU
+id`/software-fallback lines anywhere — `gnome-shell` itself is on the real
+Mesa, not just test programs. `glmark2` (GPU default, no overrides) scores
+**11570**, a ~400× jump from `-6`'s corrupted default (29): that low score
+was the GPU stumbling over out-of-range GMEM accesses every frame, not
+just visible noise. No GPU faults or hangs. Root cause, fix, and
+confirmation now all line up: the kernel told userspace the wrong GMEM
+size for a 3-slice Adreno X2-85; `upstream/qcom-next/0002` corrects it.
+Worth upstreaming — qcom-next and mainline msm still have this bug. See
+`docs/gpu-corruption-2026-09-30.md`.
+
 **2026-09-30, later still still (kernel `-7` installed):** `install-kernel.sh`
 and `install-gpu-firmware.sh` run natively on the SSD install (no WSL/
 Windows involved). `/boot/vmlinuz-glymur` and `/boot/glymur-dtb` now point
