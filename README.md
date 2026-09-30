@@ -29,6 +29,16 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30, later still (GMEM root cause confirmed exactly as
+predicted, without booting `-7` yet):** `gpu-corruption-test.sh`'s second
+run, still on kernel `-6`: `sysmem` and `FD_MESA_GMEM=16515072` (the
+correct 15.75 MB) or half of that all render clean; the GPU's *default*
+path — Mesa trusting the kernel's wrong 21 MB — is the only corrupted
+case. Matches the prediction exactly. An over-estimate of GMEM causes the
+corruption; an under-estimate is safe. Kernel `-7` itself (which reports
+the correct value without any override) is built and staged but not yet
+booted on hardware. See `docs/gpu-corruption-2026-09-30.md`.
+
 **2026-09-30, later (kernel `-7`: the GPU corruption's root cause is in
 the kernel; log review corrects the USB-C picture):**
 
