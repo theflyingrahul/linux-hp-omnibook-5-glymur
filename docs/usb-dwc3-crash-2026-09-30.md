@@ -201,3 +201,33 @@ coin flip whether the next access hits the corrupted node. Until this is
 fixed at the kernel level, avoid repeated USB-C plug/unplug or role
 switches on this DT; a reboot resets the immediate symptoms but not the
 underlying bug.
+
+## Fixed in kernel `-12`
+
+A new kernel was installed and the same tests re-run
+(`captures/2026-09-30-dwc3-crash/*-kernel12.txt`). Clean across the
+board:
+
+- **Zero occurrences** of `Internal error`, `refcount_t: underflow`, or
+  `cannot create duplicate filename` anywhere in this boot's kernel log
+  — the only `WARNING` present is the pre-existing, unrelated
+  `kernel/sched/idle.c:269` one seen since the start of this project.
+- **Both USB-C controllers exercised a host-mode role-switch and
+  survived**: `a800000.usb` (`usb_1`) got a fresh `xhci-hcd` at
+  `23:43:05`, `a600000.usb` (`usb_0`) at `23:43:48` — the exact
+  transition that crashed twice before now completes cleanly, twice, in
+  the same boot.
+- **The battery manager is healthy**: `qcom-battmgr-bat/capacity` reads
+  `18` instantly, no timeout — first clean reading after two hangs this
+  session.
+- `check-mesa.sh` and `check-ec.sh` both still pass (GPU clock genuinely
+  scales to 1.35 GHz under load; fan/thermistors read correctly, backlight
+  timeout unaffected).
+
+Root cause and fix aren't independently confirmed from this checkout
+(whatever changed between the crashing kernel and `-12` isn't yet
+reflected in this repo's own commits), but the observed behavior —
+exactly the two previously-reliable crash triggers now both completing
+without incident, and the one-boot-old battmgr hang also gone — is a
+strong live signal this is resolved. Worth a few more boots of ordinary
+use (unplug/replug cycles especially) before calling it fully closed.

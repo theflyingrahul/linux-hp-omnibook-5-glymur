@@ -29,6 +29,19 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30, kernel `-12`: the dwc3 crash and battery hang both look
+fixed.** Same tests re-run after installing a new kernel: zero `Internal
+error`/`refcount_t: underflow`/`cannot create duplicate filename`
+occurrences anywhere in the boot log, and both `usb_0` and `usb_1`
+completed a host-mode role-switch cleanly — the exact transition that
+crashed twice before on `-11`. The battery manager reads a real `18`
+percent instantly, no timeout, for the first time since it started
+hanging this session. GPU/Mesa and the EC both still check out fine.
+Root cause and fix aren't independently confirmed from this checkout's
+own commits, but the two previously-reliable triggers both completing
+cleanly is a strong signal. Worth a few more ordinary-use boots before
+calling it closed. See `docs/usb-dwc3-crash-2026-09-30.md`.
+
 **2026-09-30, kernel `-11`: the USB-C crash is deterministic — it
 reproduced again on a fresh reboot.** After the first crash (below),
 rebooting did not help: within ~8 minutes, `check-usb.sh` hit the
