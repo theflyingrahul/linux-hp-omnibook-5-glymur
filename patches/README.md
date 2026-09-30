@@ -22,12 +22,13 @@ Wi-Fi board data, firmware) are not kernel code. They live in
 Apply to qcom-next `6b4daa845239` (the qcom-next tip on 2026-09-30, from
 kernel `-8`; it was `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to
 `-4`) in order:
-`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0003`,
+`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0005`,
 `glymur-bringup/0001–0002`, then `backports/0001–0012`
 (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
 `upstream/qcom-next/0001`; `-7` adds `upstream/qcom-next/0002`; `-8` moves
-to the new base and adds `upstream/qcom-next/0003`. A fresh `prepare`
+to the new base and adds `upstream/qcom-next/0003`; `-9` adds `0004`–`0005`
+(the HP EC; qcom-next was still `6b4daa845239` when fetched before it). A fresh `prepare`
 reproduces the build tree's source exactly.
 
 Base move for `-8` (2026-09-30): the 52 new qcom-next commits are all
@@ -45,8 +46,8 @@ After `-8` was built, the comments in `upstream/qcom-next/0002` and `0003`
 were shortened (no code change); `-8`'s source differs from a fresh
 `prepare` only in those two comments.
 
-Upstream submissions: `upstream/mainline/0001`–`0005` are ready to send
-(`docs/upstreaming-2026-09-30.md`). `0004` and `0005` are the mainline
+Upstream submissions: `upstream/mainline/0001`–`0005` were signed off and
+sent on 2026-09-30 (`docs/upstreaming-2026-09-30.md` has the message IDs). `0004` and `0005` are the mainline
 versions of `upstream/qcom-next/0001` and `0002`. qcom-next was
 fetched again before `-6` (2026-09-29) and before `-7` (2026-09-30): its
 tip is still `e428097a36d`. Mainline (v7.3-rc5+37 on 2026-09-30) and
@@ -96,6 +97,12 @@ and neither changes how msm reports GMEM.
   placement refuse instead of writing to another PMIC. It lets the USB
   test DT declare the reference design's repeaters
   (`docs/eusb2-repeater-2026-09-30.md`). Generic.
+- `dt-bindings: embedded-controller: add HP OmniBook 5 16 EC` and
+  `platform: arm64: add HP OmniBook 5 16 embedded controller driver`
+  (from `-9`). Board-specific, but upstreamable like the other
+  `drivers/platform/arm64` EC drivers: hwmon for the fan speed and four
+  thermistors, and the keyboard backlight and mute LEDs, over HP's EC mailbox
+  (`docs/ec-2026-09-30.md`). Unproven until `-9` boots.
 
 Backports (`backports/`), from Bjorn Andersson's "phy: qcom: edp: Update v8
 programming sequence" v1 (linux-arm-msm, 2026-06-22,

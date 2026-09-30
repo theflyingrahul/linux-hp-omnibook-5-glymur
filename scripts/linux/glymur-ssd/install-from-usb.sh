@@ -3,11 +3,11 @@ set -euo pipefail
 
 # Install everything staged on the USB. See README.md.
 #   bash install-from-usb.sh [--keep-ubuntu-mesa] [kernel release]
-# Default kernel: 7.3.0-rc2-glymur-8.
+# Default kernel: 7.3.0-rc2-glymur-9.
 
 SYSTEM_MESA=1
 if [ "${1:-}" = --keep-ubuntu-mesa ]; then SYSTEM_MESA=0; shift; fi
-KREL="${1:-7.3.0-rc2-glymur-8}"
+KREL="${1:-7.3.0-rc2-glymur-9}"
 K="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 [ "$(id -u)" -ne 0 ] || { echo 'run as your normal user, not with sudo' >&2; exit 1; }
 [ "$(findmnt -n -o LABEL /)" = glymur-root ] || { echo 'not booted from the SSD install (glymur-root); refusing' >&2; exit 1; }
@@ -47,7 +47,7 @@ echo "== test tools from Ubuntu (glxinfo/eglinfo, vulkaninfo/vkcube, glmark2, km
 sudo apt-get install -y mesa-utils mesa-utils-bin vulkan-tools glmark2-es2-wayland kmscube ||
     echo 'apt failed (offline?); install them later, check-mesa.sh names them'
 
-for f in check-gpu-test.sh check-mesa.sh charging-watch.sh check-usb.sh gpu-corruption-test.sh; do
+for f in check-gpu-test.sh check-mesa.sh charging-watch.sh check-usb.sh check-ec.sh gpu-corruption-test.sh; do
     if [ -f "$K/$f" ]; then cp "$K/$f" "$HOME/$f"; fi
 done
 sync
@@ -55,6 +55,7 @@ echo
 echo "Done. Reboot into \"Ubuntu on SSD: device tree (GPU and USB-A test)\" and,"
 echo "from a terminal on the desktop, run:"
 echo "  bash ~/check-mesa.sh"
+echo "  sudo bash ~/check-ec.sh         (fan, EC temperatures, keyboard backlight)"
 echo "  sudo bash ~/check-usb.sh        (plug USB-C and USB 2.0 devices in first)"
 echo "  sudo bash ~/charging-watch.sh   (plug, unplug, replug; type notes)"
 echo "If the desktop is still corrupted, press Ctrl+Alt+F3, log in, and run"
