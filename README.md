@@ -29,6 +29,21 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30, kernel `-12`, port-swap retest: the crash fix holds, but
+full/low-speed USB-C enumeration is still broken.** Two more
+`check-usb.sh` runs with the charger and mouse swapped between the two
+USB-C ports produced zero crashes across four host-mode role-switches,
+confirming the `-12` fix (below) holds under real plug/swap cycling. But
+the mouse receiver failed identically every time (`error -71`, `device
+descriptor read/64`) on both ports — the same signature as before the
+eUSB2 repeater work started. The repeaters still identify correctly, but
+that was never proof they fix low-speed signaling, and this confirms
+they don't (yet). The crash and the original full/low-speed enumeration
+bug are two separate problems: only the crash is fixed. Next step is
+checking the repeater's tuning/mode-setting registers against
+`phy-qcom-eusb2-repeater.c`, per `docs/usb-c-ports-2026-09-29.md`. See
+`docs/usb-dwc3-crash-2026-09-30.md`.
+
 **2026-09-30, kernel `-12`: the dwc3 crash and battery hang both look
 fixed.** Same tests re-run after installing a new kernel: zero `Internal
 error`/`refcount_t: underflow`/`cannot create duplicate filename`
