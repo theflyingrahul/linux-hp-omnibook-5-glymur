@@ -29,6 +29,24 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30, camera controller identified; audio stopped deliberately at
+evidence limits.** The owner asked about the camera (works on ACPI, not
+on device-tree boots) and other unsettled bits (keyboard-backlight OS
+control, mute LEDs). The camera is a real USB2 peripheral on its own
+controller, `usb_hs` (ACPI `QCOM0FEF`), now fully decoded from HP's DSDT
+— memory, interrupts, one GPIO, and a PEP rail-vote table matching the
+same rails already used successfully today — a good next USB target,
+same low risk as the USB-A/USB-C work (worst case: doesn't enumerate).
+Not staged yet. See `docs/camera-usb-controller-2026-09-30.md`. Audio's
+internal speaker/mic path stopped short of any DT work on purpose: real
+but unidentified GPIOs turned up on the audio ACPI devices, and a wrong
+guess there risks damaging a speaker or mic, not just failing to work —
+a different risk class than GPIO guesses elsewhere in this project. See
+`docs/audio-acpi-tree-2026-09-30.md`. Keyboard backlight and the mute
+LEDs remain blocked on the same larger, known gap as the fan: the EC
+(IC10) has no DT node or driver at all yet — not a quick GPIO fix, a
+separate driver-stack undertaking.
+
 **2026-09-30, the battery manager hung mid-session (not a real
 battery-empty event).** From 12:21:12, every `qcom-battmgr-*` property
 failed with `-110` continuously for 14+ minutes, GNOME showed a false
