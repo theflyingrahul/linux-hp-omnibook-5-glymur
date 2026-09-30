@@ -85,3 +85,44 @@ result points to:
 The desktop can go back to software rendering: on a text console, run
 `sudo mesa-glymur-run --system off` and reboot. Per-program GPU use
 through `mesa-glymur-run` stays available.
+
+## First run: isolated to GMEM tiling (`sysmem`)
+
+Ran on kernel `-6`, `captures/2026-09-30-gpu-corruption/gpu-corruption-111000.txt`.
+Cases 2–7 (all real GPU rendering; each ran the full 8 s, `exit 124` from
+`timeout`) split cleanly:
+
+| Case | Setting | Clean? |
+|---|---|---|
+| 2 | GPU default | No |
+| 3 | linear scanout buffer | No |
+| 4 | `noubwc` | No |
+| 5 | `nolrz` | No |
+| 6 | `sysmem` | **Yes** |
+| 7 | `noubwc,nolrz,sysmem` | **Yes** |
+
+Only `sysmem` — disabling GMEM tiling (bin layout) — cleaned it up, alone
+and in combination; linear scanout, `noubwc` and `nolrz` alone all stayed
+corrupted. Per the table above, this points specifically at **GMEM tiling
+for the 3-slice configuration**, not UBWC compression, LRZ, or compressed
+scanout — narrowing "Mesa's barely tested 3-slice gen8 path" to one part
+of it. `renderer:` printed `"Adreno (TM) X2-85"` in every case, including
+case 1, confirming the compositor and every kmscube instance load the new
+Mesa consistently.
+
+**Case 1 (the llvmpipe reference) didn't produce a usable baseline**:
+`exit 139` (SIGSEGV) and answer `b` (blank/no cube). `LIBGL_ALWAYS_
+SOFTWARE=1` doesn't force software rendering through kmscube's GBM/KMS
+path the way it does for GLX — the process crashed before showing
+anything, rather than falling back to llvmpipe. That's a gap in the test
+script, not a new finding about the corruption; it just means there's no
+confirmed-clean reference frame from this run to compare against, only
+the already-established fact that the same panel was clean under software
+rendering on `-5`.
+
+**Next:** try `FD_MESA_DEBUG=sysmem` as the permanent setting for
+`mesa-glymur-run --system on` (or hardcode it into the freedreno 3-slice
+gen8 path) and confirm the desktop itself, not just kmscube, is clean.
+Worth reporting upstream: Mesa's 3-slice gen8 GMEM/bin-layout tiling
+produces visible corruption on real hardware, with `sysmem` as a working
+avoidance.

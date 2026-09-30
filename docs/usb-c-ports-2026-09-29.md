@@ -103,3 +103,47 @@ from HP's DSDT:
 - **Failure mode.** Since this is a DT-only addition over `-6`, the worst
   case is USB-C ports that don't enumerate. Charging is still covered by
   part 1.
+
+## First live test, September 30: the charging fix holds; USB-C data works on one port
+
+`check-usb.sh` and `charging-watch.sh` on kernel `-6`
+(`captures/2026-09-30-usb-c-ports/usb-test-111617.txt`,
+`captures/2026-09-30-usb-c-charging/charging-watch-111637.txt`).
+
+**Charging: fixed.** Zero "undefined port" lines anywhere in a ~5.5-minute
+run with repeated plug/unplug on both ports (was one, followed by total
+silence, every prior run). Every plug and unplug now shows up immediately
+in both `STATE` (sysfs) and `FW` (direct firmware poll): the battery
+tracks real `Charging`/`Discharging`/`Not charging` transitions in step
+with the notes ("charging, led on" → `bat=Charging`; "off" →
+`bat=Discharging`; and so on through several more cycles). This is the
+predicted fix working as designed.
+
+**USB-C data: port1 (away from the hinge) works.** `port1:
+data_role=host, power_role=source, opmode=usb_power_delivery,
+orientation=reverse, partner=yes`, and a real USB 2.0 hub plus a 128 GB
+mass-storage device enumerated on it and read data (`3-1.1 speed=480
+Generic Mass Storage Device`, SCSI attach, one partition seen) — the
+predicted "high speed without a repeater" case, confirmed. There were a
+couple of resets and one transient I/O error before it settled, so it's
+not flawless, but it works.
+
+**port0 (hinge side) is unsettled.** It shows `partner=yes`, PD, but
+`data_role=device` at the end of the run. The kernel log shows it first
+came up in host mode (an `xhci-hcd` registered on `a600000.usb`), tried to
+enumerate a low-speed device, failed three times with `error -71`
+(`EPROTO`) and "unable to enumerate", then the controller cycled through
+`dwc3_host_exit`/re-register a few times before settling with the
+role-switch reporting `device`. Not yet known whether that's the far-end
+device negotiating the role swap correctly (expected UCSI behavior) or a
+real enumeration problem independent of the role — needs a retest with a
+known-good USB-C flash drive on port0 specifically, the same way port1
+was tested.
+
+**New, minor: a firmware log-spam bug.** `ucsi_glink`, once per port1
+reconnect: `con2: Firmware bug: duplicate partner altmode SVID 0xff01 at
+offset 1..29, ignoring but please contact the BIOS vendor to fix this
+issue.` — the firmware reports the same alternate-mode SVID dozens of
+times per connector-status read; the kernel already handles it
+(de-duplicates and logs), so this is cosmetic journal noise from HP's
+firmware, not a functional bug. Not worth chasing from this repository.
