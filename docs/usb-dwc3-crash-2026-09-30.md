@@ -231,3 +231,48 @@ exactly the two previously-reliable crash triggers now both completing
 without incident, and the one-boot-old battmgr hang also gone — is a
 strong live signal this is resolved. Worth a few more boots of ordinary
 use (unplug/replug cycles especially) before calling it fully closed.
+
+## The crash fix holds under a real port-swap test — but the original full/low-speed failure is still there
+
+Same boot as the `-12` confirmation above. The charger and the mouse
+receiver were swapped between the two USB-C ports across two
+`check-usb.sh` runs (`captures/2026-09-30-dwc3-crash/
+usb-test-234701-port-swap.txt`, `usb-test-234726-port-swap.txt`).
+
+**No crash, either time.** Zero `Internal error`/`refcount_t:
+underflow`/duplicate-filename occurrences through both runs and the role
+switches in between — the `-12` fix holds under exactly the kind of
+repeated plug/replug/role-switch cycling that reproduced the crash
+before.
+
+**But the mouse receiver still doesn't enumerate.** Across this boot's
+four host-mode role-switches (`23:43:05`, `23:43:48`, `23:46:45`,
+`23:47:18` — spanning both port-swap runs), every one hit the identical
+signature from before any of today's eUSB2 repeater work:
+
+```
+usb 4-1: new low-speed USB device number 2 using xhci-hcd
+usb 4-1: device descriptor read/64, error -71
+usb 4-1: device descriptor read/64, error -71
+usb 4-1: new low-speed USB device number 3 using xhci-hcd
+usb 4-1: device descriptor read/64, error -71
+usb 4-1: device descriptor read/64, error -71
+```
+
+The SMB2370 repeaters still identify correctly (`parent PMIC subtype
+0x5f v2.0` on both, every run). So the crash and the enumeration failure
+are two separate bugs that happened to be found together: fixing the
+crash didn't fix the original full/low-speed problem
+(`docs/usb-c-ports-2026-09-29.md`) — the repeater identifying itself
+correctly was never proof it was correctly translating low-speed
+signaling, and this confirms it still isn't. The charger, which only
+needs power delivery and not data enumeration, continued negotiating
+correctly on both ports throughout (`opmode` alternated between `3.0A`
+and `usb_power_delivery` as it moved between ports).
+
+**Where this leaves it:** crash — fixed. Full/low-speed USB-C data —
+still broken, same as the day the repeaters were first added. Next step
+for that specific problem is still what `docs/usb-c-ports-2026-09-29.md`
+already proposed: check the repeater's actual tuning/mode-setting
+against what `phy-qcom-eusb2-repeater.c` does for host-mode
+low-speed operation, since identification alone clearly isn't enough.
