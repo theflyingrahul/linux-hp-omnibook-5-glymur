@@ -1,0 +1,382 @@
+
+==== system
+Linux glymur 7.3.0-rc2-glymur-11 #12 SMP PREEMPT_DYNAMIC Wed Sep 30 08:31:19 PDT 2026 aarch64 GNU/Linux
+HP OmniBook 5 Laptop 16-bf1xxx
+Jul 28 02:14:02 glymur kernel: Machine model: HP OmniBook 5 Laptop 16-bf1xxx
+Jul 28 02:14:02 glymur kernel: Kernel command line: BOOT_IMAGE=(hd1,gpt4)/boot/vmlinuz-glymur root=… rootfstype=ext4 ro rootwait clk_ignore_unused pd_ignore_unused arm64.nopauth log_buf_len=16M console=tty0 loglevel=4
+
+==== kernel log: USB controllers, PHYs, Type-C, enumeration
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: SCSI subsystem initialized
+Jul 28 02:14:02 glymur kernel: squashfs: version 4.0 (2009/01/31) Phillip Lougher
+Jul 28 02:14:02 glymur kernel: Block layer SCSI generic (bsg) driver version 0.4 loaded (major 241)
+Jul 28 02:14:02 glymur kernel: platform a600000.usb: Adding to iommu group 10
+Jul 28 02:14:02 glymur kernel: platform a800000.usb: Adding to iommu group 11
+Jul 28 02:14:02 glymur kernel: platform a000000.usb: Adding to iommu group 12
+Jul 28 02:14:02 glymur kernel: platform a200000.usb: Adding to iommu group 13
+Jul 28 02:14:02 glymur kernel: pci_bus 0005:00: root bus resource [mem 0x7a0000000-0x7dfffffff]
+Jul 28 02:14:02 glymur kernel: pci_bus 0005:00: resource 6 [mem 0x7a0000000-0x7dfffffff]
+Jul 28 02:14:02 glymur kernel: qcom-m31eusb2-phy fa0000.phy: supply vdd not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-m31eusb2-phy fa0000.phy: supply vdda12 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-m31eusb2-phy fd3000.phy: supply vdd not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-m31eusb2-phy fd3000.phy: supply vdda12 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-m31eusb2-phy fdd000.phy: supply vdd not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-m31eusb2-phy fdd000.phy: supply vdda12 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-m31eusb2-phy 88e0000.phy: supply vdd not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-m31eusb2-phy 88e0000.phy: supply vdda12 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy fd5000.phy: supply vdda-phy not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy fd5000.phy: supply vdda-pll not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy fd5000.phy: supply refgen not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: sysfs: cannot create duplicate filename '/devices/platform/soc@0/a600000.usb/software_node'
+Jul 28 02:14:02 glymur kernel:  dwc3_qcom_set_swnode+0x64/0xb8 [dwc3_qcom]
+Jul 28 02:14:02 glymur kernel:  dwc3_qcom_probe+0x53c/0x1078 [dwc3_qcom]
+Jul 28 02:14:02 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier fd5000.phy for /pmic-glink/connector@0
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy fde000.phy: supply vdda-phy not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy fde000.phy: supply vdda-pll not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy fde000.phy: supply refgen not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier fde000.phy for /pmic-glink/connector@1
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy 88e1000.phy: supply vdda-phy not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy 88e1000.phy: supply vdda-pll not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy 88e1000.phy: supply refgen not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: spmi_pmic_arb c400000.arbiter: PMIC arbiter version v8 (0x80000002)
+Jul 28 02:14:02 glymur kernel: sysfs: cannot create duplicate filename '/devices/platform/soc@0/a800000.usb/software_node'
+Jul 28 02:14:02 glymur kernel:  dwc3_qcom_set_swnode+0x64/0xb8 [dwc3_qcom]
+Jul 28 02:14:02 glymur kernel:  dwc3_qcom_probe+0x53c/0x1078 [dwc3_qcom]
+Jul 28 02:14:02 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier a800000.usb for /pmic-glink/connector@1
+Jul 28 02:14:02 glymur kernel: sysfs: cannot create duplicate filename '/devices/platform/soc@0/a600000.usb/software_node'
+Jul 28 02:14:02 glymur kernel:  dwc3_qcom_set_swnode+0x64/0xb8 [dwc3_qcom]
+Jul 28 02:14:02 glymur kernel:  dwc3_qcom_probe+0x53c/0x1078 [dwc3_qcom]
+Jul 28 02:14:02 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier a600000.usb for /pmic-glink/connector@0
+Jul 28 02:14:02 glymur kernel: sysfs: cannot create duplicate filename '/devices/platform/soc@0/a000000.usb/software_node'
+Jul 28 02:14:02 glymur kernel:  dwc3_qcom_set_swnode+0x64/0xb8 [dwc3_qcom]
+Jul 28 02:14:02 glymur kernel:  dwc3_qcom_probe+0x53c/0x1078 [dwc3_qcom]
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.2.auto: xHCI Host Controller
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.2.auto: new USB bus registered, assigned bus number 1
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.2.auto: USB0 root hub has no ports
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.2.auto: hcc params 0x0220fe65 hci version 0x110 quirks 0x000080a000000810
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.2.auto: irq 263, io mem 0x0a200000
+Jul 28 02:14:03 glymur kernel: usb usb1: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Jul 28 02:14:03 glymur kernel: usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Jul 28 02:14:03 glymur kernel: usb usb1: Product: xHCI Host Controller
+Jul 28 02:14:03 glymur kernel: usb usb1: Manufacturer: Linux 7.3.0-rc2-glymur-11 xhci-hcd
+Jul 28 02:14:03 glymur kernel: usb usb1: SerialNumber: xhci-hcd.2.auto
+Jul 28 02:14:03 glymur kernel: hub 1-0:1.0: USB hub found
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 2
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.3.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x000080a000000810
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.3.auto: irq 290, io mem 0x0a000000
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 3
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.3.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Jul 28 02:14:03 glymur kernel: usb usb2: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Jul 28 02:14:03 glymur kernel: usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Jul 28 02:14:03 glymur kernel: usb usb2: Product: xHCI Host Controller
+Jul 28 02:14:03 glymur kernel: usb usb2: Manufacturer: Linux 7.3.0-rc2-glymur-11 xhci-hcd
+Jul 28 02:14:03 glymur kernel: usb usb2: SerialNumber: xhci-hcd.3.auto
+Jul 28 02:14:03 glymur kernel: hub 2-0:1.0: USB hub found
+Jul 28 02:14:03 glymur kernel: usb usb3: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+Jul 28 02:14:03 glymur kernel: usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Jul 28 02:14:03 glymur kernel: usb usb3: Product: xHCI Host Controller
+Jul 28 02:14:03 glymur kernel: usb usb3: Manufacturer: Linux 7.3.0-rc2-glymur-11 xhci-hcd
+Jul 28 02:14:03 glymur kernel: usb usb3: SerialNumber: xhci-hcd.3.auto
+Jul 28 02:14:03 glymur kernel: hub 3-0:1.0: USB hub found
+Jul 28 02:14:03 glymur kernel: usb 1-1: new high-speed USB device number 2 using xhci-hcd
+Jul 28 02:14:03 glymur kernel: usb 1-1: New USB device found, idVendor=30c9, idProduct=00d9, bcdDevice= 0.07
+Jul 28 02:14:03 glymur kernel: usb 1-1: New USB device strings: Mfr=3, Product=1, SerialNumber=2
+Jul 28 02:14:03 glymur kernel: usb 1-1: Product: HP True Vision FHD Camera
+Jul 28 02:14:03 glymur kernel: usb 1-1: Manufacturer: [REDACTED-MFR]
+Jul 28 02:14:03 glymur kernel: usb 1-1: SerialNumber: [REDACTED-SERIAL]
+Jul 28 02:14:03 glymur kernel: videodev: Linux video capture interface: v2.00
+Jul 28 02:14:03 glymur kernel: uvcvideo 1-1:1.0: Found UVC 1.10 device HP True Vision FHD Camera (30c9:00d9)
+Jul 28 02:14:03 glymur kernel: uvcvideo 1-1:1.2: Found UVC 1.50 device HP True Vision FHD Camera (30c9:00d9)
+Jul 28 02:14:03 glymur kernel: usbcore: registered new interface driver uvcvideo
+Jul 28 02:14:04 glymur kernel: usb 3-1: new SuperSpeed USB device number 2 using xhci-hcd
+Jul 28 02:14:04 glymur kernel: usb 3-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Jul 28 02:14:04 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Jul 28 02:14:04 glymur kernel: usb 3-1: Product: Ultra
+Jul 28 02:14:04 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Jul 28 02:14:04 glymur kernel: usb 3-1: SerialNumber: [REDACTED-SERIAL]
+Jul 28 02:14:04 glymur kernel: usb-storage 3-1:1.0: USB Mass Storage device detected
+Jul 28 02:14:04 glymur kernel: scsi host0: usb-storage 3-1:1.0
+Jul 28 02:14:04 glymur kernel: usbcore: registered new interface driver usb-storage
+Jul 28 02:14:04 glymur kernel: usbcore: registered new interface driver uas
+Jul 28 02:14:05 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Jul 28 02:14:05 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Jul 28 02:14:05 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Jul 28 02:14:05 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Jul 28 02:14:05 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Jul 28 02:14:05 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Jul 28 02:14:05 glymur kernel:  sda: sda1 sda2
+Jul 28 02:14:05 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Jul 28 02:14:06 glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+Jul 28 02:14:13 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Jul 28 02:14:13 glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+Sep 30 22:44:51 glymur kernel: xhci-hcd xhci-hcd.4.auto: xHCI Host Controller
+Sep 30 22:44:51 glymur kernel: xhci-hcd xhci-hcd.4.auto: new USB bus registered, assigned bus number 4
+Sep 30 22:44:51 glymur kernel: xhci-hcd xhci-hcd.4.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x000080a000000810
+Sep 30 22:44:51 glymur kernel: xhci-hcd xhci-hcd.4.auto: irq 287, io mem 0x0a600000
+Sep 30 22:44:51 glymur kernel: xhci-hcd xhci-hcd.4.auto: xHCI Host Controller
+Sep 30 22:44:51 glymur kernel: xhci-hcd xhci-hcd.4.auto: new USB bus registered, assigned bus number 5
+Sep 30 22:44:51 glymur kernel: xhci-hcd xhci-hcd.4.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Sep 30 22:44:51 glymur kernel: usb usb4: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Sep 30 22:44:51 glymur kernel: usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 30 22:44:51 glymur kernel: usb usb4: Product: xHCI Host Controller
+Sep 30 22:44:51 glymur kernel: usb usb4: Manufacturer: Linux 7.3.0-rc2-glymur-11 xhci-hcd
+Sep 30 22:44:51 glymur kernel: usb usb4: SerialNumber: xhci-hcd.4.auto
+Sep 30 22:44:51 glymur kernel: hub 4-0:1.0: USB hub found
+Sep 30 22:44:51 glymur kernel: usb usb5: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+Sep 30 22:44:51 glymur kernel: usb usb5: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 30 22:44:51 glymur kernel: usb usb5: Product: xHCI Host Controller
+Sep 30 22:44:51 glymur kernel: usb usb5: Manufacturer: Linux 7.3.0-rc2-glymur-11 xhci-hcd
+Sep 30 22:44:51 glymur kernel: usb usb5: SerialNumber: xhci-hcd.4.auto
+Sep 30 22:44:51 glymur kernel: hub 5-0:1.0: USB hub found
+Sep 30 22:44:52 glymur kernel: usb 4-1: new low-speed USB device number 2 using xhci-hcd
+Sep 30 22:44:52 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Sep 30 22:44:52 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Sep 30 22:44:52 glymur kernel: usb 4-1: new low-speed USB device number 3 using xhci-hcd
+Sep 30 22:44:52 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Sep 30 22:44:53 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Sep 30 22:44:53 glymur kernel: usb usb4-port1: attempt power cycle
+Sep 30 22:44:54 glymur kernel: usb usb4-port1: unable to enumerate USB device
+Sep 30 22:45:02 glymur kernel: xhci-hcd xhci-hcd.4.auto: remove, state 4
+Sep 30 22:45:02 glymur kernel: usb usb5: USB disconnect, device number 1
+Sep 30 22:45:02 glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 5 deregistered
+Sep 30 22:45:02 glymur kernel: xhci-hcd xhci-hcd.4.auto: remove, state 4
+Sep 30 22:45:02 glymur kernel: usb usb4: USB disconnect, device number 1
+Sep 30 22:45:02 glymur kernel:  drm_gpuvm phy_qcom_qmp_combo drm_exec qcom_q6v5_pas snd_seq_device qcom_tsens i2c_qcom_geni qcom_spel drm_dp_aux_bus aux_bridge snd_timer qmi_tmd mhi qcom_pil_info dwc3_qcom typec drm_display_helper qcom_q6v5 qcom_eud qcom_sysmon libarc4 snd qcom_common dwc3 cec thunderbolt qcom_glink_smem pinctrl_sm8650_lpass_lpi evacc_glymur soundcore pinctrl_lpass_lpi phy_qcom_m31_eusb2 ulpi videocc_glymur qcom_glink gpi dispcc_glymur camcc_glymur udc_core rc_core mdt_loader qrtr qcom_aoss llcc_qcom nvmem_qfprom qcom_smd bam_dma qcomtee pmic_glink qcom_hwspinlock qcom_cpucp_mbox pdr_interface tee qcom_pdr_msg gpio_keys smp2p fixed qmi_helpers qcom_smem icc_bwmon rpmsg_core sch_fq_codel efi_pstore dmi_sysfs autofs4
+Sep 30 22:45:02 glymur kernel: Workqueue: events_freezable __dwc3_set_mode [dwc3]
+Sep 30 22:45:02 glymur kernel:  xhci_plat_remove+0x150/0x1b0 [xhci_plat_hcd]
+Sep 30 22:45:02 glymur kernel:  dwc3_host_exit+0x3c/0x98 [dwc3]
+Sep 30 22:45:02 glymur kernel:  __dwc3_set_mode+0x218/0x430 [dwc3]
+Sep 30 22:45:02 glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 4 deregistered
+Sep 30 22:45:06 glymur kernel: xhci-hcd xhci-hcd.4.auto: xHCI Host Controller
+Sep 30 22:45:06 glymur kernel: xhci-hcd xhci-hcd.4.auto: new USB bus registered, assigned bus number 4
+Sep 30 22:45:06 glymur kernel: xhci-hcd xhci-hcd.4.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x000080a000000810
+Sep 30 22:45:06 glymur kernel: xhci-hcd xhci-hcd.4.auto: irq 270, io mem 0x0a800000
+Sep 30 22:45:06 glymur kernel: xhci-hcd xhci-hcd.4.auto: xHCI Host Controller
+Sep 30 22:45:06 glymur kernel: xhci-hcd xhci-hcd.4.auto: new USB bus registered, assigned bus number 5
+Sep 30 22:45:06 glymur kernel: xhci-hcd xhci-hcd.4.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Sep 30 22:45:06 glymur kernel: usb usb4: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Sep 30 22:45:06 glymur kernel: usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 30 22:45:06 glymur kernel: usb usb4: Product: xHCI Host Controller
+Sep 30 22:45:06 glymur kernel: usb usb4: Manufacturer: Linux 7.3.0-rc2-glymur-11 xhci-hcd
+Sep 30 22:45:06 glymur kernel: usb usb4: SerialNumber: xhci-hcd.4.auto
+Sep 30 22:45:06 glymur kernel: hub 4-0:1.0: USB hub found
+Sep 30 22:45:06 glymur kernel: usb usb5: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+Sep 30 22:45:06 glymur kernel: usb usb5: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Sep 30 22:45:06 glymur kernel: usb usb5: Product: xHCI Host Controller
+Sep 30 22:45:06 glymur kernel: usb usb5: Manufacturer: Linux 7.3.0-rc2-glymur-11 xhci-hcd
+Sep 30 22:45:06 glymur kernel: usb usb5: SerialNumber: xhci-hcd.4.auto
+Sep 30 22:45:06 glymur kernel: hub 5-0:1.0: USB hub found
+Sep 30 22:45:06 glymur kernel: usb 4-1: new low-speed USB device number 2 using xhci-hcd
+Sep 30 22:45:07 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Sep 30 22:45:07 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Sep 30 22:45:07 glymur kernel: usb 4-1: new low-speed USB device number 3 using xhci-hcd
+Sep 30 22:45:07 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Sep 30 22:45:07 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Sep 30 22:45:07 glymur kernel: usb usb4-port1: attempt power cycle
+Sep 30 22:45:08 glymur kernel: usb 4-1: new full-speed USB device number 4 using xhci-hcd
+Sep 30 22:45:08 glymur kernel: usb 4-1: New USB device found, idVendor=413c, idProduct=301b, bcdDevice=11.23
+Sep 30 22:45:08 glymur kernel: usb 4-1: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+Sep 30 22:45:08 glymur kernel: usb 4-1: Product: Dell Universal Receiver
+Sep 30 22:45:08 glymur kernel: usb 4-1: Manufacturer: Dell
+Sep 30 22:45:09 glymur kernel: input: Dell Dell Universal Receiver as /devices/platform/soc@0/a800000.usb/xhci-hcd.4.auto/usb4/4-1/4-1:1.0/0003:413C:301B.0004/input/input19
+Sep 30 22:45:09 glymur kernel: hid-generic 0003:413C:301B.0004: input,hidraw3: USB HID v1.11 Keyboard [Dell Dell Universal Receiver] on usb-xhci-hcd.4.auto-1/input0
+Sep 30 22:45:09 glymur kernel: input: Dell Dell Universal Receiver Mouse as /devices/platform/soc@0/a800000.usb/xhci-hcd.4.auto/usb4/4-1/4-1:1.1/0003:413C:301B.0005/input/input20
+Sep 30 22:45:09 glymur kernel: input: Dell Dell Universal Receiver Consumer Control as /devices/platform/soc@0/a800000.usb/xhci-hcd.4.auto/usb4/4-1/4-1:1.1/0003:413C:301B.0005/input/input21
+Sep 30 22:45:09 glymur kernel: input: Dell Dell Universal Receiver System Control as /devices/platform/soc@0/a800000.usb/xhci-hcd.4.auto/usb4/4-1/4-1:1.1/0003:413C:301B.0005/input/input22
+Sep 30 22:45:09 glymur kernel: hid-generic 0003:413C:301B.0005: input,hidraw4: USB HID v1.11 Mouse [Dell Dell Universal Receiver] on usb-xhci-hcd.4.auto-1/input1
+Sep 30 22:45:09 glymur kernel: hid-generic 0003:413C:301B.0006: hiddev0,hidraw5: USB HID v1.11 Device [Dell Dell Universal Receiver] on usb-xhci-hcd.4.auto-1/input2
+Sep 30 22:45:09 glymur kernel: usbhid: USB HID core driver
+Sep 30 22:45:14 glymur kernel: usb 4-1: USB disconnect, device number 4
+Sep 30 22:45:14 glymur kernel: xhci-hcd xhci-hcd.4.auto: remove, state 4
+Sep 30 22:45:14 glymur kernel: usb usb5: USB disconnect, device number 1
+Sep 30 22:45:14 glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 5 deregistered
+Sep 30 22:45:14 glymur kernel: xhci-hcd xhci-hcd.4.auto: remove, state 1
+Sep 30 22:45:14 glymur kernel: usb usb4: USB disconnect, device number 1
+Sep 30 22:45:14 glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 4 deregistered
+Sep 30 22:45:22 glymur kernel: Internal error: SP/PC alignment exception: 000000008a000000 [#1]  SMP
+Sep 30 22:45:22 glymur kernel:  cfg80211 drm_gpuvm phy_qcom_qmp_combo drm_exec qcom_q6v5_pas snd_seq_device qcom_tsens i2c_qcom_geni qcom_spel drm_dp_aux_bus aux_bridge snd_timer qmi_tmd mhi qcom_pil_info dwc3_qcom typec drm_display_helper qcom_q6v5 qcom_eud qcom_sysmon libarc4 snd qcom_common dwc3 cec thunderbolt qcom_glink_smem pinctrl_sm8650_lpass_lpi evacc_glymur soundcore pinctrl_lpass_lpi phy_qcom_m31_eusb2 ulpi videocc_glymur qcom_glink gpi dispcc_glymur camcc_glymur udc_core rc_core mdt_loader qrtr qcom_aoss llcc_qcom nvmem_qfprom qcom_smd bam_dma qcomtee pmic_glink qcom_hwspinlock qcom_cpucp_mbox pdr_interface tee qcom_pdr_msg gpio_keys smp2p fixed qmi_helpers qcom_smem icc_bwmon rpmsg_core sch_fq_codel efi_pstore dmi_sysfs autofs4
+Sep 30 22:45:22 glymur kernel: Workqueue: events_freezable __dwc3_set_mode [dwc3]
+Sep 30 22:45:22 glymur kernel:  xhci_plat_probe+0x3f0/0x860 [xhci_plat_hcd]
+Sep 30 22:45:22 glymur kernel:  xhci_generic_plat_probe+0xac/0x120 [xhci_plat_hcd]
+Sep 30 22:45:22 glymur kernel:  dwc3_host_init+0x4a4/0x680 [dwc3]
+Sep 30 22:45:22 glymur kernel:  __dwc3_set_mode+0x100/0x430 [dwc3]
+Sep 30 22:45:32 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: GET_CURRENT_CAM command failed
+Sep 30 22:45:48 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: GET_CONNECTOR_STATUS failed (-110)
+
+==== kernel warnings and errors, in full
+[    1.224335] glymur kernel: ------------[ cut here ]------------
+[    1.224343] glymur kernel: WARNING: kernel/sched/idle.c:269 at do_idle+0x148/0x3c8, CPU#6: swapper/6/0
+[    1.224349] glymur kernel: Modules linked in:
+[    1.224356] glymur kernel: CPU: 6 UID: 0 PID: 0 Comm: swapper/6 Not tainted 7.3.0-rc2-glymur-11 #12 PREEMPT(lazy) 
+[    1.224362] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[    1.224370] glymur kernel: pstate: 410000c9 (nZcv daIF -PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[    1.224376] glymur kernel: pc : do_idle+0x148/0x3c8
+[    1.224382] glymur kernel: lr : do_idle+0x2d4/0x3c8
+[    1.224388] glymur kernel: sp : ffff800080183e10
+[    1.224394] glymur kernel: x29: ffff800080183e30 x28: 0000000000000000 x27: 0000000000000000
+[    1.224399] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: 0000000000000001
+[    1.224405] glymur kernel: x23: ffff000800a47080 x22: ffffd9c526d6a730 x21: 00000000000000c0
+[    1.224412] glymur kernel: x20: ffffd9c5279cc000 x19: ffff000f5beb6738 x18: ffff800080125018
+[    1.224418] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[    1.224424] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[    1.224430] glymur kernel: x11: 00000000000000c0 x10: 0000000000000000 x9 : ffffd9c5243a9f64
+[    1.224438] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[    1.224444] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[    1.224450] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 00000000000000c0
+[    1.224457] glymur kernel: Call trace:
+[    1.224464] glymur kernel:  do_idle+0x148/0x3c8 (P)
+[    1.224472] glymur kernel:  cpu_startup_entry+0x44/0x50
+[    1.224478] glymur kernel:  secondary_start_kernel+0x130/0x170
+[    1.224484] glymur kernel:  __secondary_switched+0xc8/0xd0
+[    1.224492] glymur kernel: ---[ end trace 0000000000000000 ]---
+[    1.224585] glymur kernel: qcom-pcie 1bf0000.pcie: supply vdda not found, using dummy regulator
+[    1.224674] glymur kernel: qcom-pcie 1bf0000.pcie: supply vddpe-3v3 not found, using dummy regulator
+[    1.224764] glymur kernel: qcom-pcie 1bf0000.pcie: host bridge /soc@0/pcie@1bf0000 ranges:
+[    1.224851] glymur kernel: qcom-pcie 1bf0000.pcie:       IO 0x0078105000..0x0078204fff -> 0x0000000000
+[    1.224938] glymur kernel: qcom-pcie 1bf0000.pcie:      MEM 0x0078205000..0x0079ffffff -> 0x0078205000
+[    1.225028] glymur kernel: qcom-pcie 1bf0000.pcie:      MEM 0x0780000000..0x079fffffff -> 0x0780000000
+[    1.225125] glymur kernel: qcom-pcie 1b40000.pcie: supply vdda not found, using dummy regulator
+[    1.225213] glymur kernel: qcom-pcie 1b40000.pcie: supply vddpe-3v3 not found, using dummy regulator
+[    1.225301] glymur kernel: qcom-pcie 1b40000.pcie: host bridge /soc@0/pcie@1b40000 ranges:
+[    1.225388] glymur kernel: qcom-pcie 1b40000.pcie:       IO 0x007a200000..0x007a2fffff -> 0x0000000000
+[    1.225482] glymur kernel: qcom-pcie 1b40000.pcie:      MEM 0x007a300000..0x007dffffff -> 0x007a300000
+[    1.225577] glymur kernel: qcom-pcie 1b40000.pcie:      MEM 0x07a0000000..0x07dfffffff -> 0x07a0000000
+[    1.225680] glymur kernel: arm-smmu 3da0000.iommu: probing hardware configuration...
+[    1.225776] glymur kernel: arm-smmu 3da0000.iommu: SMMUv2 with:
+[    1.225866] glymur kernel: arm-smmu 3da0000.iommu:         stage 1 translation
+[    1.225956] glymur kernel: arm-smmu 3da0000.iommu:         stage 2 translation
+[    1.226051] glymur kernel: arm-smmu 3da0000.iommu:         nested translation
+[    1.226144] glymur kernel: arm-smmu 3da0000.iommu:         coherent table walk
+[    1.226235] glymur kernel: arm-smmu 3da0000.iommu:         stream matching with 25 register groups
+[    1.226327] glymur kernel: arm-smmu 3da0000.iommu:         25 context banks (0 stage-2 only)
+[    1.226419] glymur kernel: arm-smmu 3da0000.iommu:         Supported page sizes: 0x61311000
+[  397.977121] glymur kernel: ------------[ cut here ]------------
+[  397.977135] glymur kernel: refcount_t: underflow; use-after-free.
+[  397.977146] glymur kernel: WARNING: lib/refcount.c:28 at refcount_warn_saturate+0x13c/0x2a0, CPU#0: kworker/0:2/447
+[  397.977158] glymur kernel: Modules linked in: nls_iso8859_1 q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm sg bnep scmi_cpufreq binfmt_misc uas usb_storage uvcvideo uvc videobuf2_vmalloc videobuf2_memops videobuf2_v4l2 videobuf2_common videodev mc qrtr_mhi joydev snd_q6apm input_leds hid_multitouch apr hid_generic panel_samsung_atna33xc20 fastrpc i2c_hid_of i2c_hid_acpi_prp0001 i2c_hid hid qrtr_smd xhci_plat_hcd hp_omnibook_5_ec sparse_keymap rpmsg_ctrl qcom_pd_mapper rpmsg_char ucsi_glink pmic_glink_altmode qcom_battmgr aux_hpd_bridge typec_ucsi socinfo hci_uart btqca btrtl btbcm btintel bluetooth aes_ce_blk snd_soc_lpass_wsa_macro snd_soc_lpass_va_macro ghash_ce gf128mul snd_soc_lpass_macro_common sm4_ce_gcm sm4_ce_ccm snd_soc_core sm4_ce sm4_ce_cipher snd_compress sm4 ac97_bus ath12k_wifi7 snd_pcm_dmaengine ath12k snd_pcm snd_seq_midi snd_seq_midi_event msm mac80211 snd_rawmidi spmi_pmic_arb phy_qcom_edp ubwc_config spmi_devres ocmem spmi snd_seq gpu_sched qcom_stats cfg80211
+[  397.977204] glymur kernel:  drm_gpuvm phy_qcom_qmp_combo drm_exec qcom_q6v5_pas snd_seq_device qcom_tsens i2c_qcom_geni qcom_spel drm_dp_aux_bus aux_bridge snd_timer qmi_tmd mhi qcom_pil_info dwc3_qcom typec drm_display_helper qcom_q6v5 qcom_eud qcom_sysmon libarc4 snd qcom_common dwc3 cec thunderbolt qcom_glink_smem pinctrl_sm8650_lpass_lpi evacc_glymur soundcore pinctrl_lpass_lpi phy_qcom_m31_eusb2 ulpi videocc_glymur qcom_glink gpi dispcc_glymur camcc_glymur udc_core rc_core mdt_loader qrtr qcom_aoss llcc_qcom nvmem_qfprom qcom_smd bam_dma qcomtee pmic_glink qcom_hwspinlock qcom_cpucp_mbox pdr_interface tee qcom_pdr_msg gpio_keys smp2p fixed qmi_helpers qcom_smem icc_bwmon rpmsg_core sch_fq_codel efi_pstore dmi_sysfs autofs4
+[  397.977233] glymur kernel: CPU: 0 UID: 0 PID: 447 Comm: kworker/0:2 Tainted: G        W           7.3.0-rc2-glymur-11 #12 PREEMPT(lazy) 
+[  397.977249] glymur kernel: Tainted: [W]=WARN
+[  397.977259] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[  397.977269] glymur kernel: Workqueue: events_freezable __dwc3_set_mode [dwc3]
+[  397.977280] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[  397.977291] glymur kernel: pc : refcount_warn_saturate+0x13c/0x2a0
+[  397.977301] glymur kernel: lr : refcount_warn_saturate+0x13c/0x2a0
+[  397.977311] glymur kernel: sp : ffff80008153b980
+[  397.977320] glymur kernel: x29: ffff80008153b980 x28: 0000000000000000 x27: 0000000000000000
+[  397.977331] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: 0000000000000000
+[  397.977363] glymur kernel: x23: ffffd9c52611df68 x22: ffff00082c0e0810 x21: 0000000004288060
+[  397.977372] glymur kernel: x20: ffff00080214b100 x19: ffff0008011da0b0 x18: ffff800081ac60a0
+[  397.977380] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[  397.977391] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[  397.977401] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffd9c5243ea4a8
+[  397.977412] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[  397.977421] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[  397.977431] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[  397.977442] glymur kernel: Call trace:
+[  397.977452] glymur kernel:  refcount_warn_saturate+0x13c/0x2a0 (P)
+[  397.977462] glymur kernel:  kobject_put+0x208/0x340
+[  397.977472] glymur kernel:  software_node_notify_remove+0x104/0x140
+[  397.977481] glymur kernel:  device_del+0x16c/0x3c0
+[  397.977491] glymur kernel:  usb_disconnect+0x314/0x350
+[  397.977501] glymur kernel:  usb_remove_hcd+0x18c/0x2a0
+[  397.977510] glymur kernel:  xhci_plat_remove+0x150/0x1b0 [xhci_plat_hcd]
+[  397.977519] glymur kernel:  platform_remove+0x2c/0x68
+[  397.977529] glymur kernel:  device_remove+0x58/0xc0
+[  397.977538] glymur kernel:  device_release_driver_internal+0x218/0x2f8
+[  397.977546] glymur kernel:  device_release_driver+0x24/0x50
+[  397.977561] glymur kernel:  bus_remove_device+0xfc/0x260
+[  397.977571] glymur kernel:  device_del+0x154/0x3c0
+[  397.977582] glymur kernel:  platform_device_del+0x38/0xe0
+[  397.977592] glymur kernel:  platform_device_unregister+0x20/0x68
+[  397.977598] glymur kernel:  dwc3_host_exit+0x3c/0x98 [dwc3]
+[  397.977610] glymur kernel:  __dwc3_set_mode+0x218/0x430 [dwc3]
+[  397.977620] glymur kernel:  process_one_work+0x1c4/0x5b0
+[  397.977631] glymur kernel:  worker_thread+0x194/0x330
+[  397.977641] glymur kernel:  kthread+0x138/0x150
+[  397.977651] glymur kernel:  ret_from_fork+0x10/0x20
+[  397.977661] glymur kernel: ---[ end trace 0000000000000000 ]---
+[  397.980006] glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 4 deregistered
+
+==== SPMI PMICs and eUSB2 repeaters
+spmi-0         driver=driver of_node=spmi@00000000
+spmi-1         driver=driver of_node=spmi@00000000
+spmi-2         driver=driver of_node=spmi@00000000
+Jul 28 02:14:02 glymur kernel: spmi_pmic_arb c400000.arbiter: PMIC arbiter version v8 (0x80000002)
+Sep 30 22:45:02 glymur kernel: Modules linked in: nls_iso8859_1 q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm sg bnep scmi_cpufreq binfmt_misc uas usb_storage uvcvideo uvc videobuf2_vmalloc videobuf2_memops videobuf2_v4l2 videobuf2_common videodev mc qrtr_mhi joydev snd_q6apm input_leds hid_multitouch apr hid_generic panel_samsung_atna33xc20 fastrpc i2c_hid_of i2c_hid_acpi_prp0001 i2c_hid hid qrtr_smd xhci_plat_hcd hp_omnibook_5_ec sparse_keymap rpmsg_ctrl qcom_pd_mapper rpmsg_char ucsi_glink pmic_glink_altmode qcom_battmgr aux_hpd_bridge typec_ucsi socinfo hci_uart btqca btrtl btbcm btintel bluetooth aes_ce_blk snd_soc_lpass_wsa_macro snd_soc_lpass_va_macro ghash_ce gf128mul snd_soc_lpass_macro_common sm4_ce_gcm sm4_ce_ccm snd_soc_core sm4_ce sm4_ce_cipher snd_compress sm4 ac97_bus ath12k_wifi7 snd_pcm_dmaengine ath12k snd_pcm snd_seq_midi snd_seq_midi_event msm mac80211 snd_rawmidi spmi_pmic_arb phy_qcom_edp ubwc_config spmi_devres ocmem spmi snd_seq gpu_sched qcom_stats cfg80211
+Sep 30 22:45:22 glymur kernel: Modules linked in: usbhid nls_iso8859_1 q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm sg bnep scmi_cpufreq binfmt_misc uas usb_storage uvcvideo uvc videobuf2_vmalloc videobuf2_memops videobuf2_v4l2 videobuf2_common videodev mc qrtr_mhi joydev snd_q6apm input_leds hid_multitouch apr hid_generic panel_samsung_atna33xc20 fastrpc i2c_hid_of i2c_hid_acpi_prp0001 i2c_hid hid qrtr_smd xhci_plat_hcd hp_omnibook_5_ec sparse_keymap rpmsg_ctrl qcom_pd_mapper rpmsg_char ucsi_glink pmic_glink_altmode qcom_battmgr aux_hpd_bridge typec_ucsi socinfo hci_uart btqca btrtl btbcm btintel bluetooth aes_ce_blk snd_soc_lpass_wsa_macro snd_soc_lpass_va_macro ghash_ce gf128mul snd_soc_lpass_macro_common sm4_ce_gcm sm4_ce_ccm snd_soc_core sm4_ce sm4_ce_cipher snd_compress sm4 ac97_bus ath12k_wifi7 snd_pcm_dmaengine ath12k snd_pcm snd_seq_midi snd_seq_midi_event msm mac80211 snd_rawmidi spmi_pmic_arb phy_qcom_edp ubwc_config spmi_devres ocmem spmi snd_seq gpu_sched qcom_stats
+
+==== drivers bound
+a000000.usb    -> dwc3-qcom
+88e0000.phy    -> qcom-m31eusb2-phy
+88e1000.phy    -> qcom-qmp-combo-phy
+a600000.usb    -> dwc3-qcom
+fd3000.phy     -> qcom-m31eusb2-phy
+fd5000.phy     -> qcom-qmp-combo-phy
+a800000.usb    -> dwc3-qcom
+fdd000.phy     -> qcom-m31eusb2-phy
+fde000.phy     -> qcom-qmp-combo-phy
+a200000.usb    -> dwc3-qcom
+fa0000.phy     -> qcom-m31eusb2-phy
+uas                    28672  0
+usb_storage            94208  2 uas
+xhci_plat_hcd          24576  0
+ucsi_glink             20480  0
+pmic_glink_altmode     20480  0
+typec_ucsi             73728  1 ucsi_glink
+phy_qcom_edp           77824  1
+phy_qcom_qmp_combo    159744  13
+dwc3_qcom              32768  2
+typec                 135168  4 pmic_glink_altmode,phy_qcom_qmp_combo,typec_ucsi,ucsi_glink
+dwc3                  212992  1 dwc3_qcom
+phy_qcom_m31_eusb2     16384  4
+pmic_glink             16384  3 pmic_glink_altmode,qcom_battmgr,ucsi_glink
+
+==== USB-C: ports, partners, data roles
+port0: data_role=[host] device power_role=[source] sink opmode=3.0A orientation=normal partner=yes
+    partner: type= accessory=none usb_pd=no
+port1: data_role=[host] device power_role=source [sink] opmode=default orientation=unknown partner=no
+a600000.usb-role-switch: role=host
+a800000.usb-role-switch: role=device
+
+==== USB topology and speeds
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+    |__ Port 001: Dev 002, If 0, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 1, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 2, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 3, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 4, Class=Application Specific Interface, Driver=[none], 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 003.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+    |__ Port 001: Dev 002, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
+1-1          a200000.usb    speed=480    [REDACTED-MFR] HP True Vision FHD Camera
+3-1          a000000.usb    speed=5000   SanDisk Ultra
+usb1         a200000.usb    speed=480    Linux 7.3.0-rc2-glymur-11 xhci-hcd xHCI Host Controller
+usb2         a000000.usb    speed=480    Linux 7.3.0-rc2-glymur-11 xhci-hcd xHCI Host Controller
+usb3         a000000.usb    speed=10000  Linux 7.3.0-rc2-glymur-11 xhci-hcd xHCI Host Controller
+
+==== camera (usb_hs, from kernel -8)
+Bus 001 Device 002: ID 30c9:00d9 Luxvisions Innotech Limited HP True Vision FHD Camera
+video0: HP True Vision FHD Camera: HP T
+video1: HP True Vision FHD Camera: HP T
+video2: HP True Vision FHD Camera: HP I
+video3: HP True Vision FHD Camera: HP I
+
+==== block devices and mounts
+NAME          SIZE TRAN   LABEL                           FSTYPE    MOUNTPOINTS
+sda          57.3G usb                                              
+├─sda1        7.3G        UBUNTU 26_0                     vfat      /run/media/rahul/UBUNTU 26_0
+└─sda2         50G        casper-rw                       ext3      
+zram0           0B                                                  
+nvme0n1     953.9G nvme                                             
+├─nvme0n1p1   512M nvme   SYSTEM                          vfat      
+├─nvme0n1p2    16M nvme                                             
+├─nvme0n1p3 696.4G nvme   RAHULS-X2ELITE Windows 9/9/2026 BitLocker 
+├─nvme0n1p4   256G nvme   glymur-root                     ext4      /
+└─nvme0n1p5   954M nvme                                   ntfs      
+
+Saved to /var/log/glymur/usb-test-20260930T224548.txt
