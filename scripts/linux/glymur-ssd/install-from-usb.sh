@@ -1,30 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# One command for any boot that can see the USB stick (an ACPI boot, or
-# "device tree (GPU and USB-A test)", whose USB-A port works), run from
-# the USB's glymur-tools/kernels directory as your normal user (it asks for
-# your password through sudo):
-#
-#   bash "/media/$USER/UBUNTU 26_0/glymur-tools/kernels/install-from-usb.sh"
-#
-# It checks every file against SHA256SUMS, then installs what is staged:
-# - the kernel package (skipped if it is already the newest), with its
-#   device trees;
-# - the Adreno GPU firmware;
-# - the newest Mesa build under /opt/mesa-glymur, and switches the whole
-#   system to it (sudo mesa-glymur-run --system on; undo with --system
-#   off). Pass --keep-ubuntu-mesa to install it without switching;
-# - the boot service that loads scmi-cpufreq where the device tree allows;
-# - the test tools from Ubuntu, and the check scripts into your home
-#   directory.
-#
-#   install-from-usb.sh [--keep-ubuntu-mesa] [kernel release]
-# Default kernel: 7.3.0-rc2-glymur-7.
+# Install everything staged on the USB. See README.md.
+#   bash install-from-usb.sh [--keep-ubuntu-mesa] [kernel release]
+# Default kernel: 7.3.0-rc2-glymur-8.
 
 SYSTEM_MESA=1
 if [ "${1:-}" = --keep-ubuntu-mesa ]; then SYSTEM_MESA=0; shift; fi
-KREL="${1:-7.3.0-rc2-glymur-7}"
+KREL="${1:-7.3.0-rc2-glymur-8}"
 K="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 [ "$(id -u)" -ne 0 ] || { echo 'run as your normal user, not with sudo' >&2; exit 1; }
 [ "$(findmnt -n -o LABEL /)" = glymur-root ] || { echo 'not booted from the SSD install (glymur-root); refusing' >&2; exit 1; }
@@ -51,7 +34,6 @@ if [ -n "$MESA" ]; then
     if [ "$SYSTEM_MESA" = 1 ]; then
         echo "== switching the system to it"
         sudo mesa-glymur-run --system on
-        # The older per-user switch is superseded; remove it if present.
         mesa-glymur-run --desktop off >/dev/null 2>&1 || true
     fi
 fi

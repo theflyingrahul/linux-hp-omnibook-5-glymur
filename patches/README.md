@@ -19,14 +19,35 @@ Wi-Fi board data, firmware) are not kernel code. They live in
 
 ## Boot series (built by `scripts/linux/build-qcom-next-glymur.sh`)
 
-Apply to qcom-next `e428097a36d` (the qcom-next tip on 2026-09-28; the
-base was `a47c4c5aa` up to kernel `-4`) in order:
-`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0002`,
+Apply to qcom-next `6b4daa845239` (the qcom-next tip on 2026-09-30, from
+kernel `-8`; it was `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to
+`-4`) in order:
+`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0003`,
 `glymur-bringup/0001–0002`, then `backports/0001–0012`
 (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
-`upstream/qcom-next/0001`; `-7` adds `upstream/qcom-next/0002`. A fresh
-`prepare` reproduces the build tree's source exactly. qcom-next was
+`upstream/qcom-next/0001`; `-7` adds `upstream/qcom-next/0002`; `-8` moves
+to the new base and adds `upstream/qcom-next/0003`. A fresh `prepare`
+reproduces the build tree's source exactly.
+
+Base move for `-8` (2026-09-30): the 52 new qcom-next commits are all
+Nord (Ethernet, display, eDP PHY, an ADSP remoteproc flag). The ones in
+drivers we use (`dp_display.c`, `qcom_q6v5_pas.c`, the QMP v8 header) only
+add or rename Nord entries, and no Glymur/Mahua device tree changed. The
+one collision is `phy-qcom-edp.c`: the Nord eDP PHY series replaced the `is_nord` branches with
+optional `phy_ver_ops` hooks (`phy_tx_lane_cfg`, `phy_tx_res_cfg`) and
+`phy_status_reg`/`bias1_en_2lane` config fields, so `backports/0001–0002`
+were re-ported: a three-way merge of our `-7` file with the new base, the
+same three conflicts resolved in both patches, and the v46 callbacks now
+use those hooks. The v8 (Glymur) code is unchanged: the new `0002` delta
+is byte-identical to the `-7` one. Every other patch applies unchanged.
+After `-8` was built, the comments in `upstream/qcom-next/0002` and `0003`
+were shortened (no code change); `-8`'s source differs from a fresh
+`prepare` only in those two comments.
+
+Upstream submissions: `upstream/mainline/0001`–`0005` are ready to send
+(`docs/upstreaming-2026-09-30.md`). `0004` and `0005` are the mainline
+versions of `upstream/qcom-next/0001` and `0002`. qcom-next was
 fetched again before `-6` (2026-09-29) and before `-7` (2026-09-30): its
 tip is still `e428097a36d`. Mainline (v7.3-rc5+37 on 2026-09-30) and
 msm-next (`d33622598496`, 2026-09-26) have nothing new for these drivers,
@@ -67,6 +88,14 @@ and neither changes how msm reports GMEM.
   (`docs/gpu-corruption-2026-09-30.md`). Qualcomm's KGSL reports
   `gmem_size / 4 × active slices` (15.75 MB here); msm now does the same
   when it reads the slice mask. Not board-specific: any partial-slice A8xx.
+  Confirmed on `-7`: clean desktop, `glmark2` 11570.
+- `phy: qcom: eusb2-repeater: check the parent PMIC before using it`. For
+  the SMB2370, the repeater driver checks that its parent PMIC reports the
+  SMB2370 subtype before registering the PHY, and logs what it found. A
+  board device tree places repeaters by SPMI slave ID; this makes a wrong
+  placement refuse instead of writing to another PMIC. It lets the USB
+  test DT declare the reference design's repeaters
+  (`docs/eusb2-repeater-2026-09-30.md`). Generic.
 
 Backports (`backports/`), from Bjorn Andersson's "phy: qcom: edp: Update v8
 programming sequence" v1 (linux-arm-msm, 2026-06-22,

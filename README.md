@@ -29,6 +29,28 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30, kernel `-8` staged: eUSB2 repeaters for the USB-C ports, the
+camera's controller, and the new qcom-next base.** Not booted yet.
+- **Full/low-speed USB.** Qualcomm's Mahua/Glymur CRD drives each USB-C
+  port's eUSB2 PHY through an SMB2370 repeater on SPMI bus 2 (SID 9 →
+  `usb_0`, SID 10 → `usb_1`). HP's power votes for those ports include the
+  repeaters' two rails (L15B 1.8 V, L7B 3.072 V). Without a repeater node,
+  Linux never puts the repeater in host mode. On the ACPI boot, where the
+  firmware's setup is untouched, full speed worked (a receiver at 12 Mb/s
+  on USB-A).
+    - The USB test DT now declares the repeaters.
+    - A new driver check (`upstream/qcom-next/0003`) makes each repeater
+      verify its PMIC is an SMB2370 before anything writes to it. A wrong
+      guess costs that USB-C port's data for the boot, never a write to the
+      wrong PMIC.
+    - USB-A is unchanged.
+- **Camera.** `usb_hs` (the internal camera's controller) is enabled, host
+  only.
+- **Base.** qcom-next moved to `6b4daa845239` (Nord only); the eDP PHY
+  backports were re-ported and Glymur's code is byte-identical.
+- **Test:** a mouse in each USB-C port, `check-usb.sh`. See
+  `docs/eusb2-repeater-2026-09-30.md`.
+
 **2026-09-30, camera controller identified; audio stopped deliberately at
 evidence limits.** The owner asked about the camera (works on ACPI, not
 on device-tree boots) and other unsettled bits (keyboard-backlight OS

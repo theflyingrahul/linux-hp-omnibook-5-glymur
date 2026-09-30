@@ -1,28 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Prepare a native qcom-next Glymur kernel build on the laptop itself (the
-# Ubuntu SSD install), so kernels can be built and installed without the
-# Windows/WSL round trip:
-#
-#   bash scripts/linux/setup-native-kernel-build.sh [src-root]      (no sudo)
-#
-# 1. checks the build prerequisites and prints the apt command if any are
-#    missing (this script never runs sudo);
-# 2. shallow-fetches Qualcomm's qcom-next at the pinned commit into
-#    <src-root>/linux-qcom-next (default ~/src), about 250 MB;
-# 3. applies the layered series (prepare-qcom-next-glymur.sh) in the worktree
-#    <src-root>/linux-qcom-next-glymur.
-#
-# Then build and install:
-#   GLYMUR_SUFFIX=-2 bash scripts/linux/build-qcom-next-glymur.sh \
-#       ~/src/linux-qcom-next-glymur ~/src/build-glymur "$(nproc)"
-#   sudo bash scripts/linux/glymur-ssd/install-kernel.sh ~/src/build-glymur
+# Prepare a native qcom-next build on the SSD install. See README.md.
+#   bash scripts/linux/setup-native-kernel-build.sh [src-root]
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 ROOT="${1:-$HOME/src}"
 URL=https://github.com/qualcomm-linux/kernel.git
-BASE=e428097a36d210c50991063f17ee0848e9eb68a8
+BASE=6b4daa84523902fe715813633d47f1c568d2bcbc
 CLONE="$ROOT/linux-qcom-next"
 TREE="$ROOT/linux-qcom-next-glymur"
 
