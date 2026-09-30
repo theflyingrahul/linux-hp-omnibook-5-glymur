@@ -1,0 +1,65 @@
+
+==== system
+7.3.0-rc2-glymur-9
+HP OmniBook 5 Laptop 16-bf1xxx (GPU and USB test)
+
+==== kernel log: EC bus and driver
+Jul 28 02:14:02 glymur kernel: platform 8c0000.geniqup: Adding to iommu group 3
+Jul 28 02:14:02 glymur kernel: platform ac0000.geniqup: Adding to iommu group 5
+Jul 28 02:14:02 glymur kernel: platform bc0000.geniqup: Adding to iommu group 7
+Jul 28 02:14:02 glymur kernel: input: gpio-keys as /devices/platform/gpio-keys/input/input0
+Jul 28 02:14:03 glymur kernel: Modules linked in: i2c_hid_acpi_prp0001 i2c_hid qcom_spmi_pmic(+) regmap_spmi hp_omnibook_5_ec(+) hid rpmsg_ctrl qrtr_smd rpmsg_char qcom_pd_mapper xhci_plat_hcd ucsi_glink pmic_glink_altmode typec_ucsi qcom_battmgr aux_hpd_bridge socinfo aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm ath12k_wifi7(+) hci_uart sm4_ce ath12k sm4_ce_cipher btqca btrtl sm4 btbcm snd_soc_lpass_wsa_macro snd_soc_lpass_va_macro mac80211 btintel snd_soc_lpass_macro_common cfg80211 snd_soc_core bluetooth mhi snd_compress libarc4 ac97_bus msm snd_pcm_dmaengine spmi_pmic_arb snd_pcm spmi_devres spmi i2c_qcom_geni qcom_stats qcom_spel ubwc_config phy_qcom_edp snd_seq_midi snd_seq_midi_event ocmem snd_rawmidi gpu_sched qcom_q6v5_pas drm_gpuvm qmi_tmd drm_exec qcom_pil_info snd_seq qcom_q6v5 drm_dp_aux_bus qcom_sysmon phy_qcom_qmp_combo dwc3_qcom drm_display_helper qcom_common snd_seq_device qcom_eud qcom_glink_smem snd_timer aux_bridge cec qcom_glink dwc3 typec dispcc_glymur ulpi qcom_tsens rc_core phy_qcom_m31_eusb2 mdt_loader
+Jul 28 02:14:03 glymur kernel:  videocc_glymur camcc_glymur evacc_glymur qrtr snd thunderbolt pinctrl_sm8650_lpass_lpi udc_core pinctrl_lpass_lpi pmic_glink soundcore qcom_aoss gpi llcc_qcom qcom_smd pdr_interface nvmem_qfprom qcom_pdr_msg qmi_helpers qcom_hwspinlock bam_dma qcomtee qcom_cpucp_mbox rpmsg_core smp2p tee gpio_keys fixed qcom_smem icc_bwmon sch_fq_codel efi_pstore dmi_sysfs autofs4
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF Touchscreen as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input1
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input2
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input3
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Mouse as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input5
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Touchpad as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input7
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Consumer Control as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input8
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 0416:C300 Keyboard as /devices/platform/soc@0/bc0000.geniqup/b80000.i2c/i2c-0/0-003a/0018:0416:C300.0003/input/input9
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input10
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF UNKNOWN as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input11
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:44BF UNKNOWN as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input12
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Mouse as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input14
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Touchpad as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input16
+Jul 28 02:14:03 glymur kernel: input: hid-over-i2c 04F3:32EF Consumer Control as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input17
+
+==== EC device and driver
+i2c bus for a84000: 9
+client: /sys/bus/i2c/devices/9-0076
+driver: hp-omnibook-5-ec
+hp_omnibook_5_ec       12288  0
+i2c_qcom_geni          53248  0
+gpi                    53248  3 i2c_qcom_geni
+gpio_keys              24576  0
+
+==== hwmon (5 samples, 2 s apart)
+fan1 0 rpm | EC thermistor 1: 35000 | EC thermistor 2: 36000 | EC thermistor 3: 36000 | EC thermistor 4: 31000
+fan1 0 rpm | EC thermistor 1: 35000 | EC thermistor 2: 36000 | EC thermistor 3: 36000 | EC thermistor 4: 31000
+fan1 0 rpm | EC thermistor 1: 35000 | EC thermistor 2: 36000 | EC thermistor 3: 36000 | EC thermistor 4: 31000
+fan1 0 rpm | EC thermistor 1: 35000 | EC thermistor 2: 36000 | EC thermistor 3: 36000 | EC thermistor 4: 31000
+fan1 0 rpm | EC thermistor 1: 35000 | EC thermistor 2: 36000 | EC thermistor 3: 36000 | EC thermistor 4: 31000
+
+==== keyboard backlight LED
+brightness 0 of 2
+set 0, reads back 0
+Keyboard backlight now: off, dim or bright? answer: off
+set 1, reads back 0
+Keyboard backlight now: off, dim or bright? answer: off
+set 2, reads back 0
+Keyboard backlight now: off, dim or bright? answer: off
+
+==== mute LEDs
+platform::mute reads 0
+platform::mute on, reads back 1
+Which key LED is lit now: F6, F9, both or none? answer: both
+platform::mute off, reads back 0
+platform::micmute reads 1
+platform::micmute on, reads back 1
+Which key LED is lit now: F6, F9, both or none? answer: F9
+platform::micmute off, reads back 0
+
+==== manual mailbox probe (only without the driver)
+skipped: the driver is bound
+
+saved to /var/log/glymur/ec-test-20260728T021459.txt

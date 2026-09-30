@@ -29,8 +29,21 @@ Current phase: comparing Qualcomm's Snapdragon X2 kernel and Debian image recipe
 
 ## CURRENT GATE
 
+**2026-09-30, kernel `-9` booted: EC driver confirmed live, mixed
+results.** `hp-omnibook-5-ec` binds cleanly. Fan and thermistor readings
+are real and stable (idle fan, 31-36 °C across four sensors). The
+keyboard-backlight write doesn't visibly change anything (owner-confirmed
+still off after setting all three levels) — likely missing an OS-control
+flag the mute-LED path already sends. The mute LEDs are real hardware but
+not the assumed 1:1 mapping: `platform::micmute` (LED 9) correctly lights
+only F9, but `platform::mute` (LED 8) lights *both* F6 and F9 together.
+Also confirmed live this boot: the eUSB2 repeater fix works (`parent PMIC
+subtype 0x5f v2.0` on both USB-C ports, no more `error -71`), and the
+camera enumerates (`30c9:00d9 HP True Vision FHD Camera`,
+`/dev/video0`-`3`). See `docs/ec-2026-09-30.md`.
+
 **2026-09-30, kernel `-8` staged: eUSB2 repeaters for the USB-C ports, the
-camera's controller, and the new qcom-next base.** Not booted yet.
+camera's controller, and the new qcom-next base.**
 - **Full/low-speed USB.** Qualcomm's Mahua/Glymur CRD drives each USB-C
   port's eUSB2 PHY through an SMB2370 repeater on SPMI bus 2 (SID 9 →
   `usb_0`, SID 10 → `usb_1`). HP's power votes for those ports include the
