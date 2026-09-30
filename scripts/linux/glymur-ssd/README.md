@@ -171,6 +171,30 @@ USB-C port, and a mouse in each port in turn.
 - `-8` adds the USB-C repeaters. On USB-A, a mouse is still expected to fail.
 - A charger makes its port a sink and USB device, which is correct.
 
+### `check-ec.sh`
+
+    sudo bash check-ec.sh
+
+The embedded-controller report for "device tree (GPU and USB-A test)",
+from kernel `-9` (`docs/ec-2026-09-30.md`):
+- the EC bus (`i2c9`, `0xa84000`) and the `hp-omnibook-5-ec` driver in the
+  kernel log;
+- the fan speed and the four EC thermistors, five samples 2 s apart;
+- the keyboard backlight (`hp::kbd_backlight`): it steps through off and
+  the two levels and asks what you see;
+- the F6/F9 mute LEDs (`platform::mute`, `platform::micmute`): it lights
+  each in turn and asks which key lit, since that mapping is not known.
+
+Run it at a terminal on the desktop; it waits for your answers.
+
+If the driver did not bind, it sends HP's read commands by hand with
+`i2ctransfer` (from `i2c-tools`), and nothing that changes the EC's
+state.
+
+To set the keyboard backlight by hand:
+
+    echo 2 | sudo tee /sys/class/leds/hp::kbd_backlight/brightness
+
 ### `charging-watch.sh`
 
     sudo bash charging-watch.sh

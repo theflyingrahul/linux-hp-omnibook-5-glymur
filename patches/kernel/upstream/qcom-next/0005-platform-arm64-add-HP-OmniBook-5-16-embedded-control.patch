@@ -1,0 +1,365 @@
+From 42a50331a72ede1036ae8f1fd8e822935fd61d1d Mon Sep 17 00:00:00 2001
+From: Rahul Pon <theflyingrahul@gmail.com>
+Date: Wed, 30 Sep 2026 04:33:53 -0700
+Subject: [PATCH 5/5] platform: arm64: add HP OmniBook 5 16 embedded controller
+ driver
+
+The embedded controller of the HP OmniBook 5 16 (Snapdragon X2) sits on
+I2C at address 0x76 and takes commands through a mailbox: wait for an
+idle status (0xef), write the command and sub-command (0xed), wait for
+completion, then read the 32-byte reply (0xee).
+
+Expose the fan speed and the four thermistors HP's thermal zones use
+through hwmon, the keyboard backlight (off and two levels) as an LED, and
+the two EC LEDs HP's mute LED WMI methods drive as the mute and mic mute
+LEDs. The command codes and reply formats are the ones HP's ACPI methods
+use on this laptop.
+
+---
+ drivers/platform/arm64/Kconfig            |  14 +
+ drivers/platform/arm64/Makefile           |   1 +
+ drivers/platform/arm64/hp-omnibook-5-ec.c | 295 ++++++++++++++++++++++
+ 3 files changed, 310 insertions(+)
+ create mode 100644 drivers/platform/arm64/hp-omnibook-5-ec.c
+
+diff --git a/drivers/platform/arm64/Kconfig b/drivers/platform/arm64/Kconfig
+index e32e01b2a9bd..de65d1349410 100644
+--- a/drivers/platform/arm64/Kconfig
++++ b/drivers/platform/arm64/Kconfig
+@@ -33,6 +33,20 @@ config EC_ACER_ASPIRE1
+ 	  laptop where this information is not properly exposed via the
+ 	  standard ACPI devices.
+ 
++config EC_HP_OMNIBOOK5
++	tristate "HP OmniBook 5 16 Embedded Controller driver"
++	depends on ARCH_QCOM || COMPILE_TEST
++	depends on I2C
++	depends on HWMON
++	select LEDS_CLASS
++	select NEW_LEDS
++	help
++	  Driver for the Embedded Controller in the Snapdragon X2-based HP
++	  OmniBook 5 16, which reports the fan speed and thermistor
++	  temperatures and controls the keyboard backlight.
++
++	  Say M or Y here to include this support.
++
+ config EC_HUAWEI_GAOKUN
+ 	tristate "Huawei Matebook E Go Embedded Controller driver"
+ 	depends on ARCH_QCOM || COMPILE_TEST
+diff --git a/drivers/platform/arm64/Makefile b/drivers/platform/arm64/Makefile
+index 7681be4a46e9..a809abf45d37 100644
+--- a/drivers/platform/arm64/Makefile
++++ b/drivers/platform/arm64/Makefile
+@@ -6,6 +6,7 @@
+ #
+ 
+ obj-$(CONFIG_EC_ACER_ASPIRE1)	+= acer-aspire1-ec.o
++obj-$(CONFIG_EC_HP_OMNIBOOK5)	+= hp-omnibook-5-ec.o
+ obj-$(CONFIG_EC_HUAWEI_GAOKUN)	+= huawei-gaokun-ec.o
+ obj-$(CONFIG_EC_LENOVO_YOGA_C630) += lenovo-yoga-c630.o
+ obj-$(CONFIG_EC_LENOVO_THINKPAD_T14S) += lenovo-thinkpad-t14s.o
+diff --git a/drivers/platform/arm64/hp-omnibook-5-ec.c b/drivers/platform/arm64/hp-omnibook-5-ec.c
+new file mode 100644
+index 000000000000..0fb1693da560
+--- /dev/null
++++ b/drivers/platform/arm64/hp-omnibook-5-ec.c
+@@ -0,0 +1,295 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * HP OmniBook 5 16 (Snapdragon X2) embedded controller
++ *
++ * The EC takes commands through a mailbox: wait for an idle status, write
++ * the command, wait for it to complete, then read the reply. Command codes
++ * are the ones HP's ACPI tables use on this laptop.
++ */
++
++#include <linux/cleanup.h>
++#include <linux/delay.h>
++#include <linux/hwmon.h>
++#include <linux/i2c.h>
++#include <linux/leds.h>
++#include <linux/minmax.h>
++#include <linux/module.h>
++#include <linux/mutex.h>
++#include <linux/unaligned.h>
++
++#define HPEC_STATUS		0xef
++#define HPEC_REQUEST		0xed
++#define HPEC_REPLY		0xee
++#define HPEC_REPLY_LEN		32
++
++#define HPEC_STATUS_IDLE	0x00
++#define HPEC_STATUS_DONE	0xe0
++#define HPEC_POLL_TRIES		20
++#define HPEC_POLL_US		5000
++
++#define HPEC_OS_FLAG		0x01
++#define HPEC_OS_FLAG_LEDS	0x84
++#define HPEC_KBD_BACKLIGHT	0x05
++#define HPEC_KBD_BACKLIGHT_GET	0xff
++#define HPEC_KBD_BACKLIGHT_MAX	2
++#define HPEC_LED		0x06
++#define HPEC_LED_GET		0xff
++#define HPEC_LED_ON		0x80
++#define HPEC_THERMISTOR		0x26
++#define HPEC_THERMISTOR_INVALID	0xff
++#define HPEC_FAN		0xbc
++#define HPEC_FAN_RPM		0x03
++
++/* The four thermistors HP's thermal zones enable, in their order */
++static const u8 hpec_thermistors[] = { 0x00, 0x07, 0x04, 0x0a };
++
++static const char * const hpec_thermistor_labels[] = {
++	"EC thermistor 1", "EC thermistor 2", "EC thermistor 3", "EC thermistor 4",
++};
++
++/* EC LEDs 8 and 9, which HP's mute LED WMI methods drive */
++static const struct {
++	const char *name;
++	u8 index;
++} hpec_leds[] = {
++	{ "platform::mute", 0x08 },
++	{ "platform::micmute", 0x09 },
++};
++
++struct hpec;
++
++struct hpec_led {
++	struct led_classdev cdev;
++	struct hpec *ec;
++	u8 index;
++};
++
++struct hpec {
++	struct i2c_client *client;
++	struct mutex lock;	/* serializes mailbox commands */
++	struct led_classdev kbd_backlight;
++	struct hpec_led leds[ARRAY_SIZE(hpec_leds)];
++};
++
++static int hpec_wait(struct hpec *ec, u8 status)
++{
++	int i, ret;
++
++	for (i = 0; i < HPEC_POLL_TRIES; i++) {
++		ret = i2c_smbus_read_byte_data(ec->client, HPEC_STATUS);
++		if (ret < 0)
++			return ret;
++		if (ret == status)
++			return 0;
++		fsleep(HPEC_POLL_US);
++	}
++
++	return -ETIMEDOUT;
++}
++
++static int hpec_command(struct hpec *ec, u8 cmd, u8 sub, u8 reply[HPEC_REPLY_LEN])
++{
++	u8 request[] = { cmd, sub };
++	int ret;
++
++	guard(mutex)(&ec->lock);
++
++	ret = hpec_wait(ec, HPEC_STATUS_IDLE);
++	if (ret)
++		return ret;
++
++	ret = i2c_smbus_write_i2c_block_data(ec->client, HPEC_REQUEST,
++					     sizeof(request), request);
++	if (ret)
++		return ret;
++
++	ret = hpec_wait(ec, HPEC_STATUS_DONE);
++	if (ret || !reply)
++		return ret;
++
++	ret = i2c_smbus_read_i2c_block_data(ec->client, HPEC_REPLY,
++					    HPEC_REPLY_LEN, reply);
++	if (ret < 0)
++		return ret;
++
++	return ret == HPEC_REPLY_LEN ? 0 : -EIO;
++}
++
++static int hpec_hwmon_read(struct device *dev, enum hwmon_sensor_types type,
++			   u32 attr, int channel, long *val)
++{
++	struct hpec *ec = dev_get_drvdata(dev);
++	u8 reply[HPEC_REPLY_LEN];
++	int ret;
++
++	switch (type) {
++	case hwmon_fan:
++		ret = hpec_command(ec, HPEC_FAN, HPEC_FAN_RPM, reply);
++		if (ret)
++			return ret;
++		*val = get_unaligned_le16(reply);
++		return 0;
++	case hwmon_temp:
++		ret = hpec_command(ec, HPEC_THERMISTOR, hpec_thermistors[channel], reply);
++		if (ret)
++			return ret;
++		if (reply[0] == HPEC_THERMISTOR_INVALID)
++			return -ENODATA;
++		*val = reply[0] * 1000;
++		return 0;
++	default:
++		return -EOPNOTSUPP;
++	}
++}
++
++static int hpec_hwmon_read_string(struct device *dev, enum hwmon_sensor_types type,
++				  u32 attr, int channel, const char **str)
++{
++	if (type != hwmon_temp)
++		return -EOPNOTSUPP;
++
++	*str = hpec_thermistor_labels[channel];
++	return 0;
++}
++
++static umode_t hpec_hwmon_is_visible(const void *data, enum hwmon_sensor_types type,
++				     u32 attr, int channel)
++{
++	return 0444;
++}
++
++static const struct hwmon_ops hpec_hwmon_ops = {
++	.is_visible = hpec_hwmon_is_visible,
++	.read = hpec_hwmon_read,
++	.read_string = hpec_hwmon_read_string,
++};
++
++static const struct hwmon_channel_info * const hpec_hwmon_info[] = {
++	HWMON_CHANNEL_INFO(fan, HWMON_F_INPUT),
++	HWMON_CHANNEL_INFO(temp,
++			   HWMON_T_INPUT | HWMON_T_LABEL,
++			   HWMON_T_INPUT | HWMON_T_LABEL,
++			   HWMON_T_INPUT | HWMON_T_LABEL,
++			   HWMON_T_INPUT | HWMON_T_LABEL),
++	NULL
++};
++
++static const struct hwmon_chip_info hpec_hwmon_chip = {
++	.ops = &hpec_hwmon_ops,
++	.info = hpec_hwmon_info,
++};
++
++static enum led_brightness hpec_kbd_backlight_get(struct led_classdev *led)
++{
++	struct hpec *ec = container_of(led, struct hpec, kbd_backlight);
++	u8 reply[HPEC_REPLY_LEN];
++
++	if (hpec_command(ec, HPEC_KBD_BACKLIGHT, HPEC_KBD_BACKLIGHT_GET, reply))
++		return LED_OFF;
++
++	return min_t(u8, reply[0], HPEC_KBD_BACKLIGHT_MAX);
++}
++
++static int hpec_kbd_backlight_set(struct led_classdev *led, enum led_brightness value)
++{
++	struct hpec *ec = container_of(led, struct hpec, kbd_backlight);
++
++	return hpec_command(ec, HPEC_KBD_BACKLIGHT, value, NULL);
++}
++
++static enum led_brightness hpec_led_get(struct led_classdev *cdev)
++{
++	struct hpec_led *led = container_of(cdev, struct hpec_led, cdev);
++	u8 reply[HPEC_REPLY_LEN];
++
++	if (hpec_command(led->ec, HPEC_LED, HPEC_LED_GET, reply))
++		return LED_OFF;
++
++	return (reply[1] >> (led->index - hpec_leds[0].index)) & 1;
++}
++
++static int hpec_led_set(struct led_classdev *cdev, enum led_brightness value)
++{
++	struct hpec_led *led = container_of(cdev, struct hpec_led, cdev);
++	int ret;
++
++	/* As HP's method does before every change */
++	ret = hpec_command(led->ec, HPEC_OS_FLAG, HPEC_OS_FLAG_LEDS, NULL);
++	if (ret)
++		return ret;
++
++	return hpec_command(led->ec, HPEC_LED,
++			    led->index | (value ? HPEC_LED_ON : 0), NULL);
++}
++
++static int hpec_probe(struct i2c_client *client)
++{
++	struct device *dev = &client->dev;
++	struct device *hwmon;
++	u8 reply[HPEC_REPLY_LEN];
++	struct hpec *ec;
++	unsigned int i;
++	int ret;
++
++	ec = devm_kzalloc(dev, sizeof(*ec), GFP_KERNEL);
++	if (!ec)
++		return -ENOMEM;
++
++	ec->client = client;
++	ret = devm_mutex_init(dev, &ec->lock);
++	if (ret)
++		return ret;
++
++	ret = hpec_command(ec, HPEC_FAN, HPEC_FAN_RPM, reply);
++	if (ret)
++		return dev_err_probe(dev, ret, "EC does not answer\n");
++
++	hwmon = devm_hwmon_device_register_with_info(dev, "hp_omnibook_ec", ec,
++						     &hpec_hwmon_chip, NULL);
++	if (IS_ERR(hwmon))
++		return PTR_ERR(hwmon);
++
++	ec->kbd_backlight.name = "hp::kbd_backlight";
++	ec->kbd_backlight.max_brightness = HPEC_KBD_BACKLIGHT_MAX;
++	ec->kbd_backlight.brightness_get = hpec_kbd_backlight_get;
++	ec->kbd_backlight.brightness_set_blocking = hpec_kbd_backlight_set;
++
++	ret = devm_led_classdev_register(dev, &ec->kbd_backlight);
++	if (ret)
++		return ret;
++
++	for (i = 0; i < ARRAY_SIZE(hpec_leds); i++) {
++		struct hpec_led *led = &ec->leds[i];
++
++		led->ec = ec;
++		led->index = hpec_leds[i].index;
++		led->cdev.name = hpec_leds[i].name;
++		led->cdev.max_brightness = 1;
++		led->cdev.brightness_get = hpec_led_get;
++		led->cdev.brightness_set_blocking = hpec_led_set;
++
++		ret = devm_led_classdev_register(dev, &led->cdev);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++static const struct of_device_id hpec_of_match[] = {
++	{ .compatible = "hp,omnibook-5-16-bf1xxx-ec" },
++	{ }
++};
++MODULE_DEVICE_TABLE(of, hpec_of_match);
++
++static struct i2c_driver hpec_driver = {
++	.driver = {
++		.name = "hp-omnibook-5-ec",
++		.of_match_table = hpec_of_match,
++	},
++	.probe = hpec_probe,
++};
++module_i2c_driver(hpec_driver);
++
++MODULE_DESCRIPTION("HP OmniBook 5 16 embedded controller");
++MODULE_LICENSE("GPL");
+-- 
+2.53.0
+
