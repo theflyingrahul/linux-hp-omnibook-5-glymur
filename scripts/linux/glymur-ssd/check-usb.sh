@@ -12,6 +12,12 @@ set -u
 # keyboard receiver) in the USB-A port next to or instead of the stick, and
 # a USB-C device (stick, hub, phone) in each USB-C port.
 #
+# Swap devices between the two USB-C ports and run it again: on 2026-09-30
+# a low-speed mouse failed on the hinge-side port (error -71) and a
+# high-speed hub worked on the other, which cannot tell a bad port from a
+# bad speed. A charger in a port makes it a sink and USB device: that port
+# is then correctly not a host.
+#
 # If the USB-A port does not work, boot any other entry afterwards and run
 #   sudo bash check-usb.sh --previous
 # for the same report from the previous boot's kernel log.
@@ -33,7 +39,15 @@ journalctl -k -b "$B" --no-pager | grep -m1 'Kernel command line' | sed 's/root=
 sect "kernel log: USB controllers, PHYs, Type-C, enumeration"
 journalctl -k -b "$B" --no-pager |
     grep -iE 'dwc3|xhci|a[068]00000|88e[01]000|fd[35d]000|fde000|eusb2|m31|qmp|ucsi|typec|altmode|pmic_glink|role|usb[ -]|usb[0-9]|uas|scsi|sd[a-z]|regulator.*(dummy|supply)|phy' |
-    grep -viE 'pcie|ufs|edp|mdss' | tail -200
+    grep -viE 'pcie|ufs|edp|mdss|apparmor=' | tail -200
+
+# The filter above keeps only fragments of a kernel warning (on 2026-09-30,
+# a module list and a __dwc3_set_mode trace on each role switch, without the
+# WARNING line saying what fired). Print every warning in full.
+sect "kernel warnings and errors, in full"
+journalctl -k -b "$B" --no-pager -o short-monotonic |
+    awk '/-+\[ cut here \]-+|WARNING:|BUG:|Oops|kernfs: can not remove|Unable to handle/ { n = 45 }
+         n > 0 { print; n-- }' | tail -400
 
 if [ "$B" = 0 ]; then
     sect "drivers bound"
@@ -49,6 +63,12 @@ if [ "$B" = 0 ]; then
         printf '%s: data_role=%s power_role=%s opmode=%s orientation=%s partner=%s\n' "$q" \
             "$(cat "$p/data_role")" "$(cat "$p/power_role")" "$(cat "$p/power_operation_mode")" \
             "$(cat "$p/orientation" 2>/dev/null)" "$([ -d "$p/$q-partner" ] && echo yes || echo no)"
+        # A charger makes this port a sink and USB device, which is right;
+        # say what the partner is so that is not mistaken for a failure.
+        pp="$p/$q-partner"
+        [ -d "$pp" ] && printf '    partner: type=%s accessory=%s usb_pd=%s\n' \
+            "$(cat "$pp/type" 2>/dev/null)" "$(cat "$pp/accessory_mode" 2>/dev/null)" \
+            "$(cat "$pp/supports_usb_power_delivery" 2>/dev/null)"
     done
     for r in /sys/class/usb_role/*; do
         [ -e "$r/role" ] && printf '%s: role=%s\n' "${r##*/}" "$(cat "$r/role")"
@@ -58,7 +78,10 @@ if [ "$B" = 0 ]; then
     lsusb -t 2>&1
     for d in /sys/bus/usb/devices/*; do
         [ -f "$d/speed" ] || continue
-        printf '%-12s speed=%-6s %s %s\n' "${d##*/}" "$(cat "$d/speed")" "$(cat "$d/manufacturer" 2>/dev/null)" "$(cat "$d/product" 2>/dev/null)"
+        # Which controller: a000000 = USB-A (usb_2), a600000 = USB-C hinge
+        # side (usb_0), a800000 = USB-C away from the hinge (usb_1).
+        c="$(readlink -f "$d" | grep -oE 'a[068]00000\.usb' | head -1)"
+        printf '%-12s %-14s speed=%-6s %s %s\n' "${d##*/}" "${c:-?}" "$(cat "$d/speed")" "$(cat "$d/manufacturer" 2>/dev/null)" "$(cat "$d/product" 2>/dev/null)"
     done
 
     sect "block devices and mounts"

@@ -32,25 +32,41 @@ mountpoint -q "$T" || mount -t tracefs none "$T"
 DD=/sys/kernel/debug/dynamic_debug/control
 MODS="ucsi_glink typec_ucsi pmic_glink qcom_battmgr pmic_glink_altmode"
 
+# The background readers run with job control on, so each is its own
+# process group, and cleanup kills whole groups. (Killing only the $! of a
+# `( ... ) &` subshell left its children running: on 2026-09-30 a `cat
+# trace_pipe | while read` pair outlived the script, and the reader, blocked
+# on the pipe lock that cat's splice holds while it waits for trace events,
+# set off hung-task warnings every two minutes.) A watchdog also kills the
+# groups if this script dies without running its trap.
+set -m
+READERS=()
 cleanup() {
+    trap - EXIT HUP INT TERM
     [ -e "$T/events/ucsi/enable" ] && echo 0 > "$T/events/ucsi/enable"
     for m in $MODS; do echo "module $m -p" > "$DD" 2>/dev/null; done
-    kill $(jobs -p) 2>/dev/null
+    for g in "${READERS[@]}"; do kill -- "-$g" 2>/dev/null; done
     sync
     echo; echo "Saved to $OUT"
 }
 trap cleanup EXIT
+trap 'exit 1' HUP INT TERM
 
 say "charging-watch on $(uname -r), $(tr -d '\0' < /sys/firmware/devicetree/base/model)"
 say "cmdline: $(sed 's/root=[^ ]*/root=…/' /proc/cmdline)"
 for m in $MODS; do echo "module $m +p" > "$DD" 2>/dev/null || say "no dynamic debug for $m"; done
 if [ -e "$T/events/ucsi/enable" ]; then
     echo > "$T/trace"; echo 1 > "$T/events/ucsi/enable"
-    (cat "$T/trace_pipe" | while IFS= read -r l; do log "TRACE $l"; done) &
+    # read(2) straight from trace_pipe: no cat, no pipe, no pipe lock.
+    (while IFS= read -r l; do log "TRACE $l"; done < "$T/trace_pipe") </dev/null &
+    READERS+=("$!")
 else
     say 'no ucsi tracepoints (typec_ucsi not loaded?)'
 fi
-(journalctl -k -f -n 0 --no-pager -o short-monotonic | while IFS= read -r l; do log "KERN $l"; done) &
+(journalctl -k -f -n 0 --no-pager -o short-monotonic | while IFS= read -r l; do log "KERN $l"; done) </dev/null &
+READERS+=("$!")
+(while kill -0 $$ 2>/dev/null; do sleep 2; done
+ for g in "${READERS[@]}"; do kill -- "-$g" 2>/dev/null; done) </dev/null >/dev/null 2>&1 &
 
 UD="$(ls -d /sys/kernel/debug/usb/ucsi/*/ 2>/dev/null | head -1)"
 [ -n "$UD" ] || say 'no UCSI debugfs directory; firmware connector status not polled'

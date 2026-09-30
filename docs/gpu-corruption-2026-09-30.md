@@ -43,6 +43,8 @@ from the DT or SMBIOS processor strings and is not set here.)
       `adreno-gpulist.h`) has one entry for `0x44070001`, "Adreno X2-85",
       with `gmem_size = 21 MB` and the note "bits[7:4] patched at runtime
       with active slice count". KGSL uses 21 MB for 3-slice parts too.
+      **Wrong, corrected below:** KGSL keeps 21 MB in its table but reports
+      GMEM for the active slices only (15.75 MB here).
 - **The reference setup works.** Rob Clark reports GNOME Shell working on
   a Glymur laptop (chip `0x44070041`, 4 slices) with Mesa 26.1.6.
     - Mesa describes our 3-slice part differently: 6 CCUs and 96×32 tile
@@ -126,3 +128,54 @@ gen8 path) and confirm the desktop itself, not just kmscube, is clean.
 Worth reporting upstream: Mesa's 3-slice gen8 GMEM/bin-layout tiling
 produces visible corruption on real hardware, with `sysmem` as a working
 avoidance.
+
+## Root cause: msm reports GMEM for four slices, this GPU runs three
+
+Found from the first run's result (GMEM rendering is the only broken path)
+by comparing how KGSL and msm report GMEM to userspace:
+
+- **KGSL** keeps the catalog size (21 MB) for its hardware setup, but
+  `gen8_get_gmem_size()` returns
+  `gmem_size / GEN8_1_0_NUM_PHYSICAL_SLICES * active slices` for this GPU
+  family: 21 MB / 4 × 3 = **15.75 MB** (16515072 bytes) on a 3-slice part.
+  GMEM is split evenly between the slices, so the fused-off slice's share
+  does not exist.
+- **msm** (qcom-next `e428097a36d`, msm-next `d33622598496`, mainline
+  v7.3-rc5+37) answers `MSM_PARAM_GMEM_SIZE` with the catalog value,
+  **21 MB**, whatever the slice mask. It reads the slice mask
+  (`a8xx_gpu_get_slice_info()`) only to patch the chip ID.
+- **Mesa** sizes its bins from that value and, on gen8, places the CCU
+  depth and color caches at the top of GMEM
+  (`fd6_calc_gmem_cache_offsets()`). With 21 MB, both land past the end of
+  the 15.75 MB that exists. That explains all six cases: only `sysmem`
+  avoids GMEM. The kernel logged no GPU fault or hang: GMEM accesses do
+  not go through the SMMU, so out-of-range ones corrupt silently instead
+  of faulting (inferred, not measured).
+- One detail does not follow on its own: Mesa computes the sysmem-mode
+  cache offsets from the top of the reported GMEM too, so in `sysmem`
+  mode the caches also sit past 15.75 MB. That is consistent if
+  out-of-range GMEM addresses wrap or alias: with `sysmem`, nothing else
+  is in GMEM for the caches to overwrite; with GMEM rendering, the tiles
+  are. The `FD_MESA_GMEM` cases below test the explanation directly.
+- Rob Clark's working Glymur has all four slices (`0x44070041`), where
+  21 MB is correct. That is why nobody upstream has hit this.
+
+**Kernel fix, in `-7`:** `upstream/qcom-next/0002` ("drm/msm/a8xx: report
+the GMEM size of the active slices") stores
+`info->gmem / max_slices × active slices` when it reads the slice mask and
+reports that. The GMEM protection register and the UCHE setup still cover
+the full range, as in KGSL. This fixes OpenGL (freedreno) and Vulkan
+(turnip) together, with no Mesa change, and keeps GMEM rendering.
+Forcing `sysmem` in Mesa, the other option, would give it up entirely.
+
+**Test without the new kernel:** Mesa's `FD_MESA_GMEM=<bytes>` overrides
+the size it got from the kernel. `gpu-corruption-test.sh` now runs:
+`sysmem` (reference), the default, `FD_MESA_GMEM=16515072` and half of
+that. On `-6`, cases 1, 3 and 4 should be clean and case 2 corrupted; on
+`-7`, all four clean. (Turnip's equivalent is `TU_GMEM`.)
+
+**Case 1 of the first run, corrected:** kmscube printed
+`renderer: "Adreno (TM) X2-85"` in case 1 too, so `LIBGL_ALWAYS_SOFTWARE=1`
+did not select llvmpipe on the GBM path at all; the crash (`exit 139`)
+happened on the GPU driver. The new script drops that case and uses
+`sysmem` as the clean reference.

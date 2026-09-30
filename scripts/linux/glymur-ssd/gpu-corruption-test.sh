@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 set -u
 
-# Find which part of GPU rendering corrupts the screen with Mesa
-# 26.2.3 on the Adreno X2-85 (docs/gpu-corruption-2026-09-30.md). Run from a
-# text console, not from the desktop: press Ctrl+Alt+F3, log in as yourself,
-# then
+# Test the cause of the GPU-rendered screen corruption on the Adreno X2-85
+# (docs/gpu-corruption-2026-09-30.md). Run from a text console, not from the
+# desktop: press Ctrl+Alt+F3, log in as yourself, then
 #
 #   bash gpu-corruption-test.sh
 #
@@ -13,14 +12,21 @@ set -u
 #
 # kmscube renders a spinning cube with the GPU and shows it through KMS, the
 # same path GNOME's compositor uses. Each case runs for about 8 seconds;
-# afterwards, answer whether the cube and background looked clean. Cases:
-#   1. software rendering (llvmpipe): the clean reference
-#   2. GPU, default settings (what GNOME uses)
-#   3. GPU, linear scanout buffer (no compressed scanout)
-#   4. GPU, FD_MESA_DEBUG=noubwc (no UBWC compression anywhere)
-#   5. GPU, FD_MESA_DEBUG=nolrz  (no low-resolution Z)
-#   6. GPU, FD_MESA_DEBUG=sysmem (no GMEM tiling)
-#   7. GPU, noubwc,nolrz,sysmem together
+# afterwards, answer whether the cube and background looked clean.
+#
+# The first run (2026-09-30, kernel -6) was clean only with
+# FD_MESA_DEBUG=sysmem, which turns off GMEM (on-chip tile memory)
+# rendering. The suspected cause: msm tells Mesa the GPU has 21 MB of GMEM,
+# the size for all 4 slices, but this GPU runs 3, and Qualcomm's own driver
+# (KGSL) reports 21 MB / 4 x 3 = 15.75 MB. Mesa then places tiles and its
+# caches past the end of the real GMEM. FD_MESA_GMEM overrides the size
+# Mesa uses. Cases:
+#   1. GPU, sysmem: no GMEM at all (clean last time: the reference)
+#   2. GPU, default: GMEM size from the kernel
+#   3. GPU, FD_MESA_GMEM = 15.75 MB: the size for 3 slices
+#   4. GPU, FD_MESA_GMEM = 7.875 MB: half of that
+# If the explanation is right, 1, 3 and 4 are clean. On a kernel with the
+# fix (-7 on), case 2 is clean too.
 # The answers and the kernel's GPU messages go to
 # ~/glymur-logs/gpu-corruption-<time>.txt. Press Ctrl+Alt+F2 (or F1) to go
 # back to the desktop afterwards.
@@ -41,30 +47,29 @@ done
 mkdir -p "$HOME/glymur-logs"
 OUT="$HOME/glymur-logs/gpu-corruption-$(date +%Y%m%dT%H%M%S).txt"
 log() { printf '%s\n' "$*" | tee -a "$OUT"; }
-log "gpu-corruption-test on $(uname -r), $(tr -d '\0' < /sys/firmware/devicetree/base/model 2>/dev/null), card $CARD"
+log "gpu-corruption-test (GMEM size) on $(uname -r), $(tr -d '\0' < /sys/firmware/devicetree/base/model 2>/dev/null), card $CARD"
 log "$(mesa-glymur-run --system status 2>&1 | tr '\n' ';')"
 log "kmscube: $(dpkg-query -W -f='${Version}' kmscube 2>/dev/null)"
 START="$(date '+%Y-%m-%d %H:%M:%S')"
 
+GMEM3=$(( 21 * 1024 * 1024 / 4 * 3 ))
+N=4
 run_case() {
     local n="$1" label="$2"; shift 2
-    printf '\n[%s/7] %s\nPress Enter to start (the cube shows for about 8 seconds)... ' "$n" "$label"
+    printf '\n[%s/%s] %s\nPress Enter to start (the cube shows for about 8 seconds)... ' "$n" "$N" "$label"
     read -r _
     timeout 8 "$@" -D "$CARD" > "$HOME/glymur-logs/.kmscube.$$" 2>&1
     local rc=$?
     printf '\n'
     read -r -p "Case $n ($label): was the screen clean? [y = clean, n = corrupted, b = blank/no cube] " ans
     log "case $n | $label | exit $rc | answer: ${ans:-none}"
-    grep -iE 'error|fail|modifier|using|GL_RENDERER|renderer' "$HOME/glymur-logs/.kmscube.$$" | head -5 | sed 's/^/    /' | tee -a "$OUT"
+    grep -iE 'error|fail|modifier|renderer' "$HOME/glymur-logs/.kmscube.$$" | head -5 | sed 's/^/    /' | tee -a "$OUT"
 }
 
-run_case 1 'software (llvmpipe) reference' env LIBGL_ALWAYS_SOFTWARE=1 mesa-glymur-run kmscube
-run_case 2 'GPU default'                   mesa-glymur-run kmscube
-run_case 3 'GPU, linear scanout buffer'    mesa-glymur-run kmscube -m 0
-run_case 4 'GPU, noubwc'                   env FD_MESA_DEBUG=noubwc mesa-glymur-run kmscube
-run_case 5 'GPU, nolrz'                    env FD_MESA_DEBUG=nolrz mesa-glymur-run kmscube
-run_case 6 'GPU, sysmem'                   env FD_MESA_DEBUG=sysmem mesa-glymur-run kmscube
-run_case 7 'GPU, noubwc+nolrz+sysmem'      env FD_MESA_DEBUG=noubwc,nolrz,sysmem mesa-glymur-run kmscube
+run_case 1 'GPU, sysmem (reference)'        env FD_MESA_DEBUG=sysmem mesa-glymur-run kmscube
+run_case 2 'GPU, default'                   mesa-glymur-run kmscube
+run_case 3 "GPU, GMEM $GMEM3 (3 slices)"     env FD_MESA_GMEM=$GMEM3 mesa-glymur-run kmscube
+run_case 4 "GPU, GMEM $(( GMEM3 / 2 )) (half)" env FD_MESA_GMEM=$(( GMEM3 / 2 )) mesa-glymur-run kmscube
 rm -f "$HOME/glymur-logs/.kmscube.$$"
 
 log ''
