@@ -1,7 +1,7 @@
-From 58723e151f76f723b4421b3e3df991e8add04f09 Mon Sep 17 00:00:00 2001
+From 5ea58bdd239aac1a9957cbf870b77917b8678008 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Sun, 27 Sep 2026 08:52:43 -0700
-Subject: [PATCH 1/3] ACPI: GED: Support GpioInt event resources
+Subject: [PATCH] ACPI: GED: Support GpioInt event resources
 
 The Generic Event Device accepts only Interrupt and ExtendedInterrupt
 resources in _CRS. Some ACPI firmware signals GED events through GPIO
@@ -20,6 +20,7 @@ free the events already requested and propagate the GPIO error (including
 Tested on the HP OmniBook 5 16-bf1xxx: lid close/open run _EVT and reach
 the ACPI button driver and logind.
 
+Signed-off-by: Rahul Pon <theflyingrahul@gmail.com>
 ---
  drivers/acpi/evged.c | 46 +++++++++++++++++++++++++++++++++++++++++---
  1 file changed, 43 insertions(+), 3 deletions(-)
@@ -131,3 +132,8 @@ index 5c35cbc7f6..478172ede7 100644
  static void ged_remove(struct platform_device *pdev)
  {
  	ged_shutdown(pdev);
+
+base-commit: 551c722f40809618230001baccf219193e22fc5a
+-- 
+2.53.0
+

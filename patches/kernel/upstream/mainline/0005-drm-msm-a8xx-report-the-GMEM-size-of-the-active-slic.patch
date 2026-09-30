@@ -1,4 +1,4 @@
-From 2a9bf30b4eddc0894e4da7cbb4b55a656ea3328b Mon Sep 17 00:00:00 2001
+From fdffa8475cc6ff838856ba12525baae79cf0072c Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Tue, 29 Sep 2026 23:13:55 -0700
 Subject: [PATCH msm-next] drm/msm/a8xx: report the GMEM size of the active
@@ -25,6 +25,7 @@ Do the same when reading the slice mask. The GMEM protection and UCHE
 setup still cover the full range, as in KGSL.
 
 Fixes: 288a93200892 ("drm/msm/adreno: Introduce A8x GPU Support")
+Signed-off-by: Rahul Pon <theflyingrahul@gmail.com>
 ---
  drivers/gpu/drm/msm/adreno/a8xx_gpu.c   | 4 ++++
  drivers/gpu/drm/msm/adreno/adreno_gpu.c | 3 ++-
@@ -80,6 +81,8 @@ index 114a40f79ef3..8e6a88103610 100644
  	uint16_t speedbin;
  	const struct adreno_gpu_funcs *funcs;
  
+
+base-commit: d33622598496c8994c35ba0a8a913de064dfc1a4
 -- 
 2.53.0
 

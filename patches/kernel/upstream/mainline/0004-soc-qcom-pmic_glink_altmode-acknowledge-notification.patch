@@ -1,4 +1,4 @@
-From 8cc64e0e094bc8d4b5ec31055ded602f9400594a Mon Sep 17 00:00:00 2001
+From 82e5dcd9bc7e1ceeb8a7d2717f6bf057ba7697bb Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Tue, 29 Sep 2026 10:16:24 -0700
 Subject: [PATCH] soc: qcom: pmic_glink_altmode: acknowledge notifications on
@@ -22,6 +22,7 @@ Acknowledge notifications for ports without a connector node from a
 work item, as pmic_glink_altmode_request() sleeps and the notification
 callback must not.
 
+Signed-off-by: Rahul Pon <theflyingrahul@gmail.com>
 ---
  drivers/soc/qcom/pmic_glink_altmode.c | 42 +++++++++++++++++++++++++--
  1 file changed, 40 insertions(+), 2 deletions(-)
@@ -114,6 +115,8 @@ index 13c434f8d0..24ee9ecc42 100644
  	device_for_each_child_node(dev, fwnode) {
  		ret = fwnode_property_read_u32(fwnode, "reg", &port);
  		if (ret < 0) {
+
+base-commit: 551c722f40809618230001baccf219193e22fc5a
 -- 
 2.53.0
 
