@@ -1,0 +1,116 @@
+Sep 30 23:27:25.740037 glymur kernel: usb 3-1: new SuperSpeed USB device number 3 using xhci-hcd
+Sep 30 23:27:25.751016 glymur kernel: usb 3-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Sep 30 23:27:25.752018 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Sep 30 23:27:25.752163 glymur kernel: usb 3-1: Product: Ultra
+Sep 30 23:27:25.752256 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Sep 30 23:27:25.752344 glymur kernel: usb 3-1: SerialNumber: [REDACTED-SERIAL]
+Sep 30 23:27:25.752429 glymur kernel: usb-storage 3-1:1.0: USB Mass Storage device detected
+Sep 30 23:27:25.752982 glymur kernel: scsi host0: usb-storage 3-1:1.0
+Sep 30 23:27:26.809999 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Sep 30 23:27:26.810238 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Sep 30 23:27:26.813980 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Sep 30 23:27:26.814080 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Sep 30 23:27:26.814179 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Sep 30 23:27:26.814981 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Sep 30 23:27:26.842016 glymur kernel:  sda: sda1 sda2
+Sep 30 23:27:26.842034 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Sep 30 23:27:27.096023 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Sep 30 23:27:31.814185 glymur kernel: xhci-hcd xhci-hcd.4.auto: remove, state 4
+Sep 30 23:27:31.814327 glymur kernel: usb usb5: USB disconnect, device number 1
+Sep 30 23:27:31.814363 glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 5 deregistered
+Sep 30 23:27:31.814406 glymur kernel: xhci-hcd xhci-hcd.4.auto: remove, state 4
+Sep 30 23:27:31.814448 glymur kernel: usb usb4: USB disconnect, device number 1
+Sep 30 23:27:31.814475 glymur kernel: ------------[ cut here ]------------
+Sep 30 23:27:31.814486 glymur kernel: refcount_t: underflow; use-after-free.
+Sep 30 23:27:31.814506 glymur kernel: WARNING: lib/refcount.c:28 at refcount_warn_saturate+0x13c/0x2a0, CPU#0: kworker/0:12/175
+Sep 30 23:27:31.814517 glymur kernel: Modules linked in: usbhid nls_iso8859_1 q6prm_clocks q6apm_lpass_dais snd_q6dsp_common q6apm_dai q6prm snd_seq_dummy snd_hrtimer rfcomm sg bnep scmi_cpufreq binfmt_misc uas usb_storage uvcvideo uvc videobuf2_vmalloc videobuf2_memops videobuf2_v4l2 videobuf2_common videodev mc qrtr_mhi joydev snd_q6apm apr input_leds hid_multitouch hid_generic phy_qcom_eusb2_repeater panel_samsung_atna33xc20 fastrpc i2c_hid_of i2c_hid_acpi_prp0001 i2c_hid hid qrtr_smd hp_omnibook_5_ec rpmsg_ctrl qcom_spmi_pmic sparse_keymap rpmsg_char regmap_spmi qcom_pd_mapper xhci_plat_hcd pmic_glink_altmode qcom_battmgr aux_hpd_bridge ucsi_glink typec_ucsi socinfo hci_uart aes_ce_blk ghash_ce btqca gf128mul btrtl sm4_ce_gcm btbcm snd_soc_lpass_wsa_macro snd_soc_lpass_va_macro sm4_ce_ccm btintel ath12k_wifi7 snd_soc_lpass_macro_common sm4_ce ath12k bluetooth snd_soc_core sm4_ce_cipher sm4 snd_compress ac97_bus snd_pcm_dmaengine mac80211 snd_pcm snd_seq_midi snd_seq_midi_event cfg80211 snd_rawmidi phy_qcom_edp qcom_spel msm mhi snd_seq
+Sep 30 23:27:31.814565 glymur kernel:  libarc4 phy_qcom_qmp_combo dwc3_qcom ubwc_config spmi_pmic_arb i2c_qcom_geni qcom_q6v5_pas ocmem snd_seq_device qcom_eud spmi_devres gpu_sched spmi qcom_tsens camcc_glymur dispcc_glymur qcom_stats aux_bridge qmi_tmd snd_timer drm_gpuvm dwc3 typec qcom_pil_info qcom_q6v5 drm_exec qcom_sysmon pinctrl_sm8650_lpass_lpi drm_dp_aux_bus thunderbolt snd qcom_common ulpi pinctrl_lpass_lpi evacc_glymur drm_display_helper qcom_glink_smem udc_core qcom_glink phy_qcom_m31_eusb2 soundcore cec videocc_glymur gpi rc_core mdt_loader qrtr qcom_aoss nvmem_qfprom bam_dma qcomtee qcom_smd pmic_glink llcc_qcom tee qcom_hwspinlock pdr_interface smp2p qcom_pdr_msg qmi_helpers qcom_cpucp_mbox icc_bwmon qcom_smem gpio_keys fixed rpmsg_core sch_fq_codel efi_pstore dmi_sysfs autofs4
+Sep 30 23:27:31.814589 glymur kernel: CPU: 0 UID: 0 PID: 175 Comm: kworker/0:12 Tainted: G        W           7.3.0-rc2-glymur-11 #12 PREEMPT(lazy) 
+Sep 30 23:27:31.814600 glymur kernel: Tainted: [W]=WARN
+Sep 30 23:27:31.814611 glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+Sep 30 23:27:31.814621 glymur kernel: Workqueue: events_freezable __dwc3_set_mode [dwc3]
+Sep 30 23:27:31.814633 glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+Sep 30 23:27:31.814644 glymur kernel: pc : refcount_warn_saturate+0x13c/0x2a0
+Sep 30 23:27:31.814654 glymur kernel: lr : refcount_warn_saturate+0x13c/0x2a0
+Sep 30 23:27:31.814670 glymur kernel: sp : ffff800081bf3980
+Sep 30 23:27:31.814684 glymur kernel: x29: ffff800081bf3980 x28: 0000000000000000 x27: 0000000000000000
+Sep 30 23:27:31.814693 glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: 0000000000000000
+Sep 30 23:27:31.814706 glymur kernel: x23: ffffc62b368bdf68 x22: ffff00082ec8e410 x21: 0000000004288060
+Sep 30 23:27:31.814717 glymur kernel: x20: ffff000802e18500 x19: ffff00082be648b0 x18: ffff8000815db0a0
+Sep 30 23:27:31.814731 glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+Sep 30 23:27:31.814741 glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+Sep 30 23:27:31.814753 glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffc62b34b8a4a8
+Sep 30 23:27:31.814762 glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+Sep 30 23:27:31.814773 glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+Sep 30 23:27:31.814782 glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+Sep 30 23:27:31.814792 glymur kernel: Call trace:
+Sep 30 23:27:31.814802 glymur kernel:  refcount_warn_saturate+0x13c/0x2a0 (P)
+Sep 30 23:27:31.814812 glymur kernel:  kobject_put+0x208/0x340
+Sep 30 23:27:31.814822 glymur kernel:  software_node_notify_remove+0x104/0x140
+Sep 30 23:27:31.814831 glymur kernel:  device_del+0x16c/0x3c0
+Sep 30 23:27:31.814841 glymur kernel:  usb_disconnect+0x314/0x350
+Sep 30 23:27:31.814851 glymur kernel:  usb_remove_hcd+0x18c/0x2a0
+Sep 30 23:27:31.814861 glymur kernel:  xhci_plat_remove+0x150/0x1b0 [xhci_plat_hcd]
+Sep 30 23:27:31.814871 glymur kernel:  platform_remove+0x2c/0x68
+Sep 30 23:27:31.814880 glymur kernel:  device_remove+0x58/0xc0
+Sep 30 23:27:31.814890 glymur kernel:  device_release_driver_internal+0x218/0x2f8
+Sep 30 23:27:31.814900 glymur kernel:  device_release_driver+0x24/0x50
+Sep 30 23:27:31.814910 glymur kernel:  bus_remove_device+0xfc/0x260
+Sep 30 23:27:31.814919 glymur kernel:  device_del+0x154/0x3c0
+Sep 30 23:27:31.814931 glymur kernel:  platform_device_del+0x38/0xe0
+Sep 30 23:27:31.814941 glymur kernel:  platform_device_unregister+0x20/0x68
+Sep 30 23:27:31.814950 glymur kernel:  dwc3_host_exit+0x3c/0x98 [dwc3]
+Sep 30 23:27:31.814959 glymur kernel:  __dwc3_set_mode+0x218/0x430 [dwc3]
+Sep 30 23:27:31.814969 glymur kernel:  process_one_work+0x1c4/0x5b0
+Sep 30 23:27:31.814983 glymur kernel:  worker_thread+0x194/0x330
+Sep 30 23:27:31.814993 glymur kernel:  kthread+0x138/0x150
+Sep 30 23:27:31.815002 glymur kernel:  ret_from_fork+0x10/0x20
+Sep 30 23:27:31.815009 glymur kernel: ---[ end trace 0000000000000000 ]---
+Sep 30 23:27:31.816895 glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 4 deregistered
+Sep 30 23:27:31.838027 glymur kernel: Unable to handle kernel paging request at virtual address 002f7365646f6e5f
+Sep 30 23:27:31.838092 glymur kernel: Mem abort info:
+Sep 30 23:27:31.838174 glymur kernel:   ESR = 0x0000000096000004
+Sep 30 23:27:31.838290 glymur kernel:   EC = 0x25: DABT (current EL), IL = 32 bits
+Sep 30 23:27:31.881750 glymur kernel:   SET = 0, FnV = 0
+Sep 30 23:27:31.881829 glymur kernel:   EA = 0, S1PTW = 0
+Sep 30 23:27:31.881945 glymur kernel:   FSC = 0x04: level 0 translation fault
+Sep 30 23:27:31.882013 glymur kernel: Data abort info:
+Sep 30 23:27:31.883841 glymur kernel:   ISV = 0, ISS = 0x00000004, ISS2 = 0x00000000
+Sep 30 23:27:31.883934 glymur kernel:   CM = 0, WnR = 0, TnD = 0, TagAccess = 0
+Sep 30 23:27:31.884057 glymur kernel:   GCS = 0, Overlay = 0, DirtyBit = 0
+Sep 30 23:27:31.885582 glymur kernel: [002f7365646f6e5f] address between user and kernel address ranges
+Sep 30 23:27:31.887106 glymur kernel: Internal error: Oops: 0000000096000004 [#1]  SMP
+Sep 30 23:27:31.888512 glymur kernel: Modules linked in: usbhid nls_iso8859_1 q6prm_clocks q6apm_lpass_dais snd_q6dsp_common q6apm_dai q6prm snd_seq_dummy snd_hrtimer rfcomm sg bnep scmi_cpufreq binfmt_misc uas usb_storage uvcvideo uvc videobuf2_vmalloc videobuf2_memops videobuf2_v4l2 videobuf2_common videodev mc qrtr_mhi joydev snd_q6apm apr input_leds hid_multitouch hid_generic phy_qcom_eusb2_repeater panel_samsung_atna33xc20 fastrpc i2c_hid_of i2c_hid_acpi_prp0001 i2c_hid hid qrtr_smd hp_omnibook_5_ec rpmsg_ctrl qcom_spmi_pmic sparse_keymap rpmsg_char regmap_spmi qcom_pd_mapper xhci_plat_hcd pmic_glink_altmode qcom_battmgr aux_hpd_bridge ucsi_glink typec_ucsi socinfo hci_uart aes_ce_blk ghash_ce btqca gf128mul btrtl sm4_ce_gcm btbcm snd_soc_lpass_wsa_macro snd_soc_lpass_va_macro sm4_ce_ccm btintel ath12k_wifi7 snd_soc_lpass_macro_common sm4_ce ath12k bluetooth snd_soc_core sm4_ce_cipher sm4 snd_compress ac97_bus snd_pcm_dmaengine mac80211 snd_pcm snd_seq_midi snd_seq_midi_event cfg80211 snd_rawmidi phy_qcom_edp qcom_spel msm mhi snd_seq
+Sep 30 23:27:31.890042 glymur kernel:  libarc4 phy_qcom_qmp_combo dwc3_qcom ubwc_config spmi_pmic_arb i2c_qcom_geni qcom_q6v5_pas ocmem snd_seq_device qcom_eud spmi_devres gpu_sched spmi qcom_tsens camcc_glymur dispcc_glymur qcom_stats aux_bridge qmi_tmd snd_timer drm_gpuvm dwc3 typec qcom_pil_info qcom_q6v5 drm_exec qcom_sysmon pinctrl_sm8650_lpass_lpi drm_dp_aux_bus thunderbolt snd qcom_common ulpi pinctrl_lpass_lpi evacc_glymur drm_display_helper qcom_glink_smem udc_core qcom_glink phy_qcom_m31_eusb2 soundcore cec videocc_glymur gpi rc_core mdt_loader qrtr qcom_aoss nvmem_qfprom bam_dma qcomtee qcom_smd pmic_glink llcc_qcom tee qcom_hwspinlock pdr_interface smp2p qcom_pdr_msg qmi_helpers qcom_cpucp_mbox icc_bwmon qcom_smem gpio_keys fixed rpmsg_core sch_fq_codel efi_pstore dmi_sysfs autofs4
+Sep 30 23:27:31.890066 glymur kernel: CPU: 0 UID: 0 PID: 175 Comm: kworker/0:12 Tainted: G        W           7.3.0-rc2-glymur-11 #12 PREEMPT(lazy) 
+Sep 30 23:27:31.890077 glymur kernel: Tainted: [W]=WARN
+Sep 30 23:27:31.890087 glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+Sep 30 23:27:31.890097 glymur kernel: Workqueue: events_freezable __dwc3_set_mode [dwc3]
+Sep 30 23:27:31.890106 glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+Sep 30 23:27:31.890114 glymur kernel: pc : software_node_property_present+0x54/0xe0
+Sep 30 23:27:31.890125 glymur kernel: lr : fwnode_property_present+0x84/0x100
+Sep 30 23:27:31.890138 glymur kernel: sp : ffff800081bf3c50
+Sep 30 23:27:31.890149 glymur kernel: x29: ffff800081bf3c50 x28: 0000000000000000 x27: 0000000000000000
+Sep 30 23:27:31.890163 glymur kernel: x26: ffff0008186d8090 x25: ffffc62b253794e8 x24: 0000000000000129
+Sep 30 23:27:31.890173 glymur kernel: x23: ffffc62b25375000 x22: ffffc62b37089000 x21: ffffc62b37089620
+Sep 30 23:27:31.890186 glymur kernel: x20: ffffc62b253794e8 x19: 6e2f7365646f6e5f x18: ffff8000815db040
+Sep 30 23:27:31.890197 glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+Sep 30 23:27:31.890207 glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+Sep 30 23:27:31.890216 glymur kernel: x11: 0000000000000000 x10: ffffffffee53b6e0 x9 : ffffc62b35b9fd7c
+Sep 30 23:27:31.890227 glymur kernel: x8 : 0101010101010101 x7 : 6e652d6465767265 x6 : 1d0f1d16acf2e5f3
+Sep 30 23:27:31.890237 glymur kernel: x5 : 7365722c161d0f1d x4 : 8080808000000000 x3 : ffffc62b368bf180
+Sep 30 23:27:31.890247 glymur kernel: x2 : ffffc62b368bf180 x1 : ffffc62b253794e8 x0 : ffff0008128fcac0
+Sep 30 23:27:31.890257 glymur kernel: Call trace:
+Sep 30 23:27:31.890267 glymur kernel:  software_node_property_present+0x54/0xe0 (P)
+Sep 30 23:27:31.890277 glymur kernel:  fwnode_property_present+0x84/0x100
+Sep 30 23:27:31.890289 glymur kernel:  device_property_present+0x28/0x78
+Sep 30 23:27:31.890299 glymur kernel:  dwc3_gadget_init+0x2e0/0x8b0 [dwc3]
+Sep 30 23:27:31.890309 glymur kernel:  __dwc3_set_mode+0x348/0x430 [dwc3]
+Sep 30 23:27:31.890319 glymur kernel:  process_one_work+0x1c4/0x5b0
+Sep 30 23:27:31.890328 glymur kernel:  worker_thread+0x194/0x330
+Sep 30 23:27:31.890337 glymur kernel:  kthread+0x138/0x150
+Sep 30 23:27:31.890346 glymur kernel:  ret_from_fork+0x10/0x20
+Sep 30 23:27:31.890354 glymur kernel: Code: f9404000 f9400813 b40002d3 aa0103f4 (f9400261) 
+Sep 30 23:27:31.890384 glymur kernel: ---[ end trace 0000000000000000 ]---
+Sep 30 23:27:33.145987 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `voltage_now' property: -110
+Sep 30 23:27:35.195087 glymur kernel: power_supply qcom-battmgr-bat: driver failed to report `cycle_count' property: -110

@@ -134,3 +134,70 @@ with a full backtrace for whoever picks this up next.
 system — `usb_1`'s role-switch state and the battery manager hang have
 both shown no sign of self-recovery. Don't trust the battery percentage
 in the meantime.
+
+## It recurred on a completely fresh reboot — this is deterministic, not a fluke
+
+Rebooted (kernel `-11`, same DTB). Within ~8 minutes, `check-usb.sh` hit
+the identical crash signature a second time, this time with a much
+clearer mechanism:
+
+```
+refcount_t: underflow; use-after-free.
+WARNING: lib/refcount.c:28 ...
+ kobject_put+0x208/0x340
+ software_node_notify_remove+0x104/0x140
+ device_del+0x16c/0x3c0
+ usb_disconnect+0x314/0x350
+ usb_remove_hcd+0x18c/0x2a0
+ xhci_plat_remove+0x150/0x1b0 [xhci_plat_hcd]
+ ...
+ dwc3_host_exit+0x3c/0x98 [dwc3]
+ __dwc3_set_mode+0x218/0x430 [dwc3]
+
+Unable to handle kernel paging request at virtual address 002f7365646f6e5f
+[002f7365646f6e5f] address between user and kernel address ranges
+Internal error: Oops: 0000000096000004 [#1]  SMP
+ pc : software_node_property_present+0x54/0xe0
+ lr : fwnode_property_present+0x84/0x100
+ ... xhci_plat_probe ...
+```
+
+This is a complete, unambiguous use-after-free, not a one-off fault:
+
+1. **Tearing down** the xhci platform device for a USB-C controller
+   (`xhci_plat_remove` → `usb_remove_hcd` → `device_del` →
+   `software_node_notify_remove` → `kobject_put`) hits a **refcount
+   underflow** — the software_node's reference count was already wrong
+   before this removal, exactly what a double-registration (the boot-time
+   "cannot create duplicate filename" bug) would cause.
+2. Moments later, the **next probe** of a controller
+   (`xhci_plat_probe` → `fwnode_property_present` →
+   `software_node_property_present`) dereferences a **freed/corrupted
+   fwnode** and faults. The faulting address, decoded as ASCII, spells out
+   a fragment of the string `"...node/s..."` — this is memory that used
+   to hold `"software_node"`-related string data, now being read back as
+   if it were a live pointer. Textbook use-after-free.
+
+**This is deterministic, not intermittent**: it reproduced on the very
+next boot, from the very same trigger (a `__dwc3_set_mode` role-switch
+cycle happening during normal `check-usb.sh` use, no unusual action
+taken). The boot-time "cannot create duplicate filename" bug still
+appeared too, on `a000000.usb` this time. **A reboot does not avoid this
+bug** — it only resets the clock until the next role-switch cycle hits
+it again. Evidence:
+`captures/2026-09-30-dwc3-crash/second-crash-timeline.txt`,
+`usb-test-232629-after-reboot.txt`, `usb-test-232702-after-reboot-crash.txt`.
+
+**Unaffected, confirmed again on the fresh boot**: `check-mesa.sh`
+(`mesa-test-231958-after-reboot.txt`) and `check-ec.sh`
+(`ec-test-232119-after-reboot.txt`) both ran cleanly, before the crash
+hit — GPU/Mesa and the EC are not implicated.
+
+**Revised advice:** this is a real, reproducible kernel bug in how
+`software_node` is registered/reference-counted for the USB-C dwc3
+controllers on this consolidated test DTB — every time a host-mode
+role-switch tears down and rebuilds the xhci platform device, it's a
+coin flip whether the next access hits the corrupted node. Until this is
+fixed at the kernel level, avoid repeated USB-C plug/unplug or role
+switches on this DT; a reboot resets the immediate symptoms but not the
+underlying bug.
