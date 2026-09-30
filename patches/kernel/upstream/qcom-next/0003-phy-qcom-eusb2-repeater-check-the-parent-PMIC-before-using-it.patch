@@ -1,0 +1,92 @@
+From 14b3b78fc3f3b432f367c1c219ea4bfcd8c81131 Mon Sep 17 00:00:00 2001
+From: Rahul Pon <theflyingrahul@gmail.com>
+Date: Wed, 30 Sep 2026 00:42:47 -0700
+Subject: [PATCH] phy: qcom: eusb2-repeater: check the parent PMIC before using
+ it
+
+A board device tree places an eUSB2 repeater by the SPMI slave ID of
+the PMIC that contains it, and the driver writes the repeater's enable
+and tuning registers at phy_init() time without checking what is at
+that address. If the board has a different PMIC there, or none, those
+writes land in another PMIC's peripheral at the same offset.
+
+For the SMB2370, check that the parent PMIC reports the SMB2370 subtype
+before registering the PHY, and log what was found either way. This
+lets a board whose schematic is not public (an HP OmniBook 5 on
+Snapdragon X2, whose ACPI tables do not describe the repeaters) declare
+the repeaters the reference design uses and have a wrong guess refuse
+to probe instead of writing to the wrong PMIC.
+
+qcom_pmic_get() comes from the SPMI PMIC core, so depend on it.
+---
+ drivers/phy/qualcomm/Kconfig                  |  1 +
+ .../phy/qualcomm/phy-qcom-eusb2-repeater.c    | 20 +++++++++++++++++++
+ 2 files changed, 21 insertions(+)
+
+diff --git a/drivers/phy/qualcomm/Kconfig b/drivers/phy/qualcomm/Kconfig
+index 935054f146eb..60ced21f4f88 100644
+--- a/drivers/phy/qualcomm/Kconfig
++++ b/drivers/phy/qualcomm/Kconfig
+@@ -152,6 +152,7 @@ config PHY_QCOM_QUSB2
+ config PHY_QCOM_EUSB2_REPEATER
+ 	tristate "Qualcomm PMIC eUSB2 Repeater Driver"
+ 	depends on OF && (ARCH_QCOM || COMPILE_TEST)
++	depends on MFD_SPMI_PMIC
+ 	select GENERIC_PHY
+ 	help
+ 	  Enable support for the USB high-speed eUSB2 repeater on Qualcomm
+diff --git a/drivers/phy/qualcomm/phy-qcom-eusb2-repeater.c b/drivers/phy/qualcomm/phy-qcom-eusb2-repeater.c
+index efeec4709a15..838833eebc4a 100644
+--- a/drivers/phy/qualcomm/phy-qcom-eusb2-repeater.c
++++ b/drivers/phy/qualcomm/phy-qcom-eusb2-repeater.c
+@@ -9,6 +9,7 @@
+ #include <linux/regmap.h>
+ #include <linux/of.h>
+ #include <linux/phy/phy.h>
++#include <soc/qcom/qcom-spmi-pmic.h>
+ 
+ /* eUSB2 status registers */
+ #define EUSB2_RPTR_STATUS		0x08
+@@ -58,6 +59,8 @@ struct eusb2_repeater_cfg {
+ 	int init_tbl_num;
+ 	const char * const *vreg_list;
+ 	int num_vregs;
++	/* If set, the parent PMIC must report this subtype */
++	unsigned int pmic_subtype;
+ };
+ 
+ struct eusb2_repeater {
+@@ -120,6 +123,7 @@ static const struct eusb2_repeater_cfg smb2370_eusb2_cfg = {
+ 	.init_tbl_num	= ARRAY_SIZE(smb2370_init_tbl),
+ 	.vreg_list	= pm8550b_vreg_l,
+ 	.num_vregs	= ARRAY_SIZE(pm8550b_vreg_l),
++	.pmic_subtype	= SMB2370_SUBTYPE,
+ };
+ 
+ static int eusb2_repeater_init_vregs(struct eusb2_repeater *rptr)
+@@ -270,6 +274,22 @@ static int eusb2_repeater_probe(struct platform_device *pdev)
+ 
+ 	rptr->base = res;
+ 
++	/* Never write to a different PMIC at this SPMI address */
++	if (rptr->cfg->pmic_subtype) {
++		const struct qcom_spmi_pmic *pmic = qcom_pmic_get(dev);
++
++		if (IS_ERR(pmic))
++			return dev_err_probe(dev, PTR_ERR(pmic),
++					     "cannot identify the parent PMIC\n");
++		if (pmic->subtype != rptr->cfg->pmic_subtype)
++			return dev_err_probe(dev, -ENODEV,
++					     "parent PMIC subtype %#x (type %#x), expected %#x\n",
++					     pmic->subtype, pmic->type,
++					     rptr->cfg->pmic_subtype);
++		dev_info(dev, "parent PMIC subtype %#x v%u.%u\n",
++			 pmic->subtype, pmic->major, pmic->minor);
++	}
++
+ 	ret = eusb2_repeater_init_vregs(rptr);
+ 	if (ret < 0) {
+ 		dev_err(dev, "unable to get supplies\n");
+-- 
+2.53.0
+

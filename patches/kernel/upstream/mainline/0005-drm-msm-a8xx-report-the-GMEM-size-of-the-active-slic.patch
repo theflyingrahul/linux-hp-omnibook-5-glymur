@@ -1,7 +1,8 @@
-From fa6c4db6ec8d6759bb69b3b1b32715c2648becfe Mon Sep 17 00:00:00 2001
+From 2a9bf30b4eddc0894e4da7cbb4b55a656ea3328b Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Tue, 29 Sep 2026 23:13:55 -0700
-Subject: [PATCH] drm/msm/a8xx: report the GMEM size of the active slices
+Subject: [PATCH msm-next] drm/msm/a8xx: report the GMEM size of the active
+ slices
 
 A8xx GPUs split GMEM evenly between their slices, and parts can have
 slices fused off: a8xx_gpu_get_slice_info() reads the active slice mask
@@ -22,6 +23,8 @@ GPU: gen8_get_gmem_size() in KGSL returns
 gmem_size / GEN8_1_0_NUM_PHYSICAL_SLICES * active slices, 15.75 MB here.
 Do the same when reading the slice mask. The GMEM protection and UCHE
 setup still cover the full range, as in KGSL.
+
+Fixes: 288a93200892 ("drm/msm/adreno: Introduce A8x GPU Support")
 ---
  drivers/gpu/drm/msm/adreno/a8xx_gpu.c   | 4 ++++
  drivers/gpu/drm/msm/adreno/adreno_gpu.c | 3 ++-
@@ -29,7 +32,7 @@ setup still cover the full range, as in KGSL.
  3 files changed, 8 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/msm/adreno/a8xx_gpu.c b/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
-index 97af37162065..c43591f1e626 100644
+index add93c1fa039..9b95d9b3826a 100644
 --- a/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
 +++ b/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
 @@ -112,6 +112,10 @@ void a8xx_gpu_get_slice_info(struct msm_gpu *gpu)
@@ -65,7 +68,7 @@ index 5832dc25d6bf..dadfe4c69438 100644
  	gpu->allow_relocs = config->info->family < ADRENO_6XX_GEN1;
  	gpu->pdev = pdev;
 diff --git a/drivers/gpu/drm/msm/adreno/adreno_gpu.h b/drivers/gpu/drm/msm/adreno/adreno_gpu.h
-index 9c9e2ef60d1b..3720feb6d9c6 100644
+index 114a40f79ef3..8e6a88103610 100644
 --- a/drivers/gpu/drm/msm/adreno/adreno_gpu.h
 +++ b/drivers/gpu/drm/msm/adreno/adreno_gpu.h
 @@ -204,6 +204,8 @@ struct adreno_gpu {

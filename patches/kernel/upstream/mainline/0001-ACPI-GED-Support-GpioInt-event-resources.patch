@@ -19,6 +19,7 @@ free the events already requested and propagate the GPIO error (including
 
 Tested on the HP OmniBook 5 16-bf1xxx: lid close/open run _EVT and reach
 the ACPI button driver and logind.
+
 ---
  drivers/acpi/evged.c | 46 +++++++++++++++++++++++++++++++++++++++++---
  1 file changed, 43 insertions(+), 3 deletions(-)

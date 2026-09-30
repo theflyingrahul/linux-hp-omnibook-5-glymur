@@ -1,4 +1,4 @@
-From 7655c6ee16140a5387bc1bb639821a2404a16daa Mon Sep 17 00:00:00 2001
+From 012de98c0b91209a667fe253ce78e6143087c5db Mon Sep 17 00:00:00 2001
 From: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
 Date: Mon, 22 Jun 2026 23:29:50 +0000
 Subject: [PATCH 2/2] phy: qcom: edp: update v8 power-on programming sequence
@@ -47,9 +47,13 @@ With these changes the v8 PHY has been validated to lock at 1.62, 2.7,
 5.4 and 8.1 Gbps, using both 2 and 4 lanes. Link training now suceeds on
 4-lane 8.1Gbps and 2-lane 5.4Gbps.
 
-[ Backported to qcom-next a47c4c5aa for the HP OmniBook 5 bring-up: resolved
-  against the Nord PHY support there. Nord keeps its existing sequence through
-  the _v46 callbacks, which carry its is_nord branches. Not otherwise modified. ]
+[ Backported to qcom-next for the HP OmniBook 5 bring-up, first on
+  a47c4c5aa, now on 6b4daa845239: resolved against the Nord PHY support
+  there. Nord keeps its existing sequence through the _v46 callbacks, which
+  since 6b4daa845239 call its phy_tx_lane_cfg/phy_tx_res_cfg hooks and use
+  its phy_status_reg and bias1_en_2lane instead of is_nord branches (the
+  void lanes callback ignores the always-0 phy_tx_res_cfg return). The v8
+  code is not otherwise modified. ]
 
 Assisted-by: Codex:GPT-5.5
 Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
@@ -58,7 +62,7 @@ Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
  1 file changed, 395 insertions(+), 32 deletions(-)
 
 diff --git a/drivers/phy/qualcomm/phy-qcom-edp.c b/drivers/phy/qualcomm/phy-qcom-edp.c
-index b93a401c4..0bb8364e7 100644
+index 9e7a7f75a899..e693ed6fccd4 100644
 --- a/drivers/phy/qualcomm/phy-qcom-edp.c
 +++ b/drivers/phy/qualcomm/phy-qcom-edp.c
 @@ -40,15 +40,22 @@
@@ -120,7 +124,7 @@ index b93a401c4..0bb8364e7 100644
  
  struct qcom_edp_swing_pre_emph_cfg {
  	const u8 (*swing_hbr_rbr)[4][4];
-@@ -134,11 +155,18 @@ struct qcom_edp {
+@@ -136,11 +157,18 @@ struct qcom_edp {
  };
  
  static int qcom_edp_prepare_power_on_v46(const struct qcom_edp *edp);
@@ -139,7 +143,7 @@ index b93a401c4..0bb8364e7 100644
  
  static const u8 dp_swing_hbr_rbr[4][4] = {
  	{ 0x07, 0x0f, 0x16, 0x1f },
-@@ -251,6 +279,41 @@ static const struct qcom_edp_swing_pre_emph_cfg edp_phy_swing_pre_emph_cfg = {
+@@ -253,6 +281,41 @@ static const struct qcom_edp_swing_pre_emph_cfg edp_phy_swing_pre_emph_cfg = {
  	.pre_emphasis_hbr3_hbr2 = &edp_pre_emp_hbr2_hbr3,
  };
  
@@ -181,7 +185,7 @@ index b93a401c4..0bb8364e7 100644
  static const u8 edp_phy_aux_cfg_v4[DP_AUX_CFG_SIZE] = {
  	0x00, 0x13, 0x24, 0x00, 0x0a, 0x26, 0x0a, 0x03, 0x37, 0x03, 0x02, 0x02, 0x00,
  };
-@@ -306,7 +369,7 @@ static const u8 edp_phy_aux_cfg_v5[DP_AUX_CFG_SIZE] = {
+@@ -308,7 +371,7 @@ static const u8 edp_phy_aux_cfg_v5[DP_AUX_CFG_SIZE] = {
  };
  
  static const u8 edp_phy_aux_cfg_v8[DP_AUX_CFG_SIZE] = {
@@ -190,7 +194,7 @@ index b93a401c4..0bb8364e7 100644
  };
  
  static const u8 edp_phy_vco_div_cfg_v8[4] = {
-@@ -444,6 +507,145 @@ static int qcom_edp_configure_pll(const struct qcom_edp *edp)
+@@ -443,6 +506,145 @@ static int qcom_edp_configure_pll(const struct qcom_edp *edp)
  	return edp->cfg->ver_ops->com_configure_pll(edp);
  }
  
@@ -336,7 +340,7 @@ index b93a401c4..0bb8364e7 100644
  static int qcom_edp_set_vco_div(const struct qcom_edp *edp, unsigned long *pixel_freq)
  {
  	const struct phy_configure_opts_dp *dp_opts = &edp->dp_opts;
-@@ -928,6 +1130,22 @@ static int qcom_edp_ldo_config_v6(const struct qcom_edp *edp)
+@@ -927,6 +1129,22 @@ static int qcom_edp_ldo_config_v6(const struct qcom_edp *edp)
  	return 0;
  }
  
@@ -359,7 +363,7 @@ index b93a401c4..0bb8364e7 100644
  static const struct phy_ver_ops qcom_edp_phy_ops_v6 = {
  	.com_power_on		= qcom_edp_phy_power_on_v6,
  	.com_resetsm_cntrl	= qcom_edp_phy_com_resetsm_cntrl_v6,
-@@ -959,13 +1177,18 @@ static int qcom_edp_com_configure_ssc_v8(const struct qcom_edp *edp)
+@@ -958,13 +1176,18 @@ static int qcom_edp_com_configure_ssc_v8(const struct qcom_edp *edp)
  
  	switch (dp_opts->link_rate) {
  	case 1620:
@@ -381,7 +385,7 @@ index b93a401c4..0bb8364e7 100644
  		step1 = 0x5b;
  		step2 = 0x02;
  		break;
-@@ -993,34 +1216,68 @@ static int qcom_edp_com_configure_pll_v8(const struct qcom_edp *edp)
+@@ -992,34 +1215,68 @@ static int qcom_edp_com_configure_pll_v8(const struct qcom_edp *edp)
  	u32 dec_start_mode0;
  	u32 lock_cmp1_mode0;
  	u32 lock_cmp2_mode0;
@@ -464,7 +468,7 @@ index b93a401c4..0bb8364e7 100644
  	case 8100:
  		hsclk_sel = 0x2;
  		dec_start_mode0 = 0x4f;
-@@ -1028,8 +1285,14 @@ static int qcom_edp_com_configure_pll_v8(const struct qcom_edp *edp)
+@@ -1027,8 +1284,14 @@ static int qcom_edp_com_configure_pll_v8(const struct qcom_edp *edp)
  		div_frac_start3_mode0 = 0x01;
  		lock_cmp1_mode0 = 0x18;
  		lock_cmp2_mode0 = 0x15;
@@ -479,7 +483,7 @@ index b93a401c4..0bb8364e7 100644
  		break;
  
  	default:
-@@ -1045,7 +1308,7 @@ static int qcom_edp_com_configure_pll_v8(const struct qcom_edp *edp)
+@@ -1044,7 +1307,7 @@ static int qcom_edp_com_configure_pll_v8(const struct qcom_edp *edp)
  	writel(0x30, edp->pll + DP_QSERDES_V8_COM_CLK_SELECT);
  	writel(hsclk_sel, edp->pll + DP_QSERDES_V8_COM_HSCLK_SEL_1);
  	writel(0x07, edp->pll + DP_QSERDES_V8_COM_PLL_IVCO);
@@ -488,7 +492,7 @@ index b93a401c4..0bb8364e7 100644
  	writel(0x36, edp->pll + DP_QSERDES_V8_COM_PLL_CCTRL_MODE0);
  	writel(0x16, edp->pll + DP_QSERDES_V8_COM_PLL_RCTRL_MODE0);
  	writel(0x06, edp->pll + DP_QSERDES_V8_COM_CP_CTRL_MODE0);
-@@ -1053,7 +1316,7 @@ static int qcom_edp_com_configure_pll_v8(const struct qcom_edp *edp)
+@@ -1052,7 +1315,7 @@ static int qcom_edp_com_configure_pll_v8(const struct qcom_edp *edp)
  	writel(0x00, edp->pll + DP_QSERDES_V8_COM_DIV_FRAC_START1_MODE0);
  	writel(div_frac_start2_mode0, edp->pll + DP_QSERDES_V8_COM_DIV_FRAC_START2_MODE0);
  	writel(div_frac_start3_mode0, edp->pll + DP_QSERDES_V8_COM_DIV_FRAC_START3_MODE0);
@@ -497,7 +501,7 @@ index b93a401c4..0bb8364e7 100644
  	writel(0x3f, edp->pll + DP_QSERDES_V8_COM_INTEGLOOP_GAIN0_MODE0);
  	writel(0x00, edp->pll + DP_QSERDES_V8_COM_INTEGLOOP_GAIN1_MODE0);
  	writel(0x00, edp->pll + DP_QSERDES_V8_COM_VCO_TUNE_MAP);
-@@ -1061,12 +1324,12 @@ static int qcom_edp_com_configure_pll_v8(const struct qcom_edp *edp)
+@@ -1060,12 +1323,12 @@ static int qcom_edp_com_configure_pll_v8(const struct qcom_edp *edp)
  	writel(lock_cmp2_mode0, edp->pll + DP_QSERDES_V8_COM_LOCK_CMP2_MODE0);
  
  	writel(0x0a, edp->pll + DP_QSERDES_V8_COM_BG_TIMER);
@@ -514,7 +518,7 @@ index b93a401c4..0bb8364e7 100644
  
  	writel(code1_mode0, edp->pll + DP_QSERDES_V8_COM_BIN_VCOCAL_CMP_CODE1_MODE0);
  	writel(code2_mode0, edp->pll + DP_QSERDES_V8_COM_BIN_VCOCAL_CMP_CODE2_MODE0);
-@@ -1121,27 +1384,85 @@ static const struct phy_ver_ops qcom_edp_phy_ops_v8 = {
+@@ -1120,27 +1383,85 @@ static const struct phy_ver_ops qcom_edp_phy_ops_v8 = {
  	.com_clk_fwd_cfg	= qcom_edp_com_clk_fwd_cfg_v8,
  	.com_configure_pll	= qcom_edp_com_configure_pll_v8,
  	.com_configure_ssc	= qcom_edp_com_configure_ssc_v8,
@@ -606,8 +610,8 @@ index b93a401c4..0bb8364e7 100644
 +
  static int qcom_edp_configure_tx_pre_pll_v46(const struct qcom_edp *edp)
  {
- 	writel(0x05, edp->edp + DP_PHY_TX0_TX1_LANE_CTL);
-@@ -1172,6 +1493,14 @@ static int qcom_edp_configure_tx_pre_pll_v46(const struct qcom_edp *edp)
+ 	int ret;
+@@ -1169,6 +1490,14 @@ static int qcom_edp_configure_tx_pre_pll_v46(const struct qcom_edp *edp)
  	return 0;
  }
  
@@ -622,7 +626,7 @@ index b93a401c4..0bb8364e7 100644
  static void qcom_edp_configure_lanes_after_pll_v46(const struct qcom_edp *edp)
  {
  	u32 bias0_en, drvr0_en, bias1_en, drvr1_en;
-@@ -1237,6 +1566,22 @@ static int qcom_edp_configure_rate_pcs_v46(const struct qcom_edp *edp,
+@@ -1230,6 +1559,22 @@ static int qcom_edp_configure_rate_pcs_v46(const struct qcom_edp *edp,
  	return qcom_edp_set_vco_div(edp, pixel_freq);
  }
  
@@ -645,7 +649,7 @@ index b93a401c4..0bb8364e7 100644
  static int qcom_edp_start_pll(const struct qcom_edp *edp)
  {
  	int ret;
-@@ -1267,6 +1612,24 @@ static int qcom_edp_finish_power_on_v46(const struct qcom_edp *edp)
+@@ -1260,6 +1605,24 @@ static int qcom_edp_finish_power_on_v46(const struct qcom_edp *edp)
  				  val, val & BIT(1), 500, 10000);
  }
  
@@ -670,3 +674,6 @@ index b93a401c4..0bb8364e7 100644
  static int qcom_edp_phy_power_on(struct phy *phy)
  {
  	const struct qcom_edp *edp = phy_get_drvdata(phy);
+-- 
+2.53.0
+

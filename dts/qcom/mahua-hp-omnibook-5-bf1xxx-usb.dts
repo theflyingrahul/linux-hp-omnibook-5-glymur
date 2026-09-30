@@ -32,16 +32,48 @@
  *   ask for before they are acknowledged. UCSI drives the data role
  *   through the controllers' usb-role-switch.
  *
- * Not declared yet, for all three ports:
+ * Internal camera (from kernel -8, 2026-09-30,
+ * docs/camera-usb-controller-2026-09-30.md):
+ * - the camera is a USB device (HP True Vision FHD, USB\VID_30C9&PID_00D9
+ *   under Windows) on \_SB.USB4 (QCOM0FEF): 0x0a200000, GIC SPI 240 and
+ *   246 (ACPI 272, 278), one root-hub port. That is usb_hs, a
+ *   high-speed-only DWC3 with its own M31 eUSB2 PHY; enabled here as host
+ *   only.
+ * - Its ACPI resources also name GPIO 9, whose role is unknown; it stays
+ *   reserved and untouched. If firmware leaves the camera unpowered, it
+ *   simply does not enumerate.
+ *
+ * Not declared yet, for all four controllers:
  * - PHY supplies. HP's PEP names the rails (usb_2: S7F, L15B, L4C, L7B,
  *   L4F, L1C, L2F, L1F; usb_0: S7F, L15B, L3F, L7B, L4H; usb_1: the same
  *   plus L1H), but this device tree has no RPMh regulators yet and the
  *   per-supply mapping is not evidenced. The rails stay as firmware left
  *   them; the PHY drivers get dummy regulators.
- * - eUSB2 repeaters. HP's ACPI describes none (Qualcomm's Windows xHCI
- *   filter looks for an external I2C repeater in each controller's
- *   resources, and there is none); the M31 eUSB2 driver treats the
- *   repeater as optional.
+ *
+ * eUSB2 repeaters (from kernel -8, 2026-09-30): high speed works on all
+ * three ports but full and low speed fail on all three (a USB mouse, error
+ * -71). On the ACPI boot, where Linux leaves the PHY as firmware set it,
+ * the USB-A port ran a Dell receiver at 12 Mb/s (full speed). An eUSB2 PHY
+ * reaches a USB 2 connector only through a repeater, and the Linux
+ * repeater driver puts it in host mode (it forces the repeater's 19.2 MHz
+ * clock on, an eUSB 1.2 workaround); without a repeater node that never
+ * happens. HP's ACPI does not describe the repeaters (Windows' PMIC
+ * driver and firmware own them; the PHYC tuning methods are empty for
+ * usb_0 and usb_1), so:
+ * - placement follows Qualcomm's Mahua/Glymur CRD (smb2370.dtsi): SMB2370
+ *   PMICs on SPMI bus 2 at SID 9 (usb_0) and SID 10 (usb_1), repeater at
+ *   0xfd00;
+ * - HP's PEP votes for usb_0 and usb_1 include L15B 1.8 V and L7B
+ *   3.072 V, the rails the CRD gives these repeaters (vdd18, vdd3);
+ * - patches/kernel/upstream/qcom-next/0003 makes the repeater driver
+ *   check that the PMIC at that SID reports the SMB2370 subtype before
+ *   anything writes to it. If not, it refuses: then the USB-C ports lose
+ *   data for that boot (their PHYs wait for the repeater), but nothing is
+ *   written to the wrong PMIC. Charging does not depend on it.
+ * - SID 11 (the CRD's third, disabled, SMB2370) is declared only to be
+ *   identified: its repeater is linked to nothing, so it is never
+ *   initialized. usb_2 (USB-A, which also votes L15B and L7B) stays
+ *   without a repeater until that is known.
  * - HP's USB3 PHY tuning for usb_2 (\_SB.USB2.PHYC, two register writes).
  * - DisplayPort alternate mode (mdss_dp0/dp1 stay disabled).
  */
@@ -51,6 +83,48 @@
 
 / {
 	model = "HP OmniBook 5 Laptop 16-bf1xxx (GPU and USB test)";
+};
+
+&spmi_bus2 {
+	smb2370_j_e2: pmic@9 {
+		compatible = "qcom,smb2370", "qcom,spmi-pmic";
+		reg = <0x9 SPMI_USID>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		smb2370_j_e2_eusb2_repeater: phy@fd00 {
+			compatible = "qcom,smb2370-eusb2-repeater";
+			reg = <0xfd00>;
+			#phy-cells = <0>;
+		};
+	};
+
+	smb2370_k_e2: pmic@a {
+		compatible = "qcom,smb2370", "qcom,spmi-pmic";
+		reg = <0xa SPMI_USID>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		smb2370_k_e2_eusb2_repeater: phy@fd00 {
+			compatible = "qcom,smb2370-eusb2-repeater";
+			reg = <0xfd00>;
+			#phy-cells = <0>;
+		};
+	};
+
+	/* Identification only: linked to no PHY, never initialized */
+	smb2370_l_e2: pmic@b {
+		compatible = "qcom,smb2370", "qcom,spmi-pmic";
+		reg = <0xb SPMI_USID>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		smb2370_l_e2_eusb2_repeater: phy@fd00 {
+			compatible = "qcom,smb2370-eusb2-repeater";
+			reg = <0xfd00>;
+			#phy-cells = <0>;
+		};
+	};
 };
 
 &{/pmic-glink} {
@@ -122,6 +196,8 @@
 };
 
 &usb_0_hsphy {
+	phys = <&smb2370_j_e2_eusb2_repeater>;
+
 	status = "okay";
 };
 
@@ -142,6 +218,8 @@
 };
 
 &usb_1_hsphy {
+	phys = <&smb2370_k_e2_eusb2_repeater>;
+
 	status = "okay";
 };
 
@@ -165,5 +243,16 @@
 };
 
 &usb_2_qmpphy {
+	status = "okay";
+};
+
+&usb_hs {
+	dr_mode = "host";
+	/delete-property/ usb-role-switch;
+
+	status = "okay";
+};
+
+&usb_hs_phy {
 	status = "okay";
 };
