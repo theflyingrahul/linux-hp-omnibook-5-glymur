@@ -87,6 +87,8 @@ It checks every file against `SHA256SUMS`, then installs:
   skips the switch);
 - the scmi-cpufreq boot service;
 - Ubuntu's test tools;
+- lscpu from util-linux PR #4657 (Oryon-2), into `/usr/local`, when
+  `lscpu-oryon2.tar.gz` is staged;
 - the check scripts, into your home directory.
 
 ### `install-kernel.sh`
@@ -180,10 +182,13 @@ from kernel `-9` (`docs/ec-2026-09-30.md`):
 - the EC bus (`i2c9`, `0xa84000`) and the `hp-omnibook-5-ec` driver in the
   kernel log;
 - the fan speed and the four EC thermistors, five samples 2 s apart;
-- the keyboard backlight (`hp::kbd_backlight`): it steps through off and
-  the two levels and asks what you see;
-- the F6/F9 mute LEDs (`platform::mute`, `platform::micmute`): it lights
-  each in turn and asks which key lit, since that mapping is not known.
+- full kernel warnings;
+- the keyboard backlight timeout (`kbd_backlight_timeout`, from `-10`):
+  it tries `30s` and `always` and asks whether the backlight went off;
+- the F6/F9 mute LEDs (`platform::mute`, `platform::micmute`): it asks
+  what Windows last had muted and what is lit, then lights each LED alone;
+- a 30 s key capture while you press F6, F9, F11, F5 and Fn, from the
+  keyboard, the consumer-control device and the EC hotkeys device.
 
 Run it at a terminal on the desktop; it waits for your answers.
 
@@ -191,9 +196,9 @@ If the driver did not bind, it sends HP's read commands by hand with
 `i2ctransfer` (from `i2c-tools`), and nothing that changes the EC's
 state.
 
-To set the keyboard backlight by hand:
+To set the keyboard backlight timeout by hand (`30s`, `3min` or `always`):
 
-    echo 2 | sudo tee /sys/class/leds/hp::kbd_backlight/brightness
+    echo always | sudo tee /sys/bus/i2c/devices/9-0076/kbd_backlight_timeout
 
 ### `charging-watch.sh`
 

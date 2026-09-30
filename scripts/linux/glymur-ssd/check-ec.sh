@@ -19,6 +19,11 @@ sect "kernel log: EC bus and driver"
 journalctl -k -b --no-pager |
     grep -iE 'a84000|i2c9|gpi|geni|hp-omnibook|hp_omnibook|embedded-controller|0-0076|-0076' | tail -60
 
+sect "kernel warnings and errors, in full"
+journalctl -k -b --no-pager -o short-monotonic |
+    awk '/-+\[ cut here \]-+|WARNING:|BUG:|Oops|Unable to handle/ { n = 45 }
+         n > 0 { print; n-- }' | tail -400
+
 sect "EC device and driver"
 BUS=
 for a in /sys/bus/i2c/devices/i2c-*; do
@@ -52,34 +57,81 @@ fi
 
 ask() { local a; read -r -p "$1 " a </dev/tty; echo "answer: $a"; }
 
-sect "keyboard backlight LED"
-L=/sys/class/leds/hp::kbd_backlight
-if [ -e "$L" ]; then
-    old=$(cat $L/brightness)
-    echo "brightness $old of $(cat $L/max_brightness)"
-    for b in 0 1 2; do
-        echo "$b" > $L/brightness
-        echo "set $b, reads back $(cat $L/brightness)"
-        ask "Keyboard backlight now: off, dim or bright?"
+# The EC runs the keyboard backlight (F5); the driver sets only its timeout.
+sect "keyboard backlight timeout"
+T=
+[ -n "$BUS" ] && T=/sys/bus/i2c/devices/${BUS}-0076/kbd_backlight_timeout
+if [ -n "$T" ] && [ -e "$T" ]; then
+    old=$(cat "$T")
+    echo "timeout now: $old (Windows: 30 sec, 3 min, Always)"
+    for v in 30s always; do
+        echo "$v" > "$T"
+        echo "set $v, reads back $(cat "$T")"
+        echo "Turn the backlight on with F5, then keep off the keyboard and touchpad for 45 s."
+        sleep 50
+        ask "After 45 s untouched with '$v': is the backlight on or off?"
     done
-    echo "$old" > $L/brightness
+    echo "$old" > "$T"
+    echo "restored: $(cat "$T")"
 else
-    echo "no hp::kbd_backlight LED"
+    echo "no kbd_backlight_timeout attribute"
 fi
 
-# Which EC LED is the F6 (speaker mute) and which the F9 (mic mute) LED
-# is not known yet.
+# EC LED 8 is taken as F6 (speaker mute) and 9 as F9 (mic mute). Start
+# from a known state: the EC may already have an LED on.
 sect "mute LEDs"
+declare -A was
 for n in mute micmute; do
     L=/sys/class/leds/platform::$n
     [ -e "$L" ] || { echo "no platform::$n LED"; continue; }
-    echo "platform::$n reads $(cat $L/brightness)"
-    echo 1 > $L/brightness
-    echo "platform::$n on, reads back $(cat $L/brightness)"
-    ask "Which key LED is lit now: F6, F9, both or none?"
-    echo 0 > $L/brightness
-    echo "platform::$n off, reads back $(cat $L/brightness)"
+    was[$n]=$(cat $L/brightness)
+    echo "platform::$n reads ${was[$n]}"
 done
+if [ ${#was[@]} -eq 2 ]; then
+    ask "In the last Windows session, were the speakers or the microphone muted (speaker, mic, both, none, unsure)? Was this boot a restart from Windows, or from power off?"
+    ask "Before any change, which key LEDs are lit: F6, F9, both or none?"
+    for n in mute micmute; do echo 0 > /sys/class/leds/platform::$n/brightness; done
+    echo "both off, read back: mute $(cat /sys/class/leds/platform::mute/brightness), micmute $(cat /sys/class/leds/platform::micmute/brightness)"
+    ask "Both set off. Which are lit now: F6, F9, both or none?"
+    for n in mute micmute; do
+        L=/sys/class/leds/platform::$n
+        echo 1 > $L/brightness
+        echo "platform::$n on, read back: mute $(cat /sys/class/leds/platform::mute/brightness), micmute $(cat /sys/class/leds/platform::micmute/brightness)"
+        ask "Only platform::$n set on. Which are lit now: F6, F9, both or none?"
+        echo 0 > $L/brightness
+    done
+    for n in mute micmute; do echo "${was[$n]}" > /sys/class/leds/platform::$n/brightness; done
+    echo "restored: mute $(cat /sys/class/leds/platform::mute/brightness), micmute $(cat /sys/class/leds/platform::micmute/brightness)"
+fi
+
+# F9 sends a HID Mute as well as its EC event; the timestamps show the order.
+sect "hotkeys (30 s capture)"
+echo "Press, slowly and in order: F6, F9, F11, F5, then Fn alone (Fn lock)."
+python3 - <<'PY'
+import os, re, select, struct, time
+want = ("Keyboard", "Consumer Control", "EC hotkeys", "gpio-keys")
+fds = {}
+for block in open("/proc/bus/input/devices").read().split(chr(10) * 2):
+    name = re.search(r'N: Name="([^"]*)"', block)
+    ev = re.search(r"H: Handlers=.*?(event\d+)", block)
+    if name and ev and any(w in name.group(1) for w in want):
+        try:
+            fds[os.open("/dev/input/" + ev.group(1), os.O_RDONLY)] = name.group(1)
+        except OSError as e:
+            print("cannot open", ev.group(1), e)
+print("devices:", sorted(set(fds.values())), flush=True)
+fmt = "llHHi"; size = struct.calcsize(fmt)
+end = time.time() + 30
+while time.time() < end:
+    for fd in select.select(list(fds), [], [], 1.0)[0]:
+        data = os.read(fd, size * 16)
+        for i in range(0, len(data) - size + 1, size):
+            sec, usec, typ, code, val = struct.unpack(fmt, data[i:i + size])
+            if typ in (1, 4):
+                print(f"{sec}.{usec:06d} {fds[fd]}: {'KEY' if typ == 1 else 'MSC'} code={code} value={val}", flush=True)
+print("capture done", flush=True)
+PY
+journalctl -k -b --no-pager | grep -i 'hp-omnibook-5-ec' | tail -20
 
 # Only when the driver did not bind: HP's own read commands, by hand.
 sect "manual mailbox probe (only without the driver)"
