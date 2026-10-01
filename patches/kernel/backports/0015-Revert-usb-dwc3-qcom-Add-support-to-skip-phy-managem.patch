@@ -1,0 +1,100 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+Date: Wed, 9 Sep 2026 15:19:10 +0530
+Subject: [PATCH] Revert "usb: dwc3: qcom: Add support to skip phy
+ management by USB core"
+
+This reverts commit be7b1c68cd3e4fc0f5a4e1b85696de1052f21f2f.
+
+Commit be7b1c68cd3e ("usb: dwc3: qcom: Add support to skip phy management by USB core")
+is causing a regression on qualcomm platforms.
+
+During role switch it tends to cause the following crash:
+
+[    5.620951] refcount_t: underflow; use-after-free.
+[    5.621114] Call trace:
+[    5.621115]  refcount_warn_saturate+0xd8/0x140 (P)
+[    5.621117]  kobject_put+0x11c/0x230
+[    5.621121]  software_node_notify_remove+0xdc/0xf8
+[    5.621124]  device_del+0x1dc/0x328
+[    5.621126]  usb_disconnect+0x1d8/0x348
+[    5.621129]  usb_remove_hcd+0x100/0x2a8
+[    5.621131]  xhci_plat_remove+0x8c/0x170
+[    5.621134]  platform_remove+0x28/0x40
+[    5.621135]  device_release_driver_internal+0x174/0x290
+[    5.621138]  device_release_driver+0x20/0x38
+[    5.621140]  bus_remove_device+0x19c/0x1f8
+[    5.621142]  device_del+0x1c4/0x328
+[    5.621143]  platform_device_unregister+0x34/0xc0
+[    5.621145]  dwc3_host_exit+0x50/0x70
+[    5.621146]  __dwc3_set_mode+0xa4/0x378
+
+[    5.644535] Unable to handle kernel paging request at virtual address
+[    5.644657] Workqueue: events_freezable __dwc3_set_mode
+[    5.644664] pc : __pi_strcmp+0x9c/0x140
+[    5.644668] lr : software_node_property_present+0x60/0x98
+[    5.644697] Call trace:
+[    5.644698]  __pi_strcmp+0x9c/0x140 (P)
+[    5.644700]  device_property_present+0x9c/0xc0
+[    5.644703]  dwc3_gadget_init+0x230/0x7b0
+[    5.644704]  __dwc3_set_mode+0x314/0x378
+[    5.644707]  process_scheduled_works+0x1b8/0x538
+[    5.644710]  worker_thread+0x1fc/0x2f8
+[    5.644711]  kthread+0x114/0x148
+[    5.644713]  ret_from_fork+0x10/0x20
+
+Revert skipping of usb core phy management for Qualcomm platforms to avoid
+the above issues.
+
+Reported-by: Val Packett <val@packett.cool>
+Closes: https://lore.kernel.org/all/f9926203-ee69-4e18-b6c7-95261ba10807@packett.cool/
+Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+Acked-by: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
+Tested-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Link: https://patch.msgid.link/20260909-xhci-fixes-revert-v1-1-7cc97fa0f307@oss.qualcomm.com
+Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Link: https://lore.kernel.org/r/20260909-xhci-fixes-revert-v1-1-7cc97fa0f307@oss.qualcomm.com
+[ Backported to qcom-next for the HP OmniBook 5 bring-up: usb-next commit
+  bb4f62bfaa reverts be7b1c68cd3e; qcom-next carries the same patch as
+  FROMLIST d90fb648965d, which this reverts. The context differs because of
+  qcom-next's GDSC workaround in dwc3-qcom.c; <linux/property.h> stays
+  included, as qcom-next's other code in the file needs it. ]
+---
+ drivers/usb/dwc3/dwc3-qcom.c | 14 --------------
+ 1 file changed, 14 deletions(-)
+
+diff --git a/drivers/usb/dwc3/dwc3-qcom.c b/drivers/usb/dwc3/dwc3-qcom.c
+index e147054d4f87..97fb695180ee 100644
+--- a/drivers/usb/dwc3/dwc3-qcom.c
++++ b/drivers/usb/dwc3/dwc3-qcom.c
+@@ -448,16 +448,6 @@ static irqreturn_t qcom_dwc3_resume_irq(int irq, void *data)
+ 	return IRQ_HANDLED;
+ }
+ 
+-static int dwc3_qcom_set_swnode(struct device *dev)
+-{
+-	const struct property_entry props[] = {
+-		PROPERTY_ENTRY_BOOL("xhci-skip-phy-init-quirk"),
+-		{}
+-	};
+-
+-	return device_create_managed_software_node(dev, props, NULL);
+-}
+-
+ static void dwc3_qcom_select_utmi_clk(struct dwc3_qcom *qcom)
+ {
+ 	/* Configure dwc3 to use UTMI clock as PIPE clock not present */
+@@ -735,10 +725,6 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
+ 	if (ignore_pipe_clk)
+ 		dwc3_qcom_select_utmi_clk(qcom);
+ 
+-	ret = dwc3_qcom_set_swnode(dev);
+-	if (ret)
+-		goto clk_disable;
+-
+ 	qcom->mode = usb_get_dr_mode(dev);
+ 
+ 	if (qcom->mode == USB_DR_MODE_HOST) {
+-- 
+2.53.0
+

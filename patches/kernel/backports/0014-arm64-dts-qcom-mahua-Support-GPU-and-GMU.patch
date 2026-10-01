@@ -1,0 +1,40 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Jie Zhang <jie.zhang@oss.qualcomm.com>
+Date: Fri, 25 Sep 2026 02:44:36 +0530
+Subject: [PATCH] arm64: dts: qcom: mahua: Support GPU and GMU
+
+Mahua SoC has a new GPU called Adreno X2-85, a slightly smaller variant
+of the Adreno X2-90 found on glymur. Override the compatible strings to
+correctly support it's GPU and GMU.
+
+Signed-off-by: Jie Zhang <jie.zhang@oss.qualcomm.com>
+Signed-off-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Link: https://lore.kernel.org/r/20260925-mahua-gpu-v1-5-0fa0bfd8d315@oss.qualcomm.com
+---
+ arch/arm64/boot/dts/qcom/mahua.dtsi | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/mahua.dtsi b/arch/arm64/boot/dts/qcom/mahua.dtsi
+index 5b2daaf452ff..e8aa6a0b4c1a 100644
+--- a/arch/arm64/boot/dts/qcom/mahua.dtsi
++++ b/arch/arm64/boot/dts/qcom/mahua.dtsi
+@@ -127,6 +127,14 @@ &gcc {
+ 		 <0>;				/* USB4 PHY 2 Max */
+ };
+ 
++&gmu {
++	compatible = "qcom,adreno-gmu-x285.0", "qcom,adreno-gmu";
++};
++
++&gpu {
++	compatible = "qcom,adreno-44060000", "qcom,adreno";
++};
++
+ &hsc_noc {
+ 	compatible = "qcom,mahua-hscnoc";
+ };
+-- 
+2.53.0
+

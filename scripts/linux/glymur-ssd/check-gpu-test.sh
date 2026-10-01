@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -u
 
-# One-boot check for "device tree (GPU test)". See README.md.
+# One-boot GPU, display, cpufreq and charging check. See README.md.
 #   sudo bash check-gpu-test.sh [--charging] [--cpufreq]
 
 [ "$(id -u)" -eq 0 ] || { echo 'run with sudo' >&2; exit 1; }

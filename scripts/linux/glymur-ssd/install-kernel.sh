@@ -59,5 +59,4 @@ fi
 sync
 ls -l "$BOOT"/vmlinuz-glymur "$BOOT"/vmlinuz-glymur.old "$BOOT"/glymur-dtb "$BOOT"/glymur-dtb.old 2>/dev/null
 ls -l "$BOOT/glymur-dtb/" 2>/dev/null
-echo "Reboot and choose \"Ubuntu on SSD: ACPI, newest glymur kernel\" or"
-echo "\"Ubuntu on SSD: device tree (full)\" to boot $krel."
+echo "Reboot and choose \"Ubuntu on SSD\" to boot $krel."

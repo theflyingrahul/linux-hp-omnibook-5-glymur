@@ -4,10 +4,11 @@ set -euo pipefail
 # Build Mesa for the Adreno X2-85 without root. See README.md.
 #   scripts/linux/build-mesa-glymur.sh <work dir> [jobs]
 
-VER=26.2.3
-# 1 = freedreno/turnip/softpipe, 2 = adds llvmpipe.
-PKGREL=2
-SHA256=1628058a8d2c0615975de5a15ab7bbb9638c50000b5bed9456ff423ea034a81f
+# Mesa main, pinned: the first Mesa with Mahua's X2-85 (chip 0x44060030,
+# d09fa965). No release has it yet; 26.2.3-2 was the last tarball build.
+VER=26.3.0-devel
+COMMIT=cec59b299704edc442d930ea9e06ab2edcf5ad7b
+PKGREL=1
 WORK="${1:?usage: build-mesa-glymur.sh <work dir> [jobs]}"
 JOBS="${2:-4}"
 PREFIX=/opt/mesa-glymur
@@ -21,7 +22,8 @@ WORK="$(cd "$WORK" && pwd)"
 SYSROOT="$WORK/sysroot"
 DEBS="$WORK/debs"
 
-PKGS=(meson python3-mako python3-pycparser glslang-tools libwayland-bin
+PKGS=(meson python3-mako python3-pycparser python3-yaml python3-packaging
+      glslang-tools libwayland-bin
       libdrm-dev libexpat1-dev libwayland-dev wayland-protocols
       libwayland-egl-backend-dev libdisplay-info-dev
       libx11-dev libxext-dev libxfixes-dev libxcb-glx0-dev libxcb-shm0-dev
@@ -75,12 +77,20 @@ export PKG_CONFIG_SYSROOT_DIR="$SYSROOT"
 export CFLAGS="-I$SYSROOT/usr/include" CXXFLAGS="-I$SYSROOT/usr/include"
 export LDFLAGS="-L$SYSROOT/usr/lib/aarch64-linux-gnu -Wl,-rpath-link,$SYSROOT/usr/lib/aarch64-linux-gnu"
 
+VER="$VER-${COMMIT:0:8}"
+SRC="$WORK/mesa-$VER"
 echo "== Mesa $VER source"
-TARBALL="$WORK/mesa-$VER.tar.xz"
-[ -f "$TARBALL" ] || curl -sfL -o "$TARBALL" "https://archive.mesa3d.org/mesa-$VER.tar.xz"
-echo "$SHA256  $TARBALL" | sha256sum -c -
-rm -rf "$WORK/mesa-$VER" "$WORK/build" "$WORK/stage"
-tar -C "$WORK" -xf "$TARBALL"
+rm -rf "$WORK/build" "$WORK/stage"
+if [ "$(git -C "$SRC" rev-parse HEAD 2>/dev/null)" != "$COMMIT" ]; then
+    rm -rf "$SRC"
+    git init -q "$SRC"
+    git -C "$SRC" fetch -q --depth 1 https://gitlab.freedesktop.org/mesa/mesa.git "$COMMIT"
+    git -C "$SRC" checkout -q FETCH_HEAD
+fi
+[ "$(git -C "$SRC" rev-parse HEAD)" = "$COMMIT" ] || { echo "source is not $COMMIT" >&2; exit 1; }
+git -C "$SRC" diff --quiet || { echo "$SRC has local changes" >&2; exit 1; }
+grep -q 0xffff44060030 "$SRC/src/freedreno/common/freedreno_devices.py" ||
+    { echo "this Mesa does not know the Mahua X2-85" >&2; exit 1; }
 
 echo "== configure"
 # Prefer the sysroot's llvm-config; fall back to the host's.
@@ -89,7 +99,7 @@ if [ -x "$SYSROOT$LLVM_CONFIG" ]; then LLVM_CONFIG="$SYSROOT$LLVM_CONFIG"; fi
     { echo "need LLVM 21 (Ubuntu's Mesa links libllvm21), got $("$LLVM_CONFIG" --version)" >&2; exit 1; }
 "$LLVM_CONFIG" --version --includedir --libdir --shared-mode
 printf "[binaries]\nllvm-config = '%s'\n" "$LLVM_CONFIG" > "$WORK/native.ini"
-python3 "$SYSROOT/usr/bin/meson" setup "$WORK/build" "$WORK/mesa-$VER" \
+python3 "$SYSROOT/usr/bin/meson" setup "$WORK/build" "$SRC" \
     --native-file "$WORK/native.ini" \
     --prefix="$PREFIX" --libdir="$LIBDIR" --buildtype=release \
     -Dgallium-drivers=freedreno,llvmpipe,softpipe -Dvulkan-drivers=freedreno \

@@ -1,4 +1,4 @@
-From fa6c4db6ec8d6759bb69b3b1b32715c2648becfe Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Tue, 29 Sep 2026 23:13:55 -0700
 Subject: [PATCH] drm/msm/a8xx: report the GMEM size of the active slices
@@ -7,47 +7,42 @@ A8xx GPUs split GMEM evenly between their slices, and parts can have
 slices fused off: a8xx_gpu_get_slice_info() reads the active slice mask
 and folds the slice count into the chip ID. The GMEM size reported to
 userspace (MSM_PARAM_GMEM_SIZE) is still the catalog value for all
-slices.
+slices, so on a part with fused-off slices userspace would size its
+tiles and place its CCU caches past the end of the GMEM that exists.
 
-On an HP OmniBook 5 (Snapdragon X2 Elite, Mahua), the Adreno X2-85 runs
-3 of 4 slices (chip ID 0x44070031) and the kernel reports 21 MB of GMEM.
-Mesa sizes its tiles and places its CCU caches at the top of that range,
-past the end of the GMEM that exists, and GPU-rendered output is visibly
-corrupted: noise bands and block garbage, across the whole desktop with
-GNOME Shell. Rendering without GMEM (FD_MESA_DEBUG=sysmem) is clean;
-disabling UBWC, LRZ or compressed scanout is not.
+Qualcomm's downstream driver reports GMEM for the active slices:
+gen8_get_gmem_size() in KGSL divides the GMEM size by the number of
+physical slices and multiplies it by the number of active ones. Do the
+same when reading the slice mask. The GMEM protection and UCHE setup
+still cover the full range, as in KGSL.
 
-Qualcomm's downstream driver reports GMEM for the active slices on this
-GPU: gen8_get_gmem_size() in KGSL returns
-gmem_size / GEN8_1_0_NUM_PHYSICAL_SLICES * active slices, 15.75 MB here.
-Do the same when reading the slice mask. The GMEM protection and UCHE
-setup still cover the full range, as in KGSL.
+Fixes: 288a93200892 ("drm/msm/adreno: Introduce A8x GPU Support")
+Signed-off-by: Rahul Pon <theflyingrahul@gmail.com>
 ---
- drivers/gpu/drm/msm/adreno/a8xx_gpu.c   | 4 ++++
+ drivers/gpu/drm/msm/adreno/a8xx_gpu.c   | 3 +++
  drivers/gpu/drm/msm/adreno/adreno_gpu.c | 3 ++-
  drivers/gpu/drm/msm/adreno/adreno_gpu.h | 2 ++
- 3 files changed, 8 insertions(+), 1 deletion(-)
+ 3 files changed, 7 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/msm/adreno/a8xx_gpu.c b/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
-index 97af37162065..c43591f1e626 100644
+index 97af37162065..1e30704b8141 100644
 --- a/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
 +++ b/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
-@@ -112,6 +112,10 @@ void a8xx_gpu_get_slice_info(struct msm_gpu *gpu)
+@@ -112,6 +112,9 @@ void a8xx_gpu_get_slice_info(struct msm_gpu *gpu)
  	/* Chip ID depends on the number of slices available. So update it */
  	adreno_gpu->chip_id |= FIELD_PREP(GENMASK(7, 4), hweight32(slice_mask));
  
 +	/* GMEM is split evenly between slices: report the active share */
-+	adreno_gpu->gmem = adreno_gpu->info->gmem / info->max_slices *
-+			   hweight32(slice_mask);
++	adreno_gpu->gmem = (adreno_gpu->info->gmem / info->max_slices) * hweight32(slice_mask);
 +
  	/* Update the gpu-name to reflect the slice config: */
  	const char *name = devm_kasprintf(dev, GFP_KERNEL,
  			"%"ADRENO_CHIPID_FMT,
 diff --git a/drivers/gpu/drm/msm/adreno/adreno_gpu.c b/drivers/gpu/drm/msm/adreno/adreno_gpu.c
-index 5832dc25d6bf..dadfe4c69438 100644
+index 8cd2020d4b7e..2e76471ef7ef 100644
 --- a/drivers/gpu/drm/msm/adreno/adreno_gpu.c
 +++ b/drivers/gpu/drm/msm/adreno/adreno_gpu.c
-@@ -379,7 +379,7 @@ int adreno_get_param(struct msm_gpu *gpu, struct msm_context *ctx,
+@@ -380,7 +380,7 @@ int adreno_get_param(struct msm_gpu *gpu, struct msm_context *ctx,
  		*value = adreno_gpu->info->revn;
  		return 0;
  	case MSM_PARAM_GMEM_SIZE:
@@ -56,7 +51,7 @@ index 5832dc25d6bf..dadfe4c69438 100644
  		return 0;
  	case MSM_PARAM_GMEM_BASE:
  		if (adreno_gpu->info->family >= ADRENO_6XX_GEN3)
-@@ -1205,6 +1205,7 @@ int adreno_gpu_init(struct drm_device *drm, struct platform_device *pdev,
+@@ -1206,6 +1206,7 @@ int adreno_gpu_init(struct drm_device *drm, struct platform_device *pdev,
  	adreno_gpu->funcs = funcs;
  	adreno_gpu->info = config->info;
  	adreno_gpu->chip_id = config->chip_id;

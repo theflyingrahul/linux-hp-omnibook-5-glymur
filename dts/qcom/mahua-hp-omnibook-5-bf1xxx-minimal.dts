@@ -1,14 +1,10 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * HP OmniBook 5 16-bf1xxx, minimal device tree: the full device tree with
- * the native display left out, so the firmware framebuffer stays lit.
- * The display-lab boot of this configuration (2026-09-28,
- * docs/lab-boot-state-2026-09-28.md) had working CPUs, storage, input,
- * lid, Wi-Fi, Bluetooth, and battery and AC over PMIC GLink. The ADSP and
- * CDSP boot HP's images, but nothing uses them yet: no audio. The two UCSI
- * power supplies register, but the USB-C ports do not work (no USB). Also
- * absent: USB, GPU, TPM, fan RPM, CPU frequency scaling and suspend. This
- * is the fallback when the full device tree's display does not come up.
+ * HP OmniBook 5 16-bf1xxx, minimal device tree: the daily device tree with
+ * the native display and the GPU left out, so the firmware framebuffer
+ * stays lit. The fallback when the display or the GPU does not come up.
+ * USB and the EC stay on, so a kernel can still be installed from the
+ * USB stick.
  */
 /dts-v1/;
 
@@ -40,16 +36,32 @@
 	status = "disabled";
 };
 
+&adreno_smmu {
+	status = "disabled";
+};
+
+&gmu {
+	status = "disabled";
+};
+
+&gpu {
+	status = "disabled";
+};
+
+&gpucc {
+	status = "disabled";
+};
+
+&gxclkctl {
+	status = "disabled";
+};
+
 &tlmm {
 	/*
-	 * Allow-list: everything except the pins this file uses is reserved,
-	 * up to GPIO 250 (the TLMM has 251). The eDP pins 18, 70 and 119 are
-	 * reserved here: the firmware drives them and nothing in this tree
-	 * does. Used: 0-1 i2c0, 3 touchpad, 16-17 i2c4, 32-33 i2c8,
-	 * 51 touchscreen, 56-59 uart14, 67 keyboard, 92 lid, 116 BT enable,
-	 * 146-148 PCIe 4, 152-154 PCIe 5.
+	 * The daily allow-list with the eDP pins 18, 70 and 119 reserved: the
+	 * firmware drives them and nothing in this tree does.
 	 */
-	gpio-reserved-ranges = <2 1>, <4 12>, <18 14>, <34 17>, <52 4>,
-			       <60 7>, <68 24>, <93 23>, <117 29>,
+	gpio-reserved-ranges = <2 1>, <4 12>, <18 14>, <34 2>, <38 13>,
+			       <52 4>, <60 7>, <68 24>, <93 23>, <117 29>,
 			       <149 3>, <155 96>;
 };

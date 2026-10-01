@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -u
 
-# EC report for the "device tree (GPU and USB-A test)" boot, kernel -9 on.
+# EC report, kernel -9 on; the event line needs the test device tree.
 # See README.md.
 #   sudo bash check-ec.sh
 
@@ -77,6 +77,20 @@ else
     echo "no kbd_backlight_timeout attribute"
 fi
 
+# Read-only from -11: only F5 changes the level, inside the EC.
+sect "keyboard backlight level"
+L=
+[ -n "$BUS" ] && L=/sys/bus/i2c/devices/${BUS}-0076/kbd_backlight_level
+if [ -n "$L" ] && [ -e "$L" ]; then
+    echo "level now: $(cat "$L")"
+    for i in 1 2 3; do
+        ask "Press F5 once (press $i of 3), then Enter. Is the backlight off, dim or bright?"
+        echo "level reads: $(cat "$L")"
+    done
+else
+    echo "no kbd_backlight_level attribute"
+fi
+
 # EC LED 8 is taken as F6 (speaker mute) and 9 as F9 (mic mute). Start
 # from a known state: the EC may already have an LED on.
 sect "mute LEDs"
@@ -91,21 +105,36 @@ if [ ${#was[@]} -eq 2 ]; then
     ask "In the last Windows session, were the speakers or the microphone muted (speaker, mic, both, none, unsure)? Was this boot a restart from Windows, or from power off?"
     ask "Before any change, which key LEDs are lit: F6, F9, both or none?"
     for n in mute micmute; do echo 0 > /sys/class/leds/platform::$n/brightness; done
+    sleep 0.5
     echo "both off, read back: mute $(cat /sys/class/leds/platform::mute/brightness), micmute $(cat /sys/class/leds/platform::micmute/brightness)"
     ask "Both set off. Which are lit now: F6, F9, both or none?"
     for n in mute micmute; do
         L=/sys/class/leds/platform::$n
         echo 1 > $L/brightness
+        sleep 0.5
         echo "platform::$n on, read back: mute $(cat /sys/class/leds/platform::mute/brightness), micmute $(cat /sys/class/leds/platform::micmute/brightness)"
         ask "Only platform::$n set on. Which are lit now: F6, F9, both or none?"
         echo 0 > $L/brightness
     done
     for n in mute micmute; do echo "${was[$n]}" > /sys/class/leds/platform::$n/brightness; done
+    sleep 0.5
     echo "restored: mute $(cat /sys/class/leds/platform::mute/brightness), micmute $(cat /sys/class/leds/platform::micmute/brightness)"
 fi
 
 # F9 sends a HID Mute as well as its EC event; the timestamps show the order.
+sect "EC event line before the capture"
+grep -E 'hp-omnibook-5-ec' /proc/interrupts || echo "no hp-omnibook-5-ec interrupt"
+D=/sys/kernel/debug
+grep -E 'gpio66[^0-9]|pin 66 ' "$D"/gpio "$D"/pinctrl/*/pinconf-pins 2>/dev/null
 sect "hotkeys (30 s capture)"
+# The event bytes the driver reads from EC register 0x05, from -12 on.
+TR=/sys/kernel/tracing
+EV=$TR/events/smbus/smbus_reply
+if [ -n "$BUS" ] && [ -d "$EV" ]; then
+    echo 0 > $TR/tracing_on; : > $TR/trace
+    echo "adapter_nr == $BUS && command == 5" > $EV/filter
+    echo 1 > $EV/enable; echo 1 > $TR/tracing_on
+fi
 echo "Press, slowly and in order: F6, F9, F11, F5, then Fn alone (Fn lock)."
 python3 - <<'PY'
 import os, re, select, struct, time
@@ -132,6 +161,24 @@ while time.time() < end:
 print("capture done", flush=True)
 PY
 journalctl -k -b --no-pager | grep -i 'hp-omnibook-5-ec' | tail -20
+echo "interrupts after: $(grep -E 'hp-omnibook-5-ec' /proc/interrupts || echo none)"
+if [ -d "${EV:-/nonexistent}" ]; then
+    echo 0 > $TR/tracing_on; echo 0 > $EV/enable; echo 0 > $EV/filter
+    echo "EC event bytes read during the capture (count, byte):"
+    grep smbus_reply $TR/trace | grep -o '\[[0-9a-f-]*\]$' | sort | uniq -c
+    echo "first and last reads, with times:"
+    grep smbus_reply $TR/trace | sed -n '1,5p;$p'
+    : > $TR/trace
+fi
+
+# Read only. Its vendor collection (usage page 0xff85, usage 0x68 on
+# Windows) is a candidate for a backlight level control.
+sect "keyboard HID report descriptor"
+for h in /sys/bus/hid/devices/*:0416:C300.*; do
+    [ -e "$h/report_descriptor" ] || continue
+    echo "$h"
+    od -An -tx1 -v "$h/report_descriptor"
+done
 
 # Only when the driver did not bind: HP's own read commands, by hand.
 sect "manual mailbox probe (only without the driver)"

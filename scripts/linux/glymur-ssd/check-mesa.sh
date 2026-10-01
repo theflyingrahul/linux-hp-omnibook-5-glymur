@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -u
 
-# Hardware rendering check for the "device tree (GPU test)" boot, with the
+# Hardware rendering check for the device-tree boots with the GPU, with the
 # Mesa installed by install-mesa.sh. Run from a terminal on the desktop as
 # your normal user (not sudo). Everything goes to
 # ~/glymur-logs/mesa-test-<time>.txt.
@@ -36,6 +36,28 @@ cat /sys/firmware/devicetree/base/model; echo
 ls /opt/mesa-glymur/lib/aarch64-linux-gnu/libgallium-*.so
 [ -d "$DF" ] && echo "devfreq: $(cat "$DF/governor") cur=$(cat "$DF/cur_freq") max=$(cat "$DF/max_freq")"
 ls -l /dev/dri
+
+# What msm reports to Mesa. From kernel -11: chip 0x44060030 (Mahua X2-85)
+# with 16515072 bytes (15.75 MB) of GMEM; before, 0x44070031.
+sect "what the kernel reports to Mesa (MSM_GET_PARAM)"
+python3 - <<'PY'
+import fcntl, glob, os, struct
+IOCTL = 0xC0186440  # DRM_IOCTL_MSM_GET_PARAM
+for node in sorted(glob.glob('/dev/dri/renderD*')):
+    try:
+        fd = os.open(node, os.O_RDWR)
+    except OSError as e:
+        print(node, e)
+        continue
+    for name, param in (('GPU_ID', 1), ('GMEM_SIZE', 2), ('CHIP_ID', 3), ('GMEM_BASE', 6)):
+        try:
+            buf = fcntl.ioctl(fd, IOCTL, struct.pack('IIQII', 0x10, param, 0, 0, 0))
+            print(f'{node} {name} = {struct.unpack("IIQII", buf)[2]:#x}')
+        except OSError as e:
+            print(f'{node} {name}: {e}')
+    os.close(fd)
+PY
+journalctl -k -b --no-pager | grep -iE 'adreno|a8xx|gmu' | head -12
 
 sect "system-wide mode and the compositor"
 mesa-glymur-run --system status
