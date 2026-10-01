@@ -72,7 +72,7 @@ the ACPI side, not just the driver-binding side.
 Two real, unassigned GPIOs (`191`/`2` on `ASCD`, `204`/`205` on `AUCD`)
 plausibly gate something audio-related — a codec/amp reset or enable
 line is a reasonable guess by shape, but a guess is exactly what
-`gpio-reserved-ranges` being an allow-list is there to
+`gpio-reserved-ranges` being an allow-list (`CONTRIBUTING.md`) is there to
 catch, and reserving a pin for the wrong purpose is worse than leaving it
 alone. Nothing here proves a purpose, direction, or safe default state.
 

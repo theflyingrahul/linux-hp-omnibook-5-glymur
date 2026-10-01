@@ -1,0 +1,38 @@
+Licensing of linux-hp-omnibook-5-glymur
+=======================================
+
+Copyright (c) 2026 Rahul Pon and contributors.
+
+This repository holds several kinds of material, licensed to match where
+each one goes. A file's own SPDX-License-Identifier line, where it has one,
+takes precedence over this table. The full license texts are in LICENSES/.
+
+  Path                                  License
+  ------------------------------------  ---------------------------------
+  dts/                                  BSD-3-Clause, as for Qualcomm's
+                                        and the other laptop device trees
+                                        in arch/arm64/boot/dts/qcom
+  patches/                              the license of the upstream file
+                                        each patch modifies (GPL-2.0 for
+                                        the Linux kernel)
+  scripts/, boards/ (except firmware),  GPL-2.0-only, as the kernel these
+  and all other code                    tools build and patch
+  docs/, captures/, reference/, notes/  CC-BY-4.0
+  and all other documentation
+  boards/*/firmware/                    NOT covered: see below
+
+Firmware
+--------
+
+The files under boards/hp-omnibook-5-16-bf1xxx/firmware/ are HP's and
+Qualcomm's, copied unmodified from the driver pack HP publishes for this
+laptop (provenance and hashes in that directory's README.md and
+MANIFEST.tsv). They are not licensed by this repository; their owners'
+terms apply. Do not add firmware from any other source.
+
+Contributions
+-------------
+
+By contributing, you agree that your contribution is licensed under the
+license that applies to the files it touches, as described above. See
+CONTRIBUTING.md.

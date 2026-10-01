@@ -212,7 +212,7 @@ if [ -f "$BUNDLE" ] &&
     chroot "$TARGET" chown -R "$NEWUSER:$NEWUSER" "/home/$NEWUSER"
     chroot "$TARGET" runuser -u "$NEWUSER" -- git -C "$repo" config core.filemode false || true
 else
-    say 'Workstation bundle not found or failed its checksum; skipped'
+    say 'Repository bundle not found or failed its checksum; skipped'
 fi
 
 # Import the live USB's persistent home into .work (read-only, noload).
@@ -245,12 +245,9 @@ import_live_home() {
         dest="$HOMEDIR/linux-hp-omnibook-5-glymur/.work/live-persistence-home-$(basename "$src")"
         say "Importing $src (read-only) into ${dest#"$TARGET"}"
         mkdir -p "$dest"
-        # Never import credentials, keys or app settings.
-        rsync -a --max-size=64M \
-            --exclude='/.ssh/' \
-            --exclude='/.gnupg/' --exclude='/.pki/' --exclude='/.local/share/keyrings/' \
-            --exclude='/.config/' --exclude='/.mozilla/' --exclude='/snap/' \
-            --exclude='/.cache/' --exclude='/.local/share/Trash/' --exclude='/.local/bin/' \
+        # Hidden files and directories hold credentials, keys and app
+        # settings: never import them.
+        rsync -a --max-size=64M --exclude='/.*' --exclude='/snap/' \
             --exclude='linux-qcom-next*/' \
             "$src/" "$dest/" >>"$LOG" 2>&1 ||
             say "Import from $src finished with rsync status $?"
@@ -268,8 +265,8 @@ say "Done. Kernel $KREL; filesystem UUID $FS_UUID; partition GUID $GUID."
 cat <<EOF | tee -a "$LOG"
 
 Next:
-  1. Reboot and choose "Ubuntu on SSD: ACPI, newest glymur kernel" ($KREL).
-     If it misbehaves, photograph the screen and try "Ubuntu on SSD: device tree (minimal)".
+  1. Reboot and choose "Ubuntu on SSD: ACPI (no device tree)" ($KREL).
+     If it misbehaves, photograph the screen and try "Ubuntu on SSD: fallback, firmware display (minimal device tree)".
   2. After logging in:
        POWER_SOURCE=battery bash ~/linux-hp-omnibook-5-glymur/scripts/linux/fan-thermal-profile.sh
   A bring-up report is written 60 s after every boot to /var/log/glymur/,
