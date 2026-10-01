@@ -46,8 +46,8 @@ Configuration:
   is wrong until chrony syncs.
 
 It also installs `git` from the kit, and imports the live USB's persistent
-home (read-only, `noload`) into `.work/`. Credentials, keys, keyrings and app
-settings are never imported.
+home (read-only, `noload`) into `.work/`. Hidden files and directories, which
+hold credentials, keys and app settings, are never imported.
 
 ### `make-kit.sh`
 
@@ -58,7 +58,7 @@ Assembles what goes onto the USB's FAT partition for the SSD install:
 | `glymur-tools/ssd/` | `install-ssd-root.sh`, the kernel tarball, `SHA256SUMS` |
 | `glymur-boot/` | `vmlinuz-<krel>` (fallback; GRUB prefers the SSD's copy) |
 | `glymur-tools/acpi-override/acpi-override.cpio` | the BIOS-gated `_OSC` fix |
-| `glymur-workstation/` | a repository bundle, `SHA256SUMS` |
+| `glymur-workstation/` | with `REPO_BUNDLE=1`: this checkout as a bundle, and `SHA256SUMS` |
 | `grub-entry.cfg` | entries to append to `boot/grub/grub.cfg` |
 | `MANIFEST.sha256` | every staged file |
 
@@ -67,6 +67,8 @@ Assembles what goes onto the USB's FAT partition for the SSD install:
 The partition GUID and the output are private; keep them in `.work/`.
 Environment variables:
 - `DSDT_FIX_DIR` (default `.work/dsdt-osc-fix-F.06`);
+- `REPO_BUNDLE` (default `0`; `1` bundles this checkout, `.work` included, for
+  the live session and the SSD install);
 - `DEBS_DIR` (default `.work/ssd-debs`: `git`, `git-man` and
   `liberror-perl`, fetched with `apt-get download` on an Ubuntu 26.04 arm64
   host).
@@ -74,7 +76,7 @@ Environment variables:
 ### `install-from-usb.sh`
 
 One command for any boot that can see the USB stick: an ACPI boot, or
-"device tree (GPU and USB-A test)", whose USB-A port works. Run it as your
+any device-tree boot of kernel `-10` or later, whose USB ports work. Run it as your
 normal user; it asks for your password through sudo:
 
     bash "/media/$USER/UBUNTU 26_0/glymur-tools/kernels/install-from-usb.sh" [--keep-ubuntu-mesa] [kernel release]
@@ -96,9 +98,10 @@ It checks every file against `SHA256SUMS`, then installs:
     sudo bash install-kernel.sh <glymur-kernel-*.tar.gz | build-output-dir>
 
 Installs a kernel from `build-qcom-next-glymur.sh`, as its tarball or its
-output directory. It rotates `/boot/vmlinuz-glymur` (booted by "ACPI, newest
-glymur kernel") and `vmlinuz-glymur.old` (booted by "ACPI, previous glymur
-kernel"), so nothing on the USB or the EFI partition changes. The device
+output directory. It rotates `/boot/vmlinuz-glymur` (booted by "Ubuntu on
+SSD" and the test, fallback and ACPI entries) and `vmlinuz-glymur.old`
+(booted by "Ubuntu on SSD: previous kernel"), so nothing on the USB or the
+EFI partition changes. The device
 trees go to `/boot/dtbs/<release>/` behind `/boot/glymur-dtb`, and the boot
 report tool is refreshed.
 
@@ -155,7 +158,7 @@ All of these write their reports to `/var/log/glymur/` or `~/glymur-logs/`.
 
     sudo bash check-usb.sh [--previous]
 
-The USB report for "device tree (GPU and USB-A test)". It covers:
+The USB report for the device-tree boots. It covers:
 - the USB-A port (`usb_2`);
 - the USB-C ports: `usb_0` next to the hinge, `usb_1` away from it;
 - the camera's controller (`usb_hs`, from `-8`);
@@ -177,18 +180,22 @@ USB-C port, and a mouse in each port in turn.
 
     sudo bash check-ec.sh
 
-The embedded-controller report for "device tree (GPU and USB-A test)",
-from kernel `-9` (`docs/ec-2026-09-30.md`):
+The embedded-controller report, from kernel `-9`; the event line needs
+"Ubuntu on SSD: test device tree" (`docs/ec-2026-09-30.md`):
 - the EC bus (`i2c9`, `0xa84000`) and the `hp-omnibook-5-ec` driver in the
   kernel log;
 - the fan speed and the four EC thermistors, five samples 2 s apart;
 - full kernel warnings;
 - the keyboard backlight timeout (`kbd_backlight_timeout`, from `-10`):
   it tries `30s` and `always` and asks whether the backlight went off;
+- the keyboard backlight level (`kbd_backlight_level`, from `-11`,
+  read-only): it reads it after each of three F5 presses;
 - the F6/F9 mute LEDs (`platform::mute`, `platform::micmute`): it asks
   what Windows last had muted and what is lit, then lights each LED alone;
+- the EC event line: its interrupt count and GPIO 66's state;
 - a 30 s key capture while you press F6, F9, F11, F5 and Fn, from the
-  keyboard, the consumer-control device and the EC hotkeys device.
+  keyboard, the consumer-control device and the EC hotkeys device;
+- the keyboard's HID report descriptor, read-only.
 
 Run it at a terminal on the desktop; it waits for your answers.
 
@@ -243,7 +250,7 @@ are clean (`docs/gpu-corruption-2026-09-30.md`).
     sudo bash check-gpu-test.sh [--charging] [--cpufreq]
     bash check-mesa.sh
 
-`check-gpu-test.sh` is the one-boot check for "device tree (GPU test)": GPU,
+`check-gpu-test.sh` is the one-boot check of the GPU,
 display, CPU frequency scaling and charging. Run `--cpufreq` only with
 nothing unsaved: loading scmi-cpufreq without the polling fix hung the laptop
 in lab run 1. `check-mesa.sh` checks which Mesa each program and GNOME Shell

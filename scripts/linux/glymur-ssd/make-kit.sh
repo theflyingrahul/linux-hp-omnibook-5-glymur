@@ -13,6 +13,7 @@ HERE="$REPO/scripts/linux/glymur-ssd"
 BOARD="$REPO/boards/hp-omnibook-5-16-bf1xxx"
 DSDT_FIX_DIR="${DSDT_FIX_DIR:-$REPO/.work/dsdt-osc-fix-F.06}"
 DEBS_DIR="${DEBS_DIR:-$REPO/.work/ssd-debs}"
+REPO_BUNDLE="${REPO_BUNDLE:-0}"
 
 [[ "$GUID" =~ ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$ ]] ||
     { echo "not a partition GUID: $GUID" >&2; exit 1; }
@@ -28,8 +29,7 @@ if [ -e "$OUT" ]; then
     echo "refusing to reuse $OUT" >&2
     exit 1
 fi
-mkdir -p "$OUT/glymur-tools/ssd" "$OUT/glymur-boot" "$OUT/glymur-tools/acpi-override" \
-    "$OUT/glymur-workstation"
+mkdir -p "$OUT/glymur-tools/ssd" "$OUT/glymur-boot" "$OUT/glymur-tools/acpi-override"
 
 echo "kernel $KREL, partition $GUID, BIOS gate $BIOS"
 cp "$HERE/install-ssd-root.sh" "$HERE/glymur-boot-report.sh" "$KERNEL_TAR" "$OUT/glymur-tools/ssd/"
@@ -60,19 +60,24 @@ sed -e "s|@KREL@|$KREL|g" -e "s|@PARTUUID@|$GUID|g" -e "s|@BIOS@|$BIOS|g" \
     -e "s|@BOARD_CMDLINE@|$BOARD_CMDLINE|g" -e '/^# Template/d' \
     "$HERE/grub-entry.cfg" >"$OUT/grub-entry.cfg"
 
-# Repository bundle, minus large or regenerable directories.
-echo "bundling $REPO"
-name="$(basename "$REPO")"
-out_abs="$(cd "$OUT" && pwd)"
-tar -czf "$out_abs/glymur-workstation/workstation-bundle.tar.gz" \
-    --exclude="$name/.work/usb-fat-backup-*" \
-    --exclude="$name/.work/pre-pull-backup-*" \
-    --exclude="$name/.work/workstation-stage" \
-    --exclude="$name/.work/ssd-kit*" \
-    --exclude="$name/.work/kernel-*" \
-    --exclude='__pycache__' \
-    -C "$(dirname "$REPO")" "$name"
-(cd "$OUT/glymur-workstation" && sha256sum workstation-bundle.tar.gz >SHA256SUMS)
+# With REPO_BUNDLE=1, this checkout (including .work, minus large or
+# regenerable directories) goes onto the USB for the live session and the
+# SSD install.
+if [ "$REPO_BUNDLE" = 1 ]; then
+    mkdir -p "$OUT/glymur-workstation"
+    echo "bundling $REPO"
+    name="$(basename "$REPO")"
+    out_abs="$(cd "$OUT" && pwd)"
+    tar -czf "$out_abs/glymur-workstation/workstation-bundle.tar.gz" \
+        --exclude="$name/.work/usb-fat-backup-*" \
+        --exclude="$name/.work/pre-pull-backup-*" \
+        --exclude="$name/.work/workstation-stage" \
+        --exclude="$name/.work/ssd-kit*" \
+        --exclude="$name/.work/kernel-*" \
+        --exclude='__pycache__' \
+        -C "$(dirname "$REPO")" "$name"
+    (cd "$OUT/glymur-workstation" && sha256sum workstation-bundle.tar.gz >SHA256SUMS)
+fi
 
 (cd "$OUT" && find . -type f ! -name MANIFEST.sha256 ! -name grub-entry.cfg | sort |
     sed 's#^\./##' | xargs sha256sum >MANIFEST.sha256)

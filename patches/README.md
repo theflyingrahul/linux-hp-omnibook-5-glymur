@@ -6,7 +6,7 @@ Kernel changes are split by who benefits:
 |---|---|---|
 | `kernel/upstream/qcom-next-acpi/` | Generic ACPI mechanisms for Snapdragon X2 (Glymur) laptops, as a `git format-patch` series against Qualcomm `qcom-next` (written on `a47c4c5aa`, applied since kernel `-5` on `e428097a36d`) | Yes, candidates |
 | `kernel/upstream/qcom-next/` | Generic fixes against `qcom-next`, not ACPI-specific (since kernel `-6`) | Yes, candidates |
-| `kernel/upstream/mainline/` | Submission-ready series against current mainline (only `Signed-off-by` missing) | Yes, ready |
+| `kernel/upstream/mainline/` | The generic fixes in their mainline form, as sent upstream on 2026-09-30 | Sent |
 | `kernel/backports/` | Fixes by others, posted or already in mainline, carried on our qcom-next base until qcom-next picks them up | Already posted or merged |
 | `kernel/glymur-bringup/` | Interim Glymur code, applied on top of the upstream series | No; replaced later |
 | `kernel/drafts/` | Upstream-form drafts not yet used in a build | Future |
@@ -23,14 +23,20 @@ Apply to qcom-next `6b4daa845239` (the qcom-next tip on 2026-09-30, from
 kernel `-8`; it was `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to
 `-4`) in order:
 `upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0005`,
-`glymur-bringup/0001–0002`, then `backports/0001–0012`
+`glymur-bringup/0001–0002`, then `backports/0001–0016`
 (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
 `upstream/qcom-next/0001`; `-7` adds `upstream/qcom-next/0002`; `-8` moves
 to the new base and adds `upstream/qcom-next/0003`; `-9` adds `0004`–`0005`
 (the HP EC; qcom-next was still `6b4daa845239` when fetched before it);
 `-10` reworks `0005` (backlight timeout instead of a level LED, EC events
-and hotkeys; qcom-next unchanged again). A fresh `prepare`
+and hotkeys; qcom-next unchanged again); `-11` adds the read-only
+backlight level to `0005` and `backports/0013–0014`, the Mahua GPU;
+`-12` adds `backports/0015–0016`, the dwc3-qcom software-node fix (qcom-next
+still `6b4daa845239` when fetched before it)
+(qcom-next and mainline fetched again before it, on 2026-09-30: qcom-next
+still `6b4daa845239`; mainline's only new commit in our drivers is
+`cb97bf3d4f`, still not taken, see below). A fresh `prepare`
 reproduces the build tree's source exactly.
 
 Base move for `-8` (2026-09-30): the 52 new qcom-next commits are all
@@ -48,9 +54,8 @@ After `-8` was built, the comments in `upstream/qcom-next/0002` and `0003`
 were shortened (no code change); `-8`'s source differs from a fresh
 `prepare` only in those two comments.
 
-Upstream submissions: `upstream/mainline/0001`–`0005` were signed off and
-sent on 2026-09-30 (`docs/upstreaming-2026-09-30.md` has the message IDs). `0004` and `0005` are the mainline
-versions of `upstream/qcom-next/0001` and `0002`. qcom-next was
+`upstream/mainline/0001`–`0005` were sent upstream on 2026-09-30; `0004` and
+`0005` are the mainline forms of `upstream/qcom-next/0001` and `0002`. qcom-next was
 fetched again before `-6` (2026-09-29) and before `-7` (2026-09-30): its
 tip is still `e428097a36d`. Mainline (v7.3-rc5+37 on 2026-09-30) and
 msm-next (`d33622598496`, 2026-09-26) have nothing new for these drivers,
@@ -84,14 +89,15 @@ and neither changes how msm reports GMEM.
   an unacknowledged one left the firmware reporting no connection on
   either port (`docs/usb-c-ports-2026-09-29.md`). Notifications for other
   ports are now acknowledged from a work item. Not ACPI- or board-specific.
-- `drm/msm/a8xx: report the GMEM size of the active slices`. msm told
-  userspace the catalog GMEM size for all four slices (21 MB) while this
-  X2-85 runs three. Mesa then put tiles and its CCU caches past the end of
-  real GMEM, and GPU-rendered output was corrupted
-  (`docs/gpu-corruption-2026-09-30.md`). Qualcomm's KGSL reports
-  `gmem_size / 4 × active slices` (15.75 MB here); msm now does the same
-  when it reads the slice mask. Not board-specific: any partial-slice A8xx.
-  Confirmed on `-7`: clean desktop, `glmark2` 11570.
+- `drm/msm/a8xx: report the GMEM size of the active slices`. msm reports
+  the catalog GMEM size for all slices even when some are fused off;
+  Qualcomm's KGSL reports `gmem_size / slices × active slices`, and msm now
+  does the same when it reads the slice mask. Not board-specific. On `-7`
+  it cleared the corruption here (`docs/gpu-corruption-2026-09-30.md`,
+  `glmark2` 11570), but only because this Mahua X2-85 ran with Glymur's
+  X2-90 entry (21 MB, 4 slices); the real fix for this chip is
+  `backports/0013–0014`, which make this patch a no-op here
+  (`docs/mahua-gpu-2026-09-30.md`).
 - `phy: qcom: eusb2-repeater: check the parent PMIC before using it`. For
   the SMB2370, the repeater driver checks that its parent PMIC reports the
   SMB2370 subtype before registering the PHY, and logs what it found. A
@@ -142,6 +148,40 @@ ported onto `->link_ready` (see the patch's backport note).
 - `4e93c65f87` Bluetooth: hci_qca: no serial writes after close.
 - `268aacb2e2` i2c: qcom-geni: release DMA channels on probe error.
 
+`backports/0013–0014`, from Qualcomm's "drm/msm: Mahua GPU support" v1
+(Jie Zhang, posted by Akhil P Oommen, 2026-09-25,
+`20260925-mahua-gpu-v1-0-0fa0bfd8d315@oss.qualcomm.com`; reviewed by Konrad
+Dybcio and Abel Vesa; not in qcom-next, msm-next or linux-next as of
+2026-09-30), patches 3 and 5 with the reviews collected:
+
+- `drm/msm/a8xx: Add Mahua GPU support`: the Adreno X2-85 catalog entry
+  (chip `0x44060000`, 3 slices, 15.75 MB GMEM, its own GMU chip ID). One
+  context line differs in qcom-next (the A830 clock-gating check); the
+  patch's note records it.
+- `arm64: dts: qcom: mahua: Support GPU and GMU`: the Mahua GPU and GMU
+  compatibles in `mahua.dtsi`.
+
+Until these, every Mahua board ran its GPU as Glymur's X2-90, whose 21 MB
+of GMEM caused the corruption `upstream/qcom-next/0002` worked around
+(`docs/mahua-gpu-2026-09-30.md`). Patches 1, 2 and 4 (Glymur's GMU
+compatible, bindings) are not needed here. Drop both when qcom-next has the
+series. They need Mesa with chip `0x44060030` (main from `d09fa965`), which
+`build-mesa-glymur.sh` builds.
+
+`backports/0015–0016` (from `-12`), the dwc3-qcom crash on USB-C role
+switches (`docs/usb-dwc3-crash-2026-09-30.md`):
+
+- `Revert "usb: dwc3: qcom: Add support to skip phy management by USB
+  core"` (Krishna Kurapati; `usb-next` `bb4f62bfaa`, 2026-09-09), applied as
+  the revert of qcom-next's FROMLIST copy `d90fb648965d`. The reverted patch
+  added a managed software node on every probe attempt: duplicate
+  `software_node` warnings at boot and a use-after-free on role switch.
+- `usb: dwc3: qcom: Add support to skip phy management by USB core`, the
+  replacement (posted 2026-09-14, acked by Thinh Nguyen, not merged), which
+  passes the quirk through the dwc3 core's properties.
+
+Drop both when qcom-next has the revert.
+
 Not taken: `cb97bf3d4f` "i2c: qcom-geni: Fix hardcoded clock index in
 SE_GENI_CLK_SEL". It conflicts with our ACPI I²C patch and makes probe fail
 unless the SE clock table has an exact 32 or 19.2 MHz entry. Input works on
@@ -150,20 +190,27 @@ both boot paths without it.
 The series was verified to reproduce the build tree exactly, except for
 those two board defaults, which moved to the board's command line.
 
-## Mainline series (ready to send)
+## Mainline series (`upstream/mainline/`)
 
-`upstream/mainline/` applies to mainline `fd179f8a05` (7.3-rc5 era) and
-compiles cleanly with `W=1`. `checkpatch --strict` flags only the missing
-`Signed-off-by`, which the author adds before sending. See
-`docs/upstreaming-2026-09-27.md` for recipients and status.
+These apply to mainline `fd179f8a05` (7.3-rc5 era) and compile cleanly with
+`W=1`; `0005` applies to msm-next. All five were sent upstream on 2026-09-30.
 
 1. `ACPI: GED: Support GpioInt event resources`: the same code as
-   `qcom-next-acpi/0001`, tested on this laptop.
+   `qcom-next-acpi/0001`. Withdrawn on 2026-10-01: ACPI 6.6 section 5.6.9.2
+   allows only Interrupt resources in a Generic Event Device, and mainline
+   has no ACPI driver for this laptop's GPIO controller (`QCOM0F0C`), so the
+   patch has no upstream user. The device tree handles the lid with
+   `gpio-keys`.
 2. `soc: qcom: geni-se: don't fail ACPI probe on a missing SE clock`: a
-   regression fix; `Fixes: 5b8a39dcf909`. It replaces the old
-   `standalone/0001`.
+   regression fix; `Fixes: 5b8a39dcf909`. Compile-tested only.
 3. `i2c: qcom-geni: release runtime PM reference when set_rate fails`: a
-   leak fix; `Fixes: 10e74f4c5046`. It replaces the old `standalone/0004`.
+   leak fix; `Fixes: 10e74f4c5046`. Compile-tested only.
+4. `soc: qcom: pmic_glink_altmode: acknowledge notifications on undescribed
+   ports`: the mainline form of `upstream/qcom-next/0001`, tested here.
+5. `drm/msm/a8xx: report the GMEM size of the active slices`: the first
+   version. The second, with the expression parenthesized on one line and
+   the text reworded without this laptop, is the form carried as
+   `upstream/qcom-next/0002`.
 
 ## Drafts and archive
 
