@@ -1,0 +1,109 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * HP OmniBook 5 16-bf1xxx, test device tree: the daily device tree plus
+ * what is being tested. Booted by the GRUB entry "Ubuntu on SSD: test
+ * device tree". Once an item here is proven, it moves into the daily
+ * device tree.
+ *
+ * In test from kernel -11:
+ * - the SMB2370 eUSB2 repeaters of the USB-C ports (from kernel -8, for
+ *   full and low speed);
+ * - the EC's event line, with the pull-up HP's ACPI sets on it.
+ */
+/dts-v1/;
+
+#include "mahua-hp-omnibook-5-bf1xxx.dts"
+
+/ {
+	model = "HP OmniBook 5 Laptop 16-bf1xxx (test)";
+};
+
+/*
+ * EC event line (docs/ec-2026-09-30.md): HP's ECGE (ACPI0013) GpioInt,
+ * edge triggered, active low, pull-up, PDC pin 768 = GPIO 66. ECGE._EVT
+ * reads the event from EC register 0x05 and writes 0 back. On kernel -10,
+ * without a pinctrl state, the line produced no event: nothing set the
+ * pull-up that Windows applies from the GpioInt descriptor. Qualcomm's
+ * Glymur and X1 CRDs use the same line with bias-disable; HP's descriptor
+ * asks for the pull-up.
+ */
+&hp_ec {
+	interrupts-extended = <&tlmm 66 IRQ_TYPE_EDGE_FALLING>;
+
+	pinctrl-0 = <&ec_int_n_default>;
+	pinctrl-names = "default";
+};
+
+/*
+ * eUSB2 repeaters (docs/eusb2-repeater-2026-09-30.md): high speed works on
+ * all three ports but full and low speed fail on all three (a USB mouse,
+ * error -71). On the ACPI boot, where Linux leaves the PHY as firmware set
+ * it, the USB-A port ran a Dell receiver at 12 Mb/s (full speed). An eUSB2
+ * PHY reaches a USB 2 connector only through a repeater, and the Linux
+ * repeater driver puts it in host mode (it forces the repeater's 19.2 MHz
+ * clock on, an eUSB 1.2 workaround); without a repeater node that never
+ * happens. HP's ACPI does not describe the repeaters (Windows' PMIC driver
+ * and firmware own them; the PHYC tuning methods are empty for usb_0 and
+ * usb_1), so:
+ * - placement follows Qualcomm's Mahua/Glymur CRD (smb2370.dtsi): SMB2370
+ *   PMICs on SPMI bus 2 at SID 9 (usb_0) and SID 10 (usb_1), repeater at
+ *   0xfd00. Kernels -8 to -10 identified both (PMIC subtype 0x5f, v2.0);
+ * - HP's PEP votes for usb_0 and usb_1 include L15B 1.8 V and L7B
+ *   3.072 V, the rails the CRD gives these repeaters (vdd18, vdd3);
+ * - patches/kernel/upstream/qcom-next/0003 makes the repeater driver
+ *   check that the PMIC at that SID reports the SMB2370 subtype before
+ *   anything writes to it. If not, it refuses: then the USB-C ports lose
+ *   data for that boot, but nothing is written to the wrong PMIC.
+ *   Charging does not depend on it.
+ * - The CRD's third SMB2370 (SID 11) does not answer on this laptop
+ *   (kernel -10: SPMI transaction error at probe), so it is not declared.
+ *   usb_2 (USB-A) stays without a repeater.
+ */
+&spmi_bus2 {
+	smb2370_j_e2: pmic@9 {
+		compatible = "qcom,smb2370", "qcom,spmi-pmic";
+		reg = <0x9 SPMI_USID>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		smb2370_j_e2_eusb2_repeater: phy@fd00 {
+			compatible = "qcom,smb2370-eusb2-repeater";
+			reg = <0xfd00>;
+			#phy-cells = <0>;
+		};
+	};
+
+	smb2370_k_e2: pmic@a {
+		compatible = "qcom,smb2370", "qcom,spmi-pmic";
+		reg = <0xa SPMI_USID>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		smb2370_k_e2_eusb2_repeater: phy@fd00 {
+			compatible = "qcom,smb2370-eusb2-repeater";
+			reg = <0xfd00>;
+			#phy-cells = <0>;
+		};
+	};
+};
+
+&usb_0_hsphy {
+	phys = <&smb2370_j_e2_eusb2_repeater>;
+};
+
+&usb_1_hsphy {
+	phys = <&smb2370_k_e2_eusb2_repeater>;
+};
+
+&tlmm {
+	/* The daily allow-list plus the EC event line, GPIO 66 */
+	gpio-reserved-ranges = <2 1>, <4 12>, <19 13>, <34 2>, <38 13>,
+			       <52 4>, <60 6>, <68 2>, <71 21>, <93 23>,
+			       <117 2>, <120 26>, <149 3>, <155 96>;
+
+	ec_int_n_default: ec-int-n-state {
+		pins = "gpio66";
+		function = "gpio";
+		bias-pull-up;
+	};
+};

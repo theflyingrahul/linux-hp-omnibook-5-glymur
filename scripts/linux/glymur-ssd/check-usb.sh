@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -u
 
-# USB report for the "device tree (GPU and USB-A test)" boot. See README.md.
+# USB report for the device-tree boots with USB. See README.md.
 #   sudo bash check-usb.sh [--previous]
 
 [ "$(id -u)" -eq 0 ] || { echo 'run with sudo' >&2; exit 1; }

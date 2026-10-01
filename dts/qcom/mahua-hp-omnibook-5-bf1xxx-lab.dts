@@ -34,3 +34,24 @@
 &vreg_edp {
 	status = "disabled";
 };
+
+/* The daily device tree turns the GPU on; keep it off as before */
+&adreno_smmu {
+	status = "disabled";
+};
+
+&gmu {
+	status = "disabled";
+};
+
+&gpu {
+	status = "disabled";
+};
+
+&gpucc {
+	status = "disabled";
+};
+
+&gxclkctl {
+	status = "disabled";
+};

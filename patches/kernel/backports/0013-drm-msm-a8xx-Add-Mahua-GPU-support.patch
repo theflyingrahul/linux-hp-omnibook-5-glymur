@@ -1,0 +1,112 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Jie Zhang <jie.zhang@oss.qualcomm.com>
+Date: Fri, 25 Sep 2026 02:44:34 +0530
+Subject: [PATCH] drm/msm/a8xx: Add Mahua GPU support
+
+Add support for Adreno X2-85 GPU present in Mahua SoC. This GPU is a
+smaller version of Glymur GPU with fewer slices and smaller internal
+memories, but shares the same register layout. Also, the GMU chipid is
+different when compared to Glymur's GPU. Add a new catalog entry to
+support this GPU.
+
+Signed-off-by: Jie Zhang <jie.zhang@oss.qualcomm.com>
+Signed-off-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Link: https://lore.kernel.org/r/20260925-mahua-gpu-v1-3-0fa0bfd8d315@oss.qualcomm.com
+[ Backported to qcom-next for the HP OmniBook 5 bring-up: qcom-next also
+  applies the A830 clock-gating value in a8xx_set_hwcg(), so the renamed
+  X2-85 family check sits next to it. ]
+---
+ drivers/gpu/drm/msm/adreno/a6xx_catalog.c | 42 +++++++++++++++++++++++
+ drivers/gpu/drm/msm/adreno/a8xx_gpu.c     |  2 +-
+ drivers/gpu/drm/msm/adreno/adreno_gpu.h   |  7 ++--
+ 3 files changed, 48 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/gpu/drm/msm/adreno/a6xx_catalog.c b/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
+index d58b878a6ea7..ef3b74309b42 100644
+--- a/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
++++ b/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
+@@ -2859,6 +2859,48 @@ static const struct adreno_info a8xx_gpus[] = {
+ 			{ 242, 1 },
+ 			{ 221, 2 },
+ 		),
++	}, {
++		.chip_ids = ADRENO_CHIP_IDS(0x44060000),
++		.family = ADRENO_8XX_GEN2,
++		.fw = {
++			[ADRENO_FW_SQE] = "gen80100_sqe.fw",
++			[ADRENO_FW_GMU] = "gen80100_gmu.bin",
++			[ADRENO_FW_AQE] = "gen80100_aqe.fw",
++		},
++		.gmem = 15 * SZ_1M + SZ_512K + SZ_256K,
++		.inactive_period = DRM_MSM_INACTIVE_PERIOD,
++		.quirks = ADRENO_QUIRK_HAS_CACHED_COHERENT |
++			  ADRENO_QUIRK_HAS_HW_APRIV |
++			  ADRENO_QUIRK_PREEMPTION |
++			  ADRENO_QUIRK_SOFTFUSE,
++		.funcs = &a8xx_gpu_funcs,
++		.a6xx = &(const struct a6xx_info) {
++			.protect = &x285_protect,
++			.nonctxt_reglist = x285_nonctxt_regs,
++			.pwrup_reglist = &a840_pwrup_reglist,
++			.dyn_pwrup_reglist = &x285_dyn_pwrup_reglist,
++			.ifpc_reglist = &a840_ifpc_reglist,
++			.gbif_cx = a840_gbif,
++			.max_slices = 3,
++			.gmu_chipid = 0x80a0000,
++			.bcms = (const struct a6xx_bcm[]) {
++				{ .name = "SH0", .buswidth = 16 },
++				{ .name = "MC0", .buswidth = 4 },
++				{
++					.name = "ACV",
++					.fixed = true,
++					.perfmode = BIT(2),
++					.perfmode_bw = 16500000,
++				},
++				{ /* sentinel */ },
++			},
++		},
++		.speedbins = ADRENO_SPEEDBINS(
++			{ 0,   0 },
++			{ 388, 1 },
++			{ 357, 2 },
++			{ 284, 3 },
++		),
+ 	}
+ };
+ 
+diff --git a/drivers/gpu/drm/msm/adreno/a8xx_gpu.c b/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
+index c43591f1e626..2b81e9cbb73c 100644
+--- a/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
++++ b/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
+@@ -204,7 +204,7 @@ static void a8xx_set_hwcg(struct msm_gpu *gpu, bool state)
+ 	struct a6xx_gmu *gmu = &a6xx_gpu->gmu;
+ 	u32 val;
+ 
+-	if ((adreno_is_x285(adreno_gpu) || adreno_is_a830(adreno_gpu)) && state)
++	if ((adreno_is_x285_family(adreno_gpu) || adreno_is_a830(adreno_gpu)) && state)
+ 		gpu_write(gpu, REG_A8XX_RBBM_CGC_0_PC, 0x00000702);
+ 
+ 	gmu_write(gmu, REG_A6XX_GPU_GMU_AO_GMU_CGC_MODE_CNTL,
+diff --git a/drivers/gpu/drm/msm/adreno/adreno_gpu.h b/drivers/gpu/drm/msm/adreno/adreno_gpu.h
+index 3720feb6d9c6..0e8e8133719c 100644
+--- a/drivers/gpu/drm/msm/adreno/adreno_gpu.h
++++ b/drivers/gpu/drm/msm/adreno/adreno_gpu.h
+@@ -604,9 +604,12 @@ static inline int adreno_is_a810(struct adreno_gpu *gpu)
+ 	return gpu->info->chip_ids[0] == 0x44010000;
+ }
+ 
+-static inline int adreno_is_x285(struct adreno_gpu *gpu)
++static inline int adreno_is_x285_family(const struct adreno_gpu *gpu)
+ {
+-	return gpu->info->chip_ids[0] == 0x44070001;
++	if (WARN_ON_ONCE(!gpu->info))
++		return false;
++	return gpu->info->chip_ids[0] == 0x44060000 ||
++	       gpu->info->chip_ids[0] == 0x44070001;
+ }
+ 
+ static inline int adreno_is_a830(struct adreno_gpu *gpu)
+-- 
+2.53.0
+

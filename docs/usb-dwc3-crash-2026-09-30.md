@@ -202,6 +202,75 @@ fixed at the kernel level, avoid repeated USB-C plug/unplug or role
 switches on this DT; a reboot resets the immediate symptoms but not the
 underlying bug.
 
+## Root cause: a qcom-next patch that upstream already reverted (later, same day)
+
+**Which device tree ran.** The kernel log says `Machine model: HP OmniBook
+5 Laptop 16-bf1xxx`, the daily device tree ("Ubuntu on SSD"), not the test
+tree, whose model ends in "(test)". So the USB-C repeaters and the EC event
+line were not part of this boot. That fits the log: the low-speed attempts
+on `usb_0` failed with `-71` as on `-7`.
+
+**Not new in `-11`, and not the device tree.** The same `sysfs: cannot
+create duplicate filename .../software_node` warnings are in the `-10`
+capture (`captures/2026-09-30-ec/usb-test-183203.txt`), with the backtrace
+`dwc3_qcom_set_swnode` ← `dwc3_qcom_probe`. That function comes from
+qcom-next's `FROMLIST: usb: dwc3: qcom: Add support to skip phy management
+by USB core` (Krishna Kurapati, `d90fb648965d`). On every probe attempt it
+calls `device_create_managed_software_node()` on the controller, and nothing
+removes the node when probe is deferred and retried, hence one duplicate per
+retry. The i.MX dwc3 glue drivers do the same job with a static node that
+they remove on the error and remove paths.
+
+**Upstream already knows this crash.** The patch reached `usb-next` as
+`be7b1c68cd3e` and was reverted there as `bb4f62bfaa` (2026-09-09,
+`20260909-xhci-fixes-revert-v1-1-7cc97fa0f307@oss.qualcomm.com`), because
+"during role switch it tends to cause the following crash":
+`refcount_t: underflow; use-after-free` in `software_node_notify_remove()`
+under `dwc3_host_exit()` ← `__dwc3_set_mode()`, then a bad access reading a
+property. The capture above has exactly that warning at 22:44:56, when
+`usb_0` left host mode, before the fault at 22:45:22 in
+`fwnode_property_read_bool()` when `usb_1` re-entered host mode. Qualcomm
+engineers confirmed the same duplicate `software_node` warning on Nord
+(Shawn Guo) and Hawi (Mukesh Ojha). The revert was reported by Val Packett
+and acked by Thinh Nguyen (dwc3 maintainer). Mainline never had the patch;
+qcom-next `6b4daa845239` still carries it.
+
+The theory above (the OF-graph wiring of the consolidated DT) is
+therefore not the cause; `-10`'s "GPU and USB test" tree had the same
+warnings. Every USB-C role switch since `-6` has run through this code; the
+`kernfs: can not remove 'usb5'` warnings on host-to-device switches
+(`docs/usb-c-ports-2026-09-29.md`) are likely the same bug.
+
+**The battery manager.** Its hang started 17 s after the fault. It has hung
+before without any USB crash (`docs/battmgr-hang-2026-09-30.md`), so the
+link stays unproven.
+
+**One new observation.** After a power cycle of the port, the Dell receiver
+enumerated on `usb_1` at full speed (12 Mb/s), with no repeater declared.
+Every full- or low-speed attempt on `-7` failed. One success is not enough
+to change the repeater plan, but it goes into the next USB-C test.
+
+## Kernel `-12`: the fix, as upstream has it
+
+- `backports/0015`: Krishna Kurapati's revert, with its upstream tags. It
+  reverts qcom-next's copy (`d90fb648965d`); the context differs because
+  of qcom-next's GDSC workaround in `dwc3-qcom.c`, and `<linux/property.h>`
+  stays included.
+- `backports/0016`: his replacement, "usb: dwc3: qcom: Add support to skip
+  phy management by USB core" (`20260914-xhci-skip-phy-init-v1-1-9c46b31a5a39@oss.qualcomm.com`,
+  acked by Thinh Nguyen, not merged yet). It passes the same quirk through
+  the dwc3 core's properties instead of a software node, so the host
+  device gets `xhci-skip-phy-init-quirk` as before.
+
+Nothing else changes: the `-12` DTBs are byte-identical to `-11`'s, and the
+build has the same warnings. Drop both patches when qcom-next picks up the
+revert.
+
+**To check on `-12`:** no `duplicate filename` warning at boot; a device
+plugged into and out of each USB-C port several times, and a charger
+plugged and unplugged (each forces a role switch), with no
+`refcount_t: underflow` and no oops.
+
 ## Fixed in kernel `-12`
 
 A new kernel was installed and the same tests re-run

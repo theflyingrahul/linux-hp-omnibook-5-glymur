@@ -103,8 +103,14 @@ Then build and install:
     scripts/linux/build-mesa-glymur.sh <work dir> [jobs]
 
 Builds upstream Mesa for the Adreno X2-85 on Ubuntu 26.04 arm64. It includes
-freedreno (OpenGL), turnip (Vulkan), softpipe and llvmpipe. Ubuntu's Mesa
-26.0.8 has no entry for chip `0x44070031`; Mesa 26.2 does.
+freedreno (OpenGL), turnip (Vulkan), softpipe and llvmpipe.
+- **Which Mesa.** Mesa main, pinned to one commit (`COMMIT=`) and fetched
+  by its hash. The kernel reports this GPU as chip `0x44060030` from kernel
+  `-11` (Mahua's own entry, `docs/mahua-gpu-2026-09-30.md`) and as
+  `0x44070031` before. Only main knows `0x44060030` (`d09fa965`,
+  2026-09-25); Mesa 26.2 knows only `0x44070031` and Ubuntu's 26.0.8
+  neither. The build refuses a source without `0x44060030`. Move to a
+  release once one has it.
 - **llvmpipe** links against Ubuntu's LLVM 21, so this Mesa can serve the
   whole system, including boots without the GPU.
 - **No root and no `apt install`.** Dependencies are fetched with
@@ -122,7 +128,9 @@ freedreno (OpenGL), turnip (Vulkan), softpipe and llvmpipe. Ubuntu's Mesa
     - The only LLVM dependency must be `libLLVM.so.21.1`.
     - Output: `mesa-glymur-<version>-<rev>.tar.gz`, installed by
       `glymur-ssd/install-mesa.sh`.
-    - Revisions: `-1` had freedreno, turnip and softpipe; `-2` adds llvmpipe.
+    - Revisions: 26.2.3 `-1` had freedreno, turnip and softpipe; `-2` adds
+      llvmpipe. `26.3.0-devel-cec59b29-1` is Mesa main, which also needs
+      `python3-yaml` and `python3-packaging`.
 
 ### `fan-thermal-profile.sh`
 

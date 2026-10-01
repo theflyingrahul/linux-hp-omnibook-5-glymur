@@ -3,11 +3,11 @@ set -euo pipefail
 
 # Install everything staged on the USB. See README.md.
 #   bash install-from-usb.sh [--keep-ubuntu-mesa] [kernel release]
-# Default kernel: 7.3.0-rc2-glymur-10.
+# Default kernel: 7.3.0-rc2-glymur-12.
 
 SYSTEM_MESA=1
 if [ "${1:-}" = --keep-ubuntu-mesa ]; then SYSTEM_MESA=0; shift; fi
-KREL="${1:-7.3.0-rc2-glymur-10}"
+KREL="${1:-7.3.0-rc2-glymur-12}"
 K="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 [ "$(id -u)" -ne 0 ] || { echo 'run as your normal user, not with sudo' >&2; exit 1; }
 [ "$(findmnt -n -o LABEL /)" = glymur-root ] || { echo 'not booted from the SSD install (glymur-root); refusing' >&2; exit 1; }
@@ -64,10 +64,10 @@ for f in check-gpu-test.sh check-mesa.sh charging-watch.sh check-usb.sh check-ec
 done
 sync
 echo
-echo "Done. Reboot into \"Ubuntu on SSD: device tree (GPU and USB-A test)\" and,"
+echo "Done. Reboot into \"Ubuntu on SSD: test device tree\" and,"
 echo "from a terminal on the desktop, run:"
 echo "  bash ~/check-mesa.sh"
-echo "  sudo bash ~/check-ec.sh         (fan, EC temperatures, backlight timeout, mute LEDs, hotkeys)"
+echo "  sudo bash ~/check-ec.sh         (fan, temperatures, backlight, mute LEDs, hotkeys)"
 echo "  sudo bash ~/check-usb.sh        (plug USB-C and USB 2.0 devices in first)"
 echo "  sudo bash ~/charging-watch.sh   (plug, unplug, replug; type notes)"
 echo "If the desktop is still corrupted, press Ctrl+Alt+F3, log in, and run"
