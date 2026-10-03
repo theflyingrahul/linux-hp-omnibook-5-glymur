@@ -1,9 +1,7 @@
-# Linux on the HP OmniBook 5 16 (Snapdragon X2 Elite)
+# Linux on the HP OmniBook 5 16 (Snapdragon X2 Mahua)
 
 Native Linux bring-up for the HP OmniBook 5 16-bf1xxx, a laptop with
-Qualcomm's Snapdragon X2 Elite. HP does not support Linux on it; this
-project builds that support from the laptop's own firmware tables and
-Windows drivers, with a device tree written for this board.
+Qualcomm's Snapdragon X2 Elite.
 
 | | |
 |---|---|
@@ -12,7 +10,6 @@ Windows drivers, with a device tree written for this board.
 | Memory, display | 32 GB, 16-inch OLED touchscreen |
 | Kernel | Qualcomm's [qcom-next](https://github.com/qualcomm-linux/kernel) plus [`patches/kernel/`](patches/README.md) |
 | Device tree | [`dts/qcom/mahua-hp-omnibook-5-bf1xxx.dts`](dts/qcom/mahua-hp-omnibook-5-bf1xxx.dts) |
-| Distribution | Ubuntu 26.04 today; Fedora ARM64 is the intended installed OS |
 
 > **Experimental.** This has run on one laptop. Following it means
 > repartitioning the internal SSD and running a self-built kernel. Read the
@@ -36,20 +33,6 @@ Per-subsystem detail: [`docs/status.md`](docs/status.md). Newest results:
 [`docs/booting.md`](docs/booting.md) explains how the laptop boots Linux
 (GRUB on a USB stick, the kernel and root filesystem on an SSD partition,
 Windows left untouched) and the steps to set it up, after the disclaimer.
-
-## How the work is done
-
-- **Evidence first.** Every board value (pins, addresses, power rails,
-  timings) comes from this laptop: HP's ACPI tables, HP's Windows drivers,
-  or a measurement. Unknown values stay unknown rather than guessed
-  ([`docs/evidence-policy.md`](docs/evidence-policy.md)).
-- **No foreign device trees.** Reference boards and other laptops are read
-  for comparison only; their device trees are never booted on this laptop.
-- **Upstream first.** Qualcomm's published kernel work is reused, fixes by
-  others are carried only until qcom-next has them, and generic fixes go to
-  the kernel mailing lists.
-- **Safe for Windows.** Nothing writes the Windows partitions, the EFI
-  partition or the firmware.
 
 This project uses an AI coding assistant for analysis, scripts, patches and
 notes. Every hardware result here comes from real boots on the laptop, and
