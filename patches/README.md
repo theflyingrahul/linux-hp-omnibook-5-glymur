@@ -19,12 +19,13 @@ Wi-Fi board data, firmware) are not kernel code. They live in
 
 ## Boot series (built by `scripts/linux/build-qcom-next-glymur.sh`)
 
-Apply to qcom-next `6b4daa845239` (the qcom-next tip on 2026-09-30, from
-kernel `-8`; it was `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to
-`-4`) in order:
+Apply to qcom-next `1a0586064ee1` (tag `qcom-next-7.3-rc4-20261014`, the
+qcom-next tip on 2026-10-17, from kernel `-13`; it was `6b4daa845239` for
+`-8` to `-12`, `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to `-4`)
+in order:
 `upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0005`,
-`glymur-bringup/0001–0002`, then `backports/0001–0016`
-(`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
+`glymur-bringup/0001–0002`, then `backports/` (`0001–0002`, `0013–0014`,
+`0017–0021`, `0023–0026`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
 `upstream/qcom-next/0001`; `-7` adds `upstream/qcom-next/0002`; `-8` moves
 to the new base and adds `upstream/qcom-next/0003`; `-9` adds `0004`–`0005`
@@ -38,6 +39,30 @@ still `6b4daa845239` when fetched before it)
 still `6b4daa845239`; mainline's only new commit in our drivers is
 `cb97bf3d4f`, still not taken, see below). A fresh `prepare`
 reproduces the build tree's source exactly.
+
+Base move for `-13` (2026-10-17): qcom-next was rebuilt on 7.3-rc4
+(1802 commits since `6b4daa845239`). It now carries `backports/0003–0012`
+(mainline rc3..rc4) and the dwc3-qcom revert and replacement that
+`backports/0015–0016` carried (`41c91eb285c4`, `6f2460005b7a`), so those
+twelve files are dropped. Everything else applies unchanged, without
+three-way merges, and a fresh `prepare` reproduces the tested tree
+(`ef714db1…`). Mainline (`v7.3-rc7-164-g70dd4ee72e`, 2026-10-16) has five
+fixes in drivers we use that qcom-next lacks (`backports/0017–0021`), and
+four laptop fixes come from the Linux MSM laptops kernel
+(`backports/0023–0026`); both below. New in qcom-next and relevant here:
+`92757057bb4a` (FROMLIST) "phy-qcom-eusb2-repeater: Fix SMB Power leakage
+issue", for the SMB2370 repeaters on the USB-C ports. Its `glymur.dtsi`
+now enables the APSS CoreSight trace path (`e69025f64fe7`, FROMLIST: 12 ETMs,
+funnels, replicators, two TMCs); the board `.dtsi` disables those 31 nodes.
+With that, the `-13` daily DTB enables exactly the nodes `-12` did, apart
+from the CDSP FastRPC context banks renumbered by `797f471a15c3`.
+
+qcom-next stays the base. The Linux MSM laptops kernel
+(`https://github.com/linux-msm/laptops-kernel`, `topic/glymur-laptops`) was
+evaluated on 2026-10-17 as an alternative and not taken: it is a
+community staging tree on linux-next, its Glymur branch has no CI, and it
+carries hacks and unposted patches. Fixes from it are ported one at a time,
+each checked first (`docs/community-pointers-2026-10-17.md`).
 
 Base move for `-8` (2026-09-30): the 52 new qcom-next commits are all
 Nord (Ethernet, display, eDP PHY, an ADSP remoteproc flag). The ones in
@@ -182,10 +207,62 @@ switches (`docs/usb-dwc3-crash-2026-09-30.md`):
 
 Drop both when qcom-next has the revert.
 
-Not taken: `cb97bf3d4f` "i2c: qcom-geni: Fix hardcoded clock index in
-SE_GENI_CLK_SEL". It conflicts with our ACPI I²C patch and makes probe fail
-unless the SE clock table has an exact 32 or 19.2 MHz entry. Input works on
-both boot paths without it.
+Dropped in `-13`: qcom-next `1a0586064ee1` has both. `backports/0003–0012`
+are dropped from `-13` too: qcom-next `1a0586064ee1` has all ten.
+
+`backports/0017–0021` (from `-13`), mainline fixes after 7.3-rc4 that
+qcom-next `1a0586064ee1` lacks, cherry-picked unmodified:
+
+- `8f3f88309f` clk: qcom: gpucc-glymur: the GPU CX GDSC is votable (no
+  power-off polling; status from the GDS hardware control register).
+- `6c51f09c6d` usb: typec: ucsi: map connectors to DT nodes by `reg`, not
+  by child order.
+- `63b269ec53` usb: typec: ucsi: glink: use-after-free of ucsi on remove.
+- `707ce10252` drm/dp: don't mark the AUX backlight enabled when enabling
+  failed (the eDP panel's backlight is DP AUX).
+- `9db31edf92` remoteproc: qcom_q6v5_pas: error masking in
+  `qcom_pas_stop()` (ADSP/CDSP).
+
+`backports/0023–0026` (from `-13`), from the Linux MSM laptops kernel
+`topic/glymur-laptops` (`c9f816899dc2`). None is accepted upstream; each was
+checked against its source and this laptop's evidence first:
+
+- `0023` power: supply: qcom_battmgr: refresh on Glymur state
+  notifications (Tyler Baker, laptops `e341ce20c59b`; not posted, from the
+  ASUS Zenbook A16). Glymur firmware reports plug and unplug as a
+  notification from pmic_glink owner 32782, which no client registers; the
+  patch registers it and signals a change on the supplies. Ported: one hunk
+  moved past qcom-next's `qcom_battmgr_battery[]`; code unchanged. It only
+  adds change events: in the `-6` charging run the battery tracked every
+  plug while `qcom-battmgr-ac`/`-usb` stayed `ONLINE=0`, and that value is
+  not something this patch changes. To verify: the function tracer on
+  `qcom_battmgr_state_callback` during plug and unplug.
+- `0024` dmaengine: qcom: gpi: order ring memory against register access
+  (Tyler Baker, laptops `2c82b3799713`; not posted). Doorbell and event
+  read-pointer accesses become ordered `readl`/`writel`. Its failure was on
+  `a84000.i2c`, the controller of this laptop's EC.
+- `0025` dmaengine: qcom: gpi: Set IEOB on linked I2C GO TRE to retire TX
+  descriptor (Vsevolod Nevorotov; posted 2026-09-09). Fixes TX ring
+  exhaustion after `656147fb1d4c`, which qcom-next has. The EC driver's
+  register reads (`i2c_smbus_read_byte_data`, about six a second while the
+  EC interrupt fires) take that path.
+- `0026` fixup! phy: qcom: edp: update v8 power-on programming sequence
+  (Abel Vesa, laptops `240662d141e2`). Ends the v8 PCS setup with
+  `DP_PHY_CFG_1 = 0x0f` instead of `0x2f`, as Konrad Dybcio asked in his
+  review of Bjorn Andersson's v1 ("bit(5) is for built-in selftest only");
+  Qualcomm's QMP-combo DP PHY v8 series also writes `0x0f`. Applies on top
+  of `backports/0002`; drop both when the eDP series lands in qcom-next.
+
+Still not taken: `cb97bf3d4f` "i2c: qcom-geni: Fix hardcoded clock index in
+SE_GENI_CLK_SEL" (7.3-rc5, Cc stable, so qcom-next will pick it up). Its
+conflict with `qcom-next-acpi/0003` is context only and is resolved in a
+port kept in `.work/`; ACPI controllers with a `CLKD` row keep index 0 as
+before. The open question is the device-tree path: the Glymur QUP clocks
+are DFS, so the rate table the fix searches for an exact 32 or 19.2 MHz
+level comes from the hardware, not from the `F()` list in `gcc-glymur.c`
+(which has both). Without one, probe fails for every DT I²C controller,
+keyboard and EC included. `glymur-boot-report.sh` now records each active
+QUP clock's rate, which shows the level that index 0 selects today.
 
 The series was verified to reproduce the build tree exactly, except for
 those two board defaults, which moved to the board's command line.
@@ -204,13 +281,15 @@ These apply to mainline `fd179f8a05` (7.3-rc5 era) and compile cleanly with
 2. `soc: qcom: geni-se: don't fail ACPI probe on a missing SE clock`: a
    regression fix; `Fixes: 5b8a39dcf909`. Compile-tested only.
 3. `i2c: qcom-geni: release runtime PM reference when set_rate fails`: a
-   leak fix; `Fixes: 10e74f4c5046`. Compile-tested only.
+   leak fix; `Fixes: 10e74f4c5046`. Compile-tested only. In mainline as
+   `ae8364085574` (v7.3-rc7, through `i2c-fixes`).
 4. `soc: qcom: pmic_glink_altmode: acknowledge notifications on undescribed
    ports`: the mainline form of `upstream/qcom-next/0001`, tested here.
 5. `drm/msm/a8xx: report the GMEM size of the active slices`: the first
    version. The second, with the expression parenthesized on one line and
    the text reworded without this laptop, is the form carried as
-   `upstream/qcom-next/0002`.
+   `upstream/qcom-next/0002`. The second version is in msm-next as
+   `efbda69d92e6` (2026-10-10), on its way to the next merge window.
 
 ## Drafts and archive
 

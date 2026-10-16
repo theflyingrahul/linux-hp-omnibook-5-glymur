@@ -5,6 +5,23 @@ The bring-up's dated log, newest first, moved here from the README on
 in [`status.md`](status.md); the detailed evidence is in the dated notes in
 this directory.
 
+**2026-10-17, kernel `-13` on a new qcom-next base; community pointers
+checked.** qcom-next moved to `1a0586064ee1` (7.3-rc4) and now carries
+twelve of our backports, including the dwc3-qcom crash fix. Five newer
+mainline fixes are added (GPU CX GDSC, UCSI connector mapping, UCSI glink
+use-after-free, DP AUX backlight, ADSP stop). Readers of the Reddit post
+pointed at the Linux MSM laptops kernel, the LPASS audio series and QSEECOM.
+The headset codec turns out to be the WCD9378, which now has a driver. The
+laptops kernel was weighed as a new base and rejected in favour of
+Qualcomm's first-party qcom-next; four of its fixes are ported after
+checking them (battery-manager notifications, two GPI DMA fixes for the
+EC's bus, the eDP PHY `CFG_1` value). The new base also enables CoreSight
+trace nodes in `glymur.dtsi`; the board device tree turns them off, so the
+compiled daily tree enables the same nodes as `-12`. Upstream: the I²C runtime-PM fix is
+in mainline (v7.3-rc7), the GMEM fix is in msm-next, and the `lscpu` change
+is merged in util-linux. See `docs/community-pointers-2026-10-17.md` and
+`patches/README.md`.
+
 **2026-09-30, kernel `-12`, port-swap retest: the crash fix holds, but
 full/low-speed USB-C enumeration is still broken.** Two more
 `check-usb.sh` runs with the charger and mouse swapped between the two

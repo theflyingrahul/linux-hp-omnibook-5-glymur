@@ -28,7 +28,7 @@ are the history.
 | USB-A | Working | SuperSpeed |
 | USB-C data | Partly | both ports work at high speed and SuperSpeed, and role switches are stable since `-12` (`backports/0015–0016`); full- and low-speed devices fail with `error -71` (`docs/usb-dwc3-crash-2026-09-30.md`) |
 | Camera | Detected | RGB and IR functions enumerate; no frame captured yet |
-| Audio | Not started | SoundWire SDCA codecs behind LPASS |
+| Audio | Not started | the headset codec is the WCD9378, which has a driver since 2026-09-25; the Glymur LPASS series is posted (`docs/community-pointers-2026-10-17.md`); speakers and microphones unknown |
 | NPU | Not started | the CDSP boots with HP's signed firmware; FastRPC and userspace untried |
 | RTC | Not working | not rechecked since 2026-09-28 |
 | Suspend | Untested | masked |

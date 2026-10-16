@@ -1,0 +1,54 @@
+From 8baf63b3f6a7df5f761501f06c7cf9da0a23c2f9 Mon Sep 17 00:00:00 2001
+From: Tyler Baker <forcedinductionz@gmail.com>
+Date: Sun, 27 Sep 2026 15:56:32 -0400
+Subject: [PATCH 24/26] dmaengine: qcom: gpi: order ring memory against
+ register access
+
+gpi_read_reg() and gpi_write_reg() use the relaxed MMIO accessors for
+every register, including the channel and event ring doorbells and the
+event ring read pointer. The rings live in coherent DMA memory, so
+nothing orders the TREs written by gpi_issue_pending() before the
+doorbell that hands them to the engine, or the event ring contents after
+the read pointer that says they are valid. The engine can fetch a stale
+TRE, or the driver can process a stale event and complete a transfer
+that is still running, which unmaps its buffer under the QUP:
+
+  arm-smmu 15000000.iommu: Unhandled context fault: fsr=0x402, iova=0xfff5b348, fsynr=0x340003, cbfrsynra=0xca3, cb=3
+  gpi a00000.dma-controller: Error in Transaction
+  geni_i2c a84000.i2c: DMA txn failed:3
+
+Use readl() and writel(), which order the register access against
+normal memory.
+
+With four readers polling the EC over this I2C bus, the fault hit
+within 40 s (about 52k transfers) with only the IEOB fix applied, and
+did not hit in 30 min (about 2.3M transfers) with this patch alone.
+
+Signed-off-by: Tyler Baker <forcedinductionz@gmail.com>
+Link: https://github.com/EmbeddedAndroid/linux/commit/7c8b59e172a5c34db27fc1433ea935d787542150
+---
+ drivers/dma/qcom/gpi.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/dma/qcom/gpi.c b/drivers/dma/qcom/gpi.c
+index 6a47407c95b0..7584067416d6 100644
+--- a/drivers/dma/qcom/gpi.c
++++ b/drivers/dma/qcom/gpi.c
+@@ -571,12 +571,12 @@ static inline void *to_virtual(const struct gpi_ring *const ring, phys_addr_t ad
+ 
+ static inline u32 gpi_read_reg(struct gpii *gpii, void __iomem *addr)
+ {
+-	return readl_relaxed(addr);
++	return readl(addr);
+ }
+ 
+ static inline void gpi_write_reg(struct gpii *gpii, void __iomem *addr, u32 val)
+ {
+-	writel_relaxed(val, addr);
++	writel(val, addr);
+ }
+ 
+ static __always_inline void
+-- 
+2.53.0
+

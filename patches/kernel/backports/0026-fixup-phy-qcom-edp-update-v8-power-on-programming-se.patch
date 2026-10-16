@@ -1,0 +1,26 @@
+From afbdccf8d2d6db120fd47c1287304e6ae647c914 Mon Sep 17 00:00:00 2001
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Date: Thu, 1 Oct 2026 18:20:44 +0300
+Subject: [PATCH 26/26] fixup! phy: qcom: edp: update v8 power-on programming
+ sequence
+
+---
+ drivers/phy/qualcomm/phy-qcom-edp.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/phy/qualcomm/phy-qcom-edp.c b/drivers/phy/qualcomm/phy-qcom-edp.c
+index e693ed6fccd4..fd80a65daef2 100644
+--- a/drivers/phy/qualcomm/phy-qcom-edp.c
++++ b/drivers/phy/qualcomm/phy-qcom-edp.c
+@@ -640,7 +640,7 @@ static int qcom_edp_configure_pcs_v8(const struct qcom_edp *edp)
+ 	writel(auxless_silence_cyc, edp->edp + DP_PHY_AUXLESS_SILENCE_CYC);
+ 	writel(0x08, edp->edp + DP_PHY_LFPS_CYC);
+ 	writel(lfps_period, edp->edp + DP_PHY_LFPS_PERIOD);
+-	writel(0x2f, edp->edp + DP_PHY_CFG_1);
++	writel(0x0f, edp->edp + DP_PHY_CFG_1);
+ 
+ 	return 0;
+ }
+-- 
+2.53.0
+

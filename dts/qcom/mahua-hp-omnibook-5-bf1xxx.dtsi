@@ -277,6 +277,136 @@
 };
 
 /*
+ * qcom-next (from kernel -13) adds the APSS CoreSight trace path to
+ * glymur.dtsi, enabled by default: the per-CPU ETMs, funnels, replicators
+ * and trace buffers. Nothing here needs tracing, and whether this laptop's
+ * firmware leaves the debug blocks accessible is unknown, so they stay off.
+ */
+&{/etm-0} {
+	status = "disabled";
+};
+
+&{/etm-1} {
+	status = "disabled";
+};
+
+&{/etm-2} {
+	status = "disabled";
+};
+
+&{/etm-3} {
+	status = "disabled";
+};
+
+&{/etm-4} {
+	status = "disabled";
+};
+
+&{/etm-5} {
+	status = "disabled";
+};
+
+&{/etm-6} {
+	status = "disabled";
+};
+
+&{/etm-7} {
+	status = "disabled";
+};
+
+&{/etm-8} {
+	status = "disabled";
+};
+
+&{/etm-9} {
+	status = "disabled";
+};
+
+&{/etm-10} {
+	status = "disabled";
+};
+
+&{/etm-11} {
+	status = "disabled";
+};
+
+&{/soc@0/funnel@1d021000} {
+	status = "disabled";
+};
+
+&{/soc@0/funnel@1d081000} {
+	status = "disabled";
+};
+
+&{/soc@0/funnel@1d121000} {
+	status = "disabled";
+};
+
+&{/soc@0/funnel@1d181000} {
+	status = "disabled";
+};
+
+&{/soc@0/funnel@12080000} {
+	status = "disabled";
+};
+
+&{/soc@0/replicator@1d0a0000} {
+	status = "disabled";
+};
+
+&{/soc@0/replicator@1d0b0000} {
+	status = "disabled";
+};
+
+&{/soc@0/replicator@1d0c0000} {
+	status = "disabled";
+};
+
+&{/soc@0/replicator@1d0d0000} {
+	status = "disabled";
+};
+
+&{/soc@0/replicator@1d0e0000} {
+	status = "disabled";
+};
+
+&{/soc@0/replicator@1d1a0000} {
+	status = "disabled";
+};
+
+&{/soc@0/replicator@1d1b0000} {
+	status = "disabled";
+};
+
+&{/soc@0/replicator@1d1c0000} {
+	status = "disabled";
+};
+
+&{/soc@0/replicator@1d1d0000} {
+	status = "disabled";
+};
+
+&{/soc@0/replicator@1d1e0000} {
+	status = "disabled";
+};
+
+&{/soc@0/replicator@1d090000} {
+	status = "disabled";
+};
+
+&{/soc@0/replicator@1d190000} {
+	status = "disabled";
+};
+
+&{/soc@0/tmc@1d029000} {
+	status = "disabled";
+};
+
+&{/soc@0/tmc@1d129000} {
+	status = "disabled";
+};
+
+/*
  * glymur.dtsi enables the Adreno GPU, its GMU, clock controllers and SMMU
  * by default. msm binds an available GPU into the same DRM device as the
  * display, so a GPU that fails to come up would also take the panel down.

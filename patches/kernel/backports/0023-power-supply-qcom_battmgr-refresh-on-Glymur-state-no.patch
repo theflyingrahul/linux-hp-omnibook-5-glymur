@@ -1,0 +1,104 @@
+From 15ef2b41067305ac1ecbe5aef7e5b2286ffdc26f Mon Sep 17 00:00:00 2001
+From: Tyler Baker <forcedinductionz@gmail.com>
+Date: Sat, 26 Sep 2026 20:01:33 -0400
+Subject: [PATCH 23/26] power: supply: qcom_battmgr: refresh on Glymur state
+ notifications
+
+On Glymur (ASUS Zenbook A16) the battery manager firmware acknowledges
+BATTMGR_REQUEST_NOTIFICATION but never sends a BATTMGR_NOTIFICATION
+when the charger is plugged or unplugged, so the battery, AC and USB
+supplies emit no uevents. Userspace only sees the new state on its next
+poll, and the charging indicator lags or shows the previous state.
+
+Tracing pmic_glink over an unplug and a replug shows the firmware
+reporting each change once as a notification from owner 32782, which
+no client registers, so pmic_glink drops it:
+
+  owner=32778 type=2 opcode=4     (request, acked)
+  owner=32782 type=2 opcode=0x103 w3=0x006   (unplug)
+  owner=32782 type=2 opcode=0x103 w3=0x206   (replug)
+
+Register a second client for that owner and signal a change on the
+battery, AC and USB supplies when it arrives. The payload is not
+interpreted; the supplies re-read their properties through the
+existing requests.
+
+Signed-off-by: Tyler Baker <forcedinductionz@gmail.com>
+Link: https://github.com/EmbeddedAndroid/linux/commit/0473e2eaf7499349316736611f95c8e0953c545c
+---
+ drivers/power/supply/qcom_battmgr.c | 37 +++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
+
+diff --git a/drivers/power/supply/qcom_battmgr.c b/drivers/power/supply/qcom_battmgr.c
+index be20880e3f90..028b39f3da15 100644
+--- a/drivers/power/supply/qcom_battmgr.c
++++ b/drivers/power/supply/qcom_battmgr.c
+@@ -41,6 +41,13 @@ enum qcom_battmgr_variant {
+ #define NOTIF_BAT_INFO			0x81
+ #define NOTIF_BAT_CHARGING_STATE	0x83
+ 
++/*
++ * Glymur firmware acks BATTMGR_REQUEST_NOTIFICATION but reports charger and
++ * battery state changes only as this notification from a separate owner.
++ */
++#define PMIC_GLINK_OWNER_BATTMGR_STATE	32782
++#define BATTMGR_STATE_NOTIFICATION	0x103
++
+ #define BATTMGR_BAT_INFO		0x9
+ 
+ #define BATTMGR_BAT_DISCHARGE_TIME	0xc
+@@ -325,6 +332,7 @@ struct qcom_battmgr_wireless {
+ struct qcom_battmgr {
+ 	struct device *dev;
+ 	struct pmic_glink_client *client;
++	struct pmic_glink_client *state_client;
+ 
+ 	enum qcom_battmgr_variant variant;
+ 
+@@ -1980,6 +1988,27 @@ static void qcom_battmgr_callback(const void *data, size_t len, void *priv)
+ 		qcom_battmgr_sm8350_callback(battmgr, data, len);
+ }
+ 
++static void qcom_battmgr_state_callback(const void *data, size_t len, void *priv)
++{
++	const struct pmic_glink_hdr *hdr = data;
++	struct qcom_battmgr *battmgr = priv;
++
++	if (len < sizeof(*hdr) || le32_to_cpu(hdr->type) != PMIC_GLINK_NOTIFY ||
++	    le32_to_cpu(hdr->opcode) != BATTMGR_STATE_NOTIFICATION)
++		return;
++
++	if (battmgr->bat_psy)
++		power_supply_changed(battmgr->bat_psy);
++	if (battmgr->ac_psy)
++		power_supply_changed(battmgr->ac_psy);
++	if (battmgr->usb_psy)
++		power_supply_changed(battmgr->usb_psy);
++}
++
++static void qcom_battmgr_state_pdr_notify(void *priv, int state)
++{
++}
++
+ static char *qcom_battmgr_battery[] = { "battery" };
+ 
+ static void qcom_battmgr_enable_worker(struct work_struct *work)
+@@ -2182,7 +2211,15 @@ static int qcom_battmgr_probe(struct auxiliary_device *adev,
+ 	if (IS_ERR(battmgr->client))
+ 		return PTR_ERR(battmgr->client);
+ 
++	battmgr->state_client = devm_pmic_glink_client_alloc(dev, PMIC_GLINK_OWNER_BATTMGR_STATE,
++							     qcom_battmgr_state_callback,
++							     qcom_battmgr_state_pdr_notify,
++							     battmgr);
++	if (IS_ERR(battmgr->state_client))
++		return PTR_ERR(battmgr->state_client);
++
+ 	pmic_glink_client_register(battmgr->client);
++	pmic_glink_client_register(battmgr->state_client);
+ 
+ 	return 0;
+ }
+-- 
+2.53.0
+

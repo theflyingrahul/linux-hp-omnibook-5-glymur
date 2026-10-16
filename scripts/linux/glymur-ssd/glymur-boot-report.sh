@@ -110,6 +110,13 @@ run() { printf '$ %s\n' "$*"; "$@" 2>&1; }
         journalctl -k -b --no-pager | grep -iE 'bluetooth|hci_uart|qca' | head -30
         section 'device tree: power domains (genpd)'
         head -n 120 /sys/kernel/debug/pm_genpd/pm_genpd_summary 2>&1
+        section 'device tree: QUP serial-engine clocks (DFS level in use)'
+        for c in /sys/kernel/debug/clk/gcc_qupv3_wrap*_s*_clk; do
+            [ -r "$c/clk_enable_count" ] || continue
+            printf '%s rate=%s enable=%s prepare=%s\n' "$(basename "$c")" "$(cat "$c/clk_rate")" \
+                "$(cat "$c/clk_enable_count")" "$(cat "$c/clk_prepare_count")"
+        done
+        journalctl -k -b --no-pager | grep -E 'I2C clk selected|Unsupported SE source clock' | head -20
         section 'device tree: SoC driver messages'
         journalctl -k -b --no-pager | grep -iE 'qcom|pcie|nvme|remoteproc|pmic_glink|msm|dpu|edp|panel|geni|i2c_hid|dispcc|rpmh|interconnect|tsens|pinctrl|gpio|smmu|ath12k|soccp|adsp|cdsp|battmgr|ucsi' | head -300
     fi
