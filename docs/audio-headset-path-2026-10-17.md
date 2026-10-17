@@ -43,19 +43,45 @@ two GPIOs (ACPI pins 204 and 205) starting low.
 
 ## Speakers and microphones
 
-- **Speakers:** a smart amplifier with speaker protection.
-  `qcadcm` (the ADSP calibration manager) sets up a V/I-sense feedback
-  stream (8 kHz, 32-bit) and an HP UEFI variable `SmartAmpCalibrationData`;
-  the speaker endpoint has a loopback pin and the `SpeakerProtection`
-  feature. On the T14s the speakers are two WSA8845 on `swr0`, reset by
-  LPASS TLMM pin 12, and WSA884x is the Qualcomm amplifier with V/I sense.
-  Whether HP uses WSA884x, on which bus and with which reset line is not
-  evidenced: Windows drives such amplifiers inside its audio stack without
-  PnP devices, and the calibration files (`qcacsp_crd8480`, this laptop uses
-  `acdb_cal4.acdb`) name nothing readable. The ACDB is AudioReach's chunk
-  format and can be parsed for its hardware endpoints if needed.
-- **Microphones:** a "Microphone Array" static endpoint and the LDO1_B
-  vote point to DMICs on the VA macro, as on the T14s. Pins not evidenced.
+From HP's driver pack (`qualcomm-driver-pack/src/Driver/`) and the
+installed drivers:
+
+- **HP runs Qualcomm's CRD audio configuration.** Every `_ext` package
+  (`qcaucd_ext_crd8480`, `qcascd_ext_crd8480`, `qcasd_CRD_HWoffload`,
+  `qcacsp_crd8480`) matches `SUBSYS_CRD08480` and HP's `8F03103C`,
+  `8F46103C` and `8F47103C` with one shared settings section. Only the
+  calibration (this laptop: `acdb_cal4.acdb`, `REV_04`) and the speaker
+  calibration variable (`HpCustomGuid`, `SmartAmpCalibrationData`) are HP's.
+  So HP's audio hardware is close enough to the Glymur CRD to run its
+  configuration.
+- **Speakers: stereo, WSA884x-class smart amplifiers.**
+  `qcasd_CRD_Extension8480.inf` gives the speaker endpoint two channels
+  (front left and right, 48 kHz, 24-bit), a loopback (V/I feedback) pin and
+  speaker protection; `qcadcm8480.inf` sets up the 8 kHz, 32-bit V/I-sense
+  stream. The internal-codec driver `qcaucd8480.sys` drives WSA884x
+  (`wsa884x_configure_pa_fsm`, `GetWSAData`, `kundu_wsa_enable`) and no other
+  amplifier family. The Glymur CRD has four WSA8845 (left on `swr0`, right on
+  `swr3`, reset by LPASS TLMM pins 12 and 13); the T14s has two on `swr0`.
+  HP's amplifier count, bus and reset lines are not evidenced. `AUCD`'s two
+  GPIOs (ACPI pins 204 and 205, driven low at start by `qcaucd`) are SoC
+  eGPIO pins (192–244 can be handed to LPASS); whether they are the
+  amplifier resets is not shown.
+- **Microphones: two.** `MicArray1` has `NumberOfMicrophones = 2` through
+  the internal codec, which points to DMIC0/1 on the VA macro (the T14s uses
+  `dmic01`; the CRD `dmic01` and `dmic23`). HP votes LDO1_B at 1.8 V, the
+  T14s DMIC bias rail.
+- **The SoundWire controller driver** (`QCASCD8480.sys`) runs SoundWire
+  multi-master on its RX and TX links and writes `TAMBORA_DIGITAL_INTR_MODE`
+  for the SimpleJack function, confirming the WCD9378 path above.
+- **Remaining sources:** the ACDB (`acdb_cal4.acdb`, AudioReach chunk
+  format) holds the codec-peripheral module data the SoundWire driver reads
+  (`AcdbGetCodecPeriphModuleData`): the amplifier and port configuration.
+  A boot that brings up the SoundWire controllers would list every
+  peripheral that attaches, with its manufacturer, part and unique ID.
+
+qcom-next already carries the Glymur CRD's WSA speaker and VA DMIC sound
+card (`glymur-crd.dtsi`), so the speaker and microphone path, unlike the
+headset codec, does not depend on unposted patches.
 
 ## What a headset-jack build would need
 
