@@ -1,0 +1,110 @@
+# Audio: Carrying HP's Speaker and Microphone Tuning to Linux, October 17, 2026
+
+Goal: the speakers and microphones should sound as they do on Windows. On
+Windows, HP's tuning runs inside the audio DSP (ADSP), built from HP's
+calibration database. Linux runs the same ADSP firmware (HP's
+`qcadsp8480.mbn`), so the tuning can, in principle, run on Linux in the same
+place. This note records what the tuning consists of and how to carry it
+over. Read-only work on this laptop's driver store and HP's driver pack, and
+open-source code from Qualcomm's AudioReach project.
+
+## Where the tuning lives on Windows
+
+- **Calibration database:** `acdb_cal4.acdb` from HP's `qcacsp_crd8480`
+  package (selected for `SUBSYS_8F47103C&REV_04`). It is AudioReach's ACDB
+  format, which `AudioReach/audioreach-graphservices` (`acdb/`) parses; the
+  walk in `docs/audio-headset-path-2026-10-17.md` resolves all of it: 113
+  graphs, 181 subgraphs, 1,248 module instances, 188 parameter IDs in 13,612
+  calibration entries.
+- **Per-laptop calibration:** the UEFI variable `SmartAmpCalibrationData`
+  (GUID `{53559579-8753-4f5c-9130-E82ACFB8D893}`, from `qcadcm8480.inf`),
+  most likely each speaker's measured resistance and temperature (R0/T0).
+- **Dynamically loaded DSP modules:** the `fai__*.pmd` ("Fluence AI") and
+  `ffv__*.pmd` files in the same package.
+
+## The speaker path
+
+Graphs ending in the speaker device subgraph (`0xB0000001`), one per stream
+type (key `0x1000002` = 1–7). The deep-buffer graph (`0x1000002` = 2):
+
+| Subgraph | Modules (calibrated parameters) |
+|---|---|
+| `0xB0000074` stream | PCM decoder, soft pause, MFC, **POPLESS_EQUALIZER** (`0x0800110C`, 112 B), volume |
+| `0xB0000075` device processing | `0x07001097`, **SAL** limiter (`0x08001050`, 36 B), sync, volume, **`0x0701000D`** (`0x0800137B`, **87,396 B**, plus five small parameters), MFC |
+| `0xB0000001` speaker device | **SAL**, splitter, logging, **SPEAKER_PROTECTION** v5 (19 parameters, among them `0x080011E8` 68 B, `0x08001258` 1,520 B, `0x0800134A` 2,188 B, `0x08001532` 988 B, `0x08001AEC` 3,104 B), codec DMA (WSA) |
+
+The low-latency graph (`0x1000002` = 1) uses an **MSIIR** EQ (three
+parameters: coefficients, stages, gains) in its device stage instead.
+`0x0701000D`'s 87 KB parameter is the largest in the database and the most
+likely carrier of HP's speaker voicing. The speaker-protection parameters
+are the v5 set (`0x080011E8`–`0x080011EE`, as in
+`spf/api/modules/sp_rx.h`), which is the generation the Linux kernel's
+AudioReach driver supports (`PARAM_ID_SP_OP_MODE` = `0x080011E9`). The V/I
+side has `SP_VI_STATIC_CFG` (`0x080011F6`, 44 B) and `SP_VI_CHANNEL_MAP_CFG`
+(`0x08001203`, 20 B: a channel count and four V/I entries, two speakers).
+
+## The microphone path
+
+The microphone graphs use `SMECNS_V2` (echo cancellation and noise
+suppression) with `EC_SYNC`, `IIR_MBDRC`, MSIIR, gain and volume, and module
+`0x070010D9`, which HP's endpoint INF names "Fluence NN NS" (neural noise
+suppression). Which graph serves "Microphone Array" is still to be mapped.
+
+## The modules exist in the firmware Linux runs
+
+Each of `0x0701000D`, `0x070010D9`, `0x070010E2` (speaker protection),
+`0x07001014` (MSIIR) and `0x07001097` occurs exactly once in HP's
+`qcadsp8480.mbn`, consistent with a module registry entry (a chance 4-byte
+match in 21 MB is unlikely for one ID, let alone five). The DSP accepting
+the module at graph setup is the proof. `0x0701000D` also occurs in two
+`fai__*.pmd` files.
+
+## What Linux can take today
+
+- **Topology modules with private data:** the kernel's AudioReach topology
+  stores a per-module configuration blob (`SND_SOC_AR_TPLG_MODULE_CFG_TYPE`)
+  and `audioreach_set_module_config()` sends it to the DSP unchanged, as a
+  list of `<instance, parameter, size>` records, which is the ACDB's own
+  calibration format. Upstream calls it only for `MODULE_ID_SMECNS_V2`; every
+  other module's blob is ignored.
+- **Speaker protection:** the kernel enables the SP and SP VI modules (mainline
+  `0db76f5b2235`, `3e43a8c033c3`, `b481eabe5a19`) with the operating mode and
+  V/I channel map only; no topology in `linux-msm/audioreach-topology` uses
+  them yet.
+- **EQ and dynamics parameter layouts** are public:
+  `audioreach-engine/modules/processing/filters/multi_stage_iir/api/api_msiir.h`
+  and `.../gain_control/iir_mbdrc/api/mbdrc_api.h`.
+
+## Plan
+
+1. **Kernel:** send a topology module's configuration blob for every module
+   that has one, not only `SMECNS_V2` (a small generic change in
+   `audioreach_set_media_format()`, an upstream candidate once a topology
+   uses it).
+2. **Speaker processing on the DSP:** a topology that mirrors HP's
+   deep-buffer speaker graph (stream EQ, device processing with SAL and
+   `0x0701000D`, device SAL), each module carrying HP's calibration records.
+   HP's data is not committed: a tool in this repository extracts it from the
+   driver pack at install time and builds the topology locally, as
+   `ath12k-board-add.py` does for the Wi-Fi board file.
+3. **Speaker protection:** the SP RX module with HP's parameters, the V/I
+   feedback capture from the WSA amplifiers (`VISENSE` on, a WSA TX codec DMA
+   path into the SP VI module) and the per-laptop R0/T0 from
+   `SmartAmpCalibrationData`. Until this works, the volume stays at the
+   upstream-style cap.
+4. **Microphones:** map the "Microphone Array" graph, then carry
+   `SMECNS_V2` (already supported upstream) and the other built-in modules the
+   same way. Fluence NN (`0x070010D9`) follows if the DSP accepts it without
+   the `.pmd` loading Windows does.
+5. **Fallback:** where a DSP module cannot be used, rebuild its effect in
+   PipeWire from the decoded parameters (MSIIR and popless EQ as biquads, the
+   limiter as a compressor; WebRTC noise suppression for the microphones).
+
+## Open questions
+
+- What `0x0701000D` and `0x07001097` are (vendor speaker processing is the
+  working assumption for the first).
+- Whether `SmartAmpCalibrationData` holds R0/T0, and its layout (readable on
+  Windows as administrator).
+- Whether Linux can read UEFI variables at all on this laptop (needs QSEECOM,
+  not allowlisted for this model).
