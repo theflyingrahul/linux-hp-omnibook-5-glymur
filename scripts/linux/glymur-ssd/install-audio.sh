@@ -1,27 +1,26 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Install the audio test: the test DTB for the newest kernel, the
-# AudioReach topology and the ALSA UCM profile. See README.md.
-#   sudo bash install-audio-test.sh
+# Install the speaker and microphone userspace: the AudioReach topology and
+# the ALSA UCM profile, from audio/ next to this script. See README.md.
+#   sudo bash install-audio.sh
 
-K="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/audio-test"
-DTB=mahua-hp-omnibook-5-bf1xxx-test.dtb
-TPLG=HP-OmniBook-5-16-bf1xxx-tplg.bin
+K="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/audio"
+NAME=MAHUA-HP-OmniBook-5-16-bf1xxx
+FW=/usr/lib/firmware/updates/qcom/glymur
+BOARD=HP/omnibook-5-16-bf1xxx
 [ "$(id -u)" -eq 0 ] || { echo 'run with sudo' >&2; exit 1; }
 [ "$(findmnt -n -o LABEL /)" = glymur-root ] || { echo 'not on the SSD install; refusing' >&2; exit 1; }
 (cd "$K" && sha256sum --quiet -c SHA256SUMS) || { echo 'checksum mismatch; nothing installed' >&2; exit 1; }
 
-want="$(cat "$K/kernel-release")"
-dir="$(readlink -f /boot/glymur-dtb)"
-case "$dir" in
-    */dtbs/"$want"/qcom) ;;
-    *) echo "/boot/glymur-dtb is $dir, not kernel $want; refusing" >&2; exit 1 ;;
-esac
-[ -f "$dir/$DTB.orig" ] || cp -a "$dir/$DTB" "$dir/$DTB.orig"
-install -m 644 "$K/$DTB" "$dir/$DTB"
-install -D -m 644 "$K/$TPLG" "/lib/firmware/qcom/glymur/$TPLG"
-sha256sum "$dir/$DTB" "/lib/firmware/qcom/glymur/$TPLG"
+# Topology: the board directory, plus a link at the name the kernel asks
+# for (qcom/glymur/<sound card model>-tplg.bin), as linux-firmware does.
+install -D -m 644 "$K/$NAME-tplg.bin" "$FW/$BOARD/$NAME-tplg.bin"
+ln -sfn "$BOARD/$NAME-tplg.bin" "$FW/$NAME-tplg.bin"
+sha256sum "$FW/$BOARD/$NAME-tplg.bin"
+# The kernel -13 test's topology name.
+old=/usr/lib/firmware/qcom/glymur/HP-OmniBook-5-16-bf1xxx-tplg.bin
+if [ -e "$old" ] && ! dpkg -S "$old" >/dev/null 2>&1; then rm -v "$old"; fi
 
 # UCM: new files only; never replace a file the alsa-ucm-conf package owns.
 U=/usr/share/alsa/ucm2
@@ -34,5 +33,5 @@ U=/usr/share/alsa/ucm2
     echo "UCM: $U/${f#./}"
 done
 echo "Installed. Boot 'Ubuntu on SSD: test device tree', then run check-audio.sh."
-echo "Undo: sudo cp $dir/$DTB.orig $dir/$DTB; sudo rm -r $U/HP/OmniBook-5-16-bf1xxx"
+echo "Undo: sudo rm -r $FW/$NAME-tplg.bin $FW/HP $U/HP/OmniBook-5-16-bf1xxx \\"
 echo "  $U/conf.d/glymur/HP-HPOmniBook5Laptop16_bf1xxx-ConfigID-8F47.conf"

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -u
 
-# Speaker and microphone report, kernel -13 test device tree on.
+# Speaker and microphone report, test device tree (kernel -13 on).
 # Plays or records nothing unless asked. See README.md.
 #   sudo bash check-audio.sh
 
@@ -15,9 +15,11 @@ ask() { local a; read -r -p "$1 " a </dev/tty; echo "answer: $a"; REPLY=$a; }
 
 sect system
 uname -r
+# LPASS TLMM GPIO 12/13 (7760000.pinctrl) and TLMM GPIO 204/205.
+resets() { awk '/^gpiochip/ { lp = /7760000/ } lp && / gpio1[23] / || / gpio20[45] /' /sys/kernel/debug/gpio; }
 tr -d '\0' < /sys/firmware/devicetree/base/model 2>/dev/null; echo
-TPLG=/lib/firmware/qcom/glymur/HP-OmniBook-5-16-bf1xxx-tplg.bin
-ls -l "$TPLG" 2>&1 && sha256sum "$TPLG"
+TPLG=/lib/firmware/updates/qcom/glymur/MAHUA-HP-OmniBook-5-16-bf1xxx-tplg.bin
+ls -l "$TPLG" 2>&1 && sha256sum "$(readlink -f "$TPLG")"
 
 sect "SoundWire devices (link:manufacturer:part:version:unique id)"
 for d in /sys/bus/soundwire/devices/*; do
@@ -31,8 +33,8 @@ for d in /sys/bus/soundwire/devices/*; do
 done
 ls -d /sys/kernel/debug/soundwire/* 2>/dev/null
 
-sect "amplifier reset lines (GPIO 204, 205)"
-grep -E 'gpio20[45]\b' /sys/kernel/debug/gpio 2>&1 | head
+sect "amplifier reset lines (LPASS TLMM 12, 13; TLMM 204, 205)"
+resets 2>&1
 
 sect "audio modules"
 lsmod | grep -E 'snd_soc_x1e80100|wsa884x|soundwire|lpass|q6apm|q6prm|snd_q6|pinctrl_lpass' || true
@@ -133,7 +135,7 @@ DRV=/sys/bus/soundwire/drivers/wsa884x-codec
 amps=$(ls -d "$DRV"/sdw:* 2>/dev/null | xargs -rn1 basename)
 show() { for a in /sys/bus/soundwire/devices/sdw:*0204*; do
     printf '  %s %s\n' "$(basename "$a")" "$(cat "$a/status" 2>/dev/null)"; done
-    grep -E 'gpio20[45]\b' /sys/kernel/debug/gpio | sed 's/^/  /'; }
+    resets | sed 's/^/  /'; }
 echo "bound: ${amps:-none}"; show
 if [ -n "$amps" ]; then
     for a in $amps; do echo "$a" > "$DRV/unbind"; done

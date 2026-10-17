@@ -12,7 +12,7 @@
  *
  * In test from kernel -13 (test DTB only):
  * - the speakers and the two microphones (second version: both amplifiers
- *   on swr0).
+ *   on swr0; from kernel -14 reset through LPASS TLMM GPIO 12).
  */
 /dts-v1/;
 
@@ -28,17 +28,20 @@
 	 * amplifiers on the WSA macro and two DMICs on the VA macro. The first
 	 * test (2026-10-17) found both amplifiers on swr0, unique IDs 0 and 1
 	 * (part 0x0204, WSA8845), as on the ThinkPad T14s Gen 7, and nothing on
-	 * swr3, with HP's AUCD GPIOs 204 and 205 both driven high. This test
-	 * uses only 204 (no pull, 16 mA, low at start), shared by both
-	 * amplifiers, and leaves 205 reserved, to tell the two apart. The
-	 * topology is
+	 * swr3, with HP's AUCD GPIOs 204 and 205 both driven high. HP runs the
+	 * CRD's audio configuration; the CRD resets its amplifiers with LPASS
+	 * TLMM GPIOs 12 and 13, and TLMM 204 and 205 are eGPIOs (192 + 12,
+	 * 192 + 13), so they are taken to be the same two lines. Both
+	 * amplifiers share LPASS TLMM 12, as on the ThinkPad T14s Gen 7 (same
+	 * layout); check-audio.sh's unbind/rebind check tests it. The model
+	 * names the topology, qcom/glymur/<model>-tplg.bin, built from
 	 * boards/hp-omnibook-5-16-bf1xxx/audio/MAHUA-HP-OmniBook-5-16-bf1xxx.m4.
 	 * No PMIC rail is declared: the amplifiers and the DMIC bias run on
 	 * what HP's firmware leaves on (L15B, L18B, L1B).
 	 */
 	sound {
 		compatible = "qcom,glymur-sndcard";
-		model = "HP-OmniBook-5-16-bf1xxx";
+		model = "MAHUA-HP-OmniBook-5-16-bf1xxx";
 		audio-routing = "SpkrLeft IN", "WSA WSA_SPK1 OUT",
 				"SpkrRight IN", "WSA WSA_SPK2 OUT",
 				"VA DMIC0", "vdd-micb",
@@ -86,14 +89,12 @@
 };
 
 &swr0 {
-	pinctrl-0 = <&wsa_swr_active>, <&spkr_sd_n>;
-
 	status = "okay";
 
 	spkr_left: speaker@0,0 {
 		compatible = "sdw20217020400";
 		reg = <0 0>;
-		reset-gpios = <&tlmm 204 GPIO_ACTIVE_LOW>;
+		reset-gpios = <&lpass_tlmm 12 GPIO_ACTIVE_LOW>;
 		#sound-dai-cells = <0>;
 		sound-name-prefix = "SpkrLeft";
 		qcom,port-mapping = <1 2 3 7 12 14>;
@@ -102,7 +103,7 @@
 	spkr_right: speaker@0,1 {
 		compatible = "sdw20217020400";
 		reg = <0 1>;
-		reset-gpios = <&tlmm 204 GPIO_ACTIVE_LOW>;
+		reset-gpios = <&lpass_tlmm 12 GPIO_ACTIVE_LOW>;
 		#sound-dai-cells = <0>;
 		sound-name-prefix = "SpkrRight";
 		qcom,port-mapping = <4 5 6 7 13 15>;
@@ -187,26 +188,14 @@
 };
 
 &tlmm {
-	/*
-	 * The daily allow-list plus the EC event line (GPIO 66) and the
-	 * speaker amplifier reset (GPIO 204)
-	 */
+	/* The daily allow-list plus the EC event line (GPIO 66) */
 	gpio-reserved-ranges = <2 1>, <4 12>, <19 13>, <34 2>, <38 13>,
 			       <52 4>, <60 6>, <68 2>, <71 21>, <93 23>,
-			       <117 2>, <120 26>, <149 3>, <155 49>,
-			       <205 46>;
+			       <117 2>, <120 26>, <149 3>, <155 96>;
 
 	ec_int_n_default: ec-int-n-state {
 		pins = "gpio66";
 		function = "gpio";
 		bias-pull-up;
-	};
-
-	/* HP's AUCD GpioIo: no pull, 16 mA drive (ACPI 1600 = 16 mA) */
-	spkr_sd_n: spkr-sd-n-state {
-		pins = "gpio204";
-		function = "gpio";
-		drive-strength = <16>;
-		bias-disable;
 	};
 };

@@ -2,6 +2,7 @@
 # HP OmniBook 5 16-bf1xxx (Snapdragon X2 Elite X2E84100 / Mahua):
 # stereo WSA884x speakers, 2x DMIC. Build with linux-msm/audioreach-topology.
 # Based on MAHUA-LENOVO-ThinkPad-T14s-Gen7.m4 without its DisplayPort sinks.
+# Apart from comments, the same as GLYMUR-ASUS-Zenbook-A14-UX3407NA.m4.
 # Copyright, Linaro Ltd, 2023
 include(`audioreach/audioreach.m4')
 include(`audioreach/stream-subgraph.m4')

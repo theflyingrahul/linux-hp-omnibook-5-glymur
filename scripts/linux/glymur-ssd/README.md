@@ -91,6 +91,8 @@ It checks every file against `SHA256SUMS`, then installs:
 - Ubuntu's test tools;
 - lscpu from util-linux PR #4657 (Oryon-2), into `/usr/local`, when
   `lscpu-oryon2.tar.gz` is staged;
+- the audio topology and UCM profile (`install-audio.sh`), when `audio/` is
+  staged;
 - the check scripts, into your home directory.
 
 ### `install-kernel.sh`
@@ -207,38 +209,43 @@ To set the keyboard backlight timeout by hand (`30s`, `3min` or `always`):
 
     echo always | sudo tee /sys/bus/i2c/devices/9-0076/kbd_backlight_timeout
 
-### `install-audio-test.sh`, `check-audio.sh`
+### `install-audio.sh`, `check-audio.sh`
 
-    sudo bash install-audio-test.sh
+    sudo bash install-audio.sh
     sudo bash check-audio.sh
 
-The speaker and microphone test, from kernel `-13`
-(`docs/audio-headset-path-2026-10-17.md`). `install-audio-test.sh` takes
-`audio-test/` next to it: a test DTB for the kernel named in
-`audio-test/kernel-release` (it refuses any other) and the AudioReach
-topology built from `boards/hp-omnibook-5-16-bf1xxx/audio/`. It keeps the
-previous test DTB as `.orig`, installs the topology to
-`/lib/firmware/qcom/glymur/` and the ALSA UCM profile (from
-`boards/hp-omnibook-5-16-bf1xxx/audio/ucm2/`) to `/usr/share/alsa/ucm2/`,
-as new files only: it refuses to replace a file the `alsa-ucm-conf` package
-owns. Without a UCM profile PipeWire shows "Dummy Output", because every
-path of a Qualcomm ASoC card starts switched off in the mixer; Ubuntu
-26.04's `alsa-ucm-conf` has no Glymur profiles. Then boot "Ubuntu on SSD:
+The speaker and microphone userspace and test
+(`docs/audio-headset-path-2026-10-17.md`). The sound card itself is in the
+test device tree, which comes with the kernel package from `-14` on.
+`install-audio.sh` takes `audio/` next to it: the AudioReach topology built
+from `boards/hp-omnibook-5-16-bf1xxx/audio/` and the ALSA UCM profile from
+`boards/hp-omnibook-5-16-bf1xxx/audio/ucm2/`. The kernel asks for
+`qcom/glymur/<sound card model>-tplg.bin`; as in linux-firmware, the file
+goes into a board directory
+(`/usr/lib/firmware/updates/qcom/glymur/HP/omnibook-5-16-bf1xxx/`) with a
+link at that name, under `updates/` like the HP firmware, so no package's
+file is touched. It removes the `-13` test's topology
+(`HP-OmniBook-5-16-bf1xxx-tplg.bin`). The UCM files go to
+`/usr/share/alsa/ucm2/` as new files only: it refuses to replace a file the
+`alsa-ucm-conf` package owns. Without a UCM profile PipeWire shows "Dummy
+Output", because every path of a Qualcomm ASoC card starts switched off in
+the mixer; no `alsa-ucm-conf` release has Glymur profiles yet (upstream
+`master` has them, Ubuntu 26.04 ships 1.2.15.3). Then boot "Ubuntu on SSD:
 test device tree".
 
 `check-audio.sh` lists every SoundWire device that attached (named
 link:manufacturer:part:version:unique id, also when no device-tree node
-matches), the state of GPIOs 204 and 205, the audio modules and kernel log,
-the ALSA card, the UCM profile as `alsaucm` parses it and PipeWire's view
-(`wpctl status`). Only when asked, it records 5 s from DMIC0/1 (peak and
-RMS per channel; the recording is kept next to the log) and plays a 1 kHz
-tone at -20 dBFS on the left, then the right channel (WSA macro RX0/RX1
-to the two amplifiers on `swr0`), with the WSA digital volume at 68 and PA
-volume 12, and asks which speaker played. Last, it unbinds and rebinds the
-WSA884x driver and shows the amplifiers' bus status and GPIOs 204/205
-each time: amplifiers that drop off the bus when the shared reset is
-asserted prove the reset line. The log goes to
-`/var/log/glymur/audio-test-*.txt`.
+matches), the state of the amplifier reset candidates (LPASS TLMM GPIOs 12
+and 13, TLMM GPIOs 204 and 205), the audio modules and kernel log, the ALSA
+card, the UCM profile as `alsaucm` parses it and PipeWire's view (`wpctl
+status`). Only when asked, it records 5 s from DMIC0/1 (peak and RMS per
+channel; the recording is kept next to the log) and plays a 1 kHz tone at
+-20 dBFS on the left, then the right channel (WSA macro RX0/RX1 to the two
+amplifiers on `swr0`), with the WSA digital volume at 68 and PA volume 12,
+and asks which speaker played. Last, it unbinds and rebinds the WSA884x
+driver and shows the amplifiers' bus status and those GPIOs each time:
+amplifiers that drop off the bus when the shared reset is asserted prove
+the reset line. The log goes to `/var/log/glymur/audio-test-*.txt`.
 
 ### `check-battmgr-notify.sh`
 

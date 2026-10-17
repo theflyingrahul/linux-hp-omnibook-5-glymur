@@ -3,11 +3,11 @@ set -euo pipefail
 
 # Install everything staged on the USB. See README.md.
 #   bash install-from-usb.sh [--keep-ubuntu-mesa] [kernel release]
-# Default kernel: 7.3.0-rc4-glymur-13.
+# Default kernel: 7.3.0-rc4-glymur-14.
 
 SYSTEM_MESA=1
 if [ "${1:-}" = --keep-ubuntu-mesa ]; then SYSTEM_MESA=0; shift; fi
-KREL="${1:-7.3.0-rc4-glymur-13}"
+KREL="${1:-7.3.0-rc4-glymur-14}"
 K="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 [ "$(id -u)" -ne 0 ] || { echo 'run as your normal user, not with sudo' >&2; exit 1; }
 [ "$(findmnt -n -o LABEL /)" = glymur-root ] || { echo 'not booted from the SSD install (glymur-root); refusing' >&2; exit 1; }
@@ -55,11 +55,17 @@ if [ -f "$K/lscpu-oryon2.tar.gz" ]; then
     echo "as root: $(sudo lscpu | grep 'Model name' | head -1)"
 fi
 
+if [ -d "$K/audio" ]; then
+    echo "== installing the audio topology and UCM profile"
+    sudo bash "$K/install-audio.sh"
+fi
+
 echo "== test tools from Ubuntu (glxinfo/eglinfo, vulkaninfo/vkcube, glmark2, kmscube)"
 sudo apt-get install -y mesa-utils mesa-utils-bin vulkan-tools glmark2-es2-wayland kmscube ||
     echo 'apt failed (offline?); install them later, check-mesa.sh names them'
 
-for f in check-gpu-test.sh check-mesa.sh charging-watch.sh check-usb.sh check-ec.sh gpu-corruption-test.sh; do
+for f in check-gpu-test.sh check-mesa.sh charging-watch.sh check-usb.sh check-ec.sh gpu-corruption-test.sh \
+         check-audio.sh check-battmgr-notify.sh; do
     if [ -f "$K/$f" ]; then cp "$K/$f" "$HOME/$f"; fi
 done
 sync
@@ -70,6 +76,8 @@ echo "  bash ~/check-mesa.sh"
 echo "  sudo bash ~/check-ec.sh         (fan, temperatures, backlight, mute LEDs, hotkeys)"
 echo "  sudo bash ~/check-usb.sh        (plug USB-C and USB 2.0 devices in first)"
 echo "  sudo bash ~/charging-watch.sh   (plug, unplug, replug; type notes)"
+echo "  sudo bash ~/check-audio.sh      (speakers, microphones, amplifier reset)"
+echo "  sudo bash ~/check-battmgr-notify.sh   (with the charger at hand)"
 echo "If the desktop is still corrupted, press Ctrl+Alt+F3, log in, and run"
 echo "  bash ~/gpu-corruption-test.sh"
 if [ "$SYSTEM_MESA" = 1 ] && [ -n "$MESA" ]; then
