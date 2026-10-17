@@ -6,7 +6,8 @@ Ubuntu 26.04 on the internal SSD, kernel `7.3.0-rc2-glymur-12` (Qualcomm's
 qcom-next plus `patches/kernel/`), booted with the daily device tree
 (`dts/qcom/mahua-hp-omnibook-5-bf1xxx.dts`) from the USB stick's GRUB.
 Evidence for each line is in the linked notes; the sections after this one
-are the history.
+are the history. Open work is tracked as GitHub issues: issue #28 maps
+every device Windows enumerates to its Linux state and its issue.
 
 | Subsystem | State | Notes |
 |---|---|---|
@@ -28,7 +29,7 @@ are the history.
 | USB-A | Working | SuperSpeed |
 | USB-C data | Partly | both ports work at high speed and SuperSpeed, and role switches are stable since `-12` (`backports/0015–0016`); full- and low-speed devices fail with `error -71` (`docs/usb-dwc3-crash-2026-09-30.md`) |
 | Camera | Detected | RGB and IR functions enumerate; no frame captured yet |
-| Audio | Partly | test DT, kernel `-13`: internal microphones (DMIC0/1) work, real recorded signal; speakers silent: both WSA884x amplifiers attach on `swr0` (unique IDs 0, 1) and `swr3` is empty, but the test DT put one amplifier on `swr3`, so the playback link failed to prepare; headset codec (WCD9378) still needs unposted LPASS patches (`docs/community-pointers-2026-10-17.md`). See `docs/audio-headset-path-2026-10-17.md` |
+| Audio | Partly | test DT, kernel `-13`: internal microphones (DMIC0/1) work, real recorded signal; speakers silent: both WSA884x amplifiers attach on `swr0` (unique IDs 0, 1) and `swr3` is empty, but the test DT put one amplifier on `swr3`, so the playback link failed to prepare. Kernel `-14`'s test DT has both on `swr0`, reset through LPASS TLMM 12 as on the T14s Gen 7, and the topology is the upstream Zenbook A14 one under HP's name; HP's tuning carries over through topology static calibration (`docs/audio-tuning-2026-10-17.md`). Headset codec (WCD9378) still needs unposted LPASS patches (`docs/community-pointers-2026-10-17.md`). See `docs/audio-headset-path-2026-10-17.md` |
 | NPU | Not started | the CDSP boots with HP's signed firmware; FastRPC and userspace untried |
 | RTC | Not working | not rechecked since 2026-09-28 |
 | Suspend | Untested | masked |

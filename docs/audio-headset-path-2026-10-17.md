@@ -201,3 +201,22 @@ masters but only `swr0` is populated. Which of GPIO 204 and 205 releases
 the amplifiers is still open (both were driven high). Next test: both
 amplifiers on `swr0` sharing GPIO 204, `swr3` off, GPIO 205 untouched,
 plus an unbind/rebind check that ties the reset line to attach.
+
+## Kernel `-14` test device tree: the upstream reset line
+
+Rechecked against the device trees of the Glymur CRD (qcom-next), HP's
+EliteBook X G2q and the ThinkPad T14s Gen 7 (Linux MSM laptops kernel): all
+three reset their WSA8845 amplifiers through the LPASS TLMM, GPIO 12 (left)
+and 13 (right) on the CRD and the EliteBook. The T14s Gen 7 has this
+laptop's layout, two amplifiers on `swr0` (IDs 0 and 1, the same port
+maps) sharing LPASS TLMM 12, with no extra pin state on `swr0`. HP's AUCD
+GPIOs 204 and 205 are TLMM eGPIOs (192–244, `pinctrl-glymur.c`), and
+192 + 12 and 192 + 13 are exactly them. Since HP runs the CRD
+configuration, they are taken to be the same two lines. The `-14` test
+device tree therefore uses `<&lpass_tlmm 12 GPIO_ACTIVE_LOW>` for both
+amplifiers and keeps TLMM 204 reserved, as in the daily tree.
+`check-audio.sh` reports LPASS TLMM 12 and 13 and TLMM 204 and 205, and
+its unbind/rebind check shows whether LPASS TLMM 12 takes the amplifiers
+off the bus. The sound card model is now `MAHUA-HP-OmniBook-5-16-bf1xxx`,
+the upstream naming, so the topology is
+`qcom/glymur/MAHUA-HP-OmniBook-5-16-bf1xxx-tplg.bin`.

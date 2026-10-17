@@ -5,6 +5,27 @@ The bring-up's dated log, newest first, moved here from the README on
 in [`status.md`](status.md); the detailed evidence is in the dated notes in
 this directory.
 
+**2026-10-17, evening: audio checked against upstream; kernel `-14`.**
+The audio work was rechecked against what Qualcomm and the community
+already publish. The HP topology turned out byte-identical to
+`linux-msm/audioreach-topology`'s ASUS Zenbook A14 one (same two WSA884x
+and two DMICs). The amplifier reset now takes the upstream form: the
+Glymur CRD, HP's EliteBook X G2q and the ThinkPad T14s Gen 7 (our exact
+layout) all reset through LPASS TLMM GPIO 12, and HP's ACPI pins 204 and
+205 are the eGPIOs at 192 + 12 and 192 + 13. So the test device tree
+drops the TLMM 204 pin state. The sound card model, and with it the
+topology name, follows the upstream `<SoC>-<vendor>-<product>` form
+(`MAHUA-HP-OmniBook-5-16-bf1xxx`). The topology installs under
+`firmware/updates/` like linux-firmware's board directories. For HP's
+tuning, the kernel's static-calibration mechanism, which Qualcomm wrote
+for echo cancellation and speaker protection, is the way in.
+`upstream/qcom-next/0006` sends that topology data for every module, not
+only SMECNS (linux-next still sends it for SMECNS only). HP's ACDB is now
+committed from the driver pack, and the per-laptop speaker calibration
+(R0 about 7.2 and 7.3 Ω, T0 25 °C) is decoded. qcom-next is unchanged
+(`1a0586064ee1`), and mainline has nothing new in our drivers. See
+`docs/audio-tuning-2026-10-17.md`.
+
 **2026-10-17, later: direct-to-port retest confirms full/low-speed USB-C
 is still broken; the test DT's speakers and microphones tried live.**
 Two `check-usb.sh` runs with a mouse receiver plugged straight into each

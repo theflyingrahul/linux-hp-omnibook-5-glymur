@@ -65,8 +65,12 @@ the module at graph setup is the proof. `0x0701000D` also occurs in two
   stores a per-module configuration blob (`SND_SOC_AR_TPLG_MODULE_CFG_TYPE`)
   and `audioreach_set_module_config()` sends it to the DSP unchanged, as a
   list of `<instance, parameter, size>` records, which is the ACDB's own
-  calibration format. Upstream calls it only for `MODULE_ID_SMECNS_V2`; every
-  other module's blob is ignored.
+  calibration format. This is upstream's mechanism for exactly this job:
+  `c7ed4c2debfd` ("ASoC: qcom: audioreach: add support for static
+  calibration", Srinivas Kandagatla, 2025) adds it "for ECNS and speaker
+  protection", with the blob written in the topology as a `SectionData`
+  of words. Upstream calls it only for `MODULE_ID_SMECNS_V2` (linux-next of
+  2026-10-17 too); every other module's blob is ignored.
 - **Speaker protection:** the kernel enables the SP and SP VI modules (mainline
   `0db76f5b2235`, `3e43a8c033c3`, `b481eabe5a19`) with the operating mode and
   V/I channel map only; no topology in `linux-msm/audioreach-topology` uses
@@ -77,10 +81,10 @@ the module at graph setup is the proof. `0x0701000D` also occurs in two
 
 ## Plan
 
-1. **Kernel:** send a topology module's configuration blob for every module
-   that has one, not only `SMECNS_V2` (a small generic change in
-   `audioreach_set_media_format()`, an upstream candidate once a topology
-   uses it).
+1. **Kernel (done, `-14`):** `patches/kernel/upstream/qcom-next/0006`
+   sends a topology module's configuration blob for every module that has
+   one, not only `SMECNS_V2`, before the media format and the driver's own
+   parameters (an upstream candidate once a topology uses it).
 2. **Speaker processing on the DSP:** a topology that mirrors HP's
    deep-buffer speaker graph (stream EQ, device processing with SAL and
    `0x0701000D`, device SAL), each module carrying HP's calibration records.
@@ -121,6 +125,30 @@ nominal 8 Ω speaker's DC resistance. The values are measured per unit, so
 they are read from each laptop, never copied. Linux cannot read the variable
 yet (see below); until then they can be captured once on Windows and stored
 with the board configuration.
+
+## Checked against upstream practice (2026-10-17)
+
+- **Topology:** `MAHUA-HP-OmniBook-5-16-bf1xxx.m4` builds to a file
+  byte-identical to `linux-msm/audioreach-topology`'s
+  `GLYMUR-ASUS-Zenbook-A14-UX3407NA.m4` (two WSA884x, two DMICs). As there,
+  the file is named after the sound card's `model`
+  (`qcom/glymur/<model>-tplg.bin`, `<SoC>-<vendor>-<product>`), and
+  installed into a board directory with a link at that name.
+- **UCM:** upstream alsa-ucm-conf (`master`, not yet in a release; Ubuntu
+  26.04 ships 1.2.15.3) selects Glymur laptops by DMI in
+  `Qualcomm/glymur/glymur.conf` and shares the WSA884x and WSA-macro
+  sequences. HP's profile is the Zenbook A14 one with those sequences
+  copied from `master`, selected by the card's long name, which UCM tries
+  before the driver-wide file, so it works with any release and never
+  replaces a packaged file. Upstreaming it means one DMI entry there.
+- **Speaker tuning in userspace** (PipeWire filter-chain EQ, as some
+  laptops without DSP tuning use) stays the fallback of step 5: HP's
+  tuning runs in the ADSP on Windows, and the same firmware runs here.
+- **Speaker protection:** upstream has the SP and SP VI modules and their
+  operating mode only; no published topology uses them yet. Until it runs
+  here, the gains are upstream UCM's for two WSA884x (WSA digital volume
+  84, PA volume 12 at enable); users report 84 as loud, so a lower
+  default is worth checking on this laptop's speakers.
 
 ## Open questions
 
