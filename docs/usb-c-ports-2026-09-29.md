@@ -295,7 +295,17 @@ for `orientation=reverse`, already seen on this connector in
 `docs/usb-c-charging-2026-09-29.md`) is still unconfirmed. A native
 USB-C 3.x device, tried both ways up, would close this out.
 
-## Kernel `-13` (2026-10-17): the full/low-speed enumeration bug looks fixed
+## Kernel `-13` (2026-10-17): no regressions; full/low speed not yet tested
+
+**Correction (same day):** this section first said the full/low-speed
+enumeration bug looked fixed. The captures do not show that. The
+receiver enumerated as `usb 4-1.2`, the second port of the high-speed hub
+at `usb 4-1`, so the USB-C port carried only high-speed traffic and the
+hub's transaction translator did the full-speed part. Every failure from
+`-8` to `-12` was a device straight on the port (`usb 3-1`, `4-1`, `5-1`).
+The boot also used the daily device tree (model string without
+"(test)"), which declares no SMB2370 repeaters, so the repeater fix
+`92757057bb4a` was not involved. The original text follows.
 
 Three `check-usb.sh` runs right after installing kernel `-13`
 (`1a0586064ee1`, 7.3-rc4 qcom-next base), a baseline with nothing in the
