@@ -84,13 +84,14 @@ the module at graph setup is the proof. `0x0701000D` also occurs in two
 2. **Speaker processing on the DSP:** a topology that mirrors HP's
    deep-buffer speaker graph (stream EQ, device processing with SAL and
    `0x0701000D`, device SAL), each module carrying HP's calibration records.
-   HP's data is not committed: a tool in this repository extracts it from the
-   driver pack at install time and builds the topology locally, as
-   `ath12k-board-add.py` does for the Wi-Fi board file.
+   HP's ACDB is committed unmodified under
+   `boards/hp-omnibook-5-16-bf1xxx/firmware/qcacsp_crd8480_fixvoice_WHQL/`
+   (from HP's driver pack, identical to the copy Windows installed); a
+   tool extracts the records from it and builds the topology.
 3. **Speaker protection:** the SP RX module with HP's parameters, the V/I
    feedback capture from the WSA amplifiers (`VISENSE` on, a WSA TX codec DMA
    path into the SP VI module) and the per-laptop R0/T0 from
-   `SmartAmpCalibrationData`. Until this works, the volume stays at the
+   `SmartAmpCalibrationData` (below), sent as `PARAM_ID_SP_TH_VI_R0T0_CFG`. Until this works, the volume stays at the
    upstream-style cap.
 4. **Microphones:** map the "Microphone Array" graph, then carry
    `SMECNS_V2` (already supported upstream) and the other built-in modules the
@@ -100,11 +101,30 @@ the module at graph setup is the proof. `0x0701000D` also occurs in two
    PipeWire from the decoded parameters (MSIIR and popless EQ as biquads, the
    limiter as a compressor; WebRTC noise suppression for the microphones).
 
+## The per-laptop speaker calibration
+
+Read on Windows as administrator (read-only `GetFirmwareEnvironmentVariableEx`;
+the raw variable stays private in `.work/`). It is 76 bytes, attributes
+non-volatile, boot-service and runtime access. As 32-bit little-endian words:
+
+| Words | Contents | This laptop |
+|---|---|---|
+| 0 | 0 | |
+| 1 | number of speakers | 2 |
+| 2–9 | R0 per speaker, ohms in Q24 (eight slots) | 7.197 Ω, 7.299 Ω, rest 0 |
+| 10–17 | T0 per speaker, °C in Q6 (eight slots) | 1600 = 25.0 °C for both, rest 0 |
+| 18 | calibration valid | 1 |
+
+The units match `vi_r0t0_cfg_t` in `spf/api/modules/sp_vi.h` (`r0_cali_q24`,
+`t0_cali_q6`), and the R0 values sit inside its range (2–64 Ω) and near a
+nominal 8 Ω speaker's DC resistance. The values are measured per unit, so
+they are read from each laptop, never copied. Linux cannot read the variable
+yet (see below); until then they can be captured once on Windows and stored
+with the board configuration.
+
 ## Open questions
 
 - What `0x0701000D` and `0x07001097` are (vendor speaker processing is the
   working assumption for the first).
-- Whether `SmartAmpCalibrationData` holds R0/T0, and its layout (readable on
-  Windows as administrator).
 - Whether Linux can read UEFI variables at all on this laptop (needs QSEECOM,
   not allowlisted for this model).
