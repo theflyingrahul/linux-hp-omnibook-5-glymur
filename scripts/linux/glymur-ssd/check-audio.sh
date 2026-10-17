@@ -50,6 +50,11 @@ CARD=$(awk '/OmniBook|HP-OmniBook|HPOmniBook/ {print $1; exit}' /proc/asound/car
 echo "card: ${CARD:-none}"
 [ -n "$CARD" ] && amixer -c "$CARD" controls | wc -l
 
+sect "ALSA UCM profile (what PipeWire uses)"
+ls -l /usr/share/alsa/ucm2/conf.d/glymur/ 2>&1
+[ -n "$CARD" ] && alsaucm -c "hw:$CARD" dump text 2>&1 | head -40
+command -v wpctl >/dev/null && sudo -u "${SUDO_USER:-root}" XDG_RUNTIME_DIR="/run/user/$(id -u "${SUDO_USER:-root}")" wpctl status 2>&1 | sed -n '/Audio/,/Video/p' | head -30
+
 [ -n "$CARD" ] || { echo 'no HP sound card; stopping'; echo "Saved to $OUT"; exit 0; }
 cset() { amixer -q -c "$CARD" cset "name=$1" "$2" 2>&1 | sed "s/^/  $1: /"; }
 

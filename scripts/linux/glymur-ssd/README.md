@@ -217,13 +217,20 @@ The speaker and microphone test, from kernel `-13`
 `audio-test/` next to it: a test DTB for the kernel named in
 `audio-test/kernel-release` (it refuses any other) and the AudioReach
 topology built from `boards/hp-omnibook-5-16-bf1xxx/audio/`. It keeps the
-previous test DTB as `.orig` and installs the topology to
-`/lib/firmware/qcom/glymur/`. Then boot "Ubuntu on SSD: test device tree".
+previous test DTB as `.orig`, installs the topology to
+`/lib/firmware/qcom/glymur/` and the ALSA UCM profile (from
+`boards/hp-omnibook-5-16-bf1xxx/audio/ucm2/`) to `/usr/share/alsa/ucm2/`,
+as new files only: it refuses to replace a file the `alsa-ucm-conf` package
+owns. Without a UCM profile PipeWire shows "Dummy Output", because every
+path of a Qualcomm ASoC card starts switched off in the mixer; Ubuntu
+26.04's `alsa-ucm-conf` has no Glymur profiles. Then boot "Ubuntu on SSD:
+test device tree".
 
 `check-audio.sh` lists every SoundWire device that attached (named
 link:manufacturer:part:version:unique id, also when no device-tree node
 matches), the state of GPIOs 204 and 205, the audio modules and kernel log,
-and the ALSA card. Only when asked, it records 5 s from DMIC0/1 (peak and
+the ALSA card, the UCM profile as `alsaucm` parses it and PipeWire's view
+(`wpctl status`). Only when asked, it records 5 s from DMIC0/1 (peak and
 RMS per channel; the recording is kept next to the log) and plays a 1 kHz
 tone at -20 dBFS on the left, then the right channel (WSA macro RX0/RX1
 to the two amplifiers on `swr0`), with the WSA digital volume at 68 and PA

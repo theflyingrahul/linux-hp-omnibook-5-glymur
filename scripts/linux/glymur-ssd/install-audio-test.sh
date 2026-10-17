@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Install the audio test: the test DTB for the newest kernel and the
-# AudioReach topology. See README.md.
+# Install the audio test: the test DTB for the newest kernel, the
+# AudioReach topology and the ALSA UCM profile. See README.md.
 #   sudo bash install-audio-test.sh
 
 K="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/audio-test"
@@ -22,5 +22,17 @@ esac
 install -m 644 "$K/$DTB" "$dir/$DTB"
 install -D -m 644 "$K/$TPLG" "/lib/firmware/qcom/glymur/$TPLG"
 sha256sum "$dir/$DTB" "/lib/firmware/qcom/glymur/$TPLG"
+
+# UCM: new files only; never replace a file the alsa-ucm-conf package owns.
+U=/usr/share/alsa/ucm2
+(cd "$K/ucm2" && find . -type f) | while read -r f; do
+    if [ -e "$U/$f" ] && ! cmp -s "$K/ucm2/$f" "$U/$f"; then
+        dpkg -S "$U/${f#./}" >/dev/null 2>&1 &&
+            { echo "refusing to replace packaged $U/${f#./}" >&2; continue; }
+    fi
+    install -D -m 644 "$K/ucm2/$f" "$U/${f#./}"
+    echo "UCM: $U/${f#./}"
+done
 echo "Installed. Boot 'Ubuntu on SSD: test device tree', then run check-audio.sh."
-echo "Undo: sudo cp $dir/$DTB.orig $dir/$DTB"
+echo "Undo: sudo cp $dir/$DTB.orig $dir/$DTB; sudo rm -r $U/HP/OmniBook-5-16-bf1xxx"
+echo "  $U/conf.d/glymur/HP-HPOmniBook5Laptop16_bf1xxx-ConfigID-8F47.conf"
