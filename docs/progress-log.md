@@ -5,6 +5,24 @@ The bring-up's dated log, newest first, moved here from the README on
 in [`status.md`](status.md); the detailed evidence is in the dated notes in
 this directory.
 
+**2026-10-17, later: direct-to-port retest confirms full/low-speed USB-C
+is still broken; the test DT's speakers and microphones tried live.**
+Two `check-usb.sh` runs with a mouse receiver plugged straight into each
+USB-C port in turn (no hub this time, closing the gap the earlier
+hub-based retest left open) both failed identically: `usb 4-1`,
+`device descriptor read/64, error -71`, the same signature since `-8`.
+No crash either run; the `-12` dwc3 fix still holds. This confirms the
+correction below — the bug is not fixed. On the test device tree,
+`check-audio.sh` ran for real: the internal microphones recorded a clean
+signal on both channels, but both speakers stayed silent — the second
+WSA SoundWire bus (`swr3`) never attaches its amplifier (`UNATTACHED`,
+vs. `swr0`'s `Attached`), so the stereo playback link fails to prepare
+(`ASoC error (-5) at snd_soc_link_prepare()`). Mic capture is a genuine
+first working audio path on this board; speaker playback has a specific,
+narrow next step (`swr3`'s own SoundWire master setup) rather than an
+open-ended gap. See `docs/usb-c-ports-2026-09-29.md` and
+`docs/audio-headset-path-2026-10-17.md`.
+
 **2026-10-17, audio: speakers and microphones in test.** HP's driver pack,
 registry and ACPI show HP running Qualcomm's Glymur CRD audio
 configuration: stereo WSA884x speakers on both WSA SoundWire buses (HP's

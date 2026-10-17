@@ -164,3 +164,37 @@ headset codec, does not depend on unposted patches.
 | AudioReach topology | `linux-msm/audioreach-topology` has `MAHUA-LENOVO-ThinkPad-T14s-Gen7.m4`; HP needs its own |
 
 qcom-next has none of the accepted or posted pieces yet.
+
+## Live test, kernel `-13` test device tree (2026-10-17): microphones work, speakers don't
+
+`check-audio.sh`, interactive, on the test DT boot:
+
+- **SoundWire enumeration.** `swr0`'s amplifier (`sdw:1:0:0217:0204:00:0`,
+  master `6c80000.soundwire`) shows `status: Attached`. `swr3`'s
+  amplifier (`sdw:4:0:0217:0204:00:0`, master `6ca0000.soundwire`) shows
+  `status: UNATTACHED`. Both reset GPIOs (204, 205) read back `out high`,
+  so both amplifiers are held out of reset the same way; only one of the
+  two actually joined its bus.
+- **Microphones: working.** A real 5 s stereo recording from DMIC0/DMIC1
+  through the VA macro: peak 32768 (clipping) on both channels, RMS
+  1980/1640 — genuine signal, not silence or noise floor.
+- **Speakers: silent, both channels.** The left-tone and right-tone
+  playback tests both came back "none" (owner-confirmed). The kernel log
+  during playback shows why: `swrm_wait_for_rd_fifo_avail err read
+  underflow` and `trf on Slave 0 failed:-5` on `sdw-master-4-0` — the same
+  link whose amplifier never attached — then `DPN_PortCtrl register write
+  failed for port 1`, `Program transport params failed: -5`, and the
+  playback link itself fails to prepare (`WSA Playback: ASoC error (-5)
+  at snd_soc_link_prepare()`). The same `qcom_swrm_irq_handler: SWR CMD
+  error` on `6ca0000.soundwire` appears at boot, before any test runs.
+
+**Where this leaves it:** the speaker path isn't a wiring or topology
+guess gone wrong — DMIC capture through the same VA macro infrastructure
+works cleanly, and the `swr0` amplifier attaches fine. The fault is
+narrow: `swr3` (`6ca0000.soundwire`, the second WSA bus) never completes
+SoundWire slave attach, so its amplifier can't be programmed and ASoC
+refuses to prepare the (stereo) playback link at all — silencing both
+speakers, not just the one on that bus. Next step is `swr3`'s own
+SoundWire master setup (clock/data pin config, port mapping) against
+HP's ACPI/PEP tables for that bus specifically, since `swr0` with
+identical node structure attaches without issue.

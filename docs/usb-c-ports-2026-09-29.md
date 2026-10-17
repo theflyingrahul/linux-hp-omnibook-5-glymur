@@ -347,3 +347,29 @@ USB-C 3.x stick either way up — those would close out the remaining
 Worth a few more ordinary-use boots, and ideally the charger/battery
 tests this round skipped, before calling the eUSB2 repeater work fully
 closed.
+
+## Kernel `-13`, direct-to-port retest (2026-10-17): still broken, no hub this time
+
+Two more `check-usb.sh` runs, same boot (daily device tree, no eUSB2
+repeaters declared), with a mouse receiver plugged **straight into each
+USB-C port** in turn — no hub this time, closing the gap the port-swap
+test above (via a hub) left open:
+
+- **Port 0 (`a600000.usb`):** `usb 4-1: new low-speed USB device number 2
+  using xhci-hcd` → `device descriptor read/64, error -71` (twice),
+  retried as device number 3, same failure.
+- **Port 1 (`a800000.usb`):** identical signature, same device straight
+  on `4-1`, same `error -71` pattern.
+
+No crash, no `Internal error`/`refcount_t`/`duplicate filename` in either
+boot's journal — the `-12` dwc3 fix still holds. But the enumeration
+failure itself is unchanged: this is the same `error -71` on
+`device descriptor read/64` seen on every direct-to-port low/full-speed
+attempt since kernel `-8`, now reproduced on kernel `-13` too. This
+supersedes the "looks fixed" conclusion above, which turned out to be a
+hub masking the port's own behavior (see the correction already in
+`docs/progress-log.md`, 2026-10-17). The full/low-speed USB-C enumeration
+bug is confirmed **still present and unfixed**; the `92757057bb4a`
+repeater fix pulled in for `-13` did not resolve it (and this boot used
+the daily DT, which doesn't even declare the repeaters — the test DT with
+the repeaters still needs its own direct-to-port retest).

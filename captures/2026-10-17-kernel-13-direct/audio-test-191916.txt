@@ -1,0 +1,110 @@
+
+==== system
+7.3.0-rc4-glymur-13
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+-rw-r--r-- 1 root root 11320 Oct 17 19:17 /lib/firmware/qcom/glymur/HP-OmniBook-5-16-bf1xxx-tplg.bin
+4f81077a0d8bb7568bfcd490eeea27cf25ec08357eb0f9c5788413bdd79af28e  /lib/firmware/qcom/glymur/HP-OmniBook-5-16-bf1xxx-tplg.bin
+
+==== SoundWire devices (link:manufacturer:part:version:unique id)
+sdw-master-1-0                           driver=driver master=6c80000.soundwire
+sdw-master-4-0                           driver=driver master=6ca0000.soundwire
+sdw:1:0:0217:0204:00:0                   driver=wsa884x-codec master=sdw-master-1-0
+    status: Attached
+    dev-properties/mipi_revision: 0x0
+sdw:1:0:0217:0204:00:1                   driver=driver master=sdw-master-1-0
+    status: Attached
+sdw:4:0:0217:0204:00:0                   driver=wsa884x-codec master=sdw-master-4-0
+    status: UNATTACHED
+    dev-properties/mipi_revision: 0x0
+/sys/kernel/debug/soundwire/master-1-0
+/sys/kernel/debug/soundwire/master-4-0
+
+==== amplifier reset lines (GPIO 204, 205)
+ gpio204 : out high func0 16mA no pull
+ gpio205 : out high func0 16mA no pull
+
+==== audio modules
+snd_soc_wsa884x        28672  2
+regmap_sdw             12288  1 snd_soc_wsa884x
+q6apm_lpass_dais       20480  1
+q6apm_dai              32768  1
+q6prm_clocks           16384  20
+snd_q6dsp_common       57344  2 q6apm_lpass_dais,q6prm_clocks
+q6prm                  12288  1 q6prm_clocks
+snd_q6apm              69632  4 q6apm_dai,q6prm,q6apm_lpass_dais
+apr                    20480  2 snd_q6apm,q6prm
+snd_soc_x1e80100       12288  0
+snd_soc_qcom_sdw       12288  1 snd_soc_x1e80100
+snd_soc_qcom_common    24576  1 snd_soc_x1e80100
+snd_soc_lpass_wsa_macro    73728  4
+soundwire_qcom         36864  2
+snd_soc_lpass_va_macro    69632  6
+slimbus                36864  1 soundwire_qcom
+soundwire_bus        1183744  4 regmap_sdw,snd_soc_wsa884x,snd_soc_qcom_sdw,soundwire_qcom
+snd_soc_lpass_macro_common    12288  2 snd_soc_lpass_wsa_macro,snd_soc_lpass_va_macro
+snd_soc_core          446464  10 snd_q6apm,q6apm_dai,snd_soc_qcom_common,q6apm_lpass_dais,snd_soc_lpass_wsa_macro,snd_soc_wsa884x,snd_soc_qcom_sdw,snd_soc_lpass_va_macro,soundwire_qcom,snd_soc_x1e80100
+pinctrl_sm8650_lpass_lpi    20480  0
+pinctrl_lpass_lpi      24576  7 pinctrl_sm8650_lpass_lpi
+
+==== kernel log: audio
+Jul 28 02:14:02 glymur kernel: CPUidle PSCI: Initialized CPU PM domain topology using OSI mode
+Jul 28 02:14:08 glymur kernel: wsa_macro 6c90000.codec: Driver needs fixing: Unsorted reg_defaults, sorting the copy
+Jul 28 02:14:08 glymur kernel: wsa_macro 6cb0000.codec: Driver needs fixing: Unsorted reg_defaults, sorting the copy
+Jul 28 02:14:08 glymur kernel: wsa_macro 6c90000.codec: using zero-initialized flat cache, this may cause unexpected behavior
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: supply vdd-io not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: supply vdd-1p8 not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:4:0:0217:0204:00:0: supply vdd-io not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:4:0:0217:0204:00:0: supply vdd-1p8 not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: supply vdd-io not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: supply vdd-1p8 not found, using dummy regulator
+Jul 28 02:14:09 glymur kernel: snd-x1e80100 sound: ASoC: Parent card not yet available, widget card binding deferred
+Jul 28 02:14:09 glymur kernel: va_macro 7660000.codec: supply vdd-micb not found, using dummy regulator
+Jul 28 02:14:09 glymur kernel:  MultiMedia1 Playback: ASoC: no backend DAIs enabled for MultiMedia1 Playback, possibly missing ALSA mixer-based routing or UCM profile
+Jul 28 02:14:12 glymur kernel: qcom-soundwire 6ca0000.soundwire: qcom_swrm_irq_handler: SWR CMD error, fifo status 0x4e00c00f, flushing fifo
+
+==== ALSA cards and controls
+ 0 [HPOmniBook516bf]: glymur - HP-OmniBook-5-16-bf1xxx
+                      HP-HPOmniBook5Laptop16_bf1xxx-ConfigID-8F47
+**** List of PLAYBACK Hardware Devices ****
+card 0: HPOmniBook516bf [HP-OmniBook-5-16-bf1xxx], device 0: MultiMedia1 Playback (*) []
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+**** List of CAPTURE Hardware Devices ****
+card 0: HPOmniBook516bf [HP-OmniBook-5-16-bf1xxx], device 1: MultiMedia2 Capture (*) []
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card: 0
+117
+
+==== microphones (DMIC0, DMIC1)
+Record 5 s from the two internal microphones? Speak or tap near them. (y/N) answer: y
+Recording WAVE '/tmp/glymur-audio/mic.wav' : Signed 16 bit Little Endian, Rate 48000 Hz, Stereo
+channel 0: 240000 frames, peak 32768, rms 1980 (of 32767)
+channel 1: 240000 frames, peak 32768, rms 1640 (of 32767)
+
+==== speakers
+Play a quiet 1 kHz tone, left then right, about 2 s each? (y/N) answer: y
+playing left
+BUFFER_BYTES: 99840
+TICK_TIME: 0
+Tone 'left': which speaker played, left, right, both or none? answer: none
+playing right
+BUFFER_BYTES: 99840
+TICK_TIME: 0
+Tone 'right': which speaker played, left, right, both or none? answer: none
+
+==== kernel log after the tests
+Oct 17 19:19:30 glymur kernel: qcom-soundwire 6ca0000.soundwire: swrm_wait_for_rd_fifo_avail err read underflow
+Oct 17 19:19:30 glymur kernel: soundwire sdw-master-4-0: trf on Slave 0 failed:-5 read addr 102 count 1
+Oct 17 19:19:30 glymur kernel: wsa884x-codec sdw:4:0:0217:0204:00:0: DPN_PortCtrl register write failed for port 1
+Oct 17 19:19:30 glymur kernel: soundwire sdw-master-4-0: Program transport params failed: -5
+Oct 17 19:19:30 glymur kernel: soundwire sdw-master-4-0: Program params failed: -5
+Oct 17 19:19:30 glymur kernel:  WSA Playback: ASoC error (-5): at snd_soc_link_prepare() on WSA Playback
+Oct 17 19:19:36 glymur kernel: soundwire sdw-master-1-0: clock stop deprepare wait failed:-110
+Oct 17 19:19:36 glymur kernel: qcom-soundwire 6ca0000.soundwire: swrm_wait_for_rd_fifo_avail err read underflow
+Oct 17 19:19:36 glymur kernel: soundwire sdw-master-4-0: trf on Slave 0 failed:-5 read addr 102 count 1
+Oct 17 19:19:36 glymur kernel: wsa884x-codec sdw:4:0:0217:0204:00:0: DPN_PortCtrl register write failed for port 1
+Oct 17 19:19:36 glymur kernel: soundwire sdw-master-4-0: Program transport params failed: -5
+Oct 17 19:19:36 glymur kernel: soundwire sdw-master-4-0: Program params failed: -5
+Oct 17 19:19:36 glymur kernel:  WSA Playback: ASoC error (-5): at snd_soc_link_prepare() on WSA Playback
+Saved to /var/log/glymur/audio-test-20261017T191916.txt

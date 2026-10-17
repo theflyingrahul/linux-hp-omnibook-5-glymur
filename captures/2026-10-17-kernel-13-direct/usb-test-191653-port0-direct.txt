@@ -1,0 +1,291 @@
+
+==== system
+Linux glymur 7.3.0-rc4-glymur-13 #1 SMP PREEMPT_DYNAMIC Fri Oct 16 14:55:42 PDT 2026 aarch64 GNU/Linux
+HP OmniBook 5 Laptop 16-bf1xxx
+Jul 28 02:14:02 glymur kernel: Machine model: HP OmniBook 5 Laptop 16-bf1xxx
+Jul 28 02:14:02 glymur kernel: Kernel command line: BOOT_IMAGE=(hd1,gpt4)/boot/vmlinuz-glymur root=… rootfstype=ext4 ro rootwait clk_ignore_unused pd_ignore_unused arm64.nopauth log_buf_len=16M console=tty0 loglevel=4
+
+==== kernel log: USB controllers, PHYs, Type-C, enumeration
+Jul 28 02:14:02 glymur kernel: /soc@0/usb@a000000: Fixed dependency cycle(s) with /soc@0/phy@88e1000
+Jul 28 02:14:02 glymur kernel: /soc@0/phy@88e1000: Fixed dependency cycle(s) with /soc@0/usb@a000000
+Jul 28 02:14:02 glymur kernel: /soc@0/phy@fd5000: Fixed dependency cycle(s) with /pmic-glink/connector@0
+Jul 28 02:14:02 glymur kernel: /soc@0/usb@a600000: Fixed dependency cycle(s) with /pmic-glink/connector@0
+Jul 28 02:14:02 glymur kernel: /pmic-glink/connector@0: Fixed dependency cycle(s) with /soc@0/phy@fd5000
+Jul 28 02:14:02 glymur kernel: /pmic-glink/connector@0: Fixed dependency cycle(s) with /soc@0/usb@a600000
+Jul 28 02:14:02 glymur kernel: /soc@0/phy@fde000: Fixed dependency cycle(s) with /pmic-glink/connector@1
+Jul 28 02:14:02 glymur kernel: /soc@0/usb@a800000: Fixed dependency cycle(s) with /pmic-glink/connector@1
+Jul 28 02:14:02 glymur kernel: /pmic-glink/connector@1: Fixed dependency cycle(s) with /soc@0/phy@fde000
+Jul 28 02:14:02 glymur kernel: /pmic-glink/connector@1: Fixed dependency cycle(s) with /soc@0/usb@a800000
+Jul 28 02:14:02 glymur kernel: SCSI subsystem initialized
+Jul 28 02:14:02 glymur kernel: squashfs: version 4.0 (2009/01/31) Phillip Lougher
+Jul 28 02:14:02 glymur kernel: Block layer SCSI generic (bsg) driver version 0.4 loaded (major 241)
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx0-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt2-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx2-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt2-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx2-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx0-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx1-0p9 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: platform a600000.usb: Adding to iommu group 10
+Jul 28 02:14:02 glymur kernel: platform a800000.usb: Adding to iommu group 11
+Jul 28 02:14:02 glymur kernel: platform a000000.usb: Adding to iommu group 12
+Jul 28 02:14:02 glymur kernel: platform a200000.usb: Adding to iommu group 13
+Jul 28 02:14:02 glymur kernel: pci_bus 0005:00: root bus resource [mem 0x7a0000000-0x7dfffffff]
+Jul 28 02:14:02 glymur kernel: pci_bus 0005:00: resource 6 [mem 0x7a0000000-0x7dfffffff]
+Jul 28 02:14:02 glymur kernel: qcom-m31eusb2-phy fa0000.phy: supply vdd not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-m31eusb2-phy fa0000.phy: supply vdda12 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-m31eusb2-phy fd3000.phy: supply vdd not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-m31eusb2-phy fd3000.phy: supply vdda12 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-m31eusb2-phy fdd000.phy: supply vdd not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-m31eusb2-phy fdd000.phy: supply vdda12 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-m31eusb2-phy 88e0000.phy: supply vdd not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-m31eusb2-phy 88e0000.phy: supply vdda12 not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy fd5000.phy: supply vdda-phy not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy fd5000.phy: supply vdda-pll not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy fd5000.phy: supply refgen not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier fd5000.phy for /pmic-glink/connector@0
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy fde000.phy: supply vdda-phy not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy fde000.phy: supply vdda-pll not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy fde000.phy: supply refgen not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier fde000.phy for /pmic-glink/connector@1
+Jul 28 02:14:02 glymur kernel: spmi_pmic_arb c400000.arbiter: PMIC arbiter version v8 (0x80000002)
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy 88e1000.phy: supply vdda-phy not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy 88e1000.phy: supply vdda-pll not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom-qmp-combo-phy 88e1000.phy: supply refgen not found, using dummy regulator
+Jul 28 02:14:02 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier a600000.usb for /pmic-glink/connector@0
+Jul 28 02:14:02 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier a800000.usb for /pmic-glink/connector@1
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.2.auto: xHCI Host Controller
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.2.auto: new USB bus registered, assigned bus number 1
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.2.auto: USB0 root hub has no ports
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.2.auto: hcc params 0x0220fe65 hci version 0x110 quirks 0x000080a000000810
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.2.auto: irq 260, io mem 0x0a200000
+Jul 28 02:14:03 glymur kernel: usb usb1: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Jul 28 02:14:03 glymur kernel: usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Jul 28 02:14:03 glymur kernel: usb usb1: Product: xHCI Host Controller
+Jul 28 02:14:03 glymur kernel: usb usb1: Manufacturer: Linux 7.3.0-rc4-glymur-13 xhci-hcd
+Jul 28 02:14:03 glymur kernel: usb usb1: SerialNumber: xhci-hcd.2.auto
+Jul 28 02:14:03 glymur kernel: hub 1-0:1.0: USB hub found
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 2
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.3.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x000080a000000810
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.3.auto: irq 283, io mem 0x0a000000
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 3
+Jul 28 02:14:03 glymur kernel: xhci-hcd xhci-hcd.3.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Jul 28 02:14:03 glymur kernel: usb usb2: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Jul 28 02:14:03 glymur kernel: usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Jul 28 02:14:03 glymur kernel: usb usb2: Product: xHCI Host Controller
+Jul 28 02:14:03 glymur kernel: usb usb2: Manufacturer: Linux 7.3.0-rc4-glymur-13 xhci-hcd
+Jul 28 02:14:03 glymur kernel: usb usb2: SerialNumber: xhci-hcd.3.auto
+Jul 28 02:14:03 glymur kernel: hub 2-0:1.0: USB hub found
+Jul 28 02:14:03 glymur kernel: usb usb3: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+Jul 28 02:14:03 glymur kernel: usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Jul 28 02:14:03 glymur kernel: usb usb3: Product: xHCI Host Controller
+Jul 28 02:14:03 glymur kernel: usb usb3: Manufacturer: Linux 7.3.0-rc4-glymur-13 xhci-hcd
+Jul 28 02:14:03 glymur kernel: usb usb3: SerialNumber: xhci-hcd.3.auto
+Jul 28 02:14:03 glymur kernel: hub 3-0:1.0: USB hub found
+Jul 28 02:14:03 glymur kernel: usb 1-1: new high-speed USB device number 2 using xhci-hcd
+Jul 28 02:14:03 glymur kernel: usb 1-1: New USB device found, idVendor=30c9, idProduct=00d9, bcdDevice= 0.07
+Jul 28 02:14:03 glymur kernel: usb 1-1: New USB device strings: Mfr=3, Product=1, SerialNumber=2
+Jul 28 02:14:03 glymur kernel: usb 1-1: Product: HP True Vision FHD Camera
+Jul 28 02:14:03 glymur kernel: usb 1-1: Manufacturer: [REDACTED-MFR]
+Jul 28 02:14:03 glymur kernel: usb 1-1: SerialNumber: [REDACTED-SERIAL]
+Jul 28 02:14:03 glymur kernel: videodev: Linux video capture interface: v2.00
+Jul 28 02:14:03 glymur kernel: uvcvideo 1-1:1.0: Found UVC 1.10 device HP True Vision FHD Camera (30c9:00d9)
+Jul 28 02:14:03 glymur kernel: uvcvideo 1-1:1.2: Found UVC 1.50 device HP True Vision FHD Camera (30c9:00d9)
+Jul 28 02:14:03 glymur kernel: usbcore: registered new interface driver uvcvideo
+Jul 28 02:14:04 glymur kernel: usb 3-1: new SuperSpeed USB device number 2 using xhci-hcd
+Jul 28 02:14:04 glymur kernel: usb 3-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Jul 28 02:14:04 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Jul 28 02:14:04 glymur kernel: usb 3-1: Product: Ultra
+Jul 28 02:14:04 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Jul 28 02:14:04 glymur kernel: usb 3-1: SerialNumber: [REDACTED-SERIAL]
+Jul 28 02:14:04 glymur kernel: usb-storage 3-1:1.0: USB Mass Storage device detected
+Jul 28 02:14:04 glymur kernel: scsi host0: usb-storage 3-1:1.0
+Jul 28 02:14:04 glymur kernel: usbcore: registered new interface driver usb-storage
+Jul 28 02:14:04 glymur kernel: usbcore: registered new interface driver uas
+Jul 28 02:14:05 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Jul 28 02:14:05 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Jul 28 02:14:05 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Jul 28 02:14:05 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Jul 28 02:14:05 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Jul 28 02:14:05 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Jul 28 02:14:05 glymur kernel:  sda: sda1 sda2
+Jul 28 02:14:05 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Jul 28 02:14:06 glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+Jul 28 02:14:12 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Jul 28 02:14:13 glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+Oct 17 19:16:45 glymur kernel: xhci-hcd xhci-hcd.4.auto: xHCI Host Controller
+Oct 17 19:16:45 glymur kernel: xhci-hcd xhci-hcd.4.auto: new USB bus registered, assigned bus number 4
+Oct 17 19:16:45 glymur kernel: xhci-hcd xhci-hcd.4.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x000080a000000810
+Oct 17 19:16:45 glymur kernel: xhci-hcd xhci-hcd.4.auto: irq 266, io mem 0x0a600000
+Oct 17 19:16:45 glymur kernel: xhci-hcd xhci-hcd.4.auto: xHCI Host Controller
+Oct 17 19:16:45 glymur kernel: xhci-hcd xhci-hcd.4.auto: new USB bus registered, assigned bus number 5
+Oct 17 19:16:45 glymur kernel: xhci-hcd xhci-hcd.4.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Oct 17 19:16:45 glymur kernel: usb usb4: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Oct 17 19:16:45 glymur kernel: usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Oct 17 19:16:45 glymur kernel: usb usb4: Product: xHCI Host Controller
+Oct 17 19:16:45 glymur kernel: usb usb4: Manufacturer: Linux 7.3.0-rc4-glymur-13 xhci-hcd
+Oct 17 19:16:45 glymur kernel: usb usb4: SerialNumber: xhci-hcd.4.auto
+Oct 17 19:16:45 glymur kernel: hub 4-0:1.0: USB hub found
+Oct 17 19:16:45 glymur kernel: usb usb5: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+Oct 17 19:16:45 glymur kernel: usb usb5: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Oct 17 19:16:45 glymur kernel: usb usb5: Product: xHCI Host Controller
+Oct 17 19:16:45 glymur kernel: usb usb5: Manufacturer: Linux 7.3.0-rc4-glymur-13 xhci-hcd
+Oct 17 19:16:45 glymur kernel: usb usb5: SerialNumber: xhci-hcd.4.auto
+Oct 17 19:16:45 glymur kernel: hub 5-0:1.0: USB hub found
+Oct 17 19:16:45 glymur kernel: usb 4-1: new low-speed USB device number 2 using xhci-hcd
+Oct 17 19:16:45 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Oct 17 19:16:46 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Oct 17 19:16:46 glymur kernel: usb 4-1: new low-speed USB device number 3 using xhci-hcd
+Oct 17 19:16:46 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Oct 17 19:16:46 glymur kernel: usb 4-1: device descriptor read/64, error -71
+Oct 17 19:16:46 glymur kernel: usb usb4-port1: attempt power cycle
+Oct 17 19:16:48 glymur kernel: usb usb4-port1: unable to enumerate USB device
+
+==== kernel warnings and errors, in full
+
+==== SPMI PMICs and eUSB2 repeaters
+spmi-0         driver=driver of_node=spmi@00000000
+spmi-1         driver=driver of_node=spmi@00000000
+spmi-2         driver=driver of_node=spmi@00000000
+Jul 28 02:14:02 glymur kernel: spmi_pmic_arb c400000.arbiter: PMIC arbiter version v8 (0x80000002)
+
+==== drivers bound
+a000000.usb    -> dwc3-qcom
+88e0000.phy    -> qcom-m31eusb2-phy
+88e1000.phy    -> qcom-qmp-combo-phy
+a600000.usb    -> dwc3-qcom
+fd3000.phy     -> qcom-m31eusb2-phy
+fd5000.phy     -> qcom-qmp-combo-phy
+a800000.usb    -> dwc3-qcom
+fdd000.phy     -> qcom-m31eusb2-phy
+fde000.phy     -> qcom-qmp-combo-phy
+a200000.usb    -> dwc3-qcom
+fa0000.phy     -> qcom-m31eusb2-phy
+uas                    28672  0
+usb_storage            94208  2 uas
+xhci_plat_hcd          24576  0
+ucsi_glink             20480  0
+pmic_glink_altmode     20480  0
+typec_ucsi             73728  1 ucsi_glink
+phy_qcom_edp           77824  1
+phy_qcom_qmp_combo    163840  13
+dwc3_qcom              32768  2
+typec                 135168  4 pmic_glink_altmode,phy_qcom_qmp_combo,typec_ucsi,ucsi_glink
+dwc3                  212992  1 dwc3_qcom
+phy_qcom_m31_eusb2     16384  4
+pmic_glink             16384  3 pmic_glink_altmode,qcom_battmgr,ucsi_glink
+
+==== USB-C: ports, partners, data roles
+port0: data_role=[host] device power_role=[source] sink opmode=3.0A orientation=reverse partner=yes
+    partner: type= accessory=none usb_pd=no
+port1: data_role=host [device] power_role=source [sink] opmode=default orientation=unknown partner=no
+a600000.usb-role-switch: role=host
+a800000.usb-role-switch: role=device
+
+==== USB topology and speeds
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+    |__ Port 001: Dev 002, If 0, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 1, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 2, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 3, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 4, Class=Application Specific Interface, Driver=[none], 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 003.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+    |__ Port 001: Dev 002, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
+/:  Bus 004.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 005.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+1-1          a200000.usb    speed=480    [REDACTED-MFR] HP True Vision FHD Camera
+3-1          a000000.usb    speed=5000   SanDisk Ultra
+usb1         a200000.usb    speed=480    Linux 7.3.0-rc4-glymur-13 xhci-hcd xHCI Host Controller
+usb2         a000000.usb    speed=480    Linux 7.3.0-rc4-glymur-13 xhci-hcd xHCI Host Controller
+usb3         a000000.usb    speed=10000  Linux 7.3.0-rc4-glymur-13 xhci-hcd xHCI Host Controller
+usb4         a600000.usb    speed=480    Linux 7.3.0-rc4-glymur-13 xhci-hcd xHCI Host Controller
+usb5         a600000.usb    speed=10000  Linux 7.3.0-rc4-glymur-13 xhci-hcd xHCI Host Controller
+
+==== camera (usb_hs, from kernel -8)
+Bus 001 Device 002: ID 30c9:00d9 Luxvisions Innotech Limited HP True Vision FHD Camera
+video0: HP True Vision FHD Camera: HP T
+video1: HP True Vision FHD Camera: HP T
+video2: HP True Vision FHD Camera: HP I
+video3: HP True Vision FHD Camera: HP I
+
+==== block devices and mounts
+NAME          SIZE TRAN   LABEL                           FSTYPE    MOUNTPOINTS
+sda          57.3G usb                                              
+├─sda1        7.3G        UBUNTU 26_0                     vfat      /run/media/rahul/UBUNTU 26_0
+└─sda2         50G        casper-rw                       ext3      
+zram0           0B                                                  
+nvme0n1     953.9G nvme                                             
+├─nvme0n1p1   512M nvme   SYSTEM                          vfat      
+├─nvme0n1p2    16M nvme                                             
+├─nvme0n1p3 696.4G nvme   <host> Windows 9/9/2026 BitLocker 
+├─nvme0n1p4   256G nvme   glymur-root                     ext4      /
+└─nvme0n1p5   954M nvme                                   ntfs      
+
+Saved to /var/log/glymur/usb-test-20261017T191653.txt
