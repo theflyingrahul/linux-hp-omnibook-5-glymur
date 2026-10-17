@@ -14,6 +14,7 @@ line identifies the version.
 | `qcuart8480` | 00685.13804.00030.00000 | `BSRC_UART_*Wire_*.bin` | PEP power recipes for every QUP UART. `UR15` (Bluetooth) steps `gcc_qupv3_wrap1_s6_clk` through 7.3728–100 MHz and uses GPIOs 56–59. Decode with `scripts/linux/parse-bsrc.py`. |
 | `qcwlancol8480_Enable_WHQL` | 00685.13804.00040.00010 | `bdwlan_qcc2072_1p0_ncm820A.elf` | QCC2072 Wi-Fi board data; `scripts/linux/ath12k-board-add.py` adds it to `board-2.bin` for subsystem `103c:8ef3`. |
 | `qcsubsys_ext_adsp8480_4500R_HDCP_WHQL` | 00685.13804.00050.00009 | `qcadsp8480.mbn`, `adsp_dtbs.elf`, `adsp*.jsn` | HP-signed ADSP image, needed for PMIC GLink (battery, USB-C, RTC) and audio on the device-tree path |
+| `qcacsp_crd8480_fixvoice_WHQL` | 1.0.4466.1810 | `acdb_cal4.acdb` | HP's audio calibration database (AudioReach ACDB): speaker and microphone graphs, EQ, limiter, speaker protection and noise suppression parameters. The INF loads it for `ADSP\VEN_QCOM&DEV_0F22&SUBSYS_8F47103C&REV_04`, which is how this laptop enumerates; `acdb_cal1`–`3` serve other revisions and are not copied. See `docs/audio-tuning-2026-10-17.md`. |
 | `qcnspmcdm8480` | 30.0.220.11010 | `qccdsp8480.mbn`, `cdsp_dtbs.elf` | HP-signed CDSP image |
 | `qcdx8480` | 32.0.146.0 | `qcdxkmsuc8480.mbn`, `qcvss8480.mbn`, `qcav1e8480.mbn` | GPU zap shader and video firmware |
 
