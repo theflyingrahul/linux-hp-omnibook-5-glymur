@@ -95,11 +95,11 @@ for name, side in (('left', 0), ('right', 1)):
     w.writeframes(b''.join(frames)); w.close()
 PY
     cset 'WSA_CODEC_DMA_RX_0 Audio Mixer MultiMedia1' 1
-    for m in WSA WSA2; do
-        cset "$m WSA RX0 MUX" AIF1_PB
-        cset "$m WSA_RX0 INP0" RX0
-        cset "$m WSA_RX0 Digital Volume" 68
-        cset "$m WSA_COMP1 Switch" 0
+    for r in 0 1; do
+        cset "WSA WSA RX$r MUX" AIF1_PB
+        cset "WSA WSA_RX$r INP0" RX$r
+        cset "WSA WSA_RX$r Digital Volume" 68
+        cset "WSA WSA_COMP$((r + 1)) Switch" 0
     done
     for s in SpkrLeft SpkrRight; do
         for c in COMP BOOST DAC PBR; do cset "$s $c Switch" 1; done
@@ -115,10 +115,26 @@ PY
     for s in SpkrLeft SpkrRight; do
         for c in COMP BOOST DAC PBR; do cset "$s $c Switch" 0; done
     done
-    for m in WSA WSA2; do
-        cset "$m WSA_RX0 INP0" ZERO
-        cset "$m WSA RX0 MUX" ZERO
+    for r in 0 1; do
+        cset "WSA WSA_RX$r INP0" ZERO
+        cset "WSA WSA RX$r MUX" ZERO
     done
+fi
+
+sect "amplifier reset check: unbind, then rebind, the WSA884x driver"
+# Unbinding asserts the shared reset; if it is the amplifiers' reset line,
+# they leave the bus and come back on rebind.
+DRV=/sys/bus/soundwire/drivers/wsa884x-codec
+amps=$(ls -d "$DRV"/sdw:* 2>/dev/null | xargs -rn1 basename)
+show() { for a in /sys/bus/soundwire/devices/sdw:*0204*; do
+    printf '  %s %s\n' "$(basename "$a")" "$(cat "$a/status" 2>/dev/null)"; done
+    grep -E 'gpio20[45]\b' /sys/kernel/debug/gpio | sed 's/^/  /'; }
+echo "bound: ${amps:-none}"; show
+if [ -n "$amps" ]; then
+    for a in $amps; do echo "$a" > "$DRV/unbind"; done
+    sleep 3; echo "after unbind:"; show
+    for a in $amps; do echo "$a" > "$DRV/bind"; done
+    sleep 3; echo "after rebind:"; show
 fi
 
 sect "kernel log after the tests"

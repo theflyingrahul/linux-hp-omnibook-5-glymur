@@ -17,10 +17,12 @@ correction below — the bug is not fixed. On the test device tree,
 signal on both channels, but both speakers stayed silent — the second
 WSA SoundWire bus (`swr3`) never attaches its amplifier (`UNATTACHED`,
 vs. `swr0`'s `Attached`), so the stereo playback link fails to prepare
-(`ASoC error (-5) at snd_soc_link_prepare()`). Mic capture is a genuine
-first working audio path on this board; speaker playback has a specific,
-narrow next step (`swr3`'s own SoundWire master setup) rather than an
-open-ended gap. See `docs/usb-c-ports-2026-09-29.md` and
+(`ASoC error (-5) at snd_soc_link_prepare()`). Correction: the same log
+shows a second amplifier on `swr0` (`sdw:1:0:0217:0204:00:1`, unique ID 1,
+attached but without a node), so both amplifiers are on `swr0`, as on the
+T14s, and `swr3` is empty; the playback link failed on the absent `swr3`
+amplifier. Mic capture is a genuine first working audio path on this
+board. See `docs/usb-c-ports-2026-09-29.md` and
 `docs/audio-headset-path-2026-10-17.md`.
 
 **2026-10-17, audio: speakers and microphones in test.** HP's driver pack,

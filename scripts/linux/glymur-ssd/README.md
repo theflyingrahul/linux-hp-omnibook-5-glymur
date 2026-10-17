@@ -225,9 +225,13 @@ link:manufacturer:part:version:unique id, also when no device-tree node
 matches), the state of GPIOs 204 and 205, the audio modules and kernel log,
 and the ALSA card. Only when asked, it records 5 s from DMIC0/1 (peak and
 RMS per channel; the recording is kept next to the log) and plays a 1 kHz
-tone at -20 dBFS on the left, then the right channel, with the WSA digital
-volume at 68 and PA volume 12, and asks which speaker played. The log goes
-to `/var/log/glymur/audio-test-*.txt`.
+tone at -20 dBFS on the left, then the right channel (WSA macro RX0/RX1
+to the two amplifiers on `swr0`), with the WSA digital volume at 68 and PA
+volume 12, and asks which speaker played. Last, it unbinds and rebinds the
+WSA884x driver and shows the amplifiers' bus status and GPIOs 204/205
+each time: amplifiers that drop off the bus when the shared reset is
+asserted prove the reset line. The log goes to
+`/var/log/glymur/audio-test-*.txt`.
 
 ### `check-battmgr-notify.sh`
 

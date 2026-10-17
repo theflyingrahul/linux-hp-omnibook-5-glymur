@@ -188,13 +188,16 @@ qcom-next has none of the accepted or posted pieces yet.
   at snd_soc_link_prepare()`). The same `qcom_swrm_irq_handler: SWR CMD
   error` on `6ca0000.soundwire` appears at boot, before any test runs.
 
-**Where this leaves it:** the speaker path isn't a wiring or topology
-guess gone wrong — DMIC capture through the same VA macro infrastructure
-works cleanly, and the `swr0` amplifier attaches fine. The fault is
-narrow: `swr3` (`6ca0000.soundwire`, the second WSA bus) never completes
-SoundWire slave attach, so its amplifier can't be programmed and ASoC
-refuses to prepare the (stereo) playback link at all — silencing both
-speakers, not just the one on that bus. Next step is `swr3`'s own
-SoundWire master setup (clock/data pin config, port mapping) against
-HP's ACPI/PEP tables for that bus specifically, since `swr0` with
-identical node structure attaches without issue.
+**Correction, same day:** the SoundWire list in the log has a third
+device that the summary above missed: `sdw:1:0:0217:0204:00:1`, a second
+WSA884x on `swr0` (unique ID 1), `status: Attached`, unbound because the
+test DT declared only ID 0 there. So both amplifiers sit on `swr0`, with
+unique IDs 0 and 1, as on the ThinkPad T14s Gen 7, and `swr3` has no
+device: its `UNATTACHED` node and command errors are a node for hardware
+that is not there, not a fault in `swr3`. Playback failed because the
+playback link included that absent amplifier. The reading of HP's ACPI
+(one amplifier per bus) was wrong; the interrupt list names both WSA
+masters but only `swr0` is populated. Which of GPIO 204 and 205 releases
+the amplifiers is still open (both were driven high). Next test: both
+amplifiers on `swr0` sharing GPIO 204, `swr3` off, GPIO 205 untouched,
+plus an unbind/rebind check that ties the reset line to attach.

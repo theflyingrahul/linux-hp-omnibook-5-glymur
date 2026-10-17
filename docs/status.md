@@ -28,7 +28,7 @@ are the history.
 | USB-A | Working | SuperSpeed |
 | USB-C data | Partly | both ports work at high speed and SuperSpeed, and role switches are stable since `-12` (`backports/0015–0016`); full- and low-speed devices fail with `error -71` (`docs/usb-dwc3-crash-2026-09-30.md`) |
 | Camera | Detected | RGB and IR functions enumerate; no frame captured yet |
-| Audio | Partly | test DT, kernel `-13`: internal microphones (DMIC0/1) work, real recorded signal; speakers silent on both channels — the second WSA SoundWire bus (`swr3`) never attaches its amplifier, so the stereo playback link fails to prepare; headset codec (WCD9378) still needs unposted LPASS patches (`docs/community-pointers-2026-10-17.md`). See `docs/audio-headset-path-2026-10-17.md` |
+| Audio | Partly | test DT, kernel `-13`: internal microphones (DMIC0/1) work, real recorded signal; speakers silent: both WSA884x amplifiers attach on `swr0` (unique IDs 0, 1) and `swr3` is empty, but the test DT put one amplifier on `swr3`, so the playback link failed to prepare; headset codec (WCD9378) still needs unposted LPASS patches (`docs/community-pointers-2026-10-17.md`). See `docs/audio-headset-path-2026-10-17.md` |
 | NPU | Not started | the CDSP boots with HP's signed firmware; FastRPC and userspace untried |
 | RTC | Not working | not rechecked since 2026-09-28 |
 | Suspend | Untested | masked |
