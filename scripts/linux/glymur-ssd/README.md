@@ -207,6 +207,19 @@ To set the keyboard backlight timeout by hand (`30s`, `3min` or `always`):
 
     echo always | sudo tee /sys/bus/i2c/devices/9-0076/kbd_backlight_timeout
 
+### `check-battmgr-notify.sh`
+
+    sudo bash check-battmgr-notify.sh [seconds]
+
+From kernel `-13`. While you plug and unplug the charger (60 s by
+default), it counts calls to `qcom_battmgr_state_callback`, which
+`backports/0023` adds for the Glymur firmware's state notifications
+(pmic_glink owner 32782), and to the regular `qcom_battmgr_callback`, with
+the function tracer in its own tracing instance. It prints the battmgr AC,
+USB and battery state every 10 s. Calls to the state callback on each plug
+confirm the patch's premise on this laptop; none means the firmware does
+not send them here. The log goes to `/var/log/glymur/battmgr-notify-*.txt`.
+
 ### `charging-watch.sh`
 
     sudo bash charging-watch.sh

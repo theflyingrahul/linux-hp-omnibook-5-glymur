@@ -5,8 +5,11 @@ The bring-up's dated log, newest first, moved here from the README on
 in [`status.md`](status.md); the detailed evidence is in the dated notes in
 this directory.
 
-**2026-10-17, kernel `-13` on a new qcom-next base; community pointers
-checked.** qcom-next moved to `1a0586064ee1` (7.3-rc4) and now carries
+**2026-10-17, kernel `-13` on a new qcom-next base, staged on the USB;
+community pointers checked.** **Test:** `install-from-usb.sh` (kernel
+`-13`), boot "Ubuntu on SSD", then `check-mesa.sh`, `check-ec.sh`,
+`check-usb.sh` and `check-battmgr-notify.sh` (plug and unplug the charger
+while it runs). qcom-next moved to `1a0586064ee1` (7.3-rc4) and now carries
 twelve of our backports, including the dwc3-qcom crash fix. Five newer
 mainline fixes are added (GPU CX GDSC, UCSI connector mapping, UCSI glink
 use-after-free, DP AUX backlight, ADSP stop). Readers of the Reddit post
