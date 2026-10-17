@@ -232,3 +232,49 @@ acknowledged (`docs/usb-c-charging-2026-09-29.md`, last section).
 - The USB-A part is unchanged.
 - The connector nodes add no pins, and the DTB still passes the GPIO
   allow-list check.
+
+## Kernel `-14`: the boot stick's SuperSpeed port failed to enumerate for an entire boot
+
+On the kernel `-14` test DT boot used for the audio crash
+(`docs/audio-headset-path-2026-10-17.md`), the USB-A SuperSpeed port
+holding the boot stick never once enumerated: from the very first kernel
+log lines (`usb usb3-port1: Cannot enable. Maybe the USB cable is bad?`,
+starting in the pre-NTP boot timestamps) through the rest of the boot,
+the port cycled continuously:
+
+```
+usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+usb 3-1: Device not responding to setup address.
+usb 3-1: device not accepting address N, error -71
+usb usb3-port1: attempt power cycle
+usb usb3-port1: unable to enumerate USB device
+```
+
+repeating for the entire session (178 occurrences of "Cannot enable" by
+the time it was checked, still climbing). `lsusb -t` showed bus 3 (the
+SuperSpeed root hub) present with zero child devices, and `lsblk` showed
+no `sda` at all — the stick was simply never visible to Linux this boot.
+
+**Not the audio crash's fault.** The failure loop started at the very
+beginning of this boot's kernel log, well before the `21:15:53` Oops in
+`wsa884x_runtime_suspend()` (`docs/audio-headset-path-2026-10-17.md`).
+Separately: the controller and its PHYs (`a000000.usb`, the M31 eUSB2 PHY
+and QMP combo PHY) probed completely normally — identical "supply ...
+not found, using dummy regulator" lines to every previous good boot — so
+this isn't a probe/driver-binding failure. It's a pure link-training
+failure at the hardware level: the port repeatedly tries and fails to
+bring the link up enough to even set a USB address.
+
+The camera, on its own separate controller (`a200000.usb`, `usb_hs`), was
+unaffected — this is isolated to the one physical USB-A port.
+
+**Not touched:** the boot stick was not unplugged or reseated (per the
+standing rule that it sits in the only working port and cannot be
+removed). GRUB reads the kernel from the stick before Linux's own USB
+driver initializes, so this Linux-level failure shouldn't by itself block
+booting; a reboot's own hardware-level power cycle is a stronger reset
+than the kernel's repeated in-driver retries (which never once
+succeeded). Worth checking right after the next boot whether the port
+enumerates cleanly again — if it fails identically from a fresh boot too,
+that points at a kernel `-14` regression on this exact port rather than a
+one-boot link-training glitch.

@@ -5,6 +5,26 @@ The bring-up's dated log, newest first, moved here from the README on
 in [`status.md`](status.md); the detailed evidence is in the dated notes in
 this directory.
 
+**2026-10-17, later still: the boot stick's USB-A port never came up all
+boot, independent of the audio crash.** Same `-14` test DT boot as below:
+the USB-A SuperSpeed port holding the boot stick retried and failed to
+enumerate continuously from the very first kernel log lines through the
+rest of the session (178+ `Cannot enable. Maybe the USB cable is bad?`,
+`device not accepting address, error -71`, `unable to enumerate USB
+device`, repeated automatic power cycles, none successful) — `lsusb -t`
+showed the SuperSpeed bus with no child device, `lsblk` showed no `sda`
+at all. This started well before the `21:15:53` audio Oops, so it isn't
+a side effect of that crash; the controller and its PHYs probed
+completely normally, so it isn't a probe/binding failure either — this
+is a pure hardware-level link-training failure on one physical port, with
+the camera on its own separate controller unaffected. The stick was not
+unplugged or reseated. Since GRUB reads the kernel from the stick before
+Linux's USB driver ever starts, this shouldn't block a reboot, and a
+reboot's hardware power-cycle is stronger than the kernel's own failed
+retries; worth checking right after the next boot whether it recurs
+(kernel `-14` regression) or clears (one-boot glitch). See
+`docs/usb-a-bringup-2026-09-29.md`.
+
 **2026-10-17, night: kernel `-14`'s amplifier fix confirmed live, then a
 real kernel crash stuck the test.** `check-audio.sh` on the `-14` test
 DT: both WSA884x amplifiers show `Attached` on `swr0` only, confirming
