@@ -220,3 +220,65 @@ its unbind/rebind check shows whether LPASS TLMM 12 takes the amplifiers
 off the bus. The sound card model is now `MAHUA-HP-OmniBook-5-16-bf1xxx`,
 the upstream naming, so the topology is
 `qcom/glymur/MAHUA-HP-OmniBook-5-16-bf1xxx-tplg.bin`.
+
+## Live test, kernel `-14` test device tree (2026-10-17 evening): topology confirmed, then a real kernel crash
+
+`check-audio.sh`, interactive, on the `-14` test DT boot (`MAHUA-HP-OmniBook-5-16-bf1xxx`
+card):
+
+- **Topology confirmed.** Both WSA884x amplifiers now show
+  `sdw:1:0:0217:0204:00:0` and `...:00:1`, both `status: Attached`, on
+  `swr0` only — exactly the kernel `-14` fix. `gpio12`/`gpio13` (LPASS
+  TLMM) report correctly.
+- **ALSA conflicts with PipeWire, in a good way.** `arecord`/`aplay`
+  against the raw ALSA device both failed with `audio open error: Device
+  or resource busy` — because the new UCM profile worked well enough
+  that WirePlumber had already claimed the card on its own: `wpctl
+  status` shows live "Speaker playback" and "Internal microphones"
+  streams already connected to GNOME Settings. This is evidence the
+  PipeWire integration (`3717c9d`) is working, not a regression; the
+  script's direct-ALSA test method needs to stop PipeWire first (or use
+  `pw-cat`/`wpctl`) to actually record or play on this kernel.
+- **The unbind/rebind reset check: real kernel crash.** Unbinding both
+  amplifiers correctly dropped them to `UNATTACHED` (confirms LPASS TLMM
+  12 is genuinely the shared reset line). Rebinding them triggered a
+  genuine NULL-pointer kernel Oops, asynchronously, in a PM-runtime
+  workqueue:
+
+  ```
+  Unable to handle kernel NULL pointer dereference at virtual address 0000000000000020
+  Internal error: Oops: 0000000096000004 [#1]  SMP
+  CPU: 1 ... Comm: kworker/u49:2 ... 7.3.0-rc4-glymur-14
+  Workqueue: pm pm_runtime_work
+  pc : regcache_cache_only+0x24/0x1e8
+  lr : wsa884x_runtime_suspend+0x2c/0x60 [snd_soc_wsa884x]
+  x0 : 0000000000000000   (the regmap pointer regcache_cache_only dereferences)
+  Call trace:
+   regcache_cache_only+0x24/0x1e8 (P)
+   wsa884x_runtime_suspend+0x2c/0x60 [snd_soc_wsa884x]
+   __rpm_callback -> rpm_callback -> rpm_suspend -> pm_runtime_work
+   -> process_one_work -> worker_thread -> kthread -> ret_from_fork
+  ```
+
+  `x0` (the `regmap` argument) is `NULL` — `wsa884x_runtime_suspend()` is
+  being called with no regmap, which only makes sense if the device's
+  regmap was already torn down (e.g. by `remove()`/`regmap_exit()` during
+  the unbind just before) while a PM-runtime suspend for the *same*
+  device was still queued and ran afterward: an unbind-vs-runtime-PM
+  race, not a one-off fluke. `check-audio.sh`'s subsequent write to
+  `.../wsa884x-codec/bind` then hung in `D` state (uninterruptible sleep)
+  — the crashed kworker holds the device lock forever, matching this
+  project's established pattern (an oops leaves the crashed probe's
+  device lock held; nothing short of a reboot clears it).
+
+**Where this leaves it:** the amplifier topology/reset-line fix from
+kernel `-14` is now live-confirmed correct — this was the right chip
+layout. Speaker/mic signal itself is still unconfirmed on `-14` (the test
+was blocked by the PipeWire conflict before the crash). The unbind/rebind
+reset-check in `check-audio.sh` is not safe to run again as written: it
+should either avoid triggering a runtime-PM transition during unbind (or
+not unbind at all now that the reset line is confirmed), or the
+underlying race in `wsa884x_runtime_suspend()`/`regcache_cache_only()`
+needs a real fix (the regmap must not be accessed, or the callback must
+not be invoked, once the device has been removed). Needs a reboot to
+recover — the stuck script cannot be killed (`D` state).

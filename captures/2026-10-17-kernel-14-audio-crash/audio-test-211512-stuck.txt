@@ -1,0 +1,163 @@
+
+==== system
+7.3.0-rc4-glymur-14
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+lrwxrwxrwx 1 root root 62 Jul 28 02:15 /lib/firmware/updates/qcom/glymur/MAHUA-HP-OmniBook-5-16-bf1xxx-tplg.bin -> HP/omnibook-5-16-bf1xxx/MAHUA-HP-OmniBook-5-16-bf1xxx-tplg.bin
+4f81077a0d8bb7568bfcd490eeea27cf25ec08357eb0f9c5788413bdd79af28e  /usr/lib/firmware/updates/qcom/glymur/HP/omnibook-5-16-bf1xxx/MAHUA-HP-OmniBook-5-16-bf1xxx-tplg.bin
+
+==== SoundWire devices (link:manufacturer:part:version:unique id)
+sdw-master-1-0                           driver=driver master=6c80000.soundwire
+sdw:1:0:0217:0204:00:0                   driver=wsa884x-codec master=sdw-master-1-0
+    status: Attached
+    dev-properties/mipi_revision: 0x0
+sdw:1:0:0217:0204:00:1                   driver=wsa884x-codec master=sdw-master-1-0
+    status: Attached
+    dev-properties/mipi_revision: 0x0
+/sys/kernel/debug/soundwire/master-1-0
+
+==== amplifier reset lines (LPASS TLMM 12, 13; TLMM 204, 205)
+ gpio12  : out 0 2mA no pull
+ gpio13  : in  0 2mA pull down
+
+==== audio modules
+snd_soc_wsa884x        28672  2
+regmap_sdw             12288  1 snd_soc_wsa884x
+q6apm_dai              32768  1
+q6apm_lpass_dais       20480  1
+q6prm_clocks           16384  20
+snd_q6dsp_common       57344  2 q6apm_lpass_dais,q6prm_clocks
+q6prm                  12288  1 q6prm_clocks
+snd_q6apm              65536  4 q6apm_dai,q6prm,q6apm_lpass_dais
+apr                    20480  2 snd_q6apm,q6prm
+snd_soc_x1e80100       12288  7
+snd_soc_qcom_sdw       12288  1 snd_soc_x1e80100
+snd_soc_qcom_common    24576  1 snd_soc_x1e80100
+soundwire_qcom         36864  1
+slimbus                36864  1 soundwire_qcom
+snd_soc_lpass_wsa_macro    73728  2
+snd_soc_lpass_va_macro    69632  6
+soundwire_bus        1183744  4 regmap_sdw,snd_soc_wsa884x,snd_soc_qcom_sdw,soundwire_qcom
+snd_soc_lpass_macro_common    12288  2 snd_soc_lpass_wsa_macro,snd_soc_lpass_va_macro
+snd_soc_core          446464  10 snd_q6apm,q6apm_dai,snd_soc_qcom_common,q6apm_lpass_dais,snd_soc_lpass_wsa_macro,snd_soc_wsa884x,snd_soc_qcom_sdw,snd_soc_lpass_va_macro,soundwire_qcom,snd_soc_x1e80100
+pinctrl_sm8650_lpass_lpi    20480  0
+pinctrl_lpass_lpi      24576  6 pinctrl_sm8650_lpass_lpi
+
+==== kernel log: audio
+Jul 28 02:14:02 glymur kernel: CPUidle PSCI: Initialized CPU PM domain topology using OSI mode
+Jul 28 02:14:08 glymur kernel: wsa_macro 6c90000.codec: Driver needs fixing: Unsorted reg_defaults, sorting the copy
+Jul 28 02:14:08 glymur kernel: wsa_macro 6cb0000.codec: Driver needs fixing: Unsorted reg_defaults, sorting the copy
+Jul 28 02:14:08 glymur kernel: wsa_macro 6c90000.codec: using zero-initialized flat cache, this may cause unexpected behavior
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: supply vdd-io not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: supply vdd-1p8 not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: supply vdd-io not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: supply vdd-1p8 not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: supply vdd-io not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: supply vdd-1p8 not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: supply vdd-io not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: supply vdd-1p8 not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: snd-x1e80100 sound: ASoC: Parent card not yet available, widget card binding deferred
+Jul 28 02:14:08 glymur kernel: va_macro 7660000.codec: supply vdd-micb not found, using dummy regulator
+
+==== ALSA cards and controls
+ 0 [MAHUAHPOmniBook]: glymur - MAHUA-HP-OmniBook-5-16-bf1xxx
+                      HP-HPOmniBook5Laptop16_bf1xxx-ConfigID-8F47
+**** List of PLAYBACK Hardware Devices ****
+card 0: MAHUAHPOmniBook [MAHUA-HP-OmniBook-5-16-bf1xxx], device 0: MultiMedia1 Playback (*) []
+  Subdevices: 0/1
+  Subdevice #0: subdevice #0
+**** List of CAPTURE Hardware Devices ****
+card 0: MAHUAHPOmniBook [MAHUA-HP-OmniBook-5-16-bf1xxx], device 1: MultiMedia2 Capture (*) []
+  Subdevices: 0/1
+  Subdevice #0: subdevice #0
+card: 0
+85
+
+==== ALSA UCM profile (what PipeWire uses)
+total 4
+-rw-r--r-- 1 root root 528 Jul 28 02:15 HP-HPOmniBook5Laptop16_bf1xxx-ConfigID-8F47.conf
+Verb.HiFi {
+	Comment "HiFi quality Music"
+	Device.Speaker {
+		Comment "Speaker playback"
+		Values {
+			CaptureCTL "_ucm0001.hw:MAHUAHPOmniBook"
+			PlaybackCTL "_ucm0001.hw:MAHUAHPOmniBook"
+			PlaybackChannels 2
+			PlaybackMixer "_ucm0001.default:MAHUAHPOmniBook"
+			PlaybackMixerElem Speakers
+			PlaybackPCM "_ucm0001.hw:MAHUAHPOmniBook,0"
+			PlaybackPriority 100
+			TQ HiFi
+		}
+	}
+	Device.Mic {
+		Comment "Internal microphones"
+		Values {
+			CaptureCTL "_ucm0001.hw:MAHUAHPOmniBook"
+			CapturePCM "_ucm0001.hw:MAHUAHPOmniBook,1"
+			CapturePriority 100
+			Format S16_LE
+			PlaybackCTL "_ucm0001.hw:MAHUAHPOmniBook"
+			TQ HiFi
+		}
+	}
+}
+Audio
+ ├─ Devices:
+ │      51. Built-in Audio                      [alsa]
+ │  
+ ├─ Sinks:
+ │  *   59. Built-in Audio Speaker playback     [vol: 1.00]
+ │  
+ ├─ Sources:
+ │  *   60. Built-in Audio Internal microphones [vol: 1.00]
+ │  
+ ├─ Filters:
+ │  
+ └─ Streams:
+        75. GNOME Settings                                              
+             72. input_FL        < Speaker playback:monitor_FL	[active]
+             76. monitor_FR     
+             79. input_FR        < Speaker playback:monitor_FR	[active]
+             90. monitor_FL     
+        86. GNOME Settings                                              
+             78. input_FR        < Internal microphones:capture_FR	[active]
+             80. input_FL        < Internal microphones:capture_FL	[active]
+             83. monitor_FL     
+             87. monitor_FR     
+
+Video
+
+==== microphones (DMIC0, DMIC1)
+Record 5 s from the two internal microphones? Speak or tap near them. (y/N) answer: y
+arecord: main:850: audio open error: Device or resource busy
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+  File "/usr/lib/python3.14/wave.py", line 661, in open
+    return Wave_read(f)
+  File "/usr/lib/python3.14/wave.py", line 282, in __init__
+    f = builtins.open(f, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/glymur-audio/mic.wav'
+cp: cannot stat '/tmp/glymur-audio/mic.wav': No such file or directory
+
+==== speakers
+Play a quiet 1 kHz tone, left then right, about 2 s each? (y/N) answer: y
+playing left
+aplay: main:850: audio open error: Device or resource busy
+Tone 'left': which speaker played, left, right, both or none? answer: none
+playing right
+aplay: main:850: audio open error: Device or resource busy
+Tone 'right': which speaker played, left, right, both or none? answer: none
+
+==== amplifier reset check: unbind, then rebind, the WSA884x driver
+bound: sdw:1:0:0217:0204:00:0
+sdw:1:0:0217:0204:00:1
+  sdw:1:0:0217:0204:00:0 Attached
+  sdw:1:0:0217:0204:00:1 Attached
+   gpio12  : out 0 2mA no pull
+   gpio13  : in  0 2mA pull down
+after unbind:
+  sdw:1:0:0217:0204:00:0 UNATTACHED
+  sdw:1:0:0217:0204:00:1 UNATTACHED
+   gpio12  : out 0 2mA no pull
+   gpio13  : in  0 2mA pull down

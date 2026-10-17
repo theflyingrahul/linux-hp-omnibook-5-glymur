@@ -5,6 +5,28 @@ The bring-up's dated log, newest first, moved here from the README on
 in [`status.md`](status.md); the detailed evidence is in the dated notes in
 this directory.
 
+**2026-10-17, night: kernel `-14`'s amplifier fix confirmed live, then a
+real kernel crash stuck the test.** `check-audio.sh` on the `-14` test
+DT: both WSA884x amplifiers show `Attached` on `swr0` only, confirming
+the topology/reset-line fix below is correct hardware. `arecord`/`aplay`
+then hit `Device or resource busy` — PipeWire/WirePlumber had already
+claimed the card through the new UCM profile, a sign that integration is
+working, just incompatible with the script's raw-ALSA test method as
+written. The unbind/rebind reset check crashed the kernel for real: a
+NULL-pointer Oops in `wsa884x_runtime_suspend()`/`regcache_cache_only()`
+(`x0` = NULL regmap) from an asynchronous PM-runtime workqueue, right
+after unbind — consistent with an unbind-vs-runtime-PM race, not a
+fluke. The crashed kworker holds the device's lock forever, so
+`check-audio.sh`'s next write (`bind`) is now stuck in `D` state
+(unkillable); the system needs a reboot to recover. Separately: USB-A
+and the camera are unaffected and working on this same boot; USB-C's own
+controllers are bound correctly (the test DT includes the daily tree's
+USB support plus the eUSB2 repeaters on top, not less), but neither
+`xhci-hcd` instance is registered because nothing is plugged into either
+USB-C port right now — not a test-DTB regression, the same "no device,
+no xhci instance" behavior as every previous boot's unplugged baseline.
+See `docs/audio-headset-path-2026-10-17.md`.
+
 **2026-10-17, evening: audio checked against upstream; kernel `-14`.**
 The audio work was rechecked against what Qualcomm and the community
 already publish. The HP topology turned out byte-identical to

@@ -1,0 +1,49 @@
+Oct 17 21:15:53 glymur kernel: Unable to handle kernel NULL pointer dereference at virtual address 0000000000000020
+Oct 17 21:15:53 glymur kernel: Mem abort info:
+Oct 17 21:15:53 glymur kernel:   ESR = 0x0000000096000004
+Oct 17 21:15:53 glymur kernel:   EC = 0x25: DABT (current EL), IL = 32 bits
+Oct 17 21:15:53 glymur kernel:   SET = 0, FnV = 0
+Oct 17 21:15:53 glymur kernel:   EA = 0, S1PTW = 0
+Oct 17 21:15:53 glymur kernel:   FSC = 0x04: level 0 translation fault
+Oct 17 21:15:53 glymur kernel: Data abort info:
+Oct 17 21:15:53 glymur kernel:   ISV = 0, ISS = 0x00000004, ISS2 = 0x00000000
+Oct 17 21:15:53 glymur kernel:   CM = 0, WnR = 0, TnD = 0, TagAccess = 0
+Oct 17 21:15:53 glymur kernel:   GCS = 0, Overlay = 0, DirtyBit = 0
+Oct 17 21:15:53 glymur kernel: user pgtable: 4k pages, 48-bit VAs, pgdp=0000000903628000
+Oct 17 21:15:53 glymur kernel: [0000000000000020] pgd=0000000000000000, p4d=0000000000000000
+Oct 17 21:15:53 glymur kernel: Internal error: Oops: 0000000096000004 [#1]  SMP
+Oct 17 21:15:53 glymur kernel: Modules linked in: reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6apm_dai q6apm_lpass_dais q6prm_clocks snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc uvcvideo uvc videobuf2_vmalloc videobuf2_memops videobuf2_v4l2 videobuf2_common videodev qrtr_mhi mc joydev snd_q6apm apr hid_multitouch input_leds hid_generic fastrpc phy_qcom_eusb2_repeater i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 i2c_hid hp_omnibook_5_ec qcom_spmi_pmic rpmsg_ctrl regmap_spmi hid rpmsg_char sparse_keymap qrtr_smd qcom_pd_mapper xhci_plat_hcd ucsi_glink socinfo pmic_glink_altmode typec_ucsi aux_hpd_bridge qcom_battmgr hci_uart aes_ce_blk ghash_ce gf128mul btqca btrtl sm4_ce_gcm ath12k_wifi7 sm4_ce_ccm btbcm sm4_ce ath12k btintel sm4_ce_cipher sm4 bluetooth mac80211 snd_soc_x1e80100 snd_soc_qcom_sdw cfg80211 phy_qcom_edp snd_soc_qcom_common msm mhi libarc4 spmi_pmic_arb i2c_qcom_geni spmi_devres spmi qcom_stats
+Oct 17 21:15:53 glymur kernel:  qcom_spel ubwc_config phy_qcom_qmp_combo ocmem qcom_q6v5_pas soundwire_qcom slimbus aux_bridge qmi_tmd gpu_sched snd_soc_lpass_wsa_macro snd_soc_lpass_va_macro dwc3_qcom soundwire_bus qcom_pil_info typec drm_gpuvm snd_soc_lpass_macro_common qcom_eud qcom_q6v5 drm_exec snd_soc_core qcom_sysmon drm_dp_aux_bus dwc3 thunderbolt drm_display_helper qcom_common snd_compress pinctrl_sm8650_lpass_lpi ulpi dispcc_glymur camcc_glymur videocc_glymur phy_qcom_m31_eusb2 qcom_glink_smem evacc_glymur ac97_bus pinctrl_lpass_lpi qcom_tsens gpi cec udc_core snd_pcm_dmaengine rc_core qcom_glink qrtr llcc_qcom mdt_loader qcom_aoss pmic_glink qcom_hwspinlock pdr_interface nvmem_qfprom qcom_smd qcom_pdr_msg qcomtee smp2p qmi_helpers gpio_keys qcom_cpucp_mbox tee bam_dma fixed rpmsg_core icc_bwmon qcom_smem sch_fq_codel efi_pstore dmi_sysfs autofs4
+Oct 17 21:15:53 glymur kernel: CPU: 1 UID: 0 PID: 252 Comm: kworker/u49:2 Not tainted 7.3.0-rc4-glymur-14 #1 PREEMPT(lazy) 
+Oct 17 21:15:53 glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+Oct 17 21:15:53 glymur kernel: Workqueue: pm pm_runtime_work
+Oct 17 21:15:53 glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+Oct 17 21:15:53 glymur kernel: pc : regcache_cache_only+0x24/0x1e8
+Oct 17 21:15:53 glymur kernel: lr : wsa884x_runtime_suspend+0x2c/0x60 [snd_soc_wsa884x]
+Oct 17 21:15:53 glymur kernel: sp : ffff800083fa3c20
+Oct 17 21:15:53 glymur kernel: x29: ffff800083fa3c20 x28: 0000000000000000 x27: 0000000000000000
+Oct 17 21:15:53 glymur kernel: x26: 0000000000000000 x25: 0000000000000008 x24: 00000000000f4240
+Oct 17 21:15:53 glymur kernel: x23: 0000000000000001 x22: ffffb40164fd3290 x21: ffff00080ae7f8f4
+Oct 17 21:15:53 glymur kernel: x20: 0000000000000001 x19: 0000000000000000 x18: ffff800081545048
+Oct 17 21:15:53 glymur kernel: x17: 0000000000000000 x16: ffffb401df2e3170 x15: 0000000000000000
+Oct 17 21:15:53 glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+Oct 17 21:15:53 glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffb40164fd32bc
+Oct 17 21:15:53 glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+Oct 17 21:15:53 glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+Oct 17 21:15:53 glymur kernel: x2 : 0000000000000000 x1 : 0000000000000001 x0 : 0000000000000000
+Oct 17 21:15:53 glymur kernel: Call trace:
+Oct 17 21:15:53 glymur kernel:  regcache_cache_only+0x24/0x1e8 (P)
+Oct 17 21:15:53 glymur kernel:  wsa884x_runtime_suspend+0x2c/0x60 [snd_soc_wsa884x]
+Oct 17 21:15:53 glymur kernel:  __rpm_callback+0x54/0x250
+Oct 17 21:15:53 glymur kernel:  rpm_callback+0x88/0xa0
+Oct 17 21:15:53 glymur kernel:  rpm_suspend+0xec/0x6b8
+Oct 17 21:15:53 glymur kernel:  pm_runtime_work+0x118/0x128
+Oct 17 21:15:53 glymur kernel:  process_one_work+0x1c4/0x5b0
+Oct 17 21:15:53 glymur kernel:  worker_thread+0x194/0x330
+Oct 17 21:15:53 glymur kernel:  kthread+0x138/0x150
+Oct 17 21:15:53 glymur kernel:  ret_from_fork+0x10/0x20
+Oct 17 21:15:53 glymur kernel: Code: 910003fd a90153f3 aa0003f3 2a0103f4 (f9401001) 
+Oct 17 21:15:53 glymur kernel: ---[ end trace 0000000000000000 ]---
+Oct 17 21:15:53 glymur kernel: ---[ end trace 0000000000000000 ]---
+Oct 17 21:15:54 glymur kernel: qcom-apm gprsvc:service:2:1: CMD timeout for [100100d] opcode
+Oct 17 21:15:59 glymur kernel: qcom-apm gprsvc:service:2:1: CMD timeout for [100100d] opcode
