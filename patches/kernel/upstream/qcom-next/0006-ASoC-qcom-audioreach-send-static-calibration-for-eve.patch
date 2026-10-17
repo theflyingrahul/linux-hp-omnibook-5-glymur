@@ -1,0 +1,53 @@
+From d1312675c9f810534dcbf72170f3dbddb5f265f2 Mon Sep 17 00:00:00 2001
+From: Rahul Pon <theflyingrahul@gmail.com>
+Date: Sat, 17 Oct 2026 07:50:53 -0700
+Subject: [PATCH] ASoC: qcom: audioreach: send static calibration for every
+ module
+
+Commit c7ed4c2debfd ("ASoC: qcom: audioreach: add support for static
+calibration") lets a topology carry a blob of calibration data for a
+module, a list of parameter records in the APM_CMD_SET_CFG payload
+format, and names echo and noise cancellation and speaker protection as
+its users. Only MODULE_ID_SMECNS_V2 sends it, though: the blob of any
+other module is parsed, kept and never sent, so a topology cannot tune
+an equaliser, a limiter or speaker protection that way.
+
+Send the blob for every module that has one, before the module's media
+format and the parameters the driver sets itself, so that those keep
+precedence over static data. SMECNS_V2 behaves as before, and topologies
+without calibration data are unaffected.
+---
+ sound/soc/qcom/qdsp6/audioreach.c | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
+
+diff --git a/sound/soc/qcom/qdsp6/audioreach.c b/sound/soc/qcom/qdsp6/audioreach.c
+index 0350afb5995a..5cf0775e0b74 100644
+--- a/sound/soc/qcom/qdsp6/audioreach.c
++++ b/sound/soc/qcom/qdsp6/audioreach.c
+@@ -1447,6 +1447,16 @@ int audioreach_set_media_format(struct q6apm_graph *graph,
+ {
+ 	int rc;
+ 
++	/*
++	 * Static calibration from the topology first, so that the media
++	 * format and the parameters set below take precedence.
++	 */
++	if (module->data) {
++		rc = audioreach_set_module_config(graph, module, cfg);
++		if (rc)
++			return rc;
++	}
++
+ 	switch (module->module_id) {
+ 	case MODULE_ID_DATA_LOGGING:
+ 		rc = audioreach_module_enable(graph, module, true);
+@@ -1463,9 +1473,6 @@ int audioreach_set_media_format(struct q6apm_graph *graph,
+ 	case MODULE_ID_DISPLAY_PORT_SINK:
+ 		rc = audioreach_display_port_set_media_format(graph, module, cfg);
+ 		break;
+-	case  MODULE_ID_SMECNS_V2:
+-		rc = audioreach_set_module_config(graph, module, cfg);
+-		break;
+ 	case MODULE_ID_I2S_SOURCE:
+ 	case MODULE_ID_I2S_SINK:
+ 		rc = audioreach_i2s_set_media_format(graph, module, cfg);

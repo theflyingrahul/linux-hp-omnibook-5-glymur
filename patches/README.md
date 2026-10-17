@@ -23,7 +23,7 @@ Apply to qcom-next `1a0586064ee1` (tag `qcom-next-7.3-rc4-20261014`, the
 qcom-next tip on 2026-10-17, from kernel `-13`; it was `6b4daa845239` for
 `-8` to `-12`, `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to `-4`)
 in order:
-`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0005`,
+`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0006`,
 `glymur-bringup/0001–0002`, then `backports/` (`0001–0002`, `0013–0014`,
 `0017–0021`, `0023–0026`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
@@ -56,6 +56,21 @@ now enables the APSS CoreSight trace path (`e69025f64fe7`, FROMLIST: 12 ETMs,
 funnels, replicators, two TMCs); the board `.dtsi` disables those 31 nodes.
 With that, the `-13` daily DTB enables exactly the nodes `-12` did, apart
 from the CDSP FastRPC context banks renumbered by `797f471a15c3`.
+
+Kernel `-14` (2026-10-17) adds `upstream/qcom-next/0006`, "ASoC: qcom:
+audioreach: send static calibration for every module". Commit
+`c7ed4c2debfd` ("add support for static calibration", Srinivas
+Kandagatla, 6.18) lets a topology carry a module's calibration as a list of
+parameter records, meant for echo and noise cancellation and speaker
+protection, but `audioreach_set_media_format()` sends it only for
+`MODULE_ID_SMECNS_V2` (still so in linux-next of 2026-10-17). `0006`
+sends it for every module that has it, before the media format and the
+driver's own parameters, so those keep precedence; SMECNS and topologies
+without calibration behave as before. It is how HP's ACDB tuning reaches
+the DSP (`docs/audio-tuning-2026-10-17.md`). Fetched before it: qcom-next
+still `1a0586064ee1`; mainline `v7.3-rc7-244-g58161ead29` has no new commit
+in our drivers since `-13`'s check. A fresh `prepare` reproduces the build
+tree.
 
 qcom-next stays the base. The Linux MSM laptops kernel
 (`https://github.com/linux-msm/laptops-kernel`, `topic/glymur-laptops`) was
