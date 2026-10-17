@@ -5,6 +5,29 @@ The bring-up's dated log, newest first, moved here from the README on
 in [`status.md`](status.md); the detailed evidence is in the dated notes in
 this directory.
 
+**2026-10-17, kernel `-13` booted: the full/low-speed USB-C enumeration
+bug looks fixed, no battery/charger retest this round.** `check-mesa.sh`,
+`check-ec.sh` and three `check-usb.sh` runs (baseline, then a USB 2.0 hub
+carrying a mass-storage stick and a Dell wireless-receiver dongle swapped
+between the two USB-C ports) all came back clean — zero crashes anywhere
+in the boot journal. The headline result: the receiver, which has failed
+with `error -71` on every low/full-speed attempt since the eUSB2
+repeaters were first added on `-8` (including the `-12` port-swap
+retest), now enumerates cleanly as a full-speed device with working
+keyboard/mouse/consumer-control HID input, on both ports, alongside the
+hub and stick behind it. Likely cause: the new qcom-next base pulled in
+FROMLIST commit `92757057bb4a` "phy-qcom-eusb2-repeater: Fix SMB Power
+leakage issue" for these exact SMB2370 repeaters (not isolated by
+reverting just that commit). GPU/Mesa (glmark2 10881, same Adreno X2-85
+path) and the EC (backlight timeout, the new read-only
+`kbd_backlight_level`, both mute LEDs) all re-confirmed with no
+regressions; the EC hotkey event line is still silent, unchanged from
+`-10`. No charger was available this round, so the battery-manager
+notification check (`check-battmgr-notify.sh`) and a bare low-speed-only
+device weren't tried; `/sys/class/power_supply/qcom-battmgr-bat` still
+reads instantly and correctly (82%, discharging) with nothing plugged in.
+See `docs/usb-c-ports-2026-09-29.md`.
+
 **2026-10-17, kernel `-13` on a new qcom-next base, staged on the USB;
 community pointers checked.** **Test:** `install-from-usb.sh` (kernel
 `-13`), boot "Ubuntu on SSD", then `check-mesa.sh`, `check-ec.sh`,

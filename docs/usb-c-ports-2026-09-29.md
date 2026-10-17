@@ -294,3 +294,46 @@ exercising it, so the PHY's own orientation/lane-swap handling (relevant
 for `orientation=reverse`, already seen on this connector in
 `docs/usb-c-charging-2026-09-29.md`) is still unconfirmed. A native
 USB-C 3.x device, tried both ways up, would close this out.
+
+## Kernel `-13` (2026-10-17): the full/low-speed enumeration bug looks fixed
+
+Three `check-usb.sh` runs right after installing kernel `-13`
+(`1a0586064ee1`, 7.3-rc4 qcom-next base), a baseline with nothing in the
+USB-C ports followed by two more swapping a USB 2.0 hub (carrying a mass
+storage stick and a Dell wireless-receiver dongle) and the charger
+between the two ports:
+
+- **Baseline:** USB-A and the camera enumerate as always; both USB-C
+  ports idle (`partner=no`).
+- **Run 2 (hub on `a600000.usb`, charger on the other port):** the hub
+  enumerates at high speed, the mass-storage stick behind it at high
+  speed, and — the device that failed every single time before, with
+  `error -71` on `device descriptor read/64` — **the Dell receiver now
+  enumerates cleanly as a full-speed device**, registering keyboard,
+  mouse and consumer-control HID inputs. `lsusb -t` shows the whole tree
+  (hub → storage + receiver) hanging correctly off the port.
+- **Run 3 (swapped: hub now on `a800000.usb`):** identical result on the
+  other port — same hub, same stick, same receiver, same clean full-speed
+  enumeration, this time at `a800000.usb`'s role-switch.
+
+No crash, no `error -71`, on either port, with a real low/full-speed
+device repeatedly plugged and swapped — the exact test that failed every
+time from kernel `-8` (when the eUSB2 repeaters were first added) through
+the kernel `-12` port-swap retest (`docs/usb-dwc3-crash-2026-09-30.md`).
+
+**Likely cause:** `patches/README.md`'s kernel `-13` entry notes that the
+new qcom-next base pulled in `92757057bb4a` (FROMLIST) "phy-qcom-eusb2-repeater:
+Fix SMB Power leakage issue" for the SMB2370 repeaters on the USB-C
+ports — landing in the same rebase as this result, and matching the
+symptom (a repeater that identified correctly but didn't pass low-speed
+signaling through). Not independently isolated by reverting just that
+commit, but it is the one qcom-next change in this exact driver between
+`-12` and `-13`.
+
+This was a HID dongle and a USB 2.0 hub, not yet a bare low-speed-only
+device (e.g. a plain low-speed mouse with no hub in between) or a native
+USB-C 3.x stick either way up — those would close out the remaining
+"device-class-specific?" and SuperSpeed-orientation questions above.
+Worth a few more ordinary-use boots, and ideally the charger/battery
+tests this round skipped, before calling the eUSB2 repeater work fully
+closed.
