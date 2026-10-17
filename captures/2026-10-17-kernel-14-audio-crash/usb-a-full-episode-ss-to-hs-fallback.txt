@@ -1,0 +1,175 @@
+Oct 17 21:24:35 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:36 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:37 glymur kernel: kauditd_printk_skb: 2 callbacks suppressed
+Oct 17 21:24:37 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:38 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:39 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:40 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:42 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:43 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:44 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:45 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:46 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:47 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:48 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:50 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:51 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:52 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:53 glymur kernel: usb 3-1: Device not responding to setup address.
+Oct 17 21:24:53 glymur kernel: usb 3-1: Device not responding to setup address.
+Oct 17 21:24:53 glymur kernel: usb 3-1: device not accepting address 5, error -71
+Oct 17 21:24:53 glymur kernel: usb 3-1: Device not responding to setup address.
+Oct 17 21:24:54 glymur kernel: usb 3-1: Device not responding to setup address.
+Oct 17 21:24:54 glymur kernel: usb 3-1: device not accepting address 6, error -71
+Oct 17 21:24:54 glymur kernel: usb usb3-port1: attempt power cycle
+Oct 17 21:24:55 glymur kernel: usb 3-1: Device not responding to setup address.
+Oct 17 21:24:55 glymur kernel: usb 3-1: Device not responding to setup address.
+Oct 17 21:24:55 glymur kernel: usb 3-1: device not accepting address 7, error -71
+Oct 17 21:24:56 glymur kernel: usb 3-1: Device not responding to setup address.
+Oct 17 21:24:56 glymur kernel: usb 3-1: Device not responding to setup address.
+Oct 17 21:24:56 glymur kernel: usb 3-1: device not accepting address 8, error -71
+Oct 17 21:24:56 glymur kernel: usb usb3-port1: unable to enumerate USB device
+Oct 17 21:24:57 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:58 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:24:59 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:00 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:02 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:03 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:04 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:05 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:06 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:07 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:08 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:10 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:11 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:12 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:13 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:14 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:15 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:16 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:18 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:19 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:20 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:21 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:22 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:23 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:24 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:26 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:27 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:29 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:30 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:31 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:32 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:34 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:35 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:36 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:37 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:38 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:40 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:41 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:42 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:43 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:45 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:46 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:47 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:48 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:49 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:50 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:51 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:53 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:54 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:55 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:56 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:57 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:58 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:25:59 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:01 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:02 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:03 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:04 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:05 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:06 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:07 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:09 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:10 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:11 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:12 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:13 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:15 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:17 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:18 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:19 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:21 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:22 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:23 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:24 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:25 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:26 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:27 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:29 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:31 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:34 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:35 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:36 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:37 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:38 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:39 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:40 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:42 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:43 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:44 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:45 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:46 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:47 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:48 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:50 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:51 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:52 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:53 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:54 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:55 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:56 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:57 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:26:59 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:00 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:01 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:02 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:03 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:04 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:05 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:07 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:08 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:09 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:10 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:11 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:12 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:13 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:15 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:16 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:17 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:18 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:19 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:20 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:21 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:22 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:24 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:25 glymur kernel: usb usb3-port1: Cannot enable. Maybe the USB cable is bad?
+Oct 17 21:27:26 glymur kernel: usb 2-1: new high-speed USB device number 6 using xhci-hcd
+Oct 17 21:27:26 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Oct 17 21:27:26 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Oct 17 21:27:26 glymur kernel: usb 2-1: Product: Ultra
+Oct 17 21:27:26 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Oct 17 21:27:26 glymur kernel: usb 2-1: SerialNumber: [REDACTED-SERIAL]
+Oct 17 21:27:26 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Oct 17 21:27:26 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Oct 17 21:27:26 glymur kernel: usbcore: registered new interface driver usb-storage
+Oct 17 21:27:26 glymur kernel: usbcore: registered new interface driver uas
+Oct 17 21:27:27 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Oct 17 21:27:27 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Oct 17 21:27:27 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Oct 17 21:27:27 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Oct 17 21:27:27 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Oct 17 21:27:27 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Oct 17 21:27:27 glymur kernel:  sda: sda1 sda2
+Oct 17 21:27:27 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Oct 17 21:27:28 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.

@@ -5,6 +5,20 @@ The bring-up's dated log, newest first, moved here from the README on
 in [`status.md`](status.md); the detailed evidence is in the dated notes in
 this directory.
 
+**2026-10-17, later still: it recovered on its own — SuperSpeed gave up,
+High-Speed took over.** Follow-up to the entry right below: after ~13
+minutes of continuous `usb3-port1: Cannot enable` retries (141
+occurrences), the retry loop simply stopped, and the stick enumerated
+instead on the same port's separate High-Speed bus (`usb 2-1`, not
+`usb 3-1`) and mounted normally — readable, just at 480 Mb/s instead of
+5000. No reboot happened; this resolved itself. SuperSpeed itself never
+came back this boot (bus 3 stayed a bare root hub). This points at a
+transient link-training problem on this one boot rather than a dead
+port, a dead stick, or a kernel `-14` regression that blocks USB-A
+outright. The unrelated stuck `check-audio.sh` process is still stuck
+in `D` state — that part still needs a reboot. See
+`docs/usb-a-bringup-2026-09-29.md`.
+
 **2026-10-17, later still: the boot stick's USB-A port never came up all
 boot, independent of the audio crash.** Same `-14` test DT boot as below:
 the USB-A SuperSpeed port holding the boot stick retried and failed to

@@ -278,3 +278,43 @@ succeeded). Worth checking right after the next boot whether the port
 enumerates cleanly again — if it fails identically from a fresh boot too,
 that points at a kernel `-14` regression on this exact port rather than a
 one-boot link-training glitch.
+
+## The same boot: it recovered on its own, by falling back from SuperSpeed to High-Speed
+
+No reboot happened. The failure loop above (`usb usb3-port1: Cannot
+enable`) kept retrying continuously for about **13 minutes** (141
+occurrences from `21:24:35` to `21:27:25`) and then stopped on its own:
+at `21:27:26` the stick enumerated — but on `usb 2-1` (the same
+controller's separate **High-Speed** bus), not `usb 3-1` (SuperSpeed).
+`usb-storage` bound it normally and it mounted:
+
+```
+usb 2-1: new high-speed USB device number 6 using xhci-hcd
+usb 2-1: Product: Ultra / Manufacturer: SanDisk
+usb-storage 2-1:1.0: USB Mass Storage device detected
+scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+ sda: sda1 sda2
+FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+```
+
+No further `usb3-port1: Cannot enable` lines after `21:27:28` — the
+SuperSpeed side simply gave up retrying, and the device stayed usable
+afterward over the High-Speed pins of the same USB-A connector (`lsusb
+-t`: bus 2 "480M" with the mass-storage device attached, bus 3 "10000M"
+still a bare root hub with no device). The stick mounted at
+`/run/media/rahul/UBUNTU 26_0`, 86% used, 7.4G/1.1G avail — readable and
+otherwise normal, just at roughly 1/10th its usual SuperSpeed throughput,
+and with the "not properly unmounted" FAT warning from the 13-minute gap
+with no clean unmount in between.
+
+**Reading:** this points at a transient SuperSpeed link-training problem
+on this one boot, not a dead port or a dead stick or a kernel `-14`
+regression that blocks USB-A outright — High-Speed (whose electrical
+pins are physically separate from SuperSpeed's in a USB-A receptacle)
+worked throughout, once the host stopped trying SuperSpeed. The
+unrelated stuck `check-audio.sh` process (`docs/audio-headset-path-2026-10-17.md`)
+is still stuck in `D` state after this recovery — that still needs a
+reboot; this USB-A episode resolved itself without one. Worth checking
+on the next boot whether SuperSpeed trains cleanly from the start, to
+tell a one-boot glitch from something that recurs.
