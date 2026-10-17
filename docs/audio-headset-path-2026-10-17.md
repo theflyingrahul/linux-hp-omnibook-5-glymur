@@ -79,6 +79,30 @@ installed drivers:
   A boot that brings up the SoundWire controllers would list every
   peripheral that attaches, with its manufacturer, part and unique ID.
 
+### The calibration database
+
+HP's ACDB (`acdb_cal4.acdb`) is in the AudioReach format that
+`AudioReach/audioreach-graphservices` (`acdb/`) parses: an `ACDB` header
+and tagged chunks (`CSLU` → `CAKT`/`CDLU` → `CDDE`/`CDDO` → `POOL`). Walked
+that way, all 1,479 calibration rows resolve (Qualcomm's own Linux ACDBs for
+GLYMUR and MAHUA in `AudioReach/audioreach-conf`, 399 and 400 rows, check
+the walker). What it shows:
+
+- One codec DMA interface record: the **WSA** interface (LPAIF type 2),
+  index 3, channel mask `0x3`, with a 32-bit, 2-channel format, which fits the
+  V/I-sense feedback of two amplifiers. No WSA2 interface appears, which
+  a CRD-style split across `swr0` and `swr3` would need.
+- HP's key IDs (`0x0100000E` and up) are a Windows namespace, not the
+  Linux `kvh2xml.h` one (where the speaker-protection keys `SP_Dev_Map`
+  `0xBE000000` and `SP_VI_Map` `0xBF000000` carry stereo or quad); there is no
+  public dictionary for them, so they are not decoded here.
+
+Every Glymur and Mahua topology in `linux-msm/audioreach-topology` plays
+through `WSA_CODEC_DMA_RX_0`; the ThinkPad T14s Gen 7 one describes "2x
+WSA8845 speakers, 2x DMIC". HP's stereo speakers, two microphones and
+single WSA interface match that layout more closely than the CRD's four
+amplifiers. The amplifier reset lines and SoundWire IDs remain unproven.
+
 qcom-next already carries the Glymur CRD's WSA speaker and VA DMIC sound
 card (`glymur-crd.dtsi`), so the speaker and microphone path, unlike the
 headset codec, does not depend on unposted patches.
