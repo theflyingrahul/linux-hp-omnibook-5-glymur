@@ -9,13 +9,110 @@
  * - the SMB2370 eUSB2 repeaters of the USB-C ports (from kernel -8, for
  *   full and low speed);
  * - the EC's event line, with the pull-up HP's ACPI sets on it.
+ *
+ * In test from kernel -13 (test DTB only):
+ * - the speakers and the two microphones.
  */
 /dts-v1/;
 
+#include <dt-bindings/sound/qcom,q6dsp-lpass-ports.h>
 #include "mahua-hp-omnibook-5-bf1xxx.dts"
 
 / {
 	model = "HP OmniBook 5 Laptop 16-bf1xxx (test)";
+
+	/*
+	 * Speakers and microphones (docs/audio-headset-path-2026-10-17.md).
+	 * HP runs Qualcomm's Glymur CRD audio configuration: stereo WSA884x
+	 * smart amplifiers on the WSA macro and two DMICs on the VA macro.
+	 * HP's ACPI gives the speaker device (AUCD) the interrupts of both WSA
+	 * SoundWire masters (GSIV 202 = swr0, 203 = swr3) and two output GPIOs
+	 * (204, 205, no pull, 16 mA, low at start), so this follows the CRD's
+	 * layout of one reset line per bus with one amplifier on each. The
+	 * amplifier SoundWire unique IDs are not evidenced (the CRD and the
+	 * T14s use 0 and 1); a wrong guess leaves the amplifier unbound, and
+	 * the SoundWire log names the IDs that attach. The topology is
+	 * boards/hp-omnibook-5-16-bf1xxx/audio/MAHUA-HP-OmniBook-5-16-bf1xxx.m4.
+	 * No PMIC rail is declared: the amplifiers and the DMIC bias run on
+	 * what HP's firmware leaves on (L15B, L18B, L1B).
+	 */
+	sound {
+		compatible = "qcom,glymur-sndcard";
+		model = "HP-OmniBook-5-16-bf1xxx";
+		audio-routing = "SpkrLeft IN", "WSA WSA_SPK1 OUT",
+				"SpkrRight IN", "WSA2 WSA_SPK1 OUT",
+				"VA DMIC0", "vdd-micb",
+				"VA DMIC1", "vdd-micb";
+
+		wsa-dai-link {
+			link-name = "WSA Playback";
+
+			cpu {
+				sound-dai = <&q6apmbedai WSA_CODEC_DMA_RX_0>;
+			};
+
+			codec {
+				sound-dai = <&spkr_left>, <&swr0 0>, <&lpass_wsamacro 0>,
+					    <&spkr_right>, <&swr3 0>, <&lpass_wsa2macro 0>;
+			};
+
+			platform {
+				sound-dai = <&q6apm>;
+			};
+		};
+
+		va-dai-link {
+			link-name = "VA Capture";
+
+			cpu {
+				sound-dai = <&q6apmbedai VA_CODEC_DMA_TX_0>;
+			};
+
+			codec {
+				sound-dai = <&lpass_vamacro 0>;
+			};
+
+			platform {
+				sound-dai = <&q6apm>;
+			};
+		};
+	};
+};
+
+&lpass_vamacro {
+	pinctrl-0 = <&dmic01_default>;
+	pinctrl-names = "default";
+	qcom,dmic-sample-rate = <4800000>;
+};
+
+&swr0 {
+	status = "okay";
+
+	spkr_left: speaker@0,0 {
+		compatible = "sdw20217020400";
+		reg = <0 0>;
+		reset-gpios = <&tlmm 204 GPIO_ACTIVE_LOW>;
+		pinctrl-0 = <&spkr_left_sd_n>;
+		pinctrl-names = "default";
+		#sound-dai-cells = <0>;
+		sound-name-prefix = "SpkrLeft";
+		qcom,port-mapping = <1 2 3 7 12 14>;
+	};
+};
+
+&swr3 {
+	status = "okay";
+
+	spkr_right: speaker@0,0 {
+		compatible = "sdw20217020400";
+		reg = <0 0>;
+		reset-gpios = <&tlmm 205 GPIO_ACTIVE_LOW>;
+		pinctrl-0 = <&spkr_right_sd_n>;
+		pinctrl-names = "default";
+		#sound-dai-cells = <0>;
+		sound-name-prefix = "SpkrRight";
+		qcom,port-mapping = <1 2 3 7 12 14>;
+	};
 };
 
 /*
@@ -96,14 +193,33 @@
 };
 
 &tlmm {
-	/* The daily allow-list plus the EC event line, GPIO 66 */
+	/*
+	 * The daily allow-list plus the EC event line (GPIO 66) and the
+	 * speaker amplifier resets (GPIOs 204, 205)
+	 */
 	gpio-reserved-ranges = <2 1>, <4 12>, <19 13>, <34 2>, <38 13>,
 			       <52 4>, <60 6>, <68 2>, <71 21>, <93 23>,
-			       <117 2>, <120 26>, <149 3>, <155 96>;
+			       <117 2>, <120 26>, <149 3>, <155 49>,
+			       <206 45>;
 
 	ec_int_n_default: ec-int-n-state {
 		pins = "gpio66";
 		function = "gpio";
 		bias-pull-up;
+	};
+
+	/* HP's AUCD GpioIo: no pull, 16 mA drive (ACPI 1600 = 16 mA) */
+	spkr_left_sd_n: spkr-left-sd-n-state {
+		pins = "gpio204";
+		function = "gpio";
+		drive-strength = <16>;
+		bias-disable;
+	};
+
+	spkr_right_sd_n: spkr-right-sd-n-state {
+		pins = "gpio205";
+		function = "gpio";
+		drive-strength = <16>;
+		bias-disable;
 	};
 };

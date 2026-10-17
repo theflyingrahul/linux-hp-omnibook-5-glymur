@@ -90,8 +90,9 @@ the walker). What it shows:
 
 - One codec DMA interface record: the **WSA** interface (LPAIF type 2),
   index 3, channel mask `0x3`, with a 32-bit, 2-channel format, which fits the
-  V/I-sense feedback of two amplifiers. No WSA2 interface appears, which
-  a CRD-style split across `swr0` and `swr3` would need.
+  V/I-sense feedback of two amplifiers. (This does not decide between one
+  and two WSA buses: the CRD also plays to all four amplifiers on `swr0`
+  and `swr3` through `WSA_CODEC_DMA_RX_0`.)
 - HP's key IDs (`0x0100000E` and up) are a Windows namespace, not the
   Linux `kvh2xml.h` one (where the speaker-protection keys `SP_Dev_Map`
   `0xBE000000` and `SP_VI_Map` `0xBF000000` carry stereo or quad); there is no
@@ -120,8 +121,32 @@ amplifier reset lines is exhausted.
 Every Glymur and Mahua topology in `linux-msm/audioreach-topology` plays
 through `WSA_CODEC_DMA_RX_0`; the ThinkPad T14s Gen 7 one describes "2x
 WSA8845 speakers, 2x DMIC". HP's stereo speakers, two microphones and
-single WSA interface match that layout more closely than the CRD's four
-amplifiers. The amplifier reset lines and SoundWire IDs remain unproven.
+single WSA interface match the two-amplifier count of that layout.
+
+### HP's ACPI interrupts settle the buses
+
+`AUCD`'s three `Interrupt` resources (GSIV 202, 203, 170) are GIC
+interrupts, not GPIO-routed ones (the 2026-09-30 note took them for ADSP
+identifiers). GSIV = SPI + 32: GSIV 202 is `GIC_SPI 170`, `swr0` (WSA), and
+GSIV 203 is `GIC_SPI 171`, `swr3` (WSA2), in `glymur.dtsi`; GSIV 170
+(SPI 138) is not in qcom-next's or the laptops kernel's tree. `ASCD`'s GSIV
+793 is `GIC_SPI 761`, `swr2`, the WCD9378's primary bus, as expected. So
+HP's own DSDT gives the speaker device both WSA SoundWire masters and two
+output GPIOs, the CRD's structure of one reset line per bus. With stereo
+speakers, one amplifier per bus is the reading the test checks.
+
+## The speaker and microphone test (staged 2026-10-17)
+
+Test device tree only, on kernel `-13`, qcom-next with no extra patches
+(it already has the CRD's WSA and VA path): `swr0` and `swr3` enabled, one
+WSA8845 node on each (`reg = <0 0>`, reset GPIO 204 and 205, HP's pin
+settings), DMIC0/1 on the VA macro, and a `qcom,glymur-sndcard` with the
+topology from `boards/hp-omnibook-5-16-bf1xxx/audio/`. No PMIC rail is
+declared. Unknown unique IDs do not stop the test: the Qualcomm SoundWire
+driver adds every device that attaches (`sdw_slave_add`), so
+`/sys/bus/soundwire/devices/` names each amplifier by link, manufacturer,
+part, version and unique ID. `check-audio.sh` reports that and, only when
+asked, records the microphones and plays a quiet tone per channel.
 
 qcom-next already carries the Glymur CRD's WSA speaker and VA DMIC sound
 card (`glymur-crd.dtsi`), so the speaker and microphone path, unlike the

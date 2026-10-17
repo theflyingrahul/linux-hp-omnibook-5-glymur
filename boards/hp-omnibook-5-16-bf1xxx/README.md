@@ -11,6 +11,7 @@ switch them on for this board.
 | DSDT `_OSC` override | `scripts/linux/glymur-dsdt-osc-fix.py` (output private, BIOS-gated) | Works around an HP BIOS F.06 AML bug |
 | Wi-Fi board data | `scripts/linux/ath12k-board-add.py` (output private) | HP subsystem `103c:8ef3` needs Windows' `bdwlan_qcc2072_1p0_ncm820A.elf` |
 | Firmware for ADSP/CDSP/GPU | extracted from the Windows driver store (private) | HP-signed images |
+| AudioReach topology (in test) | `audio/MAHUA-HP-OmniBook-5-16-bf1xxx.m4` | Stereo speakers on the WSA path and two DMICs on the VA path (`docs/audio-headset-path-2026-10-17.md`); derived from `linux-msm/audioreach-topology`'s `MAHUA-LENOVO-ThinkPad-T14s-Gen7.m4` without the DisplayPort sinks, built with that repository's m4 includes and `alsatplg` into `qcom/glymur/HP-OmniBook-5-16-bf1xxx-tplg.bin` |
 
 ## Kernel command line
 

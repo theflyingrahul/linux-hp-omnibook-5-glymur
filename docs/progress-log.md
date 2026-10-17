@@ -5,6 +5,16 @@ The bring-up's dated log, newest first, moved here from the README on
 in [`status.md`](status.md); the detailed evidence is in the dated notes in
 this directory.
 
+**2026-10-17, audio: speakers and microphones in test.** HP's driver pack,
+registry and ACPI show HP running Qualcomm's Glymur CRD audio
+configuration: stereo WSA884x speakers on both WSA SoundWire buses (HP's
+ACPI gives the speaker device the `swr0` and `swr3` interrupts and two
+GPIOs, 204 and 205) and two DMICs. The headset codec is the WCD9378
+(reset GPIO 191), which needs unposted patches and waits. The test device
+tree for `-13` and an HP AudioReach topology are staged on the USB
+(`install-audio-test.sh`, then `check-audio.sh` on the test device tree).
+See `docs/audio-headset-path-2026-10-17.md`.
+
 **2026-10-17, kernel `-13` booted: no regressions; full/low-speed USB-C
 still untested.** `check-mesa.sh`, `check-ec.sh` and three `check-usb.sh`
 runs (baseline, then a USB 2.0 hub carrying a mass-storage stick and a Dell

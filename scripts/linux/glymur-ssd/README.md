@@ -207,6 +207,28 @@ To set the keyboard backlight timeout by hand (`30s`, `3min` or `always`):
 
     echo always | sudo tee /sys/bus/i2c/devices/9-0076/kbd_backlight_timeout
 
+### `install-audio-test.sh`, `check-audio.sh`
+
+    sudo bash install-audio-test.sh
+    sudo bash check-audio.sh
+
+The speaker and microphone test, from kernel `-13`
+(`docs/audio-headset-path-2026-10-17.md`). `install-audio-test.sh` takes
+`audio-test/` next to it: a test DTB for the kernel named in
+`audio-test/kernel-release` (it refuses any other) and the AudioReach
+topology built from `boards/hp-omnibook-5-16-bf1xxx/audio/`. It keeps the
+previous test DTB as `.orig` and installs the topology to
+`/lib/firmware/qcom/glymur/`. Then boot "Ubuntu on SSD: test device tree".
+
+`check-audio.sh` lists every SoundWire device that attached (named
+link:manufacturer:part:version:unique id, also when no device-tree node
+matches), the state of GPIOs 204 and 205, the audio modules and kernel log,
+and the ALSA card. Only when asked, it records 5 s from DMIC0/1 (peak and
+RMS per channel; the recording is kept next to the log) and plays a 1 kHz
+tone at -20 dBFS on the left, then the right channel, with the WSA digital
+volume at 68 and PA volume 12, and asks which speaker played. The log goes
+to `/var/log/glymur/audio-test-*.txt`.
+
 ### `check-battmgr-notify.sh`
 
     sudo bash check-battmgr-notify.sh [seconds]
