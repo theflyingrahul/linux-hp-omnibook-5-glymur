@@ -109,6 +109,14 @@ WSA or WSA2 clock, and none holds a recognisable GPIO or reset line, so the
 driver data neither confirms nor rules out a second WSA bus and does not
 give the amplifier resets.
 
+A Windows ETW trace of `Microsoft-Windows-GPIO-ClassExtension` (all
+keywords, informational level) around one system sound on the speakers
+(2026-10-17, kept in `.work/`) recorded only interrupt-flow events on one
+`GIO0` bank, after the sound had ended, and no output writes at all. That
+provider does not trace pin writes, so it neither shows nor excludes GPIOs
+204 and 205 switching the amplifiers. The read-only Windows evidence for the
+amplifier reset lines is exhausted.
+
 Every Glymur and Mahua topology in `linux-msm/audioreach-topology` plays
 through `WSA_CODEC_DMA_RX_0`; the ThinkPad T14s Gen 7 one describes "2x
 WSA8845 speakers, 2x DMIC". HP's stereo speakers, two microphones and
