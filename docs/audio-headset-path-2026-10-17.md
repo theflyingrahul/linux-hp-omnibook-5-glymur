@@ -97,6 +97,18 @@ the walker). What it shows:
   `0xBE000000` and `SP_VI_Map` `0xBF000000` carry stereo or quad); there is no
   public dictionary for them, so they are not decoded here.
 
+The "codec peripheral" data the Windows SoundWire driver reads
+(`AcdbGetCodecPeriphModuleData`) is the ACDB's driver-data section (`GCLU`
+→ `GCKT`/`GCDT` → `GCDE`/`GCDO` → `POOL`, as in `acdb_command.c`): 17
+module records (`0x08000020`–`0x080000a0`, `0x09000090`) in a Qualcomm
+format with no public description. The one readable record, module
+`0x08000070`, names its clocks: LPASS `RX_CORE_TX_MCLK`/`2X` (`0x312`,
+`0x313`) and `TX_CORE_MCLK`/`NPL` (`0x30c`, `0x30d`) at 19.2 MHz, so it
+configures a codec on the RX and TX macros, the WCD9378. No record names a
+WSA or WSA2 clock, and none holds a recognisable GPIO or reset line, so the
+driver data neither confirms nor rules out a second WSA bus and does not
+give the amplifier resets.
+
 Every Glymur and Mahua topology in `linux-msm/audioreach-topology` plays
 through `WSA_CODEC_DMA_RX_0`; the ThinkPad T14s Gen 7 one describes "2x
 WSA8845 speakers, 2x DMIC". HP's stereo speakers, two microphones and
