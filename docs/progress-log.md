@@ -5,6 +5,40 @@ The bring-up's dated log, newest first, moved here from the README on
 in [`status.md`](status.md); the detailed evidence is in the dated notes in
 this directory.
 
+**2026-10-20: the `-14` crash explained and fixed; names, mute keys and
+LEDs; kernel `-15`.** The `-14` crash came about 3 s after the amplifier
+unbind, not on rebind: `wsa884x` leaves runtime PM enabled after unbind, and
+the pending autosuspend then passes a released (NULL) regmap to
+`regcache_cache_only()`. Mainline and linux-next have the same code;
+`upstream/qcom-next/0007` fixes it with
+`devm_pm_runtime_enable()`. The unbind did confirm the reset
+line: both amplifiers left the bus (the `gpio12 : out 0` in the log is the
+direction and function, not the level). The built-in audio now carries the
+names Windows uses ("Internal Speakers" and "Microphone Array" on
+"Qualcomm(R) Aqstic(TM) ACX Static Endpoints Audio Device", via the UCM
+profile and a WirePlumber rule). The mute switches drive the F6/F9 LEDs
+through ALSA's `snd_ctl_led`, as alsa-ucm-conf does for the ThinkPad T14s,
+with the EC LEDs' default triggers set in the EC driver. F9 still sends the
+same HID Mute as F6. Its own EC event has never arrived, and HP's ACPI
+shows a "who am I"/capabilities handshake Linux never sent; a read-only
+test of it, and of the raw keyboard reports, is in
+`docs/linux-runbook-2026-10-20.md`. `check-audio.sh` now plays and records through
+PipeWire and no longer unbinds the driver. The USB-A episode on the same
+boot lasted about 13 minutes from boot; the 141 saved lines are its last
+three. qcom-next is unchanged; mainline's one new commit in our drivers
+does not apply. Each change was checked for upstream precedent; only the
+speaker-LED switch has none. The `-15` test device tree also enables the
+Iris video codec, as on the Glymur CRD, with HP's own `qcvss8480.mbn` (the
+same 3.6 firmware generation, signed for this laptop), the way upstream
+laptops load Windows' video image (`docs/video-iris-2026-10-20.md`), and
+DisplayPort over both USB-C ports with the four blocks HP's EliteBook X
+G2q and the ThinkPad T14s Gen 7 use (`docs/external-display-2026-10-20.md`), and HP's skin-temperature limits on
+the EC thermistors, through the hwmon core's thermal bridge and passive
+trips mapped to the CPUs and GPU (`docs/thermal-skin-2026-10-20.md`).
+Cluster idle (#14) turned out to be set up on every device-tree boot
+already; the boot report now counts it. The next boot's steps are in `docs/linux-runbook-2026-10-20.md`. See
+`docs/audio-mute-leds-2026-10-20.md`.
+
 **2026-10-17, later still: it recovered on its own — SuperSpeed gave up,
 High-Speed took over.** Follow-up to the entry right below: after ~13
 minutes of continuous `usb3-port1: Cannot enable` retries (141
