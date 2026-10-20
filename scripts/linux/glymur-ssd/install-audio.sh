@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Install the speaker and microphone userspace: the AudioReach topology and
-# the ALSA UCM profile, from audio/ next to this script. See README.md.
+# Install the speaker and microphone userspace: the AudioReach topology, the
+# ALSA UCM profile and the WirePlumber names, from audio/ next to this
+# script. See README.md.
 #   sudo bash install-audio.sh
 
 K="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/audio"
@@ -32,6 +33,11 @@ U=/usr/share/alsa/ucm2
     install -D -m 644 "$K/ucm2/$f" "$U/${f#./}"
     echo "UCM: $U/${f#./}"
 done
+# WirePlumber: the names Windows uses, as a local admin file.
+WP=/etc/wireplumber/wireplumber.conf.d/51-hp-omnibook-5-16-audio.conf
+install -D -m 644 "$K/wireplumber/${WP##*/}" "$WP"
+echo "WirePlumber: $WP"
+
 echo "Installed. Boot 'Ubuntu on SSD: test device tree', then run check-audio.sh."
 echo "Undo: sudo rm -r $FW/$NAME-tplg.bin $FW/HP $U/HP/OmniBook-5-16-bf1xxx \\"
-echo "  $U/conf.d/glymur/HP-HPOmniBook5Laptop16_bf1xxx-ConfigID-8F47.conf"
+echo "  $U/conf.d/glymur/HP-HPOmniBook5Laptop16_bf1xxx-ConfigID-8F47.conf $WP"
