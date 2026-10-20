@@ -13,6 +13,12 @@
  * In test from kernel -13 (test DTB only):
  * - the speakers and the two microphones (second version: both amplifiers
  *   on swr0; from kernel -14 reset through LPASS TLMM GPIO 12).
+ *
+ * In test from kernel -15:
+ * - the Iris video decoder and encoder, as on the Glymur CRD (which the
+ *   Mahua CRD includes), with HP's signed video firmware;
+ * - DisplayPort over both USB-C ports (DP alt mode);
+ * - HP's skin-temperature limits on the EC thermistors.
  */
 /dts-v1/;
 
@@ -107,6 +113,195 @@
 		#sound-dai-cells = <0>;
 		sound-name-prefix = "SpkrRight";
 		qcom,port-mapping = <4 5 6 7 13 15>;
+	};
+};
+
+/*
+ * Skin temperature (docs/thermal-skin-2026-10-20.md): HP's ACPI thermal
+ * zones TZ31-TZ34 on the EC's four thermistors (channels 0-3), with HP's
+ * passive and critical trips. HP's passive trips throttle the CPUs, GPU,
+ * NSP and Wi-Fi; the CPUs and the GPU are the cooling devices here, as on
+ * the ThinkPad X13s's skin zone. HP's _TSP is 5 s.
+ */
+&hp_ec {
+	#thermal-sensor-cells = <1>;
+};
+
+/ {
+	thermal-zones {
+		ec-thermistor-1-thermal {
+			/* HP's TZ31 */
+			polling-delay-passive = <5000>;
+			polling-delay = <5000>;
+			thermal-sensors = <&hp_ec 0>;
+
+			trips {
+				ec_thermistor1_passive: trip-point0 {
+					temperature = <65000>;
+					hysteresis = <2000>;
+					type = "passive";
+				};
+
+				trip-point1 {
+					temperature = <115000>;
+					hysteresis = <1000>;
+					type = "critical";
+				};
+			};
+
+			cooling-maps {
+				map0 {
+					trip = <&ec_thermistor1_passive>;
+					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&gpu THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
+				};
+			};
+		};
+
+		ec-thermistor-2-thermal {
+			/* HP's TZ32 (its passive trip acts only through Qualcomm's PowerLimits device) */
+			polling-delay-passive = <5000>;
+			polling-delay = <5000>;
+			thermal-sensors = <&hp_ec 1>;
+
+			trips {
+				trip-point1 {
+					temperature = <90000>;
+					hysteresis = <1000>;
+					type = "critical";
+				};
+			};
+		};
+
+		ec-thermistor-3-thermal {
+			/* HP's TZ33 */
+			polling-delay-passive = <5000>;
+			polling-delay = <5000>;
+			thermal-sensors = <&hp_ec 2>;
+
+			trips {
+				ec_thermistor3_passive: trip-point0 {
+					temperature = <75000>;
+					hysteresis = <2000>;
+					type = "passive";
+				};
+
+				trip-point1 {
+					temperature = <90000>;
+					hysteresis = <1000>;
+					type = "critical";
+				};
+			};
+
+			cooling-maps {
+				map0 {
+					trip = <&ec_thermistor3_passive>;
+					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&gpu THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
+				};
+			};
+		};
+
+		ec-thermistor-4-thermal {
+			/* HP's TZ34 */
+			polling-delay-passive = <5000>;
+			polling-delay = <5000>;
+			thermal-sensors = <&hp_ec 3>;
+
+			trips {
+				ec_thermistor4_passive: trip-point0 {
+					temperature = <50000>;
+					hysteresis = <2000>;
+					type = "passive";
+				};
+
+				trip-point1 {
+					temperature = <85000>;
+					hysteresis = <1000>;
+					type = "critical";
+				};
+			};
+
+			cooling-maps {
+				map0 {
+					trip = <&ec_thermistor4_passive>;
+					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&gpu THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
+				};
+			};
+		};
+	};
+};
+
+/*
+ * DisplayPort over USB-C (docs/external-display-2026-10-20.md): DP0 and DP1
+ * reach the USB-C connectors through usb_0_qmpphy and usb_1_qmpphy, which
+ * glymur.dtsi already links; hot-plug comes from pmic_glink altmode. As on
+ * HP's EliteBook X G2q (Glymur) and the ThinkPad T14s Gen 7 (Mahua).
+ */
+&mdss_dp0 {
+	status = "okay";
+};
+
+&mdss_dp0_out {
+	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
+};
+
+&mdss_dp1 {
+	status = "okay";
+};
+
+&mdss_dp1_out {
+	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
+};
+
+/*
+ * Iris video codec (docs/video-iris-2026-10-20.md). The node is the Glymur
+ * CRD's; the firmware is HP's qcvss8480.mbn from the Windows display
+ * driver package (video-firmware 3.6, the CRD image's generation, signed
+ * for this laptop), named like the ADSP and CDSP images. Laptops upstream
+ * load Windows' qcvss image the same way (ThinkPad X13s, IdeaCentre Mini).
+ */
+&iris {
+	firmware-name = "qcom/glymur/HP/omnibook-5-16-bf1xxx/qcvss8480.mbn";
+
+	status = "okay";
+
+	video-firmware {
+		iommus = <&apps_smmu 0x19e2 0x0>;
 	};
 };
 

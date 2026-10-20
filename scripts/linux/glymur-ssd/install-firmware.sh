@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Install HP's ADSP/CDSP and Bluetooth firmware. See README.md.
+# Install HP's ADSP/CDSP, video and Bluetooth firmware. See README.md.
 #   sudo bash install-firmware.sh
 
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
@@ -19,6 +19,7 @@ cdsp="$FW/qcnspmcdm8480"
 install -m 644 "$adsp/qcadsp8480.mbn" "$adsp/adsp_dtbs.elf" \
     "$adsp/adspr.jsn" "$adsp/adsps.jsn" "$adsp/adspua.jsn" "$soc/"
 install -m 644 "$cdsp/qccdsp8480.mbn" "$cdsp/cdsp_dtbs.elf" "$soc/"
+install -m 644 "$FW/qcdx8480/qcvss8480.mbn" "$soc/"
 
 bt="$FW/qcbluetooth8480_WHQL"
 install -m 644 "$bt/clnbtfw10.tlv" "$DEST/qca/ornbtfw11.tlv"

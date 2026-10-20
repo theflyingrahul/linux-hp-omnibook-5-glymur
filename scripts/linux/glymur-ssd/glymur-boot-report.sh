@@ -57,6 +57,16 @@ run() { printf '$ %s\n' "$*"; "$@" 2>&1; }
     for s in /sys/devices/system/cpu/cpu0/cpuidle/state*; do
         [ -d "$s" ] && printf '%s %s usage=%s\n' "$(basename "$s")" "$(cat "$s/name")" "$(cat "$s/usage")"
     done
+    # With PSCI OS-initiated idle, cluster and system idle are genpd states.
+    journalctl -k -b --no-pager | grep -E 'CPUidle PSCI|psci: (OSI|PSCI)' | head -3
+    for d in power-domain-cpu-cluster0 power-domain-cpu-cluster1 power-domain-system; do
+        [ -d "/sys/kernel/debug/pm_genpd/$d" ] || continue
+        printf '%s:\n' "$d"
+        sed 's/^/  /' "/sys/kernel/debug/pm_genpd/$d/idle_states" 2>&1
+        printf '  active %s ms, idle %s ms\n' \
+            "$(cat "/sys/kernel/debug/pm_genpd/$d/active_time" 2>/dev/null)" \
+            "$(cat "/sys/kernel/debug/pm_genpd/$d/total_idle_time" 2>/dev/null)"
+    done
     section 'network'
     run ip -br link
     run rfkill list

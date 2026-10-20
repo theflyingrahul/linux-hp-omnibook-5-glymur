@@ -93,6 +93,7 @@ It checks every file against `SHA256SUMS`, then installs:
   `lscpu-oryon2.tar.gz` is staged;
 - the audio topology and UCM profile (`install-audio.sh`), when `audio/` is
   staged;
+- HP's video firmware (`qcvss8480.mbn`), when `hp-fw/` is staged;
 - the check scripts, into your home directory.
 
 ### `install-kernel.sh`
@@ -120,6 +121,8 @@ Installs HP's firmware from `boards/hp-omnibook-5-16-bf1xxx/firmware`
 packaged file is replaced:
 - **ADSP and CDSP:** `qcom/glymur/HP/omnibook-5-16-bf1xxx/` gets the images,
   dtbs and `.jsn` files, at the `firmware-name` paths in the DTS.
+- **Video (Iris):** `qcvss8480.mbn` into the same directory (from kernel
+  `-15`'s test device tree).
 - **Bluetooth (QCC2072):** `qca/ornbtfw11.tlv` and `qca/ornnv11.*` are HP's
   "Colorado" `clnbtfw10.tlv`/`clnbtnv10.*` under btqca's "Orion" names.
     - The "10" in HP's names is not the ROM version: the patch header says
@@ -233,19 +236,53 @@ the mixer; no `alsa-ucm-conf` release has Glymur profiles yet (upstream
 `master` has them, Ubuntu 26.04 ships 1.2.15.3). Then boot "Ubuntu on SSD:
 test device tree".
 
+`install-audio.sh` also installs the WirePlumber rule from
+`boards/hp-omnibook-5-16-bf1xxx/audio/wireplumber/` to
+`/etc/wireplumber/wireplumber.conf.d/`, which gives the card and its two
+devices the names Windows uses ("Internal Speakers" and "Microphone Array" on
+"Qualcomm(R) Aqstic(TM) ACX Static Endpoints Audio Device").
+
 `check-audio.sh` lists every SoundWire device that attached (named
 link:manufacturer:part:version:unique id, also when no device-tree node
-matches), the state of the amplifier reset candidates (LPASS TLMM GPIOs 12
-and 13, TLMM GPIOs 204 and 205), the audio modules and kernel log, the ALSA
-card, the UCM profile as `alsaucm` parses it and PipeWire's view (`wpctl
-status`). Only when asked, it records 5 s from DMIC0/1 (peak and RMS per
-channel; the recording is kept next to the log) and plays a 1 kHz tone at
--20 dBFS on the left, then the right channel (WSA macro RX0/RX1 to the two
-amplifiers on `swr0`), with the WSA digital volume at 68 and PA volume 12,
-and asks which speaker played. Last, it unbinds and rebinds the WSA884x
-driver and shows the amplifiers' bus status and those GPIOs each time:
-amplifiers that drop off the bus when the shared reset is asserted prove
-the reset line. The log goes to `/var/log/glymur/audio-test-*.txt`.
+matches), the amplifier reset candidates (LPASS TLMM GPIOs 12 and 13, TLMM
+GPIOs 204 and 205; direction and function only), the audio modules and
+kernel log, the ALSA card, the UCM profile as `alsaucm` parses it,
+PipeWire's view and names (`wpctl status`, `pw-dump`), and the mute
+switches, their `ctl-led` binding and the F6/F9 LEDs. Only when asked, it
+records 5 s from the microphones and plays a 1 kHz tone at -20 dBFS on the
+left, then the right speaker, both through PipeWire as the desktop user
+(the card belongs to PipeWire, so raw ALSA access is busy); mutes the
+speakers and then the microphones from software, asks which LED is lit and
+checks that a recording made while muted is silent (the mute switches are
+UCM-created controls, so PipeWire must still mute the samples);
+and asks for F6 and F9 presses, recording the mute state, the LEDs and the
+EC interrupt count across F9. It no longer unbinds the amplifier driver,
+which crashed kernel `-14` (`docs/audio-mute-leds-2026-10-20.md`). The log
+goes to `/var/log/glymur/audio-test-*.txt`.
+
+### `check-video.sh`
+
+    sudo bash check-video.sh
+
+The Iris video decoder, from kernel `-15`'s test device tree
+(`docs/video-iris-2026-10-20.md`): the firmware file, the kernel log, the
+V4L2 devices and their formats, then a 10 s 1080p H.264 clip generated
+with `ffmpeg` and decoded in software and with the hardware decoder
+(`h264_v4l2m2m`), with the time and CPU each took. It needs `v4l-utils`
+and `ffmpeg` (`sudo apt install v4l-utils ffmpeg`). The log goes to
+`/var/log/glymur/video-test-*.txt`.
+
+### `check-display.sh`
+
+    sudo bash check-display.sh
+
+External displays over USB-C, from kernel `-15`'s test device tree
+(`docs/external-display-2026-10-20.md`): the DRM connectors and their
+modes, each USB-C port's partner and alternate modes (DisplayPort is SVID
+`ff01`), the DisplayPort and alt-mode kernel log, and the monitors GNOME
+uses. Run it with nothing plugged in, then with a monitor or a USB-C to
+DisplayPort/HDMI adapter on one port, then on the other. The log goes to
+`/var/log/glymur/display-test-*.txt`.
 
 ### `check-battmgr-notify.sh`
 

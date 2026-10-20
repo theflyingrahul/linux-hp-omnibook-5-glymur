@@ -3,11 +3,11 @@ set -euo pipefail
 
 # Install everything staged on the USB. See README.md.
 #   bash install-from-usb.sh [--keep-ubuntu-mesa] [kernel release]
-# Default kernel: 7.3.0-rc4-glymur-14.
+# Default kernel: 7.3.0-rc4-glymur-15.
 
 SYSTEM_MESA=1
 if [ "${1:-}" = --keep-ubuntu-mesa ]; then SYSTEM_MESA=0; shift; fi
-KREL="${1:-7.3.0-rc4-glymur-14}"
+KREL="${1:-7.3.0-rc4-glymur-15}"
 K="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 [ "$(id -u)" -ne 0 ] || { echo 'run as your normal user, not with sudo' >&2; exit 1; }
 [ "$(findmnt -n -o LABEL /)" = glymur-root ] || { echo 'not booted from the SSD install (glymur-root); refusing' >&2; exit 1; }
@@ -26,6 +26,13 @@ fi
 
 echo "== installing the GPU firmware"
 sudo bash "$K/install-gpu-firmware.sh" "$K/gpu-fw"
+
+# HP's video firmware (Iris), from the Windows display driver package.
+if [ -f "$K/hp-fw/qcvss8480.mbn" ]; then
+    echo "== installing HP's video firmware"
+    sudo install -D -m 644 "$K/hp-fw/qcvss8480.mbn" \
+        /usr/lib/firmware/updates/qcom/glymur/HP/omnibook-5-16-bf1xxx/qcvss8480.mbn
+fi
 
 MESA="$(ls "$K"/mesa-glymur-*.tar.gz 2>/dev/null | sort -V | tail -1)"
 if [ -n "$MESA" ]; then
@@ -65,7 +72,7 @@ sudo apt-get install -y mesa-utils mesa-utils-bin vulkan-tools glmark2-es2-wayla
     echo 'apt failed (offline?); install them later, check-mesa.sh names them'
 
 for f in check-gpu-test.sh check-mesa.sh charging-watch.sh check-usb.sh check-ec.sh gpu-corruption-test.sh \
-         check-audio.sh check-battmgr-notify.sh; do
+         check-audio.sh check-battmgr-notify.sh check-video.sh check-display.sh; do
     if [ -f "$K/$f" ]; then cp "$K/$f" "$HOME/$f"; fi
 done
 sync
@@ -76,8 +83,10 @@ echo "  bash ~/check-mesa.sh"
 echo "  sudo bash ~/check-ec.sh         (fan, temperatures, backlight, mute LEDs, hotkeys)"
 echo "  sudo bash ~/check-usb.sh        (plug USB-C and USB 2.0 devices in first)"
 echo "  sudo bash ~/charging-watch.sh   (plug, unplug, replug; type notes)"
-echo "  sudo bash ~/check-audio.sh      (speakers, microphones, amplifier reset)"
+echo "  sudo bash ~/check-audio.sh      (speakers, microphones, names, mute LEDs, F6/F9)"
 echo "  sudo bash ~/check-battmgr-notify.sh   (with the charger at hand)"
+echo "  sudo bash ~/check-video.sh      (hardware video decoding)"
+echo "  sudo bash ~/check-display.sh    (external monitor on each USB-C port)"
 echo "If the desktop is still corrupted, press Ctrl+Alt+F3, log in, and run"
 echo "  bash ~/gpu-corruption-test.sh"
 if [ "$SYSTEM_MESA" = 1 ] && [ -n "$MESA" ]; then
