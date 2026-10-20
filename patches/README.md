@@ -23,7 +23,7 @@ Apply to qcom-next `1a0586064ee1` (tag `qcom-next-7.3-rc4-20261014`, the
 qcom-next tip on 2026-10-17, from kernel `-13`; it was `6b4daa845239` for
 `-8` to `-12`, `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to `-4`)
 in order:
-`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0006`,
+`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0007`,
 `glymur-bringup/0001–0002`, then `backports/` (`0001–0002`, `0013–0014`,
 `0017–0021`, `0023–0026`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
@@ -71,6 +71,23 @@ the DSP (`docs/audio-tuning-2026-10-17.md`). Fetched before it: qcom-next
 still `1a0586064ee1`; mainline `v7.3-rc7-244-g58161ead29` has no new commit
 in our drivers since `-13`'s check. A fresh `prepare` reproduces the build
 tree.
+
+Kernel `-15` (2026-10-20) adds `upstream/qcom-next/0007`, "ASoC: codecs:
+wsa884x: disable runtime PM when the driver is unbound": the driver left
+runtime PM enabled after unbind, and the pending autosuspend then
+dereferenced a released regmap (the `-14` crash); it uses
+`devm_pm_runtime_enable()`. Mainline and linux-next have the same code. It
+also reworks `0005`: the EC LEDs get the `audio-mute`/`audio-micmute`
+default triggers, as the ThinkPad T14s EC driver does
+(`docs/audio-mute-leds-2026-10-20.md`), and registers its thermistors as
+thermal sensors through `HWMON_C_REGISTER_TZ`, with `0004`'s binding
+allowing `#thermal-sensor-cells`, for HP's skin zones in the test device
+tree (`docs/thermal-skin-2026-10-20.md`). Fetched before it: qcom-next still
+`1a0586064ee1`. Mainline `v7.3-341-gf47d223627` has one new commit in our
+drivers, `8cb5c17be3` "i2c: qcom-geni: Restore the source-clock selection
+policy"; it fixes `cb97bf3d4f`, which qcom-next never took, and qcom-next
+already uses the policy it restores, so neither is needed. A fresh
+`prepare` reproduces the build tree.
 
 qcom-next stays the base. The Linux MSM laptops kernel
 (`https://github.com/linux-msm/laptops-kernel`, `topic/glymur-laptops`) was

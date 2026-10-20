@@ -1,4 +1,4 @@
-From f890686106ecb51285f6a36fd4e150bc673f3208 Mon Sep 17 00:00:00 2001
+From 5a7172203120b4abef430ab9ac4e471dda881f91 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Wed, 30 Sep 2026 04:33:53 -0700
 Subject: [PATCH 5/5] platform: arm64: add HP OmniBook 5 16 embedded controller
@@ -23,13 +23,12 @@ Expose:
 
 The command codes, event codes and reply formats are the ones HP's ACPI
 methods use on this laptop.
-
 ---
  .../ABI/testing/sysfs-driver-hp-omnibook-5-ec |  19 +
  drivers/platform/arm64/Kconfig                |  17 +
  drivers/platform/arm64/Makefile               |   1 +
- drivers/platform/arm64/hp-omnibook-5-ec.c     | 413 ++++++++++++++++++
- 4 files changed, 450 insertions(+)
+ drivers/platform/arm64/hp-omnibook-5-ec.c     | 416 ++++++++++++++++++
+ 4 files changed, 453 insertions(+)
  create mode 100644 Documentation/ABI/testing/sysfs-driver-hp-omnibook-5-ec
  create mode 100644 drivers/platform/arm64/hp-omnibook-5-ec.c
 
@@ -100,10 +99,10 @@ index 7681be4a46e9..a809abf45d37 100644
  obj-$(CONFIG_EC_LENOVO_THINKPAD_T14S) += lenovo-thinkpad-t14s.o
 diff --git a/drivers/platform/arm64/hp-omnibook-5-ec.c b/drivers/platform/arm64/hp-omnibook-5-ec.c
 new file mode 100644
-index 000000000000..a8b0aa9b1385
+index 000000000000..24dd29e81205
 --- /dev/null
 +++ b/drivers/platform/arm64/hp-omnibook-5-ec.c
-@@ -0,0 +1,413 @@
+@@ -0,0 +1,416 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/*
 + * HP OmniBook 5 16 (Snapdragon X2) embedded controller
@@ -187,10 +186,11 @@ index 000000000000..a8b0aa9b1385
 +/* EC LEDs 8 and 9, which HP's mute LED WMI methods drive */
 +static const struct {
 +	const char *name;
++	const char *trigger;
 +	u8 index;
 +} hpec_leds[] = {
-+	{ "platform::mute", 0x08 },
-+	{ "platform::micmute", 0x09 },
++	{ "platform::mute", "audio-mute", 0x08 },
++	{ "platform::micmute", "audio-micmute", 0x09 },
 +};
 +
 +struct hpec;
@@ -302,6 +302,7 @@ index 000000000000..a8b0aa9b1385
 +};
 +
 +static const struct hwmon_channel_info * const hpec_hwmon_info[] = {
++	HWMON_CHANNEL_INFO(chip, HWMON_C_REGISTER_TZ),
 +	HWMON_CHANNEL_INFO(fan, HWMON_F_INPUT),
 +	HWMON_CHANNEL_INFO(temp,
 +			   HWMON_T_INPUT | HWMON_T_LABEL,
@@ -480,6 +481,7 @@ index 000000000000..a8b0aa9b1385
 +		led->ec = ec;
 +		led->index = hpec_leds[i].index;
 +		led->cdev.name = hpec_leds[i].name;
++		led->cdev.default_trigger = hpec_leds[i].trigger;
 +		led->cdev.max_brightness = 1;
 +		led->cdev.brightness_get = hpec_led_get;
 +		led->cdev.brightness_set_blocking = hpec_led_set;
@@ -517,6 +519,3 @@ index 000000000000..a8b0aa9b1385
 +
 +MODULE_DESCRIPTION("HP OmniBook 5 16 embedded controller");
 +MODULE_LICENSE("GPL");
--- 
-2.53.0
-

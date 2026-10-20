@@ -1,0 +1,45 @@
+From fa92386f3d0bef950e8b86216048600ced22f970 Mon Sep 17 00:00:00 2001
+From: Rahul Pon <theflyingrahul@gmail.com>
+Date: Tue, 20 Oct 2026 01:32:59 -0700
+Subject: [PATCH] ASoC: codecs: wsa884x: disable runtime PM when the
+ driver is unbound
+
+The driver enables runtime PM with a 3 s autosuspend delay at probe and
+never disables it, so unbinding the driver leaves a pending autosuspend
+behind. When it fires, wsa884x_runtime_suspend() looks up a regmap that
+the unbind has already released and passes NULL to
+regcache_cache_only():
+
+  Unable to handle kernel NULL pointer dereference at virtual address
+  0000000000000020
+  Workqueue: pm pm_runtime_work
+  pc : regcache_cache_only+0x24/0x1e8
+  lr : wsa884x_runtime_suspend+0x2c/0x60 [snd_soc_wsa884x]
+
+The crashed worker keeps the device lock, so a following bind blocks for
+good. Seen on an HP OmniBook 5 16 (two WSA8845 on one SoundWire bus) by
+writing both amplifiers to the driver's unbind file.
+
+Use devm_pm_runtime_enable(), so runtime PM is disabled, and the pending
+autosuspend cancelled, before the regmap is released.
+
+Fixes: aa21a7d4f68a ("ASoC: codecs: wsa884x: Add WSA884x family of speakers")
+---
+ sound/soc/codecs/wsa884x.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/sound/soc/codecs/wsa884x.c b/sound/soc/codecs/wsa884x.c
+index a367c94bfb4d..5384c76fbf2b 100644
+--- a/sound/soc/codecs/wsa884x.c
++++ b/sound/soc/codecs/wsa884x.c
+@@ -2124,7 +2124,9 @@ static int wsa884x_probe(struct sdw_slave *pdev,
+ 	pm_runtime_use_autosuspend(dev);
+ 	pm_runtime_mark_last_busy(dev);
+ 	pm_runtime_set_active(dev);
+-	pm_runtime_enable(dev);
++	ret = devm_pm_runtime_enable(dev);
++	if (ret)
++		return ret;
+ 
+ 	return devm_snd_soc_register_component(dev,
+ 					       &wsa884x_component_drv,
