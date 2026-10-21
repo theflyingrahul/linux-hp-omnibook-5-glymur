@@ -1,0 +1,75 @@
+[sudo: authenticate] Password: 
+== debugfs sdw
+-- /sys/kernel/debug/soundwire/master-1-0
+qualcomm-sdw
+sdw:1:0:0217:0204:00:0
+sdw:1:0:0217:0204:00:1
+/sys/kernel/debug/soundwire/master-1-0/sdw-slave-*: cat: '/sys/kernel/debug/soundwire/master-1-0/sdw-slave-*': No such file or directory
+-- /sys/kernel/debug/soundwire/master-4-0
+ls: cannot access '/sys/kernel/debug/soundwire/master-4-0': No such file or directory
+/sys/kernel/debug/soundwire/master-4-0/sdw-slave-*: cat: '/sys/kernel/debug/soundwire/master-4-0/sdw-slave-*': No such file or directory
+== lpass gpio
+gpiochip1: 23 GPIOs, parent: platform/7760000.pinctrl, 7760000.pinctrl, can sleep:
+ gpio0   : in  0 2mA pull down
+ gpio1   : in  0 2mA pull down
+ gpio2   : in  0 2mA pull down
+ gpio3   : in  0 2mA pull down
+ gpio4   : in  0 2mA pull down
+ gpio5   : in  0 2mA pull down
+ gpio6   : out 1 8mA no pull
+ gpio7   : in  1 8mA no pull
+ gpio8   : in  0 2mA pull down
+ gpio9   : in  0 2mA pull down
+ gpio10  : in  2 2mA no pull
+ gpio11  : in  2 2mA keeper
+ gpio12  : out 0 2mA no pull
+ gpio13  : in  0 2mA pull down
+ gpio14  : in  0 2mA pull down
+ gpio15  : in  0 2mA pull down
+ gpio16  : in  0 2mA pull down
+ gpio17  : in  0 2mA pull down
+ gpio18  : in  0 2mA pull down
+ gpio19  : in  0 2mA pull down
+ gpio20  : in  0 2mA pull down
+ gpio21  : in  0 2mA pull down
+ gpio22  : in  0 2mA pull down
+
+gpiochip2: 1 GPIOs, parent: auxiliary/gpiolib_shared.proxy.7, gpiolib_shared.proxy.7, can sleep:
+
+gpiochip3: 1 GPIOs, parent: auxiliary/gpiolib_shared.proxy.8, gpiolib_shared.proxy.8, can sleep:
+ gpio-0   (                    |reset               ) out hi ACTIVE LOW
+
+== pinctrl handles
+pin 10 (gpio10): 6c80000.soundwire (GPIO UNCLAIMED) function wsa_swr_clk group gpio10
+pin 11 (gpio11): 6c80000.soundwire (GPIO UNCLAIMED) function wsa_swr_data group gpio11
+pin 12 (gpio12): (MUX UNCLAIMED) 7760000.pinctrl:775
+pin 13 (gpio13): (MUX UNCLAIMED) (GPIO UNCLAIMED)
+pin 14 (gpio14): (MUX UNCLAIMED) (GPIO UNCLAIMED)
+pin 15 (gpio15): (MUX UNCLAIMED) (GPIO UNCLAIMED)
+== journal wsa/sdw all
+Jul 28 02:14:02 glymur kernel: OF: reserved mem: 0x000000008d800000..0x000000008d87ffff (512 KiB) nomap non-reusable q6-adsp-dtb@8d800000
+Jul 28 02:14:02 glymur kernel: OF: reserved mem: 0x0000000091900000..0x000000009197ffff (512 KiB) nomap non-reusable q6-cdsp-dtb@91900000
+Jul 28 02:14:02 glymur kernel: qcom_q6v5_pas d00000.remoteproc: failed to get shutdown_state: -22
+Jul 28 02:14:08 glymur kernel: qcom-apm gprsvc:service:2:1: CMD timeout for [1001021] opcode
+Jul 28 02:14:08 glymur kernel: snd-x1e80100 sound: ASoC: Parent card not yet available, widget card binding deferred
+Jul 28 02:14:11 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon
+Jul 28 02:14:11 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon
+Jul 28 02:14:11 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon
+Jul 28 02:14:11 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon
+Jul 28 02:14:12 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon
+Jul 28 02:14:12 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon
+Oct 21 20:03:55 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon
+Oct 21 20:03:55 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon
+Oct 21 20:07:14 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR bus clsh detected
+Oct 21 20:12:41 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon
+Oct 21 20:12:41 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon
+== runtime pm
+/sys/bus/soundwire/devices/sdw:1:0:0217:0204:00:0 active UNATTACHED
+/sys/bus/soundwire/devices/sdw:1:0:0217:0204:00:1 active UNATTACHED
+== audio process users
+                     USER        PID ACCESS COMMAND
+/dev/snd/controlC0:  rahul      3410 F.... pipewire
+                     rahul      3421 F.... wireplumber
+/dev/snd/pcmC0D0p:   rahul      3410 F...m pipewire
+/dev/snd/pcmC0D1c:   rahul      3410 F...m pipewire
+/dev/snd/seq:        rahul      3410 F.... pipewire

@@ -1,0 +1,4 @@
+5 s from the default source (Microphone Array), 48 kHz stereo, 2026-10-21 ~20:50:
+L mean -25 rms 833 peak 32768 (first-second transient) last second peak 913
+R mean -25 rms 815 peak 32768 (first-second transient) last second peak 1058
+Room noise only; the raw WAV is kept private in .work/.

@@ -1,0 +1,291 @@
+[sudo: authenticate] Password: 
+== uptime/kernel
+7.3.0-rc4-glymur-15
+ 20:45:50 up 43 min,  1 user,  load average: 0.16, 0.14, 0.48
+== soundwire
+sdw-master-1-0 driver=driver status=cat: /sys/bus/soundwire/devices/sdw-master-1-0/status: No such file or directory
+sdw:1:0:0217:0204:00:0 driver=wsa884x-codec status=UNATTACHED
+sdw:1:0:0217:0204:00:1 driver=wsa884x-codec status=UNATTACHED
+== resets
+ gpio12  : out 0 2mA no pull
+ gpio13  : in  0 2mA pull down
+== aplay -l
+**** List of PLAYBACK Hardware Devices ****
+card 0: MAHUAHPOmniBook [MAHUA-HP-OmniBook-5-16-bf1xxx], device 0: MultiMedia1 Playback (*) []
+  Subdevices: 0/1
+  Subdevice #0: subdevice #0
+== amixer
+Simple mixer control 'Speakers',0
+  Capabilities: pswitch pswitch-joined
+  Playback channels: Mono
+  Mono: Playback [on]
+Simple mixer control 'Mic LED',0
+  Capabilities: cswitch cswitch-joined
+  Capture channels: Mono
+  Mono: Capture [on]
+Simple mixer control 'MultiMedia2 Mixer VA_CODEC_DMA_TX_0',0
+  Capabilities: pswitch
+  Playback channels: Front Left - Front Right
+  Mono:
+  Front Left: Playback [on]
+  Front Right: Playback [off]
+Simple mixer control 'SpkrLeft BOOST',0
+  Capabilities: pswitch pswitch-joined
+  Playback channels: Mono
+  Mono: Playback [on]
+Simple mixer control 'SpkrLeft COMP',0
+  Capabilities: pswitch pswitch-joined
+  Playback channels: Mono
+  Mono: Playback [on]
+Simple mixer control 'SpkrLeft CPS',0
+  Capabilities: pswitch pswitch-joined
+  Playback channels: Mono
+  Mono: Playback [off]
+Simple mixer control 'SpkrLeft DAC',0
+  Capabilities: pswitch pswitch-joined
+  Playback channels: Mono
+  Mono: Playback [on]
+Simple mixer control 'SpkrLeft PA',0
+  Capabilities: volume volume-joined
+  Playback channels: Mono
+  Capture channels: Mono
+  Limits: 0 - 6
+  Mono: 6 [100%] [0.00dB]
+Simple mixer control 'SpkrLeft PBR',0
+  Capabilities: pswitch pswitch-joined
+  Playback channels: Mono
+  Mono: Playback [on]
+Simple mixer control 'SpkrLeft VISENSE',0
+  Capabilities: pswitch pswitch-joined
+  Playback channels: Mono
+  Mono: Playback [off]
+Simple mixer control 'SpkrLeft WSA MODE',0
+  Capabilities: enum
+  Items: 'Speaker' 'Receiver'
+  Item0: 'Speaker'
+Simple mixer control 'SpkrRight BOOST',0
+  Capabilities: pswitch pswitch-joined
+  Playback channels: Mono
+  Mono: Playback [on]
+Simple mixer control 'SpkrRight COMP',0
+  Capabilities: pswitch pswitch-joined
+  Playback channels: Mono
+  Mono: Playback [on]
+Simple mixer control 'SpkrRight CPS',0
+  Capabilities: pswitch pswitch-joined
+  Playback channels: Mono
+  Mono: Playback [off]
+Simple mixer control 'SpkrRight DAC',0
+  Capabilities: pswitch pswitch-joined
+  Playback channels: Mono
+  Mono: Playback [on]
+Simple mixer control 'SpkrRight PA',0
+  Capabilities: volume volume-joined
+  Playback channels: Mono
+  Capture channels: Mono
+  Limits: 0 - 6
+  Mono: 6 [100%] [0.00dB]
+Simple mixer control 'SpkrRight PBR',0
+  Capabilities: pswitch pswitch-joined
+  Playback channels: Mono
+  Mono: Playback [on]
+Simple mixer control 'SpkrRight VISENSE',0
+  Capabilities: pswitch pswitch-joined
+  Playback channels: Mono
+  Mono: Playback [off]
+Simple mixer control 'SpkrRight WSA MODE',0
+  Capabilities: enum
+== wpctl
+Audio
+ ├─ Devices:
+ │      51. Built-in Audio                      [alsa]
+ │  
+ ├─ Sinks:
+ │  *   59. Internal Speakers                   [vol: 1.00]
+ │  
+ ├─ Sources:
+ │  *   60. Microphone Array                    [vol: 1.00]
+ │  
+ ├─ Filters:
+ │  
+ └─ Streams:
+        96. GNOME Settings                                              
+             76. monitor_FR     
+             97. monitor_FL     
+             98. input_FR        < Microphone Array:capture_FR	[active]
+             99. input_FL        < Microphone Array:capture_FL	[active]
+       100. GNOME Settings                                              
+             78. monitor_FR     
+             81. monitor_FL     
+             82. input_FR        < Internal Speakers:monitor_FR	[active]
+             83. input_FL        < Internal Speakers:monitor_FL	[active]
+       108. Firefox                                                     
+             88. output_FL       > Internal Speakers:playback_FL	[paused]
+            102. output_FR       > Internal Speakers:playback_FR	[paused]
+
+Video
+         0. Audio/Sink    alsa_output.platform-sound.HiFi__Speaker__sink
+== sink volume/mute
+Volume: 1.00
+Volume: 1.00
+== pw sink state
+        "factory.usage": "factory.name=<factory-name> (library.name=<library-name>) node.name=<string> ",
+      "args": "{\n            #jack.library     = libjack.so.0\n            #jack.server      = null\n            #jack.client-name = PipeWire\n            #jack.connect     = true\n            #tunnel.mode      = duplex  # source|sink|duplex\n            source.props = {\n                #audio.channels = 2\n\t\t#midi.ports = 1\n                #audio.position = [ FL FR ]\n                # extra sink properties\n            }\n            sink.props = {\n                #audio.channels = 2\n\t\t#midi.ports = 1\n                #audio.position = [ FL FR ]\n                # extra sink properties\n            }\n        }",
+      "change-mask": [ "input-ports", "output-ports", "state", "props", "params" ],
+      "state": "idle",
+        "node.name": "Dummy-Driver",
+      "change-mask": [ "input-ports", "output-ports", "state", "props", "params" ],
+      "state": "suspended",
+        "node.name": "Freewheel-Driver",
+      "change-mask": [ "input-ports", "output-ports", "state", "props", "params" ],
+      "state": "suspended",
+        "node.name": "Midi-Bridge",
+      "change-mask": [ "input-ports", "output-ports", "state", "props", "params" ],
+      "state": "suspended",
+        "node.name": "bluez_midi.server",
+      "change-mask": [ "input-ports", "output-ports", "state", "props", "params" ],
+      "state": "running",
+        "api.alsa.pcm.card": 0,
+        "api.alsa.pcm.stream": "playback",
+        "audio.channels": 2,
+        "factory.name": "api.alsa.pcm.sink",
+        "node.name": "alsa_output.platform-sound.HiFi__Speaker__sink",
+            "name": "audio.channels",
+              "audio.channels",
+      "change-mask": [ "input-ports", "output-ports", "state", "props", "params" ],
+      "state": "running",
+        "api.alsa.pcm.card": 0,
+        "api.alsa.pcm.stream": "capture",
+        "audio.channels": 2,
+        "factory.name": "api.alsa.pcm.source",
+        "node.name": "alsa_input.platform-sound.HiFi__Mic__source",
+== proc asound
+ 0 [MAHUAHPOmniBook]: glymur - MAHUA-HP-OmniBook-5-16-bf1xxx
+                      HP-HPOmniBook5Laptop16_bf1xxx-ConfigID-8F47
+id
+pcm0p
+pcm1c
+== kernel log audio
+Jul 28 02:14:02 glymur kernel: OF: reserved mem: initialized node adsp-rpc-remote-heap, compatible id shared-dma-pool
+Jul 28 02:14:02 glymur kernel: OF: reserved mem: 0x00000000ff400000..0x00000000ffbfffff (8192 KiB) map reusable adsp-rpc-remote-heap
+Jul 28 02:14:02 glymur kernel: OF: reserved mem: 0x0000000089e00000..0x000000008d7fffff (59392 KiB) nomap non-reusable adspslpi@89e00000
+Jul 28 02:14:02 glymur kernel: OF: reserved mem: 0x000000008d800000..0x000000008d87ffff (512 KiB) nomap non-reusable q6-adsp-dtb@8d800000
+Jul 28 02:14:02 glymur kernel: CPUidle PSCI: Initialized CPU PM domain topology using OSI mode
+Jul 28 02:14:02 glymur kernel: PM: genpd: Not disabling unused power domains
+Jul 28 02:14:02 glymur kernel: pci 0005:01:00.0: ASPM: default states L1
+Jul 28 02:14:02 glymur kernel: pci 0004:01:00.0: ASPM: default states L1
+Jul 28 02:14:02 glymur kernel: remoteproc remoteproc1: adsp is available
+Jul 28 02:14:02 glymur kernel: remoteproc remoteproc1: powering up adsp
+Jul 28 02:14:02 glymur kernel: remoteproc remoteproc1: Booting fw image qcom/glymur/HP/omnibook-5-16-bf1xxx/qcadsp8480.mbn, size 21432280
+Jul 28 02:14:03 glymur kernel: Modules linked in: xhci_plat_hcd(+) i2c_hid_of i2c_hid_acpi_prp0001 hp_omnibook_5_ec(+) i2c_hid sparse_keymap hid ucsi_glink typec_ucsi pmic_glink_altmode qcom_battmgr aux_hpd_bridge socinfo aes_ce_b
+Jul 28 02:14:03 glymur kernel:  thunderbolt pdr_interface libarc4 i2c_qcom_geni mc camcc_glymur udc_core qcom_smd qcom_pdr_msg evacc_glymur snd_pcm_dmaengine videocc_glymur qcom_aoss dispcc_glymur qcomtee pinctrl_sm8650_lpass_lpi 
+Jul 28 02:14:03 glymur kernel: Modules linked in: xhci_plat_hcd(+) i2c_hid_of i2c_hid_acpi_prp0001 hp_omnibook_5_ec(+) i2c_hid sparse_keymap hid ucsi_glink typec_ucsi pmic_glink_altmode qcom_battmgr aux_hpd_bridge socinfo aes_ce_b
+Jul 28 02:14:03 glymur kernel:  thunderbolt pdr_interface libarc4 i2c_qcom_geni mc camcc_glymur udc_core qcom_smd qcom_pdr_msg evacc_glymur snd_pcm_dmaengine videocc_glymur qcom_aoss dispcc_glymur qcomtee pinctrl_sm8650_lpass_lpi 
+Jul 28 02:14:03 glymur kernel: remoteproc remoteproc1: remote processor adsp is now up
+Jul 28 02:14:03 glymur kernel: qcom,fastrpc 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1: assigned reserved memory node adsp-rpc-remote-heap
+Jul 28 02:14:03 glymur kernel: qcom,apr 6800000.remoteproc:glink-edge.adsp_apps.-1.-1: Adding APR/GPR dev: gprsvc:service:2:1
+Jul 28 02:14:03 glymur kernel: qcom,apr 6800000.remoteproc:glink-edge.adsp_apps.-1.-1: Adding APR/GPR dev: gprsvc:service:2:2
+Jul 28 02:14:04 glymur kernel: Modules linked in: bnep scmi_cpufreq binfmt_misc uas usb_storage snd_soc_hdmi_codec uvcvideo uvc videobuf2_vmalloc qrtr_mhi snd_q6apm(+) apr joydev phy_qcom_eusb2_repeater input_leds hid_multitouch h
+Jul 28 02:14:04 glymur kernel:  videobuf2_dma_contig drm_dp_aux_bus phy_qcom_qmp_combo qcom_stats qcom_common videobuf2_memops drm_display_helper phy_qcom_edp qcom_eud qcom_glink_smem aux_bridge videobuf2_v4l2 qrtr videobuf2_commo
+Jul 28 02:14:04 glymur kernel: Modules linked in: bnep scmi_cpufreq binfmt_misc uas usb_storage snd_soc_hdmi_codec uvcvideo uvc videobuf2_vmalloc qrtr_mhi snd_q6apm(+) apr joydev phy_qcom_eusb2_repeater input_leds hid_multitouch h
+Jul 28 02:14:04 glymur kernel:  videobuf2_dma_contig drm_dp_aux_bus phy_qcom_qmp_combo qcom_stats qcom_common videobuf2_memops drm_display_helper phy_qcom_edp qcom_eud qcom_glink_smem aux_bridge videobuf2_v4l2 qrtr videobuf2_commo
+Jul 28 02:14:05 glymur kernel: Modules linked in: rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device sg bnep scmi_cpufreq binfmt_misc uas usb_storage snd_soc_hdmi_codec uvcvideo uvc videobuf2_vmalloc qrtr_mh
+Jul 28 02:14:05 glymur kernel:  drm_exec qcom_sysmon snd_soc_core spmi dwc3_qcom qcom_spel videobuf2_dma_contig drm_dp_aux_bus phy_qcom_qmp_combo qcom_stats qcom_common videobuf2_memops drm_display_helper phy_qcom_edp qcom_eud qco
+Jul 28 02:14:05 glymur kernel: Modules linked in: rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device sg bnep scmi_cpufreq binfmt_misc uas usb_storage snd_soc_hdmi_codec uvcvideo uvc videobuf2_vmalloc qrtr_mh
+Jul 28 02:14:05 glymur kernel:  drm_exec qcom_sysmon snd_soc_core spmi dwc3_qcom qcom_spel videobuf2_dma_contig drm_dp_aux_bus phy_qcom_qmp_combo qcom_stats qcom_common videobuf2_memops drm_display_helper phy_qcom_edp qcom_eud qco
+Jul 28 02:14:06 glymur kernel: Modules linked in: snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device sg bnep scmi_cpufreq binfmt_misc uas usb_storage snd_soc_hdmi_codec uvcvideo uvc
+Jul 28 02:14:06 glymur kernel:  spmi_devres ubwc_config drm_exec qcom_sysmon snd_soc_core spmi dwc3_qcom qcom_spel videobuf2_dma_contig drm_dp_aux_bus phy_qcom_qmp_combo qcom_stats qcom_common videobuf2_memops drm_display_helper p
+Jul 28 02:14:06 glymur kernel: Modules linked in: snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device sg bnep scmi_cpufreq binfmt_misc uas usb_storage snd_soc_hdmi_codec uvcvideo uvc
+Jul 28 02:14:06 glymur kernel:  spmi_devres ubwc_config drm_exec qcom_sysmon snd_soc_core spmi dwc3_qcom qcom_spel videobuf2_dma_contig drm_dp_aux_bus phy_qcom_qmp_combo qcom_stats qcom_common videobuf2_memops drm_display_helper p
+Jul 28 02:14:08 glymur kernel: qcom-apm gprsvc:service:2:1: CMD timeout for [1001021] opcode
+Jul 28 02:14:08 glymur kernel: wsa_macro 6c90000.codec: Driver needs fixing: Unsorted reg_defaults, sorting the copy
+Jul 28 02:14:08 glymur kernel: wsa_macro 6cb0000.codec: Driver needs fixing: Unsorted reg_defaults, sorting the copy
+Jul 28 02:14:08 glymur kernel: wsa_macro 6c90000.codec: using zero-initialized flat cache, this may cause unexpected behavior
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: supply vdd-io not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: supply vdd-1p8 not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: supply vdd-io not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: supply vdd-1p8 not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: supply vdd-io not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: supply vdd-1p8 not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: supply vdd-io not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: supply vdd-1p8 not found, using dummy regulator
+Jul 28 02:14:08 glymur kernel: snd-x1e80100 sound: ASoC: Parent card not yet available, widget card binding deferred
+Jul 28 02:14:11 glymur kernel: Modules linked in: snd_ctl_led reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6apm_lpass_dais q6prm_clocks q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd
+Jul 28 02:14:11 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon snd_soc_c
+Jul 28 02:14:11 glymur kernel: Modules linked in: snd_ctl_led reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6apm_lpass_dais q6prm_clocks q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd
+Jul 28 02:14:11 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon snd_soc_c
+Jul 28 02:14:11 glymur kernel: Modules linked in: snd_ctl_led reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6apm_lpass_dais q6prm_clocks q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd
+Jul 28 02:14:11 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon snd_soc_c
+Jul 28 02:14:11 glymur kernel: Modules linked in: snd_ctl_led reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6apm_lpass_dais q6prm_clocks q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd
+Jul 28 02:14:11 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon snd_soc_c
+Jul 28 02:14:12 glymur kernel: Modules linked in: snd_ctl_led reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6apm_lpass_dais q6prm_clocks q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd
+Jul 28 02:14:12 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon snd_soc_c
+Jul 28 02:14:12 glymur kernel: Modules linked in: snd_ctl_led reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6apm_lpass_dais q6prm_clocks q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd
+Jul 28 02:14:12 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon snd_soc_c
+Oct 21 20:03:55 glymur kernel: Modules linked in: nls_iso8859_1 snd_ctl_led reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6apm_lpass_dais q6prm_clocks q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm sn
+Oct 21 20:03:55 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon snd_soc_c
+Oct 21 20:03:55 glymur kernel: Modules linked in: nls_iso8859_1 snd_ctl_led reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6apm_lpass_dais q6prm_clocks q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm sn
+Oct 21 20:03:55 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon snd_soc_c
+Oct 21 20:07:14 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR bus clsh detected
+Oct 21 20:12:41 glymur kernel: Modules linked in: nls_iso8859_1 snd_ctl_led reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6apm_lpass_dais q6prm_clocks q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm sn
+Oct 21 20:12:41 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon snd_soc_c
+Oct 21 20:12:41 glymur kernel: Modules linked in: nls_iso8859_1 snd_ctl_led reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6apm_lpass_dais q6prm_clocks q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm sn
+Oct 21 20:12:41 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon snd_soc_c
+== recent errors
+Jul 28 02:14:03 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Jul 28 02:14:03 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Jul 28 02:14:03 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Jul 28 02:14:03 glymur kernel: hp-omnibook-5-ec 9-0076: probe with driver hp-omnibook-5-ec failed with error -22
+Jul 28 02:14:03 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier a800000.usb for /pmic-glink/connector@1
+Jul 28 02:14:03 glymur kernel: Bluetooth: hci0: QCA Failed to request file: qca/ornbcscal11.bin (-2)
+Jul 28 02:14:04 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Jul 28 02:14:04 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Jul 28 02:14:04 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Jul 28 02:14:04 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Jul 28 02:14:05 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Jul 28 02:14:05 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Jul 28 02:14:05 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Jul 28 02:14:05 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Jul 28 02:14:06 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Jul 28 02:14:06 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Jul 28 02:14:06 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Jul 28 02:14:06 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Jul 28 02:14:08 glymur kernel: qcom-apm gprsvc:service:2:1: CMD timeout for [1001021] opcode
+Jul 28 02:14:11 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Jul 28 02:14:11 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Jul 28 02:14:11 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Jul 28 02:14:11 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Jul 28 02:14:11 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Jul 28 02:14:11 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Jul 28 02:14:11 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Jul 28 02:14:11 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Jul 28 02:14:12 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Jul 28 02:14:12 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Jul 28 02:14:12 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Jul 28 02:14:12 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 21 20:03:55 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 21 20:03:55 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 21 20:03:55 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 21 20:03:55 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 21 20:07:14 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR bus clsh detected
+Oct 21 20:12:41 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 21 20:12:41 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 21 20:12:41 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 21 20:12:41 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+== wireplumber/pipewire journal
+Jul 28 02:14:10 glymur systemd[3378]: Started pipewire.service - PipeWire Multimedia Service.
+Jul 28 02:14:10 glymur systemd[3378]: Started wireplumber.service - Multimedia Service Session Manager.
+Jul 28 02:14:11 glymur wireplumber[3421]: [0:00:11.055813631] [3421]  INFO Camera camera_manager.cpp:340 libcamera v0.7.0
+Jul 28 02:14:11 glymur wireplumber[3421]: [0:00:11.059217607] [3527] ERROR MediaDevice media_device.cpp:511 /dev/media0[]: Failed to open media device at /dev/media0: Permission denied
+Jul 28 02:14:11 glymur wireplumber[3421]: [0:00:11.059241514] [3527]  INFO DeviceEnumerator device_enumerator.cpp:269 Unable to populate media device /dev/media0 (Permission denied), skipping
+Jul 28 02:14:11 glymur wireplumber[3421]: [0:00:11.059249170] [3527]  WARN DeviceEnumerator device_enumerator_udev.cpp:198 Failed to add device for '/sys/devices/platform/soc@0/a200000.usb/xhci-hcd.2.auto/usb1/1-1/1-1:1.0/media0', skipping
+Jul 28 02:14:11 glymur wireplumber[3421]: [0:00:11.059427712] [3527] ERROR MediaDevice media_device.cpp:511 /dev/media1[]: Failed to open media device at /dev/media1: Permission denied
+Jul 28 02:14:11 glymur wireplumber[3421]: [0:00:11.059431723] [3527]  INFO DeviceEnumerator device_enumerator.cpp:269 Unable to populate media device /dev/media1 (Permission denied), skipping
+Jul 28 02:14:11 glymur wireplumber[3421]: [0:00:11.059434640] [3527]  WARN DeviceEnumerator device_enumerator_udev.cpp:198 Failed to add device for '/sys/devices/platform/soc@0/a200000.usb/xhci-hcd.2.auto/usb1/1-1/1-1:1.2/media1', skipping
+Jul 28 02:14:11 glymur wireplumber[3421]: [0:00:11.059827767] [3527] ERROR DmaBufAllocator dma_buf_allocator.cpp:119 Could not open any dma-buf provider
+Jul 28 02:14:11 glymur wireplumber[3421]: spa.v4l2: Cannot open '/dev/video0': 110, Connection timed out
+Jul 28 02:14:11 glymur wireplumber[3421]: spa.v4l2: Cannot open '/dev/video1': 110, Connection timed out
+== remoteproc
+remoteproc0 soccp attached
+remoteproc1 adsp running
+remoteproc2 cdsp running
