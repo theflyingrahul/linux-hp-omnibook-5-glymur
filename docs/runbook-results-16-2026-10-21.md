@@ -13,7 +13,7 @@ The microphone recording is not committed.
 | Mute LEDs | EC LED 8 lights F6, LED 9 lights F9, both confirmed by eye |
 | Desktop mute | speaker mute lights F6, mic mute lights F9; a muted recording is silent |
 | F6 key | GNOME shows the mute icon and the LED follows |
-| F9 key | **no GNOME icon**; the LED follows |
+| F9 key | **does nothing**: no GNOME icon, the microphone is not muted and the LED stays off (`check-audio.sh` read `micmute 0` and the source unmuted after F9) |
 | Hotkey capture | only the keyboard HID device reported keys; every EC event read returned `00` (268 reads) |
 | Rails | `vreg_l15b_e0_1p8` and `vreg_l18b_e0_1p2` enabled; USB-A and the camera enumerate |
 | Stress (120 s, 12 cores) | 67 °C peak, fan to 3766 rpm, CPUs 3.4-4.0 GHz, no throttling |
@@ -70,7 +70,8 @@ keyboard's own HID device:
 - A second press arrives as **Ctrl + `KEY_F17`** (usage `0x7006c`). The
   mic-mute key, F9, is the likely sender; this is inferred from the order
   of presses, not tested alone. Nothing in GNOME binds Ctrl+F17, which would
-  explain the missing microphone-mute icon even though the LED follows.
+  explain why F9 neither shows an icon nor mutes the microphone; the LED
+  follows only a software mute, not the key.
 - F11, F5 and Fn produced nothing on any device. F5 (backlight) is handled
   inside the EC, so that is expected.
 
@@ -103,3 +104,8 @@ and `Discharging` again at 10 s samples while `ac` and `usb` stayed `0`
 (battmgr's AC and USB supplies do not follow USB-C charging; the UCSI source
 supply does). No timeout or hang appeared. Raw log:
 `captures/2026-10-21-runbook-16/battmgr-notify-20261021T233919.txt`.
+
+Correction: an earlier line of this note said the F9 LED follows the key. It
+follows a software mute and the manual LED test, but pressing F9 changed
+nothing (the audio check's own readback after F9: source not muted,
+`platform::micmute` 0, 48 EC interrupts in that window).
