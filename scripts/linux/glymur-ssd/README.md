@@ -260,6 +260,20 @@ EC interrupt count across F9. It no longer unbinds the amplifier driver,
 which crashed kernel `-14` (`docs/audio-mute-leds-2026-10-20.md`). The log
 goes to `/var/log/glymur/audio-test-*.txt`.
 
+### `watch-audio.sh`
+
+    sudo bash watch-audio.sh [seconds]
+
+Leave it running while using the laptop (default 30 minutes). It logs the
+speaker amplifiers' SoundWire status and runtime-PM state, the SoundWire
+master's, and the L15B/L18B rails once a second whenever one changes, with a
+full dump (reset line, rail use counts, the last kernel messages about
+SoundWire, the amplifiers and the APM) at each change, and turns on the
+SoundWire and `wsa884x` driver debug messages through dynamic debug. It is
+how to find what makes the amplifiers leave the bus
+(`docs/audio-speakers-down-2026-10-21.md`). The log goes to
+`/var/log/glymur/audio-watch-*.txt`.
+
 ### `check-video.sh`
 
     sudo bash check-video.sh
