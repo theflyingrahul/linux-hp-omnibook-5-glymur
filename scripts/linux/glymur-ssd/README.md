@@ -369,8 +369,8 @@ Run by `glymur-boot-report.service` 60 s after each boot; it writes
 
     sudo bash check-hotkeys.sh
 
-From kernel `-16`. Asks for one special key at a time (F9 twice, F11 twice,
-F6, F5, Fn alone, the Copilot key), ending each step with Enter, and prints
+From kernel `-16`. Asks for one special key at a time (F1 to F12 on their
+own, then each with Fn held, then Fn alone and the Copilot key), ending each step with Enter, and prints
 the key codes the kernel saw from the keyboard, the touchpad's consumer
 collection, the EC input device and `gpio-keys`. It settles which key sends
 what, for the mic-mute work (`docs/runbook-results-16-2026-10-21.md`). The
