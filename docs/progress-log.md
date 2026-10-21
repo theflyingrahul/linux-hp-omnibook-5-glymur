@@ -5,6 +5,21 @@ The bring-up's dated log, newest first, moved here from the README on
 in [`status.md`](status.md); the detailed evidence is in the dated notes in
 this directory.
 
+**2026-10-21, later: kernel `-16` built for the four open problems of `-15`.**
+The EC's thermal zones are renamed (`ec-therm1…4-thermal`), the fix of the
+EC probe failure. The speaker amplifiers get the supplies every reference
+board gives them (L15B 1.8 V, L18B 1.2 V, always on, at HP's voltages);
+`-15` left them as dummy regulators, which may be why they drop off the
+SoundWire bus after a clash, and `watch-audio.sh` logs the trigger for the
+next boot. Iris runs as `qcom,mahua-iris` with one video core
+(`upstream/qcom-next/0008`), because the second core's GDSC never came on.
+DisplayPort is off again in the test device tree: the failed EDID read and
+the display controller's hang trace back to an AUX or alt-mode failure and a
+path that commits to a dead link; Qualcomm's newer Glymur DP PHY series is
+not taken (it does not merge into our older revisions and the PHY carries
+working USB-C). Nothing is booted yet. See
+`docs/kernel-16-plan-2026-10-21.md`.
+
 **2026-10-21: runbook on kernel `-15`; the EC never bound.** The test
 device tree's thermal zone `ec-thermistor-1-thermal` is over the kernel's
 19-character limit, so the EC's hwmon registration, and with it the whole EC
