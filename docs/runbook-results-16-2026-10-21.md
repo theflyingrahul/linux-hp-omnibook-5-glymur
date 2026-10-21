@@ -17,29 +17,37 @@ The microphone recording is not committed.
 | Hotkey capture | only the keyboard HID device reported keys; every EC event read returned `00` (268 reads) |
 | Rails | `vreg_l15b_e0_1p8` and `vreg_l18b_e0_1p2` enabled; USB-A and the camera enumerate |
 | Stress (120 s, 12 cores) | 67 °C peak, fan to 3766 rpm, CPUs 3.4-4.0 GHz, no throttling |
-| Video | **fails**, see below |
-| Speakers | **silent**, see below |
+| Video | `check-video.sh` (Iris, `h264_v4l2m2m`) **fails**; playback in Firefox works, in software |
+| Speakers | **work** by ear; the check's tone is flaky, see below |
 
 ## Video
 
-The decoder and encoder devices exist, but every H.264 decode fails at once.
-The firmware answers the one-core Iris configuration of `-16` with
+The decoder and encoder devices exist, but `check-video.sh` fails: every
+H.264 decode through `h264_v4l2m2m` errors at once. The firmware answers the
+one-core Iris configuration of `-16` with
 `vDec_SetProperty_c2: Configured core 1 is not supported` and
 `vDec_Start: Configured core 0 is not supported` (`Monitor=88000800`). Both
 cores are refused, so the second core was not the whole problem.
 
+The owner then played video in Firefox and it works. That is software
+decoding: the `iris` interrupt count stayed at 22, all from the failed test,
+and no Iris errors followed.
+
 ## Speakers
 
-No tone on either speaker (left and right both "none"). `vdd-io not found` no
-longer appears, and both amplifiers read `Attached` at rest. One
-`SWR bus clsh detected` came about a minute after boot.
+By ear the speakers work on `-16` (the owner, later the same night). The
+`vdd-io not found` message is gone and both amplifiers read `Attached`. One
+`SWR bus clsh detected` came about a minute after boot and did no lasting
+harm.
 
-`watch-audio.sh` shows the bus runtime-suspending and resuming. At 23:22:23,
-as the tone test started, the master resumed and both amplifiers reported
-`UNATTACHED`; they re-enumerated at 23:22:49. The tones lasted a few seconds
-from about 23:22:25, so they probably played while the amplifiers were not
-attached. This is a reading of two logs, not a proven cause; the watch was
-still running when this was written.
+The check's 1 kHz tone is flaky: sometimes it plays, sometimes not. The
+first run, with the tone silent, matches the watch log: the bus
+runtime-suspends and resumes, and at 23:22:23, as the tone started, both
+amplifiers reported `UNATTACHED` and re-enumerated at 23:22:49. A tone sent
+in that window is lost. This is a reading of two logs, not a proven cause.
+`check-audio.sh` now plays a second of silence and waits for both amplifiers
+to attach before the tones. A delay of that size after a resume is also
+something a listener would notice, so it is worth a look in the kernel.
 
 ## Ubuntu 26.10 upgrade
 

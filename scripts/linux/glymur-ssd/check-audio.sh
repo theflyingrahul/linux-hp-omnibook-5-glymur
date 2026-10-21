@@ -122,6 +122,22 @@ PY
     chown "$SUDO_USER" "$WAV"/*.wav
     asuser wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
     asuser wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.5
+    # The amplifiers detach when the bus runtime-suspends and need a while to
+    # re-attach; a tone sent in that window is lost, so wake them first.
+    python3 - "$WAV" <<'PY'
+import sys, wave
+w = wave.open(sys.argv[1] + '/wake.wav', 'w')
+w.setnchannels(2); w.setsampwidth(2); w.setframerate(48000)
+w.writeframes(b'\0' * 4 * 48000); w.close()
+PY
+    chown "$SUDO_USER" "$WAV/wake.wav"
+    asuser pw-play "$WAV/wake.wav" 2>&1 | tail -2
+    for i in $(seq 1 40); do
+        n=$(cat /sys/bus/soundwire/devices/sdw:*/status 2>/dev/null | grep -c '^Attached$')
+        [ "$n" -ge 2 ] && break
+        sleep 1
+    done
+    echo "amplifiers attached: $n of 2 after the wake-up"
     for side in left right; do
         echo "playing $side"
         asuser pw-play "$WAV/$side.wav" 2>&1 | tail -2
