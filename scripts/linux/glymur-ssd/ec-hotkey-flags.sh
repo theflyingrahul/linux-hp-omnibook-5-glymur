@@ -6,6 +6,8 @@ set -u
 # Windows driver does. Sets each flag with the driver unbound, watches EC
 # register 0x05 while F9 and F11 are pressed, then clears the flag again.
 # See docs/runbook-results-16-2026-10-21.md.
+# Flag 0x80 (APET) is the action-keys mode: clearing it turns F1-F12 into
+# plain function keys (media row off), so the script leaves it set at the end.
 #   sudo bash ec-hotkey-flags.sh
 
 [ "$(id -u)" -eq 0 ] || { echo 'run with sudo' >&2; exit 1; }
@@ -30,7 +32,7 @@ cmd() {
     echo "cmd $1 $2: status $(st) (no 0xe0)"
 }
 cleanup() {
-    cmd 0x01 0x00 >> "$OUT" 2>&1; cmd 0x01 0x01 >> "$OUT" 2>&1
+    cmd 0x01 0x80 >> "$OUT" 2>&1
     [ -e $DRV/$BUS-0076 ] || echo "$BUS-0076" > $DRV/bind 2>/dev/null
     sleep 1
     # a new LED device starts without the audio triggers
@@ -65,7 +67,7 @@ trial() {  # name, then the cmd sub pairs to set
 
 trial "no flag set (baseline)"
 trial "APET 0x80" 0x01 0x80
-cmd 0x01 0x00 | tee -a "$OUT"
+cmd 0x01 0x80 | tee -a "$OUT"
 trial "SCET 0x81" 0x01 0x81
 cmd 0x01 0x01 | tee -a "$OUT"
 trial "APET and SCET together" 0x01 0x80 0x01 0x81

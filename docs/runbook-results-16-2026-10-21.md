@@ -189,3 +189,19 @@ not even F5, whose event `0x0d` HP's AML expects. So the EC raises no hotkey
 events in its present state. Next: a second pass with the reference command
 `0x35` ("enable SCI events"; the driver for Qualcomm's EC writes `1` to it
 at probe), which the script now offers.
+
+## Flag 0x80 is the action-keys mode (2026-10-22)
+
+After the flag experiments the function row sent plain `F7`/`F8` (codes 65 and
+66) instead of `VOLUMEDOWN`/`VOLUMEUP`. `ec-hotkey-flags.sh` had cleared flag
+`0x80` (APET) at the end of each trial and at exit. Setting `0x80` again
+(mailbox command `0x01`, sub-command `0x80`) brought the media keys back
+(confirmed by the owner and a key capture), so **APET is the action-keys
+mode**: set, F1-F12 send their media functions; clear, plain F-keys. The
+state is in the EC and survives the driver being unbound.
+
+The script was cleared both flags and left them that way; `0x80` is now
+restored and the script leaves it set. `0x81` (SCET) was also cleared
+(`0x01`) and is not restored: its original state is not known and nothing
+visible depends on it so far. Lesson: read a state before changing it; no
+register is known to read back a flag.
