@@ -19,9 +19,18 @@
  *   Mahua CRD includes), with HP's signed video firmware;
  * - DisplayPort over both USB-C ports (DP alt mode);
  * - HP's skin-temperature limits on the EC thermistors.
+ *
+ * Changed for kernel -16 (docs/kernel-16-plan-2026-10-21.md):
+ * - the EC thermal zones are named ec-therm1..4-thermal (the kernel limits
+ *   zone names to 19 characters; the -15 names made the EC probe fail);
+ * - the speaker amplifiers get their two supplies, L15B and L18B, which
+ *   are held on at HP's voltages;
+ * - Iris uses the one-core Mahua variant (qcom,mahua-iris);
+ * - DisplayPort is off again: plugging a monitor crashed -15.
  */
 /dts-v1/;
 
+#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
 #include <dt-bindings/sound/qcom,q6dsp-lpass-ports.h>
 #include "mahua-hp-omnibook-5-bf1xxx.dts"
 
@@ -42,8 +51,14 @@
 	 * layout); check-audio.sh's unbind/rebind check tests it. The model
 	 * names the topology, qcom/glymur/<model>-tplg.bin, built from
 	 * boards/hp-omnibook-5-16-bf1xxx/audio/MAHUA-HP-OmniBook-5-16-bf1xxx.m4.
-	 * No PMIC rail is declared: the amplifiers and the DMIC bias run on
-	 * what HP's firmware leaves on (L15B, L18B, L1B).
+	 * From kernel -16 the amplifiers' two supplies are declared (see
+	 * &apps_rsc below). -15 left them as dummy regulators, so Linux held
+	 * neither L15B nor L18B, and both amplifiers left the bus a few
+	 * minutes after a bus clash (docs/audio-speakers-down-2026-10-21.md).
+	 * The Glymur CRD, the ASUS Zenbook A14, the HP EliteBook X G2q and the
+	 * ThinkPad T14s Gen 7 all give the WSA884x these two supplies. Whether
+	 * that is the cause here is untested. The DMIC bias (L1B) still runs
+	 * on what HP's firmware leaves on.
 	 */
 	sound {
 		compatible = "qcom,glymur-sndcard";
@@ -103,6 +118,8 @@
 		reset-gpios = <&lpass_tlmm 12 GPIO_ACTIVE_LOW>;
 		#sound-dai-cells = <0>;
 		sound-name-prefix = "SpkrLeft";
+		vdd-1p8-supply = <&vreg_l15b_e0_1p8>;
+		vdd-io-supply = <&vreg_l18b_e0_1p2>;
 		qcom,port-mapping = <1 2 3 7 12 14>;
 	};
 
@@ -112,7 +129,42 @@
 		reset-gpios = <&lpass_tlmm 12 GPIO_ACTIVE_LOW>;
 		#sound-dai-cells = <0>;
 		sound-name-prefix = "SpkrRight";
+		vdd-1p8-supply = <&vreg_l15b_e0_1p8>;
+		vdd-io-supply = <&vreg_l18b_e0_1p2>;
 		qcom,port-mapping = <4 5 6 7 13 15>;
+	};
+};
+
+/*
+ * The two rails of the speaker amplifiers (WSA884x vdd-1p8 and vdd-io), on
+ * PMH0101 (B_E0) as on the CRD. HP's own PEP votes: LDO15_B 1.8 V
+ * (ACDResources.bin, ASCDResources.bin, and the USB ports) and LDO18_B
+ * 1.2 V (the display, SDC2). Both are shared with other consumers (L15B
+ * feeds the USB PHYs and eUSB2 repeaters, L18B the display), so they are
+ * always on, as the display lab does (lab-rails.dtso).
+ */
+&apps_rsc {
+	regulators-0 {
+		compatible = "qcom,pmh0101-rpmh-regulators";
+		qcom,pmic-id = "B_E0";
+
+		vreg_l15b_e0_1p8: ldo15 {
+			regulator-name = "vreg_l15b_e0_1p8";
+			regulator-min-microvolt = <1800000>;
+			regulator-max-microvolt = <1800000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+			regulator-always-on;
+			regulator-boot-on;
+		};
+
+		vreg_l18b_e0_1p2: ldo18 {
+			regulator-name = "vreg_l18b_e0_1p2";
+			regulator-min-microvolt = <1200000>;
+			regulator-max-microvolt = <1200000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+			regulator-always-on;
+			regulator-boot-on;
+		};
 	};
 };
 
@@ -267,26 +319,16 @@
 };
 
 /*
- * DisplayPort over USB-C (docs/external-display-2026-10-20.md): DP0 and DP1
- * reach the USB-C connectors through usb_0_qmpphy and usb_1_qmpphy, which
- * glymur.dtsi already links; hot-plug comes from pmic_glink altmode. As on
- * HP's EliteBook X G2q (Glymur) and the ThinkPad T14s Gen 7 (Mahua).
+ * DisplayPort over USB-C (docs/external-display-2026-10-20.md) is off again
+ * after kernel -15: with &mdss_dp0 and &mdss_dp1 enabled, plugging a monitor
+ * made the EDID read fail, then the display controller timed out until the
+ * machine reset (docs/runbook-results-2026-10-21.md). The two nodes, the
+ * USB-C PHY links and the pmic_glink altmode ports stay as glymur.dtsi has
+ * them. To test again, enable &mdss_dp0 and &mdss_dp1 with
+ * link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000
+ * 8100000000> on their out endpoints, and read
+ * docs/kernel-16-plan-2026-10-21.md first.
  */
-&mdss_dp0 {
-	status = "okay";
-};
-
-&mdss_dp0_out {
-	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
-};
-
-&mdss_dp1 {
-	status = "okay";
-};
-
-&mdss_dp1_out {
-	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
-};
 
 /*
  * Iris video codec (docs/video-iris-2026-10-20.md). The node is the Glymur
@@ -296,6 +338,7 @@
  * load Windows' qcvss image the same way (ThinkPad X13s, IdeaCentre Mini).
  */
 &iris {
+	compatible = "qcom,mahua-iris", "qcom,glymur-iris";
 	firmware-name = "qcom/glymur/HP/omnibook-5-16-bf1xxx/qcvss8480.mbn";
 
 	status = "okay";

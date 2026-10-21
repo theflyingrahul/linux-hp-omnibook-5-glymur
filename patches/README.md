@@ -23,7 +23,7 @@ Apply to qcom-next `1a0586064ee1` (tag `qcom-next-7.3-rc4-20261014`, the
 qcom-next tip on 2026-10-17, from kernel `-13`; it was `6b4daa845239` for
 `-8` to `-12`, `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to `-4`)
 in order:
-`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0007`,
+`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0008`,
 `glymur-bringup/0001–0002`, then `backports/` (`0001–0002`, `0013–0014`,
 `0017–0021`, `0023–0026`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
@@ -88,6 +88,26 @@ drivers, `8cb5c17be3` "i2c: qcom-geni: Restore the source-clock selection
 policy"; it fixes `cb97bf3d4f`, which qcom-next never took, and qcom-next
 already uses the policy it restores, so neither is needed. A fresh
 `prepare` reproduces the build tree.
+
+Kernel `-16` (2026-10-21) adds `upstream/qcom-next/0008`, "media: iris:
+add a one-core variant for Mahua": `qcom,mahua-iris` (fallback
+`qcom,glymur-iris`, as for Nord) with the Glymur platform data and
+`num_cores = 1`. On the HP OmniBook 5 the Glymur data powers a second
+video core whose GDSC (`video_cc_mvs1_gdsc`) never comes on, and Mahua's
+device tree drops the second video thermal zone; whether Mahua really has
+one core is not confirmed, so it is not for upstream yet
+(`docs/kernel-16-plan-2026-10-21.md`). Fetched before it: qcom-next still
+`1a0586064ee1`; mainline `v7.3-1703-ga804c5742b` has no new commit in our
+drivers (the `drm/msm/dp` fixes `e249a6e2a1` and `707ce10252` are in the
+base and `backports/0020`; `58995b11df` fixes mode validation under wide
+bus and does not touch our failure). Looked at and not taken: the Linux
+MSM laptops tree's Glymur DP PHY series (11 patches, v5, `1d2d3337824a` to
+`d11873c94ea1`). qcom-next carries older revisions of the first three and
+parts of the rest, and the two do not merge (20 conflicts in
+`phy-qcom-qmp-combo.c` that are not mechanical); the same PHY carries
+USB-C SuperSpeed, which works. The DTS changes of `-16` (EC zone names,
+amplifier supplies, Iris compatible, DisplayPort off) are in the test
+device tree only. A fresh `prepare` reproduces the build tree.
 
 qcom-next stays the base. The Linux MSM laptops kernel
 (`https://github.com/linux-msm/laptops-kernel`, `topic/glymur-laptops`) was
