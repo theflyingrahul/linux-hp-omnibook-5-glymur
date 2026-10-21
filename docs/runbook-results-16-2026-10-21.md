@@ -200,7 +200,7 @@ After the flag experiments the function row sent plain `F7`/`F8` (codes 65 and
 mode**: set, F1-F12 send their media functions; clear, plain F-keys. The
 state is in the EC and survives the driver being unbound.
 
-The script was cleared both flags and left them that way; `0x80` is now
+The script cleared both flags and left them that way; `0x80` is now
 restored and the script leaves it set. `0x81` (SCET) was also cleared
 (`0x01`) and is not restored: its original state is not known and nothing
 visible depends on it so far. Lesson: read a state before changing it; no
