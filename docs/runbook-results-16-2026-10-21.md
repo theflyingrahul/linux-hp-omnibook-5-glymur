@@ -89,3 +89,17 @@ switch, consistent with unplugging a cable). The battery read `Charging` at
 74 % while the AC supply and the USB-C source both read `online=0`
 afterwards, so the status was stale for a moment or the charger had just
 gone.
+
+## Battery-manager notifications (`check-battmgr-notify.sh`, 60 s, plug and unplug)
+
+`qcom_battmgr_state_callback`, the function `backports/0023` adds for the
+Glymur firmware's state notifications, was called **0 times**. The regular
+`qcom_battmgr_callback` ran 2,076 times, in bursts (up to 257 calls in a
+second, median 17) with a once-a-second beat between them. So on this laptop
+the firmware did not send the state notifications on a plug or unplug, and
+the premise of that patch is not confirmed here; the battery still changed
+state, through the regular path. The status read `Discharging`, `Charging`
+and `Discharging` again at 10 s samples while `ac` and `usb` stayed `0`
+(battmgr's AC and USB supplies do not follow USB-C charging; the UCSI source
+supply does). No timeout or hang appeared. Raw log:
+`captures/2026-10-21-runbook-16/battmgr-notify-20261021T233919.txt`.
