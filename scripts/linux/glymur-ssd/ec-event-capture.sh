@@ -35,6 +35,7 @@ sleep 0.5
 echo "unbound; reg00=$(i2cget -y $BUS $ADDR 0x00) reg05=$(i2cget -y $BUS $ADDR 0x05)" | tee -a "$OUT"
 i2cset -y $BUS $ADDR 0x00 0x00 && echo "acknowledged register 0x00 (wrote 0)" | tee -a "$OUT"
 
+# (pass 2 is optional)
 # one line per falling edge: time, reg00, reg05; a non-zero reg00 is acknowledged
 (
     stdbuf -oL gpiomon --chip $CHIP --edges falling $PIN 2>/dev/null | while read -r _; do
@@ -47,12 +48,24 @@ W=$!
 sleep 1
 echo "line quiet check: $(wc -l < "$EDGES") edges in the first second" | tee -a "$OUT"
 
-for key in "F9 (microphone mute)" "F9 (microphone mute)" "F11" "F6 (speaker mute)" "F5 (keyboard backlight)" "Fn alone"; do
-    n=$(wc -l < "$EDGES")
-    read -r -p "Press $key ONCE, then press Enter: " _ </dev/tty
-    sleep 0.7
-    got="$(tail -n +$((n + 1)) "$EDGES" | sed 's/^/    /')"
-    echo "$key -> $(printf '%s' "$got" | grep -c .) edge(s)" | tee -a "$OUT"
-    [ -n "$got" ] && printf '%s\n' "$got" | tee -a "$OUT"
-done
+keys() {
+    for key in "F9 (microphone mute)" "F9 (microphone mute)" "F11" "F6 (speaker mute)" "F5 (keyboard backlight)" "Fn alone"; do
+        n=$(wc -l < "$EDGES")
+        read -r -p "Press $key ONCE, then press Enter: " _ </dev/tty
+        sleep 0.7
+        got="$(tail -n +$((n + 1)) "$EDGES" | sed 's/^/    /')"
+        echo "$key -> $(printf '%s' "$got" | grep -c .) edge(s)" | tee -a "$OUT"
+        [ -n "$got" ] && printf '%s\n' "$got" | tee -a "$OUT"
+    done
+}
+
+echo "== pass 1: events as the EC is" | tee -a "$OUT"
+keys
+
+read -r -p "Second pass with the reference 'enable SCI events' command (write 1 to register 0x35, written back to 0 at the end)? y/N: " yn </dev/tty
+if [ "$yn" = y ]; then
+    i2cset -y $BUS $ADDR 0x35 0x01 && echo "== pass 2: register 0x35 set to 1" | tee -a "$OUT"
+    keys
+    i2cset -y $BUS $ADDR 0x35 0x00 && echo "register 0x35 back to 0" | tee -a "$OUT"
+fi
 echo "Saved to $OUT"

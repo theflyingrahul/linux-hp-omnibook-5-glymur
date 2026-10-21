@@ -165,3 +165,27 @@ What remains: the reference "enable events" command `0x35` (HP's AML never
 writes it), HP's `HPIC0003` application driver and `HPIC0005` mute-LED device
 (evidence from Windows: how it sets up hotkeys), and the vendor HID
 collection.
+
+## The stuck event in register 0x00 (2026-10-22)
+
+HP's AML reads the event through the field `CMD5`, which starts at offset 0,
+so the register is `0x00`, not `0x05`. A read-only scan of registers
+`0x00`-`0x0f` found `0x00` = `0x30` (the reference code for "fan 1 status
+change") and everything else zero. Writing `0` to register `0x00`, as HP's
+AML does to acknowledge, cleared it, and the line on GPIO 66, which had
+fallen every 118 ms, then stayed quiet (checked with `gpiomon` for 6 s).
+So the nine interrupts a second were one old event, never acknowledged
+because the driver acknowledges register `0x05`.
+
+(A reading I took at the time, "0 interrupts in 10 s" from
+`/proc/interrupts`, was an empty read: after an unbind and rebind of the
+driver the EC interrupt is no longer requested and the line is missing from
+the file until the next boot. The `gpiomon` result is the valid one. Also
+open: why a rebind loses the interrupt.)
+
+With the line quiet, `ec-event-capture.sh` saw **no falling edge for any
+key**: F9 (twice), F11, F6, F5 and Fn alone (`ec-events-20261022T002306.txt`),
+not even F5, whose event `0x0d` HP's AML expects. So the EC raises no hotkey
+events in its present state. Next: a second pass with the reference command
+`0x35` ("enable SCI events"; the driver for Qualcomm's EC writes `1` to it
+at probe), which the script now offers.

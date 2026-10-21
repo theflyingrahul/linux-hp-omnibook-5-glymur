@@ -1,0 +1,12 @@
+kernel: 7.3.0-rc4-glymur-16
+reg00 before: Error: Could not set address to 0x76: Device or resource busy (driver bound, may be busy)
+unbound; reg00=0x00 reg05=0x00
+acknowledged register 0x00 (wrote 0)
+line quiet check: 0 edges in the first second
+F9 (microphone mute) -> 0 edge(s)
+F9 (microphone mute) -> 0 edge(s)
+F11 -> 0 edge(s)
+F6 (speaker mute) -> 0 edge(s)
+F5 (keyboard backlight) -> 0 edge(s)
+Fn alone -> 0 edge(s)
+driver rebound: 1
