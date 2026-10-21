@@ -1,0 +1,106 @@
+watching for 3600 s, log /var/log/glymur/audio-watch-20261021T232112.txt
+kernel 7.3.0-rc4-glymur-16
+23:21:12 0=Attached/suspended 1=Attached/suspended master=suspended master=suspended vreg_l15b_e0_1p8=enabled/1800000 vreg_l18b_e0_1p2=enabled/1200000 
+23:21:24 0=Attached/active 1=Attached/active master=active master=active vreg_l15b_e0_1p8=enabled/1800000 vreg_l18b_e0_1p2=enabled/1200000 
+---- dump 23:21:24
+sdw:1:0:0217:0204:00:0 status=Attached pm=active
+sdw:1:0:0217:0204:00:1 status=Attached pm=active
+ gpio12  : out 0 2mA no pull
+ gpio13  : in  0 2mA pull down
+/sys/class/regulator/regulator.2/name:vreg_l15b_e0_1p8
+/sys/class/regulator/regulator.3/name:vreg_l18b_e0_1p2
+/sys/class/regulator/regulator.1/state:enabled
+/sys/class/regulator/regulator.2/state:enabled
+/sys/class/regulator/regulator.3/state:enabled
+23:21:47 0=Attached/suspended 1=Attached/suspended master=suspended master=suspended vreg_l15b_e0_1p8=enabled/1800000 vreg_l18b_e0_1p2=enabled/1200000 
+---- dump 23:21:47
+sdw:1:0:0217:0204:00:0 status=Attached pm=suspended
+sdw:1:0:0217:0204:00:1 status=Attached pm=suspended
+ gpio12  : out 0 2mA no pull
+ gpio13  : in  0 2mA pull down
+/sys/class/regulator/regulator.2/name:vreg_l15b_e0_1p8
+/sys/class/regulator/regulator.3/name:vreg_l18b_e0_1p2
+/sys/class/regulator/regulator.1/state:enabled
+/sys/class/regulator/regulator.2/state:enabled
+/sys/class/regulator/regulator.3/state:enabled
+23:22:06 0=Attached/active 1=Attached/active master=active master=active vreg_l15b_e0_1p8=enabled/1800000 vreg_l18b_e0_1p2=enabled/1200000 
+---- dump 23:22:06
+sdw:1:0:0217:0204:00:0 status=Attached pm=active
+sdw:1:0:0217:0204:00:1 status=Attached pm=active
+ gpio12  : out 0 2mA no pull
+ gpio13  : in  0 2mA pull down
+/sys/class/regulator/regulator.2/name:vreg_l15b_e0_1p8
+/sys/class/regulator/regulator.3/name:vreg_l18b_e0_1p2
+/sys/class/regulator/regulator.1/state:enabled
+/sys/class/regulator/regulator.2/state:enabled
+/sys/class/regulator/regulator.3/state:enabled
+23:22:15 0=Attached/suspended 1=Attached/suspended master=suspended master=suspended vreg_l15b_e0_1p8=enabled/1800000 vreg_l18b_e0_1p2=enabled/1200000 
+---- dump 23:22:15
+sdw:1:0:0217:0204:00:0 status=Attached pm=suspended
+sdw:1:0:0217:0204:00:1 status=Attached pm=suspended
+ gpio12  : out 0 2mA no pull
+ gpio13  : in  0 2mA pull down
+/sys/class/regulator/regulator.2/name:vreg_l15b_e0_1p8
+/sys/class/regulator/regulator.3/name:vreg_l18b_e0_1p2
+/sys/class/regulator/regulator.1/state:enabled
+/sys/class/regulator/regulator.2/state:enabled
+/sys/class/regulator/regulator.3/state:enabled
+23:22:24 0=UNATTACHED/active 1=UNATTACHED/active master=active master=active vreg_l15b_e0_1p8=enabled/1800000 vreg_l18b_e0_1p2=enabled/1200000 
+---- dump 23:22:24
+sdw:1:0:0217:0204:00:0 status=UNATTACHED pm=active
+sdw:1:0:0217:0204:00:1 status=UNATTACHED pm=active
+ gpio12  : out 0 2mA no pull
+ gpio13  : in  0 2mA pull down
+/sys/class/regulator/regulator.2/name:vreg_l15b_e0_1p8
+/sys/class/regulator/regulator.3/name:vreg_l18b_e0_1p2
+/sys/class/regulator/regulator.1/state:enabled
+/sys/class/regulator/regulator.2/state:enabled
+/sys/class/regulator/regulator.3/state:enabled
+Oct 21 23:22:23 glymur kernel: qcom-soundwire 6c80000.soundwire: SWR new slave attached
+Oct 21 23:22:23 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: Slave 1 state check1: UNATTACHED, status was 1
+Oct 21 23:22:23 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: initializing enumeration and init completion for Slave 1
+Oct 21 23:22:23 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: Slave 2 state check1: UNATTACHED, status was 1
+Oct 21 23:22:23 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: initializing enumeration and init completion for Slave 2
+Oct 21 23:22:23 glymur kernel: qcom-soundwire 6c80000.soundwire: SWR new slave attached
+23:22:40 0=UNATTACHED/suspended 1=UNATTACHED/suspended master=suspended master=suspended vreg_l15b_e0_1p8=enabled/1800000 vreg_l18b_e0_1p2=enabled/1200000 
+---- dump 23:22:40
+sdw:1:0:0217:0204:00:0 status=UNATTACHED pm=suspended
+sdw:1:0:0217:0204:00:1 status=UNATTACHED pm=suspended
+ gpio12  : out 0 2mA no pull
+ gpio13  : in  0 2mA pull down
+/sys/class/regulator/regulator.2/name:vreg_l15b_e0_1p8
+/sys/class/regulator/regulator.3/name:vreg_l18b_e0_1p2
+/sys/class/regulator/regulator.1/state:enabled
+/sys/class/regulator/regulator.2/state:enabled
+/sys/class/regulator/regulator.3/state:enabled
+Oct 21 23:22:23 glymur kernel: qcom-soundwire 6c80000.soundwire: SWR new slave attached
+Oct 21 23:22:23 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: Slave 1 state check1: UNATTACHED, status was 1
+Oct 21 23:22:23 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: initializing enumeration and init completion for Slave 1
+Oct 21 23:22:23 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: Slave 2 state check1: UNATTACHED, status was 1
+Oct 21 23:22:23 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: initializing enumeration and init completion for Slave 2
+Oct 21 23:22:23 glymur kernel: qcom-soundwire 6c80000.soundwire: SWR new slave attached
+23:22:49 0=Attached/active 1=Attached/active master=active master=active vreg_l15b_e0_1p8=enabled/1800000 vreg_l18b_e0_1p2=enabled/1200000 
+---- dump 23:22:49
+sdw:1:0:0217:0204:00:0 status=Attached pm=active
+sdw:1:0:0217:0204:00:1 status=Attached pm=active
+ gpio12  : out 0 2mA no pull
+ gpio13  : in  0 2mA pull down
+/sys/class/regulator/regulator.2/name:vreg_l15b_e0_1p8
+/sys/class/regulator/regulator.3/name:vreg_l18b_e0_1p2
+/sys/class/regulator/regulator.1/state:enabled
+/sys/class/regulator/regulator.2/state:enabled
+/sys/class/regulator/regulator.3/state:enabled
+Oct 21 23:22:49 glymur kernel: qcom-soundwire 6c80000.soundwire: SWR new slave attached
+Oct 21 23:22:49 glymur kernel: soundwire sdw-master-1-0: SDW Slave Addr: 210217020400
+Oct 21 23:22:49 glymur kernel: soundwire sdw-master-1-0: SDW Slave class_id 0x00, mfg_id 0x0217, part_id 0x0204, unique_id 0x1, version 0x2
+Oct 21 23:22:49 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: signaling enumeration completion for Slave 1
+Oct 21 23:22:49 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: signaling initialization completion for Slave 1
+Oct 21 23:22:49 glymur kernel: qcom-soundwire 6c80000.soundwire: SWR new slave attached
+Oct 21 23:22:49 glymur kernel: qcom-soundwire 6c80000.soundwire: Slave status not changed 5
+Oct 21 23:22:49 glymur kernel: qcom-soundwire 6c80000.soundwire: SWR new slave attached
+Oct 21 23:22:49 glymur kernel: soundwire sdw-master-1-0: SDW Slave Addr: 210217020400
+Oct 21 23:22:49 glymur kernel: soundwire sdw-master-1-0: SDW Slave class_id 0x00, mfg_id 0x0217, part_id 0x0204, unique_id 0x1, version 0x2
+Oct 21 23:22:49 glymur kernel: soundwire sdw-master-1-0: SDW Slave Addr: 200217020400
+Oct 21 23:22:49 glymur kernel: soundwire sdw-master-1-0: SDW Slave class_id 0x00, mfg_id 0x0217, part_id 0x0204, unique_id 0x0, version 0x2
+Oct 21 23:22:49 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: signaling enumeration completion for Slave 2
+Oct 21 23:22:49 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: signaling initialization completion for Slave 2

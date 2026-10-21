@@ -5,6 +5,8 @@ The bring-up's dated log, newest first, moved here from the README on
 in [`status.md`](status.md); the detailed evidence is in the dated notes in
 this directory.
 
+**2026-10-21, night: `-16` booted.** EC, thermal zone names, rails, stress and the mute keys and LEDs pass; F9 shows no GNOME icon. Video still fails: the firmware refuses core 0 as well as core 1. Speakers still silent although both amplifiers attach; the tone test ran while they were `UNATTACHED` after a bus resume. The Ubuntu 26.10 upgrade removed `libllvm21` (no GUI) and tripped flash-kernel; both fixed. See `docs/runbook-results-16-2026-10-21.md`.
+
 **2026-10-21, later: kernel `-16` built for the four open problems of `-15`.**
 The EC's thermal zones are renamed (`ec-therm1…4-thermal`), the fix of the
 EC probe failure. The speaker amplifiers get the supplies every reference

@@ -1,0 +1,53 @@
+
+==== system
+7.3.0-rc4-glymur-16
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+
+==== kernel log: EC bus and driver
+Oct 02 23:05:38 glymur kernel: platform 8c0000.geniqup: Adding to iommu group 3
+Oct 02 23:05:38 glymur kernel: platform ac0000.geniqup: Adding to iommu group 5
+Oct 02 23:05:38 glymur kernel: platform bc0000.geniqup: Adding to iommu group 7
+Oct 02 23:05:39 glymur kernel: input: gpio-keys as /devices/platform/gpio-keys/input/input0
+Oct 02 23:05:39 glymur kernel: input: HP OmniBook 5 EC hotkeys as /devices/platform/soc@0/ac0000.geniqup/a84000.i2c/i2c-9/9-0076/input/input1
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF Touchscreen as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input2
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input3
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input4
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Mouse as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input6
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Touchpad as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input8
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Consumer Control as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input9
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 0416:C300 Keyboard as /devices/platform/soc@0/bc0000.geniqup/b80000.i2c/i2c-0/0-003a/0018:0416:C300.0003/input/input10
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input11
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF UNKNOWN as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input12
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF UNKNOWN as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input13
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Mouse as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input15
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Touchpad as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input17
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Consumer Control as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input18
+Oct 02 23:05:45 glymur kernel: input: MAHUA-HP-OmniBook-5-16-bf1xxx Headset Jack as /devices/platform/sound/sound/card0/input19
+
+==== kernel warnings and errors, in full
+
+==== EC device and driver
+i2c bus for a84000: 9
+client: /sys/bus/i2c/devices/9-0076
+driver: hp-omnibook-5-ec
+reset_gpio             12288  1
+gpio_shared_proxy      20480  1
+hp_omnibook_5_ec       16384  0
+sparse_keymap          12288  1 hp_omnibook_5_ec
+i2c_qcom_geni          53248  0
+gpi                    53248  3 i2c_qcom_geni
+gpio_keys              24576  0
+
+==== hwmon (5 samples, 2 s apart)
+fan1 0 rpm | EC thermistor 1: 42000 | EC thermistor 2: 43000 | EC thermistor 3: 42000 | EC thermistor 4: 36000
+fan1 0 rpm | EC thermistor 1: 42000 | EC thermistor 2: 43000 | EC thermistor 3: 42000 | EC thermistor 4: 36000
+fan1 0 rpm | EC thermistor 1: 42000 | EC thermistor 2: 43000 | EC thermistor 3: 42000 | EC thermistor 4: 36000
+fan1 0 rpm | EC thermistor 1: 42000 | EC thermistor 2: 43000 | EC thermistor 3: 42000 | EC thermistor 4: 36000
+fan1 0 rpm | EC thermistor 1: 42000 | EC thermistor 2: 43000 | EC thermistor 3: 42000 | EC thermistor 4: 36000
+
+==== keyboard backlight timeout
+timeout now: 3min (Windows: 30 sec, 3 min, Always)
+set 30s, reads back 30s
+Turn the backlight on with F5, then keep off the keyboard and touchpad for 45 s.
+check-ec.sh: line 58: /dev/tty: No such device or address
+check-ec.sh: line 58: a: unbound variable

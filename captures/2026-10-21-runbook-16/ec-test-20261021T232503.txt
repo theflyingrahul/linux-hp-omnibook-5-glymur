@@ -1,0 +1,135 @@
+
+==== system
+7.3.0-rc4-glymur-16
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+
+==== kernel log: EC bus and driver
+Oct 02 23:05:38 glymur kernel: platform 8c0000.geniqup: Adding to iommu group 3
+Oct 02 23:05:38 glymur kernel: platform ac0000.geniqup: Adding to iommu group 5
+Oct 02 23:05:38 glymur kernel: platform bc0000.geniqup: Adding to iommu group 7
+Oct 02 23:05:39 glymur kernel: input: gpio-keys as /devices/platform/gpio-keys/input/input0
+Oct 02 23:05:39 glymur kernel: input: HP OmniBook 5 EC hotkeys as /devices/platform/soc@0/ac0000.geniqup/a84000.i2c/i2c-9/9-0076/input/input1
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF Touchscreen as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input2
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input3
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input4
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Mouse as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input6
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Touchpad as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input8
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Consumer Control as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input9
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 0416:C300 Keyboard as /devices/platform/soc@0/bc0000.geniqup/b80000.i2c/i2c-0/0-003a/0018:0416:C300.0003/input/input10
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input11
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF UNKNOWN as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input12
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF UNKNOWN as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input13
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Mouse as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input15
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Touchpad as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input17
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Consumer Control as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input18
+Oct 02 23:05:45 glymur kernel: input: MAHUA-HP-OmniBook-5-16-bf1xxx Headset Jack as /devices/platform/sound/sound/card0/input19
+
+==== kernel warnings and errors, in full
+
+==== EC device and driver
+i2c bus for a84000: 9
+client: /sys/bus/i2c/devices/9-0076
+driver: hp-omnibook-5-ec
+reset_gpio             12288  1
+gpio_shared_proxy      20480  1
+hp_omnibook_5_ec       16384  0
+sparse_keymap          12288  1 hp_omnibook_5_ec
+i2c_qcom_geni          53248  0
+gpi                    53248  3 i2c_qcom_geni
+gpio_keys              24576  0
+
+==== hwmon (5 samples, 2 s apart)
+fan1 0 rpm | EC thermistor 1: 40000 | EC thermistor 2: 41000 | EC thermistor 3: 41000 | EC thermistor 4: 36000
+fan1 0 rpm | EC thermistor 1: 40000 | EC thermistor 2: 41000 | EC thermistor 3: 41000 | EC thermistor 4: 36000
+fan1 0 rpm | EC thermistor 1: 40000 | EC thermistor 2: 41000 | EC thermistor 3: 41000 | EC thermistor 4: 36000
+fan1 0 rpm | EC thermistor 1: 40000 | EC thermistor 2: 41000 | EC thermistor 3: 41000 | EC thermistor 4: 37000
+fan1 0 rpm | EC thermistor 1: 40000 | EC thermistor 2: 41000 | EC thermistor 3: 41000 | EC thermistor 4: 37000
+
+==== keyboard backlight timeout
+timeout now: 3min (Windows: 30 sec, 3 min, Always)
+set 30s, reads back 30s
+Turn the backlight on with F5, then keep off the keyboard and touchpad for 45 s.
+After 45 s untouched with '30s': is the backlight on or off? answer: off
+set always, reads back always
+Turn the backlight on with F5, then keep off the keyboard and touchpad for 45 s.
+After 45 s untouched with 'always': is the backlight on or off? answer: on
+restored: 3min
+
+==== keyboard backlight level
+level now: 2
+Press F5 once (press 1 of 3), then Enter. Is the backlight off, dim or bright? answer: dim
+level reads: 1
+Press F5 once (press 2 of 3), then Enter. Is the backlight off, dim or bright? answer: off
+level reads: 0
+Press F5 once (press 3 of 3), then Enter. Is the backlight off, dim or bright? answer: bright
+level reads: 2
+
+==== mute LEDs
+platform::mute reads 0
+platform::micmute reads 0
+In the last Windows session, were the speakers or the microphone muted (speaker, mic, both, none, unsure)? Was this boot a restart from Windows, or from power off? answer: none
+Before any change, which key LEDs are lit: F6, F9, both or none? answer: none
+both off, read back: mute 0, micmute 0
+Both set off. Which are lit now: F6, F9, both or none? answer: none
+platform::mute on, read back: mute 1, micmute 0
+Only platform::mute set on. Which are lit now: F6, F9, both or none? answer: F6
+platform::micmute on, read back: mute 0, micmute 1
+Only platform::micmute set on. Which are lit now: F6, F9, both or none? answer: F9
+restored: mute 0, micmute 0
+
+==== EC event line before the capture
+ 288:      10396          0          0          0          0          0          0          0          0          0          0          0  msmgpio                     66 Edge      hp-omnibook-5-ec
+/sys/kernel/debug/gpio: gpio66  : in  high func0 2mA pull up
+/sys/kernel/debug/pinctrl/f100000.pinctrl/pinconf-pins:pin 66 (GPIO_66): 
+
+==== hotkeys (30 s capture)
+Press, slowly and in order: F6, F9, F11, F5, then Fn alone (Fn lock).
+devices: ['HP OmniBook 5 EC hotkeys', 'gpio-keys', 'hid-over-i2c 0416:C300 Keyboard', 'hid-over-i2c 04F3:32EF Consumer Control']
+1792605469.199349 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=786658
+1792605469.199349 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=1
+1792605469.453976 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=2
+1792605469.487969 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=2
+1792605469.522970 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=2
+1792605469.556970 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=2
+1792605469.590969 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=2
+1792605469.624969 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=2
+1792605469.658969 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=2
+1792605469.692969 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=2
+1792605469.701828 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=786658
+1792605469.701828 hid-over-i2c 0416:C300 Keyboard: KEY code=113 value=0
+1792605474.162337 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458976
+1792605474.162337 hid-over-i2c 0416:C300 Keyboard: KEY code=29 value=1
+1792605474.164923 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458860
+1792605474.164923 hid-over-i2c 0416:C300 Keyboard: KEY code=187 value=1
+1792605474.168704 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458860
+1792605474.168704 hid-over-i2c 0416:C300 Keyboard: KEY code=187 value=0
+1792605474.172760 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458976
+1792605474.172760 hid-over-i2c 0416:C300 Keyboard: KEY code=29 value=0
+capture done
+interrupts after:  288:      10664          0          0          0          0          0          0          0          0          0          0          0  msmgpio                     66 Edge      hp-omnibook-5-ec
+EC event bytes read during the capture (count, byte):
+    268 [00]
+first and last reads, with times:
+ irq/288-hp-omni-693     [000] .....  1267.955385: smbus_reply: i2c-9 a=076 f=0000 c=5 BYTE_DATA l=1 [00]
+ irq/288-hp-omni-693     [000] .....  1268.076979: smbus_reply: i2c-9 a=076 f=0000 c=5 BYTE_DATA l=1 [00]
+ irq/288-hp-omni-693     [000] .....  1268.190591: smbus_reply: i2c-9 a=076 f=0000 c=5 BYTE_DATA l=1 [00]
+ irq/288-hp-omni-693     [000] .....  1268.303249: smbus_reply: i2c-9 a=076 f=0000 c=5 BYTE_DATA l=1 [00]
+ irq/288-hp-omni-693     [000] .....  1268.412108: smbus_reply: i2c-9 a=076 f=0000 c=5 BYTE_DATA l=1 [00]
+ irq/288-hp-omni-693     [000] .....  1298.723163: smbus_reply: i2c-9 a=076 f=0000 c=5 BYTE_DATA l=1 [00]
+
+==== keyboard HID report descriptor
+/sys/bus/hid/devices/0018:0416:C300.0003
+ 05 01 09 06 a1 01 85 08 05 07 19 e0 29 e7 15 00
+ 25 01 75 01 95 08 81 02 95 01 75 08 81 03 95 05
+ 75 01 05 08 19 01 29 05 91 02 95 01 75 03 91 03
+ 95 06 75 10 15 00 26 00 80 05 07 19 00 2a 00 80
+ 81 00 c0 05 0c 09 01 a1 01 85 09 19 00 2a 3c 02
+ 15 00 26 3c 02 95 01 75 10 81 00 c0 06 85 ff 09
+ 68 a1 01 85 0a 09 01 15 00 26 ff 00 75 08 95 08
+ b1 00 85 0b 09 01 15 00 26 ff 00 75 08 95 20 b1
+ 00 c0
+
+==== manual mailbox probe (only without the driver)
+skipped: the driver is bound
+
+saved to /var/log/glymur/ec-test-20261021T232503.txt

@@ -1,0 +1,292 @@
+
+==== system
+7.3.0-rc4-glymur-16
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+lrwxrwxrwx 1 root root 62 Oct 21 22:59 /lib/firmware/updates/qcom/glymur/MAHUA-HP-OmniBook-5-16-bf1xxx-tplg.bin -> HP/omnibook-5-16-bf1xxx/MAHUA-HP-OmniBook-5-16-bf1xxx-tplg.bin
+4f81077a0d8bb7568bfcd490eeea27cf25ec08357eb0f9c5788413bdd79af28e  /usr/lib/firmware/updates/qcom/glymur/HP/omnibook-5-16-bf1xxx/MAHUA-HP-OmniBook-5-16-bf1xxx-tplg.bin
+
+==== SoundWire devices (link:manufacturer:part:version:unique id)
+sdw-master-1-0                           driver=driver master=6c80000.soundwire
+sdw:1:0:0217:0204:00:0                   driver=wsa884x-codec master=sdw-master-1-0
+    status: Attached
+    dev-properties/mipi_revision: 0x0
+sdw:1:0:0217:0204:00:1                   driver=wsa884x-codec master=sdw-master-1-0
+    status: Attached
+    dev-properties/mipi_revision: 0x0
+
+==== amplifier reset lines (LPASS TLMM 12, 13; TLMM 204, 205; direction and function)
+ gpio12  : out 0 2mA no pull
+ gpio13  : in  0 2mA pull down
+
+==== audio modules
+snd_soc_wsa884x        28672  2
+regmap_sdw             12288  1 snd_soc_wsa884x
+q6prm_clocks           16384  20
+q6apm_lpass_dais       20480  1
+q6apm_dai              32768  1
+snd_q6dsp_common       57344  2 q6apm_lpass_dais,q6prm_clocks
+q6prm                  12288  1 q6prm_clocks
+snd_q6apm              65536  4 q6apm_dai,q6prm,q6apm_lpass_dais
+apr                    20480  2 snd_q6apm,q6prm
+snd_ctl_led            28672  0
+hp_omnibook_5_ec       16384  0
+sparse_keymap          12288  1 hp_omnibook_5_ec
+snd_soc_x1e80100       12288  5
+snd_soc_qcom_sdw       12288  1 snd_soc_x1e80100
+snd_soc_qcom_common    24576  1 snd_soc_x1e80100
+soundwire_qcom         36864  1
+snd_soc_lpass_va_macro    69632  6
+slimbus                36864  1 soundwire_qcom
+snd_soc_lpass_wsa_macro    73728  2
+soundwire_bus        1183744  4 regmap_sdw,snd_soc_wsa884x,snd_soc_qcom_sdw,soundwire_qcom
+snd_soc_lpass_macro_common    12288  2 snd_soc_lpass_wsa_macro,snd_soc_lpass_va_macro
+snd_soc_core          446464  10 snd_q6apm,q6apm_dai,snd_soc_qcom_common,q6apm_lpass_dais,snd_soc_lpass_wsa_macro,snd_soc_wsa884x,snd_soc_qcom_sdw,snd_soc_lpass_va_macro,soundwire_qcom,snd_soc_x1e80100
+pinctrl_sm8650_lpass_lpi    20480  0
+pinctrl_lpass_lpi      24576  6 pinctrl_sm8650_lpass_lpi
+
+==== kernel log: audio and EC
+Oct 02 23:05:38 glymur kernel: Machine model: HP OmniBook 5 Laptop 16-bf1xxx (test)
+Oct 02 23:05:38 glymur kernel: psci: [Firmware Bug]: failed to set PC mode: -3
+Oct 02 23:05:38 glymur kernel: DMI: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+Oct 02 23:05:38 glymur kernel: CPUidle PSCI: Initialized CPU PM domain topology using OSI mode
+Oct 02 23:05:38 glymur systemd[1]: Mounting sys-kernel-debug.mount - Kernel Debug File System...
+Oct 02 23:05:38 glymur systemd[1]: Mounted sys-kernel-debug.mount - Kernel Debug File System.
+Oct 02 23:05:39 glymur kernel: remoteproc remoteproc2: Booting fw image qcom/glymur/HP/omnibook-5-16-bf1xxx/qccdsp8480.mbn, size 3252504
+Oct 02 23:05:39 glymur kernel: remoteproc remoteproc1: Booting fw image qcom/glymur/HP/omnibook-5-16-bf1xxx/qcadsp8480.mbn, size 21432280
+Oct 02 23:05:39 glymur kernel: input: HP OmniBook 5 EC hotkeys as /devices/platform/soc@0/ac0000.geniqup/a84000.i2c/i2c-9/9-0076/input/input1
+Oct 02 23:05:45 glymur kernel: wsa_macro 6c90000.codec: Driver needs fixing: Unsorted reg_defaults, sorting the copy
+Oct 02 23:05:45 glymur kernel: wsa_macro 6cb0000.codec: Driver needs fixing: Unsorted reg_defaults, sorting the copy
+Oct 02 23:05:45 glymur kernel: wsa_macro 6c90000.codec: using zero-initialized flat cache, this may cause unexpected behavior
+Oct 02 23:05:45 glymur kernel: snd-x1e80100 sound: ASoC: Parent card not yet available, widget card binding deferred
+Oct 02 23:05:45 glymur kernel: va_macro 7660000.codec: supply vdd-micb not found, using dummy regulator
+Oct 02 23:05:45 glymur kernel: input: MAHUA-HP-OmniBook-5-16-bf1xxx Headset Jack as /devices/platform/sound/sound/card0/input19
+Oct 02 23:06:35 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR bus clsh detected
+
+==== ALSA cards
+ 0 [MAHUAHPOmniBook]: glymur - MAHUA-HP-OmniBook-5-16-bf1xxx
+                      HP-HPOmniBook5Laptop16_bf1xxx-ConfigID-8F47
+card: 0
+
+==== ALSA UCM profile (what PipeWire uses)
+/etc/wireplumber/wireplumber.conf.d/:
+total 4
+-rw-r--r-- 1 root root 1071 Oct 21 22:59 51-hp-omnibook-5-16-audio.conf
+
+/usr/share/alsa/ucm2/conf.d/glymur/:
+total 4
+lrwxrwxrwx 1 root root  37 Aug 24 11:29 GLYMUR-CRD.conf -> ../../Qualcomm/glymur/GLYMUR-CRD.conf
+-rw-r--r-- 1 root root 920 Oct 21 22:59 HP-HPOmniBook5Laptop16_bf1xxx-ConfigID-8F47.conf
+Verb.HiFi {
+	Comment "HiFi quality Music"
+	Device.Speaker {
+		Comment "Internal Speakers"
+		Values {
+			CaptureCTL "_ucm0001.hw:MAHUAHPOmniBook"
+			PlaybackCTL "_ucm0001.hw:MAHUAHPOmniBook"
+			PlaybackChannels 2
+			PlaybackMixer "_ucm0001.default:MAHUAHPOmniBook"
+			PlaybackMixerElem Speakers
+			PlaybackPCM "_ucm0001.hw:MAHUAHPOmniBook,0"
+			PlaybackPriority 100
+			PlaybackSwitch "Speakers Switch"
+			TQ HiFi
+		}
+	}
+	Device.Mic {
+		Comment "Microphone Array"
+		Values {
+			CaptureCTL "_ucm0001.hw:MAHUAHPOmniBook"
+			CaptureMixerElem "Mic LED"
+			CapturePCM "_ucm0001.hw:MAHUAHPOmniBook,1"
+			CapturePriority 100
+			CaptureSwitch "Mic LED Capture Switch"
+			Format S16_LE
+			PlaybackCTL "_ucm0001.hw:MAHUAHPOmniBook"
+			TQ HiFi
+		}
+	}
+}
+
+==== PipeWire: names (Windows: Qualcomm(R) Aqstic(TM) ACX Static Endpoints Audio Device)
+Audio
+ ├─ Devices:
+ │      53. Built-in Audio                      [alsa]
+ │  
+ ├─ Sinks:
+ │  *   46. Internal Speakers                   [vol: 1.00]
+ │  
+ ├─ Sources:
+ │  *   47. Microphone Array                    [vol: 1.00]
+ │  
+ ├─ Filters:
+ │  
+ └─ Streams:
+
+Video
+            "name": "api.alsa.path",
+        "api.alsa.path": "hw:0",
+        "api.alsa.path": "hw:MAHUAHPOmniBook,0",
+        "api.alsa.path": "hw:MAHUAHPOmniBook,1",
+        "device.description": "Built-in Audio",
+        "device.description": "HP True Vision FHD Camera",
+        "device.description": "HP True Vision FHD Camera: HP I",
+        "device.description": "HP True Vision FHD Camera: HP T",
+        "device.description": "Iris Decoder",
+        "device.description": "Iris Encoder",
+        "device.name": "alsa_card.platform-sound",
+        "device.name": "libcamera_device./base/soc@0/usb@a200000-1:1.0-30c9:00d9",
+        "device.name": "libcamera_device./base/soc@0/usb@a200000-1:1.2-30c9:00d9",
+        "device.name": "v4l2_device.platform-aa00000.video-codec",
+        "device.name": "v4l2_device.platform-aa00000.video-codec.2",
+        "device.name": "v4l2_device.platform-xhci-hcd.2.auto-usb-0_1_1.0",
+        "device.name": "v4l2_device.platform-xhci-hcd.2.auto-usb-0_1_1.0.2",
+        "device.name": "v4l2_device.platform-xhci-hcd.2.auto-usb-0_1_1.2",
+        "device.name": "v4l2_device.platform-xhci-hcd.2.auto-usb-0_1_1.2.2",
+        "device.nick": "MAHUA-HP-OmniBook-5-16-bf1xxx",
+        "node.description": "BLE MIDI 1",
+        "node.description": "HP True Vision FHD Camera (V4L2)",
+        "node.description": "Internal Speakers",
+        "node.description": "Microphone Array",
+        "node.name": "Dummy-Driver",
+        "node.name": "Freewheel-Driver",
+        "node.name": "Midi-Bridge",
+        "node.name": "alsa_input.platform-sound.HiFi__Mic__source",
+        "node.name": "alsa_output.platform-sound.HiFi__Speaker__sink",
+        "node.name": "bluez_midi.server",
+        "node.name": "v4l2_input.platform-xhci-hcd.2.auto-usb-0_1_1.0",
+        "node.name": "v4l2_input.platform-xhci-hcd.2.auto-usb-0_1_1.2",
+        "node.nick": "HP True Vision FHD Camera",
+        "node.nick": "Internal Speakers",
+        "node.nick": "Microphone Array",
+
+==== mute switches, LED binding and LEDs
+  /sys/class/sound/ctl-led/mic/card0/list: 89
+  /sys/class/sound/ctl-led/speaker/card0/list: 88
+  Speakers Switch          
+  Mic LED Capture Switch   
+  platform::mute     brightness=0 trigger=[audio-mute]
+  platform::micmute  brightness=0 trigger=[audio-micmute]
+  sink muted: Volume: 1.00   source muted: Volume: 1.00
+
+==== microphones (DMIC0, DMIC1) through PipeWire
+Record 5 s from the Microphone Array? Speak or tap near the microphones. (y/N) answer: y
+/tmp/glymur-audio/mic.wav
+channel 0: 250880 frames, peak 27677, rms 1171 (of 32767), 10217 distinct values
+channel 1: 250880 frames, peak 32768, rms 1523 (of 32767), 10560 distinct values
+
+==== speakers through PipeWire
+Play a quiet 1 kHz tone on the Internal Speakers, left then right, about 2 s each? (y/N) answer: y
+playing left
+Tone 'left': which speaker played, left, right, both or none? answer: none
+playing right
+Tone 'right': which speaker played, left, right, both or none? answer: none
+
+==== mute from the desktop: switches and LEDs follow
+Mute the speakers, then the microphones, from software and watch the F6 and F9 LEDs? (y/N) answer: y
+speakers muted:
+  Speakers Switch          
+  Mic LED Capture Switch   
+  platform::mute     brightness=1 trigger=[audio-mute]
+  platform::micmute  brightness=1 trigger=[audio-micmute]
+  sink muted: Volume: 0.25 [MUTED]   source muted: Volume: 1.00 [MUTED]
+Which mute LEDs are lit now: F6, F9, both or none? answer: both
+microphones muted:
+  Speakers Switch          
+  Mic LED Capture Switch   
+  platform::mute     brightness=0 trigger=[audio-mute]
+  platform::micmute  brightness=1 trigger=[audio-micmute]
+  sink muted: Volume: 0.25   source muted: Volume: 1.00 [MUTED]
+Which mute LEDs are lit now: F6, F9, both or none? answer: F9
+recording 3 s while muted (speak now):
+/tmp/glymur-audio/muted.wav
+muted recording: 143360 frames, peak 0 -> SILENT, OK
+both unmuted:
+  Speakers Switch          
+  Mic LED Capture Switch   
+  platform::mute     brightness=0 trigger=[audio-mute]
+  platform::micmute  brightness=0 trigger=[audio-micmute]
+  sink muted: Volume: 0.25   source muted: Volume: 1.00
+
+==== mute keys: F6 (speakers) and F9 (microphones)
+Press F6 once, then answer: did GNOME show the speaker-mute icon? (y/N) answer: y
+after F6:
+  Speakers Switch          
+  Mic LED Capture Switch   
+  platform::mute     brightness=1 trigger=[audio-mute]
+  platform::micmute  brightness=0 trigger=[audio-micmute]
+  sink muted: Volume: 0.25 [MUTED]   source muted: Volume: 1.00
+Press F9 once, then answer: which icon did GNOME show, speaker mute, microphone mute, both or none? answer: none
+after F9:
+  Speakers Switch          
+  Mic LED Capture Switch   
+  platform::mute     brightness=1 trigger=[audio-mute]
+  platform::micmute  brightness=0 trigger=[audio-micmute]
+  sink muted: Volume: 0.25 [MUTED]   source muted: Volume: 1.00
+EC interrupts during F9: 8456 -> 8504
+Oct 02 23:05:38 glymur kernel: DMI: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+Oct 02 23:05:39 glymur kernel: remoteproc remoteproc2: Booting fw image qcom/glymur/HP/omnibook-5-16-bf1xxx/qccdsp8480.mbn, size 3252504
+Oct 02 23:05:39 glymur kernel: remoteproc remoteproc1: Booting fw image qcom/glymur/HP/omnibook-5-16-bf1xxx/qcadsp8480.mbn, size 21432280
+Oct 02 23:05:39 glymur kernel: input: HP OmniBook 5 EC hotkeys as /devices/platform/soc@0/ac0000.geniqup/a84000.i2c/i2c-9/9-0076/input/input1
+Oct 02 23:05:45 glymur kernel: input: MAHUA-HP-OmniBook-5-16-bf1xxx Headset Jack as /devices/platform/sound/sound/card0/input19
+
+==== kernel log after the tests
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000009: unknown
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000009: unknown
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000009: unknown
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000009: unknown
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:CmdDec:264d:d7968008:00> vDec_QBuf(4320): BUFFER port 1 type 1 error 4000004
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000007: unknown
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000007: unknown
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000007: unknown
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000007: unknown
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000006: unknown
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000006: unknown
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000006: unknown
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000006: unknown
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Oct 21 23:17:47 glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:CmdDec:264d:d7968008:00> vDec_Drain(3407): Drain port 1 error 4000004
+Oct 21 23:22:23 glymur kernel: qcom-soundwire 6c80000.soundwire: SWR new slave attached
+Oct 21 23:22:23 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: Slave 1 state check1: UNATTACHED, status was 1
+Oct 21 23:22:23 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: initializing enumeration and init completion for Slave 1
+Oct 21 23:22:23 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: Slave 2 state check1: UNATTACHED, status was 1
+Oct 21 23:22:23 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: initializing enumeration and init completion for Slave 2
+Oct 21 23:22:23 glymur kernel: qcom-soundwire 6c80000.soundwire: SWR new slave attached
+Oct 21 23:22:49 glymur kernel: qcom-soundwire 6c80000.soundwire: SWR new slave attached
+Oct 21 23:22:49 glymur kernel: soundwire sdw-master-1-0: SDW Slave Addr: 210217020400
+Oct 21 23:22:49 glymur kernel: soundwire sdw-master-1-0: SDW Slave class_id 0x00, mfg_id 0x0217, part_id 0x0204, unique_id 0x1, version 0x2
+Oct 21 23:22:49 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: signaling enumeration completion for Slave 1
+Oct 21 23:22:49 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: signaling initialization completion for Slave 1
+Oct 21 23:22:49 glymur kernel: qcom-soundwire 6c80000.soundwire: SWR new slave attached
+Oct 21 23:22:49 glymur kernel: qcom-soundwire 6c80000.soundwire: Slave status not changed 5
+Oct 21 23:22:49 glymur kernel: qcom-soundwire 6c80000.soundwire: SWR new slave attached
+Oct 21 23:22:49 glymur kernel: soundwire sdw-master-1-0: SDW Slave Addr: 210217020400
+Oct 21 23:22:49 glymur kernel: soundwire sdw-master-1-0: SDW Slave class_id 0x00, mfg_id 0x0217, part_id 0x0204, unique_id 0x1, version 0x2
+Oct 21 23:22:49 glymur kernel: soundwire sdw-master-1-0: SDW Slave Addr: 200217020400
+Oct 21 23:22:49 glymur kernel: soundwire sdw-master-1-0: SDW Slave class_id 0x00, mfg_id 0x0217, part_id 0x0204, unique_id 0x0, version 0x2
+Oct 21 23:22:49 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: signaling enumeration completion for Slave 2
+Oct 21 23:22:49 glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: signaling initialization completion for Slave 2
+Saved to /var/log/glymur/audio-test-20261021T232212.txt
