@@ -1,0 +1,440 @@
+[sudo: authenticate] Password: 
+== kernel
+7.3.0-rc4-glymur-15
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+== cpus
+12
+      2 scmi
+Model name:                              Snapdragon(R) X2 Elite - X2E84100 - Qualcomm Oryon(TM) CPU 47A CPU @ 4.7GHz
+BIOS Model name:                         Snapdragon(R) X2 Elite - X2E84100 - Qualcomm Oryon(TM) CPU 47A CPU @ 4.7GHz
+Thread(s) per core:                      1
+Core(s) per cluster:                     12
+Socket(s):                               1
+== lspci -nn
+0004:00:00.0 PCI bridge [0604]: Qualcomm Technologies, Inc Device [17cb:0120]
+	Kernel driver in use: pcieport
+	Kernel modules: shpchp
+0004:01:00.0 Network controller [0280]: Qualcomm Technologies, Inc Device [17cb:1112] (rev 01)
+	DeviceName: WLAN
+	Subsystem: Hewlett-Packard Company Device [103c:8ef3]
+	Kernel driver in use: ath12k_wifi7_pci
+	Kernel modules: ath12k_wifi7
+0005:00:00.0 PCI bridge [0604]: Qualcomm Technologies, Inc Device [17cb:0120]
+	Kernel driver in use: pcieport
+	Kernel modules: shpchp
+0005:01:00.0 Non-Volatile memory controller [0108]: Samsung Electronics Co Ltd BM9C1 QLC NVME SSD (DRAM-less) [144d:a80f]
+	Subsystem: Samsung Electronics Co Ltd Device [144d:a801]
+	Kernel driver in use: nvme
+	Kernel modules: nvme
+== lsusb
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 30c9:00d9 Luxvisions Innotech Limited HP True Vision FHD Camera
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 003 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 003 Device 002: ID 0781:558a SanDisk Corp. Ultra
+== nvme/block
+NAME          SIZE TYPE MODEL
+loop0        61.9M loop 
+loop1        61.8M loop 
+loop2       247.5M loop 
+loop3           4K loop 
+loop4       552.9M loop 
+loop5        90.7M loop 
+loop6        90.7M loop 
+loop7        91.7M loop 
+loop8       188.2M loop 
+loop9        79.9M loop 
+loop10       17.5M loop 
+== platform devices WITH driver
+17
+10001000.ctcu -> 
+10c3000.rng -> 
+11200000.tn -> 
+17600000.watchdog -> 
+1dfa000.crypto -> 
+3d6c000.gmu -> 
+dummy-sink -> 
+efivars.0 -> 
+non-pixel.3.auto -> 
+pixel.4.auto -> 
+rtc-efi.0 -> 
+timer -> 
+tpdm-cdsp-cmsr -> 
+tpdm-cdsp-cmsr2 -> 
+tpdm-cdsp-llm -> 
+tpdm-cdsp-llm2 -> 
+video-firmware.5.auto -> 
+3d00000.gpu -> adreno
+17810000.timer -> arch-timer-mmio
+arm-scmi.0.auto -> arm-scmi
+arm-scmi.1.auto -> arm-scmi
+15000000.iommu -> arm-smmu
+3da0000.iommu -> arm-smmu
+15480000.iommu -> arm-smmu-v3
+pmu -> armv8-pmu
+1dc4000.dma-controller -> bam-dma-engine
+18900000.rsc:bcm-voter -> bcm_voter
+ade0000.clock-controller -> camcc-glymur
+18900000.rsc:clock-controller -> clk-rpmh
+81c60000.aop-cmd-db -> cmd-db
+af00000.clock-controller -> dispcc-glymur
+a000000.usb -> dwc3-qcom
+a200000.usb -> dwc3-qcom
+a600000.usb -> dwc3-qcom
+a800000.usb -> dwc3-qcom
+abf0000.clock-controller -> evacc-glymur
+100000.clock-controller -> gcc-glymur
+a80000.i2c -> geni_i2c
+a84000.i2c -> geni_i2c
+b80000.i2c -> geni_i2c
+b90000.i2c -> geni_i2c
+8c0000.geniqup -> geni_se_qup
+ac0000.geniqup -> geni_se_qup
+bc0000.geniqup -> geni_se_qup
+f100000.pinctrl -> glymur-tlmm
+800000.dma-controller -> gpi
+a00000.dma-controller -> gpi
+b00000.dma-controller -> gpi
+gpio-keys -> gpio-keys
+3d90000.clock-controller -> gpucc-glymur
+3d64000.clock-controller -> gxclkctl-kaanapali
+hdmi-audio-codec.7.auto -> hdmi-audio-codec
+hdmi-audio-codec.8.auto -> hdmi-audio-codec
+kgdboc -> kgdboc
+af54000.displayport-controller -> msm-dp-display
+af5c000.displayport-controller -> msm-dp-display
+af6c000.displayport-controller -> msm-dp-display
+ae00000.display-subsystem -> msm-mdss
+ae01000.display-controller -> msm_dpu
+psci-cpuidle -> psci-cpuidle
+psci -> psci-cpuidle-domain
+6800000.remoteproc:glink-edge:gpr:service@1:dais -> q6apm-dai
+6800000.remoteproc:glink-edge:gpr:service@1:bedais -> q6apm-lpass-dais
+6800000.remoteproc:glink-edge:gpr:service@2:clock-controller -> q6prm-lpass-clock
+32300000.remoteproc:glink-edge:fastrpc:compute-cb@1 -> qcom,fastrpc-cb
+32300000.remoteproc:glink-edge:fastrpc:compute-cb@2 -> qcom,fastrpc-cb
+32300000.remoteproc:glink-edge:fastrpc:compute-cb@3 -> qcom,fastrpc-cb
+32300000.remoteproc:glink-edge:fastrpc:compute-cb@4 -> qcom,fastrpc-cb
+32300000.remoteproc:glink-edge:fastrpc:compute-cb@5 -> qcom,fastrpc-cb
+32300000.remoteproc:glink-edge:fastrpc:compute-cb@6 -> qcom,fastrpc-cb
+32300000.remoteproc:glink-edge:fastrpc:compute-cb@7 -> qcom,fastrpc-cb
+32300000.remoteproc:glink-edge:fastrpc:compute-cb@8 -> qcom,fastrpc-cb
+32300000.remoteproc:glink-edge:fastrpc:compute-cb@c -> qcom,fastrpc-cb
+32300000.remoteproc:glink-edge:fastrpc:compute-cb@d -> qcom,fastrpc-cb
+32300000.remoteproc:glink-edge:fastrpc:compute-cb@e -> qcom,fastrpc-cb
+6800000.remoteproc:glink-edge:fastrpc:compute-cb@3 -> qcom,fastrpc-cb
+6800000.remoteproc:glink-edge:fastrpc:compute-cb@4 -> qcom,fastrpc-cb
+6800000.remoteproc:glink-edge:fastrpc:compute-cb@5 -> qcom,fastrpc-cb
+6800000.remoteproc:glink-edge:fastrpc:compute-cb@6 -> qcom,fastrpc-cb
+6800000.remoteproc:glink-edge:fastrpc:compute-cb@7 -> qcom,fastrpc-cb
+6800000.remoteproc:glink-edge:fastrpc:compute-cb@8 -> qcom,fastrpc-cb
+361c8000.efuse -> qcom,qfprom
+100c400.pmu -> qcom-bwmon
+100d400.pmu -> qcom-bwmon
+faac00.phy -> qcom-edp-phy
+c448000.spmi:pmic@9:phy@fd00 -> qcom-eusb2-repeater
+c448000.spmi:pmic@a:phy@fd00 -> qcom-eusb2-repeater
+3e04000.mailbox -> qcom-ipcc
+aa00000.video-codec -> qcom-iris
+21800000.system-cache-controller -> qcom-llcc
+88e0000.phy -> qcom-m31eusb2-phy
+fa0000.phy -> qcom-m31eusb2-phy
+fd3000.phy -> qcom-m31eusb2-phy
+fdd000.phy -> qcom-m31eusb2-phy
+1b40000.pcie -> qcom-pcie
+1bf0000.pcie -> qcom-pcie
+88e1000.phy -> qcom-qmp-combo-phy
+fd5000.phy -> qcom-qmp-combo-phy
+fde000.phy -> qcom-qmp-combo-phy
+1b50000.phy -> qcom-qmp-pcie-phy
+1bf6000.phy -> qcom-qmp-pcie-phy
+18900000.rsc:power-controller -> qcom-rpmhpd
+7760000.pinctrl -> qcom-sm8650-lpass-lpi-pinctrl
+ffe00000.smem -> qcom-smem
+qcom-socinfo -> qcom-socinfo
+6c80000.soundwire -> qcom-soundwire
+c22c000.thermal-sensor -> qcom-tsens
+c22d000.thermal-sensor -> qcom-tsens
+c22e000.thermal-sensor -> qcom-tsens
+c22f000.thermal-sensor -> qcom-tsens
+c230000.thermal-sensor -> qcom-tsens
+c231000.thermal-sensor -> qcom-tsens
+c300000.power-management -> qcom_aoss_qmp
+17610000.mailbox -> qcom_cpucp_mbox
+17620000.mailbox -> qcom_cpucp_mbox
+a98000.serial -> qcom_geni_serial
+1f40000.hwlock -> qcom_hwspinlock
+b220000.interrupt-controller -> qcom_pdc
+pmic-glink -> qcom_pmic_glink
+32300000.remoteproc -> qcom_q6v5_pas
+6800000.remoteproc -> qcom_q6v5_pas
+d00000.remoteproc -> qcom_q6v5_pas
+firmware:scm -> qcom_scm
+smp2p-adsp -> qcom_smp2p
+smp2p-cdsp -> qcom_smp2p
+smp2p-soccp -> qcom_smp2p
+ef3b000.power-limits -> qcom_spel
+c30f000.sram -> qcom_stats
+qcomtee -> qcomtee
+1500000.interconnect -> qnoc-glymur
+1600000.interconnect -> qnoc-glymur
+1680000.interconnect -> qnoc-glymur
+16c0000.interconnect -> qnoc-glymur
+16d0000.interconnect -> qnoc-glymur
+16e0000.interconnect -> qnoc-glymur
+1700000.interconnect -> qnoc-glymur
+1720000.interconnect -> qnoc-glymur
+1740000.interconnect -> qnoc-glymur
+1780000.interconnect -> qnoc-glymur
+1900000.interconnect -> qnoc-glymur
+1920000.interconnect -> qnoc-glymur
+1d600000.interconnect -> qnoc-glymur
+1f300000.interconnect -> qnoc-glymur
+2000000.interconnect -> qnoc-glymur
+320c0000.interconnect -> qnoc-glymur
+7400000.interconnect -> qnoc-glymur
+7420000.interconnect -> qnoc-glymur
+7e40000.interconnect -> qnoc-glymur
+interconnect-0 -> qnoc-glymur
+interconnect-1 -> qnoc-glymur
+regulator-edp -> reg-fixed-voltage
+18900000.rsc -> rpmh
+firmware:scmi -> scmi_mailbox_transport
+firmware:scmi-1 -> scmi_mailbox_transport
+serial8250 -> serial8250
+soc@0 -> simple-pm-bus
+sound -> snd-x1e80100
+c400000.arbiter -> spmi_pmic_arb
+14680000.sram -> sram
+18b4e000.sram -> sram
+81e08600.sram -> sram
+1fd5000.clock-controller -> tcsrcc-glymur
+7660000.codec -> va_macro
+aaf0000.clock-controller -> videocc-glymur
+6c90000.codec -> wsa_macro
+6cb0000.codec -> wsa_macro
+xhci-hcd.2.auto -> xhci-hcd
+xhci-hcd.6.auto -> xhci-hcd
+== i2c adapters
+0-003a hid-over-i2c drv=i2c_hid_of
+4-0015 hid-over-i2c drv=i2c_hid_of
+8-0010 hid-over-i2c drv=i2c_hid_of
+9-0076 omnibook-5-16-bf1xx drv=
+i2c-0 Geni-I2C drv=
+i2c-10 dpu_dp_aux drv=
+i2c-11 dpu_dp_aux drv=
+i2c-12 dpu_dp_aux drv=
+i2c-4 Geni-I2C drv=
+i2c-8 Geni-I2C drv=
+i2c-9 Geni-I2C drv=
+== spmi/other buses with drivers
+-- spmi
+2-09 -> pmic-spmi
+2-0a -> pmic-spmi
+spmi-0 -> 
+spmi-1 -> 
+spmi-2 -> 
+-- slimbus
+-- soundwire
+sdw-master-1-0 -> 
+sdw:1:0:0217:0204:00:0 -> wsa884x-codec
+sdw:1:0:0217:0204:00:1 -> wsa884x-codec
+-- mhi
+mhi0 -> 
+mhi0_IPCR -> qcom_mhi_qrtr
+-- auxiliary
+aux_bridge.aux_bridge.0 -> aux_bridge.aux_bridge
+aux_bridge.aux_bridge.1 -> aux_bridge.aux_bridge
+aux_bridge.aux_bridge.2 -> 
+aux_hpd_bridge.dp_hpd_bridge.0 -> aux_hpd_bridge.aux_hpd_bridge
+aux_hpd_bridge.dp_hpd_bridge.1 -> aux_hpd_bridge.aux_hpd_bridge
+gpiolib_shared.proxy.7 -> gpio_shared_proxy
+gpiolib_shared.proxy.8 -> gpio_shared_proxy
+gpiolib_shared.proxy.9 -> gpio_shared_proxy
+pmic_glink.altmode.0 -> pmic_glink_altmode.pmic_glink_altmode
+pmic_glink.power-supply.0 -> qcom_battmgr.pmic_glink_power_supply
+pmic_glink.rtc-glink.0 -> 
+pmic_glink.ucsi.0 -> ucsi_glink.pmic_glink_ucsi
+qcom_common.pd-mapper.0 -> qcom_pd_mapper.qcom-pdm-mapper
+qcom_common.pd-mapper.1 -> qcom_pd_mapper.qcom-pdm-mapper
+qcom_common.pd-mapper.2 -> qcom_pd_mapper.qcom-pdm-mapper
+reset.gpio.0 -> reset_gpio
+-- rpmsg
+32300000.remoteproc:glink-edge.IPCRTR.-1.-1 -> qcom_smd_qrtr
+32300000.remoteproc:glink-edge.LOOPBACK_CTL_CDSP.-1.-1 -> 
+32300000.remoteproc:glink-edge.cdsprmglink-apps-dsp.-1.-1 -> 
+32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1 -> qcom,fastrpc
+32300000.remoteproc:glink-edge.rpmsg_ctrl.0.0 -> rpmsg_ctrl
+6800000.remoteproc:glink-edge.IPCRTR.-1.-1 -> qcom_smd_qrtr
+6800000.remoteproc:glink-edge.adsp_apps.-1.-1 -> qcom,apr
+6800000.remoteproc:glink-edge.adsp_apps2.-1.-1 -> 
+6800000.remoteproc:glink-edge.bt_cp_ctrl.-1.-1 -> 
+6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1 -> qcom,fastrpc
+6800000.remoteproc:glink-edge.glink_ssr.-1.-1 -> qcom_glink_ssr
+6800000.remoteproc:glink-edge.rpmsg_ctrl.0.0 -> rpmsg_ctrl
+6800000.remoteproc:glink-edge.sleepmonglink-apps-adsp.-1.-1 -> 
+d00000.remoteproc:glink-edge.IPCRTR.-1.-1 -> qcom_smd_qrtr
+d00000.remoteproc:glink-edge.PMIC_LOGS_SOCCP_APPS.-1.-1 -> 
+d00000.remoteproc:glink-edge.PMIC_RTR_SOCCP_APPS.-1.-1 -> qcom_pmic_glink_rpmsg
+d00000.remoteproc:glink-edge.glink_ssr.-1.-1 -> qcom_glink_ssr
+d00000.remoteproc:glink-edge.rpmsg_ctrl.0.0 -> rpmsg_ctrl
+-- pci
+0004:00:00.0 -> pcieport
+0004:01:00.0 -> ath12k_wifi7_pci
+0005:00:00.0 -> pcieport
+0005:01:00.0 -> nvme
+== input
+N: Name="gpio-keys"	P: Phys=gpio-keys/input0	H: Handlers=event0 
+N: Name="hid-over-i2c 0416:C300 Keyboard"	P: Phys=0-003a	H: Handlers=sysrq kbd event7 leds 
+N: Name="hid-over-i2c 04F3:44BF"	P: Phys=8-0010	H: Handlers=mouse0 event1 
+N: Name="hid-over-i2c 04F3:44BF UNKNOWN"	P: Phys=8-0010	H: Handlers=event2 
+N: Name="hid-over-i2c 04F3:44BF UNKNOWN"	P: Phys=8-0010	H: Handlers=event3 
+N: Name="hid-over-i2c 04F3:32EF Mouse"	P: Phys=4-0015	H: Handlers=mouse1 event4 
+N: Name="hid-over-i2c 04F3:32EF Touchpad"	P: Phys=4-0015	H: Handlers=mouse2 event5 
+N: Name="hid-over-i2c 04F3:32EF Consumer Control"	P: Phys=4-0015	H: Handlers=kbd event6 
+N: Name="MAHUA-HP-OmniBook-5-16-bf1xxx Headset Jack"	P: Phys=ALSA	H: Handlers=kbd event8 
+== sound
+ 0 [MAHUAHPOmniBook]: glymur - MAHUA-HP-OmniBook-5-16-bf1xxx
+                      HP-HPOmniBook5Laptop16_bf1xxx-ConfigID-8F47
+card 0: MAHUAHPOmniBook [MAHUA-HP-OmniBook-5-16-bf1xxx], device 0: MultiMedia1 Playback (*) []
+card 0: MAHUAHPOmniBook [MAHUA-HP-OmniBook-5-16-bf1xxx], device 1: MultiMedia2 Capture (*) []
+== power_supply
+qcom-battmgr-ac type=Mains status= online=0 cap=
+qcom-battmgr-bat type=Battery status=Discharging online= cap=25
+qcom-battmgr-usb type=USB status= online=0 cap=
+qcom-battmgr-wls type=Wireless status= online=0 cap=
+ucsi-source-psy-pmic_glink.ucsi.01 type=USB status=Not charging online=0 cap=
+ucsi-source-psy-pmic_glink.ucsi.02 type=USB status=Not charging online=0 cap=
+== thermal zone count by prefix
+      6 aoss
+      2 camera
+     24 cpu
+      4 cpullc
+      2 ddr
+      9 gpu
+      5 gpuss
+      4 nsphmx
+      4 nsphvx
+      1 qcom-battmgr-bat
+      8 qmx
+      1 video
+== cooling
+      1 ath12k_thermal
+      1 cpufreq-cpu0
+      1 cpufreq-cpu6
+      1 devfreq-3d00000.gpu
+== hwmon names (non thermal)
+nvme
+qcom_battmgr_bat
+qcom_battmgr_ac
+qcom_battmgr_usb
+qcom_battmgr_wls
+ucsi_source_psy_pmic_glink.ucsi.01
+ucsi_source_psy_pmic_glink.ucsi.02
+ath12k_hwmon
+wsa884x
+wsa884x
+== remoteproc
+remoteproc0 soccp attached fw=unknown
+remoteproc1 adsp running fw=qcom/glymur/HP/omnibook-5-16-bf1xxx/qcadsp8480.mbn
+remoteproc2 cdsp running fw=qcom/glymur/HP/omnibook-5-16-bf1xxx/qccdsp8480.mbn
+== net/bt/rfkill
+lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP> 
+wlo1             UP             xx:xx:xx:xx:xx:xx <BROADCAST,MULTICAST,UP,LOWER_UP> 
+hci0:	Type: Primary  Bus: UART
+	BD Address: xx:xx:xx:xx:xx:xx  ACL MTU: 1024:8  SCO MTU: 240:4
+	UP RUNNING PSCAN 
+	RX bytes:1621432 acl:95 sco:0 events:9328 errors:0
+Controller xx:xx:xx:xx:xx:xx glymur [default]
+0: hci0: Bluetooth
+	Soft blocked: no
+	Hard blocked: no
+1: phy0: Wireless LAN
+	Soft blocked: no
+	Hard blocked: no
+== video/media/drm
+ls: cannot access '/dev/cdsp*': No such file or directory
+ls: cannot access '/dev/adsp*': No such file or directory
+/dev/dri/card1
+/dev/dri/renderD128
+/dev/fastrpc-adsp-secure
+/dev/fastrpc-cdsp
+/dev/fastrpc-cdsp-secure
+/dev/media0
+/dev/media1
+/dev/video0
+/dev/video1
+/dev/video2
+/dev/video3
+/dev/video4
+/dev/video5
+
+/dev/dri/by-path:
+platform-ae01000.display-controller-card
+platform-ae01000.display-controller-render
+== leds/backlight/rtc/watchdog/tpm/crypto
+ls: cannot access '/dev/tpm*': No such file or directory
+/dev/hwrng
+
+/sys/class/backlight:
+dp_aux_backlight
+
+/sys/class/leds:
+input10::capslock
+input10::compose
+input10::kana
+input10::numlock
+input10::scrolllock
+
+/sys/class/rtc:
+
+/sys/class/tpm:
+
+/sys/class/watchdog:
+== typec/ucsi
+port0
+port1
+/sys/class/typec/port0 host [device] source [sink] default
+/sys/class/typec/port1 host [device] source [sink] default
+== iommu/pmu/misc
+smmu.0x0000000003da0000
+smmu.0x0000000015000000
+smmu3.0x0000000015480000
+armv8_pmuv3
+breakpoint
+kprobe
+software
+tracepoint
+uprobe
+== deferred probes
+== ACPI dev presence (DT boot)
+ls: cannot access '/sys/bus/acpi/devices': No such file or directory
+== interrupt of firmware devices: cpuidle/cpufreq/devfreq
+3d00000.gpu
+psci_idle
+== dmesg -l warn+ counts by driver prefix
+     71 tcsrcc-glymur 1fd5000.clock-controller:
+     36 qcom-iris aa00000.video-codec:
+     18 x8 :
+     18 x5 :
+     18 x26: 0000000000000000
+     18 x23: ffffda0b36124680
+     18 x20: 0000000000000001
+     18 x2 :
+     18 x17: 0000000000000000
+     18 x14: 0000000000000000
+     18 x11: 0000000000000000
+     18 video_cc_mvs1_gdsc status
+     18 vfs_open+0x34/0x130 
+     18 v4l2_open+0x84/0x1c8 [videodev]
+     18 sp :
+     18 rpm_resume+0x550/0x748 
+     18 rpm_callback+0x88/0xa0 
+     18 pstate: 61400009
+     18 pc :
+     18 path_openat+0x5d4/0x938 
+     18 lr :
+     18 iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+     18 iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+     18 iris_open+0x88/0x4d0 [qcom_iris]
+     18 iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]

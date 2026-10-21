@@ -1,0 +1,281 @@
+area	linux_state	windows_name	windows_id	note
+Audio	absent	SoundWire HID	SOUNDWIRE\SDCA_FUNCTION_11&MAN_0217&FUNC_0001&TYPE	headset-button function not enumerated on SoundWire
+Audio	n/a	ACPI Audio Compositor Device	ACPI\ACPI0018	Windows audio processing / no Linux counterpart
+Audio	n/a	QCSDCA Device (Ext)	QCSDCA\EXTENSIONDEVICE	Windows audio processing / no Linux counterpart
+Audio	n/a	QCSDCA Microphone(Ext)	QCSDCA\EXTENSIONMICROPHONE	Windows audio processing / no Linux counterpart
+Audio	n/a	QCSDCA Speaker(Ext)	QCSDCA\EXTENSIONSPEAKER	Windows audio processing / no Linux counterpart
+Audio	n/a	Qualcomm ASD Audio Proxy APO	SWD\DRIVERENUM	Windows audio processing / no Linux counterpart
+Audio	n/a	Qualcomm ASD Audio Proxy APO	SWD\DRIVERENUM	Windows audio processing / no Linux counterpart
+Audio	n/a	Qualcomm ASD Audio Proxy APO	SWD\DRIVERENUM	Windows audio processing / no Linux counterpart
+Audio	n/a	Qualcomm ASD Audio Proxy APO	SWD\DRIVERENUM	Windows audio processing / no Linux counterpart
+Audio	n/a	Qualcomm ASD Audio Proxy APO	SWD\DRIVERENUM	Windows audio processing / no Linux counterpart
+Audio	n/a	Qualcomm ASD Audio Proxy APO	SWD\DRIVERENUM	Windows audio processing / no Linux counterpart
+Audio	n/a	Qualcomm ASD Audio Proxy APO	SWD\DRIVERENUM	Windows audio processing / no Linux counterpart
+Audio	n/a	Qualcomm Fluence AI APO	SWD\DRIVERENUM	Windows audio processing / no Linux counterpart
+Audio	n/a	Qualcomm(R) Aqstic(TM) Audio DSP and Calibration Manager	ADSP\VEN_QCOM&DEV_0F22&SUBSYS_8F47103C&REV_04	Windows audio processing / no Linux counterpart
+Audio	n/a	Qualcomm(R) Aqstic(TM) Sound Model Library Software Component	SWD\DRIVERENUM	Windows audio processing / no Linux counterpart
+Audio	n/a	Voice Clarity	SWD\DRIVERENUM	Windows audio processing / no Linux counterpart
+Audio	n/a	VoiceAssistantDriver Device	ACPI\QCOM104A	Windows audio processing / no Linux counterpart
+Audio	partial	Microphone Array (Qualcomm(R) Aqstic(TM) ACX Static Endpoints Audio Device)	SWD\MMDEVAPI	microphones work; speakers silent (amplifiers UNATTACHED)
+Audio	partial	Qualcomm(R) Aqstic(TM)	ADCM\VEN_QCOM&DEV_0FB7&SUBSYS_8F47103C&REV_04	ASoC card up; amplifier function absent; no SDCA headset codec on the bus
+Audio	partial	Qualcomm(R) Aqstic(TM) ACX Audio Device	AUCD\VEN_QCOM&DEV_0FCD&SUBSYS_8F47103C&REV_04	ASoC card up; amplifier function absent; no SDCA headset codec on the bus
+Audio	partial	Qualcomm(R) Aqstic(TM) ACX Headset Capture Audio Device	{4DCB0606-6415-4A36-BDC5-9B1792117DC9}\HEADSETCAPTUREDEVICE{2070F793-92FE-11F1-	headset jack input device registers; path not retested on -15
+Audio	partial	Qualcomm(R) Aqstic(TM) ACX Headset Render Audio Device	{4DCB0606-6415-4A36-BDC5-9B1792117DC9}\HEADSETRENDERDEVICE{2070F792-92FE-11F1-B	headset jack input device registers; path not retested on -15
+Audio	partial	Qualcomm(R) Aqstic(TM) ACX Static Endpoints Audio Device	QCASD\VEN_QCOM&DEV_0FCD&SUBSYS_8F47103C&REV_04	microphones work; speakers silent (amplifiers UNATTACHED)
+Audio	partial	Qualcomm(R) Aqstic(TM) AudioDriverX Device	ADCM\VEN_QCOM&DEV_0FF4&SUBSYS_8F47103C&REV_04	ASoC card up; amplifier function absent; no SDCA headset codec on the bus
+Audio	partial	SoundWire Audio	SOUNDWIRE\SDCA_AGGREGATOR	ASoC card up; amplifier function absent; no SDCA headset codec on the bus
+Audio	partial	SoundWire Audio	SOUNDWIRE\SDCA_FUNCTION_11&MAN_0217&FUNC_0003&TYPE	ASoC card up; amplifier function absent; no SDCA headset codec on the bus
+Audio	partial	SoundWire Audio	SOUNDWIRE\SDCA_FUNCTION_11&MAN_0217&FUNC_0003&TYPE	ASoC card up; amplifier function absent; no SDCA headset codec on the bus
+Audio	partial	SoundWire Audio	SOUNDWIRE\SDCA_FUNCTION_11&MAN_0217&FUNC_0003&TYPE	ASoC card up; amplifier function absent; no SDCA headset codec on the bus
+Audio	partial	SoundWire Audio Multifunction Device	SOUNDWIRE\SDCA_PERIPHERAL_10&MAN_0217&PART_0110&VE	ASoC card up; amplifier function absent; no SDCA headset codec on the bus
+Audio	partial	Speakers (Qualcomm(R) Aqstic(TM) ACX Static Endpoints Audio Device)	SWD\MMDEVAPI	microphones work; speakers silent (amplifiers UNATTACHED)
+Audio	working	Qualcomm(R) Aqstic(TM) SoundWire Controller	ADCM\VEN_QCOM&DEV_0FF6&SUBSYS_8F47103C&REV_04	qcom-soundwire master bound (swr0 for the amplifiers)
+Bluetooth	absent	Qualcomm(R) Aqstic(TM) BT ACX Transport Device	ACPI\QCOM0FEA	BT audio offload (ACX) not used; A2DP works through the host
+Bluetooth	n/a	Bluetooth Device (Personal Area Network)	BTH\MS_BTHPAN	Windows stack
+Bluetooth	n/a	Bluetooth Device (RFCOMM Protocol TDI)	BTH\MS_RFCOMM	Windows stack
+Bluetooth	n/a	Microsoft Bluetooth Enumerator	BTH\MS_BTHBRB	Windows stack
+Bluetooth	n/a	Microsoft Bluetooth LE Enumerator	BTH\MS_BTHLE	Windows stack
+Bluetooth	n/a	Microsoft Radio Device Enumeration Bus	SWD\RADIO	Windows stack
+Bluetooth	working	Bluetooth	SWD\RADIO	hci0 up on GENI UART; A2DP playback confirmed; RF calibration file qca/ornbcscal11.bin missing
+Bluetooth	working	Qualcomm FastConnect C7700 NCM820A Bluetooth Adapter	QCA_SHB\UART_H4_CLG	hci0 up on GENI UART; A2DP playback confirmed; RF calibration file qca/ornbcscal11.bin missing
+Bluetooth	working	Qualcomm(R) Bluetooth UART Transport Driver	ACPI\QCOM0F6B	hci0 up on GENI UART; A2DP playback confirmed; RF calibration file qca/ornbcscal11.bin missing
+Buses	working	Qualcomm(R) Bam Bus Device	ACPI\QCOM0F0A	SPMI, GPI DMA, BAM, 4 of 5 I2C controllers, BT UART bound
+Buses	working	Qualcomm(R) Bam Bus Device	ACPI\QCOM0F0A	SPMI, GPI DMA, BAM, 4 of 5 I2C controllers, BT UART bound
+Buses	working	Qualcomm(R) Bus Device	ACPI\QCOM0F16	SPMI, GPI DMA, BAM, 4 of 5 I2C controllers, BT UART bound
+Buses	working	Qualcomm(R) Bus Device	ACPI\QCOM0F16	SPMI, GPI DMA, BAM, 4 of 5 I2C controllers, BT UART bound
+Buses	working	Qualcomm(R) Bus Device	ACPI\QCOM0F88	SPMI, GPI DMA, BAM, 4 of 5 I2C controllers, BT UART bound
+Buses	working	Qualcomm(R) Bus Device	ACPI\QCOM0F88	SPMI, GPI DMA, BAM, 4 of 5 I2C controllers, BT UART bound
+Buses	working	Qualcomm(R) Bus Device	ACPI\QCOM0F88	SPMI, GPI DMA, BAM, 4 of 5 I2C controllers, BT UART bound
+Buses	working	Qualcomm(R) I2C Bus Device	ACPI\QCOM0F10	SPMI, GPI DMA, BAM, 4 of 5 I2C controllers, BT UART bound
+Buses	working	Qualcomm(R) I2C Bus Device	ACPI\QCOM0F10	SPMI, GPI DMA, BAM, 4 of 5 I2C controllers, BT UART bound
+Buses	working	Qualcomm(R) I2C Bus Device	ACPI\QCOM0F10	SPMI, GPI DMA, BAM, 4 of 5 I2C controllers, BT UART bound
+Buses	working	Qualcomm(R) I2C Bus Device	ACPI\QCOM0F10	SPMI, GPI DMA, BAM, 4 of 5 I2C controllers, BT UART bound
+Buses	working	Qualcomm(R) I2C Bus Device	ACPI\QCOM0F10	SPMI, GPI DMA, BAM, 4 of 5 I2C controllers, BT UART bound
+Buses	working	Qualcomm(R) SPI Bus Device	ACPI\QCOM0F0E	SPMI, GPI DMA, BAM, 4 of 5 I2C controllers, BT UART bound
+Buses	working	Qualcomm(R) SPMI Bus Device	ACPI\QCOM0F0B	SPMI, GPI DMA, BAM, 4 of 5 I2C controllers, BT UART bound
+Buses	working	Qualcomm(R) System Manager GPIO Device	ACPI\QCOM0F0C	SPMI, GPI DMA, BAM, 4 of 5 I2C controllers, BT UART bound
+Buses	working	Qualcomm(R) System Manager PMIC GPIO Framework Extension Device	ACPI\QCOM0F2D	SPMI, GPI DMA, BAM, 4 of 5 I2C controllers, BT UART bound
+CPU	working	Snapdragon(R) X2 Elite - X2E84100 - Qualcomm Oryon(TM) CPU	ACPI\QUALCOMM_TECHNOLOGIES_INC_-_ARMV8_(64-BI	12 CPUs, scmi cpufreq, cluster idle used
+CPU	working	Snapdragon(R) X2 Elite - X2E84100 - Qualcomm Oryon(TM) CPU	ACPI\QUALCOMM_TECHNOLOGIES_INC_-_ARMV8_(64-BI	12 CPUs, scmi cpufreq, cluster idle used
+CPU	working	Snapdragon(R) X2 Elite - X2E84100 - Qualcomm Oryon(TM) CPU	ACPI\QUALCOMM_TECHNOLOGIES_INC_-_ARMV8_(64-BI	12 CPUs, scmi cpufreq, cluster idle used
+CPU	working	Snapdragon(R) X2 Elite - X2E84100 - Qualcomm Oryon(TM) CPU	ACPI\QUALCOMM_TECHNOLOGIES_INC_-_ARMV8_(64-BI	12 CPUs, scmi cpufreq, cluster idle used
+CPU	working	Snapdragon(R) X2 Elite - X2E84100 - Qualcomm Oryon(TM) CPU	ACPI\QUALCOMM_TECHNOLOGIES_INC_-_ARMV8_(64-BI	12 CPUs, scmi cpufreq, cluster idle used
+CPU	working	Snapdragon(R) X2 Elite - X2E84100 - Qualcomm Oryon(TM) CPU	ACPI\QUALCOMM_TECHNOLOGIES_INC_-_ARMV8_(64-BI	12 CPUs, scmi cpufreq, cluster idle used
+CPU	working	Snapdragon(R) X2 Elite - X2E84100 - Qualcomm Oryon(TM) CPU	ACPI\QUALCOMM_TECHNOLOGIES_INC_-_ARMV8_(64-BI	12 CPUs, scmi cpufreq, cluster idle used
+CPU	working	Snapdragon(R) X2 Elite - X2E84100 - Qualcomm Oryon(TM) CPU	ACPI\QUALCOMM_TECHNOLOGIES_INC_-_ARMV8_(64-BI	12 CPUs, scmi cpufreq, cluster idle used
+CPU	working	Snapdragon(R) X2 Elite - X2E84100 - Qualcomm Oryon(TM) CPU	ACPI\QUALCOMM_TECHNOLOGIES_INC_-_ARMV8_(64-BI	12 CPUs, scmi cpufreq, cluster idle used
+CPU	working	Snapdragon(R) X2 Elite - X2E84100 - Qualcomm Oryon(TM) CPU	ACPI\QUALCOMM_TECHNOLOGIES_INC_-_ARMV8_(64-BI	12 CPUs, scmi cpufreq, cluster idle used
+CPU	working	Snapdragon(R) X2 Elite - X2E84100 - Qualcomm Oryon(TM) CPU	ACPI\QUALCOMM_TECHNOLOGIES_INC_-_ARMV8_(64-BI	12 CPUs, scmi cpufreq, cluster idle used
+CPU	working	Snapdragon(R) X2 Elite - X2E84100 - Qualcomm Oryon(TM) CPU	ACPI\QUALCOMM_TECHNOLOGIES_INC_-_ARMV8_(64-BI	12 CPUs, scmi cpufreq, cluster idle used
+Camera	absent	Camera DFU Device	USB\VID_30C9&PID_00D9&MI_04	firmware-update interface, no driver and not needed
+Camera	n/a	Rts-DMFT-Group	SWD\SGDEVAPI	Windows software
+Camera	n/a	Windows Studio Effects Camera	SWD\DRIVERENUM	Windows software
+Camera	n/a	Windows Studio Effects Voice Clarity APO	SWD\DRIVERENUM	Windows software
+Camera	working	HP IR Camera	USB\VID_30C9&PID_00D9&MI_02	grey 400x400 frame captured
+Camera	working	HP True Vision FHD Camera	USB\VID_30C9&PID_00D9&MI_00	RGB frame captured; uvcvideo
+Camera	working	USB Composite Device	USB\VID_30C9&PID_00D9	RGB frame captured; uvcvideo
+DSP	visible	Qualcomm(R) Audio RPC Daemon Device	ACPI\QCOM0F82	cdsp/adsp remoteprocs running, /dev/fastrpc-*; no compute workload tried
+DSP	visible	Qualcomm(R) Compute DSP Subsystem Device	ACPI\QCOM0FA6	cdsp/adsp remoteprocs running, /dev/fastrpc-*; no compute workload tried
+DSP	visible	Qualcomm(R) FastRPC Device	ACPI\QCOM0F5C	cdsp/adsp remoteprocs running, /dev/fastrpc-*; no compute workload tried
+DSP	visible	Qualcomm(R) NSP0 CDSP SW Thermal Device	ACPI\QCOM0FB8	cdsp/adsp remoteprocs running, /dev/fastrpc-*; no compute workload tried
+DSP	visible	Snapdragon(R) X2 Elite - X2E84100 - Qualcomm(R) Hexagon(TM) NPU	ACPI\VEN_QCOM&DEV_0FF0&SUBSYS_CRD08480&REV_00	cdsp/adsp remoteprocs running, /dev/fastrpc-*; no compute workload tried
+DSP	working	Qualcomm(R) Audio DSP Subsystem Device	ACPI\VEN_QCOM&DEV_0F1B&SUBSYS_8F47103C&REV_00	adsp running with HP qcadsp8480.mbn
+Display	n/a	Microsoft Basic Display Driver	ROOT\BASICDISPLAY	Windows software
+Display	n/a	Microsoft Basic Render Driver	ROOT\BASICRENDER	Windows software
+Display	n/a	Qualcomm(R) Display Services	SWD\DRIVERENUM	Windows software
+Display	working	Integrated Monitor (ATNA60KJ02-0)	DISPLAY\SDC4214	eDP panel (Samsung ATNA), DP AUX backlight
+EC	failing	ACPI Fan	ACPI\PNP0C0B	fan speed comes from the EC driver (not bound on -15)
+EC	failing	HP Application Driver	ACPI\HPIC0003	HP WMI/EC services: EC driver not bound; no HP WMI on arm64
+EC	failing	HP Application Enabling Services	SWD\DRIVERENUM	HP WMI/EC services: EC driver not bound; no HP WMI on arm64
+EC	failing	HP Mute LED	ACPI\HPIC0005	EC driver did not bind on -15 (thermal zone name too long); fixed for -16
+EC	working	ACPI Lid	ACPI\PNP0C0D	gpio-keys lid switch registered
+Firmware	n/a	Device Firmware	UEFI\RES_{0BDA2024-30C9-00D9-8DE0-301873DE33F	UEFI capsule resources; fwupd is masked on purpose
+Firmware	n/a	Device Firmware	UEFI\RES_{64EC2CA6-4AE3-4A6E-B542-27A7E0AA0BA	UEFI capsule resources; fwupd is masked on purpose
+Firmware	n/a	Device Firmware	UEFI\RES_{94ECDA5A-E410-411E-A7FB-5B82A0456A4	UEFI capsule resources; fwupd is masked on purpose
+Firmware	n/a	System Firmware	UEFI\RES_{84CB55F4-D08A-43BB-BB7D-07FA3847689	UEFI capsule resources; fwupd is masked on purpose
+GPU	working	Qualcomm(R) Adreno(TM) X2-85 GPU	ACPI\VEN_QCOM&DEV_0FF5&SUBSYS_8F47103C&REV_00	adreno bound, /dev/dri/renderD128 (needs Mesa 26.2 from /opt/mesa-glymur)
+Input	n/a	HID-compliant consumer control device	HID\HID_DEVICE_SYSTEM_VHF	Windows virtual HID
+Input	n/a	HID-compliant mouse	HID\HID_DEVICE_SYSTEM_VHF	Windows virtual HID
+Input	n/a	Virtual HID Framework (VHF) HID device	VHF\HID_DEVICE_SYSTEM_VHF	Windows virtual HID
+Input	n/a	Virtual HID Framework (VHF) HID device	VHF\HID_DEVICE_SYSTEM_VHF	Windows virtual HID
+Input	working	Converted Portable Device Control device	BUTTONCONVERTER\CONVERTEDDEVICE	keyboard on i2c 0-003a; consumer keys through it
+Input	working	ELAN Consumer Control device	HID\ELAN0189&COL05	touchpad on i2c 4-0015
+Input	working	ELAN HID Class Filter Driver	HID\ELAN0189&COL02	touchpad on i2c 4-0015
+Input	working	ELAN Input Device	HID\ELAN0189&COL01	touchpad on i2c 4-0015
+Input	working	ELAN PrecisionTouchpad Filter Driver	HID\ELAN0189&COL03	touchpad on i2c 4-0015
+Input	working	HID Button over Interrupt Driver	ACPI\ACPI0011	keyboard on i2c 0-003a; consumer keys through it
+Input	working	HID Keyboard Device	HID\CONVERTEDDEVICE&COL01	keyboard on i2c 0-003a; consumer keys through it
+Input	working	HID Keyboard Device	HID\QTEC0001&COL01	keyboard on i2c 0-003a; consumer keys through it
+Input	working	HID-compliant consumer control device	HID\CONVERTEDDEVICE&COL02	keyboard on i2c 0-003a; consumer keys through it
+Input	working	HID-compliant consumer control device	HID\QTEC0001&COL02	keyboard on i2c 0-003a; consumer keys through it
+Input	working	HID-compliant device	HID\VEN_ELAN&DEV_2513&SUBSYS_CRD08480&REV_00	touchscreen on i2c 8-0010 (tested by hand)
+Input	working	HID-compliant system controller	HID\CONVERTEDDEVICE&COL03	keyboard on i2c 0-003a; consumer keys through it
+Input	working	HID-compliant touch screen	HID\VEN_ELAN&DEV_2513&SUBSYS_CRD08480&REV_00	touchscreen on i2c 8-0010 (tested by hand)
+Input	working	HID-compliant vendor-defined device	HID\QTEC0001&COL03	keyboard on i2c 0-003a; consumer keys through it
+Input	working	HID-compliant vendor-defined device	HID\VEN_ELAN&DEV_2513&SUBSYS_CRD08480&REV_00	touchscreen on i2c 8-0010 (tested by hand)
+Input	working	HID-compliant vendor-defined device	HID\VEN_ELAN&DEV_2513&SUBSYS_CRD08480&REV_00	touchscreen on i2c 8-0010 (tested by hand)
+Input	working	HID-compliant vendor-defined device	HID\VEN_ELAN&DEV_2513&SUBSYS_CRD08480&REV_00	touchscreen on i2c 8-0010 (tested by hand)
+Input	working	I2C HID Device	ACPI\ELAN0189	touchpad on i2c 4-0015
+Input	working	I2C HID Device	ACPI\QTEC0001	keyboard on i2c 0-003a; consumer keys through it
+Input	working	I2C HID Device	ACPI\VEN_ELAN&DEV_2513&SUBSYS_CRD08480&REV_00	touchscreen on i2c 8-0010 (tested by hand)
+Input	working	Microsoft Input Configuration Device	HID\ELAN0189&COL04	touchpad on i2c 4-0015
+Input	working	Portable Device Control device	HID\ACPI0011	keyboard on i2c 0-003a; consumer keys through it
+PCIe	working	PCI Express Root Complex	ACPI\PNP0A08	pcie4 (Wi-Fi) and pcie5 (NVMe) up
+PCIe	working	PCI Express Root Complex	ACPI\PNP0A08	pcie4 (Wi-Fi) and pcie5 (NVMe) up
+PCIe	working	PCI Express Root Port	PCI\VEN_17CB&DEV_0120&SUBSYS_00000000&REV_00	pcie4 (Wi-Fi) and pcie5 (NVMe) up
+PCIe	working	PCI Express Root Port	PCI\VEN_17CB&DEV_0120&SUBSYS_00000000&REV_00	pcie4 (Wi-Fi) and pcie5 (NVMe) up
+PCIe	working	Qualcomm(R) PCIe Platform Extension Plugin	ACPI\QCOM0F96	pcie4 (Wi-Fi) and pcie5 (NVMe) up
+Platform	n/a	ACPI ARM64-based PC	ROOT\ARM64_HAL	ACPI plumbing (this is a device-tree boot)
+Platform	n/a	ACPI Devices driver	ACPI\ACPI0013	ACPI plumbing (this is a device-tree boot)
+Platform	n/a	ACPI Devices driver	ACPI\ACPI0013	ACPI plumbing (this is a device-tree boot)
+Platform	n/a	ACPI Processor Aggregator	ACPI\ACPI000C	ACPI plumbing (this is a device-tree boot)
+Platform	n/a	ACPI Processor Container Device	ACPI\ACPI0010	ACPI plumbing (this is a device-tree boot)
+Platform	n/a	ACPI Processor Container Device	ACPI\ACPI0010	ACPI plumbing (this is a device-tree boot)
+Platform	n/a	ACPI Processor Container Device	ACPI\ACPI0010	ACPI plumbing (this is a device-tree boot)
+Platform	n/a	ACPI Wake Alarm	ACPI\ACPI000E	ACPI plumbing (this is a device-tree boot)
+Platform	n/a	Generic Bus	ACPI\PNP0A05	ACPI plumbing (this is a device-tree boot)
+Platform	n/a	Generic Bus	ACPI\PNP0A05	ACPI plumbing (this is a device-tree boot)
+Platform	n/a	Microsoft ACPI-Compliant System	ACPI_HAL\PNP0C08	ACPI plumbing (this is a device-tree boot)
+Platform	n/a	Microsoft UEFI-Compliant System	ACPI_HAL\UEFI	ACPI plumbing (this is a device-tree boot)
+Platform	n/a	Microsoft Windows Management Interface for ACPI	ACPI\PNP0C14	ACPI plumbing (this is a device-tree boot)
+Platform	n/a	Microsoft Windows Management Interface for ACPI	ACPI\PNP0C14	ACPI plumbing (this is a device-tree boot)
+Platform	n/a	Microsoft Windows Management Interface for ACPI	ACPI\PNP0C14	ACPI plumbing (this is a device-tree boot)
+Power	working	Charge Arbitration Driver	ROOT\CAD	qcom_battmgr: battery, AC, USB power supplies
+Power	working	Microsoft AC Adapter	ACPI\ACPI0003	qcom_battmgr: battery, AC, USB power supplies
+Power	working	Microsoft ACPI-Compliant Control Method Battery	ACPI\PNP0C0A	qcom_battmgr: battery, AC, USB power supplies
+Power	working	Qualcomm(R) ACPI Bridge Device	ACPI\QCOM1045	qcom_battmgr: battery, AC, USB power supplies
+Power	working	Qualcomm(R) Power Management FGBCL Device	ACPI\QCOM0F77	qcom_battmgr: battery, AC, USB power supplies
+Power	working	Qualcomm(R) Power Management PMIC GLink Device	ACPI\QCOM0F8E	qcom_battmgr: battery, AC, USB power supplies
+Power policy	partial	Qualcomm CPU Core parking Policy Device	ACPI\VEN_QCOM&DEV_0FD8&SUBSYS_CUST8480&REV_00	cpufreq through SCMI; the other Windows policy devices have no Linux counterpart
+Power policy	partial	Qualcomm CPU DCVS Cluster 0 Policy Device	ACPI\VEN_QCOM&DEV_0FDA&SUBSYS_CUST8480&REV_00	cpufreq through SCMI; the other Windows policy devices have no Linux counterpart
+Power policy	partial	Qualcomm CPU DCVS Cluster 1 Policy Device	ACPI\VEN_QCOM&DEV_0FDB&SUBSYS_CUST8480&REV_00	cpufreq through SCMI; the other Windows policy devices have no Linux counterpart
+Power policy	partial	Qualcomm CPU DCVS Policy Device	ACPI\VEN_QCOM&DEV_0FD9&SUBSYS_CUST8480&REV_00	cpufreq through SCMI; the other Windows policy devices have no Linux counterpart
+Power policy	partial	Qualcomm GPU limits Policy Device	ACPI\VEN_QCOM&DEV_0FDD&SUBSYS_CUST8480&REV_00	cpufreq through SCMI; the other Windows policy devices have no Linux counterpart
+Power policy	partial	Qualcomm Modem BCL Policy Device	ACPI\VEN_QCOM&DEV_0FE1&SUBSYS_CUST8480&REV_00	cpufreq through SCMI; the other Windows policy devices have no Linux counterpart
+Power policy	partial	Qualcomm Modem skin Policy Device	ACPI\VEN_QCOM&DEV_0FDF&SUBSYS_CUST8480&REV_00	cpufreq through SCMI; the other Windows policy devices have no Linux counterpart
+Power policy	partial	Qualcomm NSP limits Policy Device	ACPI\VEN_QCOM&DEV_0FDE&SUBSYS_CUST8480&REV_00	cpufreq through SCMI; the other Windows policy devices have no Linux counterpart
+Power policy	partial	Qualcomm Power Engine Plug-in Device	ACPI\VEN_QCOM&DEV_0F17&SUBSYS_CUST8480&REV_00	cpufreq through SCMI; the other Windows policy devices have no Linux counterpart
+Power policy	partial	Qualcomm PowerLimits Device	ACPI\QCOM103F	qcom_spel energy counters work; no limits readable
+Power policy	partial	Qualcomm WLAN Limits Policy Device	ACPI\VEN_QCOM&DEV_0FE2&SUBSYS_CUST8480&REV_00	cpufreq through SCMI; the other Windows policy devices have no Linux counterpart
+Power policy	visible	Qualcomm Pep Acpi Interface Device	ACPI\QCOM1033	PMIC and RPMh power domains bound
+Power policy	visible	Qualcomm QSTF CONFIG Device	ACPI\QCOM1043	PMIC and RPMh power domains bound
+Power policy	visible	Qualcomm SBOD Device	ACPI\QCOM103C	PMIC and RPMh power domains bound
+Power policy	visible	Qualcomm(R) PPTE Services	ACPI\QCOM1042	PMIC and RPMh power domains bound
+Power policy	visible	Qualcomm(R) Power Management PMIC Device	ACPI\QCOM0F2B	PMIC and RPMh power domains bound
+Power policy	visible	Qualcomm(R) Power Management PML0	ACPI\QCOM0FC6	PMIC and RPMh power domains bound
+Power policy	visible	Qualcomm(R) Reset Power Error Notifier Device	ACPI\QCOM1000	PMIC and RPMh power domains bound
+Security	absent	Trusted Platform Module 2.0	{36DEAA79-C5DD-447C-95E6-B3859589291A}\TREETPM	no /dev/tpm (TPM2 start method 9 not supported)
+Security	n/a	Microsoft Pluton security processor	ROOT\PLUTONQC	Windows security processor
+Security	visible	Qualcomm BcryptCipher Device	ACPI\QCOM1032	soccp remoteproc attached, qcom_scm and qcomtee bound; crypto engines have no Linux use yet
+Security	visible	Qualcomm Secure Processor Device	ACPI\QCOM0F87	soccp remoteproc attached, qcom_scm and qcomtee bound; crypto engines have no Linux use yet
+Security	visible	Qualcomm(R) Connection Security Device	ACPI\QCOM0FA1	soccp remoteproc attached, qcom_scm and qcomtee bound; crypto engines have no Linux use yet
+Security	visible	Qualcomm(R) Control Processor Subsystem Device	ACPI\QCOM1036	soccp remoteproc attached, qcom_scm and qcomtee bound; crypto engines have no Linux use yet
+Security	visible	Qualcomm(R) Inline Crypto Engine Device	ACPI\QCOM103D	soccp remoteproc attached, qcom_scm and qcomtee bound; crypto engines have no Linux use yet
+Security	visible	Qualcomm(R) Inline Crypto Engine Device	ACPI\QCOM103D	soccp remoteproc attached, qcom_scm and qcomtee bound; crypto engines have no Linux use yet
+Security	visible	Qualcomm(R) SSG Secure Services Device	ACPI\QCOM1004	soccp remoteproc attached, qcom_scm and qcomtee bound; crypto engines have no Linux use yet
+Security	visible	Qualcomm(R) Secure Kernel Extension	ACPI\QCOM0FA5	soccp remoteproc attached, qcom_scm and qcomtee bound; crypto engines have no Linux use yet
+Security	visible	Qualcomm(R) Secure Processor Subsystem Device	ACPI\QCOM0F8D	soccp remoteproc attached, qcom_scm and qcomtee bound; crypto engines have no Linux use yet
+Security	visible	Qualcomm(R) System Manager SCM Device	ACPI\QCOM1001	soccp remoteproc attached, qcom_scm and qcomtee bound; crypto engines have no Linux use yet
+Security	visible	Qualcomm(R) System Manager Secapp Device	ACPI\QCOM0FCC	soccp remoteproc attached, qcom_scm and qcomtee bound; crypto engines have no Linux use yet
+Sensors	absent	Qualcomm Human Presence Sensor	ACPI\QCOM0FF8	no IIO device
+Sensors	absent	Qualcomm(R) All-Ways Aware(TM) Sensor Platform Device - Display	ACPI\QCOM0693	no IIO device
+Sensors	absent	Qualcomm(R) All-Ways Aware(TM) Sensor Platform Device - Keyboard	ACPI\QCOM0694	no IIO device
+Sensors	absent	Qualcomm(R) Analog-to-Digital Converter Device	ACPI\QCOM0F11	no IIO device
+SoC plumbing	visible	Qualcomm Shared Memory Port Device	ACPI\QCOM0F84	smmu, llcc, smem, ipcc, glink, pd-mapper, remoteproc loaders bound
+SoC plumbing	visible	Qualcomm Subsystem Dependency Device	ACPI\QCOM0F20	smmu, llcc, smem, ipcc, glink, pd-mapper, remoteproc loaders bound
+SoC plumbing	visible	Qualcomm System Cache Device	ACPI\VEN_QCOM&DEV_0F83&SUBSYS_CRD08480&REV_00	smmu, llcc, smem, ipcc, glink, pd-mapper, remoteproc loaders bound
+SoC plumbing	visible	Qualcomm(R) DCF Device	ACPI\QCOM0FF7	smmu, llcc, smem, ipcc, glink, pd-mapper, remoteproc loaders bound
+SoC plumbing	visible	Qualcomm(R) Data IPC Router Device	ACPI\QCOM0F0D	smmu, llcc, smem, ipcc, glink, pd-mapper, remoteproc loaders bound
+SoC plumbing	visible	Qualcomm(R) IOMMU Device	ACPI\QCOM0FF9	smmu, llcc, smem, ipcc, glink, pd-mapper, remoteproc loaders bound
+SoC plumbing	visible	Qualcomm(R) Inter Processor Communication Interrupt Device	ACPI\QCOM1046	smmu, llcc, smem, ipcc, glink, pd-mapper, remoteproc loaders bound
+SoC plumbing	visible	Qualcomm(R) Peripheral Image Loader Device	ACPI\VEN_QCOM&DEV_0FFB&SUBSYS_CRD08480&REV_04	smmu, llcc, smem, ipcc, glink, pd-mapper, remoteproc loaders bound
+SoC plumbing	visible	Qualcomm(R) Protection Domain Service Registry Device	ACPI\VEN_QCOM&DEV_0FFA&SUBSYS_CRD08480&REV_00	smmu, llcc, smem, ipcc, glink, pd-mapper, remoteproc loaders bound
+SoC plumbing	visible	Qualcomm(R) QcSocServiceKMDF Service	ACPI\QCOM103B	smmu, llcc, smem, ipcc, glink, pd-mapper, remoteproc loaders bound
+SoC plumbing	visible	Qualcomm(R) SOC Partition Interface Device	ACPI\QCOM0FFD	smmu, llcc, smem, ipcc, glink, pd-mapper, remoteproc loaders bound
+SoC plumbing	visible	Qualcomm(R) SenD Device	ACPI\QCOM1047	smmu, llcc, smem, ipcc, glink, pd-mapper, remoteproc loaders bound
+SoC plumbing	visible	Qualcomm(R) System Manager Device	ACPI\QCOM0F2F	smmu, llcc, smem, ipcc, glink, pd-mapper, remoteproc loaders bound
+SoC plumbing	visible	Qualcomm(R) System Manager Device	ACPI\QCOM0F85	smmu, llcc, smem, ipcc, glink, pd-mapper, remoteproc loaders bound
+SoC plumbing	visible	Qualcomm(R) System Manager Device	ACPI\QCOM103E	smmu, llcc, smem, ipcc, glink, pd-mapper, remoteproc loaders bound
+SoC plumbing	visible	Qualcomm(R) TFTP Device	ACPI\QCOM0FFE	smmu, llcc, smem, ipcc, glink, pd-mapper, remoteproc loaders bound
+Storage	working	SAMSUNG MZVMX1T0HDLD-00BH1	SCSI\DISK&VEN_NVME&PROD_SAMSUNG_MZVMX1T0	nvme on pcie5
+Storage	working	Standard NVM Express Controller	PCI\VEN_144D&DEV_A80F&SUBSYS_A801144D&REV_00	nvme on pcie5
+Thermal	working	ACPI Thermal Zone	ACPI\THERMALZONE	tsens: 6 controllers, about 60 zones; EC thermistors missing on -15
+Thermal	working	ACPI Thermal Zone	ACPI\THERMALZONE	tsens: 6 controllers, about 60 zones; EC thermistors missing on -15
+Thermal	working	ACPI Thermal Zone	ACPI\THERMALZONE	tsens: 6 controllers, about 60 zones; EC thermistors missing on -15
+Thermal	working	ACPI Thermal Zone	ACPI\THERMALZONE	tsens: 6 controllers, about 60 zones; EC thermistors missing on -15
+Thermal	working	Qualcomm Temperature Sensor Device	ACPI\QCOM0F58	tsens: 6 controllers, about 60 zones; EC thermistors missing on -15
+Thermal	working	Qualcomm Temperature Sensor Device	ACPI\QCOM0F59	tsens: 6 controllers, about 60 zones; EC thermistors missing on -15
+Thermal	working	Qualcomm Temperature Sensor Device	ACPI\QCOM0F5A	tsens: 6 controllers, about 60 zones; EC thermistors missing on -15
+Thermal	working	Qualcomm Temperature Sensor Device	ACPI\QCOM0F91	tsens: 6 controllers, about 60 zones; EC thermistors missing on -15
+Thermal	working	Qualcomm Temperature Sensor Device	ACPI\QCOM0FB5	tsens: 6 controllers, about 60 zones; EC thermistors missing on -15
+Thermal	working	Qualcomm Temperature Sensor Device	ACPI\QCOM1038	tsens: 6 controllers, about 60 zones; EC thermistors missing on -15
+Thermal	working	Qualcomm Temperature Sensor Device	ACPI\QCOM1039	tsens: 6 controllers, about 60 zones; EC thermistors missing on -15
+Thermal	working	Qualcomm(R) Subsys Base Thermal Mitigation Device	ACPI\QCOM1005	tsens: 6 controllers, about 60 zones; EC thermistors missing on -15
+Thermal	working	Qualcomm(R) Wlan Thermal Mitigation Device	ACPI\QCOM0FC7	tsens: 6 controllers, about 60 zones; EC thermistors missing on -15
+USB	working	Qualcomm(R) USB3(TM) eXtensible Host Controller	ACPI\QCOM0F9A	xhci and dwc3 bound; USB-A SuperSpeed stick in use
+USB	working	Qualcomm(R) USB3(TM) eXtensible Host Controller	ACPI\QCOM0FEF	xhci and dwc3 bound; USB-A SuperSpeed stick in use
+USB	working	Synopsys USB 3.0 Dual-Role Controller	ACPI\QCOM0F8B	xhci and dwc3 bound; USB-A SuperSpeed stick in use
+USB	working	Synopsys USB 3.0 Dual-Role Controller	ACPI\QCOM0F8C	xhci and dwc3 bound; USB-A SuperSpeed stick in use
+USB	working	USB Root Hub (USB 3.0)	USB\ROOT_HUB30	xhci and dwc3 bound; USB-A SuperSpeed stick in use
+USB	working	USB Root Hub (USB 3.0)	USB\ROOT_HUB30	xhci and dwc3 bound; USB-A SuperSpeed stick in use
+USB-C	partial	Qualcomm(R) USB Type-C Device	ACPI\QCOM0F9D	UCSI ports registered; USB-C data works; DisplayPort over USB-C crashed the machine
+USB-C	partial	UCM-UCSI ACPI Device	ACPI\USBC000	UCSI ports registered; USB-C data works; DisplayPort over USB-C crashed the machine
+Video	visible	Qualcomm(R) EVA Device	ACPI\QCOM0FD7	evacc clock controller bound
+Wi-Fi	working	Qualcomm FastConnect C7700 NCM820A Wi-Fi 7 Network Adapter	PCI\VEN_17CB&DEV_1112&SUBSYS_8EF3103C&REV_01	ath12k, wlo1 up
+Wi-Fi	working	Wi-Fi	SWD\RADIO	ath12k, wlo1 up
+Windows-only	n/a		HTREE\ROOT	virtual or Windows-specific
+Windows-only	n/a	Composite Bus Enumerator	ROOT\COMPOSITEBUS	virtual or Windows-specific
+Windows-only	n/a	Facial Recognition (Windows Hello) Software Device	ROOT\WINDOWSHELLOFACESOFTWAREDRIVER	virtual or Windows-specific
+Windows-only	n/a	Generic software component	SWD\DRIVERENUM	virtual or Windows-specific
+Windows-only	n/a	Generic volume shadow copy	STORAGE\VOLUMESNAPSHOT	virtual or Windows-specific
+Windows-only	n/a	Generic volume shadow copy	STORAGE\VOLUMESNAPSHOT	virtual or Windows-specific
+Windows-only	n/a	HP HP OmniBook 5 Laptop 16-bf1xxx	SWD\COMPUTER	virtual or Windows-specific
+Windows-only	n/a	Hyper-V Virtual Switch Extension Adapter	ROOT\VMS_VSMP	virtual or Windows-specific
+Windows-only	n/a	Microsoft Device Association Root Enumerator	SWD\MSDAS	virtual or Windows-specific
+Windows-only	n/a	Microsoft GS Wavetable Synth	SWD\MMDEVAPI	virtual or Windows-specific
+Windows-only	n/a	Microsoft Hyper-V PCI Server	ROOT\VPCIVSP	virtual or Windows-specific
+Windows-only	n/a	Microsoft Hyper-V Virtual Disk Server	ROOT\STORVSP	virtual or Windows-specific
+Windows-only	n/a	Microsoft Hyper-V Virtual Machine Bus Provider	ROOT\VMBUS	virtual or Windows-specific
+Windows-only	n/a	Microsoft Hyper-V Virtualization Infrastructure Driver	ROOT\VID	virtual or Windows-specific
+Windows-only	n/a	Microsoft Hypervisor Service	ROOT\HVSERVICE	virtual or Windows-specific
+Windows-only	n/a	Microsoft Kernel Debug Network Adapter	ROOT\KDNIC	virtual or Windows-specific
+Windows-only	n/a	Microsoft Print to PDF	SWD\PRINTENUM	virtual or Windows-specific
+Windows-only	n/a	Microsoft RRAS Root Enumerator	SWD\MSRRAS	virtual or Windows-specific
+Windows-only	n/a	Microsoft Storage Spaces Controller	ROOT\SPACEPORT	virtual or Windows-specific
+Windows-only	n/a	Microsoft Streaming Service Proxy	SW\{96E080C7-143C-11D1-B40F-00A0C9223196}	virtual or Windows-specific
+Windows-only	n/a	Microsoft System Management BIOS Driver	ROOT\MSSMBIOS	virtual or Windows-specific
+Windows-only	n/a	Microsoft Virtual Drive Enumerator	ROOT\VDRVROOT	virtual or Windows-specific
+Windows-only	n/a	Microsoft Windows Trusted Runtime Secure Service	{4E815EE1-20F8-41EF-8CFF-3C283F02D722}\{03B82FC5-2052-44D6-9462-F22C72499337}	virtual or Windows-specific
+Windows-only	n/a	Microsoft Windows Trusted Runtime Secure Service	{4E815EE1-20F8-41EF-8CFF-3C283F02D722}\{15D785F6-DF37-4BFE-B225-2DD4CE87C940}	virtual or Windows-specific
+Windows-only	n/a	Microsoft Windows Trusted Runtime Secure Service	{4E815EE1-20F8-41EF-8CFF-3C283F02D722}\{16A1AB50-7413-4875-893D-2E5AA0B79888}	virtual or Windows-specific
+Windows-only	n/a	Microsoft Windows Trusted Runtime Secure Service	{4E815EE1-20F8-41EF-8CFF-3C283F02D722}\{2A51AA84-2DFF-468C-9629-B50103B969D9}	virtual or Windows-specific
+Windows-only	n/a	Microsoft Windows Trusted Runtime Secure Service	{4E815EE1-20F8-41EF-8CFF-3C283F02D722}\{36DEAA79-C5DD-447C-95E6-B3859589291A}	virtual or Windows-specific
+Windows-only	n/a	Microsoft Windows Trusted Runtime Secure Service	{4E815EE1-20F8-41EF-8CFF-3C283F02D722}\{59EB09D9-537E-4961-A905-444449D9FE61}	virtual or Windows-specific
+Windows-only	n/a	Microsoft Windows Trusted Runtime Secure Service	{4E815EE1-20F8-41EF-8CFF-3C283F02D722}\{699AA2F1-A42E-40DF-BABE-3AAAD2BB6A47}	virtual or Windows-specific
+Windows-only	n/a	Microsoft Windows Trusted Runtime Secure Service	{4E815EE1-20F8-41EF-8CFF-3C283F02D722}\{72F6EF56-CF28-4D19-A027-1C3EC5E7DF4B}	virtual or Windows-specific
+Windows-only	n/a	Microsoft Windows Trusted Runtime Secure Service	{4E815EE1-20F8-41EF-8CFF-3C283F02D722}\{742E7313-2543-4EB8-BBEB-C5B75945063C}	virtual or Windows-specific
+Windows-only	n/a	Microsoft Windows Trusted Runtime Secure Service	{4E815EE1-20F8-41EF-8CFF-3C283F02D722}\{AE865C08-4A07-404D-BE51-D9A0465E23E5}	virtual or Windows-specific
+Windows-only	n/a	Microsoft Windows Trusted Runtime Secure Service	{4E815EE1-20F8-41EF-8CFF-3C283F02D722}\{C28F7046-F72E-4F23-B061-E50421C5404C}	virtual or Windows-specific
+Windows-only	n/a	Microsoft Windows Trusted Runtime Secure Service	{4E815EE1-20F8-41EF-8CFF-3C283F02D722}\{D08CBE90-96EA-4031-9EBD-DA11FC8A8319}	virtual or Windows-specific
+Windows-only	n/a	Microsoft Windows Trusted Runtime Secure Service	{4E815EE1-20F8-41EF-8CFF-3C283F02D722}\{DA4B2995-8A01-4440-8B45-E1C026B16695}	virtual or Windows-specific
+Windows-only	n/a	Microsoft Windows Trusted Runtime Secure Service	{4E815EE1-20F8-41EF-8CFF-3C283F02D722}\{EB3C7242-1B1A-4D51-AB55-F268F018F860}	virtual or Windows-specific
+Windows-only	n/a	Microsoft Windows Trusted Runtime Secure Service	{4E815EE1-20F8-41EF-8CFF-3C283F02D722}\{F4637010-03C3-42CD-B932-B48ADF3A6A54}	virtual or Windows-specific
+Windows-only	n/a	Microsoft Windows Trusted Runtime Secure Service	{4E815EE1-20F8-41EF-8CFF-3C283F02D722}\{F5AEA618-0649-49F4-81EF-F2E0F9EAFFCC}	virtual or Windows-specific
+Windows-only	n/a	NDIS Virtual Network Adapter Enumerator	ROOT\NDISVIRTUALBUS	virtual or Windows-specific
+Windows-only	n/a	Plug and Play Software Device Enumerator	ROOT\SYSTEM	virtual or Windows-specific
+Windows-only	n/a	Remote Desktop Device Redirector Bus	ROOT\RDPBUS	virtual or Windows-specific
+Windows-only	n/a	Root Print Queue	SWD\PRINTENUM	virtual or Windows-specific
+Windows-only	n/a	UMBus Root Bus Enumerator	ROOT\UMBUS	virtual or Windows-specific
+Windows-only	n/a	Volume	STORAGE\VOLUME	virtual or Windows-specific
+Windows-only	n/a	Volume	STORAGE\VOLUME	virtual or Windows-specific
+Windows-only	n/a	Volume	STORAGE\VOLUME	virtual or Windows-specific
+Windows-only	n/a	Volume	STORAGE\VOLUME	virtual or Windows-specific
+Windows-only	n/a	Volume Manager	ROOT\VOLMGR	virtual or Windows-specific
+Windows-only	n/a	WAN Miniport (IKEv2)	SWD\MSRRAS	virtual or Windows-specific
+Windows-only	n/a	WAN Miniport (IP)	SWD\MSRRAS	virtual or Windows-specific
+Windows-only	n/a	WAN Miniport (IPv6)	SWD\MSRRAS	virtual or Windows-specific
+Windows-only	n/a	WAN Miniport (L2TP)	SWD\MSRRAS	virtual or Windows-specific
+Windows-only	n/a	WAN Miniport (Network Monitor)	SWD\MSRRAS	virtual or Windows-specific
+Windows-only	n/a	WAN Miniport (PPPOE)	SWD\MSRRAS	virtual or Windows-specific
+Windows-only	n/a	WAN Miniport (PPTP)	SWD\MSRRAS	virtual or Windows-specific
+Windows-only	n/a	WAN Miniport (SSTP)	SWD\MSRRAS	virtual or Windows-specific
