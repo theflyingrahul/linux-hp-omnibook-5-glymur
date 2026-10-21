@@ -94,12 +94,13 @@ fi
 # EC LED 8 is taken as F6 (speaker mute) and 9 as F9 (mic mute). Start
 # from a known state: the EC may already have an LED on.
 sect "mute LEDs"
-declare -A was
+declare -A was trig
 for n in mute micmute; do
     L=/sys/class/leds/platform::$n
     [ -e "$L" ] || { echo "no platform::$n LED"; continue; }
     was[$n]=$(cat $L/brightness)
-    echo "platform::$n reads ${was[$n]}"
+    trig[$n]=$(sed -n 's/.*\[\(.*\)\].*/\1/p' $L/trigger)
+    echo "platform::$n reads ${was[$n]}, trigger ${trig[$n]:-none}"
 done
 if [ ${#was[@]} -eq 2 ]; then
     ask "In the last Windows session, were the speakers or the microphone muted (speaker, mic, both, none, unsure)? Was this boot a restart from Windows, or from power off?"
@@ -117,8 +118,10 @@ if [ ${#was[@]} -eq 2 ]; then
         echo 0 > $L/brightness
     done
     for n in mute micmute; do echo "${was[$n]}" > /sys/class/leds/platform::$n/brightness; done
+    # Writing brightness detaches the audio LED triggers; put them back.
+    for n in mute micmute; do [ -n "${trig[$n]}" ] && echo "${trig[$n]}" > /sys/class/leds/platform::$n/trigger; done
     sleep 0.5
-    echo "restored: mute $(cat /sys/class/leds/platform::mute/brightness), micmute $(cat /sys/class/leds/platform::micmute/brightness)"
+    echo "restored: mute $(cat /sys/class/leds/platform::mute/brightness), micmute $(cat /sys/class/leds/platform::micmute/brightness); triggers $(cat /sys/class/leds/platform::mute/trigger | sed -n 's/.*\[\(.*\)\].*/\1/p'), $(cat /sys/class/leds/platform::micmute/trigger | sed -n 's/.*\[\(.*\)\].*/\1/p')"
 fi
 
 # F9 sends a HID Mute as well as its EC event; the timestamps show the order.
