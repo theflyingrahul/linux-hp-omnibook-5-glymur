@@ -145,3 +145,23 @@ HP's AML never writes the reference "enable events" command `0x35`. The OS
 flags `0x80`, `0x81`, `0x82` and `0x84` (mailbox command `0x01`) are written
 by named methods (`APET`, `SCET`, `MSET`, and `SMLS` for `0x84`); the driver
 sends only `0x84`. Whether `0x80` or `0x81` gate event delivery is unknown.
+
+## OS-state flags do not switch on F9 (`ec-hotkey-flags.sh`, 2026-10-22)
+
+HP's AML has `APET` (mailbox command `0x01`, flag `0x80`) and `SCET` (`0x81`)
+that nothing in the tables calls, so HP's Windows driver must. With the EC
+driver unbound, `0x80`, `0x81` and both together were set one at a time (the
+EC answered each with status `0xe0`, done), and register `0x05` was polled
+every 30 ms while F9 and F11 were each pressed twice, after a baseline
+without any flag. **Zero non-zero reads in every trial**, flags and baseline
+alike. The flags were cleared afterwards, the driver rebound and the LED
+triggers restored. Log: `captures/2026-10-21-runbook-16/ec-flags-*.txt`.
+
+The keyboard's HID report descriptor has a vendor collection (usage page
+`0xff85`) with feature reports `0x0a` (8 bytes) and `0x0b` (32 bytes); both
+read all zeros through `hidraw`. What they carry is unknown.
+
+What remains: the reference "enable events" command `0x35` (HP's AML never
+writes it), HP's `HPIC0003` application driver and `HPIC0005` mute-LED device
+(evidence from Windows: how it sets up hotkeys), and the vendor HID
+collection.

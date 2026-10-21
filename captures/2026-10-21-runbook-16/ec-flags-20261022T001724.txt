@@ -1,0 +1,24 @@
+kernel: 7.3.0-rc4-glymur-16
+EC register 0x05 before: Error: Could not set address to 0x76: Device or resource busy
+== Trial: no flag set (baseline): In 3 s press F9 twice, then F11 twice (20 s window)
+== PRESS NOW (no flag set (baseline)): F9 twice, then F11 twice
+no flag set (baseline): 0 non-zero reads of register 0x05
+== Trial: APET 0x80: In 3 s press F9 twice, then F11 twice (20 s window)
+cmd 0x01 0x80: done
+== PRESS NOW (APET 0x80): F9 twice, then F11 twice
+APET 0x80: 0 non-zero reads of register 0x05
+cmd 0x01 0x00: done
+== Trial: SCET 0x81: In 3 s press F9 twice, then F11 twice (20 s window)
+cmd 0x01 0x81: done
+== PRESS NOW (SCET 0x81): F9 twice, then F11 twice
+SCET 0x81: 0 non-zero reads of register 0x05
+cmd 0x01 0x01: done
+== Trial: APET and SCET together: In 3 s press F9 twice, then F11 twice (20 s window)
+cmd 0x01 0x80: done
+cmd 0x01 0x81: done
+== PRESS NOW (APET and SCET together): F9 twice, then F11 twice
+APET and SCET together: 0 non-zero reads of register 0x05
+== Finished: flags cleared, driver rebound
+cmd 0x01 0x00: done
+cmd 0x01 0x01: done
+driver rebound: 1, flags cleared
