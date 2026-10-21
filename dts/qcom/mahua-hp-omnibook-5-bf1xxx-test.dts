@@ -129,7 +129,7 @@
 
 / {
 	thermal-zones {
-		ec-thermistor-1-thermal {
+		ec-therm1-thermal {
 			/* HP's TZ31 */
 			polling-delay-passive = <5000>;
 			polling-delay = <5000>;
@@ -169,7 +169,7 @@
 			};
 		};
 
-		ec-thermistor-2-thermal {
+		ec-therm2-thermal {
 			/* HP's TZ32 (its passive trip acts only through Qualcomm's PowerLimits device) */
 			polling-delay-passive = <5000>;
 			polling-delay = <5000>;
@@ -184,7 +184,7 @@
 			};
 		};
 
-		ec-thermistor-3-thermal {
+		ec-therm3-thermal {
 			/* HP's TZ33 */
 			polling-delay-passive = <5000>;
 			polling-delay = <5000>;
@@ -224,7 +224,7 @@
 			};
 		};
 
-		ec-thermistor-4-thermal {
+		ec-therm4-thermal {
 			/* HP's TZ34 */
 			polling-delay-passive = <5000>;
 			polling-delay = <5000>;

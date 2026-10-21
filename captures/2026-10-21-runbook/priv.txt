@@ -1,0 +1,47 @@
+== gpio66
+ gpio66  : in  high func0 2mA pull up
+ gpio67  : in  high func0 2mA pull up
+== gpiodetect
+gpiochip0 [f100000.pinctrl] (251 lines)
+gpiochip1 [7760000.pinctrl] (23 lines)
+gpiochip2 [gpiolib_shared.proxy.7] (1 lines)
+gpiochip3 [gpiolib_shared.proxy.8] (1 lines)
+gpiochip4 [gpiolib_shared.proxy.9] (1 lines)
+== ec who/caps (read-only)
+0x00
+0x00 0x00 0x00 0x00 0x00 0x00
+== ec pending 0x05
+0x00
+== dt ec node
+#thermal-sensor-cells
+compatible
+interrupts-extended
+name
+phandle
+pinctrl-0
+pinctrl-names
+reg
+00000000: 0000 006e 0000 0042 0000 0002            ...n...B....
+== energy
+sys sudo: interactive authentication is required
+soc sudo: interactive authentication is required
+cl0 sudo: interactive authentication is required
+cl1 sudo: interactive authentication is required
+cl2 sudo: interactive authentication is required
+igpu sudo: interactive authentication is required
+dgpu sudo: interactive authentication is required
+nsp sudo: interactive authentication is required
+mmcx sudo: interactive authentication is required
+infra sudo: interactive authentication is required
+dram sudo: interactive authentication is required
+mdm sudo: interactive authentication is required
+wlan sudo: interactive authentication is required
+usb1 sudo: interactive authentication is required
+usb2 sudo: interactive authentication is required
+usb3 sudo: interactive authentication is required
+== genpd
+State  Time(ms)       Usage      Rejected   Above      Below      S2idle
+S0     386209         65120      13489      67997      0          0
+== ucsi/typec
+/sys/class/typec/port0 host [device] unknown
+/sys/class/typec/port1 host [device] unknown

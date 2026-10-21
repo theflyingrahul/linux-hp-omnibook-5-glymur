@@ -1,0 +1,32 @@
+# previous boot (kernel -15, test tree) last events before the hang; dpu_* repeats removed
+Oct 20 15:59:05.485144 glymur kernel: xhci-hcd xhci-hcd.9.auto: xHCI Host Controller
+Oct 20 15:59:05.485371 glymur kernel: xhci-hcd xhci-hcd.9.auto: new USB bus registered, assigned bus number 4
+Oct 20 15:59:05.487434 glymur kernel: xhci-hcd xhci-hcd.9.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x000080a000000810
+Oct 20 15:59:05.487566 glymur kernel: xhci-hcd xhci-hcd.9.auto: irq 299, io mem 0x0a600000
+Oct 20 15:59:05.487677 glymur kernel: xhci-hcd xhci-hcd.9.auto: xHCI Host Controller
+Oct 20 15:59:05.487794 glymur kernel: xhci-hcd xhci-hcd.9.auto: new USB bus registered, assigned bus number 5
+Oct 20 15:59:05.487911 glymur kernel: xhci-hcd xhci-hcd.9.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Oct 20 15:59:05.488528 glymur kernel: usb usb4: SerialNumber: xhci-hcd.9.auto
+Oct 20 15:59:05.488631 glymur kernel: hub 4-0:1.0: USB hub found
+Oct 20 15:59:05.488778 glymur kernel: hub 4-0:1.0: 1 port detected
+Oct 20 15:59:05.489318 glymur kernel: usb usb5: SerialNumber: xhci-hcd.9.auto
+Oct 20 15:59:05.489405 glymur kernel: hub 5-0:1.0: USB hub found
+Oct 20 15:59:05.489527 glymur kernel: hub 5-0:1.0: 1 port detected
+Oct 20 15:59:06.226144 glymur kernel: [drm:msm_dp_display_process_hpd_high.isra.0 [msm]] *ERROR* panel edid read failed
+Oct 20 15:59:06.249135 glymur kernel: [drm:msm_dp_display_process_hpd_high.isra.0 [msm]] *ERROR* panel edid read failed
+Oct 20 15:59:06.249192 glymur kernel: [drm:msm_dp_bridge_get_modes [msm]] *ERROR* failed to get DP sink modes, rc=0
+Oct 20 15:59:06.320352 glymur kernel: usb 4-1: new full-speed USB device number 2 using xhci-hcd
+Oct 20 15:59:06.325109 glymur kernel: [drm:msm_dp_display_atomic_pre_enable [msm]] *ERROR* DP display prepare failed, rc=-107
+Oct 20 15:59:06.447101 glymur kernel: usb 4-1: New USB device found, idVendor=04b4, idProduct=5210, bcdDevice= 0.00
+Oct 20 15:59:06.447337 glymur kernel: usb 4-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Oct 20 15:59:06.447857 glymur kernel: usb 4-1: Product: Billboard Device
+Oct 20 15:59:06.447947 glymur kernel: usb 4-1: Manufacturer: Cypress Semiconductor
+Oct 20 15:59:06.448035 glymur kernel: usb 4-1: SerialNumber: 0001
+Oct 20 15:59:06.528105 glymur kernel: hid-generic 0003:04B4:5210.0004: hiddev0,hidraw3: USB HID v1.11 Device [Cypress Semiconductor Billboard Device] on usb-xhci-hcd.9.auto-1/input1
+Oct 20 15:59:06.528406 glymur kernel: usbcore: registered new interface driver usbhid
+Oct 20 15:59:06.528422 glymur kernel: usbhid: USB HID core driver
+# dpu error lines in that boot: 205; first at 15:59:06, last at 15:59:18
+Oct 20 15:59:06 glymur kernel: [drm:dpu_encoder_phys_vid_wait_for_commit_done:545] [dpu error]vblank timeout: 81021100
+Oct 20 15:59:06 glymur kernel: [drm:dpu_kms_wait_for_commit_done:527] [dpu error]wait for commit done returned -110
+Oct 20 15:59:06 glymur kernel: [drm:dpu_encoder_frame_done_timeout:2731] [dpu error]enc35 frame done timeout
+Oct 20 15:59:18 glymur kernel: [drm:dpu_encoder_frame_done_timeout:2731] [dpu error]enc35 frame done timeout

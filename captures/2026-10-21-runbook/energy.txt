@@ -1,0 +1,56 @@
+idle window
+sys    7.92 W
+soc    1.74 W
+cl0    0.11 W
+cl1    0.54 W
+cl2    0.00 W
+igpu   0.40 W
+dgpu   0.00 W
+nsp    0.00 W
+mmcx   0.01 W
+infra  0.67 W
+dram   0.28 W
+mdm    0.00 W
+wlan   3.80 W
+usb1   0.00 W
+usb2   0.00 W
+usb3   0.00 W
+stress window
+sys    27.23 W
+soc    15.66 W
+cl0    4.37 W
+cl1    10.08 W
+cl2    0.00 W
+igpu   0.47 W
+dgpu   0.00 W
+nsp    0.00 W
+mmcx   0.02 W
+infra  0.72 W
+dram   0.31 W
+mdm    0.00 W
+wlan   3.26 W
+usb1   0.00 W
+usb2   0.00 W
+usb3   0.00 W
+sys pl1 limit=0 win=0 max=cat: /sys/class/powercap/qcom-spel:0//constraint_0_max_power_uw: No such file or directory
+sys pl2 limit=0 win=0 max=cat: /sys/class/powercap/qcom-spel:0//constraint_1_max_power_uw: No such file or directory
+sys pl3 limit=0 win=0 max=cat: /sys/class/powercap/qcom-spel:0//constraint_2_max_power_uw: No such file or directory
+sys pl4 limit=0 win=0 max=cat: /sys/class/powercap/qcom-spel:0//constraint_3_max_power_uw: No such file or directory
+soc pl1 limit=0 win=0 max=cat: /sys/class/powercap/qcom-spel:0:0//constraint_0_max_power_uw: No such file or directory
+soc pl2 limit=0 win=0 max=cat: /sys/class/powercap/qcom-spel:0:0//constraint_1_max_power_uw: No such file or directory
+soc pl3 limit=0 win=0 max=cat: /sys/class/powercap/qcom-spel:0:0//constraint_2_max_power_uw: No such file or directory
+soc pl4 limit=0 win=0 max=cat: /sys/class/powercap/qcom-spel:0:0//constraint_3_max_power_uw: No such file or directory
+cl0 pl1 limit=cat: /sys/class/powercap/qcom-spel:0:0:0//constraint_0_power_limit_uw: No data available win=cat: /sys/class/powercap/qcom-spel:0:0:0//constraint_0_time_window_us: No data available max=cat: /sys/class/powercap/qcom-spel:0:0:0//constraint_0_max_power_uw: No such file or directory
+cl1 pl1 limit=cat: /sys/class/powercap/qcom-spel:0:0:1//constraint_0_power_limit_uw: No data available win=cat: /sys/class/powercap/qcom-spel:0:0:1//constraint_0_time_window_us: No data available max=cat: /sys/class/powercap/qcom-spel:0:0:1//constraint_0_max_power_uw: No such file or directory
+cl2 pl1 limit=cat: /sys/class/powercap/qcom-spel:0:0:2//constraint_0_power_limit_uw: No data available win=cat: /sys/class/powercap/qcom-spel:0:0:2//constraint_0_time_window_us: No data available max=cat: /sys/class/powercap/qcom-spel:0:0:2//constraint_0_max_power_uw: No such file or directory
+igpu pl1 limit=cat: /sys/class/powercap/qcom-spel:0:0:3//constraint_0_power_limit_uw: No data available win=cat: /sys/class/powercap/qcom-spel:0:0:3//constraint_0_time_window_us: No data available max=cat: /sys/class/powercap/qcom-spel:0:0:3//constraint_0_max_power_uw: No such file or directory
+dgpu pl1 limit=cat: /sys/class/powercap/qcom-spel:0:0:4//constraint_0_power_limit_uw: No data available win=cat: /sys/class/powercap/qcom-spel:0:0:4//constraint_0_time_window_us: No data available max=cat: /sys/class/powercap/qcom-spel:0:0:4//constraint_0_max_power_uw: No such file or directory
+nsp pl1 limit=cat: /sys/class/powercap/qcom-spel:0:0:5//constraint_0_power_limit_uw: No data available win=cat: /sys/class/powercap/qcom-spel:0:0:5//constraint_0_time_window_us: No data available max=cat: /sys/class/powercap/qcom-spel:0:0:5//constraint_0_max_power_uw: No such file or directory
+mmcx pl1 limit=cat: /sys/class/powercap/qcom-spel:0:0:6//constraint_0_power_limit_uw: No data available win=cat: /sys/class/powercap/qcom-spel:0:0:6//constraint_0_time_window_us: No data available max=cat: /sys/class/powercap/qcom-spel:0:0:6//constraint_0_max_power_uw: No such file or directory
+infra pl1 limit=cat: /sys/class/powercap/qcom-spel:0:0:7//constraint_0_power_limit_uw: No data available win=cat: /sys/class/powercap/qcom-spel:0:0:7//constraint_0_time_window_us: No data available max=cat: /sys/class/powercap/qcom-spel:0:0:7//constraint_0_max_power_uw: No such file or directory
+dram pl1 limit=cat: /sys/class/powercap/qcom-spel:0:0:8//constraint_0_power_limit_uw: No data available win=cat: /sys/class/powercap/qcom-spel:0:0:8//constraint_0_time_window_us: No data available max=cat: /sys/class/powercap/qcom-spel:0:0:8//constraint_0_max_power_uw: No such file or directory
+mdm pl1 limit=cat: /sys/class/powercap/qcom-spel:0:0:9//constraint_0_power_limit_uw: No data available win=cat: /sys/class/powercap/qcom-spel:0:0:9//constraint_0_time_window_us: No data available max=cat: /sys/class/powercap/qcom-spel:0:0:9//constraint_0_max_power_uw: No such file or directory
+wlan pl1 limit=cat: /sys/class/powercap/qcom-spel:0:0:a//constraint_0_power_limit_uw: No data available win=cat: /sys/class/powercap/qcom-spel:0:0:a//constraint_0_time_window_us: No data available max=cat: /sys/class/powercap/qcom-spel:0:0:a//constraint_0_max_power_uw: No such file or directory
+usb1 pl1 limit=cat: /sys/class/powercap/qcom-spel:0:0:b//constraint_0_power_limit_uw: No data available win=cat: /sys/class/powercap/qcom-spel:0:0:b//constraint_0_time_window_us: No data available max=cat: /sys/class/powercap/qcom-spel:0:0:b//constraint_0_max_power_uw: No such file or directory
+usb2 pl1 limit=cat: /sys/class/powercap/qcom-spel:0:0:c//constraint_0_power_limit_uw: No data available win=cat: /sys/class/powercap/qcom-spel:0:0:c//constraint_0_time_window_us: No data available max=cat: /sys/class/powercap/qcom-spel:0:0:c//constraint_0_max_power_uw: No such file or directory
+usb3 pl1 limit=cat: /sys/class/powercap/qcom-spel:0:0:d//constraint_0_power_limit_uw: No data available win=cat: /sys/class/powercap/qcom-spel:0:0:d//constraint_0_time_window_us: No data available max=cat: /sys/class/powercap/qcom-spel:0:0:d//constraint_0_max_power_uw: No such file or directory

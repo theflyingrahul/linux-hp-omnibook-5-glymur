@@ -1,0 +1,7 @@
+# current boot: EC probe failure and Iris power-on failure
+Jul 28 02:14:03 glymur kernel: hp-omnibook-5-ec 9-0076: probe with driver hp-omnibook-5-ec failed with error -22
+Jul 28 02:14:03 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Jul 28 02:14:03 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Jul 28 02:14:03 glymur kernel: thermal_sys: Failed to register thermal zone ec-thermistor-1-thermal: -22
+Jul 28 02:14:03 glymur kernel: thermal_sys: Thermal zone name (ec-thermistor-1-thermal) too long, should be under 20 chars
+Jul 28 02:14:03 glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'

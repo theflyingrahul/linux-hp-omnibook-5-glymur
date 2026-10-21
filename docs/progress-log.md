@@ -5,6 +5,17 @@ The bring-up's dated log, newest first, moved here from the README on
 in [`status.md`](status.md); the detailed evidence is in the dated notes in
 this directory.
 
+**2026-10-21: runbook on kernel `-15`; the EC never bound.** The test
+device tree's thermal zone `ec-thermistor-1-thermal` is over the kernel's
+19-character limit, so the EC's hwmon registration, and with it the whole EC
+probe, fails with `-22` (no F9, mute LEDs, EC interrupt or skin-temperature
+zones). The zones are renamed `ec-therm1…4-thermal`; kernel `-16` will carry
+it. Plugging a monitor on 2026-10-20 failed the EDID read, then the display
+controller timed out for 12 s and the machine reset. Iris video fails on the
+`video_cc_mvs1_gdsc` power domain. Camera RGB and IR frames, the touchscreen
+and A2DP work. First SoC power numbers: 8 W idle, 27 W under 12-thread load.
+See `docs/runbook-results-2026-10-21.md`.
+
 **2026-10-20: the `-14` crash explained and fixed; names, mute keys and
 LEDs; kernel `-15`.** The `-14` crash came about 3 s after the amplifier
 unbind, not on rebind: `wsa884x` leaves runtime PM enabled after unbind, and

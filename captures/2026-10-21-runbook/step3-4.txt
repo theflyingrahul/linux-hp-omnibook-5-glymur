@@ -1,0 +1,62 @@
+== wpctl
+PipeWire 'pipewire-0' [1.6.2, user@host]
+ └─ Clients:
+        33. WirePlumber                         [1.6.2, user@host, pid:3421]
+        38. WirePlumber [export]                [1.6.2, user@host, pid:3421]
+        39. pipewire                            [1.6.2, user@host, pid:3425]
+        62. GNOME Volume Control Media Keys     [1.6.2, user@host, pid:4112]
+        67. gnome-shell                         [1.6.2, user@host, pid:3839]
+        68. GNOME Shell Volume Control          [1.6.2, user@host, pid:3839]
+        69. xdg-desktop-portal                  [1.6.2, user@host, pid:4353]
+        70. Mutter                              [1.6.2, user@host, pid:3839]
+        76. wpctl                               [1.6.2, user@host, pid:46392]
+
+Audio
+ ├─ Devices:
+ │      51. Built-in Audio                      [alsa]
+ │  
+ ├─ Sinks:
+ │  *   59. Internal Speakers                   [vol: 1.00]
+ │  
+ ├─ Sources:
+ │  *   60. Microphone Array                    [vol: 1.00]
+ │  
+ ├─ Filters:
+ │  
+ └─ Streams:
+
+Video
+ ├─ Devices:
+ │      52. HP True Vision FHD Camera           [v4l2]
+ │      53. HP True Vision FHD Camera           [v4l2]
+ │      54. HP True Vision FHD Camera           [v4l2]
+ │      55. HP True Vision FHD Camera           [v4l2]
+ │  
+ ├─ Sinks:
+ │  
+ ├─ Sources:
+ │  *   63. HP True Vision FHD Camera (V4L2)   
+ │      65. HP True Vision FHD Camera (V4L2)   
+ │  
+ ├─ Filters:
+== desc
+        "device.description": "Built-in Audio",
+        "device.description": "HP True Vision FHD Camera",
+        "node.description": "BLE MIDI 1",
+        "node.description": "HP True Vision FHD Camera (V4L2)",
+        "node.description": "Internal Speakers",
+        "node.description": "Microphone Array",
+== ctl-led
+/sys/class/sound/ctl-led/mic/card0/list: 89
+/sys/class/sound/ctl-led/speaker/card0/list: 88
+cat: /sys/class/leds/platform::mute/brightness: No such file or directory
+ugrep: warning: /sys/class/leds/platform::mute/trigger: No such file or directory
+platform::mute  
+cat: /sys/class/leds/platform::micmute/brightness: No such file or directory
+ugrep: warning: /sys/class/leds/platform::micmute/trigger: No such file or directory
+platform::micmute  
+== proc interrupts
+== hidraw
+/sys/class/hidraw/hidraw0 HID_NAME=hid-over-i2c 04F3:44BF
+/sys/class/hidraw/hidraw1 HID_NAME=hid-over-i2c 04F3:32EF
+/sys/class/hidraw/hidraw2 HID_NAME=hid-over-i2c 0416:C300

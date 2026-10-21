@@ -58,7 +58,7 @@ thermal sensors through the hwmon core's `HWMON_C_REGISTER_TZ`.
 - `upstream/qcom-next/0005`: the EC driver sets `HWMON_C_REGISTER_TZ`; a
   channel without a thermal zone in the device tree is skipped, so
   nothing changes on the other device trees.
-- The test device tree adds `ec-thermistor-1`…`4-thermal` with HP's
+- The test device tree adds `ec-therm1-thermal`…`ec-therm4-thermal` with HP's
   passive and critical trips and 5 s polling (the EC has no working event
   line, #11), mapping the passive trips to all twelve CPUs and the GPU.
   `TZ32`'s passive trip acts only through Qualcomm's PowerLimits device,

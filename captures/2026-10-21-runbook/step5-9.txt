@@ -1,0 +1,142 @@
+== v4l2
+HP True Vision FHD Camera: HP T (usb-xhci-hcd.2.auto-1):
+	/dev/video2
+	/dev/video3
+	/dev/video4
+	/dev/video5
+	/dev/media0
+	/dev/media1
+== iris dmesg
+Jul 28 02:14:03 glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+Jul 28 02:14:03 glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#1: v4l_id/706
+Jul 28 02:14:03 glymur kernel: Modules linked in: xhci_plat_hcd(+) i2c_hid_of i2c_hid_acpi_prp0001 hp_omnibook_5_ec(+) i2c_hid sparse_keymap hid ucsi_glink typec_ucsi pmic_glink_altmode qcom_battmgr aux_hpd_bridge socinfo aes_ce_blk ghash_ce hci_uart gf128mul btqca sm4_ce_gcm btrtl sm4_ce_ccm ath12k_wifi7(+) btbcm sm4_ce ath12k btintel sm4_ce_cipher bluetooth sm4 msm mac80211 snd_soc_x1e80100 snd_soc_qcom_sdw snd_soc_qcom_common soundwire_qcom slimbus ocmem qcom_iris qcom_q6v5_pas cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon snd_soc_core spmi dwc3_qcom qcom_spel videobuf2_dma_contig drm_dp_aux_bus phy_qcom_qmp_combo qcom_stats qcom_common videobuf2_memops drm_display_helper phy_qcom_edp qcom_eud qcom_glink_smem aux_bridge videobuf2_v4l2 qrtr videobuf2_common snd_compress typec qcom_tsens dwc3 qcom_glink cec mhi videodev ac97_bus pmic_glink mdt_loader ulpi rc_core
+Jul 28 02:14:03 glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+Jul 28 02:14:03 glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+Jul 28 02:14:03 glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+Jul 28 02:14:03 glymur kernel:  gdsc_enable+0x6c/0x2b0
+Jul 28 02:14:03 glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+Jul 28 02:14:03 glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+Jul 28 02:14:03 glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+Jul 28 02:14:03 glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+Jul 28 02:14:03 glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+Jul 28 02:14:03 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Jul 28 02:14:03 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Jul 28 02:14:03 glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+Jul 28 02:14:03 glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#11: v4l_id/707
+Jul 28 02:14:03 glymur kernel: Modules linked in: xhci_plat_hcd(+) i2c_hid_of i2c_hid_acpi_prp0001 hp_omnibook_5_ec(+) i2c_hid sparse_keymap hid ucsi_glink typec_ucsi pmic_glink_altmode qcom_battmgr aux_hpd_bridge socinfo aes_ce_blk ghash_ce hci_uart gf128mul btqca sm4_ce_gcm btrtl sm4_ce_ccm ath12k_wifi7(+) btbcm sm4_ce ath12k btintel sm4_ce_cipher bluetooth sm4 msm mac80211 snd_soc_x1e80100 snd_soc_qcom_sdw snd_soc_qcom_common soundwire_qcom slimbus ocmem qcom_iris qcom_q6v5_pas cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gpu_sched v4l2_mem2mem spmi_pmic_arb snd_soc_lpass_macro_common qcom_pil_info drm_gpuvm qcom_q6v5 spmi_devres ubwc_config drm_exec qcom_sysmon snd_soc_core spmi dwc3_qcom qcom_spel videobuf2_dma_contig drm_dp_aux_bus phy_qcom_qmp_combo qcom_stats qcom_common videobuf2_memops drm_display_helper phy_qcom_edp qcom_eud qcom_glink_smem aux_bridge videobuf2_v4l2 qrtr videobuf2_common snd_compress typec qcom_tsens dwc3 qcom_glink cec mhi videodev ac97_bus pmic_glink mdt_loader ulpi rc_core
+Jul 28 02:14:03 glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+Jul 28 02:14:03 glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+Jul 28 02:14:03 glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+== thermal ec
+== all zones
+aoss-0-thermal 38400
+aoss-1-thermal 38700
+aoss-2-thermal 38400
+aoss-3-thermal 38900
+aoss-4-thermal 38900
+aoss-5-thermal 38900
+camera-0-thermal 38900
+camera-1-thermal 38900
+cpu-0-0-0-thermal 39100
+cpu-0-0-1-thermal 39100
+cpu-0-1-0-thermal 39500
+cpu-0-1-1-thermal 39100
+cpu-0-2-0-thermal 39500
+cpu-0-2-1-thermal 39500
+cpu-0-3-0-thermal 39100
+cpu-0-3-1-thermal 39100
+cpu-0-4-0-thermal 39900
+cpu-0-4-1-thermal 40300
+cpu-0-5-0-thermal 38700
+cpu-0-5-1-thermal 39100
+cpu-1-0-0-thermal 39500
+cpu-1-0-1-thermal 39500
+cpu-1-1-0-thermal 38400
+cpu-1-1-1-thermal 38700
+cpu-1-2-0-thermal 39100
+cpu-1-2-1-thermal 39100
+cpu-1-3-0-thermal 38700
+cpu-1-3-1-thermal 38700
+cpu-1-4-0-thermal 39900
+cpu-1-4-1-thermal 39900
+cpu-1-5-0-thermal 38700
+cpu-1-5-1-thermal 39500
+cpullc-0-0-thermal 39500
+cpullc-0-1-thermal 39500
+cpullc-1-0-thermal 40100
+cpullc-1-1-thermal 40100
+ddr-0-thermal 39500
+ddr-1-thermal 39100
+gpu-0-0-thermal 38500
+gpu-0-1-thermal 38500
+gpu-0-2-thermal 38500
+gpu-1-0-thermal 38500
+gpu-1-1-thermal 38500
+gpu-1-2-thermal 38500
+gpu-2-0-thermal 38900
+gpu-2-1-thermal 38900
+gpu-2-2-thermal 38500
+gpuss-0-thermal 38900
+gpuss-1-thermal 38500
+gpuss-2-thermal 38900
+gpuss-3-thermal 38900
+gpuss-4-thermal 38900
+nsphmx-0-thermal 38500
+nsphmx-1-thermal 38900
+nsphmx-2-thermal 38900
+nsphmx-3-thermal 38500
+nsphvx-0-thermal 38900
+nsphvx-1-thermal 38900
+nsphvx-2-thermal 38900
+nsphvx-3-thermal 39300
+== powercap
+== /sys/class/powercap/qcom-spel/  enabled=1 energy=cat: /sys/class/powercap/qcom-spel//energy_uj: No such file or directory
+== /sys/class/powercap/qcom-spel:0/ sys enabled=1 energy=cat: /sys/class/powercap/qcom-spel:0//energy_uj: Permission denied
+  pl1: 0 uW over 0 us (max cat: /sys/class/powercap/qcom-spel:0//constraint_0_max_power_uw: No such file or directory)
+  pl2: 0 uW over 0 us (max cat: /sys/class/powercap/qcom-spel:0//constraint_1_max_power_uw: No such file or directory)
+  pl3: 0 uW over 0 us (max cat: /sys/class/powercap/qcom-spel:0//constraint_2_max_power_uw: No such file or directory)
+  pl4: 0 uW over 0 us (max cat: /sys/class/powercap/qcom-spel:0//constraint_3_max_power_uw: No such file or directory)
+== /sys/class/powercap/qcom-spel:0:0/ soc enabled=1 energy=cat: /sys/class/powercap/qcom-spel:0:0//energy_uj: Permission denied
+  pl1: 0 uW over 0 us (max cat: /sys/class/powercap/qcom-spel:0:0//constraint_0_max_power_uw: No such file or directory)
+  pl2: 0 uW over 0 us (max cat: /sys/class/powercap/qcom-spel:0:0//constraint_1_max_power_uw: No such file or directory)
+  pl3: 0 uW over 0 us (max cat: /sys/class/powercap/qcom-spel:0:0//constraint_2_max_power_uw: No such file or directory)
+  pl4: 0 uW over 0 us (max cat: /sys/class/powercap/qcom-spel:0:0//constraint_3_max_power_uw: No such file or directory)
+== /sys/class/powercap/qcom-spel:0:0:0/ cl0 enabled=1 energy=cat: /sys/class/powercap/qcom-spel:0:0:0//energy_uj: Permission denied
+  pl1: cat: /sys/class/powercap/qcom-spel:0:0:0//constraint_0_power_limit_uw: No data available uW over cat: /sys/class/powercap/qcom-spel:0:0:0//constraint_0_time_window_us: No data available us (max cat: /sys/class/powercap/qcom-spel:0:0:0//constraint_0_max_power_uw: No such file or directory)
+== /sys/class/powercap/qcom-spel:0:0:1/ cl1 enabled=1 energy=cat: /sys/class/powercap/qcom-spel:0:0:1//energy_uj: Permission denied
+  pl1: cat: /sys/class/powercap/qcom-spel:0:0:1//constraint_0_power_limit_uw: No data available uW over cat: /sys/class/powercap/qcom-spel:0:0:1//constraint_0_time_window_us: No data available us (max cat: /sys/class/powercap/qcom-spel:0:0:1//constraint_0_max_power_uw: No such file or directory)
+== /sys/class/powercap/qcom-spel:0:0:2/ cl2 enabled=1 energy=cat: /sys/class/powercap/qcom-spel:0:0:2//energy_uj: Permission denied
+  pl1: cat: /sys/class/powercap/qcom-spel:0:0:2//constraint_0_power_limit_uw: No data available uW over cat: /sys/class/powercap/qcom-spel:0:0:2//constraint_0_time_window_us: No data available us (max cat: /sys/class/powercap/qcom-spel:0:0:2//constraint_0_max_power_uw: No such file or directory)
+== /sys/class/powercap/qcom-spel:0:0:3/ igpu enabled=1 energy=cat: /sys/class/powercap/qcom-spel:0:0:3//energy_uj: Permission denied
+  pl1: cat: /sys/class/powercap/qcom-spel:0:0:3//constraint_0_power_limit_uw: No data available uW over cat: /sys/class/powercap/qcom-spel:0:0:3//constraint_0_time_window_us: No data available us (max cat: /sys/class/powercap/qcom-spel:0:0:3//constraint_0_max_power_uw: No such file or directory)
+== /sys/class/powercap/qcom-spel:0:0:4/ dgpu enabled=1 energy=cat: /sys/class/powercap/qcom-spel:0:0:4//energy_uj: Permission denied
+  pl1: cat: /sys/class/powercap/qcom-spel:0:0:4//constraint_0_power_limit_uw: No data available uW over cat: /sys/class/powercap/qcom-spel:0:0:4//constraint_0_time_window_us: No data available us (max cat: /sys/class/powercap/qcom-spel:0:0:4//constraint_0_max_power_uw: No such file or directory)
+== /sys/class/powercap/qcom-spel:0:0:5/ nsp enabled=1 energy=cat: /sys/class/powercap/qcom-spel:0:0:5//energy_uj: Permission denied
+  pl1: cat: /sys/class/powercap/qcom-spel:0:0:5//constraint_0_power_limit_uw: No data available uW over cat: /sys/class/powercap/qcom-spel:0:0:5//constraint_0_time_window_us: No data available us (max cat: /sys/class/powercap/qcom-spel:0:0:5//constraint_0_max_power_uw: No such file or directory)
+== /sys/class/powercap/qcom-spel:0:0:6/ mmcx enabled=1 energy=cat: /sys/class/powercap/qcom-spel:0:0:6//energy_uj: Permission denied
+  pl1: cat: /sys/class/powercap/qcom-spel:0:0:6//constraint_0_power_limit_uw: No data available uW over cat: /sys/class/powercap/qcom-spel:0:0:6//constraint_0_time_window_us: No data available us (max cat: /sys/class/powercap/qcom-spel:0:0:6//constraint_0_max_power_uw: No such file or directory)
+== /sys/class/powercap/qcom-spel:0:0:7/ infra enabled=1 energy=cat: /sys/class/powercap/qcom-spel:0:0:7//energy_uj: Permission denied
+  pl1: cat: /sys/class/powercap/qcom-spel:0:0:7//constraint_0_power_limit_uw: No data available uW over cat: /sys/class/powercap/qcom-spel:0:0:7//constraint_0_time_window_us: No data available us (max cat: /sys/class/powercap/qcom-spel:0:0:7//constraint_0_max_power_uw: No such file or directory)
+== /sys/class/powercap/qcom-spel:0:0:8/ dram enabled=1 energy=cat: /sys/class/powercap/qcom-spel:0:0:8//energy_uj: Permission denied
+  pl1: cat: /sys/class/powercap/qcom-spel:0:0:8//constraint_0_power_limit_uw: No data available uW over cat: /sys/class/powercap/qcom-spel:0:0:8//constraint_0_time_window_us: No data available us (max cat: /sys/class/powercap/qcom-spel:0:0:8//constraint_0_max_power_uw: No such file or directory)
+== /sys/class/powercap/qcom-spel:0:0:9/ mdm enabled=1 energy=cat: /sys/class/powercap/qcom-spel:0:0:9//energy_uj: Permission denied
+  pl1: cat: /sys/class/powercap/qcom-spel:0:0:9//constraint_0_power_limit_uw: No data available uW over cat: /sys/class/powercap/qcom-spel:0:0:9//constraint_0_time_window_us: No data available us (max cat: /sys/class/powercap/qcom-spel:0:0:9//constraint_0_max_power_uw: No such file or directory)
+== /sys/class/powercap/qcom-spel:0:0:a/ wlan enabled=1 energy=cat: /sys/class/powercap/qcom-spel:0:0:a//energy_uj: Permission denied
+  pl1: cat: /sys/class/powercap/qcom-spel:0:0:a//constraint_0_power_limit_uw: No data available uW over cat: /sys/class/powercap/qcom-spel:0:0:a//constraint_0_time_window_us: No data available us (max cat: /sys/class/powercap/qcom-spel:0:0:a//constraint_0_max_power_uw: No such file or directory)
+== /sys/class/powercap/qcom-spel:0:0:b/ usb1 enabled=1 energy=cat: /sys/class/powercap/qcom-spel:0:0:b//energy_uj: Permission denied
+  pl1: cat: /sys/class/powercap/qcom-spel:0:0:b//constraint_0_power_limit_uw: No data available uW over cat: /sys/class/powercap/qcom-spel:0:0:b//constraint_0_time_window_us: No data available us (max cat: /sys/class/powercap/qcom-spel:0:0:b//constraint_0_max_power_uw: No such file or directory)
+== /sys/class/powercap/qcom-spel:0:0:c/ usb2 enabled=1 energy=cat: /sys/class/powercap/qcom-spel:0:0:c//energy_uj: Permission denied
+  pl1: cat: /sys/class/powercap/qcom-spel:0:0:c//constraint_0_power_limit_uw: No data available uW over cat: /sys/class/powercap/qcom-spel:0:0:c//constraint_0_time_window_us: No data available us (max cat: /sys/class/powercap/qcom-spel:0:0:c//constraint_0_max_power_uw: No such file or directory)
+== /sys/class/powercap/qcom-spel:0:0:d/ usb3 enabled=1 energy=cat: /sys/class/powercap/qcom-spel:0:0:d//energy_uj: Permission denied
+  pl1: cat: /sys/class/powercap/qcom-spel:0:0:d//constraint_0_power_limit_uw: No data available uW over cat: /sys/class/powercap/qcom-spel:0:0:d//constraint_0_time_window_us: No data available us (max cat: /sys/class/powercap/qcom-spel:0:0:d//constraint_0_max_power_uw: No such file or directory)
+== cpuidle
+/sys/devices/system/cpu/cpu0/cpuidle/state0 WFI usage=144603
+/sys/devices/system/cpu/cpu0/cpuidle/state1 cpu-sleep-0 usage=161689
+== drm
+/sys/class/drm/card1-DP-1 disconnected
+/sys/class/drm/card1-DP-2 disconnected
+/sys/class/drm/card1-Writeback-1 unknown
+/sys/class/drm/card1-eDP-1 connected
+== typec
+port0
+port1
