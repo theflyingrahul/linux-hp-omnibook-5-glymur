@@ -109,3 +109,39 @@ Correction: an earlier line of this note said the F9 LED follows the key. It
 follows a software mute and the manual LED test, but pressing F9 changed
 nothing (the audio check's own readback after F9: source not muted,
 `platform::micmute` 0, 48 EC interrupts in that window).
+
+## Function-key map (`check-hotkeys.sh`, 2026-10-22)
+
+One key at a time, from the kernel's input events
+(`captures/2026-10-21-runbook-16/hotkeys-20261022T000907.txt`). This replaces
+the guess above that F9 sends Ctrl+F17.
+
+| Key on its own | What the kernel sees | GNOME |
+|---|---|---|
+| F1 | Meta+P, twice | display switcher (Super+P) |
+| F2 | Meta+Ctrl+Alt+Shift+Space | nothing bound |
+| F3, F4 | `BRIGHTNESSDOWN`, `BRIGHTNESSUP` | brightness |
+| F5 | **nothing** (the EC runs the keyboard backlight itself) | |
+| F6 | `KEY_MUTE` | speaker mute, LED follows |
+| F7, F8 | `VOLUMEDOWN`, `VOLUMEUP` | volume |
+| F9 | **nothing, on any device** | no mic mute |
+| F10 | `PLAYPAUSE` | media |
+| F11 | Ctrl+F17 | nothing bound (HP's programmable key) |
+| F12 | `SYSRQ` (Print) | screenshot |
+| Fn alone | nothing | |
+| Copilot | Meta+Shift+F23 | nothing bound |
+| Fn+F1…F12 | plain F1…F12 (59-68, 87, 88) | |
+
+So the earlier notes were wrong twice: F9 does not send the HID Mute that F6
+sends (at least not on `-16`), and the Ctrl+F17 was F11, not F9. F9 reaches
+the system only as the EC's event `0x11`, which the driver maps to
+`KEY_MICMUTE` and which never arrives.
+
+HP's AML reads the event the same way the driver does: `\_SB.IC10.INTR` reads
+the data byte of register `0x05` (the generic serial bus reply carries a
+status and a length byte in front) and writes `0` back. The EC's line still
+falls about every 118 ms with the driver unbound and the byte reads `00`.
+HP's AML never writes the reference "enable events" command `0x35`. The OS
+flags `0x80`, `0x81`, `0x82` and `0x84` (mailbox command `0x01`) are written
+by named methods (`APET`, `SCET`, `MSET`, and `SMLS` for `0x84`); the driver
+sends only `0x84`. Whether `0x80` or `0x81` gate event delivery is unknown.

@@ -1,0 +1,29 @@
+kernel: 7.3.0-rc4-glymur-16
+Each step: the key events the kernel saw, as device name(code). Passes:
+F1-F12 on their own, then F1-F12 with Fn held, then Fn alone and the Copilot key.
+F1 on its own -> 0416:C300 Keyboard Meta(125) down;0416:C300 Keyboard ?(25) down;0416:C300 Keyboard ?(25) up;0416:C300 Keyboard ?(25) down;0416:C300 Keyboard ?(25) up;0416:C300 Keyboard Meta(125) up;
+F2 on its own -> 0416:C300 Keyboard Meta(125) down;0416:C300 Keyboard LCtrl(29) down;0416:C300 Keyboard LAlt(56) down;0416:C300 Keyboard LShift(42) down;0416:C300 Keyboard ?(57) down;0416:C300 Keyboard ?(57) up;0416:C300 Keyboard LShift(42) up;0416:C300 Keyboard LAlt(56) up;0416:C300 Keyboard LCtrl(29) up;0416:C300 Keyboard Meta(125) up;
+F3 on its own -> 0416:C300 Keyboard BRIGHTNESSDOWN(224) down;0416:C300 Keyboard BRIGHTNESSDOWN(224) up;
+F4 on its own -> 0416:C300 Keyboard BRIGHTNESSUP(225) down;0416:C300 Keyboard BRIGHTNESSUP(225) up;
+F5 on its own -> nothing
+F6 on its own -> 0416:C300 Keyboard MUTE(113) down;0416:C300 Keyboard MUTE(113) up;
+F7 on its own -> 0416:C300 Keyboard VOLUMEDOWN(114) down;0416:C300 Keyboard VOLUMEDOWN(114) up;
+F8 on its own -> 0416:C300 Keyboard VOLUMEUP(115) down;0416:C300 Keyboard VOLUMEUP(115) up;
+F9 on its own -> nothing
+F10 on its own -> 0416:C300 Keyboard PLAYPAUSE(164) down;0416:C300 Keyboard PLAYPAUSE(164) up;
+F11 on its own -> 0416:C300 Keyboard LCtrl(29) down;0416:C300 Keyboard F17(187) down;0416:C300 Keyboard F17(187) up;0416:C300 Keyboard LCtrl(29) up;
+F12 on its own -> 0416:C300 Keyboard SYSRQ(99) down;0416:C300 Keyboard SYSRQ(99) up;
+Fn held together with F1 -> 0416:C300 Keyboard F1(59) down;0416:C300 Keyboard F1(59) up;
+Fn held together with F2 -> 0416:C300 Keyboard F2(60) down;0416:C300 Keyboard F2(60) up;
+Fn held together with F3 -> 0416:C300 Keyboard F3(61) down;0416:C300 Keyboard F3(61) up;
+Fn held together with F4 -> 0416:C300 Keyboard F4(62) down;0416:C300 Keyboard F4(62) up;
+Fn held together with F5 -> 0416:C300 Keyboard F5(63) down;0416:C300 Keyboard F5(63) up;
+Fn held together with F6 -> 0416:C300 Keyboard F6(64) down;0416:C300 Keyboard F6(64) up;
+Fn held together with F7 -> 0416:C300 Keyboard F7(65) down;0416:C300 Keyboard F7(65) up;
+Fn held together with F8 -> 0416:C300 Keyboard F8(66) down;0416:C300 Keyboard F8(66) up;
+Fn held together with F9 -> 0416:C300 Keyboard F9(67) down;0416:C300 Keyboard F9(67) up;
+Fn held together with F10 -> 0416:C300 Keyboard F10(68) down;0416:C300 Keyboard F10(68) up;
+Fn held together with F11 -> 0416:C300 Keyboard F11(87) down;0416:C300 Keyboard F11(87) up;
+Fn held together with F12 -> 0416:C300 Keyboard F12(88) down;0416:C300 Keyboard F12(88) up;
+Fn alone -> nothing
+Copilot key -> 0416:C300 Keyboard Meta(125) down;0416:C300 Keyboard LShift(42) down;0416:C300 Keyboard F23(193) down;0416:C300 Keyboard F23(193) up;0416:C300 Keyboard LShift(42) up;0416:C300 Keyboard Meta(125) up;
