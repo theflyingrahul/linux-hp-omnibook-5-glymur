@@ -60,3 +60,32 @@ something a listener would notice, so it is worth a look in the kernel.
 - `linux-generic`, `linux-image-generic`, `linux-headers-generic` and the
   `7.3.0-9` packages came in with the upgrade; removed and held. The
   `7.0.0-30` kernel and headers stay for the out-of-tree modules.
+
+## Hotkeys, EC interrupt, RTC and charging (later the same night)
+
+The 30 s hotkey capture (F6, F9, F11, F5, Fn) saw two key events, both on the
+keyboard's own HID device:
+
+- F6 arrives as `KEY_MUTE` (code 113), and it auto-repeated while held.
+- A second press arrives as **Ctrl + `KEY_F17`** (usage `0x7006c`). The
+  mic-mute key, F9, is the likely sender; this is inferred from the order
+  of presses, not tested alone. Nothing in GNOME binds Ctrl+F17, which would
+  explain the missing microphone-mute icon even though the LED follows.
+- F11, F5 and Fn produced nothing on any device. F5 (backlight) is handled
+  inside the EC, so that is expected.
+
+The EC event line (GPIO 66) fires about nine times a second even when idle
+(87 interrupts in 10 s), and every event read returns `00`, "no event". Key
+presses did not change the byte. That is a constant wake-up load, and either
+the EC is pulsing the line for another reason or the edge is being
+re-triggered by the read. Open.
+
+There is no RTC device (`/dev/rtc*`, `timedatectl` says "RTC time: n/a"), so
+the clock restarts from the last saved time at every boot, as seen in the
+journal (boots stamped 2026-10-02) until NTP corrects it.
+
+At 23:39 both xhci controllers of one USB-C port were removed (a role
+switch, consistent with unplugging a cable). The battery read `Charging` at
+74 % while the AC supply and the USB-C source both read `online=0`
+afterwards, so the status was stale for a moment or the charger had just
+gone.
