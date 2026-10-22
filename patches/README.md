@@ -23,7 +23,7 @@ Apply to qcom-next `1a0586064ee1` (tag `qcom-next-7.3-rc4-20261014`, the
 qcom-next tip on 2026-10-17, from kernel `-13`; it was `6b4daa845239` for
 `-8` to `-12`, `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to `-4`)
 in order:
-`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0007`,
+`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0008`,
 `glymur-bringup/0001–0003`, then `backports/` (`0001–0002`, `0013–0014`,
 `0017–0021`, `0023–0040`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
@@ -185,6 +185,16 @@ configuration, and a fresh `prepare` reproduces the tested tree
 
 The eDP backports (`0001–0002`, `0026`) match the laptops tree's (the same
 revisions, rebased); `0014`, `0024` and `0025` are identical to it.
+
+Also for `-17`: `upstream/qcom-next/0008`, "ASoC: qcom: topology: size a
+module's configuration in bytes". Topology module configuration carries its
+length in bytes and is sent as such, but the parser allocated and copied
+that many `__le32` elements, reading three times the length past the
+configuration. The fix sizes it in bytes, refuses a configuration that runs
+past the widget's private data and has the caller check the error
+(`Fixes: c7ed4c2debfd`). linux-next of 2026-10-20 has the same code, so it
+is an upstream candidate; the speaker filter topology
+(`docs/audio-speaker-eq-2026-10-23.md`) is its first user here.
 
 Also for `-17`: `glymur-bringup/0003`, "media: iris: bring-up diagnostics
 for Mahua's core and pipe check". HP's video firmware refuses Glymur's

@@ -1,0 +1,70 @@
+From aa1ba94c343e89031abbb90d281c787b2f021396 Mon Sep 17 00:00:00 2001
+From: Rahul Pon <theflyingrahul@gmail.com>
+Date: Thu, 22 Oct 2026 12:58:04 -0700
+Subject: [PATCH] ASoC: qcom: topology: size a module's configuration in bytes
+
+The topology's module configuration array carries its length in bytes:
+audioreach_set_module_config() sends module->data->size bytes to the DSP.
+audioreach_get_module_priv_data() instead allocates and copies that many
+__le32 elements, so it reads three times the configuration's length past
+the end of the array, beyond the widget's private data. Allocate and copy
+the header plus size bytes, refuse an array that does not fit in the
+private data, and have the caller check for the error instead of storing
+it as the module's data.
+
+Fixes: c7ed4c2debfd ("ASoC: qcom: audioreach: add support for static calibration")
+---
+ sound/soc/qcom/qdsp6/topology.c | 19 ++++++++++++++-----
+ 1 file changed, 14 insertions(+), 5 deletions(-)
+
+diff --git a/sound/soc/qcom/qdsp6/topology.c b/sound/soc/qcom/qdsp6/topology.c
+index faafbc5c0ad0..a12a555df8f8 100644
+--- a/sound/soc/qcom/qdsp6/topology.c
++++ b/sound/soc/qcom/qdsp6/topology.c
+@@ -316,14 +316,18 @@ audioreach_get_module_priv_data(const struct snd_soc_tplg_private *private)
+ 		mod_array = (struct snd_soc_tplg_vendor_array *)((u8 *)private->array + sz);
+ 		if (le32_to_cpu(mod_array->type) == SND_SOC_AR_TPLG_MODULE_CFG_TYPE) {
+ 			struct audioreach_module_priv_data *pdata;
++			u32 left = le32_to_cpu(private->size) - sz;
++			u32 size = le32_to_cpu(mod_array->size);
+ 
+-			pdata = kzalloc_flex(*pdata, data,
+-					     le32_to_cpu(mod_array->size));
++			/* size counts the bytes of configuration after the header */
++			if (left < sizeof(*pdata) || size > left - sizeof(*pdata))
++				return ERR_PTR(-EINVAL);
++
++			pdata = kzalloc(sizeof(*pdata) + size, GFP_KERNEL);
+ 			if (!pdata)
+ 				return ERR_PTR(-ENOMEM);
+ 
+-			memcpy(pdata, ((u8 *)private->data + sz), struct_size(pdata, data,
+-						le32_to_cpu(mod_array->size)));
++			memcpy(pdata, (u8 *)private->data + sz, sizeof(*pdata) + size);
+ 			return pdata;
+ 		}
+ 
+@@ -593,6 +597,7 @@ static int audioreach_widget_load_module_common(struct snd_soc_component *compon
+ 						const struct snd_soc_tplg_dapm_widget *tplg_w)
+ {
+ 	struct q6apm *apm = dev_get_drvdata(component->dev);
++	struct audioreach_module_priv_data *data;
+ 	struct audioreach_container *cont;
+ 	struct audioreach_sub_graph *sg;
+ 	struct audioreach_module *mod;
+@@ -610,7 +615,11 @@ static int audioreach_widget_load_module_common(struct snd_soc_component *compon
+ 	if (IS_ERR_OR_NULL(mod))
+ 		return mod ? PTR_ERR(mod) : -ENODEV;
+ 
+-	mod->data = audioreach_get_module_priv_data(&tplg_w->priv);
++	data = audioreach_get_module_priv_data(&tplg_w->priv);
++	if (IS_ERR(data))
++		return PTR_ERR(data);
++
++	mod->data = data;
+ 
+ 	dobj = &w->dobj;
+ 	dobj->private = mod;
+-- 
+2.53.0
+
