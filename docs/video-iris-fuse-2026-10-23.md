@@ -76,6 +76,11 @@ Two explanations fit, and the code does not separate them:
 2. Decode with `HFI_PROP_PIPE` = 2 and core mask 1, then with 4 pipes and
    core mask 2, and log what the firmware answers to each.
 
+Built for `-17` as `patches/kernel/glymur-bringup/0003` (default-off
+`qcom_iris.diag_*` parameters) with Iris on again in the test device tree;
+`sudo bash check-video.sh --diag` runs seven trials (pipes 4, 2, 1; core
+mask driver's choice, 2, or not sent), reloading the module for each.
+
 Whichever is accepted gives Mahua its own Iris platform data (pipes, the
 core that exists and its power domain), which is how upstream would take
-it. The Iris node stays off in the test tree until such a change exists.
+it. The daily device tree keeps Iris off.

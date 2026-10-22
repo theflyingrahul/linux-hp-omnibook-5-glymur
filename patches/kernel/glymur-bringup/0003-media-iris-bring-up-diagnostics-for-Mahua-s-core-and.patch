@@ -1,0 +1,241 @@
+From f879e9692305c032e52871cef8b40fc8733b74a5 Mon Sep 17 00:00:00 2001
+From: Rahul Pon <theflyingrahul@gmail.com>
+Date: Thu, 22 Oct 2026 12:47:25 -0700
+Subject: [PATCH] media: iris: bring-up diagnostics for Mahua's core and pipe
+ check
+
+HP's video firmware refuses every session on the HP OmniBook 5 (Mahua):
+"Configured core N is not supported, Monitor=88000800", where Monitor is
+the wrapper's efuse word. The Glymur platform data powers two cores and
+sends four pipes. Add default-off module parameters to try the
+alternatives on one boot:
+
+  diag_cores    video cores to power and use (command line only)
+  diag_pipes    HFI_PROP_PIPE for new sessions
+  diag_core_id  HFI_PROP_CORE_ID for new sessions (0: not sent)
+
+and log the efuse word and the core power status after the firmware
+boots when any of them is set. Not for upstream.
+---
+ drivers/media/platform/qcom/iris/Makefile     |  1 +
+ .../media/platform/qcom/iris/iris_common.c    |  6 +-
+ drivers/media/platform/qcom/iris/iris_core.c  |  3 +
+ drivers/media/platform/qcom/iris/iris_ctrls.c |  3 +-
+ drivers/media/platform/qcom/iris/iris_diag.c  | 81 +++++++++++++++++++
+ drivers/media/platform/qcom/iris/iris_diag.h  | 14 ++++
+ drivers/media/platform/qcom/iris/iris_probe.c |  5 ++
+ 7 files changed, 110 insertions(+), 3 deletions(-)
+ create mode 100644 drivers/media/platform/qcom/iris/iris_diag.c
+ create mode 100644 drivers/media/platform/qcom/iris/iris_diag.h
+
+diff --git a/drivers/media/platform/qcom/iris/Makefile b/drivers/media/platform/qcom/iris/Makefile
+index fb75d8e35c59..8ace5f0eab3f 100644
+--- a/drivers/media/platform/qcom/iris/Makefile
++++ b/drivers/media/platform/qcom/iris/Makefile
+@@ -3,6 +3,7 @@ qcom-iris-objs += iris_buffer.o \
+              iris_core.o \
+              iris_ctrls.o \
+              iris_debugfs.o \
++             iris_diag.o \
+              iris_firmware.o \
+              iris_hfi_common.o \
+              iris_hfi_gen1.o \
+diff --git a/drivers/media/platform/qcom/iris/iris_common.c b/drivers/media/platform/qcom/iris/iris_common.c
+index abea6807a59e..f88177d5edc5 100644
+--- a/drivers/media/platform/qcom/iris/iris_common.c
++++ b/drivers/media/platform/qcom/iris/iris_common.c
+@@ -7,6 +7,7 @@
+ 
+ #include "iris_common.h"
+ #include "iris_ctrls.h"
++#include "iris_diag.h"
+ #include "iris_instance.h"
+ #include "iris_power.h"
+ 
+@@ -49,11 +50,12 @@ void iris_set_ts_metadata(struct iris_inst *inst, struct vb2_v4l2_buffer *vbuf)
+ int iris_set_core_id(struct iris_inst *inst)
+ {
+ 	const struct iris_hfi_session_ops *hfi_ops = inst->hfi_session_ops;
++	u32 core_id = iris_diag_core_id(inst->core, inst->core_id);
+ 
+-	if (!inst->core_id)
++	if (!core_id)
+ 		return 0;
+ 
+-	return hfi_ops->session_set_core_id(inst, inst->core_id);
++	return hfi_ops->session_set_core_id(inst, core_id);
+ }
+ 
+ int iris_process_streamon_input(struct iris_inst *inst)
+diff --git a/drivers/media/platform/qcom/iris/iris_core.c b/drivers/media/platform/qcom/iris/iris_core.c
+index e239ca23154d..99f12e769e5f 100644
+--- a/drivers/media/platform/qcom/iris/iris_core.c
++++ b/drivers/media/platform/qcom/iris/iris_core.c
+@@ -6,6 +6,7 @@
+ #include <linux/pm_runtime.h>
+ 
+ #include "iris_core.h"
++#include "iris_diag.h"
+ #include "iris_firmware.h"
+ #include "iris_state.h"
+ #include "iris_vpu_common.h"
+@@ -81,6 +82,8 @@ int iris_core_init(struct iris_core *core)
+ 	if (ret)
+ 		goto error_unload_fw;
+ 
++	iris_diag_log_fuses(core);
++
+ 	ret = iris_vpu_switch_to_hwmode(core);
+ 	if (ret)
+ 		goto error_unload_fw;
+diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.c b/drivers/media/platform/qcom/iris/iris_ctrls.c
+index 8c4c47944f22..70e7cab5c3d5 100644
+--- a/drivers/media/platform/qcom/iris/iris_ctrls.c
++++ b/drivers/media/platform/qcom/iris/iris_ctrls.c
+@@ -7,6 +7,7 @@
+ #include <media/v4l2-mem2mem.h>
+ 
+ #include "iris_ctrls.h"
++#include "iris_diag.h"
+ #include "iris_hfi_gen1_defines.h"
+ #include "iris_hfi_gen2_defines.h"
+ #include "iris_instance.h"
+@@ -552,7 +553,7 @@ int iris_set_stage(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id
+ int iris_set_pipe(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id)
+ {
+ 	const struct iris_hfi_session_ops *hfi_ops = inst->hfi_session_ops;
+-	u32 work_route = inst->fw_caps[PIPE].value;
++	u32 work_route = iris_diag_pipes(inst->core, inst->fw_caps[PIPE].value);
+ 	u32 hfi_id = inst->fw_caps[cap_id].hfi_id;
+ 
+ 	if (!hfi_id)
+diff --git a/drivers/media/platform/qcom/iris/iris_diag.c b/drivers/media/platform/qcom/iris/iris_diag.c
+new file mode 100644
+index 000000000000..f3fd83c1bef5
+--- /dev/null
++++ b/drivers/media/platform/qcom/iris/iris_diag.c
+@@ -0,0 +1,81 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Bring-up diagnostics for Mahua, whose video firmware refuses Glymur's core
++ * and pipe configuration. All off unless a parameter is set.
++ */
++
++#include <linux/device.h>
++#include <linux/io.h>
++#include <linux/module.h>
++#include <linux/slab.h>
++
++#include "iris_core.h"
++#include "iris_diag.h"
++#include "iris_platform_common.h"
++#include "iris_vpu_register_defines.h"
++
++#define WRAPPER_EFUSE_MONITOR	(WRAPPER_BASE_OFFS + 0x08)
++
++static unsigned int diag_cores;
++module_param(diag_cores, uint, 0444);
++MODULE_PARM_DESC(diag_cores, "Video cores to power and use (0: platform value)");
++
++static unsigned int diag_pipes;
++module_param(diag_pipes, uint, 0644);
++MODULE_PARM_DESC(diag_pipes, "HFI_PROP_PIPE value for new sessions (0: platform value)");
++
++static int diag_core_id = -1;
++module_param(diag_core_id, int, 0644);
++MODULE_PARM_DESC(diag_core_id, "HFI_PROP_CORE_ID for new sessions (-1: driver choice, 0: not sent)");
++
++int iris_diag_apply(struct iris_core *core)
++{
++	struct iris_platform_data *plat;
++
++	if (!diag_cores || diag_cores >= core->iris_platform_data->num_cores)
++		return 0;
++
++	plat = devm_kmemdup(core->dev, core->iris_platform_data, sizeof(*plat), GFP_KERNEL);
++	if (!plat)
++		return -ENOMEM;
++
++	plat->num_cores = diag_cores;
++	core->iris_platform_data = plat;
++	dev_info(core->dev, "diag: %u video core(s)\n", diag_cores);
++
++	return 0;
++}
++
++void iris_diag_log_fuses(struct iris_core *core)
++{
++	if (!diag_cores && !diag_pipes && diag_core_id < 0)
++		return;
++
++	dev_info(core->dev, "diag: efuse monitor %#010x, core power status %#010x\n",
++		 readl(core->reg_base + WRAPPER_EFUSE_MONITOR),
++		 readl(core->reg_base + WRAPPER_CORE_POWER_STATUS));
++}
++
++u32 iris_diag_pipes(struct iris_core *core, u32 pipes)
++{
++	u32 val = READ_ONCE(diag_pipes);
++
++	if (!val)
++		return pipes;
++
++	dev_info(core->dev, "diag: HFI_PROP_PIPE %u instead of %u\n", val, pipes);
++
++	return val;
++}
++
++u32 iris_diag_core_id(struct iris_core *core, u32 core_id)
++{
++	int val = READ_ONCE(diag_core_id);
++
++	if (val < 0)
++		return core_id;
++
++	dev_info(core->dev, "diag: HFI_PROP_CORE_ID %d instead of %u\n", val, core_id);
++
++	return val;
++}
+diff --git a/drivers/media/platform/qcom/iris/iris_diag.h b/drivers/media/platform/qcom/iris/iris_diag.h
+new file mode 100644
+index 000000000000..5b45bb9ecd7d
+--- /dev/null
++++ b/drivers/media/platform/qcom/iris/iris_diag.h
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef __IRIS_DIAG_H__
++#define __IRIS_DIAG_H__
++
++#include <linux/types.h>
++
++struct iris_core;
++
++int iris_diag_apply(struct iris_core *core);
++void iris_diag_log_fuses(struct iris_core *core);
++u32 iris_diag_pipes(struct iris_core *core, u32 pipes);
++u32 iris_diag_core_id(struct iris_core *core, u32 core_id);
++
++#endif
+diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
+index db13ea4308a5..f7af2b3a2d6f 100644
+--- a/drivers/media/platform/qcom/iris/iris_probe.c
++++ b/drivers/media/platform/qcom/iris/iris_probe.c
+@@ -13,6 +13,7 @@
+ #include <linux/soc/qcom/ubwc.h>
+ 
+ #include "iris_debugfs.h"
++#include "iris_diag.h"
+ #include "iris_core.h"
+ #include "iris_ctrls.h"
+ #include "iris_vidc.h"
+@@ -380,6 +381,10 @@ static int iris_probe(struct platform_device *pdev)
+ 
+ 	core->iris_platform_data = of_device_get_match_data(core->dev);
+ 
++	ret = iris_diag_apply(core);
++	if (ret)
++		return ret;
++
+ 	core->ubwc_cfg = qcom_ubwc_config_get_data();
+ 	if (IS_ERR(core->ubwc_cfg))
+ 		return PTR_ERR(core->ubwc_cfg);

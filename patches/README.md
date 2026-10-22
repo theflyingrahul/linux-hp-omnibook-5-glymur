@@ -24,7 +24,7 @@ qcom-next tip on 2026-10-17, from kernel `-13`; it was `6b4daa845239` for
 `-8` to `-12`, `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to `-4`)
 in order:
 `upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0007`,
-`glymur-bringup/0001–0002`, then `backports/` (`0001–0002`, `0013–0014`,
+`glymur-bringup/0001–0003`, then `backports/` (`0001–0002`, `0013–0014`,
 `0017–0021`, `0023–0040`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
 `upstream/qcom-next/0001`; `-7` adds `upstream/qcom-next/0002`; `-8` moves
@@ -185,6 +185,16 @@ configuration, and a fresh `prepare` reproduces the tested tree
 
 The eDP backports (`0001–0002`, `0026`) match the laptops tree's (the same
 revisions, rebased); `0014`, `0024` and `0025` are identical to it.
+
+Also for `-17`: `glymur-bringup/0003`, "media: iris: bring-up diagnostics
+for Mahua's core and pipe check". HP's video firmware refuses Glymur's
+core and pipe settings against its fuse word
+(`docs/video-iris-fuse-2026-10-23.md`). Three module parameters, all off by
+default, try the alternatives on one boot: `qcom_iris.diag_cores` (cores
+to power, load time only), `diag_pipes` and `diag_core_id` (per session),
+and the efuse word and core power status are logged once the firmware
+boots. `check-video.sh --diag` runs the trials. Not for upstream: the
+result becomes Mahua platform data.
 
 qcom-next stays the base. The Linux MSM laptops kernel
 (`https://github.com/linux-msm/laptops-kernel`, `topic/glymur-laptops`) was

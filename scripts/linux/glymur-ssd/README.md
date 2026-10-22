@@ -286,6 +286,16 @@ with `ffmpeg` and decoded in software and with the hardware decoder
 and `ffmpeg` (`sudo apt install v4l-utils ffmpeg`). The log goes to
 `/var/log/glymur/video-test-*.txt`.
 
+    sudo bash check-video.sh --diag
+
+From kernel `-17`, with the test device tree: the firmware refuses Glymur's
+core and pipe settings on this Mahua die (`docs/video-iris-fuse-2026-10-23.md`).
+For each trial the script reloads `qcom_iris` with `diag_cores=1` (only
+the first video core powered) and a `diag_pipes`/`diag_core_id` setting
+(`patches/kernel/glymur-bringup/0003`), decodes a 2 s clip and lists what
+the kernel and the firmware logged: the fuse word, the settings sent, and
+any refusal. It ends by reloading the module without parameters.
+
 ### `check-display.sh`
 
     sudo bash check-display.sh
