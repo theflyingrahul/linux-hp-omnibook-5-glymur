@@ -25,7 +25,7 @@ qcom-next tip on 2026-10-17, from kernel `-13`; it was `6b4daa845239` for
 in order:
 `upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0007`,
 `glymur-bringup/0001–0002`, then `backports/` (`0001–0002`, `0013–0014`,
-`0017–0021`, `0023–0026`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
+`0017–0021`, `0023–0040`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
 `upstream/qcom-next/0001`; `-7` adds `upstream/qcom-next/0002`; `-8` moves
 to the new base and adds `upstream/qcom-next/0003`; `-9` adds `0004`–`0005`
@@ -116,6 +116,75 @@ tree. `0005` reads the EC's pending event from register `0x00`, where HP's
 `IC10.INTR` reads it (field `CMD5`, no offset), instead of `0x05`; the old
 value left a fan notice unacknowledged and the event line firing about nine
 times a second (`docs/audit-2026-10-22.md`).
+
+Upstream check of 2026-10-23 (no build yet). qcom-next is still
+`1a0586064ee1` and mainline still `v7.3-1703-ga804c5742b`, so the base
+stays. linux-next `next-20261020` (`8f7df005a756`) now carries
+`backports/0013` and `0017–0021` as accepted commits, identical to the files
+here (`26f6187879d9`, `8f3f88309fa4`, `6c51f09c6db5`, `63b269ec537d`,
+`707ce1025214`, `9db31edf92dd`); they stay until qcom-next has them. Of its
+other commits in drivers this laptop uses, these fixes are taken as
+`backports/0027–0040`, in linux-next order:
+
+- `0027–0029` drm/msm/a6xx: the A8x bandwidth vote honours `perfmode_bw`
+  (`db6a2e4a7ebd`), the secondary rail is voted from the chosen primary
+  corner (`128a0edde507`), and the GMU dependency votes are resolved against
+  the GPU's OPP table (`eab0aff8965e`). Akhil P Oommen, through msm-next;
+  they apply to every A8x GPU, the X2-85 included. The rest of that series
+  (BX rail, MX clamp) is for Hawi and not taken.
+- `0030` drm/msm: vm_bo use-after-free in `with_vm_locks()`
+  (`81878aa1a2f5`, Cc stable).
+- `0031` drm/msm/dp: no link-training success after a reinit
+  (`a47987366e7f`): when every attempt fails, the stream was enabled on an
+  untrained link, the failure mode of `-15`'s DisplayPort crash. DisplayPort
+  stays off; this is for when it comes back.
+- `0032` qcom_battmgr: announce charger online changes found in the status
+  response (`87fd20da8ca8`, Cc stable). The X1E80100 variant, which Glymur
+  uses, gets no firmware notification for the AC and USB supplies, so UPower
+  kept the state it read at boot. `0023` stays: it listens for a
+  notification that never came in its one test here, and the two do not
+  overlap.
+- `0033–0034` pmic_glink: the altmode worker no longer runs while devices
+  are suspended (`c7c56b6ec077`, Cc stable), and an early rpmsg probe is no
+  longer lost (`0c79a829af36`), which left USB-C and the battery without
+  pmic_glink clients.
+- `0035–0036` qcom_scm: an empty PAS resource table and the retry size
+  (`324103eb65ba`, `57e43df2e426`; ADSP and CDSP boot through it).
+- `0037–0039` AudioReach: `g_apm` cleared on removal (`be2172758f2b`), and
+  the q6apm-dai position wraps to 0 for a full ring and resets with the
+  fragment queue on prepare (`0ea3e0b196f9`, `0337b8129cf6`, both Cc
+  stable). The speakers and microphones run through q6apm-dai.
+- `0040` qcom_battmgr: a full battery on external power reports `Full`
+  instead of `Not charging` (`6c8098e04ee4`, Bjorn Andersson). Ported: the
+  declaration hunk needed one line less context, because qcom-next's
+  multi-port USB-C patch declares `property` beside it; code unchanged.
+
+The ported files compile with `W=1` and no warnings against the `-16`
+configuration, and a fresh `prepare` reproduces the tested tree
+(`ab8ab104`). Not taken:
+
+- `93b6c8d10fad` "drm/msm/a8xx: Enable CLX feature on Adreno X2-85", in
+  linux-next. The laptops tree reverts it (`c9f622e03e71`, Abel Vesa): with
+  the CLX tables sent, the GMU stops answering on the Glymur CRD, the
+  Zenbook A14 and the Yoga Slim 7x. When qcom-next takes it, carry that
+  revert.
+- The Qualcomm TPM driver (`tpm: Introduce Qualcomm TPM driver` and the
+  `qcom.tz.tpm` TEE service, v4, reviewed by Jarkko Sakkinen; laptops tree,
+  not in linux-next). It is the TPM Windows uses for BitLocker, so it waits
+  for the owner's decision.
+- The TEE-based EFI variable driver (laptops tree): UEFI writes wait for a
+  stable system.
+- dwc3-qcom suspend and VBUS changes (Faisal Hassan, laptops tree, not in
+  linux-next): suspend is masked.
+- `f7c62ebfd912` (X1E80100 capacity): qcom-next already lists it.
+  `a49f86cd1333` (USB type) is for the SM8350 variant only. The a6xx GMU
+  wrapper fixes (`8128ae7af6b4`, `e2f57c576f14`) are for GPUs without a
+  GMU. The Iris changes wait for Iris to be enabled again.
+- The PMIC BCL hwmon driver, the LPASS reset and video clock binding fixes,
+  and the laptops tree's `HACK:` commits.
+
+The eDP backports (`0001–0002`, `0026`) match the laptops tree's (the same
+revisions, rebased); `0014`, `0024` and `0025` are identical to it.
 
 qcom-next stays the base. The Linux MSM laptops kernel
 (`https://github.com/linux-msm/laptops-kernel`, `topic/glymur-laptops`) was
