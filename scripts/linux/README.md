@@ -27,6 +27,7 @@ This directory contains shell scripts for validating the build environment, retr
 - `qcom0f10-snapshot/`: Separate default-off, read-only GENI timing/status module for the same two controllers. It does not register an I²C adapter; its September 25 live test completed.
 - `glymur-qcom0f10-snapshot.sh`: Follow-up collector that pins the Ubuntu kernel and module hash before a read-only snapshot. It is staged only in a separate optional GRUB entry; the normal Ubuntu boot remains unchanged.
 
+- `acdb-extract.py`: reads an AudioReach calibration database (`.acdb`): its graphs, each subgraph's module instances and calibration rows, and writes a chosen row as the parameter records the DSP takes (`APM_CMD_SET_CFG`), with instance IDs remapped, raw or as a topology `SectionData` (module configuration). See `docs/audio-speaker-eq-2026-10-23.md`.
 - `ath12k-board-add.py`: appends one named board-data ELF to a copy of an ath12k `board-2.bin`, refusing duplicates and checking the round trip. Its output holds Windows-derived data and stays in `.work/`.
 - `glymur-acpi-input/`: keyboard/touchpad bring-up kit for the stock Ubuntu `7.0.0-30-generic` live kernel. It contains:
     - `glymur_acpi_gpio.c`: a default-off ACPI TLMM GPIO/IRQ driver with PDC pin translation and a pin allow-list.

@@ -214,12 +214,15 @@ To set the keyboard backlight timeout by hand (`30s`, `3min` or `always`):
 
 ### `install-audio.sh`, `check-audio.sh`
 
-    sudo bash install-audio.sh
+    sudo bash install-audio.sh [--speaker-eq]
     sudo bash check-audio.sh
 
 The speaker and microphone userspace and test
 (`docs/audio-headset-path-2026-10-17.md`). The sound card itself is in the
 test device tree, which comes with the kernel package from `-14` on.
+With `--speaker-eq` (from `-17`) it installs the topology variant that runs
+HP's speaker filter on the DSP (`docs/audio-speaker-eq-2026-10-23.md`)
+under the same name; without the option it puts the plain topology back.
 `install-audio.sh` takes `audio/` next to it: the AudioReach topology built
 from `boards/hp-omnibook-5-16-bf1xxx/audio/` and the ALSA UCM profile from
 `boards/hp-omnibook-5-16-bf1xxx/audio/ucm2/`. The kernel asks for

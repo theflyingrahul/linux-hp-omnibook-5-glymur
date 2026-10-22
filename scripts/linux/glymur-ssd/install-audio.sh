@@ -3,11 +3,15 @@ set -euo pipefail
 
 # Install the speaker and microphone userspace: the AudioReach topology, the
 # ALSA UCM profile and the WirePlumber names, from audio/ next to this
-# script. See README.md.
-#   sudo bash install-audio.sh
+# script. See README.md. --speaker-eq installs the topology variant with
+# HP's speaker filter on the DSP (docs/audio-speaker-eq-2026-10-23.md);
+# running it again without the option puts the plain topology back.
+#   sudo bash install-audio.sh [--speaker-eq]
 
 K="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/audio"
 NAME=MAHUA-HP-OmniBook-5-16-bf1xxx
+SRC=$NAME
+[ "${1:-}" = --speaker-eq ] && SRC=$NAME-speaker-eq
 FW=/usr/lib/firmware/updates/qcom/glymur
 BOARD=HP/omnibook-5-16-bf1xxx
 [ "$(id -u)" -eq 0 ] || { echo 'run with sudo' >&2; exit 1; }
@@ -16,7 +20,8 @@ BOARD=HP/omnibook-5-16-bf1xxx
 
 # Topology: the board directory, plus a link at the name the kernel asks
 # for (qcom/glymur/<sound card model>-tplg.bin), as linux-firmware does.
-install -D -m 644 "$K/$NAME-tplg.bin" "$FW/$BOARD/$NAME-tplg.bin"
+install -D -m 644 "$K/$SRC-tplg.bin" "$FW/$BOARD/$NAME-tplg.bin"
+echo "Topology: $SRC"
 ln -sfn "$BOARD/$NAME-tplg.bin" "$FW/$NAME-tplg.bin"
 sha256sum "$FW/$BOARD/$NAME-tplg.bin"
 # The kernel -13 test's topology name.
