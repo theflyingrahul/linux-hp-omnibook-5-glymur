@@ -9,7 +9,14 @@ B=0
 [ "${1:-}" = --previous ] && B=-1
 OUT="/var/log/glymur/usb-test-$(date +%Y%m%dT%H%M%S).txt"
 mkdir -p /var/log/glymur
-exec > >(tee "$OUT") 2>&1
+# Personal identifiers stay out of the log (it may end up in the
+# repository): MAC and Bluetooth addresses, UUIDs, USB serial numbers.
+redact() {
+    sed -u -E -e 's/\b([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}\b/xx:xx:xx:xx:xx:xx/g' \
+        -e 's/\b[0-9A-Fa-f]{8}(-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}\b/<uuid>/g' \
+        -e 's/(SerialNumber: ).*/\1<serial>/'
+}
+exec > >(redact | tee "$OUT") 2>&1
 sect() { printf '\n==== %s\n' "$*"; }
 
 sect system
@@ -83,7 +90,7 @@ if [ "$B" = 0 ]; then
     done
 
     sect "block devices and mounts"
-    lsblk -o NAME,SIZE,TRAN,LABEL,FSTYPE,MOUNTPOINTS 2>&1 | grep -vE '^loop'
+    lsblk -o NAME,SIZE,TRAN,FSTYPE,MOUNTPOINTS 2>&1 | grep -vE '^loop'
 fi
 sync
 echo; echo "Saved to $OUT"

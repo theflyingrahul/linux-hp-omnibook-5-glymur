@@ -17,8 +17,10 @@ esac
 SRC="$(realpath "$SRC")"
 mkdir -p "$OUT"
 OUT="$(realpath "$OUT")"
-# Empty LOCALVERSION: no "+" for an untagged tree.
-MAKE=(make -C "$SRC" "O=$OUT" ARCH=arm64 "-j$JOBS" "LOCALVERSION=$SUFFIX")
+# Empty LOCALVERSION: no "+" for an untagged tree. A fixed build user and
+# host keep the build machine's name out of the version string.
+MAKE=(make -C "$SRC" "O=$OUT" ARCH=arm64 "-j$JOBS" "LOCALVERSION=$SUFFIX"
+      KBUILD_BUILD_USER=glymur KBUILD_BUILD_HOST=glymur-build)
 
 cat >"$OUT/glymur.config" <<'CFG'
 CONFIG_LOCALVERSION="-glymur"

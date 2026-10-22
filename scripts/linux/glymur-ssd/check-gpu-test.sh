@@ -21,7 +21,7 @@ run() { printf '$ %s\n' "$*"; "$@" 2>&1; }
 
 sect system
 run uname -a
-run cat /proc/cmdline
+run sed 's/root=[^ ]*/root=…/' /proc/cmdline
 run cat /sys/firmware/devicetree/base/model; echo
 
 sect "GPU and display: kernel log"

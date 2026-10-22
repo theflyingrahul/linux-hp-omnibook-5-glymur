@@ -16,6 +16,13 @@ OUT="$DIR/boot-$(date +%Y%m%dT%H%M%S)-$boot_id.txt"
 
 section() { printf '\n### %s\n' "$1"; }
 run() { printf '$ %s\n' "$*"; "$@" 2>&1; }
+# Personal identifiers stay out of the report (it may end up in the
+# repository): MAC and Bluetooth addresses, UUIDs, USB serial numbers.
+redact() {
+    sed -u -E -e 's/\b([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}\b/xx:xx:xx:xx:xx:xx/g' \
+        -e 's/\b[0-9A-Fa-f]{8}(-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}\b/<uuid>/g' \
+        -e 's/(SerialNumber: ).*/\1<serial>/'
+}
 
 {
     section 'kernel'
@@ -94,7 +101,7 @@ run() { printf '$ %s\n' "$*"; "$@" 2>&1; }
         cat /sys/kernel/debug/devices_deferred 2>&1
         journalctl -k -b --no-pager | grep -E 'sync_state\(\) pending|deferred probe pending' | head -40
         section 'device tree: storage and PCIe'
-        run lsblk -o NAME,SIZE,TYPE,FSTYPE,LABEL,MOUNTPOINTS
+        run lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINTS
         run lspci -nnk
         section 'device tree: remoteprocs'
         for r in /sys/class/remoteproc/remoteproc*; do
@@ -136,6 +143,6 @@ run() { printf '$ %s\n' "$*"; "$@" 2>&1; }
     journalctl -k -b -p warning --no-pager | tail -150
     section 'oops check'
     journalctl -k -b --no-pager | grep -E 'Oops|BUG:|Call trace|WARNING: CPU' | head -20
-} >"$OUT" 2>&1
+} 2>&1 | redact >"$OUT"
 
 ls -1t "$DIR"/boot-*.txt 2>/dev/null | tail -n +31 | xargs -r rm -f
