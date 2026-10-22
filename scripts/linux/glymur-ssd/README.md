@@ -375,3 +375,28 @@ the key codes the kernel saw from the keyboard, the touchpad's consumer
 collection, the EC input device and `gpio-keys`. It settles which key sends
 what, for the mic-mute work (`docs/runbook-results-16-2026-10-21.md`). The
 log goes to `/var/log/glymur/hotkeys-*.txt`.
+
+### `ec-event-capture.sh`
+
+    sudo bash ec-event-capture.sh
+
+Read-only apart from acknowledging events. With the EC driver unbound, it
+waits for each falling edge on the EC's event line (GPIO 66), reads
+registers `0x00` (the event, as HP's `IC10.INTR` reads it) and `0x05` (what
+the driver read up to `-16`), and writes `0` to `0x00` as HP's AML does.
+It asks for F9, F11, F6, F5 and Fn one at a time, then rebinds the driver
+and restores the LED triggers. It never writes the reference "enable
+events" command `0x35`. The log goes to `/var/log/glymur/ec-events-*.txt`.
+
+### `ec-hotkey-flags.sh`
+
+    sudo bash ec-hotkey-flags.sh
+
+**Writes persistent EC state; run only with the owner's go-ahead.** It sets
+HP's OS-state flags `0x80` (`APET`, the action-keys mode) and `0x81`
+(`SCET`) through mailbox command `0x01`, one trial each, and watches
+register `0x00` while F9 and F11 are pressed. The flags cannot be read back
+and survive reboots until a BIOS reset. It ends with `0x80` set (clearing it
+turns F1–F12 into plain function keys) and `0x81` cleared, and asks the
+operator to type a confirmation before writing anything. The log goes to
+`/var/log/glymur/ec-flags-*.txt` (`docs/audit-2026-10-22.md`).

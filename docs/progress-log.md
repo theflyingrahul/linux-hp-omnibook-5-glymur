@@ -5,6 +5,8 @@ The bring-up's dated log, newest first, moved here from the README on
 in [`status.md`](status.md); the detailed evidence is in the dated notes in
 this directory.
 
+**2026-10-22: audit of the `-16` work.** The EC driver read events from register `0x05`; HP's `IC10.INTR` reads `0x00`, where a fan notice sat unacknowledged and kept the event line firing. `upstream/qcom-next/0005` is fixed, the Iris one-core patch `0008` is dropped and Iris is off again, the WirePlumber card rule now matches the device name, and the OS-state flag experiment is void (it watched the wrong register; the owner reset the flags through the BIOS). Personal identifiers were rewritten out of the history, and logs are now redacted before they are committed. No kernel is built yet. See `docs/audit-2026-10-22.md`.
+
 **2026-10-21, night: `-16` booted.** EC, thermal zone names, rails, stress and the mute keys and LEDs pass; F9 shows no GNOME icon. Video still fails: the firmware refuses core 0 as well as core 1. Speakers still silent although both amplifiers attach; the tone test ran while they were `UNATTACHED` after a bus resume. The Ubuntu 26.10 upgrade removed `libllvm21` (no GUI) and tripped flash-kernel; both fixed. See `docs/runbook-results-16-2026-10-21.md`.
 
 **2026-10-21, later: kernel `-16` built for the four open problems of `-15`.**
