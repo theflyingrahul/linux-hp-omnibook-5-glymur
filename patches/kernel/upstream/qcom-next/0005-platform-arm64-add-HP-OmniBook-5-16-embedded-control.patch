@@ -1,4 +1,4 @@
-From 5a7172203120b4abef430ab9ac4e471dda881f91 Mon Sep 17 00:00:00 2001
+From 376dfe5474d0a971380b4e017e33552a25d5235d Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Wed, 30 Sep 2026 04:33:53 -0700
 Subject: [PATCH 5/5] platform: arm64: add HP OmniBook 5 16 embedded controller
@@ -27,8 +27,8 @@ methods use on this laptop.
  .../ABI/testing/sysfs-driver-hp-omnibook-5-ec |  19 +
  drivers/platform/arm64/Kconfig                |  17 +
  drivers/platform/arm64/Makefile               |   1 +
- drivers/platform/arm64/hp-omnibook-5-ec.c     | 416 ++++++++++++++++++
- 4 files changed, 453 insertions(+)
+ drivers/platform/arm64/hp-omnibook-5-ec.c     | 417 ++++++++++++++++++
+ 4 files changed, 454 insertions(+)
  create mode 100644 Documentation/ABI/testing/sysfs-driver-hp-omnibook-5-ec
  create mode 100644 drivers/platform/arm64/hp-omnibook-5-ec.c
 
@@ -99,10 +99,10 @@ index 7681be4a46e9..a809abf45d37 100644
  obj-$(CONFIG_EC_LENOVO_THINKPAD_T14S) += lenovo-thinkpad-t14s.o
 diff --git a/drivers/platform/arm64/hp-omnibook-5-ec.c b/drivers/platform/arm64/hp-omnibook-5-ec.c
 new file mode 100644
-index 000000000000..24dd29e81205
+index 000000000000..bfe20e12aafd
 --- /dev/null
 +++ b/drivers/platform/arm64/hp-omnibook-5-ec.c
-@@ -0,0 +1,416 @@
+@@ -0,0 +1,417 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/*
 + * HP OmniBook 5 16 (Snapdragon X2) embedded controller
@@ -126,7 +126,8 @@ index 000000000000..24dd29e81205
 +#include <linux/sysfs.h>
 +#include <linux/unaligned.h>
 +
-+#define HPEC_EVENT		0x05
++/* The pending event, cleared by writing 0 (HP's IC10.INTR, field CMD5) */
++#define HPEC_EVENT		0x00
 +#define HPEC_STATUS		0xef
 +#define HPEC_REQUEST		0xed
 +#define HPEC_REPLY		0xee

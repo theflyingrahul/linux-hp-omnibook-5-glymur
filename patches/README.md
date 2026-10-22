@@ -23,7 +23,7 @@ Apply to qcom-next `1a0586064ee1` (tag `qcom-next-7.3-rc4-20261014`, the
 qcom-next tip on 2026-10-17, from kernel `-13`; it was `6b4daa845239` for
 `-8` to `-12`, `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to `-4`)
 in order:
-`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0008`,
+`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0007`,
 `glymur-bringup/0001–0002`, then `backports/` (`0001–0002`, `0013–0014`,
 `0017–0021`, `0023–0026`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
@@ -108,6 +108,14 @@ parts of the rest, and the two do not merge (20 conflicts in
 USB-C SuperSpeed, which works. The DTS changes of `-16` (EC zone names,
 amplifier supplies, Iris compatible, DisplayPort off) are in the test
 device tree only. A fresh `prepare` reproduces the build tree.
+
+After `-16` (2026-10-22, not built yet): `0008` is dropped. HP's video
+firmware refused the one-core configuration as it refused two cores, so
+the core count was not the fault, and Iris is off again in the test device
+tree. `0005` reads the EC's pending event from register `0x00`, where HP's
+`IC10.INTR` reads it (field `CMD5`, no offset), instead of `0x05`; the old
+value left a fan notice unacknowledged and the event line firing about nine
+times a second (`docs/audit-2026-10-22.md`).
 
 qcom-next stays the base. The Linux MSM laptops kernel
 (`https://github.com/linux-msm/laptops-kernel`, `topic/glymur-laptops`) was

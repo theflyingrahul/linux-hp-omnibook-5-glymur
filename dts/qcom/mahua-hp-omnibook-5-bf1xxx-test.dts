@@ -27,6 +27,11 @@
  *   are held on at HP's voltages;
  * - Iris uses the one-core Mahua variant (qcom,mahua-iris);
  * - DisplayPort is off again: plugging a monitor crashed -15.
+ *
+ * Changed after kernel -16 (docs/audit-2026-10-22.md):
+ * - Iris is off again: HP's video firmware refused the driver's
+ *   configuration with one core as with two, and the one-core patch is
+ *   dropped.
  */
 /dts-v1/;
 
@@ -331,27 +336,17 @@
  */
 
 /*
- * Iris video codec (docs/video-iris-2026-10-20.md). The node is the Glymur
- * CRD's; the firmware is HP's qcvss8480.mbn from the Windows display
- * driver package (video-firmware 3.6, the CRD image's generation, signed
- * for this laptop), named like the ADSP and CDSP images. Laptops upstream
- * load Windows' qcvss image the same way (ThinkPad X13s, IdeaCentre Mini).
+ * Iris video codec (docs/video-iris-2026-10-20.md) stays off, as glymur.dtsi
+ * leaves it. With HP's qcvss8480.mbn the second core's GDSC never came on
+ * (-15), and with one core the firmware answered "Configured core 0 is not
+ * supported" (-16, docs/runbook-results-16-2026-10-21.md). What the
+ * firmware expects is not known yet.
  */
-&iris {
-	compatible = "qcom,mahua-iris", "qcom,glymur-iris";
-	firmware-name = "qcom/glymur/HP/omnibook-5-16-bf1xxx/qcvss8480.mbn";
-
-	status = "okay";
-
-	video-firmware {
-		iommus = <&apps_smmu 0x19e2 0x0>;
-	};
-};
 
 /*
  * EC event line (docs/ec-2026-09-30.md): HP's ECGE (ACPI0013) GpioInt,
  * edge triggered, active low, pull-up, PDC pin 768 = GPIO 66. ECGE._EVT
- * reads the event from EC register 0x05 and writes 0 back. On kernel -10,
+ * reads the event from EC register 0x00 and writes 0 back. On kernel -10,
  * without a pinctrl state, the line produced no event: nothing set the
  * pull-up that Windows applies from the GpioInt descriptor. Qualcomm's
  * Glymur and X1 CRDs use the same line with bias-disable; HP's descriptor
