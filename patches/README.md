@@ -25,7 +25,7 @@ qcom-next tip on 2026-10-17, from kernel `-13`; it was `6b4daa845239` for
 in order:
 `upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0008`,
 `glymur-bringup/0001–0003`, then `backports/` (`0001–0002`, `0013–0014`,
-`0017–0021`, `0023–0040`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
+`0017–0021`, `0023–0043`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
 `upstream/qcom-next/0001`; `-7` adds `upstream/qcom-next/0002`; `-8` moves
 to the new base and adds `upstream/qcom-next/0003`; `-9` adds `0004`–`0005`
@@ -185,6 +185,17 @@ configuration, and a fresh `prepare` reproduces the tested tree
 
 The eDP backports (`0001–0002`, `0026`) match the laptops tree's (the same
 revisions, rebased); `0014`, `0024` and `0025` are identical to it.
+
+Before building `-17` (2026-10-23): qcom-next still `1a0586064ee1`;
+mainline moved to `v7.3-4514-g2a08195e4d` (the 7.4 merge window). It
+merged four of `0027–0040` (`0033–0036`) and adds three fixes taken as
+`backports/0041–0043`: Glymur's USB controllers marked `dma-coherent`
+(`e62df36f34`), the USB controllers' missing clock rates, performance
+level and interconnect votes (`0f8d35f04a`; both Greg Ociepka, `Fixes:` the
+Glymur USB nodes), and the PMIC temperature alarm's `temp_map` indexing
+(`51c262cf2a`, Georgi Djakov). Not taken: `eca1247443` (TSENS limits
+widened to the hardware range; no fix), the Glymur SD-card and PCIe3
+nodes (not on this laptop), and SCMI's ACPI transport.
 
 Also for `-17`: `upstream/qcom-next/0008`, "ASoC: qcom: topology: size a
 module's configuration in bytes". Topology module configuration carries its

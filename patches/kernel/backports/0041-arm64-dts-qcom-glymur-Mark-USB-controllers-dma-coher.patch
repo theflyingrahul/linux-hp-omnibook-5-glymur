@@ -1,0 +1,84 @@
+From e62df36f34949aebe016c5c81e34baa7a9eca427 Mon Sep 17 00:00:00 2001
+From: Greg Ociepka <greg@ferrisoft.com>
+Date: Wed, 12 Aug 2026 17:40:14 +0200
+Subject: [PATCH] arm64: dts: qcom: glymur: Mark USB controllers dma-coherent
+
+All five USB controller nodes on Glymur (usb_0, usb_1, usb_2, usb_hs,
+usb_mp) are missing the dma-coherent property, which Hamoa carries on
+all of its USB controllers. Krishna Kurapati confirmed the Glymur USB
+controllers are dma-coherent [1].
+
+Without the property the kernel treats USB DMA buffers as non-coherent
+and performs cache maintenance on every transfer, which coherent
+hardware makes redundant.
+
+Tested on an Asus Zenbook A16 (UX3607OA): all controllers enumerate
+their devices as before and a 64 MiB write plus two O_DIRECT
+read-backs over USB mass storage produce identical checksums.
+
+[1] https://lore.kernel.org/linux-arm-msm/f92cc91e-6e5c-4375-aaa6-f079a165f4b5@oss.qualcomm.com/
+
+Fixes: 4eee57dd4df9 ("arm64: dts: qcom: glymur: Add USB related nodes")
+Signed-off-by: Greg Ociepka <greg@ferrisoft.com>
+Assisted-by: Claude:fable-5
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Reviewed-by: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Link: https://lore.kernel.org/r/20260812154014.123315-1-greg@ferrisoft.com
+Signed-off-by: Bjorn Andersson <andersson@kernel.org>
+---
+ arch/arm64/boot/dts/qcom/glymur.dtsi | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
+index 7dedace8c3..de7c395d9c 100644
+--- a/arch/arm64/boot/dts/qcom/glymur.dtsi
++++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
+@@ -4949,6 +4949,8 @@ &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
+ 			usb-role-switch;
+ 			wakeup-source;
+ 
++			dma-coherent;
++
+ 			status = "disabled";
+ 
+ 			ports {
+@@ -5037,6 +5039,8 @@ &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
+ 			usb-role-switch;
+ 			wakeup-source;
+ 
++			dma-coherent;
++
+ 			status = "disabled";
+ 
+ 			ports {
+@@ -5125,6 +5129,8 @@ &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
+ 			usb-role-switch;
+ 			wakeup-source;
+ 
++			dma-coherent;
++
+ 			status = "disabled";
+ 
+ 			ports {
+@@ -5215,6 +5221,8 @@ &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
+ 			usb-role-switch;
+ 			wakeup-source;
+ 
++			dma-coherent;
++
+ 			status = "disabled";
+ 		};
+ 
+@@ -5299,6 +5307,8 @@ &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
+ 			dr_mode = "host";
+ 			wakeup-source;
+ 
++			dma-coherent;
++
+ 			status = "disabled";
+ 		};
+ 
+-- 
+2.53.0
+
