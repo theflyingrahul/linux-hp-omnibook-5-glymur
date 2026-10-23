@@ -3,11 +3,11 @@ set -euo pipefail
 
 # Install everything staged on the USB. See README.md.
 #   bash install-from-usb.sh [--keep-ubuntu-mesa] [kernel release]
-# Default kernel: 7.3.0-rc4-glymur-16.
+# Default kernel: 7.3.0-rc4-glymur-17.
 
 SYSTEM_MESA=1
 if [ "${1:-}" = --keep-ubuntu-mesa ]; then SYSTEM_MESA=0; shift; fi
-KREL="${1:-7.3.0-rc4-glymur-16}"
+KREL="${1:-7.3.0-rc4-glymur-17}"
 K="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 [ "$(id -u)" -ne 0 ] || { echo 'run as your normal user, not with sudo' >&2; exit 1; }
 [ "$(findmnt -n -o LABEL /)" = glymur-root ] || { echo 'not booted from the SSD install (glymur-root); refusing' >&2; exit 1; }
@@ -72,7 +72,8 @@ sudo apt-get install -y mesa-utils mesa-utils-bin vulkan-tools glmark2-es2-wayla
     echo 'apt failed (offline?); install them later, check-mesa.sh names them'
 
 for f in check-gpu-test.sh check-mesa.sh charging-watch.sh check-usb.sh check-ec.sh gpu-corruption-test.sh \
-         check-audio.sh watch-audio.sh check-battmgr-notify.sh check-video.sh check-display.sh; do
+         check-audio.sh watch-audio.sh check-battmgr-notify.sh check-video.sh check-display.sh \
+         check-hotkeys.sh ec-event-capture.sh; do
     if [ -f "$K/$f" ]; then cp "$K/$f" "$HOME/$f"; fi
 done
 sync
