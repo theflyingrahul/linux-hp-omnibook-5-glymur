@@ -50,6 +50,12 @@ if [ -d "$BOOT/dtbs/$krel/qcom" ]; then
     [ -d "$BOOT/dtbs/$running/qcom" ] && ln -sfn "dtbs/$running/qcom" "$BOOT/glymur-dtb.old"
     ln -sfn "dtbs/$krel/qcom" "$BOOT/glymur-dtb"
 fi
+# The initramfs is only for plymouth; keep it matching when one is in use.
+if [ -e "$BOOT/initrd-glymur" ] && command -v update-initramfs >/dev/null; then
+    update-initramfs -c -k "$krel"
+    [ -f "$BOOT/initrd.img-$running" ] && ln -sfn "initrd.img-$running" "$BOOT/initrd-glymur.old"
+    ln -sfn "initrd.img-$krel" "$BOOT/initrd-glymur"
+fi
 
 report="$(dirname "${BASH_SOURCE[0]}")/glymur-boot-report.sh"
 if [ -f "$report" ] && [ -f /etc/systemd/system/glymur-boot-report.service ]; then
@@ -57,6 +63,6 @@ if [ -f "$report" ] && [ -f /etc/systemd/system/glymur-boot-report.service ]; th
     echo 'Updated /usr/local/sbin/glymur-boot-report.'
 fi
 sync
-ls -l "$BOOT"/vmlinuz-glymur "$BOOT"/vmlinuz-glymur.old "$BOOT"/glymur-dtb "$BOOT"/glymur-dtb.old 2>/dev/null
+ls -l "$BOOT"/vmlinuz-glymur "$BOOT"/vmlinuz-glymur.old "$BOOT"/glymur-dtb "$BOOT"/glymur-dtb.old "$BOOT"/initrd-glymur "$BOOT"/initrd-glymur.old 2>/dev/null
 ls -l "$BOOT/glymur-dtb/" 2>/dev/null
 echo "Reboot and choose \"Ubuntu on SSD\" to boot $krel."
