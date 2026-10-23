@@ -62,6 +62,13 @@ if [ -f "$K/lscpu-oryon2.tar.gz" ]; then
     echo "as root: $(sudo lscpu | grep 'Model name' | head -1)"
 fi
 
+# EFI variables (from -17): read-only until writes are allowed on purpose.
+# Remount read-write by hand for a single write (docs/uefi-variables-2026-10-23.md).
+if ! grep -q '^efivarfs ' /etc/fstab; then
+    echo "== mounting efivarfs read-only from the next boot on"
+    echo 'efivarfs /sys/firmware/efi/efivars efivarfs ro,nosuid,nodev,noexec 0 0' | sudo tee -a /etc/fstab
+fi
+
 if [ -d "$K/audio" ]; then
     echo "== installing the audio topology and UCM profile"
     sudo bash "$K/install-audio.sh"
@@ -73,7 +80,7 @@ sudo apt-get install -y mesa-utils mesa-utils-bin vulkan-tools glmark2-es2-wayla
 
 for f in check-gpu-test.sh check-mesa.sh charging-watch.sh check-usb.sh check-ec.sh gpu-corruption-test.sh \
          check-audio.sh watch-audio.sh check-battmgr-notify.sh check-video.sh check-display.sh \
-         check-hotkeys.sh ec-event-capture.sh; do
+         check-hotkeys.sh ec-event-capture.sh dump-efivars.sh; do
     if [ -f "$K/$f" ]; then cp "$K/$f" "$HOME/$f"; fi
 done
 sync

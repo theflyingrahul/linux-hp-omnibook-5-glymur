@@ -1,0 +1,28 @@
+From 57121bba104c4ebfcf642ac0590d6f4812d1d76e Mon Sep 17 00:00:00 2001
+From: Rahul Pon <theflyingrahul@gmail.com>
+Date: Fri, 23 Oct 2026 02:12:15 -0700
+Subject: [PATCH] firmware: qcom: scm: Allow QSEECOM on HP OmniBook 5 16
+
+The HP OmniBook 5 16 (bf1xxx, Snapdragon X2 Elite, Mahua) keeps its EFI
+variables behind the UEFI secure application, as the other Snapdragon X
+laptops do. Add it to the QSEECOM allowlist so that efivarfs and the
+PMIC RTC's UEFI time offset work.
+---
+ drivers/firmware/qcom/qcom_scm.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
+index a427e691b92b..677af7d2ac96 100644
+--- a/drivers/firmware/qcom/qcom_scm.c
++++ b/drivers/firmware/qcom/qcom_scm.c
+@@ -2325,6 +2325,7 @@ static const struct of_device_id qcom_scm_qseecom_allowlist[] __maybe_unused = {
+ 	{ .compatible = "ecs,liva-qc710" },
+ 	{ .compatible = "honor,magicbook-art-14-snapdragon" },
+ 	{ .compatible = "hp,elitebook-ultra-g1q" },
++	{ .compatible = "hp,omnibook-5-16-bf1xxx" },
+ 	{ .compatible = "hp,omnibook-x14" },
+ 	{ .compatible = "huawei,gaokun3" },
+ 	{ .compatible = "lenovo,flex-5g" },
+-- 
+2.53.0
+

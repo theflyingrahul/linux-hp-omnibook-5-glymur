@@ -23,7 +23,7 @@ Apply to qcom-next `1a0586064ee1` (tag `qcom-next-7.3-rc4-20261014`, the
 qcom-next tip on 2026-10-17, from kernel `-13`; it was `6b4daa845239` for
 `-8` to `-12`, `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to `-4`)
 in order:
-`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0008`,
+`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0009`,
 `glymur-bringup/0001–0003`, then `backports/` (`0001–0002`, `0013–0014`,
 `0017–0021`, `0023–0043`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
@@ -196,6 +196,14 @@ Glymur USB nodes), and the PMIC temperature alarm's `temp_map` indexing
 (`51c262cf2a`, Georgi Djakov). Not taken: `eca1247443` (TSENS limits
 widened to the hardware range; no fix), the Glymur SD-card and PCIe3
 nodes (not on this laptop), and SCMI's ACPI transport.
+
+Also for `-17` (the owner allowed UEFI variables on 2026-10-23):
+`upstream/qcom-next/0009`, "firmware: qcom: scm: Allow QSEECOM on HP
+OmniBook 5 16", the one-line allowlist entry every Snapdragon X laptop gets
+upstream (HP's EliteBook X G2q as `665d237915`), and
+`CONFIG_EFI_VARS_PSTORE_DEFAULT_DISABLE=y` in the build, so the EFI pstore
+backend never writes crash logs into the variable store. Reads only for now
+(`docs/uefi-variables-2026-10-23.md`). An upstream candidate.
 
 Also for `-17`: `upstream/qcom-next/0008`, "ASoC: qcom: topology: size a
 module's configuration in bytes". Topology module configuration carries its

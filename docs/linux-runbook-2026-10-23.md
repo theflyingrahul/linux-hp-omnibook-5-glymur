@@ -16,7 +16,8 @@ From the USB stick's `glymur-tools/kernels/` directory, as for `-16`:
     bash install-from-usb.sh
     sudo bash install-audio.sh --speaker-eq
 
-`install-from-usb.sh` defaults to `-17` and installs the plain topology;
+`install-from-usb.sh` defaults to `-17`, mounts `efivarfs` read-only from
+the next boot on, and installs the plain topology;
 the second line replaces it with the speaker filter variant
 (`docs/audio-speaker-eq-2026-10-23.md`), so one boot tests both the kernel
 and the filter. Then reboot into "Ubuntu on SSD: test device tree".
@@ -74,7 +75,14 @@ bandwidth votes (backport `0042`). Plug a USB mouse or keyboard receiver
 hub), then `sudo bash ~/check-usb.sh`. On `-16` these failed with
 `error -71`.
 
-## 7. Quick regression look
+## 7. UEFI variables and the clock (issues #17, #18)
+
+`timedatectl` should show an RTC time (there was none on `-16`), and
+`mount | grep efivars` should show `ro`. Then `sudo bash ~/dump-efivars.sh`
+(read-only) and hand back its directory privately. The power button now
+reaches the desktop (`KEY_POWER`); expect GNOME's power-off dialog.
+
+## 8. Quick regression look
 
 Touchscreen, Bluetooth, camera, Wi-Fi, suspend stays masked.
 

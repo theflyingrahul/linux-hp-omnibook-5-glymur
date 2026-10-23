@@ -413,3 +413,16 @@ and survive reboots until a BIOS reset. It ends with `0x80` set (clearing it
 turns F1–F12 into plain function keys) and `0x81` cleared, and asks the
 operator to type a confirmation before writing anything. The log goes to
 `/var/log/glymur/ec-flags-*.txt` (`docs/audit-2026-10-22.md`).
+
+### `dump-efivars.sh`
+
+    sudo bash dump-efivars.sh
+
+From kernel `-17`, which lets Linux read the UEFI variables through QSEECOM
+(`docs/uefi-variables-2026-10-23.md`). Read-only: it lists every variable
+with its size and attributes, copies them into
+`/var/log/glymur/efivars-*/efivars.tar.gz` and names the ones that matter
+here (`RTCInfo`, `SmartAmpCalibrationData`, `BootOrder`, `SecureBoot`).
+The copy holds machine-specific data; keep it in `.work/`, never commit it.
+`install-from-usb.sh` mounts `efivarfs` read-only (an `/etc/fstab` line) from
+`-17` on, so nothing writes a variable without an explicit remount.

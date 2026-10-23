@@ -38,12 +38,16 @@
  *   default-off diagnostics of glymur-bringup/0003 (qcom_iris.diag_cores,
  *   diag_pipes, diag_core_id). Without them the second core fails to power
  *   on and every open fails, as on -15; nothing else depends on Iris.
+ * - the PMK8850 PMIC (power key, PMIC GPIOs, ADC, RTC), as every Glymur
+ *   and Mahua laptop upstream includes it, with the RTC taking its offset
+ *   from UEFI read-only (docs/uefi-variables-2026-10-23.md).
  */
 /dts-v1/;
 
 #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
 #include <dt-bindings/sound/qcom,q6dsp-lpass-ports.h>
 #include "mahua-hp-omnibook-5-bf1xxx.dts"
+#include "pmk8850.dtsi"
 
 / {
 	model = "HP OmniBook 5 Laptop 16-bf1xxx (test)";
@@ -447,4 +451,16 @@
 		function = "gpio";
 		bias-pull-up;
 	};
+};
+
+/*
+ * PMK8850 RTC (PMIC "A", whose clocks HP's PEP tables vote): the counter
+ * runs from the PMIC, the offset to wall time is the UEFI variable Windows
+ * keeps (qcom,uefi-rtc-info), as on the ASUS Zenbook A16 and the Glymur
+ * QCB. Without allow-set-time Linux only reads the variable. No alarm, as
+ * on the Glymur CRD, the QCB and the Zenbook A16.
+ */
+&pmk8850_rtc {
+	qcom,uefi-rtc-info;
+	qcom,no-alarm;
 };
