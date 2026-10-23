@@ -1,0 +1,103 @@
+# boot -2 (kernel -16), the boot that froze at the blue screen: display bring-up in the initramfs
+[    1.271108] glymur kernel: msm_serial: driver initialized
+[    1.271715] glymur kernel: [drm] Initialized simpledrm 1.0.0 for simple-framebuffer.0 on minor 0
+[    1.271786] glymur kernel: simple-framebuffer simple-framebuffer.0: [drm] fb0: simpledrmdrmfb frame buffer device
+[    1.283013] glymur kernel: Freeing initrd memory: 55868K
+[    1.288963] glymur systemd[1]: Running in initrd.
+[    1.288975] glymur systemd[1]: Queued start job for default target initrd.target.
+[    1.288984] glymur systemd[1]: Reached target initrd-usr-fs.target - Initrd /usr File System.
+[    1.289045] glymur systemd[1]: systemd-pcrphase-initrd.service - TPM PCR Barrier (initrd) skipped, unmet condition check ConditionSecurity=measured-os
+[    1.466236] glymur systemd[1]: Starting plymouth-start.service - Show Plymouth Boot Screen...
+[    1.469640] glymur systemd[1]: Received SIGRTMIN+20 from PID 323 (plymouthd).
+[    1.483724] glymur systemd[1]: Received SIGRTMIN+20 from PID 323 (plymouthd).
+[    1.567047] glymur systemd[1]: Started plymouth-start.service - Show Plymouth Boot Screen.
+[    1.608136] glymur systemd[1]: systemd-ask-password-console.path - Dispatch Password Requests to Console Directory Watch skipped, unmet condition check ConditionPathExists=!/run/plymouth/pid
+[    1.608213] glymur systemd[1]: Started systemd-ask-password-plymouth.path - Forward Password Requests to Plymouth Directory Watch.
+[    1.608407] glymur systemd[1]: Reached target initrd-root-device.target - Initrd Root Device.
+[    1.858007] glymur kernel: msm_dpu ae01000.display-controller: bound af6c000.displayport-controller (ops msm_dp_display_comp_ops [msm])
+[    1.865677] glymur kernel: msm_dpu ae01000.display-controller: bound 3d00000.gpu (ops a3xx_ops [msm])
+[    1.895010] glymur kernel: [drm:dpu_kms_hw_init:1193] dpu hardware revision:0xc0020000
+[    1.904040] glymur kernel: msm_dpu ae01000.display-controller: Direct firmware load for qcom/gen80100_sqe.fw failed with error -2
+[    1.904164] glymur kernel: msm_dpu ae01000.display-controller: [drm:adreno_request_fw [msm]] *ERROR* failed to load gen80100_sqe.fw
+[    1.904258] glymur kernel: [drm] Initialized msm 1.13.0 for ae01000.display-controller on minor 1
+[    1.904266] glymur kernel: msm_dpu ae01000.display-controller: Direct firmware load for qcom/gen80100_sqe.fw failed with error -2
+[    1.904354] glymur kernel: msm_dpu ae01000.display-controller: [drm:adreno_request_fw [msm]] *ERROR* failed to load gen80100_sqe.fw
+[    1.946884] glymur kernel: msm_dpu ae01000.display-controller: [drm] fb0: msmdrmfb frame buffer device
+[    2.355226] glymur systemd[1]: Reached target initrd-root-fs.target - Initrd Root File System.
+[    2.355836] glymur systemd[1]: Starting initrd-parse-etc.service - Mountpoints Configured in the Real Root...
+[    2.361504] glymur systemd[1]: initrd-parse-etc.service: Deactivated successfully.
+[    2.361617] glymur systemd[1]: Finished initrd-parse-etc.service - Mountpoints Configured in the Real Root.
+[    2.361671] glymur systemd[1]: initrd-parse-etc.service: Triggering OnSuccess= dependencies.
+[    2.361894] glymur systemd[1]: Reached target initrd-fs.target - Initrd File Systems.
+[    2.361919] glymur systemd[1]: Reached target initrd.target - Initrd Default Target.
+[    2.362414] glymur systemd[1]: Starting initrd-cleanup.service - Cleaning Up and Shutting Down Daemons...
+[    2.368776] glymur systemd[1]: Stopped target initrd.target - Initrd Default Target.
+[    2.368857] glymur systemd[1]: Stopped target initrd-root-device.target - Initrd Root Device.
+[    2.368892] glymur systemd[1]: Stopped target initrd-usr-fs.target - Initrd /usr File System.
+[    2.369627] glymur systemd[1]: Starting plymouth-switch-root.service - Plymouth switch root service...
+[    2.370968] glymur systemd[1]: initrd-cleanup.service: Deactivated successfully.
+[    2.371054] glymur systemd[1]: Finished initrd-cleanup.service - Cleaning Up and Shutting Down Daemons.
+[    2.384690] glymur systemd[1]: Starting initrd-udevadm-cleanup-db.service - Cleanup udev Database...
+[    2.390868] glymur systemd[1]: initrd-udevadm-cleanup-db.service: Deactivated successfully.
+
+# its last 60 journal lines (nothing after 3.67 s reached the disk)
+[    3.658504] glymur systemd[1]: Listening on systemd-resolved-monitor.socket - Resolve Monitor Varlink Socket.
+[    3.658511] glymur systemd[1]: Listening on systemd-resolved-varlink.socket - Resolve Service Varlink Socket.
+[    3.658519] glymur systemd[1]: Listening on systemd-udevd-control.socket - udev Control Socket.
+[    3.658526] glymur systemd[1]: Listening on systemd-udevd-varlink.socket - udev Varlink Socket.
+[    3.658533] glymur systemd[1]: Mounting dev-hugepages.mount - Huge Pages File System...
+[    3.658540] glymur systemd[1]: Mounting dev-mqueue.mount - POSIX Message Queue File System...
+[    3.658548] glymur systemd[1]: Mounting sys-kernel-debug.mount - Kernel Debug File System...
+[    3.658555] glymur systemd[1]: Mounting sys-kernel-tracing.mount - Kernel Trace File System...
+[    3.658564] glymur systemd[1]: tmp.mount: Directory /tmp to mount over is not empty, mounting anyway.
+[    3.658571] glymur systemd[1]: Mounting tmp.mount - Temporary Directory /tmp...
+[    3.658578] glymur systemd[1]: Starting systemd-journald.service - Journal Service...
+[    3.658585] glymur systemd[1]: Starting keyboard-setup.service - Set the console keyboard layout...
+[    3.658593] glymur systemd[1]: Starting kmod-static-nodes.service - Create List of Static Device Nodes...
+[    3.658600] glymur systemd[1]: modprobe@configfs.service - Load Kernel Module configfs skipped, unmet condition check ConditionKernelModuleLoaded=!configfs
+[    3.658608] glymur systemd[1]: modprobe@drm.service - Load Kernel Module drm skipped, unmet condition check ConditionKernelModuleLoaded=!drm
+[    3.658616] glymur systemd[1]: Starting modprobe@efi_pstore.service - Load Kernel Module efi_pstore...
+[    3.658623] glymur systemd[1]: modprobe@fuse.service - Load Kernel Module fuse skipped, unmet condition check ConditionKernelModuleLoaded=!fuse
+[    3.658631] glymur systemd[1]: Mounting sys-fs-fuse-connections.mount - FUSE Control File System...
+[    3.658639] glymur systemd[1]: Started plymouth-job-monitor.service - Plymouth Job Status Forwarder.
+[    3.658646] glymur systemd[1]: plymouth-switch-root.service: Deactivated successfully.
+[    3.658653] glymur systemd[1]: Stopped plymouth-switch-root.service - Plymouth switch root service.
+[    3.658661] glymur systemd[1]: systemd-hibernate-clear.service - Clear Stale Hibernate Storage Info skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/HibernateLocation-<uuid>
+[    3.658669] glymur systemd[1]: Starting systemd-modules-load.service - Load Kernel Modules...
+[    3.658677] glymur systemd[1]: systemd-pcrmachine.service - TPM PCR Machine ID Measurement skipped, unmet condition check ConditionSecurity=measured-os
+[    3.658684] glymur systemd[1]: systemd-pcrosseparator.service - TPM PCR OS Separator skipped, unmet condition check ConditionSecurity=measured-os
+[    3.658693] glymur systemd[1]: Starting systemd-remount-fs.service - Remount Root and Kernel File Systems...
+[    3.658701] glymur systemd[1]: systemd-tpm2-setup-early.service - Early TPM SRK Setup skipped, unmet condition check ConditionSecurity=measured-os
+[    3.658708] glymur systemd[1]: systemd-pcrnvdone.service - TPM PCR NvPCR Initialization Separator skipped, unmet condition check ConditionPathExists=/etc/initrd-release
+[    3.658716] glymur systemd[1]: Reached target cryptsetup.target - Local Encrypted Volumes.
+[    3.658723] glymur systemd[1]: systemd-pcrproduct.service - TPM NvPCR Product ID Measurement skipped, unmet condition check ConditionSecurity=measured-os
+[    3.658731] glymur systemd[1]: Starting systemd-udev-load-credentials.service - Load udev Rules from Credentials...
+[    3.658738] glymur systemd[1]: Starting systemd-udev-trigger.service - Coldplug All udev Devices...
+[    3.658745] glymur systemd[1]: Mounted dev-hugepages.mount - Huge Pages File System.
+[    3.658752] glymur systemd[1]: Mounted dev-mqueue.mount - POSIX Message Queue File System.
+[    3.658760] glymur systemd[1]: Mounted sys-kernel-debug.mount - Kernel Debug File System.
+[    3.658767] glymur systemd[1]: Mounted sys-kernel-tracing.mount - Kernel Trace File System.
+[    3.658774] glymur systemd[1]: Mounted tmp.mount - Temporary Directory /tmp.
+[    3.658782] glymur systemd[1]: Mounted sys-fs-fuse-connections.mount - FUSE Control File System.
+[    3.658789] glymur systemd[1]: Finished kmod-static-nodes.service - Create List of Static Device Nodes.
+[    3.658796] glymur systemd[1]: Starting systemd-tmpfiles-setup-dev-early.service - Create Static Device Nodes in /dev gracefully...
+[    3.658814] glymur systemd-journald[558]: Collecting audit messages is disabled.
+[    3.658827] glymur systemd[1]: Finished systemd-udev-load-credentials.service - Load udev Rules from Credentials.
+[    3.658837] glymur systemd-journald[558]: Journal started
+[    3.658853] glymur systemd-journald[558]: Runtime Journal (/run/log/journal/72d80a48b0a14cd6ae41c45f52a2e16f) is 8M, max 632.1M, 624.1M free.
+[    3.608776] glymur systemd[1]: Queued start job for default target graphical.target.
+[    3.614372] glymur systemd[1]: systemd-journald.service: Deactivated successfully.
+[    3.659071] glymur systemd[1]: Started systemd-journald.service - Journal Service.
+[    3.659123] glymur kernel: EXT4-fs (nvme0n1p4): re-mounted <uuid> r/w.
+[    3.659747] glymur systemd[1]: Finished systemd-remount-fs.service - Remount Root and Kernel File Systems.
+[    3.662300] glymur systemd[1]: systemd-hwdb-update.service - Rebuild Hardware Database skipped, unmet condition check ConditionNeedsUpdate=/etc
+[    3.662596] glymur systemd-modules-load[565]: Module 'i2c_dev' is built in
+[    3.662903] glymur systemd[1]: Starting systemd-journal-flush.service - Flush Journal to Persistent Storage...
+[    3.663357] glymur systemd[1]: Starting systemd-random-seed.service - Load/Save OS Random Seed...
+[    3.663379] glymur systemd[1]: systemd-tpm2-setup.service - TPM SRK Setup skipped, unmet condition check ConditionSecurity=measured-os
+[    3.663576] glymur systemd[1]: Finished systemd-modules-load.service - Load Kernel Modules.
+[    3.664463] glymur systemd[1]: Starting systemd-sysctl.service - Apply Kernel Variables...
+[    3.666261] glymur systemd[1]: modprobe@efi_pstore.service: Deactivated successfully.
+[    3.666419] glymur systemd[1]: Finished modprobe@efi_pstore.service - Load Kernel Module efi_pstore.
+[    3.666623] glymur systemd[1]: systemd-pstore.service - Platform Persistent Storage Archival skipped, unmet condition check ConditionDirectoryNotEmpty=/sys/fs/pstore
+[    3.669741] glymur systemd-journald[558]: Time spent on flushing to /var/log/journal/72d80a48b0a14cd6ae41c45f52a2e16f is 96.326ms for 1174 entries.

@@ -1,0 +1,46 @@
+# 19 warnings this boot; the first one:
+[    4.254508] ------------[ cut here ]------------
+[    4.254510] video_cc_mvs1_gdsc status stuck at 'off'
+[    4.254516] WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#6: v4l_id/887
+[    4.254523] Modules linked in: qcom_spmi_pmic(+) regmap_spmi rpmsg_ctrl xhci_plat_hcd(+) qrtr_smd rpmsg_char qcom_pd_mapper ucsi_glink pmic_glink_altmode qcom_battmgr typec_ucsi aux_hpd_bridge socinfo hci_uart btqca aes_ce_blk btrtl ghash_ce btbcm gf128mul sm4_ce_gcm btintel sm4_ce_ccm sm4_ce bluetooth sm4_ce_cipher sm4 ath12k_wifi7(+) ath12k snd_soc_x1e80100 snd_soc_qcom_sdw snd_soc_qcom_common i2c_qcom_geni qcom_iris msm mac80211 v4l2_mem2mem videobuf2_dma_contig spmi_pmic_arb videobuf2_memops spmi_devres phy_qcom_edp qcom_tsens spmi camcc_glymur videobuf2_v4l2 dispcc_glymur qcom_spel qcom_stats videobuf2_common ubwc_config cfg80211 videodev soundwire_qcom ocmem qcom_q6v5_pas dwc3_qcom slimbus mhi phy_qcom_qmp_combo videocc_glymur evacc_glymur mc snd_soc_lpass_wsa_macro snd_soc_lpass_va_macro soundwire_bus qcom_eud gpu_sched snd_soc_lpass_macro_common qmi_tmd libarc4 aux_bridge dwc3 typec drm_gpuvm qcom_pil_info snd_soc_core qcom_q6v5 ulpi qcom_sysmon drm_exec pinctrl_sm8650_lpass_lpi qcom_rpmh_regulator thunderbolt
+[    4.254560]  udc_core snd_compress phy_qcom_m31_eusb2 qcom_common pinctrl_lpass_lpi gpi drm_dp_aux_bus ac97_bus qcom_glink_smem snd_pcm_dmaengine drm_display_helper cec qcom_glink qrtr bam_dma rc_core mdt_loader llcc_qcom nvmem_qfprom qcom_aoss pmic_glink pdr_interface qcomtee qcom_smd qcom_pdr_msg smp2p qmi_helpers tee qcom_cpucp_mbox qcom_hwspinlock rpmsg_core icc_bwmon qcom_smem fixed gpio_keys sch_fq_codel efi_pstore dmi_sysfs autofs4
+[    4.254579] CPU: 6 UID: 0 PID: 887 Comm: v4l_id Not tainted 7.3.0-rc4-glymur-17 #2 PREEMPT(lazy) 
+[    4.254581] Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[    4.254581] pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[    4.254583] pc : gdsc_toggle_logic+0x1f8/0x210
+[    4.254585] lr : gdsc_toggle_logic+0x1f8/0x210
+[    4.254586] sp : ffff800086bfb450
+[    4.254587] x29: ffff800086bfb450 x28: 0000000000000101 x27: 0000000000000000
+[    4.254589] x26: 0000000000000000 x25: 0000000000000000 x24: ffff00082617bc00
+[    4.254591] x23: ffffb63afc7f2680 x22: 0000000000000000 x21: 0000000000000001
+[    4.254592] x20: 0000000000000001 x19: ffffb63afc7f2260 x18: ffff8000838650d8
+[    4.254593] x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[    4.254595] x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[    4.254596] x11: 0000000000000000 x10: 0000000000000000 x9 : ffffb63b589ca4c8
+[    4.254597] x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[    4.254599] x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[    4.254600] x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[    4.254601] Call trace:
+[    4.254602]  gdsc_toggle_logic+0x1f8/0x210 (P)
+[    4.254605]  gdsc_enable+0x6c/0x2b0
+[    4.254606]  _genpd_power_on+0xc0/0x208
+[    4.254609]  genpd_power_on+0x208/0x478
+[    4.254611]  genpd_runtime_resume+0xd8/0x320
+[    4.254613]  __rpm_callback+0x54/0x250
+[    4.254615]  rpm_callback+0x88/0xa0
+[    4.254616]  rpm_resume+0x550/0x748
+[    4.254618]  __pm_runtime_resume+0x64/0xd8
+[    4.254619]  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[    4.254626]  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[    4.254629]  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+[    4.254632]  iris_core_init+0x9c/0x190 [qcom_iris]
+[    4.254636]  iris_open+0x88/0x4d0 [qcom_iris]
+[    4.254638]  v4l2_open+0x84/0x1c8 [videodev]
+[    4.254648]  chrdev_open+0xbc/0x270
+[    4.254650]  do_dentry_open+0x12c/0x548
+[    4.254652]  vfs_open+0x34/0x130
+[    4.254653]  path_openat+0x5d4/0x938
+[    4.254654]  do_file_open+0xbc/0x190
+[    4.254655]  do_sys_openat2+0x8c/0x120
+[    4.254656]  __arm64_sys_openat+0x80/0xf0
+[    4.254657]  invoke_syscall.constprop.0+0xb0/0x130

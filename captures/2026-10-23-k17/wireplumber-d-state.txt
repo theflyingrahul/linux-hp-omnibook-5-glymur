@@ -1,0 +1,12 @@
+# wireplumber (PID 11558) in D state, 2026-10-23 17:10, kernel -17
+[<0>] audioreach_send_cmd_sync+0x24c/0x2b0 [snd_q6apm]
+[<0>] q6prm_set_hw_core_req.isra.0+0xc8/0x1a0 [q6prm]
+[<0>] q6prm_vote_lpass_core_hw+0x24/0x50 [q6prm]
+[<0>] clk_vote_q6dsp_block+0x50/0x88 [snd_q6dsp_common]
+[<0>] clk_core_prepare+0xb0/0x3e0
+[<0>] clk_prepare+0x30/0x70
+[<0>] pm_clk_resume+0x16c/0x1f8
+[<0>] wsa_macro_runtime_resume+0x28/0x110 [snd_soc_lpass_wsa_macro]
+[<0>] pm_generic_runtime_resume+0x38/0x80
+[<0>] __rpm_callback+0x54/0x250
+[<0>] rpm_callback+0x88/0xa0

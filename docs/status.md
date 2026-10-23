@@ -1,6 +1,6 @@
 # Project Status
 
-## Current state (2026-10-22)
+## Current state (2026-10-23)
 
 Ubuntu 26.10 on the internal SSD (upgraded from 26.04 on 2026-10-21), kernel
 `7.3.0-rc4-glymur-16` (Qualcomm's qcom-next plus `patches/kernel/`), booted
@@ -17,7 +17,7 @@ every device Windows enumerates to its Linux state and its issue.
 | CPU frequency scaling | Working | SCMI with polling (`arm,no-completion-irq`); `docs/gpu-bringup-2026-09-29.md` |
 | Thermal sensors | Working | SoC TSENS zones; EC thermistors through the EC driver; HP's four skin-temperature zones (`ec-therm1…4-thermal`) register on `-16`'s test device tree. 120 s on all 12 cores peaked at 67 °C, below every passive trip (`docs/thermal-skin-2026-10-20.md`) |
 | Internal display | Working | eDP, 2 lanes at 2.7 Gb/s, backlight over DP AUX; needs `backports/0001–0002`; `docs/edp-display-working-2026-09-29.md` |
-| GPU | Working | Adreno X2-85 (chip `0x44060030`, 15.75 MB GMEM), GNOME Shell and `glmark2` on Mesa main; `docs/mahua-gpu-2026-09-30.md` |
+| GPU | Working | Adreno X2-85 (chip `0x44060030`, 15.75 MB GMEM), GNOME Shell and `glmark2` on Mesa main; `docs/mahua-gpu-2026-09-30.md` **`-17`, 2026-10-23:** one GPU lockup (`ptyxis`, recovered with `cx gdsc didn't collapse`) in the same three seconds as an audio DSP stall (`docs/runbook-results-17-2026-10-23.md`). |
 | External displays | Crashes | DP alt mode on both USB-C ports in the `-15` test device tree, as on HP's EliteBook X G2q and the ThinkPad T14s Gen 7. Plugging a monitor or adapter on 2026-10-20 failed the EDID read and the display controller then timed out until the machine hung and reset (`docs/runbook-results-2026-10-21.md`); do not plug displays into the test tree. Kernel `-16`'s test tree has DisplayPort off again; the cause is a DP alt-mode/AUX failure plus a display path that commits to a dead link, and Qualcomm's newer Glymur DP PHY series does not merge into our base blindly (`docs/kernel-16-plan-2026-10-21.md`) |
 | Keyboard, touchpad | Working | I²C HID |
 | Touchscreen | Working | tested by hand on the `-15` test device tree, 2026-10-21 |
@@ -31,10 +31,10 @@ every device Windows enumerates to its Linux state and its issue.
 | USB-A | Working | SuperSpeed; on one kernel `-14` boot the SuperSpeed lane failed to train for ~13 minutes, then the stick came up on the same port's separate High-Speed lane instead and stayed usable (just at 480 Mb/s, not 5000) — recovered on its own, no reboot needed; SuperSpeed itself never recovered that boot. Predates and is unrelated to that boot's audio crash. `docs/usb-a-bringup-2026-09-29.md` |
 | USB-C data | Partly | both ports work at high speed and SuperSpeed, and role switches are stable since `-12` (`backports/0015–0016`); full- and low-speed devices fail with `error -71` (`docs/usb-dwc3-crash-2026-09-30.md`) |
 | Camera | Working | RGB (640x480 colour) and IR (400x400 grey) frames captured with ffmpeg on 2026-10-21; Camera app not tried |
-| Audio | Partly | Kernel `-16` test device tree: the speakers play (both WSA884x on `swr0`, reset through LPASS TLMM 12, supplies L15B and L18B always on at HP's voltages) and the two microphones record. The speaker and microphone names and the F6/F9 LEDs follow the desktop's mute; the card's Windows name did not apply (rule fixed, not yet installed). After the SoundWire bus idles, the amplifiers detach and take about 25 s to re-attach, so a first sound can be lost. HP's DSP tuning is not carried yet (#2); the headset jack (WCD9378) waits on unposted LPASS patches. Notes: `docs/audio-headset-path-2026-10-17.md`, `docs/audio-mute-leds-2026-10-20.md`, `docs/audio-speakers-down-2026-10-21.md`, `docs/runbook-results-16-2026-10-21.md` |
+| Audio | Partly | Kernel `-16` test device tree: the speakers play (both WSA884x on `swr0`, reset through LPASS TLMM 12, supplies L15B and L18B always on at HP's voltages) and the two microphones record. The speaker and microphone names and the F6/F9 LEDs follow the desktop's mute; the card's Windows name did not apply (rule fixed, not yet installed). After the SoundWire bus idles, the amplifiers detach and take about 25 s to re-attach, so a first sound can be lost. HP's DSP tuning is not carried yet (#2); the headset jack (WCD9378) waits on unposted LPASS patches. Notes: `docs/audio-headset-path-2026-10-17.md`, `docs/audio-mute-leds-2026-10-20.md`, `docs/audio-speakers-down-2026-10-21.md`, `docs/runbook-results-16-2026-10-21.md` **`-17`, 2026-10-23:** the DSP's APM and power manager stopped answering at 815 s; every LPASS clock vote then timed out and the audio session hung until reboot (`docs/runbook-results-17-2026-10-23.md`). |
 | Video decode/encode | Failing | Iris with HP's `qcvss8480.mbn`: on `-15` the second video core's GDSC stayed off; on `-16`, with one core, the firmware answered "Configured core 0 is not supported". Iris is off again in the test device tree and the one-core patch is dropped. Software decoding works (Firefox). `docs/video-iris-2026-10-20.md`, `docs/audit-2026-10-22.md` |
 | NPU | Not started | the CDSP boots with HP's signed firmware; FastRPC and userspace untried |
-| RTC | Not working | no `/dev/rtc` on `-16`; the clock restarts from the last saved time until NTP. Upstream reads the offset from a UEFI variable, which waits on UEFI variable access (#17, #18, deferred) |
+| RTC | Not working | no `/dev/rtc` on `-16`; the clock restarts from the last saved time until NTP. Upstream reads the offset from a UEFI variable, which waits on UEFI variable access (#17, #18, deferred) **`-17`:** the PMIC RTC node is there but `rtc-pm8xxx` fails with `-ENOENT`: HP's firmware has no `RTCInfo` variable. |
 | Suspend | Untested | masked |
 | TPM | Not working | TPM2 start method 9 (vendor-specific), no Linux driver |
 

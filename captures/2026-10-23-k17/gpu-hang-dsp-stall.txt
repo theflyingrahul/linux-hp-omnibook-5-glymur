@@ -1,0 +1,63 @@
+[  786.376166] wsa884x-codec sdw:1:0:0217:0204:00:0: Parity error detected
+[  786.936618] usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+[  787.095954] ------------[ cut here ]------------
+[  787.095958] video_cc_mvs1_gdsc status stuck at 'off'
+[  787.095964] WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#10: wireplumber/10323
+[  787.095971] Modules linked in: nls_iso8859_1 reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6apm_lpass_dais q6apm_dai q6prm_clocks snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer sg rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc uas usb_storage uvcvideo uvc videobuf2_vmalloc qrtr_mhi joydev snd_q6apm input_leds pm8941_pwrkey apr hid_multitouch qcom_pon hid_generic rtc_pm8xxx pinctrl_spmi_gpio phy_qcom_eusb2_repeater nvmem_qcom_spmi_sdam snd_ctl_led panel_samsung_atna33xc20 fastrpc i2c_hid_of i2c_hid_acpi_prp0001 hp_omnibook_5_ec sparse_keymap i2c_hid hid qcom_spmi_pmic regmap_spmi rpmsg_ctrl xhci_plat_hcd qrtr_smd rpmsg_char qcom_pd_mapper ucsi_glink pmic_glink_altmode qcom_battmgr typec_ucsi aux_hpd_bridge socinfo hci_uart btqca aes_ce_blk btrtl ghash_ce btbcm gf128mul sm4_ce_gcm btintel sm4_ce_ccm sm4_ce bluetooth sm4_ce_cipher sm4 ath12k_wifi7 ath12k snd_soc_x1e80100 snd_soc_qcom_sdw snd_soc_qcom_common i2c_qcom_geni qcom_iris msm mac80211
+[  787.096059] CPU: 10 UID: 1000 PID: 10323 Comm: wireplumber Tainted: G        W           7.3.0-rc4-glymur-17 #2 PREEMPT(lazy) 
+[  787.096061] Tainted: [W]=WARN
+[  787.096062] Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[  787.096063] pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[  787.096064] pc : gdsc_toggle_logic+0x1f8/0x210
+[  787.096066] lr : gdsc_toggle_logic+0x1f8/0x210
+[  787.096068] sp : ffff800096a7b440
+[  787.096068] x29: ffff800096a7b440 x28: 0000000000000101 x27: 0000000000000000
+[  787.096070] x26: 0000000000000000 x25: 0000000000000000 x24: ffff00082617bc00
+[  787.096072] x23: ffffb63afc7f2680 x22: 0000000000000000 x21: 0000000000000001
+[  787.096073] x20: 0000000000000001 x19: ffffb63afc7f2260 x18: ffff8000940b50d8
+[  787.096075] x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[  787.096076] x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[  787.096077] x11: 0000000000000000 x10: 0000000000000000 x9 : ffffb63b589ca4c8
+[  787.096079] x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[  787.096080] x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[  787.096081] x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[  787.096083] Call trace:
+[  787.096150] ---[ end trace 0000000000000000 ]---
+[  787.096659] qcom-iris aa00000.video-codec: power on failed
+[  787.097301] qcom-iris aa00000.video-codec: core init failed
+[  815.616003] qcom-apm gprsvc:service:2:1: CMD timeout for [1001004] opcode
+[  818.688106] qcom-prm gprsvc:service:2:2: CMD timeout for [1001010] opcode
+[  818.750593] msm_dpu ae01000.display-controller: [drm:hangcheck_handler [msm]] *ERROR* 44060030: hangcheck detected gpu lockup rb 2!
+[  818.750631] msm_dpu ae01000.display-controller: [drm:hangcheck_handler [msm]] *ERROR* 44060030:     completed fence: 6749
+[  818.750652] msm_dpu ae01000.display-controller: [drm:hangcheck_handler [msm]] *ERROR* 44060030:     submitted fence: 6750
+[  820.734676] qcom-apm gprsvc:service:2:1: CMD timeout for [1001003] opcode
+[  822.784399] msm_dpu ae01000.display-controller: [drm:hangcheck_handler [msm]] *ERROR* 44060030: hangcheck detected gpu lockup rb 2!
+[  822.784440] msm_dpu ae01000.display-controller: [drm:hangcheck_handler [msm]] *ERROR* 44060030:     completed fence: 6749
+[  822.784461] msm_dpu ae01000.display-controller: [drm:hangcheck_handler [msm]] *ERROR* 44060030:     submitted fence: 6750
+[  823.808449] qcom-prm gprsvc:service:2:2: CMD timeout for [1001010] opcode
+[  825.856404] qcom-apm gprsvc:service:2:1: CMD timeout for [1001004] opcode
+[  826.750882] msm_dpu ae01000.display-controller: [drm:hangcheck_handler [msm]] *ERROR* 44060030: hangcheck detected gpu lockup rb 2!
+[  826.750945] msm_dpu ae01000.display-controller: [drm:hangcheck_handler [msm]] *ERROR* 44060030:     completed fence: 6749
+[  826.750980] msm_dpu ae01000.display-controller: [drm:hangcheck_handler [msm]] *ERROR* 44060030:     submitted fence: 6750
+[  828.926957] qcom-prm gprsvc:service:2:2: CMD timeout for [1001010] opcode
+[  830.783009] msm_dpu ae01000.display-controller: [drm:hangcheck_handler [msm]] *ERROR* 44060030: hangcheck detected gpu lockup rb 2!
+[  830.783074] msm_dpu ae01000.display-controller: [drm:hangcheck_handler [msm]] *ERROR* 44060030:     completed fence: 6749
+[  830.783108] msm_dpu ae01000.display-controller: [drm:hangcheck_handler [msm]] *ERROR* 44060030:     submitted fence: 6750
+[  834.047106] qcom-prm gprsvc:service:2:2: CMD timeout for [1001010] opcode
+[  834.052881] msm_dpu ae01000.display-controller: [drm:recover_worker [msm]] *ERROR* 44060030: hangcheck recover!
+[  834.052922] msm_dpu ae01000.display-controller: [drm:recover_worker [msm]] *ERROR* 44060030: offending task: ptyxis (ptyxis --new-window)
+[  834.052941] revision: 0 (44060030)
+[  834.052942] rb 0: fence:    6143/6144
+[  834.052943] rptr:     34
+[  834.052943] rb wptr:  34
+[  834.052944] rb 1: fence:    -256/-256
+[  834.052944] rptr:     0
+[  834.052945] rb wptr:  0
+[  834.052945] rb 2: fence:    6750/6750
+[  834.052946] rptr:     0
+[  834.052947] rb wptr:  128
+[  834.052947] rb 3: fence:    -256/-256
+[  834.052948] rptr:     0
+[  834.052948] rb wptr:  0
+[  835.071164] adreno 3d00000.gpu: [drm:a8xx_recover [msm]] *ERROR* cx gdsc didn't collapse
+[  835.076958] msm_dpu ae01000.display-controller: [drm:recover_worker [msm]] *ERROR* 44060030: hangcheck recover!
