@@ -1,0 +1,32 @@
+[    9.699433] qcom-apm gprsvc:service:2:1: CMD timeout for [1001021] opcode
+[  120.899983] qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR bus clsh detected
+[ 1442.790962] qcom-apm gprsvc:service:2:1: CMD timeout for [1001004] opcode
+[ 1446.374958] qcom-prm gprsvc:service:2:2: CMD timeout for [1001010] opcode
+[ 1447.910936] qcom-apm gprsvc:service:2:1: CMD timeout for [1001003] opcode
+[ 1451.494966] qcom-prm gprsvc:service:2:2: CMD timeout for [1001010] opcode
+[ 1453.030948] qcom-apm gprsvc:service:2:1: CMD timeout for [1001004] opcode
+[ 1456.614954] qcom-prm gprsvc:service:2:2: CMD timeout for [1001010] opcode
+[ 1461.734970] qcom-prm gprsvc:service:2:2: CMD timeout for [1001010] opcode
+[ 1466.854954] qcom-prm gprsvc:service:2:2: CMD timeout for [100100f] opcode
+[ 1466.854966] qcom-sm8650-lpass-lpi-pinctrl 7760000.pinctrl: __pm_clk_enable: failed to enable clk 000000003c939673, error -110
+[ 1471.975008] qcom-prm gprsvc:service:2:2: CMD timeout for [100100f] opcode
+[ 1471.975020] qcom-sm8650-lpass-lpi-pinctrl 7760000.pinctrl: __pm_clk_enable: failed to enable clk 000000009189d507, error -110
+[ 1477.096517] qcom-prm gprsvc:service:2:2: CMD timeout for [100100f] opcode
+[ 1477.096529] va_macro 7660000.codec: __pm_clk_enable: failed to enable clk 00000000074f5d07, error -110
+[ 1482.214988] qcom-prm gprsvc:service:2:2: CMD timeout for [100100f] opcode
+[ 1482.214999] va_macro 7660000.codec: __pm_clk_enable: failed to enable clk 00000000f7bcb69a, error -110
+[ 1487.336518] qcom-prm gprsvc:service:2:2: CMD timeout for [100100f] opcode
+[ 1487.336531] va_macro 7660000.codec: __pm_clk_enable: failed to enable clk 00000000f2297384, error -110
+[ 1492.455032] qcom-prm gprsvc:service:2:2: CMD timeout for [100100f] opcode
+[ 1492.455043] wsa_macro 6c90000.codec: __pm_clk_enable: failed to enable clk 000000008b2909b3, error -110
+[ 1497.575018] qcom-prm gprsvc:service:2:2: CMD timeout for [100100f] opcode
+[ 1497.575029] wsa_macro 6c90000.codec: __pm_clk_enable: failed to enable clk 0000000028fc5bd3, error -110
+[ 1502.694982] qcom-prm gprsvc:service:2:2: CMD timeout for [100100f] opcode
+[ 1502.694997] wsa_macro 6c90000.codec: __pm_clk_enable: failed to enable clk 000000000d7d66df, error -110
+[ 1507.815016] qcom-prm gprsvc:service:2:2: CMD timeout for [100100f] opcode
+[ 1507.815030] wsa_macro 6c90000.codec: __pm_clk_enable: failed to enable clk 000000008b6e84cb, error -110
+[ 1512.935065] qcom-prm gprsvc:service:2:2: CMD timeout for [100100f] opcode
+[ 1518.055016] qcom-apm gprsvc:service:2:1: CMD timeout for [1001000] opcode
+[ 1523.175117] qcom-apm gprsvc:service:2:1: CMD timeout for [1001000] opcode
+[ 1528.295098] qcom-apm gprsvc:service:2:1: CMD timeout for [1001004] opcode
+[ 1533.416119] qcom-apm gprsvc:service:2:1: CMD timeout for [1001004] opcode

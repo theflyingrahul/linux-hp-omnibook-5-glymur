@@ -128,39 +128,72 @@ WirePlumber debug logs, the UEFI variable dump, with `SHA256SUMS`), and in
 | video `--diag` | see below |
 | UEFI dump | 98 variables, `SmartAmpCalibrationData` (80 bytes) present, no `RTCInfo`; private |
 
-### The audio session stall
+### The audio session stall: WirePlumber's v4l2 monitor
 
-WirePlumber 1.6.8 never runs the events that pick a profile, choose the
-default sink and link streams. `default.configured.audio.sink` is the
-speakers, but `default.audio.sink` stays `auto_null`; setting the profile
-by hand (`wpctl set-profile <card> 1`) creates the sinks, but they never
-become default and streams still never link (`pw-play` waits forever).
+WirePlumber 1.6.8 never ran the events that pick the card's profile, choose
+the default sink and link streams: the card sat on profile `off`, PipeWire
+offered only "Dummy Output", and `default.audio.sink` stayed `auto_null`
+although `default.configured.audio.sink` named the speakers. Setting the
+profile by hand created the sinks, but streams still never linked.
 
-A full-detail WirePlumber log (`wp-debug3.log`, private) shows its event
-queue stuck behind the first event: the asynchronous `node/create-item`
-hook for an audio node sets the node's `Format` param
-(`si_audio_adapter_configure_node: setting Format param since it is not set
-yet`) and waits for an answer that never comes; only shutdown ends it
-(`Object activation aborted: proxy destroyed`). Everything queued behind it
-(profiles, default nodes, linking) waits too.
+Bisected with one WirePlumber restart per step:
 
-Ruled out:
+| Change | Session |
+|---|---|
+| Iris video nodes disabled by a `monitor.v4l2.rules` entry | stuck |
+| the HP WirePlumber rule file moved aside | stuck |
+| `~/.local/state/wireplumber` moved aside | stuck |
+| `monitor.v4l2` and `monitor.libcamera` disabled | **works**: HiFi profile, speakers default, `pw-play` plays |
+| only `monitor.v4l2` disabled | **works** |
 
-- the Iris video nodes, whose every open times out on `-17`
-  (`spa.v4l2: Cannot open '/dev/video0': 110`): with them disabled in
-  WirePlumber the session stays stuck;
-- the speaker filter topology (not installed, above);
-- `upstream/qcom-next/0008` (topology module configuration size): for a
-  valid topology it sends the same `SET_CFG` payload as before.
+So the **v4l2 monitor** blocks WirePlumber's event queue on `-17`. Its
+attempt to open the Iris decoder times out (`spa.v4l2: Cannot open
+'/dev/video0': 110`) because Iris cannot power on; on `-16` the open
+succeeded. (Disabling only the Iris devices by rule was not enough; the
+monitor still enumerates them.) The libcamera monitor still offers the camera
+to PipeWire.
 
-Still open: what changed between `-16`, where the same userspace and
-topology worked, and `-17`. The `-17` kernel changes on the path are the
-backports `0027-0043` and `0008`; the format negotiation goes through the
-ALSA PCM (`hw_params`), which `aplay` exercises with a different format and
-buffer. Next: run the PipeWire sink by hand with `pw-cli` or
-`spa-acp-tool` to see which `hw_params` call blocks, and boot `-16`
-("previous kernel") once to confirm the session works there with today's
-userspace.
+Workaround, in place for the next boots:
+`~/.config/wireplumber/wireplumber.conf.d/52-no-v4l2-monitor.conf`, also
+committed as `boards/hp-omnibook-5-16-bf1xxx/audio/wireplumber/52-no-v4l2-monitor.conf`
+(not yet installed by `install-audio.sh`). Remove it once Iris opens again.
+
+Also ruled out: the speaker filter topology (never installed) and
+`upstream/qcom-next/0008` (same `SET_CFG` payload for a valid topology). The
+kernel PCM path works: `aplay` with plain RW access and with MMAP and a
+1024-frame period both played 3 s without a DSP timeout. The device offers
+only S16_LE, 2 channels, 48 kHz.
+
+### Why the whole system freezes: the clock prepare lock
+
+At 1442 s, 5.5 s after the last WirePlumber restart and with the session now
+working, the DSP stopped answering again exactly as on the first boot (APM
+`1001004`, `1001003`, `1001000`, then PRM `1001010` and `100100f`, 5 s
+each). The D-state tasks (`captures/2026-10-23-k17/boot2/freeze-stacks.txt`)
+show how one hung DSP request freezes the laptop:
+
+- PipeWire sits in `clk_core_prepare` -> `clk_vote_q6dsp_block` ->
+  `q6prm_vote_lpass_core_hw` -> `audioreach_send_cmd_sync`: it holds the
+  clock framework's global prepare lock while it waits up to 5 s for the DSP,
+  and the next request takes it again.
+- The GPU's runtime suspend (`a6xx_gmu_stop` -> `clk_bulk_unprepare`) waits
+  for that lock, so GPU jobs wait in `msm_gpu_submit` -> `rpm_resume`. That
+  is the "GPU lockup" of the first boot, which killed the terminal: the GPU
+  was not hung, its power management was.
+- The GENI I2C controllers' runtime resume (`geni_i2c_xfer`) waits for it too,
+  and they carry the EC, the keyboard, the touchpad and the touchscreen: the
+  input freezes the owner saw.
+
+Stopping the audio services released the lock (no D-state task left).
+
+So there are two problems. The trigger is the DSP that stops answering APM
+and PRM commands, seen twice, both times within seconds of a WirePlumber
+restart while the audio graph was in use; whether it also happens without a
+restart is not known. The amplifier is the multiplier: a 5 s synchronous DSP
+call under the global clock prepare lock (`q6prm` via
+`clk_vote_q6dsp_block`) turns any DSP stall into a system-wide freeze. That
+is worth raising upstream: the LPASS vote should not block for seconds with
+the prepare lock held.
 
 ### Video `--diag` trials
 
@@ -178,6 +211,18 @@ collapse, wfi=0x0, idle=0x0`) repeats; the `mvs1` GDSC still never turns on.
 
 ### Configuration left for the next boot
 
-The plain topology is installed (`install-audio.sh`, unchanged file). The
-`-17` initramfs and `initrd-glymur.old` are in place. No WirePlumber or
-PipeWire configuration was left behind.
+- The plain topology (`install-audio.sh`, the same file as before).
+- The `-17` initramfs, `initrd-glymur.old` for `-16`.
+- `~/.config/wireplumber/wireplumber.conf.d/52-no-v4l2-monitor.conf` (above).
+
+Not run this boot: the GPU load test (`check-mesa.sh`), because the DSP had
+wedged and the result would not have been clean; the hands-on steps (F-keys,
+listening, charger, USB devices).
+
+### Next boot
+
+1. Use audio normally; do not restart PipeWire or WirePlumber. If the
+   freezes come back, check `dmesg` for `CMD timeout`: if present without
+   any restart, the DSP stall happens on its own.
+2. Runbook steps 3.2 (`check-hotkeys.sh`), 4 (listen, `check-audio.sh`),
+   5 (charger), 6 (USB devices), then `check-mesa.sh`.

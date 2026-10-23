@@ -1,0 +1,33 @@
+# Kernel -17, second boot, 1490 s: D-state tasks after the DSP stopped answering.
+# PipeWire holds the clock framework's prepare lock while q6prm waits for the DSP;
+# the GPU's runtime suspend and the GENI I2C controllers' runtime resume wait on it.
+== 3620 pipewire
+audioreach_send_cmd_sync+0x24c/0x2b0 [snd_q6apm]
+q6prm_set_hw_core_req.isra.0+0xc8/0x1a0 [q6prm]
+q6prm_vote_lpass_core_hw+0x24/0x50 [q6prm]
+clk_vote_q6dsp_block+0x50/0x88 [snd_q6dsp_common]
+clk_core_prepare+0xb0/0x3e0
+clk_prepare+0x30/0x70
+pm_clk_resume+0x16c/0x1f8
+wsa_macro_runtime_resume+0x28/0x110 [snd_soc_lpass_wsa_macro]
+== 425 kworker/u50:7+pm
+clk_prepare_lock+0x48/0xd8
+clk_unprepare+0x34/0x80
+clk_bulk_unprepare+0x50/0x98
+a6xx_gmu_stop+0x94/0x728 [msm]
+a6xx_gmu_pm_suspend+0x4c/0x1b0 [msm]
+adreno_runtime_suspend+0x48/0x78 [msm]
+== 10378 kworker/u48:0+ring2
+rpm_resume+0x1b0/0x748
+__pm_runtime_resume+0x64/0xd8
+msm_gpu_submit+0x48/0x1f8 [msm]
+msm_job_run+0xc0/0x180 [msm]
+drm_sched_run_job_work+0x118/0x450 [gpu_sched]
+== 187 kworker/u49:1+thermal_events (four of these)
+rpm_resume+0x1b0/0x748
+__pm_runtime_resume+0x64/0xd8
+geni_i2c_xfer+0x58/0x7f8 [i2c_qcom_geni]
+__i2c_transfer+0x1d0/0x8c8
+i2c_smbus_xfer_emulated+0x1e8/0x7d8
+i2c_smbus_read_byte_data+0x60/0xc8
+hpec_command+0x60/0x168 [hp_omnibook_5_ec]
