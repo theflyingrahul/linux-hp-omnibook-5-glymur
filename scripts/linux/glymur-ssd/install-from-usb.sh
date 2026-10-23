@@ -69,6 +69,11 @@ if ! grep -q '^efivarfs ' /etc/fstab; then
     echo 'efivarfs /sys/firmware/efi/efivars efivarfs ro,nosuid,nodev,noexec 0 0' | sudo tee -a /etc/fstab
 fi
 
+if [ -d "$K/boot-logo" ]; then
+    echo "== the firmware's boot logo for plymouth"
+    sudo bash "$K/install-boot-logo.sh"
+fi
+
 if [ -d "$K/audio" ]; then
     echo "== installing the audio topology and UCM profile"
     sudo bash "$K/install-audio.sh"

@@ -17,7 +17,8 @@ From the USB stick's `glymur-tools/kernels/` directory, as for `-16`:
     sudo bash install-audio.sh --speaker-eq
 
 `install-from-usb.sh` defaults to `-17`, mounts `efivarfs` read-only from
-the next boot on, and installs the plain topology;
+the next boot on, installs HP's boot logo for plymouth, and installs the
+plain topology;
 the second line replaces it with the speaker filter variant
 (`docs/audio-speaker-eq-2026-10-23.md`), so one boot tests both the kernel
 and the filter. Then reboot into "Ubuntu on SSD: test device tree".
@@ -82,7 +83,13 @@ hub), then `sudo bash ~/check-usb.sh`. On `-16` these failed with
 (read-only) and hand back its directory privately. The power button now
 reaches the desktop (`KEY_POWER`); expect GNOME's power-off dialog.
 
-## 8. Quick regression look
+## 8. Boot logo
+
+On this boot plymouth should show HP's logo where the firmware drew it,
+without a jump (`docs/boot-logo-2026-10-23.md`). If it shows the fallback
+still: `plymouth-set-default-theme` should print `bgrt`.
+
+## 9. Quick regression look
 
 Touchscreen, Bluetooth, camera, Wi-Fi, suspend stays masked.
 

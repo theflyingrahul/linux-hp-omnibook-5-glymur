@@ -426,3 +426,15 @@ here (`RTCInfo`, `SmartAmpCalibrationData`, `BootOrder`, `SecureBoot`).
 The copy holds machine-specific data; keep it in `.work/`, never commit it.
 `install-from-usb.sh` mounts `efivarfs` read-only (an `/etc/fstab` line) from
 `-17` on, so nothing writes a variable without an explicit remount.
+
+### `install-boot-logo.sh`
+
+    sudo bash install-boot-logo.sh [--remove]
+
+Gives plymouth's `bgrt` theme HP's firmware logo, which a device-tree boot
+cannot take from the ACPI BGRT (`docs/boot-logo-2026-10-23.md`). It installs
+`boot-logo/bgrt-fallback.png` from the USB kit (private: made from HP's
+firmware, never committed) as `/usr/share/plymouth/themes/spinner/bgrt-fallback.png`,
+diverting a packaged file of that name with `dpkg-divert`. `--remove` puts
+the packaged file back. `install-from-usb.sh` runs it when `boot-logo/` is
+staged.
