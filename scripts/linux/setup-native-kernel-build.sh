@@ -7,7 +7,7 @@ set -euo pipefail
 REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 ROOT="${1:-$HOME/src}"
 URL=https://github.com/qualcomm-linux/kernel.git
-BASE=1a0586064ee1fbcefe49b6382ee17a236c590879
+BASE=c7896917e523946138ce654d4b6c1e33d5a8f4e5
 CLONE="$ROOT/linux-qcom-next"
 TREE="$ROOT/linux-qcom-next-glymur"
 

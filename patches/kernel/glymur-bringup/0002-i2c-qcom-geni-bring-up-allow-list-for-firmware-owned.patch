@@ -1,7 +1,7 @@
-From fce7d3ac193059b0a911c04ac8288bb04262a1b6 Mon Sep 17 00:00:00 2001
+From e811ac383bf0d61ffc2b30e60c12df52627ea43c Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Sat, 26 Sep 2026 15:33:47 -0700
-Subject: [PATCH 2/2] i2c: qcom-geni: bring-up allow-list for firmware-owned
+Subject: [PATCH] i2c: qcom-geni: bring-up allow-list for firmware-owned
  controllers
 
 Firmware-owned (ACPI) GENI controllers are only bound when their MMIO base
@@ -16,10 +16,10 @@ configuration.
  1 file changed, 28 insertions(+)
 
 diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
-index 56af17de0..d554a939a 100644
+index c0061582e74d..91715b267892 100644
 --- a/drivers/i2c/busses/i2c-qcom-geni.c
 +++ b/drivers/i2c/busses/i2c-qcom-geni.c
-@@ -1294,6 +1294,27 @@ static int geni_i2c_resources_init(struct geni_se *se)
+@@ -1322,6 +1322,27 @@ static int geni_i2c_resources_init(struct geni_se *se)
  				  Bps_to_icc(gi2c->clk_freq_out));
  }
  
@@ -47,7 +47,7 @@ index 56af17de0..d554a939a 100644
  static int geni_i2c_fw_resources_init(struct geni_se *se)
  {
  	struct geni_i2c_dev *gi2c = dev_get_drvdata(se->dev);
-@@ -1322,6 +1343,13 @@ static int geni_i2c_probe(struct platform_device *pdev)
+@@ -1350,6 +1371,13 @@ static int geni_i2c_probe(struct platform_device *pdev)
  	if (!gi2c->dev_data)
  		return -EINVAL;
  
@@ -61,3 +61,6 @@ index 56af17de0..d554a939a 100644
  	gi2c->se.dev = dev;
  	/* A top-level ACPI device's parent is not a GENI wrapper. */
  	if (!gi2c->dev_data->fw_owned)
+-- 
+2.53.0
+

@@ -19,13 +19,14 @@ Wi-Fi board data, firmware) are not kernel code. They live in
 
 ## Boot series (built by `scripts/linux/build-qcom-next-glymur.sh`)
 
-Apply to qcom-next `1a0586064ee1` (tag `qcom-next-7.3-rc4-20261014`, the
-qcom-next tip on 2026-10-17, from kernel `-13`; it was `6b4daa845239` for
+Apply to qcom-next `c7896917e523` (tag `qcom-next-7.3-rc6-20261023`, from
+kernel `-18`; it was `1a0586064ee1` (`qcom-next-7.3-rc4-20261014`) for `-13`
+to `-17`, `6b4daa845239` for
 `-8` to `-12`, `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to `-4`)
 in order:
 `upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0009`,
 `glymur-bringup/0001–0003`, then `backports/` (`0001–0002`, `0013–0014`,
-`0017–0021`, `0023–0043`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
+`0017`, `0020`, `0023–0037`, `0040–0043`, `0046`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
 `upstream/qcom-next/0001`; `-7` adds `upstream/qcom-next/0002`; `-8` moves
 to the new base and adds `upstream/qcom-next/0003`; `-9` adds `0004`–`0005`
@@ -196,6 +197,23 @@ Glymur USB nodes), and the PMIC temperature alarm's `temp_map` indexing
 (`51c262cf2a`, Georgi Djakov). Not taken: `eca1247443` (TSENS limits
 widened to the hardware range; no fix), the Glymur SD-card and PCIe3
 nodes (not on this laptop), and SCMI's ACPI transport.
+
+Base move for `-18` (2026-10-23, `docs/kernel-18-plan-2026-10-23.md`):
+qcom-next was rebuilt on 7.3-rc6 (1869 commits since `1a0586064ee1`). It
+carries `backports/0018`, `0019` and `0021`, so they are dropped, and
+Qualcomm's GPR probe-race fix (FROMLIST, "soc: qcom: apr: Publish GPR
+callback before client probe"), which explains the `[1001021]` timeout at
+boot. It also carries `cb97bf3d4f` without mainline's follow-up
+`8cb5c17be3` ("i2c: qcom-geni: Restore the source-clock selection policy",
+Abel Vesa; it fixes I2C HID failures `cb97bf3d4f` caused on the X1E80100
+CRD), taken as `backports/0046`. `upstream/qcom-next-acpi/0003` and
+`glymur-bringup/0002` are refreshed for the new context (two `#define`s
+next to their comment); ACPI controllers still take their timing from the
+`CLKD` table and fall back to the clock lookup only without a row.
+`backports/0038–0039` are dropped as a bisect step: the audio DSP stall of
+`-17` is new, and they are the q6apm stream changes it could involve. Every
+other patch applies unchanged, and a fresh `prepare` reproduces the tested
+tree (`7a96eb38`).
 
 Also for `-17` (the owner allowed UEFI variables on 2026-10-23):
 `upstream/qcom-next/0009`, "firmware: qcom: scm: Allow QSEECOM on HP
