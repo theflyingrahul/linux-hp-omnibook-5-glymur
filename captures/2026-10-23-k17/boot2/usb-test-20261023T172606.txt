@@ -1,0 +1,723 @@
+
+==== system
+Linux glymur 7.3.0-rc4-glymur-17 #2 SMP PREEMPT_DYNAMIC Fri Oct 23 03:17:11 PDT 2026 aarch64 GNU/Linux
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+Oct 02 23:05:38 glymur kernel: Machine model: HP OmniBook 5 Laptop 16-bf1xxx (test)
+Oct 02 23:05:38 glymur kernel: Kernel command line: BOOT_IMAGE=(hd1,gpt4)/boot/vmlinuz-glymur root=… rootfstype=ext4 ro rootwait clk_ignore_unused pd_ignore_unused arm64.nopauth quiet splash log_buf_len=16M console=tty0 loglevel=4
+
+==== kernel log: USB controllers, PHYs, Type-C, enumeration
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx0-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt1-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: platform a600000.usb: Adding to iommu group 10
+Oct 02 23:05:38 glymur kernel: platform a800000.usb: Adding to iommu group 11
+Oct 02 23:05:38 glymur kernel: platform a000000.usb: Adding to iommu group 12
+Oct 02 23:05:38 glymur kernel: platform a200000.usb: Adding to iommu group 13
+Oct 02 23:05:38 glymur kernel: pci_bus 0005:00: root bus resource [mem 0x7a0000000-0x7dfffffff]
+Oct 02 23:05:38 glymur kernel: pci_bus 0005:00: resource 6 [mem 0x7a0000000-0x7dfffffff]
+Oct 02 23:05:38 glymur kernel: qcom-m31eusb2-phy fa0000.phy: supply vdd not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom-m31eusb2-phy fa0000.phy: supply vdda12 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom-m31eusb2-phy 88e0000.phy: supply vdd not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom-m31eusb2-phy 88e0000.phy: supply vdda12 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom-qmp-combo-phy fd5000.phy: supply vdda-phy not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom-qmp-combo-phy fd5000.phy: supply vdda-pll not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom-qmp-combo-phy fd5000.phy: supply refgen not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier fd5000.phy for /pmic-glink/connector@0
+Oct 02 23:05:38 glymur kernel: qcom-qmp-combo-phy fde000.phy: supply vdda-phy not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom-qmp-combo-phy fde000.phy: supply vdda-pll not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom-qmp-combo-phy fde000.phy: supply refgen not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier fde000.phy for /pmic-glink/connector@1
+Oct 02 23:05:38 glymur kernel: qcom-qmp-combo-phy 88e1000.phy: supply vdda-phy not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom-qmp-combo-phy 88e1000.phy: supply vdda-pll not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom-qmp-combo-phy 88e1000.phy: supply refgen not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: spmi_pmic_arb c400000.arbiter: PMIC arbiter version v8 (0x80000002)
+Oct 02 23:05:38 glymur kernel: xhci-hcd xhci-hcd.2.auto: xHCI Host Controller
+Oct 02 23:05:38 glymur kernel: xhci-hcd xhci-hcd.2.auto: new USB bus registered, assigned bus number 1
+Oct 02 23:05:38 glymur kernel: xhci-hcd xhci-hcd.2.auto: USB0 root hub has no ports
+Oct 02 23:05:38 glymur kernel: xhci-hcd xhci-hcd.2.auto: hcc params 0x0220fe65 hci version 0x110 quirks 0x000080a000000810
+Oct 02 23:05:38 glymur kernel: xhci-hcd xhci-hcd.2.auto: irq 231, io mem 0x0a200000
+Oct 02 23:05:38 glymur kernel: usb usb1: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Oct 02 23:05:38 glymur kernel: usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Oct 02 23:05:38 glymur kernel: usb usb1: Product: xHCI Host Controller
+Oct 02 23:05:38 glymur kernel: usb usb1: Manufacturer: Linux 7.3.0-rc4-glymur-17 xhci-hcd
+Oct 02 23:05:38 glymur kernel: usb usb1: SerialNumber: <serial>
+Oct 02 23:05:38 glymur kernel: hub 1-0:1.0: USB hub found
+Oct 02 23:05:38 glymur kernel: xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+Oct 02 23:05:38 glymur kernel: xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 2
+Oct 02 23:05:38 glymur kernel: xhci-hcd xhci-hcd.3.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x000080a000000810
+Oct 02 23:05:38 glymur kernel: xhci-hcd xhci-hcd.3.auto: irq 255, io mem 0x0a000000
+Oct 02 23:05:38 glymur kernel: xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+Oct 02 23:05:38 glymur kernel: xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 3
+Oct 02 23:05:38 glymur kernel: xhci-hcd xhci-hcd.3.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Oct 02 23:05:38 glymur kernel: usb usb2: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Oct 02 23:05:38 glymur kernel: usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Oct 02 23:05:38 glymur kernel: usb usb2: Product: xHCI Host Controller
+Oct 02 23:05:38 glymur kernel: usb usb2: Manufacturer: Linux 7.3.0-rc4-glymur-17 xhci-hcd
+Oct 02 23:05:38 glymur kernel: usb usb2: SerialNumber: <serial>
+Oct 02 23:05:38 glymur kernel: hub 2-0:1.0: USB hub found
+Oct 02 23:05:38 glymur kernel: usb usb3: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+Oct 02 23:05:38 glymur kernel: usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Oct 02 23:05:38 glymur kernel: usb usb3: Product: xHCI Host Controller
+Oct 02 23:05:38 glymur kernel: usb usb3: Manufacturer: Linux 7.3.0-rc4-glymur-17 xhci-hcd
+Oct 02 23:05:38 glymur kernel: usb usb3: SerialNumber: <serial>
+Oct 02 23:05:38 glymur kernel: hub 3-0:1.0: USB hub found
+Oct 02 23:05:38 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: parent PMIC subtype 0x5f v2.0
+Oct 02 23:05:38 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: supply vdd18 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: supply vdd3 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: parent PMIC subtype 0x5f v2.0
+Oct 02 23:05:38 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: supply vdd18 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: supply vdd3 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: probe with driver rtc-pm8xxx failed with error -2
+Oct 02 23:05:39 glymur kernel: qcom-m31eusb2-phy fd3000.phy: supply vdd not found, using dummy regulator
+Oct 02 23:05:39 glymur kernel: qcom-m31eusb2-phy fd3000.phy: supply vdda12 not found, using dummy regulator
+Oct 02 23:05:39 glymur kernel: qcom-m31eusb2-phy fdd000.phy: supply vdd not found, using dummy regulator
+Oct 02 23:05:39 glymur kernel: qcom-m31eusb2-phy fdd000.phy: supply vdda12 not found, using dummy regulator
+Oct 02 23:05:39 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier a600000.usb for /pmic-glink/connector@0
+Oct 02 23:05:39 glymur kernel: usb 1-1: new high-speed USB device number 2 using xhci-hcd
+Oct 02 23:05:39 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier a800000.usb for /pmic-glink/connector@1
+Oct 02 23:05:39 glymur kernel: usb 3-1: new SuperSpeed USB device number 2 using xhci-hcd
+Oct 02 23:05:39 glymur kernel: usb 3-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Oct 02 23:05:39 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Oct 02 23:05:39 glymur kernel: usb 3-1: Product: Ultra
+Oct 02 23:05:39 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Oct 02 23:05:39 glymur kernel: usb 3-1: SerialNumber: <serial>
+Oct 02 23:05:39 glymur kernel: usb 1-1: New USB device found, idVendor=30c9, idProduct=00d9, bcdDevice= 0.07
+Oct 02 23:05:39 glymur kernel: usb 1-1: New USB device strings: Mfr=3, Product=1, SerialNumber=2
+Oct 02 23:05:39 glymur kernel: usb 1-1: Product: HP True Vision FHD Camera
+Oct 02 23:05:39 glymur kernel: usb 1-1: Manufacturer: DUKUF0A8PLT4ZB
+Oct 02 23:05:39 glymur kernel: usb 1-1: SerialNumber: <serial>
+Oct 02 23:05:39 glymur kernel: usb-storage 3-1:1.0: USB Mass Storage device detected
+Oct 02 23:05:39 glymur kernel: scsi host0: usb-storage 3-1:1.0
+Oct 02 23:05:39 glymur kernel: usbcore: registered new interface driver usb-storage
+Oct 02 23:05:39 glymur kernel: usbcore: registered new interface driver uas
+Oct 02 23:05:41 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Oct 02 23:05:41 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Oct 02 23:05:41 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Oct 02 23:05:41 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Oct 02 23:05:41 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Oct 02 23:05:41 glymur kernel:  sda: sda1 sda2
+Oct 02 23:05:41 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Oct 02 23:05:41 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Oct 02 23:05:41 glymur kernel: videodev: Linux video capture interface: v2.00
+Oct 02 23:05:41 glymur kernel: platform video-firmware.6.auto: Adding to iommu group 38
+Oct 02 23:05:41 glymur kernel: uvcvideo 1-1:1.0: Found UVC 1.10 device HP True Vision FHD Camera (30c9:00d9)
+Oct 02 23:05:41 glymur kernel: uvcvideo 1-1:1.2: Found UVC 1.50 device HP True Vision FHD Camera (30c9:00d9)
+Oct 02 23:05:41 glymur kernel: usbcore: registered new interface driver uvcvideo
+Oct 02 23:05:41 glymur kernel: input: pmic_pwrkey as /devices/platform/soc@0/c400000.arbiter/spmi-0/0-00/c426000.spmi:pmic@0:pon@1300/c426000.spmi:pmic@0:pon@1300:pwrkey/input/input19
+Oct 02 23:05:42 glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+Oct 02 23:05:42 glymur kernel: Modules linked in: pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7(+) ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens(+) videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul
+Oct 02 23:05:42 glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+Oct 02 23:05:42 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 02 23:05:42 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 02 23:05:42 glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+Oct 02 23:05:42 glymur kernel: Modules linked in: pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7(+) ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens(+) videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul
+Oct 02 23:05:42 glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+Oct 02 23:05:42 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 02 23:05:42 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 02 23:05:43 glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+Oct 02 23:05:43 glymur kernel: Modules linked in: bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode
+Oct 02 23:05:43 glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+Oct 02 23:05:43 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 02 23:05:43 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 02 23:05:43 glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+Oct 02 23:05:43 glymur kernel: Modules linked in: bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode
+Oct 02 23:05:43 glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+Oct 02 23:05:43 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 02 23:05:43 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 02 23:05:43 glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+Oct 02 23:05:43 glymur kernel: Modules linked in: snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic
+Oct 02 23:05:43 glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+Oct 02 23:05:43 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 02 23:05:43 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 02 23:05:45 glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+Oct 02 23:05:45 glymur kernel: Modules linked in: snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic
+Oct 02 23:05:45 glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+Oct 02 23:05:45 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 02 23:05:45 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 02 23:05:45 glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+Oct 02 23:05:45 glymur kernel: Modules linked in: snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic
+Oct 02 23:05:45 glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+Oct 02 23:05:45 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 02 23:05:45 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 02 23:05:51 glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+Oct 02 23:05:51 glymur kernel: Modules linked in: reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of
+Oct 02 23:05:51 glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+Oct 02 23:05:51 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 02 23:05:51 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 02 23:05:51 glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+Oct 02 23:05:51 glymur kernel: Modules linked in: reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of
+Oct 02 23:05:51 glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+Oct 02 23:05:51 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 02 23:05:51 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 02 23:05:52 glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+Oct 02 23:05:52 glymur kernel: Modules linked in: reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of
+Oct 02 23:05:52 glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+Oct 02 23:05:52 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 02 23:05:52 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 02 23:05:52 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Oct 23 17:23:06 glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+Oct 23 17:25:57 glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+Oct 23 17:25:57 glymur kernel: Modules linked in: nls_iso8859_1 reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater
+Oct 23 17:25:57 glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+Oct 23 17:25:57 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 23 17:25:57 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 23 17:25:57 glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+Oct 23 17:25:57 glymur kernel: Modules linked in: nls_iso8859_1 reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater
+Oct 23 17:25:57 glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+Oct 23 17:25:57 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 23 17:25:57 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 23 17:25:57 glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+
+==== kernel warnings and errors, in full
+[    6.097758] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[    6.097763] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[    6.097767] glymur kernel:  _genpd_power_on+0xc0/0x208
+[    6.097771] glymur kernel:  genpd_power_on+0x208/0x478
+[    6.097775] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[    6.097780] glymur kernel:  __rpm_callback+0x54/0x250
+[    6.097784] glymur kernel:  rpm_callback+0x88/0xa0
+[    6.097788] glymur kernel:  rpm_resume+0x550/0x748
+[    6.097793] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[    6.097797] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[    6.097802] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[    6.097806] glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+[    6.097811] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[    6.097816] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[    6.097821] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[    6.097826] glymur kernel:  chrdev_open+0xbc/0x270
+[    6.097834] glymur kernel:  do_dentry_open+0x12c/0x548
+[    6.097839] glymur kernel:  vfs_open+0x34/0x130
+[    6.097865] glymur kernel:  path_openat+0x5d4/0x938
+[    6.097871] glymur kernel:  do_file_open+0xbc/0x190
+[    6.097875] glymur kernel:  do_sys_openat2+0x8c/0x120
+[    6.097880] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[    6.097886] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[    6.097890] glymur kernel:  el0_svc_common.constprop.0+0x114/0x140
+[    6.624131] glymur kernel: ------------[ cut here ]------------
+[    6.624153] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[    6.624162] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#9: wireplumber/1771
+[    6.624170] glymur kernel: Modules linked in: snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic
+[    6.624220] glymur kernel:  hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+[    6.624243] glymur kernel: CPU: 9 UID: 60578 PID: 1771 Comm: wireplumber Tainted: G        W           7.3.0-rc4-glymur-17 #2 PREEMPT(lazy) 
+[    6.624251] glymur kernel: Tainted: [W]=WARN
+[    6.624258] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[    6.624266] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[    6.624272] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[    6.624280] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[    6.624286] glymur kernel: sp : ffff80008d62b690
+[    6.624294] glymur kernel: x29: ffff80008d62b690 x28: 0000000000000101 x27: 0000000000000000
+[    6.624300] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff000819bd0800
+[    6.624339] glymur kernel: x23: ffffa3548bbda680 x22: 0000000000000000 x21: 0000000000000001
+[    6.624346] glymur kernel: x20: 0000000000000001 x19: ffffa3548bbda260 x18: ffff80008cee50d8
+[    6.624354] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[    6.624361] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[    6.624368] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffa354a8f3a4c8
+[    6.624375] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[    6.624386] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[    6.624393] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[    6.624400] glymur kernel: Call trace:
+[    6.624407] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[    6.624414] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[    6.624420] glymur kernel:  _genpd_power_on+0xc0/0x208
+[    6.624427] glymur kernel:  genpd_power_on+0x208/0x478
+[    6.624434] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[    6.624441] glymur kernel:  __rpm_callback+0x54/0x250
+[    6.624448] glymur kernel:  rpm_callback+0x88/0xa0
+[    6.624455] glymur kernel:  rpm_resume+0x550/0x748
+[    6.624462] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[    6.624470] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[    6.624479] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[    6.624486] glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+[    6.624493] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[    6.624500] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[    6.624507] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[    6.624514] glymur kernel:  chrdev_open+0xbc/0x270
+[    6.624521] glymur kernel:  do_dentry_open+0x12c/0x548
+[    6.624528] glymur kernel:  vfs_open+0x34/0x130
+[    6.624534] glymur kernel:  path_openat+0x5d4/0x938
+[    6.624541] glymur kernel:  do_file_open+0xbc/0x190
+[    6.624552] glymur kernel:  do_sys_openat2+0x8c/0x120
+[    6.624559] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[    6.624565] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[    6.624573] glymur kernel:  el0_svc_common.constprop.0+0x114/0x140
+[    8.080067] glymur kernel: ------------[ cut here ]------------
+[    8.080104] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[    8.080111] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#8: gst-plugin-scan/2090
+[    8.080118] glymur kernel: Modules linked in: snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic
+[    8.080147] glymur kernel:  hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+[    8.080158] glymur kernel: CPU: 8 UID: 60578 PID: 2090 Comm: gst-plugin-scan Tainted: G        W           7.3.0-rc4-glymur-17 #2 PREEMPT(lazy) 
+[    8.080164] glymur kernel: Tainted: [W]=WARN
+[    8.080170] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[    8.080175] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[    8.080180] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[    8.080185] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[    8.080191] glymur kernel: sp : ffff80008d31b6b0
+[    8.080196] glymur kernel: x29: ffff80008d31b6b0 x28: 0000000000000101 x27: 0000000000000000
+[    8.080201] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff000819bd0800
+[    8.080206] glymur kernel: x23: ffffa3548bbda680 x22: 0000000000000000 x21: 0000000000000001
+[    8.080211] glymur kernel: x20: 0000000000000001 x19: ffffa3548bbda260 x18: ffff80008d0ed0d8
+[    8.080216] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[    8.080227] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[    8.080232] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffa354a8f3a4c8
+[    8.080238] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[    8.080243] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[    8.080248] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[    8.080253] glymur kernel: Call trace:
+[    8.080258] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[    8.080264] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[    8.080269] glymur kernel:  _genpd_power_on+0xc0/0x208
+[    8.080274] glymur kernel:  genpd_power_on+0x208/0x478
+[    8.080280] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[    8.080285] glymur kernel:  __rpm_callback+0x54/0x250
+[    8.080290] glymur kernel:  rpm_callback+0x88/0xa0
+[    8.080295] glymur kernel:  rpm_resume+0x550/0x748
+[    8.080300] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[    8.080305] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[    8.080310] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[    8.080315] glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+[    8.080320] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[    8.080325] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[    8.080330] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[    8.080335] glymur kernel:  chrdev_open+0xbc/0x270
+[    8.080341] glymur kernel:  do_dentry_open+0x12c/0x548
+[    8.080346] glymur kernel:  vfs_open+0x34/0x130
+[    8.080351] glymur kernel:  path_openat+0x5d4/0x938
+[    8.080357] glymur kernel:  do_file_open+0xbc/0x190
+[    8.080361] glymur kernel:  do_sys_openat2+0x8c/0x120
+[    8.080367] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[    8.080371] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[    8.080375] glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+[    8.083003] glymur kernel: ------------[ cut here ]------------
+[    8.083008] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[    8.083013] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#8: gst-plugin-scan/2090
+[    8.083017] glymur kernel: Modules linked in: snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic
+[    8.083027] glymur kernel:  hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+[    8.083036] glymur kernel: CPU: 8 UID: 60578 PID: 2090 Comm: gst-plugin-scan Tainted: G        W           7.3.0-rc4-glymur-17 #2 PREEMPT(lazy) 
+[    8.083040] glymur kernel: Tainted: [W]=WARN
+[    8.083045] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[    8.083049] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[    8.083053] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[    8.083057] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[    8.083061] glymur kernel: sp : ffff80008d31b420
+[    8.083065] glymur kernel: x29: ffff80008d31b420 x28: 0000000000000101 x27: 0000000000000000
+[    8.083069] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff000819bd0800
+[    8.083073] glymur kernel: x23: ffffa3548bbda680 x22: 0000000000000000 x21: 0000000000000001
+[    8.083077] glymur kernel: x20: 0000000000000001 x19: ffffa3548bbda260 x18: ffff80008d0ed0d8
+[    8.083081] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[    8.083086] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[    8.083090] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffa354a8f3a4c8
+[    8.083094] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[    8.083098] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[    8.083102] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[    8.083106] glymur kernel: Call trace:
+[    8.083110] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[    8.083114] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[    8.083118] glymur kernel:  _genpd_power_on+0xc0/0x208
+[    8.083122] glymur kernel:  genpd_power_on+0x208/0x478
+[    8.083126] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[    8.083131] glymur kernel:  __rpm_callback+0x54/0x250
+[    8.083135] glymur kernel:  rpm_callback+0x88/0xa0
+[    8.083145] glymur kernel:  rpm_resume+0x550/0x748
+[    8.083149] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[    8.083153] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[    8.083157] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[    8.083162] glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+[    8.083166] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[    8.083170] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[    8.083174] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[    8.083178] glymur kernel:  chrdev_open+0xbc/0x270
+[    8.083182] glymur kernel:  do_dentry_open+0x12c/0x548
+[    8.083186] glymur kernel:  vfs_open+0x34/0x130
+[    8.083190] glymur kernel:  path_openat+0x5d4/0x938
+[    8.083194] glymur kernel:  do_file_open+0xbc/0x190
+[    8.083198] glymur kernel:  do_sys_openat2+0x8c/0x120
+[    8.083202] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[    8.083206] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[    8.083211] glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+[   14.513133] glymur kernel: ------------[ cut here ]------------
+[   14.513160] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[   14.513167] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#9: v4l_id/3791
+[   14.513173] glymur kernel: Modules linked in: reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of
+[   14.513212] glymur kernel:  panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+[   14.513231] glymur kernel: CPU: 9 UID: 0 PID: 3791 Comm: v4l_id Tainted: G        W           7.3.0-rc4-glymur-17 #2 PREEMPT(lazy) 
+[   14.513237] glymur kernel: Tainted: [W]=WARN
+[   14.513249] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[   14.513254] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[   14.513285] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[   14.513290] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[   14.513295] glymur kernel: sp : ffff80008e7ab4e0
+[   14.513300] glymur kernel: x29: ffff80008e7ab4e0 x28: 0000000000000101 x27: 0000000000000000
+[   14.513304] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff000819bd0800
+[   14.513309] glymur kernel: x23: ffffa3548bbda680 x22: 0000000000000000 x21: 0000000000000001
+[   14.513314] glymur kernel: x20: 0000000000000001 x19: ffffa3548bbda260 x18: ffff80008d3bb0d8
+[   14.513318] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[   14.513323] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[   14.513328] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffa354a8f3a4c8
+[   14.513333] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[   14.513337] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[   14.513342] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[   14.513346] glymur kernel: Call trace:
+[   14.513351] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[   14.513355] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[   14.513362] glymur kernel:  _genpd_power_on+0xc0/0x208
+[   14.513367] glymur kernel:  genpd_power_on+0x208/0x478
+[   14.513371] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[   14.513376] glymur kernel:  __rpm_callback+0x54/0x250
+[   14.513380] glymur kernel:  rpm_callback+0x88/0xa0
+[   14.513385] glymur kernel:  rpm_resume+0x550/0x748
+[   14.513390] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[   14.513395] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[   14.513400] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[   14.513405] glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+[   14.513410] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[   14.513415] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[   14.513420] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[   14.513425] glymur kernel:  chrdev_open+0xbc/0x270
+[   14.513430] glymur kernel:  do_dentry_open+0x12c/0x548
+[   14.513435] glymur kernel:  vfs_open+0x34/0x130
+[   14.513440] glymur kernel:  path_openat+0x5d4/0x938
+[   14.513445] glymur kernel:  do_file_open+0xbc/0x190
+[   14.513450] glymur kernel:  do_sys_openat2+0x8c/0x120
+[   14.513457] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[   14.513461] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[   14.513471] glymur kernel:  el0_svc_common.constprop.0+0x114/0x140
+[   14.518221] glymur kernel: ------------[ cut here ]------------
+[   14.518232] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[   14.518238] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#2: v4l_id/3792
+[   14.518243] glymur kernel: Modules linked in: reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of
+[   14.518266] glymur kernel:  panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+[   14.518277] glymur kernel: CPU: 2 UID: 0 PID: 3792 Comm: v4l_id Tainted: G        W           7.3.0-rc4-glymur-17 #2 PREEMPT(lazy) 
+[   14.518282] glymur kernel: Tainted: [W]=WARN
+[   14.518287] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[   14.518292] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[   14.518297] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[   14.518302] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[   14.518307] glymur kernel: sp : ffff80008e65b6b0
+[   14.518312] glymur kernel: x29: ffff80008e65b6b0 x28: 0000000000000101 x27: 0000000000000000
+[   14.518317] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff000819bd0800
+[   14.518321] glymur kernel: x23: ffffa3548bbda680 x22: 0000000000000000 x21: 0000000000000001
+[   14.518326] glymur kernel: x20: 0000000000000001 x19: ffffa3548bbda260 x18: ffff80008e1a10d8
+[   14.518331] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[   14.518336] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[   14.518340] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffa354a8f3a4c8
+[   14.518345] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[   14.518350] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[   14.518354] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[   14.518359] glymur kernel: Call trace:
+[   14.518363] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[   14.518368] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[   14.518373] glymur kernel:  _genpd_power_on+0xc0/0x208
+[   14.518377] glymur kernel:  genpd_power_on+0x208/0x478
+[   14.518382] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[   14.518386] glymur kernel:  __rpm_callback+0x54/0x250
+[   14.518391] glymur kernel:  rpm_callback+0x88/0xa0
+[   14.518396] glymur kernel:  rpm_resume+0x550/0x748
+[   14.518401] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[   14.518406] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[   14.518411] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[   14.518415] glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+[   14.518420] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[   14.518425] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[   14.518430] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[   14.518434] glymur kernel:  chrdev_open+0xbc/0x270
+[   14.518439] glymur kernel:  do_dentry_open+0x12c/0x548
+[   14.518444] glymur kernel:  vfs_open+0x34/0x130
+[   14.518448] glymur kernel:  path_openat+0x5d4/0x938
+[   14.518453] glymur kernel:  do_file_open+0xbc/0x190
+[   14.518458] glymur kernel:  do_sys_openat2+0x8c/0x120
+[   14.518462] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[   14.518467] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[   14.518472] glymur kernel:  el0_svc_common.constprop.0+0x114/0x140
+[   14.680068] glymur kernel: ------------[ cut here ]------------
+[   14.680096] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[   14.680104] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#11: wireplumber/3624
+[   14.680114] glymur kernel: Modules linked in: reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of
+[   14.680153] glymur kernel:  panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+[   14.680170] glymur kernel: CPU: 11 UID: 1000 PID: 3624 Comm: wireplumber Tainted: G        W           7.3.0-rc4-glymur-17 #2 PREEMPT(lazy) 
+[   14.680178] glymur kernel: Tainted: [W]=WARN
+[   14.680187] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[   14.680195] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[   14.680203] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[   14.680211] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[   14.680219] glymur kernel: sp : ffff80008e5b33b0
+[   14.680227] glymur kernel: x29: ffff80008e5b33b0 x28: 0000000000000101 x27: 0000000000000000
+[   14.680234] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff000819bd0800
+[   14.680243] glymur kernel: x23: ffffa3548bbda680 x22: 0000000000000000 x21: 0000000000000001
+[   14.680250] glymur kernel: x20: 0000000000000001 x19: ffffa3548bbda260 x18: ffff80008de850d8
+[   14.680258] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[   14.680266] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[   14.680273] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffa354a8f3a4c8
+[   14.680281] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[   14.680288] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[   14.680297] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[   14.680304] glymur kernel: Call trace:
+[   14.680312] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[   14.680319] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[   14.680326] glymur kernel:  _genpd_power_on+0xc0/0x208
+[   14.680333] glymur kernel:  genpd_power_on+0x208/0x478
+[   14.680340] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[   14.680347] glymur kernel:  __rpm_callback+0x54/0x250
+[   14.680354] glymur kernel:  rpm_callback+0x88/0xa0
+[   14.680361] glymur kernel:  rpm_resume+0x550/0x748
+[   14.680368] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[   14.680375] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[   14.680382] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[   14.680390] glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+[   14.680446] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[   14.680454] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[   14.680462] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[   14.680468] glymur kernel:  chrdev_open+0xbc/0x270
+[   14.680476] glymur kernel:  do_dentry_open+0x12c/0x548
+[   14.680483] glymur kernel:  vfs_open+0x34/0x130
+[   14.680490] glymur kernel:  path_openat+0x5d4/0x938
+[   14.680497] glymur kernel:  do_file_open+0xbc/0x190
+[   14.680504] glymur kernel:  do_sys_openat2+0x8c/0x120
+[   14.680511] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[   14.680517] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[   14.680524] glymur kernel:  el0_svc_common.constprop.0+0x114/0x140
+[  339.315830] glymur kernel: ------------[ cut here ]------------
+[  339.315871] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[  339.315885] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#1: v4l2-ctl/8674
+[  339.315897] glymur kernel: Modules linked in: nls_iso8859_1 reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater
+[  339.315952] glymur kernel:  qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs
+[  339.315983] glymur kernel:  autofs4
+[  339.315995] glymur kernel: CPU: 1 UID: 1000 PID: 8674 Comm: v4l2-ctl Tainted: G        W           7.3.0-rc4-glymur-17 #2 PREEMPT(lazy) 
+[  339.316011] glymur kernel: Tainted: [W]=WARN
+[  339.316026] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[  339.316043] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[  339.316051] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[  339.316071] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[  339.316087] glymur kernel: sp : ffff800093e236a0
+[  339.316097] glymur kernel: x29: ffff800093e236a0 x28: 0000000000000101 x27: 0000000000000000
+[  339.316108] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff000819bd0800
+[  339.316118] glymur kernel: x23: ffffa3548bbda680 x22: 0000000000000000 x21: 0000000000000001
+[  339.316129] glymur kernel: x20: 0000000000000001 x19: ffffa3548bbda260 x18: ffff8000926b50d8
+[  339.316144] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[  339.316157] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[  339.316167] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffa354a8f3a4c8
+[  339.316178] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[  339.316189] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[  339.316200] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[  339.316211] glymur kernel: Call trace:
+[  339.316221] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[  339.316231] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[  339.316242] glymur kernel:  _genpd_power_on+0xc0/0x208
+[  339.316278] glymur kernel:  genpd_power_on+0x208/0x478
+[  339.316289] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[  339.316298] glymur kernel:  __rpm_callback+0x54/0x250
+[  339.316310] glymur kernel:  rpm_callback+0x88/0xa0
+[  339.316321] glymur kernel:  rpm_resume+0x550/0x748
+[  339.316333] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[  339.316343] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[  339.316354] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[  339.316368] glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+[  339.316381] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[  339.316390] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[  339.316399] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[  339.316409] glymur kernel:  chrdev_open+0xbc/0x270
+[  339.316422] glymur kernel:  do_dentry_open+0x12c/0x548
+[  339.316432] glymur kernel:  vfs_open+0x34/0x130
+[  339.316444] glymur kernel:  path_openat+0x5d4/0x938
+[  339.316456] glymur kernel:  do_file_open+0xbc/0x190
+[  339.316466] glymur kernel:  do_sys_openat2+0x8c/0x120
+[  339.316476] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[  339.316486] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[  339.320042] glymur kernel: ------------[ cut here ]------------
+[  339.320075] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[  339.320086] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#1: v4l2-ctl/8674
+[  339.320098] glymur kernel: Modules linked in: nls_iso8859_1 reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater
+[  339.320133] glymur kernel:  qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs
+[  339.320170] glymur kernel:  autofs4
+[  339.320178] glymur kernel: CPU: 1 UID: 1000 PID: 8674 Comm: v4l2-ctl Tainted: G        W           7.3.0-rc4-glymur-17 #2 PREEMPT(lazy) 
+[  339.320187] glymur kernel: Tainted: [W]=WARN
+[  339.320197] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[  339.320206] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[  339.320215] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[  339.320227] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[  339.320238] glymur kernel: sp : ffff800093e23700
+[  339.320268] glymur kernel: x29: ffff800093e23700 x28: 0000000000000101 x27: 0000000000000000
+[  339.320278] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff000819bd0800
+[  339.320293] glymur kernel: x23: ffffa3548bbda680 x22: 0000000000000000 x21: 0000000000000001
+[  339.320302] glymur kernel: x20: 0000000000000001 x19: ffffa3548bbda260 x18: ffff8000926b50d8
+[  339.320312] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[  339.320321] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[  339.320330] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffa354a8f3a4c8
+[  339.320339] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[  339.320348] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[  339.320356] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[  339.320365] glymur kernel: Call trace:
+[  339.320374] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[  339.320383] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[  339.320392] glymur kernel:  _genpd_power_on+0xc0/0x208
+[  339.320402] glymur kernel:  genpd_power_on+0x208/0x478
+[  339.320413] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[  339.320422] glymur kernel:  __rpm_callback+0x54/0x250
+[  339.320431] glymur kernel:  rpm_callback+0x88/0xa0
+[  339.320440] glymur kernel:  rpm_resume+0x550/0x748
+[  339.320450] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[  339.320459] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[  339.320467] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[  339.320476] glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+[  339.320486] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[  339.320494] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[  339.320503] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[  339.320513] glymur kernel:  chrdev_open+0xbc/0x270
+[  339.320522] glymur kernel:  do_dentry_open+0x12c/0x548
+[  339.320531] glymur kernel:  vfs_open+0x34/0x130
+[  339.320540] glymur kernel:  path_openat+0x5d4/0x938
+[  339.320548] glymur kernel:  do_file_open+0xbc/0x190
+[  339.320558] glymur kernel:  do_sys_openat2+0x8c/0x120
+[  339.320565] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[  339.320575] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+
+==== SPMI PMICs and eUSB2 repeaters
+0-00           driver=pmic-spmi of_node=pmic@00000000
+2-09           driver=pmic-spmi of_node=pmic@00000009
+2-0a           driver=pmic-spmi of_node=pmic@0000000a
+spmi-0         driver=driver of_node=spmi@00000000
+spmi-1         driver=driver of_node=spmi@00000000
+spmi-2         driver=driver of_node=spmi@00000000
+c448000.spmi:pmic@9:phy@fd00 -> qcom-eusb2-repeater
+c448000.spmi:pmic@a:phy@fd00 -> qcom-eusb2-repeater
+Oct 02 23:05:38 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: supply vdd3 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: parent PMIC subtype 0x5f v2.0
+Oct 02 23:05:38 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: supply vdd18 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: supply vdd3 not found, using dummy regulator
+Oct 02 23:05:38 glymur kernel: rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: probe with driver rtc-pm8xxx failed with error -2
+Oct 02 23:05:41 glymur kernel: input: pmic_pwrkey as /devices/platform/soc@0/c400000.arbiter/spmi-0/0-00/c426000.spmi:pmic@0:pon@1300/c426000.spmi:pmic@0:pon@1300:pwrkey/input/input19
+Oct 02 23:05:42 glymur kernel: Modules linked in: pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7(+) ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens(+) videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul
+Oct 02 23:05:42 glymur kernel:  sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+Oct 02 23:05:42 glymur kernel: Modules linked in: pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7(+) ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens(+) videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul
+Oct 02 23:05:42 glymur kernel:  sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+Oct 02 23:05:43 glymur kernel: Modules linked in: bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode
+Oct 02 23:05:43 glymur kernel:  aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+Oct 02 23:05:43 glymur kernel: Modules linked in: bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode
+Oct 02 23:05:43 glymur kernel:  aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+Oct 02 23:05:43 glymur kernel: Modules linked in: snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic
+Oct 02 23:05:43 glymur kernel:  hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+Oct 02 23:05:45 glymur kernel: Modules linked in: snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic
+Oct 02 23:05:45 glymur kernel:  hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+Oct 02 23:05:45 glymur kernel: Modules linked in: snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic
+Oct 02 23:05:45 glymur kernel:  hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+Oct 02 23:05:51 glymur kernel: Modules linked in: reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of
+Oct 02 23:05:51 glymur kernel:  panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+Oct 02 23:05:51 glymur kernel: Modules linked in: reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of
+Oct 02 23:05:51 glymur kernel:  panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+Oct 02 23:05:52 glymur kernel: Modules linked in: reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of
+Oct 02 23:05:52 glymur kernel:  panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+Oct 23 17:25:57 glymur kernel: Modules linked in: nls_iso8859_1 reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater
+Oct 23 17:25:57 glymur kernel:  qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs
+Oct 23 17:25:57 glymur kernel: Modules linked in: nls_iso8859_1 reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater
+Oct 23 17:25:57 glymur kernel:  qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs
+
+==== drivers bound
+a000000.usb    -> dwc3-qcom
+88e0000.phy    -> qcom-m31eusb2-phy
+88e1000.phy    -> qcom-qmp-combo-phy
+a600000.usb    -> dwc3-qcom
+fd3000.phy     -> qcom-m31eusb2-phy
+fd5000.phy     -> qcom-qmp-combo-phy
+a800000.usb    -> dwc3-qcom
+fdd000.phy     -> qcom-m31eusb2-phy
+fde000.phy     -> qcom-qmp-combo-phy
+a200000.usb    -> dwc3-qcom
+fa0000.phy     -> qcom-m31eusb2-phy
+uas                    28672  0
+usb_storage            94208  2 uas
+phy_qcom_eusb2_repeater    12288  2
+xhci_plat_hcd          24576  0
+ucsi_glink             20480  0
+typec_ucsi             73728  1 ucsi_glink
+pmic_glink_altmode     20480  0
+phy_qcom_edp           77824  1
+dwc3_qcom              32768  2
+phy_qcom_qmp_combo    163840  13
+dwc3                  212992  1 dwc3_qcom
+typec                 135168  4 pmic_glink_altmode,phy_qcom_qmp_combo,typec_ucsi,ucsi_glink
+phy_qcom_m31_eusb2     16384  4
+pmic_glink             16384  3 pmic_glink_altmode,qcom_battmgr,ucsi_glink
+
+==== USB-C: ports, partners, data roles
+port0: data_role=host [device] power_role=source [sink] opmode=default orientation=unknown partner=no
+port1: data_role=host [device] power_role=source [sink] opmode=default orientation=unknown partner=no
+a600000.usb-role-switch: role=device
+a800000.usb-role-switch: role=device
+
+==== USB topology and speeds
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+    |__ Port 001: Dev 002, If 0, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 1, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 2, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 3, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 4, Class=Application Specific Interface, Driver=[none], 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 003.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+    |__ Port 001: Dev 002, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
+1-1          a200000.usb    speed=480    DUKUF0A8PLT4ZB HP True Vision FHD Camera
+3-1          a000000.usb    speed=5000   SanDisk Ultra
+usb1         a200000.usb    speed=480    Linux 7.3.0-rc4-glymur-17 xhci-hcd xHCI Host Controller
+usb2         a000000.usb    speed=480    Linux 7.3.0-rc4-glymur-17 xhci-hcd xHCI Host Controller
+usb3         a000000.usb    speed=10000  Linux 7.3.0-rc4-glymur-17 xhci-hcd xHCI Host Controller
+
+==== camera (usb_hs, from kernel -8)
+Bus 001 Device 002: ID 30c9:00d9 Luxvisions Innotech Limited HP True Vision FHD Camera
+video0: qcom-iris-decoder
+video1: qcom-iris-encoder
+video2: HP True Vision FHD Camera: HP T
+video3: HP True Vision FHD Camera: HP T
+video4: HP True Vision FHD Camera: HP I
+video5: HP True Vision FHD Camera: HP I
+
+==== block devices and mounts
+NAME          SIZE TRAN FSTYPE    MOUNTPOINTS
+sda          57.3G usb            
+├─sda1        7.3G      vfat      /run/media/<user>/UBUNTU 26_0
+└─sda2         50G      ext3      
+zram0           0B                
+nvme0n1     953.9G nvme           
+├─nvme0n1p1   512M nvme vfat      
+├─nvme0n1p2    16M nvme           
+├─nvme0n1p3 696.4G nvme BitLocker 
+├─nvme0n1p4   256G nvme ext4      /
+└─nvme0n1p5   954M nvme ntfs      
+
+Saved to /var/log/glymur/usb-test-20261023T172606.txt

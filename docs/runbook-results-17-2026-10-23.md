@@ -53,10 +53,9 @@ over the edge; it does not explain the GPU.
 
 Two failures in three seconds point to something both depend on (a power or
 bus resource) more than to two separate bugs, but nothing here proves which.
-New in `-17` on the audio side is the speaker filter topology
-(`install-audio.sh --speaker-eq`, module `0x6053`); it is the first suspect
-for the DSP, and `install-audio.sh` without options goes back to the plain
-topology.
+(Corrected after the second boot: the speaker filter topology was never
+installed. The topology on disk was the plain one, sha256 `4f81077a…`, the
+same file `-16` used, so the filter is not the cause.)
 
 One session problem was self-inflicted: stopping `pipewire.service` while
 testing `aplay` was cancelled while its socket was re-created, so the old
@@ -104,8 +103,81 @@ kernel `-16`, `quiet splash`, with an initramfs.
 ## Next boot
 
 Boot `-17` again (now with its own initramfs). Do not restart audio services.
-Run the runbook from step 3 in order; if the DSP timeouts come back without
-any session restarts, go back to the plain topology (`sudo bash
-install-audio.sh`) for the boot after. If the blue-screen freeze comes back,
+Run the runbook from step 3 in order. If the blue-screen freeze comes back,
 the next diagnostic boot drops `quiet splash` (press `e` in GRUB) so the
 console shows the last messages.
+
+## Second boot, with the matching initramfs (17:21)
+
+Raw: `captures/2026-10-23-k17/boot2/` (sanitized). Private data is on the
+USB stick, for the Windows-side session too, in
+`glymur-logs/k17-2026-10-23/` (both boots' dmesg and journals, the
+WirePlumber debug logs, the UEFI variable dump, with `SHA256SUMS`), and in
+`.work/k17-boot1-*` and `.work/k17-boot2-*`.
+
+| Check | Result |
+|---|---|
+| boot | clean; the `-17` initramfs loads, `msm` initializes inside it, plymouth shows; no freeze |
+| 3.1 EC interrupt | **fixed**: 3 interrupts in total, 0 in 20 s idle (about 90 per 10 s on `-16`). Reading register `0x00` (`docs/audit-2026-10-22.md`) clears the event |
+| EC sensors | fan 0 rpm, thermistors 36-38 °C, backlight attributes read |
+| boot-time APM timeout | `CMD timeout [1001021]` (`APM_CMD_GET_SPF_STATE`) at 9.696 s again; it is in every boot back to `-15`, so it is old and harmless |
+| direct playback | `aplay -D plughw:0,0`, 3 s, played in 3.2 s with no DSP timeout: the DSP path works |
+| audio session | **broken from boot**, before anything was touched: the card's profile is `off`, PipeWire offers only "Dummy Output", streams never link (see below) |
+| USB | `check-usb.sh`: no errors; full and low speed still need a device plugged in by hand |
+| battery manager | 60 s baseline on battery: `qcom_battmgr_callback` 52 calls, `qcom_battmgr_state_callback` 0 (no plug events in this run) |
+| video `--diag` | see below |
+| UEFI dump | 98 variables, `SmartAmpCalibrationData` (80 bytes) present, no `RTCInfo`; private |
+
+### The audio session stall
+
+WirePlumber 1.6.8 never runs the events that pick a profile, choose the
+default sink and link streams. `default.configured.audio.sink` is the
+speakers, but `default.audio.sink` stays `auto_null`; setting the profile
+by hand (`wpctl set-profile <card> 1`) creates the sinks, but they never
+become default and streams still never link (`pw-play` waits forever).
+
+A full-detail WirePlumber log (`wp-debug3.log`, private) shows its event
+queue stuck behind the first event: the asynchronous `node/create-item`
+hook for an audio node sets the node's `Format` param
+(`si_audio_adapter_configure_node: setting Format param since it is not set
+yet`) and waits for an answer that never comes; only shutdown ends it
+(`Object activation aborted: proxy destroyed`). Everything queued behind it
+(profiles, default nodes, linking) waits too.
+
+Ruled out:
+
+- the Iris video nodes, whose every open times out on `-17`
+  (`spa.v4l2: Cannot open '/dev/video0': 110`): with them disabled in
+  WirePlumber the session stays stuck;
+- the speaker filter topology (not installed, above);
+- `upstream/qcom-next/0008` (topology module configuration size): for a
+  valid topology it sends the same `SET_CFG` payload as before.
+
+Still open: what changed between `-16`, where the same userspace and
+topology worked, and `-17`. The `-17` kernel changes on the path are the
+backports `0027-0043` and `0008`; the format negotiation goes through the
+ALSA PCM (`hw_params`), which `aplay` exercises with a different format and
+buffer. Next: run the PipeWire sink by hand with `pw-cli` or
+`spa-acp-tool` to see which `hw_params` call blocks, and boot `-16`
+("previous kernel") once to confirm the session works there with today's
+userspace.
+
+### Video `--diag` trials
+
+`video-test-20261023T172620.txt`:
+
+| Trial | Result |
+|---|---|
+| default (core 1), pipes 4, 2 or 1 | firmware: `Configured core 1 is not supported`, then `core 0 is not supported`; fatal session errors |
+| `diag_core_id=2`, pipes 4 or 2 | **no "not supported" and no fatal error**; but no frame within 30 s, and `ffmpeg` then hung past its timeout and had to be killed |
+| `diag_core_id=0` | `can't configure decoder` (`EINVAL`) |
+
+Core ID 2 is the one the firmware accepts; the decode then stalls rather
+than fails. With every open, `qcom-iris ... failed to suspend` (`skip power
+collapse, wfi=0x0, idle=0x0`) repeats; the `mvs1` GDSC still never turns on.
+
+### Configuration left for the next boot
+
+The plain topology is installed (`install-audio.sh`, unchanged file). The
+`-17` initramfs and `initrd-glymur.old` are in place. No WirePlumber or
+PipeWire configuration was left behind.

@@ -1,0 +1,65 @@
+kernel: 7.3.0-rc4-glymur-17
+traceable: qcom_battmgr_state_callback
+traceable: qcom_battmgr_callback
+ 60 s left: ac=0 usb=0 bat=Discharging
+ 50 s left: ac=0 usb=0 bat=Discharging
+ 40 s left: ac=0 usb=0 bat=Discharging
+ 30 s left: ac=0 usb=0 bat=Discharging
+ 20 s left: ac=0 usb=0 bat=Discharging
+ 10 s left: ac=0 usb=0 bat=Discharging
+== calls
+qcom_battmgr_state_callback 0
+qcom_battmgr_callback 52
+== trace
+          <idle>-0       [000] d.h3.  1056.885417: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1056.891452: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1056.894600: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1067.105515: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1067.111450: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1067.114676: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1071.450296: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1071.452992: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.H3.  1071.455366: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1071.457801: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1071.458271: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1071.458701: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1071.459134: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1071.459569: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1071.459924: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1071.460290: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1071.460621: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1071.462861: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1071.465285: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1071.467593: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1071.469903: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1071.472330: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.H3.  1071.475181: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1077.323978: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1077.328760: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1077.331881: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1087.539654: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1087.544393: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1087.547546: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1097.758656: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1097.763410: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1097.766555: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.698296: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.700808: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.703606: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.705696: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.710027: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.712144: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.712524: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.712917: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.713304: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.713652: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.714037: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.714395: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.714760: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.715101: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.715414: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.715769: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1101.716132: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1107.977028: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1107.981076: qcom_battmgr_callback <-pmic_glink_rpmsg_callback
+          <idle>-0       [000] d.h3.  1107.983795: qcom_battmgr_callback <-pmic_glink_rpmsg_callback

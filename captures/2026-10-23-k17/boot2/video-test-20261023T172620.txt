@@ -1,0 +1,151 @@
+
+==== system
+7.3.0-rc4-glymur-17
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+-rw-r--r-- 1 root root 2503368 Oct 23 16:41 /usr/lib/firmware/updates/qcom/glymur/HP/omnibook-5-16-bf1xxx/qcvss8480.mbn
+fbb439d77b977a2dc29a52d3771b7925c8af278d5ce55374d331ef2178b8b758  /usr/lib/firmware/updates/qcom/glymur/HP/omnibook-5-16-bf1xxx/qcvss8480.mbn
+
+==== kernel log: iris, videocc
+Oct 02 23:05:45 glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+Oct 02 23:05:45 glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+Oct 02 23:05:45 glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+Oct 02 23:05:45 glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+Oct 02 23:05:45 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 02 23:05:45 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 02 23:05:45 glymur kernel: Modules linked in: snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm(+) snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic
+Oct 02 23:05:45 glymur kernel:  hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+Oct 02 23:05:45 glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+Oct 02 23:05:45 glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+Oct 02 23:05:45 glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+Oct 02 23:05:45 glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+Oct 02 23:05:45 glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+Oct 02 23:05:45 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 02 23:05:45 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 02 23:05:51 glymur kernel: Modules linked in: reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of
+Oct 02 23:05:51 glymur kernel:  panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+Oct 02 23:05:51 glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+Oct 02 23:05:51 glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+Oct 02 23:05:51 glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+Oct 02 23:05:51 glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+Oct 02 23:05:51 glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+Oct 02 23:05:51 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 02 23:05:51 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 02 23:05:51 glymur kernel: Modules linked in: reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of
+Oct 02 23:05:51 glymur kernel:  panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+Oct 02 23:05:51 glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+Oct 02 23:05:51 glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+Oct 02 23:05:51 glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+Oct 02 23:05:51 glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+Oct 02 23:05:51 glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+Oct 02 23:05:51 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 02 23:05:51 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 02 23:05:52 glymur kernel: Modules linked in: reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater qcom_pon i2c_hid_of
+Oct 02 23:05:52 glymur kernel:  panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs autofs4
+Oct 02 23:05:52 glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+Oct 02 23:05:52 glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+Oct 02 23:05:52 glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+Oct 02 23:05:52 glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+Oct 02 23:05:52 glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+Oct 02 23:05:52 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 02 23:05:52 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 23 17:25:57 glymur kernel: Modules linked in: nls_iso8859_1 reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater
+Oct 23 17:25:57 glymur kernel:  qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs
+Oct 23 17:25:57 glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+Oct 23 17:25:57 glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+Oct 23 17:25:57 glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+Oct 23 17:25:57 glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+Oct 23 17:25:57 glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+Oct 23 17:25:57 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 23 17:25:57 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Oct 23 17:25:57 glymur kernel: Modules linked in: nls_iso8859_1 reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_lpass_dais q6apm_dai snd_q6dsp_common q6prm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc qrtr_mhi pm8941_pwrkey hci_uart btqca snd_ctl_led btrtl uvcvideo btbcm btintel uvc snd_soc_x1e80100 snd_soc_qcom_sdw videobuf2_vmalloc bluetooth snd_soc_qcom_common ath12k_wifi7 ath12k qcom_spel qcom_iris mac80211 v4l2_mem2mem videobuf2_dma_contig videobuf2_memops qcom_tsens videobuf2_v4l2 hp_omnibook_5_ec soundwire_qcom videobuf2_common sparse_keymap cfg80211 snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro slimbus videodev soundwire_bus snd_q6apm snd_soc_lpass_macro_common mc fastrpc mhi libarc4 snd_soc_core snd_compress ac97_bus snd_pcm_dmaengine qcomtee tee joydev input_leds sg sch_fq_codel efi_pstore apr uas usb_storage hid_multitouch hid_generic pinctrl_spmi_gpio nvmem_qcom_spmi_sdam rtc_pm8xxx phy_qcom_eusb2_repeater
+Oct 23 17:25:57 glymur kernel:  qcom_pon i2c_hid_of panel_samsung_atna33xc20 i2c_hid_acpi_prp0001 rpmsg_ctrl qrtr_smd i2c_hid rpmsg_char qcom_pd_mapper qcom_spmi_pmic hid regmap_spmi xhci_plat_hcd socinfo ucsi_glink typec_ucsi qcom_battmgr pmic_glink_altmode aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher spmi_pmic_arb sm4 msm spmi_devres spmi qcom_q6v5_pas qcom_stats qcom_pil_info phy_qcom_edp qmi_tmd i2c_qcom_geni dispcc_glymur qcom_common qcom_glink_smem qcom_glink qcom_q6v5 ubwc_config dwc3_qcom qcom_sysmon phy_qcom_qmp_combo mdt_loader ocmem qcom_eud aux_bridge drm_gpuvm videocc_glymur qcom_rpmh_regulator dwc3 qcom_smd llcc_qcom drm_exec pinctrl_sm8650_lpass_lpi gpu_sched pinctrl_lpass_lpi drm_display_helper typec ulpi camcc_glymur udc_core evacc_glymur cec gpi nvmem_qfprom thunderbolt rc_core drm_dp_aux_bus phy_qcom_m31_eusb2 qcom_hwspinlock qcom_aoss icc_bwmon bam_dma qrtr qcom_cpucp_mbox gpio_keys pmic_glink pdr_interface qcom_pdr_msg smp2p qmi_helpers qcom_smem rpmsg_core fixed dmi_sysfs
+Oct 23 17:25:57 glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+Oct 23 17:25:57 glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+Oct 23 17:25:57 glymur kernel:  iris_vpu_power_on+0x5c/0x120 [qcom_iris]
+Oct 23 17:25:57 glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+Oct 23 17:25:57 glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+Oct 23 17:25:57 glymur kernel: qcom-iris aa00000.video-codec: power on failed
+Oct 23 17:25:57 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+qcom_iris             270336  0
+v4l2_mem2mem           57344  1 qcom_iris
+videobuf2_dma_contig    24576  1 qcom_iris
+videobuf2_v4l2         40960  3 qcom_iris,uvcvideo,v4l2_mem2mem
+videobuf2_common       94208  7 qcom_iris,videobuf2_vmalloc,videobuf2_dma_contig,videobuf2_v4l2,uvcvideo,v4l2_mem2mem,videobuf2_memops
+videodev              405504  4 qcom_iris,videobuf2_v4l2,uvcvideo,v4l2_mem2mem
+ubwc_config            24576  2 qcom_iris,msm
+mdt_loader             12288  4 qcom_iris,ath12k,msm,qcom_q6v5_pas
+videocc_glymur         20480  12
+
+==== V4L2 devices
+HP True Vision FHD Camera: HP T (usb-xhci-hcd.2.auto-1):
+	/dev/video2
+	/dev/video3
+	/dev/video4
+	/dev/video5
+	/dev/media0
+	/dev/media1
+
+==== diagnostics: one core, pipe and core ID trials
+
+-- trial: diag_pipes=0 diag_core_id=-1
+loaded with: diag_core_id:-1 diag_cores:1 diag_pipes:0 
+[vf#0:0 @ 0xb5cf4f77d1e0] No filtered frames for output stream, trying to initialize anyway.
+[vist#0:0/h264 @ 0xb5cf4f77bd30] [dec:h264_v4l2m2m @ 0xb5cf4f77bbf0] Task finished with error code: -1145393733 (Error number -1145393733 occurred)
+[vist#0:0/h264 @ 0xb5cf4f77bd30] [dec:h264_v4l2m2m @ 0xb5cf4f77bbf0] Terminating thread with return code -1145393733 (Error number -1145393733 occurred)
+[out#0/null @ 0xb5cf4f7e6a80] Output file is empty, nothing was encoded(check -ss / -t / -frames parameters if used)
+ffmpeg exit: 69
+      1 <VFW_E:CmdDec:264d:f9b42008:00> vDec_SetProperty_c2(2421): Configured core 1 is not supported, Monitor=88000800. 
+      1 <VFW_E:CmdDec:264d:f9b42008:00> vDec_Start(2951): Configured core 0 is not supported, Monitor=88000800. 
+     10 session error received 0x4000003: fatal error
+
+-- trial: diag_pipes=2 diag_core_id=-1
+loaded with: diag_core_id:-1 diag_cores:1 diag_pipes:2 
+[vf#0:0 @ 0xbcef0ded11e0] No filtered frames for output stream, trying to initialize anyway.
+[vist#0:0/h264 @ 0xbcef0decfd30] [dec:h264_v4l2m2m @ 0xbcef0decfbf0] Task finished with error code: -1145393733 (Error number -1145393733 occurred)
+[vist#0:0/h264 @ 0xbcef0decfd30] [dec:h264_v4l2m2m @ 0xbcef0decfbf0] Terminating thread with return code -1145393733 (Error number -1145393733 occurred)
+[out#0/null @ 0xbcef0df65200] Output file is empty, nothing was encoded(check -ss / -t / -frames parameters if used)
+ffmpeg exit: 69
+      1 <VFW_E:CmdDec:264d:3b9c0008:00> vDec_SetProperty_c2(2421): Configured core 1 is not supported, Monitor=88000800. 
+      1 <VFW_E:CmdDec:264d:3b9c0008:00> vDec_Start(2951): Configured core 0 is not supported, Monitor=88000800. 
+      1 diag: HFI_PROP_PIPE 2 instead of 4
+     10 session error received 0x4000003: fatal error
+
+-- trial: diag_pipes=1 diag_core_id=-1
+loaded with: diag_core_id:-1 diag_cores:1 diag_pipes:1 
+[vf#0:0 @ 0xb9adbaf961e0] No filtered frames for output stream, trying to initialize anyway.
+[vist#0:0/h264 @ 0xb9adbaf94d30] [dec:h264_v4l2m2m @ 0xb9adbaf94bf0] Task finished with error code: -1145393733 (Error number -1145393733 occurred)
+[vist#0:0/h264 @ 0xb9adbaf94d30] [dec:h264_v4l2m2m @ 0xb9adbaf94bf0] Terminating thread with return code -1145393733 (Error number -1145393733 occurred)
+[out#0/null @ 0xb9adbafffa80] Output file is empty, nothing was encoded(check -ss / -t / -frames parameters if used)
+ffmpeg exit: 69
+      1 <VFW_E:CmdDec:264d:3b9c6008:00> vDec_SetProperty_c2(2421): Configured core 1 is not supported, Monitor=88000800. 
+      1 <VFW_E:CmdDec:264d:3b9c6008:00> vDec_Start(2951): Configured core 0 is not supported, Monitor=88000800. 
+      1 diag: HFI_PROP_PIPE 1 instead of 4
+     10 session error received 0x4000003: fatal error
+
+-- trial: diag_pipes=0 diag_core_id=2
+loaded with: diag_core_id:2 diag_cores:1 diag_pipes:0 
+ffmpeg exit: 124
+      2 diag: HFI_PROP_CORE_ID 2 instead of 1
+
+-- trial: diag_pipes=2 diag_core_id=2
+loaded with: diag_core_id:2 diag_cores:1 diag_pipes:2 
+ffmpeg exit: 124
+      2 diag: HFI_PROP_CORE_ID 2 instead of 1
+      1 diag: HFI_PROP_PIPE 2 instead of 4
+
+-- trial: diag_pipes=0 diag_core_id=0
+loaded with: diag_core_id:0 diag_cores:1 diag_pipes:0 
+[h264_v4l2m2m @ 0xc43dfdb5e690] can't configure decoder
+[vist#0:0/h264 @ 0xc43dfdb5cd30] [dec:h264_v4l2m2m @ 0xc43dfdb5cbf0] Error while opening decoder: Invalid argument
+Error opening output file -.
+Error opening output files: Invalid argument
+ffmpeg exit: 234
+
+-- trial: diag_pipes=2 diag_core_id=0
+loaded with: diag_core_id:0 diag_cores:1 diag_pipes:2 
+[h264_v4l2m2m @ 0xc8f30e458690] can't configure decoder
+[vist#0:0/h264 @ 0xc8f30e456d30] [dec:h264_v4l2m2m @ 0xc8f30e456bf0] Error while opening decoder: Invalid argument
+Error opening output file -.
+Error opening output files: Invalid argument
+ffmpeg exit: 234
+Saved to /var/log/glymur/video-test-20261023T172620.txt
