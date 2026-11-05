@@ -1,0 +1,16 @@
+baseline:
+0
+21:56:17
+restart 1 rc=0
+wpctl ok
+21:57:12
+restart 2 rc=0
+wpctl ok
+21:58:07
+restart 3 rc=0
+wpctl ok
+sdw:1:0:0217:0204:00:0 Attached
+sdw:1:0:0217:0204:00:1 Attached
+done
+
+[exited with code 0]
