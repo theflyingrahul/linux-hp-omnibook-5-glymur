@@ -37,7 +37,7 @@ nothing. Battery read 85 %, discharging, AC offline at the time of the check.
 
 `captures/2026-11-05-k18/`: kernel journals of this boot and the two before
 it, `dmesg`, the boot report, the audio, hotkey and Mesa checks and the GPIO
-debugfs listing. They went through `scripts/linux/sanitize-log.sh`: MAC
+debugfs listing. They went through a sanitizer (now merged into `scripts/linux/sanitize-capture.sh`): MAC
 addresses (including the access point's), UUIDs and partition UUIDs, USB
 serial numbers, the user name, e-mail and IP addresses are replaced. The
 5 s microphone recording is left out, and the full systemd journal stays
