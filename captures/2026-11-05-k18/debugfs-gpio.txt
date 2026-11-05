@@ -1,0 +1,70 @@
+gpiochip0: 251 GPIOs, parent: platform/f100000.pinctrl, f100000.pinctrl:
+ gpio0   : in  high func1 2mA pull up
+ gpio1   : in  high func1 2mA pull up
+ gpio3   : in  high func0 2mA pull up
+ gpio16  : in  high func1 2mA pull up
+ gpio17  : in  high func1 2mA pull up
+ gpio18  : out high func0 16mA no pull
+ gpio32  : in  high func1 2mA pull up
+ gpio33  : in  high func1 2mA pull up
+ gpio36  : in  high func1 2mA pull up
+ gpio37  : in  high func1 2mA pull up
+ gpio51  : in  high func0 2mA pull up
+ gpio56  : out low  func1 2mA no pull
+ gpio57  : out low  func1 2mA no pull
+ gpio58  : out low  func1 2mA no pull
+ gpio59  : out low  func1 2mA no pull
+ gpio66  : in  high func0 2mA pull up
+ gpio67  : in  high func0 2mA pull up
+ gpio70  : out high func0 16mA no pull
+ gpio92  : in  high func0 2mA no pull
+ gpio116 : out high func0 16mA no pull
+ gpio119 : in  high func1 2mA no pull
+ gpio146 : out high func0 2mA no pull
+ gpio147 : in  high func1 2mA pull up
+ gpio148 : in  high func0 2mA pull up
+ gpio152 : out high func0 2mA no pull
+ gpio153 : in  low  func1 2mA pull up
+ gpio154 : in  high func0 2mA pull up
+
+gpiochip1: 8 GPIOs, parent: platform/c426000.spmi:pmic@0:gpio@b800, c426000.spmi:pmic@0:gpio@b800:
+ gpio1 : in   low  normal  vin-0 pull-down 10uA              push-pull  low     atest-1 dtest-0
+ gpio2 : in   low  normal  vin-0 pull-down 10uA              push-pull  low     atest-1 dtest-0
+ gpio3 : in   low  normal  vin-0 pull-down 10uA              push-pull  low     atest-1 dtest-0
+ gpio4 : in   low  normal  vin-0 pull-down 10uA              push-pull  low     atest-1 dtest-0
+ gpio5 : in   low  normal  vin-0 pull-down 10uA              push-pull  low     atest-1 dtest-0
+ gpio6 : in   high normal  vin-0 no pull                     push-pull  low     atest-1 dtest-0
+ gpio7 : in   low  normal  vin-0 pull-down 10uA              push-pull  low     atest-1 dtest-0
+ gpio8 : out  high normal  vin-1 no pull                     push-pull  low     atest-1 dtest-0
+
+gpiochip2: 23 GPIOs, parent: platform/7760000.pinctrl, 7760000.pinctrl, can sleep:
+ gpio0   : in  0 2mA pull down
+ gpio1   : in  0 2mA pull down
+ gpio2   : in  0 2mA pull down
+ gpio3   : in  0 2mA pull down
+ gpio4   : in  0 2mA pull down
+ gpio5   : in  0 2mA pull down
+ gpio6   : out 1 8mA no pull
+ gpio7   : in  1 8mA no pull
+ gpio8   : in  0 2mA pull down
+ gpio9   : in  0 2mA pull down
+ gpio10  : in  2 2mA no pull
+ gpio11  : in  2 2mA keeper
+ gpio12  : out 0 2mA no pull
+ gpio13  : in  0 2mA pull down
+ gpio14  : in  0 2mA pull down
+ gpio15  : in  0 2mA pull down
+ gpio16  : in  0 2mA pull down
+ gpio17  : in  0 2mA pull down
+ gpio18  : in  0 2mA pull down
+ gpio19  : in  0 2mA pull down
+ gpio20  : in  0 2mA pull down
+ gpio21  : in  0 2mA pull down
+ gpio22  : in  0 2mA pull down
+
+gpiochip3: 1 GPIOs, parent: auxiliary/gpiolib_shared.proxy.7, gpiolib_shared.proxy.7, can sleep:
+
+gpiochip4: 1 GPIOs, parent: auxiliary/gpiolib_shared.proxy.8, gpiolib_shared.proxy.8, can sleep:
+ gpio-0   (                    |reset               ) out hi ACTIVE LOW
+
+gpiochip5: 1 GPIOs, parent: auxiliary/gpiolib_shared.proxy.9, gpiolib_shared.proxy.9, can sleep:

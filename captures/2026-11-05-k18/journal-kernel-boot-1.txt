@@ -1,0 +1,1236 @@
+Oct 02 23:05:38.515631 glymur kernel: Booting Linux on physical CPU 0x0000000000 [0x512f0021]
+Oct 02 23:05:38.515646 glymur kernel: Linux version 7.3.0-rc6-glymur-18 (glymur@glymur-build) (gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0, GNU ld (GNU Binutils for Ubuntu) 2.46) #1 SMP PREEMPT_DYNAMIC Fri Oct 23 09:39:43 PDT 2026
+Oct 02 23:05:38.515650 glymur kernel: KASLR enabled
+Oct 02 23:05:38.515653 glymur kernel: Machine model: HP OmniBook 5 Laptop 16-bf1xxx (test)
+Oct 02 23:05:38.515656 glymur kernel: efi: EFI v2.7 by INSYDE Corp.
+Oct 02 23:05:38.515660 glymur kernel: efi: SMBIOS=0xd6770000 SMBIOS 3.0=0xd6750000 TPMFinalLog=0xd6da0000 ACPI 2.0=0xd6ed3018 MEMATTR=0xc1cde018 ESRT=0xc261e018 MOKvar=0xd5f50000 TPMEventLog=0xd6e39018 INITRD=0xc1d02198 RNG=0xd6e3ff98 MEMRESERVE=0xc1d02218 
+Oct 02 23:05:38.515664 glymur kernel: random: crng init done
+Oct 02 23:05:38.515667 glymur kernel: esrt: Reserving ESRT space from 0x00000000c261e018 to 0x00000000c261e0c8.
+Oct 02 23:05:38.515670 glymur kernel: Reserved memory: created CMA memory pool at 0x00000000ff400000, size 8 MiB
+Oct 02 23:05:38.515673 glymur kernel: OF: reserved mem: initialized node adsp-rpc-remote-heap, compatible id shared-dma-pool
+Oct 02 23:05:38.515676 glymur kernel: OF: reserved mem: 0x00000000ff400000..0x00000000ffbfffff (8192 KiB) map reusable adsp-rpc-remote-heap
+Oct 02 23:05:38.515679 glymur kernel: OF: reserved mem: 0x0000000081400000..0x00000000814fffff (1024 KiB) nomap non-reusable pdp@81400000
+Oct 02 23:05:38.515682 glymur kernel: OF: reserved mem: 0x0000000081c60000..0x0000000081c7ffff (128 KiB) nomap non-reusable aop-cmd-db@81c60000
+Oct 02 23:05:38.515685 glymur kernel: OF: reserved mem: 0x0000000081e00000..0x0000000081ffffff (2048 KiB) nomap non-reusable pdp-ns-shared@81e00000
+Oct 02 23:05:38.515688 glymur kernel: OF: reserved mem: 0x0000000086e10000..0x000000008716ffff (3456 KiB) nomap non-reusable oobdaretag@86e10000
+Oct 02 23:05:38.515692 glymur kernel: OF: reserved mem: 0x0000000087170000..0x0000000087d2ffff (12032 KiB) nomap non-reusable oob-secure@87170000
+Oct 02 23:05:38.515695 glymur kernel: OF: reserved mem: 0x0000000087d30000..0x0000000087d4ffff (128 KiB) nomap non-reusable oobdtbqc@87d30000
+Oct 02 23:05:38.515698 glymur kernel: OF: reserved mem: 0x0000000087d50000..0x0000000087d6ffff (128 KiB) nomap non-reusable oobdtboem@87d50000
+Oct 02 23:05:38.515700 glymur kernel: OF: reserved mem: 0x0000000087e00000..0x00000000889fffff (12288 KiB) nomap non-reusable oob-nonsecure@87e00000
+Oct 02 23:05:38.515703 glymur kernel: OF: reserved mem: 0x0000000088a00000..0x0000000088dfffff (4096 KiB) nomap non-reusable spss@88a00000
+Oct 02 23:05:38.515706 glymur kernel: OF: reserved mem: 0x0000000088e00000..0x00000000891fffff (4096 KiB) nomap non-reusable soccp@88e00000
+Oct 02 23:05:38.515709 glymur kernel: OF: reserved mem: 0x0000000089200000..0x000000008921ffff (128 KiB) nomap non-reusable soccpdtb@89200000
+Oct 02 23:05:38.515712 glymur kernel: OF: reserved mem: 0x0000000089700000..0x0000000089dfffff (7168 KiB) nomap non-reusable cvp@89700000
+Oct 02 23:05:38.515715 glymur kernel: OF: reserved mem: 0x0000000089e00000..0x000000008d7fffff (59392 KiB) nomap non-reusable adspslpi@89e00000
+Oct 02 23:05:38.515718 glymur kernel: OF: reserved mem: 0x000000008d800000..0x000000008d87ffff (512 KiB) nomap non-reusable q6-adsp-dtb@8d800000
+Oct 02 23:05:38.515721 glymur kernel: OF: reserved mem: 0x000000008d900000..0x00000000918fffff (65536 KiB) nomap non-reusable cdsp@8d900000
+Oct 02 23:05:38.515723 glymur kernel: OF: reserved mem: 0x0000000091900000..0x000000009197ffff (512 KiB) nomap non-reusable q6-cdsp-dtb@91900000
+Oct 02 23:05:38.515726 glymur kernel: OF: reserved mem: 0x00000000919fe000..0x00000000919fffff (8 KiB) nomap non-reusable gpu-microcode@919fe000
+Oct 02 23:05:38.515729 glymur kernel: OF: reserved mem: 0x0000000091a00000..0x00000000921fffff (8192 KiB) nomap non-reusable camera@91a00000
+Oct 02 23:05:38.515733 glymur kernel: OF: reserved mem: 0x0000000092200000..0x00000000928fffff (7168 KiB) nomap non-reusable av1-encoder@92200000
+Oct 02 23:05:38.515735 glymur kernel: OF: reserved mem: 0x0000000092900000..0x00000000934fffff (12288 KiB) nomap non-reusable video@92900000
+Oct 02 23:05:38.515738 glymur kernel: OF: reserved mem: 0x00000000ffe00000..0x00000000ffffffff (2048 KiB) nomap non-reusable smem@ffe00000
+Oct 02 23:05:38.515741 glymur kernel: NUMA: Faking a node at [mem 0x0000000081a60000-0x0000000fffffffff]
+Oct 02 23:05:38.515744 glymur kernel: NODE_DATA(0) allocated [mem 0xffbf84700-0xffbf89cff]
+Oct 02 23:05:38.515747 glymur kernel: cma: Reserved 32 MiB at 0x00000000fcc00000
+Oct 02 23:05:38.515749 glymur kernel: psci: probing for conduit method from DT.
+Oct 02 23:05:38.515752 glymur kernel: psci: PSCIv1.1 detected in firmware.
+Oct 02 23:05:38.515755 glymur kernel: psci: Using standard PSCI v0.2 function IDs
+Oct 02 23:05:38.515758 glymur kernel: psci: MIGRATE_INFO_TYPE not supported.
+Oct 02 23:05:38.515760 glymur kernel: psci: SMC Calling Convention v1.1
+Oct 02 23:05:38.515764 glymur kernel: psci: OSI mode supported.
+Oct 02 23:05:38.515767 glymur kernel: psci: [Firmware Bug]: failed to set PC mode: -3
+Oct 02 23:05:38.515770 glymur kernel: Zone ranges:
+Oct 02 23:05:38.515773 glymur kernel:   DMA      [mem 0x0000000081a60000-0x00000000ffffffff]
+Oct 02 23:05:38.515775 glymur kernel:   DMA32    empty
+Oct 02 23:05:38.515778 glymur kernel:   Normal   [mem 0x0000000100000000-0x0000000fffffffff]
+Oct 02 23:05:38.515781 glymur kernel:   Device   empty
+Oct 02 23:05:38.515784 glymur kernel: Movable zone start for each node
+Oct 02 23:05:38.515787 glymur kernel: Early memory node ranges
+Oct 02 23:05:38.515789 glymur kernel:   node   0: [mem 0x0000000081a60000-0x0000000081bbffff]
+Oct 02 23:05:38.515792 glymur kernel:   node   0: [mem 0x0000000081bc0000-0x0000000081bfffff]
+Oct 02 23:05:38.515795 glymur kernel:   node   0: [mem 0x0000000081d00000-0x0000000081d5ffff]
+Oct 02 23:05:38.515798 glymur kernel:   node   0: [mem 0x0000000081db1000-0x0000000081dfffff]
+Oct 02 23:05:38.515800 glymur kernel:   node   0: [mem 0x0000000082200000-0x000000008239ffff]
+Oct 02 23:05:38.515803 glymur kernel:   node   0: [mem 0x00000000824e0000-0x00000000826fffff]
+Oct 02 23:05:38.515806 glymur kernel:   node   0: [mem 0x0000000082800000-0x00000000829bffff]
+Oct 02 23:05:38.515808 glymur kernel:   node   0: [mem 0x00000000829c0000-0x0000000083efffff]
+Oct 02 23:05:38.515811 glymur kernel:   node   0: [mem 0x0000000083f00000-0x00000000843fffff]
+Oct 02 23:05:38.515814 glymur kernel:   node   0: [mem 0x0000000084400000-0x00000000848fffff]
+Oct 02 23:05:38.515816 glymur kernel:   node   0: [mem 0x0000000085300000-0x000000008536ffff]
+Oct 02 23:05:38.515819 glymur kernel:   node   0: [mem 0x0000000085370000-0x0000000085d8ffff]
+Oct 02 23:05:38.515822 glymur kernel:   node   0: [mem 0x0000000085d90000-0x0000000086e0ffff]
+Oct 02 23:05:38.515824 glymur kernel:   node   0: [mem 0x0000000093f00000-0x00000000a8efffff]
+Oct 02 23:05:38.515827 glymur kernel:   node   0: [mem 0x00000000a8f00000-0x00000000a8f0ffff]
+Oct 02 23:05:38.515830 glymur kernel:   node   0: [mem 0x00000000a8f10000-0x00000000a8ffffff]
+Oct 02 23:05:38.515833 glymur kernel:   node   0: [mem 0x00000000a9000000-0x00000000a90fffff]
+Oct 02 23:05:38.515836 glymur kernel:   node   0: [mem 0x00000000a9100000-0x00000000d4dbffff]
+Oct 02 23:05:38.515838 glymur kernel:   node   0: [mem 0x00000000d4dc0000-0x00000000d596ffff]
+Oct 02 23:05:38.515841 glymur kernel:   node   0: [mem 0x00000000d5970000-0x00000000d5f4ffff]
+Oct 02 23:05:38.515844 glymur kernel:   node   0: [mem 0x00000000d5f50000-0x00000000d6b0ffff]
+Oct 02 23:05:38.515846 glymur kernel:   node   0: [mem 0x00000000d6b10000-0x00000000d6c9ffff]
+Oct 02 23:05:38.515849 glymur kernel:   node   0: [mem 0x00000000d6ca0000-0x00000000d6deffff]
+Oct 02 23:05:38.515852 glymur kernel:   node   0: [mem 0x00000000d6df0000-0x00000000d6efffff]
+Oct 02 23:05:38.515854 glymur kernel:   node   0: [mem 0x00000000d9dc0000-0x00000000f9a1ffff]
+Oct 02 23:05:38.515857 glymur kernel:   node   0: [mem 0x00000000f9a20000-0x00000000fbd1ffff]
+Oct 02 23:05:38.515860 glymur kernel:   node   0: [mem 0x00000000fbd20000-0x00000000febfffff]
+Oct 02 23:05:38.515862 glymur kernel:   node   0: [mem 0x00000000fed80000-0x00000000ffdfffff]
+Oct 02 23:05:38.515865 glymur kernel:   node   0: [mem 0x0000000880000000-0x00000008bedfbfff]
+Oct 02 23:05:38.515868 glymur kernel:   node   0: [mem 0x00000008c0000000-0x0000000fffffffff]
+Oct 02 23:05:38.515871 glymur kernel: Initmem setup node 0 [mem 0x0000000081a60000-0x0000000fffffffff]
+Oct 02 23:05:38.515874 glymur kernel: On node 0, zone DMA: 6752 pages in unavailable ranges
+Oct 02 23:05:38.515877 glymur kernel: On node 0, zone DMA: 256 pages in unavailable ranges
+Oct 02 23:05:38.515880 glymur kernel: On node 0, zone DMA: 81 pages in unavailable ranges
+Oct 02 23:05:38.515883 glymur kernel: On node 0, zone DMA: 1024 pages in unavailable ranges
+Oct 02 23:05:38.515885 glymur kernel: On node 0, zone DMA: 320 pages in unavailable ranges
+Oct 02 23:05:38.515888 glymur kernel: On node 0, zone DMA: 256 pages in unavailable ranges
+Oct 02 23:05:38.515891 glymur kernel: On node 0, zone DMA: 2560 pages in unavailable ranges
+Oct 02 23:05:38.515894 glymur kernel: On node 0, zone DMA: 20720 pages in unavailable ranges
+Oct 02 23:05:38.515896 glymur kernel: On node 0, zone DMA: 11968 pages in unavailable ranges
+Oct 02 23:05:38.515899 glymur kernel: On node 0, zone DMA: 384 pages in unavailable ranges
+Oct 02 23:05:38.515902 glymur kernel: On node 0, zone Normal: 512 pages in unavailable ranges
+Oct 02 23:05:38.515905 glymur kernel: On node 0, zone Normal: 4612 pages in unavailable ranges
+Oct 02 23:05:38.515907 glymur kernel: percpu: Embedded 59 pages/cpu s115288 r8192 d118184 u241664
+Oct 02 23:05:38.515910 glymur kernel: pcpu-alloc: s115288 r8192 d118184 u241664 alloc=59*4096
+Oct 02 23:05:38.515913 glymur kernel: pcpu-alloc: [0] 00 [0] 01 [0] 02 [0] 03 [0] 04 [0] 05 [0] 06 [0] 07 
+Oct 02 23:05:38.515916 glymur kernel: pcpu-alloc: [0] 08 [0] 09 [0] 10 [0] 11 
+Oct 02 23:05:38.515919 glymur kernel: Detected PIPT I-cache on CPU0
+Oct 02 23:05:38.515922 glymur kernel: CPU features: SYS_ID_AA64ISAR1_EL1[31:28]: already set to 0
+Oct 02 23:05:38.515925 glymur kernel: CPU features: SYS_ID_AA64ISAR1_EL1[27:24]: already set to 0
+Oct 02 23:05:38.515928 glymur kernel: CPU features: SYS_ID_AA64ISAR1_EL1[11:8]: already set to 0
+Oct 02 23:05:38.515930 glymur kernel: CPU features: SYS_ID_AA64ISAR1_EL1[7:4]: already set to 0
+Oct 02 23:05:38.515933 glymur kernel: CPU features: SYS_ID_AA64ISAR2_EL1[15:12]: forced to 0
+Oct 02 23:05:38.515936 glymur kernel: CPU features: SYS_ID_AA64ISAR2_EL1[11:8]: forced to 0
+Oct 02 23:05:38.515939 glymur kernel: CPU features: detected: GICv3 CPU interface
+Oct 02 23:05:38.515942 glymur kernel: CPU features: detected: HCRX_EL2 register
+Oct 02 23:05:38.515944 glymur kernel: CPU features: detected: Virtualization Host Extensions
+Oct 02 23:05:38.515947 glymur kernel: CPU features: detected: Spectre-v4
+Oct 02 23:05:38.515949 glymur kernel: alternatives: applying boot alternatives
+Oct 02 23:05:38.515953 glymur kernel: Kernel command line: BOOT_IMAGE=(hd1,gpt4)/boot/vmlinuz-glymur root=PARTUUID=<uuid> rootfstype=ext4 ro rootwait clk_ignore_unused pd_ignore_unused arm64.nopauth quiet splash log_buf_len=16M console=tty0 loglevel=4
+Oct 02 23:05:38.515956 glymur kernel: Unknown kernel command line parameters "splash", will be passed to user space.
+Oct 02 23:05:38.515958 glymur kernel: printk: log buffer data + meta data: 16777216 + 71303168 = 88080384 bytes
+Oct 02 23:05:38.515962 glymur kernel: printk: early log buf free: 253752(96%)
+Oct 02 23:05:38.515964 glymur kernel: Dentry cache hash table entries: 4194304 (order: 13, 33554432 bytes, linear)
+Oct 02 23:05:38.515967 glymur kernel: Inode-cache hash table entries: 2097152 (order: 12, 16777216 bytes, linear)
+Oct 02 23:05:38.515970 glymur kernel: software IO TLB: area num 16.
+Oct 02 23:05:38.515973 glymur kernel: software IO TLB: SWIOTLB bounce buffer size roundup to 4MB
+Oct 02 23:05:38.515975 glymur kernel: software IO TLB: mapped [mem 0x00000000ff000000-0x00000000ff400000] (4MB)
+Oct 02 23:05:38.515979 glymur kernel: Fallback order for Node 0: 0 
+Oct 02 23:05:38.515983 glymur kernel: Built 1 zonelists, mobility grouping on.  Total pages: 8306395
+Oct 02 23:05:38.515986 glymur kernel: Policy zone: Normal
+Oct 02 23:05:38.515989 glymur kernel: mem auto-init: stack:all(zero), heap alloc:on, heap free:off
+Oct 02 23:05:38.515992 glymur kernel: SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=12, Nodes=1
+Oct 02 23:05:38.515995 glymur kernel: ftrace: allocating 69811 entries in 274 pages
+Oct 02 23:05:38.515998 glymur kernel: ftrace: allocated 274 pages with 3 groups
+Oct 02 23:05:38.516001 glymur kernel: Dynamic Preempt: lazy
+Oct 02 23:05:38.516003 glymur kernel: rcu: Preemptible hierarchical RCU implementation.
+Oct 02 23:05:38.516007 glymur kernel: rcu:         RCU restricting CPUs from NR_CPUS=512 to nr_cpu_ids=12.
+Oct 02 23:05:38.516009 glymur kernel:         Trampoline variant of Tasks RCU enabled.
+Oct 02 23:05:38.516012 glymur kernel:         Rude variant of Tasks RCU enabled.
+Oct 02 23:05:38.516015 glymur kernel:         Tracing variant of Tasks RCU enabled.
+Oct 02 23:05:38.516018 glymur kernel: rcu: RCU calculated value of scheduler-enlistment delay is 100 jiffies.
+Oct 02 23:05:38.516021 glymur kernel: rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=12
+Oct 02 23:05:38.516023 glymur kernel: RCU Tasks: Setting shift to 4 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=12.
+Oct 02 23:05:38.516026 glymur kernel: RCU Tasks Rude: Setting shift to 4 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=12.
+Oct 02 23:05:38.516029 glymur kernel: NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+Oct 02 23:05:38.516032 glymur kernel: GICv3: GIC: Using split EOI/Deactivate mode
+Oct 02 23:05:38.516035 glymur kernel: GIC: enabling workaround for GICv3: ARM64 erratum 2941627
+Oct 02 23:05:38.516037 glymur kernel: GICv3: 960 SPIs implemented
+Oct 02 23:05:38.516040 glymur kernel: GICv3: 1024 Extended SPIs implemented
+Oct 02 23:05:38.516042 glymur kernel: Root IRQ handler: gic_handle_irq
+Oct 02 23:05:38.516045 glymur kernel: GICv3: GICv3 features: 48 PPIs, DirectLPI
+Oct 02 23:05:38.516048 glymur kernel: GICv3: GICv4 features: DirectLPI RVPEID Valid+Dirty 
+Oct 02 23:05:38.516050 glymur kernel: GICv3: GICD_CTLR.DS=0, SCR_EL3.FIQ=1
+Oct 02 23:05:38.516053 glymur kernel: GICv3: CPU0: found redistributor 0 region 0:0x0000000017080000
+Oct 02 23:05:38.516056 glymur kernel: ITS [mem 0x17040000-0x1707ffff]
+Oct 02 23:05:38.516058 glymur kernel: ITS@0x0000000017040000: Single VMOVP capable
+Oct 02 23:05:38.516061 glymur kernel: ITS@0x0000000017040000: Using GICv4.1 mode 00000000 00000001
+Oct 02 23:05:38.516064 glymur kernel: ITS@0x0000000017040000: allocated 8192 Devices @880820000 (indirect, esz 8, psz 64K, shr 1)
+Oct 02 23:05:38.516067 glymur kernel: ITS@0x0000000017040000: allocated 32768 Interrupt Collections @880830000 (flat, esz 2, psz 64K, shr 1)
+Oct 02 23:05:38.516070 glymur kernel: ITS@0x0000000017040000: allocated 8192 Virtual CPUs @880840000 (flat, esz 8, psz 64K, shr 1)
+Oct 02 23:05:38.516072 glymur kernel: GICv3: using LPI property table @0x0000000880850000
+Oct 02 23:05:38.516076 glymur kernel: ITS: Using DirectLPI for VPE invalidation
+Oct 02 23:05:38.516079 glymur kernel: ITS: Enabling GICv4 support
+Oct 02 23:05:38.516082 glymur kernel: GICv3: CPU0: using allocated LPI pending table @0x0000000880860000
+Oct 02 23:05:38.516084 glymur kernel: rcu: srcu_init: Setting srcu_struct sizes based on contention.
+Oct 02 23:05:38.516087 glymur kernel: clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275000 ns
+Oct 02 23:05:38.516090 glymur kernel: arch_timer: cp15 timer running at 19.20MHz (hyp-virt).
+Oct 02 23:05:38.516093 glymur kernel: clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x46d987e47, max_idle_ns: 440795202767 ns
+Oct 02 23:05:38.516096 glymur kernel: sched_clock: 56 bits at 19MHz, resolution 52ns, wraps every 4398046511078ns
+Oct 02 23:05:38.516098 glymur kernel: Console: colour dummy device 80x25
+Oct 02 23:05:38.516102 glymur kernel: printk: legacy console [tty0] enabled
+Oct 02 23:05:38.516105 glymur kernel: Calibrating delay loop (skipped), value calculated using timer frequency.. 38.40 BogoMIPS (lpj=19200)
+Oct 02 23:05:38.516108 glymur kernel: pid_max: default: 32768 minimum: 301
+Oct 02 23:05:38.516111 glymur kernel: landlock: Up and running.
+Oct 02 23:05:38.516116 glymur kernel: Yama: becoming mindful.
+Oct 02 23:05:38.516119 glymur kernel: AppArmor: AppArmor initialized
+Oct 02 23:05:38.516122 glymur kernel: Mount-cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+Oct 02 23:05:38.516126 glymur kernel: Mountpoint-cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+Oct 02 23:05:38.516129 glymur kernel: VFS: Finished mounting rootfs on nullfs
+Oct 02 23:05:38.516132 glymur kernel: rcu: Hierarchical SRCU implementation.
+Oct 02 23:05:38.516135 glymur kernel: rcu:         Max phase no-delay instances is 400.
+Oct 02 23:05:38.516139 glymur kernel: Timer migration: 2 hierarchy levels; 8 children per group; 2 crossnode level
+Oct 02 23:05:38.516142 glymur kernel: Remapping and enabling EFI services.
+Oct 02 23:05:38.516145 glymur kernel: smp: Bringing up secondary CPUs ...
+Oct 02 23:05:38.516148 glymur kernel: Detected PIPT I-cache on CPU1
+Oct 02 23:05:38.516151 glymur kernel: GICv3: CPU1: found redistributor 100 region 0:0x00000000170c0000
+Oct 02 23:05:38.516154 glymur kernel: GICv3: CPU1: using allocated LPI pending table @0x0000000880870000
+Oct 02 23:05:38.516158 glymur kernel: CPU1: Booted secondary processor 0x0000000100 [0x512f0021]
+Oct 02 23:05:38.516161 glymur kernel: Detected PIPT I-cache on CPU2
+Oct 02 23:05:38.516164 glymur kernel: GICv3: CPU2: found redistributor 200 region 0:0x0000000017100000
+Oct 02 23:05:38.516167 glymur kernel: GICv3: CPU2: using allocated LPI pending table @0x0000000880880000
+Oct 02 23:05:38.516170 glymur kernel: CPU2: Booted secondary processor 0x0000000200 [0x512f0021]
+Oct 02 23:05:38.516173 glymur kernel: Detected PIPT I-cache on CPU3
+Oct 02 23:05:38.516177 glymur kernel: GICv3: CPU3: found redistributor 300 region 0:0x0000000017140000
+Oct 02 23:05:38.516180 glymur kernel: GICv3: CPU3: using allocated LPI pending table @0x0000000880890000
+Oct 02 23:05:38.516183 glymur kernel: CPU3: Booted secondary processor 0x0000000300 [0x512f0021]
+Oct 02 23:05:38.516186 glymur kernel: Detected PIPT I-cache on CPU4
+Oct 02 23:05:38.516190 glymur kernel: GICv3: CPU4: found redistributor 400 region 0:0x0000000017180000
+Oct 02 23:05:38.516193 glymur kernel: GICv3: CPU4: using allocated LPI pending table @0x00000008808a0000
+Oct 02 23:05:38.516196 glymur kernel: CPU4: Booted secondary processor 0x0000000400 [0x512f0021]
+Oct 02 23:05:38.516199 glymur kernel: Detected PIPT I-cache on CPU5
+Oct 02 23:05:38.516203 glymur kernel: GICv3: CPU5: found redistributor 500 region 0:0x00000000171c0000
+Oct 02 23:05:38.516206 glymur kernel: GICv3: CPU5: using allocated LPI pending table @0x00000008808b0000
+Oct 02 23:05:38.516209 glymur kernel: CPU5: Booted secondary processor 0x0000000500 [0x512f0021]
+Oct 02 23:05:38.516212 glymur kernel: Detected PIPT I-cache on CPU6
+Oct 02 23:05:38.516216 glymur kernel: GICv3: CPU6: found redistributor 10000 region 0:0x0000000017200000
+Oct 02 23:05:38.516219 glymur kernel: GICv3: CPU6: using allocated LPI pending table @0x00000008808c0000
+Oct 02 23:05:38.516222 glymur kernel: CPU6: Booted secondary processor 0x0000010000 [0x511f0021]
+Oct 02 23:05:38.516225 glymur kernel: Detected PIPT I-cache on CPU7
+Oct 02 23:05:38.516228 glymur kernel: GICv3: CPU7: found redistributor 10100 region 0:0x0000000017240000
+Oct 02 23:05:38.516232 glymur kernel: GICv3: CPU7: using allocated LPI pending table @0x00000008808d0000
+Oct 02 23:05:38.516235 glymur kernel: CPU7: Booted secondary processor 0x0000010100 [0x511f0021]
+Oct 02 23:05:38.516238 glymur kernel: Detected PIPT I-cache on CPU8
+Oct 02 23:05:38.516241 glymur kernel: GICv3: CPU8: found redistributor 10200 region 0:0x0000000017280000
+Oct 02 23:05:38.516244 glymur kernel: GICv3: CPU8: using allocated LPI pending table @0x00000008808e0000
+Oct 02 23:05:38.516248 glymur kernel: CPU8: Booted secondary processor 0x0000010200 [0x511f0021]
+Oct 02 23:05:38.516251 glymur kernel: Detected PIPT I-cache on CPU9
+Oct 02 23:05:38.516254 glymur kernel: GICv3: CPU9: found redistributor 10300 region 0:0x00000000172c0000
+Oct 02 23:05:38.516257 glymur kernel: GICv3: CPU9: using allocated LPI pending table @0x00000008808f0000
+Oct 02 23:05:38.516261 glymur kernel: CPU9: Booted secondary processor 0x0000010300 [0x511f0021]
+Oct 02 23:05:38.516264 glymur kernel: Detected PIPT I-cache on CPU10
+Oct 02 23:05:38.516267 glymur kernel: GICv3: CPU10: found redistributor 10400 region 0:0x0000000017300000
+Oct 02 23:05:38.516270 glymur kernel: GICv3: CPU10: using allocated LPI pending table @0x0000000880900000
+Oct 02 23:05:38.516274 glymur kernel: CPU10: Booted secondary processor 0x0000010400 [0x511f0021]
+Oct 02 23:05:38.516277 glymur kernel: Detected PIPT I-cache on CPU11
+Oct 02 23:05:38.516280 glymur kernel: GICv3: CPU11: found redistributor 10500 region 0:0x0000000017340000
+Oct 02 23:05:38.516283 glymur kernel: GICv3: CPU11: using allocated LPI pending table @0x0000000880910000
+Oct 02 23:05:38.516287 glymur kernel: CPU11: Booted secondary processor 0x0000010500 [0x511f0021]
+Oct 02 23:05:38.516290 glymur kernel: smp: Brought up 1 node, 12 CPUs
+Oct 02 23:05:38.516293 glymur kernel: SMP: Total of 12 processors activated.
+Oct 02 23:05:38.516296 glymur kernel: CPU: All CPU(s) started at EL2
+Oct 02 23:05:38.516299 glymur kernel: CPU features: detected: Branch Target Identification
+Oct 02 23:05:38.516302 glymur kernel: CPU features: detected: ARMv8.4 Translation Table Level
+Oct 02 23:05:38.516305 glymur kernel: CPU features: detected: Instruction cache invalidation not required for I/D coherence
+Oct 02 23:05:38.516309 glymur kernel: CPU features: detected: Data cache clean to the PoU not required for I/D coherence
+Oct 02 23:05:38.516312 glymur kernel: CPU features: detected: Common not Private translations
+Oct 02 23:05:38.516315 glymur kernel: CPU features: detected: CRC32 instructions
+Oct 02 23:05:38.516319 glymur kernel: CPU features: detected: Data cache clean to Point of Deep Persistence
+Oct 02 23:05:38.516322 glymur kernel: CPU features: detected: Data cache clean to Point of Persistence
+Oct 02 23:05:38.516325 glymur kernel: CPU features: detected: Data independent timing control (DIT)
+Oct 02 23:05:38.516328 glymur kernel: CPU features: detected: E0PD
+Oct 02 23:05:38.516331 glymur kernel: CPU features: detected: Enhanced Counter Virtualization
+Oct 02 23:05:38.516334 glymur kernel: CPU features: detected: Enhanced Counter Virtualization (CNTPOFF)
+Oct 02 23:05:38.516337 glymur kernel: CPU features: detected: Enhanced Privileged Access Never
+Oct 02 23:05:38.516351 glymur kernel: CPU features: detected: Enhanced Virtualization Traps
+Oct 02 23:05:38.516355 glymur kernel: CPU features: detected: Fine Grained Traps
+Oct 02 23:05:38.516359 glymur kernel: CPU features: detected: RCpc load-acquire (LDAPR)
+Oct 02 23:05:38.516362 glymur kernel: CPU features: detected: LSE atomic instructions
+Oct 02 23:05:38.516365 glymur kernel: CPU features: detected: Privileged Access Never
+Oct 02 23:05:38.516368 glymur kernel: CPU features: detected: PMUv3
+Oct 02 23:05:38.516371 glymur kernel: CPU features: detected: RAS Extension Support
+Oct 02 23:05:38.516374 glymur kernel: CPU features: detected: RASv1p1 Extension Support
+Oct 02 23:05:38.516377 glymur kernel: CPU features: detected: Random Number Generator
+Oct 02 23:05:38.516380 glymur kernel: CPU features: detected: Speculation barrier (SB)
+Oct 02 23:05:38.516383 glymur kernel: CPU features: detected: Stage-2 Force Write-Back
+Oct 02 23:05:38.516387 glymur kernel: CPU features: detected: TLB range maintenance instructions
+Oct 02 23:05:38.516390 glymur kernel: CPU features: detected: WFx with timeout
+Oct 02 23:05:38.516393 glymur kernel: CPU features: detected: XNX
+Oct 02 23:05:38.516396 glymur kernel: CPU features: detected: Scalable Matrix Extension
+Oct 02 23:05:38.516399 glymur kernel: CPU features: detected: Speculative Store Bypassing Safe (SSBS)
+Oct 02 23:05:38.516402 glymur kernel: CPU features: detected: Scalable Vector Extension
+Oct 02 23:05:38.516405 glymur kernel: alternatives: applying system-wide alternatives
+Oct 02 23:05:38.516408 glymur kernel: CPU features: detected: Activity Monitors Unit (AMU) on CPU0-11
+Oct 02 23:05:38.516412 glymur kernel: CPU features: detected: ICV_DIR_EL1 trapping
+Oct 02 23:05:38.516416 glymur kernel: CPU features: detected: Hardware dirty bit management on CPU0-11
+Oct 02 23:05:38.516419 glymur kernel: SVE: maximum available vector length 16 bytes per vector
+Oct 02 23:05:38.516422 glymur kernel: SVE: default vector length 16 bytes per vector
+Oct 02 23:05:38.516425 glymur kernel: SME: minimum available vector length 64 bytes per vector
+Oct 02 23:05:38.516429 glymur kernel: SME: maximum available vector length 64 bytes per vector
+Oct 02 23:05:38.516431 glymur kernel: SME: default vector length 64 bytes per vector
+Oct 02 23:05:38.516435 glymur kernel: Memory: 29483144K/33225580K available (28160K kernel code, 6922K rwdata, 13520K rodata, 16000K init, 1292K bss, 3681840K reserved, 40960K cma-reserved)
+Oct 02 23:05:38.516438 glymur kernel: devtmpfs: initialized
+Oct 02 23:05:38.516441 glymur kernel: setend instruction emulation is not supported on this system
+Oct 02 23:05:38.516445 glymur kernel: posixtimers hash table entries: 8192 (order: 5, 131072 bytes, linear)
+Oct 02 23:05:38.516448 glymur kernel: futex hash table entries: 4096 (262144 bytes on 1 NUMA nodes, total 256 KiB, linear).
+Oct 02 23:05:38.516451 glymur kernel: 2G module region forced by RANDOMIZE_MODULE_REGION_FULL
+Oct 02 23:05:38.516454 glymur kernel: 0 pages in range for non-PLT usage
+Oct 02 23:05:38.516458 glymur kernel: 507744 pages in range for PLT usage
+Oct 02 23:05:38.516460 glymur kernel: DMI: SMBIOS 3.8.0 present.
+Oct 02 23:05:38.516464 glymur kernel: DMI: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+Oct 02 23:05:38.516467 glymur kernel: DMI: Memory slots populated: 1/1
+Oct 02 23:05:38.516470 glymur kernel: NET: Registered PF_NETLINK/PF_ROUTE protocol family
+Oct 02 23:05:38.516474 glymur kernel: DMA: preallocated 4096 KiB GFP_KERNEL pool for atomic allocations
+Oct 02 23:05:38.516477 glymur kernel: DMA: preallocated 4096 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+Oct 02 23:05:38.516480 glymur kernel: audit: initializing netlink subsys (disabled)
+Oct 02 23:05:38.516483 glymur kernel: audit: type=2000 audit(0.018:1): state=initialized audit_enabled=0 res=1
+Oct 02 23:05:38.516486 glymur kernel: thermal_sys: Registered thermal governor 'fair_share'
+Oct 02 23:05:38.516489 glymur kernel: thermal_sys: Registered thermal governor 'bang_bang'
+Oct 02 23:05:38.516492 glymur kernel: thermal_sys: Registered thermal governor 'step_wise'
+Oct 02 23:05:38.516496 glymur kernel: thermal_sys: Registered thermal governor 'user_space'
+Oct 02 23:05:38.516499 glymur kernel: thermal_sys: Registered thermal governor 'power_allocator'
+Oct 02 23:05:38.516503 glymur kernel: cpuidle: using governor ladder
+Oct 02 23:05:38.516506 glymur kernel: cpuidle: using governor menu
+Oct 02 23:05:38.516509 glymur kernel: hw-breakpoint: found 6 breakpoint and 4 watchpoint registers.
+Oct 02 23:05:38.516512 glymur kernel: ASID allocator initialised with 65536 entries
+Oct 02 23:05:38.516516 glymur kernel: Serial: AMBA PL011 UART driver
+Oct 02 23:05:38.516519 glymur kernel: CPUidle PSCI: Initialized CPU PM domain topology using OSI mode
+Oct 02 23:05:38.516522 glymur kernel: /soc@0/clock-controller@af00000: Fixed dependency cycle(s) with /soc@0/phy@faac00
+Oct 02 23:05:38.516525 glymur kernel: /soc@0/phy@faac00: Fixed dependency cycle(s) with /soc@0/clock-controller@af00000
+Oct 02 23:05:38.516528 glymur kernel: /soc@0/usb@a600000: Fixed dependency cycle(s) with /soc@0/phy@fd5000
+Oct 02 23:05:38.516532 glymur kernel: /soc@0/phy@fd5000: Fixed dependency cycle(s) with /soc@0/usb@a600000
+Oct 02 23:05:38.516535 glymur kernel: /soc@0/usb@a800000: Fixed dependency cycle(s) with /soc@0/phy@fde000
+Oct 02 23:05:38.516539 glymur kernel: /soc@0/phy@fde000: Fixed dependency cycle(s) with /soc@0/usb@a800000
+Oct 02 23:05:38.516542 glymur kernel: /soc@0/usb@a000000: Fixed dependency cycle(s) with /soc@0/phy@88e1000
+Oct 02 23:05:38.516545 glymur kernel: /soc@0/phy@88e1000: Fixed dependency cycle(s) with /soc@0/usb@a000000
+Oct 02 23:05:38.516549 glymur kernel: /soc@0/display-subsystem@ae00000/displayport-controller@af6c000: Fixed dependency cycle(s) with /soc@0/display-subsystem@ae00000/display-controller@ae01000
+Oct 02 23:05:38.516552 glymur kernel: /soc@0/display-subsystem@ae00000/display-controller@ae01000: Fixed dependency cycle(s) with /soc@0/display-subsystem@ae00000/displayport-controller@af6c000
+Oct 02 23:05:38.516556 glymur kernel: /soc@0/display-subsystem@ae00000/displayport-controller@af6c000/aux-bus/panel: Fixed dependency cycle(s) with /soc@0/display-subsystem@ae00000/displayport-controller@af6c000
+Oct 02 23:05:38.516560 glymur kernel: /soc@0/display-subsystem@ae00000/displayport-controller@af6c000: Fixed dependency cycle(s) with /soc@0/display-subsystem@ae00000/displayport-controller@af6c000/aux-bus/panel
+Oct 02 23:05:38.516563 glymur kernel: /soc@0/tmc@1004f000: Fixed dependency cycle(s) with /soc@0/ctcu@10001000
+Oct 02 23:05:38.516566 glymur kernel: /soc@0/tmc@10048000: Fixed dependency cycle(s) with /soc@0/ctcu@10001000
+Oct 02 23:05:38.516570 glymur kernel: /soc@0/replicator@1004e000: Fixed dependency cycle(s) with /soc@0/tmc@10048000
+Oct 02 23:05:38.516573 glymur kernel: /soc@0/tmc@1004f000: Fixed dependency cycle(s) with /soc@0/replicator@1004e000
+Oct 02 23:05:38.516576 glymur kernel: /soc@0/ctcu@10001000: Fixed dependency cycle(s) with /soc@0/tmc@1004f000
+Oct 02 23:05:38.516580 glymur kernel: /soc@0/replicator@1004e000: Fixed dependency cycle(s) with /soc@0/tmc@1004f000
+Oct 02 23:05:38.516583 glymur kernel: /soc@0/tmc@10048000: Fixed dependency cycle(s) with /soc@0/replicator@1004e000
+Oct 02 23:05:38.516587 glymur kernel: /soc@0/ctcu@10001000: Fixed dependency cycle(s) with /soc@0/tmc@10048000
+Oct 02 23:05:38.516590 glymur kernel: /soc@0/funnel@10041000: Fixed dependency cycle(s) with /soc@0/stm@10002000
+Oct 02 23:05:38.516593 glymur kernel: /soc@0/stm@10002000: Fixed dependency cycle(s) with /soc@0/funnel@10041000
+Oct 02 23:05:38.516596 glymur kernel: /soc@0/funnel@10041000: Fixed dependency cycle(s) with /soc@0/tpda@10004000
+Oct 02 23:05:38.516600 glymur kernel: /soc@0/tpda@10004000: Fixed dependency cycle(s) with /soc@0/funnel@10041000
+Oct 02 23:05:38.516603 glymur kernel: /soc@0/tpdm@1000f000: Fixed dependency cycle(s) with /soc@0/tpda@10004000
+Oct 02 23:05:38.516606 glymur kernel: /soc@0/tpda@10004000: Fixed dependency cycle(s) with /soc@0/tpdm@1000f000
+Oct 02 23:05:38.516609 glymur kernel: /soc@0/funnel@11c04000: Fixed dependency cycle(s) with /soc@0/funnel@10041000
+Oct 02 23:05:38.516613 glymur kernel: /soc@0/funnel@10041000: Fixed dependency cycle(s) with /soc@0/funnel@11c04000
+Oct 02 23:05:38.516616 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/funnel@10041000
+Oct 02 23:05:38.516619 glymur kernel: /soc@0/funnel@10041000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516623 glymur kernel: /soc@0/replicator@1004e000: Fixed dependency cycle(s) with /soc@0/replicator@10046000
+Oct 02 23:05:38.516626 glymur kernel: /soc@0/replicator@10046000: Fixed dependency cycle(s) with /soc@0/replicator@1004e000
+Oct 02 23:05:38.516629 glymur kernel: /soc@0/replicator@11c06000: Fixed dependency cycle(s) with /soc@0/replicator@10046000
+Oct 02 23:05:38.516632 glymur kernel: /soc@0/replicator@10046000: Fixed dependency cycle(s) with /soc@0/replicator@11c06000
+Oct 02 23:05:38.516636 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@1102c000
+Oct 02 23:05:38.516639 glymur kernel: /soc@0/tpdm@1102c000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516643 glymur kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /soc@0/tpdm@11180000
+Oct 02 23:05:38.516646 glymur kernel: /soc@0/tpdm@11180000: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Oct 02 23:05:38.516649 glymur kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /soc@0/tpdm@11185000
+Oct 02 23:05:38.516652 glymur kernel: /soc@0/tpdm@11185000: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Oct 02 23:05:38.516655 glymur kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /soc@0/tpdm@11186000
+Oct 02 23:05:38.516658 glymur kernel: /soc@0/tpdm@11186000: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Oct 02 23:05:38.516662 glymur kernel: /soc@0/funnel@11189000: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Oct 02 23:05:38.516665 glymur kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /soc@0/funnel@11189000
+Oct 02 23:05:38.516669 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/funnel@11189000
+Oct 02 23:05:38.516672 glymur kernel: /soc@0/funnel@11189000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516675 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@111d0000
+Oct 02 23:05:38.516678 glymur kernel: /soc@0/tpdm@111d0000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516681 glymur kernel: /soc@0/tpdm@11220000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516685 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@11220000
+Oct 02 23:05:38.516688 glymur kernel: /soc@0/tpdm@11228000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516691 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@11228000
+Oct 02 23:05:38.516694 glymur kernel: /soc@0/tpdm@11224000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516698 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@11224000
+Oct 02 23:05:38.516701 glymur kernel: /soc@0/tpdm@1121f000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516704 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@1121f000
+Oct 02 23:05:38.516707 glymur kernel: /soc@0/tpdm@1121e000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516711 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@1121e000
+Oct 02 23:05:38.516714 glymur kernel: /soc@0/tpdm@1121d000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516717 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@1121d000
+Oct 02 23:05:38.516720 glymur kernel: /soc@0/tpdm@1121c000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516724 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@1121c000
+Oct 02 23:05:38.516727 glymur kernel: /soc@0/tpdm@1121b000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516730 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@1121b000
+Oct 02 23:05:38.516734 glymur kernel: /soc@0/tpdm@1121a000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516740 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@1121a000
+Oct 02 23:05:38.516744 glymur kernel: /soc@0/tpdm@11219000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516747 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@11219000
+Oct 02 23:05:38.516750 glymur kernel: /soc@0/tpda@11471000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516753 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/tpda@11471000
+Oct 02 23:05:38.516756 glymur kernel: /soc@0/tpdm@11213000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516759 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@11213000
+Oct 02 23:05:38.516763 glymur kernel: /soc@0/tpdm@1120b000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516766 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@1120b000
+Oct 02 23:05:38.516770 glymur kernel: /soc@0/tpdm@11207000: Fixed dependency cycle(s) with /soc@0/tn@11200000
+Oct 02 23:05:38.516773 glymur kernel: /soc@0/tn@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@11207000
+Oct 02 23:05:38.516776 glymur kernel: /soc@0/tpda@11471000: Fixed dependency cycle(s) with /soc@0/tpdm@11470000
+Oct 02 23:05:38.516779 glymur kernel: /soc@0/tpdm@11470000: Fixed dependency cycle(s) with /soc@0/tpda@11471000
+Oct 02 23:05:38.516782 glymur kernel: /soc@0/tpda@11c08000: Fixed dependency cycle(s) with /soc@0/tpdm@11c03000
+Oct 02 23:05:38.516785 glymur kernel: /soc@0/tpdm@11c03000: Fixed dependency cycle(s) with /soc@0/tpda@11c08000
+Oct 02 23:05:38.516789 glymur kernel: /soc@0/tmc@11c05000: Fixed dependency cycle(s) with /soc@0/funnel@11c04000
+Oct 02 23:05:38.516792 glymur kernel: /soc@0/funnel@11c04000: Fixed dependency cycle(s) with /soc@0/tmc@11c05000
+Oct 02 23:05:38.516795 glymur kernel: /soc@0/tpda@11c08000: Fixed dependency cycle(s) with /soc@0/funnel@11c04000
+Oct 02 23:05:38.516799 glymur kernel: /soc@0/funnel@11c04000: Fixed dependency cycle(s) with /soc@0/tpda@11c08000
+Oct 02 23:05:38.516802 glymur kernel: /soc@0/replicator@11c06000: Fixed dependency cycle(s) with /soc@0/tmc@11c05000
+Oct 02 23:05:38.516806 glymur kernel: /soc@0/tmc@11c05000: Fixed dependency cycle(s) with /soc@0/replicator@11c06000
+Oct 02 23:05:38.516809 glymur kernel: /dummy-sink: Fixed dependency cycle(s) with /soc@0/replicator@11c06000
+Oct 02 23:05:38.516812 glymur kernel: /soc@0/replicator@11c06000: Fixed dependency cycle(s) with /dummy-sink
+Oct 02 23:05:38.516816 glymur kernel: /soc@0/tpdm@11c0d000: Fixed dependency cycle(s) with /soc@0/tpda@11c08000
+Oct 02 23:05:38.516819 glymur kernel: /soc@0/tpda@11c08000: Fixed dependency cycle(s) with /soc@0/tpdm@11c0d000
+Oct 02 23:05:38.516822 glymur kernel: /soc@0/tpdm@11c0c000: Fixed dependency cycle(s) with /soc@0/tpda@11c08000
+Oct 02 23:05:38.516825 glymur kernel: /soc@0/tpda@11c08000: Fixed dependency cycle(s) with /soc@0/tpdm@11c0c000
+Oct 02 23:05:38.516828 glymur kernel: /soc@0/tpdm@11c0b000: Fixed dependency cycle(s) with /soc@0/tpda@11c08000
+Oct 02 23:05:38.516832 glymur kernel: /soc@0/tpda@11c08000: Fixed dependency cycle(s) with /soc@0/tpdm@11c0b000
+Oct 02 23:05:38.516835 glymur kernel: /soc@0/tpdm@11c0a000: Fixed dependency cycle(s) with /soc@0/tpda@11c08000
+Oct 02 23:05:38.516838 glymur kernel: /soc@0/tpda@11c08000: Fixed dependency cycle(s) with /soc@0/tpdm@11c0a000
+Oct 02 23:05:38.516841 glymur kernel: /soc@0/tpdm@11c09000: Fixed dependency cycle(s) with /soc@0/tpda@11c08000
+Oct 02 23:05:38.516844 glymur kernel: /soc@0/tpda@11c08000: Fixed dependency cycle(s) with /soc@0/tpdm@11c09000
+Oct 02 23:05:38.516848 glymur kernel: /soc@0/interrupt-controller@17000000: Fixed dependency cycle(s) with /soc@0/interrupt-controller@17000000
+Oct 02 23:05:38.516851 glymur kernel: /tpdm-cdsp-llm: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Oct 02 23:05:38.516854 glymur kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /tpdm-cdsp-llm
+Oct 02 23:05:38.516857 glymur kernel: /tpdm-cdsp-llm2: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Oct 02 23:05:38.516861 glymur kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /tpdm-cdsp-llm2
+Oct 02 23:05:38.516864 glymur kernel: /tpdm-cdsp-cmsr: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Oct 02 23:05:38.516867 glymur kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /tpdm-cdsp-cmsr
+Oct 02 23:05:38.516870 glymur kernel: /tpdm-cdsp-cmsr2: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Oct 02 23:05:38.516873 glymur kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /tpdm-cdsp-cmsr2
+Oct 02 23:05:38.516876 glymur kernel: /soc@0/phy@fd5000: Fixed dependency cycle(s) with /pmic-glink/connector@0
+Oct 02 23:05:38.516880 glymur kernel: /soc@0/usb@a600000: Fixed dependency cycle(s) with /pmic-glink/connector@0
+Oct 02 23:05:38.516883 glymur kernel: /pmic-glink/connector@0: Fixed dependency cycle(s) with /soc@0/phy@fd5000
+Oct 02 23:05:38.516886 glymur kernel: /pmic-glink/connector@0: Fixed dependency cycle(s) with /soc@0/usb@a600000
+Oct 02 23:05:38.516890 glymur kernel: /soc@0/phy@fde000: Fixed dependency cycle(s) with /pmic-glink/connector@1
+Oct 02 23:05:38.516893 glymur kernel: /soc@0/usb@a800000: Fixed dependency cycle(s) with /pmic-glink/connector@1
+Oct 02 23:05:38.516896 glymur kernel: /pmic-glink/connector@1: Fixed dependency cycle(s) with /soc@0/phy@fde000
+Oct 02 23:05:38.516899 glymur kernel: /pmic-glink/connector@1: Fixed dependency cycle(s) with /soc@0/usb@a800000
+Oct 02 23:05:38.516902 glymur kernel: HugeTLB: registered 1.00 GiB page size, pre-allocated 0 pages
+Oct 02 23:05:38.516906 glymur kernel: HugeTLB: 0 KiB vmemmap can be freed for a 1.00 GiB page
+Oct 02 23:05:38.516909 glymur kernel: HugeTLB: registered 32.0 MiB page size, pre-allocated 0 pages
+Oct 02 23:05:38.516912 glymur kernel: HugeTLB: 0 KiB vmemmap can be freed for a 32.0 MiB page
+Oct 02 23:05:38.516915 glymur kernel: HugeTLB: registered 2.00 MiB page size, pre-allocated 0 pages
+Oct 02 23:05:38.516919 glymur kernel: HugeTLB: 0 KiB vmemmap can be freed for a 2.00 MiB page
+Oct 02 23:05:38.516921 glymur kernel: HugeTLB: registered 64.0 KiB page size, pre-allocated 0 pages
+Oct 02 23:05:38.516925 glymur kernel: HugeTLB: 0 KiB vmemmap can be freed for a 64.0 KiB page
+Oct 02 23:05:38.516927 glymur kernel: ACPI: Interpreter disabled.
+Oct 02 23:05:38.516931 glymur kernel: iommu: Default domain type: Translated
+Oct 02 23:05:38.516934 glymur kernel: iommu: DMA domain TLB invalidation policy: strict mode
+Oct 02 23:05:38.516937 glymur kernel: SCSI subsystem initialized
+Oct 02 23:05:38.516940 glymur kernel: libata version 3.00 loaded.
+Oct 02 23:05:38.516944 glymur kernel: usbcore: registered new interface driver usbfs
+Oct 02 23:05:38.516947 glymur kernel: usbcore: registered new interface driver hub
+Oct 02 23:05:38.516950 glymur kernel: usbcore: registered new device driver usb
+Oct 02 23:05:38.516953 glymur kernel: pps_core: LinuxPPS API ver. 1 registered
+Oct 02 23:05:38.516956 glymur kernel: pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <<email>>
+Oct 02 23:05:38.516959 glymur kernel: PTP clock support registered
+Oct 02 23:05:38.516962 glymur kernel: EDAC MC: Ver: 3.0.0
+Oct 02 23:05:38.516966 glymur kernel: scmi_core: SCMI protocol bus registered
+Oct 02 23:05:38.516969 glymur kernel: Advanced Linux Sound Architecture Driver Initialized.
+Oct 02 23:05:38.516972 glymur kernel: NetLabel: Initializing
+Oct 02 23:05:38.516975 glymur kernel: NetLabel:  domain hash size = 128
+Oct 02 23:05:38.516979 glymur kernel: NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+Oct 02 23:05:38.516982 glymur kernel: NetLabel:  unlabeled traffic allowed by default
+Oct 02 23:05:38.516985 glymur kernel: mctp: management component transport protocol core
+Oct 02 23:05:38.516988 glymur kernel: NET: Registered PF_MCTP protocol family
+Oct 02 23:05:38.516991 glymur kernel: vgaarb: loaded
+Oct 02 23:05:38.516994 glymur kernel: clocksource: Switched to clocksource arch_sys_counter
+Oct 02 23:05:38.516997 glymur kernel: VFS: Disk quotas dquot_6.6.0
+Oct 02 23:05:38.517001 glymur kernel: VFS: Dquot-cache hash table entries: 512 (4096 bytes)
+Oct 02 23:05:38.517004 glymur kernel: AppArmor: AppArmor Filesystem Enabled
+Oct 02 23:05:38.517007 glymur kernel: pnp: PnP ACPI: disabled
+Oct 02 23:05:38.517010 glymur kernel: NET: Registered PF_INET protocol family
+Oct 02 23:05:38.517013 glymur kernel: IP idents hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+Oct 02 23:05:38.517016 glymur kernel: tcp_listen_portaddr_hash hash table entries: 16384 (order: 6, 262144 bytes, linear)
+Oct 02 23:05:38.517019 glymur kernel: Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+Oct 02 23:05:38.517023 glymur kernel: TCP established hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+Oct 02 23:05:38.517026 glymur kernel: TCP bind hash table entries: 65536 (order: 9, 2097152 bytes, linear)
+Oct 02 23:05:38.517029 glymur kernel: TCP: Hash tables configured (established 262144 bind 65536)
+Oct 02 23:05:38.517033 glymur kernel: MPTCP token hash table entries: 32768 (order: 8, 786432 bytes, linear)
+Oct 02 23:05:38.517036 glymur kernel: UDP hash table entries: 16384 (order: 8, 1048576 bytes, linear)
+Oct 02 23:05:38.517039 glymur kernel: NET: Registered PF_UNIX/PF_LOCAL protocol family
+Oct 02 23:05:38.517042 glymur kernel: NET: Registered PF_XDP protocol family
+Oct 02 23:05:38.517045 glymur kernel: PCI: CLS 0 bytes, default 64
+Oct 02 23:05:38.517048 glymur kernel: Trying to unpack rootfs image as initramfs...
+Oct 02 23:05:38.517051 glymur kernel: kvm [1]: nv: 571 coarse grained trap handlers
+Oct 02 23:05:38.517054 glymur kernel: kvm [1]: nv: 710 fine grained trap handlers
+Oct 02 23:05:38.517058 glymur kernel: kvm [1]: IPA Size Limit: 44 bits
+Oct 02 23:05:38.517061 glymur kernel: kvm [1]: GICv4 support disabled
+Oct 02 23:05:38.517064 glymur kernel: kvm [1]: GICv3: no GICV resource entry
+Oct 02 23:05:38.517067 glymur kernel: kvm [1]: disabling GICv2 emulation
+Oct 02 23:05:38.517070 glymur kernel: kvm [1]: GIC system register CPU interface enabled
+Oct 02 23:05:38.517073 glymur kernel: kvm [1]: vgic interrupt IRQ9
+Oct 02 23:05:38.517076 glymur kernel: kvm [1]: VHE mode initialized successfully
+Oct 02 23:05:38.517079 glymur kernel: Initialise system trusted keyrings
+Oct 02 23:05:38.517082 glymur kernel: Key type blacklist registered
+Oct 02 23:05:38.517086 glymur kernel: workingset: timestamp_bits=40 (anon: 35) max_order=23 bucket_order=0 (anon: 0)
+Oct 02 23:05:38.517089 glymur kernel: squashfs: version 4.0 (2009/01/31) Phillip Lougher
+Oct 02 23:05:38.517092 glymur kernel: fuse: init (API version 7.46)
+Oct 02 23:05:38.517095 glymur kernel: integrity: Platform Keyring initialized
+Oct 02 23:05:38.517099 glymur kernel: integrity: Machine keyring initialized
+Oct 02 23:05:38.517102 glymur kernel: NET: Registered PF_ALG protocol family
+Oct 02 23:05:38.517105 glymur kernel: Key type asymmetric registered
+Oct 02 23:05:38.517108 glymur kernel: Asymmetric key parser 'x509' registered
+Oct 02 23:05:38.517111 glymur kernel: Block layer SCSI generic (bsg) driver version 0.4 loaded (major 241)
+Oct 02 23:05:38.517115 glymur kernel: io scheduler mq-deadline registered
+Oct 02 23:05:38.517118 glymur kernel: ledtrig-cpu: registered to indicate activity on CPUs
+Oct 02 23:05:38.517121 glymur kernel: Serial: 8250/16550 driver, 32 ports, IRQ sharing enabled
+Oct 02 23:05:38.517124 glymur kernel: msm_serial: driver initialized
+Oct 02 23:05:38.517127 glymur kernel: SuperH (H)SCI(F) driver initialized
+Oct 02 23:05:38.517231 glymur kernel: arm-smmu-v3 15480000.iommu: oas 40-bit (features 0x001c1fcf)
+Oct 02 23:05:38.517291 glymur kernel: arm-smmu-v3 15480000.iommu: allocated 65536 entries for cmdq
+Oct 02 23:05:38.517349 glymur kernel: arm-smmu-v3 15480000.iommu: allocated 32768 entries for evtq
+Oct 02 23:05:38.517403 glymur kernel: arm-smmu-v3 15480000.iommu: SMMU currently enabled! Resetting...
+Oct 02 23:05:38.517457 glymur kernel: arm-smmu-v3 15480000.iommu: msi_domain absent - falling back to wired irqs
+Oct 02 23:05:38.517461 glymur kernel: loop: module loaded
+Oct 02 23:05:38.517464 glymur kernel: zram: Added device: zram0
+Oct 02 23:05:38.517467 glymur kernel: Key type psk registered
+Oct 02 23:05:38.517471 glymur kernel: tun: Universal TUN/TAP device driver, 1.6
+Oct 02 23:05:38.517474 glymur kernel: CAN device driver interface
+Oct 02 23:05:38.517477 glymur kernel: Intel(R) 2.5G Ethernet Linux Driver
+Oct 02 23:05:38.517481 glymur kernel: Copyright(c) 2018 Intel Corporation.
+Oct 02 23:05:38.517484 glymur kernel: PPP generic driver version 2.4.2
+Oct 02 23:05:38.517487 glymur kernel: mousedev: PS/2 mouse device common for all mice
+Oct 02 23:05:38.517490 glymur kernel: i2c_dev: i2c /dev entries driver
+Oct 02 23:05:38.517494 glymur kernel: device-mapper: core: CONFIG_IMA_DISABLE_HTABLE is disabled. Duplicate IMA measurements will not be recorded in the IMA log.
+Oct 02 23:05:38.517497 glymur kernel: device-mapper: uevent: version 1.0.3
+Oct 02 23:05:38.517500 glymur kernel: device-mapper: ioctl: 4.50.0-ioctl (2025-04-28) initialised: <email>
+Oct 02 23:05:38.517554 glymur kernel: simple-framebuffer simple-framebuffer.0: [drm] Registered 1 planes with drm panic
+Oct 02 23:05:38.517559 glymur kernel: [drm] Initialized simpledrm 1.0.0 for simple-framebuffer.0 on minor 0
+Oct 02 23:05:38.517562 glymur kernel: fbcon: Deferring console take-over
+Oct 02 23:05:38.517606 glymur kernel: simple-framebuffer simple-framebuffer.0: [drm] fb0: simpledrmdrmfb frame buffer device
+Oct 02 23:05:38.517610 glymur kernel: clocksource: arch_mmio_counter: mask: 0xffffffffffffff max_cycles: 0x46d987e47, max_idle_ns: 440795202767 ns
+Oct 02 23:05:38.517668 glymur kernel: arch-timer-mmio 17810000.timer: mmio timer running at 19.20MHz (virt)
+Oct 02 23:05:38.517673 glymur kernel: hw perfevents: enabled with armv8_pmuv3 PMU driver, 13 (0,80000fff) counters available
+Oct 02 23:05:38.517676 glymur kernel: watchdog: NMI not fully supported
+Oct 02 23:05:38.517679 glymur kernel: watchdog: Hard watchdog permanently disabled
+Oct 02 23:05:38.517682 glymur kernel: drop_monitor: Initializing network drop monitor service
+Oct 02 23:05:38.517686 glymur kernel: NET: Registered PF_INET6 protocol family
+Oct 02 23:05:38.517689 glymur kernel: Segment Routing with IPv6
+Oct 02 23:05:38.517692 glymur kernel: In-situ OAM (IOAM) with IPv6
+Oct 02 23:05:38.517695 glymur kernel: NET: Registered PF_PACKET protocol family
+Oct 02 23:05:38.517699 glymur kernel: can: controller area network core
+Oct 02 23:05:38.517701 glymur kernel: NET: Registered PF_CAN protocol family
+Oct 02 23:05:38.517705 glymur kernel: Key type dns_resolver registered
+Oct 02 23:05:38.517708 glymur kernel: NET: Registered PF_VSOCK protocol family
+Oct 02 23:05:38.517711 glymur kernel: registered taskstats version 1
+Oct 02 23:05:38.517714 glymur kernel: Loading compiled-in X.509 certificates
+Oct 02 23:05:38.517718 glymur kernel: Loaded X.509 cert 'Build time autogenerated kernel key: 2375620f8c3c29b733c3b59749c6a8449dd425cc'
+Oct 02 23:05:38.517721 glymur kernel: Demotion targets for Node 0: null
+Oct 02 23:05:38.517724 glymur kernel: Key type .fscrypt registered
+Oct 02 23:05:38.517727 glymur kernel: Key type fscrypt-provisioning registered
+Oct 02 23:05:38.517730 glymur kernel: Key type big_key registered
+Oct 02 23:05:38.517733 glymur kernel: Key type encrypted registered
+Oct 02 23:05:38.517736 glymur kernel: AppArmor: AppArmor sha256 policy hashing enabled
+Oct 02 23:05:38.517739 glymur kernel: integrity: secureboot mode unknown
+Oct 02 23:05:38.517743 glymur kernel: ima: No TPM chip found, activating TPM-bypass!
+Oct 02 23:05:38.517746 glymur kernel: Loading compiled-in module X.509 certificates
+Oct 02 23:05:38.517749 glymur kernel: Loaded X.509 cert 'Build time autogenerated kernel key: 2375620f8c3c29b733c3b59749c6a8449dd425cc'
+Oct 02 23:05:38.517752 glymur kernel: ima: Allocated hash algorithm: sha256
+Oct 02 23:05:38.517755 glymur kernel: ima: No architecture policies found
+Oct 02 23:05:38.517758 glymur kernel: evm: Initialising EVM extended attributes:
+Oct 02 23:05:38.517762 glymur kernel: evm: security.selinux
+Oct 02 23:05:38.517765 glymur kernel: evm: security.SMACK64
+Oct 02 23:05:38.517768 glymur kernel: evm: security.SMACK64EXEC
+Oct 02 23:05:38.517771 glymur kernel: evm: security.SMACK64TRANSMUTE
+Oct 02 23:05:38.517775 glymur kernel: evm: security.SMACK64MMAP
+Oct 02 23:05:38.517778 glymur kernel: evm: security.apparmor
+Oct 02 23:05:38.517780 glymur kernel: evm: security.ima
+Oct 02 23:05:38.517783 glymur kernel: evm: security.capability
+Oct 02 23:05:38.517786 glymur kernel: evm: HMAC attrs: 0x1
+Oct 02 23:05:38.517789 glymur kernel: integrity: Couldn't get size: 0x8000000000000003
+Oct 02 23:05:38.517793 glymur kernel: fbcon: Taking over console
+Oct 02 23:05:38.517796 glymur kernel: integrity: MODSIGN: Couldn't get UEFI db list
+Oct 02 23:05:38.517799 glymur kernel: Console: switching to colour frame buffer device 240x75
+Oct 02 23:05:38.517802 glymur kernel: integrity: Couldn't get size: 0x8000000000000003
+Oct 02 23:05:38.517806 glymur kernel: integrity: Couldn't get UEFI dbx list
+Oct 02 23:05:38.517868 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.517924 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38.517978 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.518031 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Oct 02 23:05:38.518083 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx0-0p9 not found, using dummy regulator
+Oct 02 23:05:38.518134 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.518189 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38.518239 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.518289 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Oct 02 23:05:38.518357 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.518408 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.518459 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.518509 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38.518561 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.518612 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Oct 02 23:05:38.518664 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.518714 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt2-0p9 not found, using dummy regulator
+Oct 02 23:05:38.518765 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx2-0p9 not found, using dummy regulator
+Oct 02 23:05:38.518815 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.518866 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38.518917 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.518968 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519019 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519070 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt2-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519120 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx2-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519170 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519220 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38.519270 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519319 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519373 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519425 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519476 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519528 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519579 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38.519633 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519684 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519735 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519784 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519834 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519885 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.519936 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38.519987 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520038 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520090 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520140 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520190 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520240 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520290 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38.520339 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520391 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520441 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx0-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520491 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520541 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38.520592 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520645 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520695 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520745 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520796 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520847 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520897 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38.520946 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.520996 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.521045 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Oct 02 23:05:38.521095 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Oct 02 23:05:38.521144 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.521195 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Oct 02 23:05:38.521246 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Oct 02 23:05:38.521297 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.521350 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Oct 02 23:05:38.521402 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.521452 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx1-0p9 not found, using dummy regulator
+Oct 02 23:05:38.521507 glymur kernel: qcom-qmp-pcie-phy 1bf6000.phy: supply vdda-phy not found, using dummy regulator
+Oct 02 23:05:38.521557 glymur kernel: qcom-qmp-pcie-phy 1bf6000.phy: supply vdda-pll not found, using dummy regulator
+Oct 02 23:05:38.521611 glymur kernel: qcom-qmp-pcie-phy 1b50000.phy: supply vdda-phy not found, using dummy regulator
+Oct 02 23:05:38.521660 glymur kernel: qcom-qmp-pcie-phy 1b50000.phy: supply vdda-pll not found, using dummy regulator
+Oct 02 23:05:38.521665 glymur kernel: qcom_scm: convention: smc arm 64
+Oct 02 23:05:38.521719 glymur kernel: qcom_scm firmware:scm: qseecom: found qseecom with version 0x1402000
+Oct 02 23:05:38.521771 glymur kernel: qcom_qseecom qcom_qseecom: setting up client for qcom.tz.uefisecapp
+Oct 02 23:05:38.521776 glymur kernel: efivars: Registered efivars operations
+Oct 02 23:05:38.521834 glymur kernel: qcom-pcie 1bf0000.pcie: supply vdda not found, using dummy regulator
+Oct 02 23:05:38.521886 glymur kernel: qcom-pcie 1bf0000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Oct 02 23:05:38.521939 glymur kernel: qcom-pcie 1bf0000.pcie: host bridge /soc@0/pcie@1bf0000 ranges:
+Oct 02 23:05:38.521991 glymur kernel: qcom-pcie 1bf0000.pcie:       IO 0x0078105000..0x0078204fff -> 0x0000000000
+Oct 02 23:05:38.522043 glymur kernel: qcom-pcie 1bf0000.pcie:      MEM 0x0078205000..0x0079ffffff -> 0x0078205000
+Oct 02 23:05:38.522094 glymur kernel: qcom-pcie 1bf0000.pcie:      MEM 0x0780000000..0x079fffffff -> 0x0780000000
+Oct 02 23:05:38.522152 glymur kernel: qcom-pcie 1b40000.pcie: supply vdda not found, using dummy regulator
+Oct 02 23:05:38.522205 glymur kernel: qcom-pcie 1b40000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Oct 02 23:05:38.522265 glymur kernel: arm-smmu 3da0000.iommu: probing hardware configuration...
+Oct 02 23:05:38.522319 glymur kernel: arm-smmu 3da0000.iommu: SMMUv2 with:
+Oct 02 23:05:38.522374 glymur kernel: arm-smmu 3da0000.iommu:         stage 1 translation
+Oct 02 23:05:38.522428 glymur kernel: arm-smmu 3da0000.iommu:         stage 2 translation
+Oct 02 23:05:38.522482 glymur kernel: arm-smmu 3da0000.iommu:         nested translation
+Oct 02 23:05:38.522536 glymur kernel: arm-smmu 3da0000.iommu:         coherent table walk
+Oct 02 23:05:38.522588 glymur kernel: arm-smmu 3da0000.iommu:         stream matching with 25 register groups
+Oct 02 23:05:38.522639 glymur kernel: qcom-pcie 1b40000.pcie: host bridge /soc@0/pcie@1b40000 ranges:
+Oct 02 23:05:38.522692 glymur kernel: arm-smmu 3da0000.iommu:         25 context banks (0 stage-2 only)
+Oct 02 23:05:38.522745 glymur kernel: arm-smmu 3da0000.iommu:         Supported page sizes: 0x61311000
+Oct 02 23:05:38.522799 glymur kernel: arm-smmu 3da0000.iommu:         Stage-1: 48-bit VA -> 40-bit IPA
+Oct 02 23:05:38.522851 glymur kernel: arm-smmu 3da0000.iommu:         Stage-2: 40-bit IPA -> 40-bit PA
+Oct 02 23:05:38.522902 glymur kernel: qcom-pcie 1b40000.pcie:       IO 0x007a200000..0x007a2fffff -> 0x0000000000
+Oct 02 23:05:38.522953 glymur kernel: qcom-pcie 1b40000.pcie:      MEM 0x007a300000..0x007dffffff -> 0x007a300000
+Oct 02 23:05:38.523004 glymur kernel: qcom-pcie 1b40000.pcie:      MEM 0x07a0000000..0x07dfffffff -> 0x07a0000000
+Oct 02 23:05:38.523061 glymur kernel: arm-smmu 3da0000.iommu:         preserved 0 boot mappings
+Oct 02 23:05:38.523119 glymur kernel: platform 3d00000.gpu: Adding to iommu group 0
+Oct 02 23:05:38.523175 glymur kernel: platform 3d6c000.gmu: Adding to iommu group 1
+Oct 02 23:05:38.523236 glymur kernel: arm-smmu 15000000.iommu: probing hardware configuration...
+Oct 02 23:05:38.523290 glymur kernel: arm-smmu 15000000.iommu: SMMUv2 with:
+Oct 02 23:05:38.523344 glymur kernel: arm-smmu 15000000.iommu:         stage 1 translation
+Oct 02 23:05:38.523396 glymur kernel: arm-smmu 15000000.iommu:         stage 2 translation
+Oct 02 23:05:38.523448 glymur kernel: arm-smmu 15000000.iommu:         nested translation
+Oct 02 23:05:38.523499 glymur kernel: arm-smmu 15000000.iommu:         coherent table walk
+Oct 02 23:05:38.523551 glymur kernel: arm-smmu 15000000.iommu:         stream matching with 186 register groups
+Oct 02 23:05:38.523603 glymur kernel: arm-smmu 15000000.iommu:         111 context banks (0 stage-2 only)
+Oct 02 23:05:38.523655 glymur kernel: arm-smmu 15000000.iommu:         Supported page sizes: 0x61311000
+Oct 02 23:05:38.523707 glymur kernel: arm-smmu 15000000.iommu:         Stage-1: 40-bit VA -> 40-bit IPA
+Oct 02 23:05:38.523758 glymur kernel: arm-smmu 15000000.iommu:         Stage-2: 40-bit IPA -> 40-bit PA
+Oct 02 23:05:38.523809 glymur kernel: arm-smmu 15000000.iommu:         preserved 0 boot mappings
+Oct 02 23:05:38.523866 glymur kernel: platform 800000.dma-controller: Adding to iommu group 2
+Oct 02 23:05:38.523921 glymur kernel: platform 8c0000.geniqup: Adding to iommu group 3
+Oct 02 23:05:38.523978 glymur kernel: platform a00000.dma-controller: Adding to iommu group 4
+Oct 02 23:05:38.524031 glymur kernel: platform ac0000.geniqup: Adding to iommu group 5
+Oct 02 23:05:38.524089 glymur kernel: platform b00000.dma-controller: Adding to iommu group 6
+Oct 02 23:05:38.524144 glymur kernel: platform bc0000.geniqup: Adding to iommu group 7
+Oct 02 23:05:38.524204 glymur kernel: platform 1dc4000.dma-controller: Adding to iommu group 8
+Oct 02 23:05:38.524261 glymur kernel: platform 1dfa000.crypto: Adding to iommu group 8
+Oct 02 23:05:38.524318 glymur kernel: platform 6800000.remoteproc: Adding to iommu group 9
+Oct 02 23:05:38.524377 glymur kernel: platform a600000.usb: Adding to iommu group 10
+Oct 02 23:05:38.524431 glymur kernel: platform a800000.usb: Adding to iommu group 11
+Oct 02 23:05:38.524487 glymur kernel: platform a000000.usb: Adding to iommu group 12
+Oct 02 23:05:38.524540 glymur kernel: platform a200000.usb: Adding to iommu group 13
+Oct 02 23:05:38.524594 glymur kernel: platform ae00000.display-subsystem: Adding to iommu group 14
+Oct 02 23:05:38.524652 glymur kernel: platform 32300000.remoteproc: Adding to iommu group 15
+Oct 02 23:05:38.524715 glymur kernel: amba 10048000.tmc: Adding to iommu group 16
+Oct 02 23:05:38.524773 glymur kernel: amba 1004f000.tmc: Adding to iommu group 17
+Oct 02 23:05:38.524777 glymur kernel: a98000.serial: ttyHS1 MMIO:0x0000000000a98000 (irq = 162, base_baud = 0) is a MSM
+Oct 02 23:05:38.524853 glymur kernel: serial serial0: tty port ttyHS1 registered
+Oct 02 23:05:38.524857 glymur kernel: clk: Not disabling unused clocks
+Oct 02 23:05:38.524861 glymur kernel: PM: genpd: Not disabling unused power domains
+Oct 02 23:05:38.524864 glymur kernel: ALSA device list:
+Oct 02 23:05:38.524868 glymur kernel:   No soundcards found.
+Oct 02 23:05:38.524920 glymur kernel: qcom-pcie 1b40000.pcie: iATU: unroll T, 32 ob, 8 ib, align 4K, limit 1024G
+Oct 02 23:05:38.524971 glymur kernel: qcom-pcie 1bf0000.pcie: iATU: unroll T, 32 ob, 8 ib, align 4K, limit 1024G
+Oct 02 23:05:38.524975 glymur kernel: Freeing initrd memory: 55704K
+Oct 02 23:05:38.525026 glymur kernel: qcom-pcie 1bf0000.pcie: PCIe Gen.3 x1 link up
+Oct 02 23:05:38.525077 glymur kernel: qcom-pcie 1b40000.pcie: PCIe Gen.4 x4 link up
+Oct 02 23:05:38.525130 glymur kernel: qcom-pcie 1bf0000.pcie: PCI host bridge to bus 0004:00
+Oct 02 23:05:38.525197 glymur kernel: pci_bus 0004:00: root bus resource [bus 00-ff]
+Oct 02 23:05:38.525251 glymur kernel: pci_bus 0004:00: root bus resource [io  0x0000-0xfffff]
+Oct 02 23:05:38.525303 glymur kernel: pci_bus 0004:00: root bus resource [mem 0x78205000-0x79ffffff]
+Oct 02 23:05:38.525358 glymur kernel: pci_bus 0004:00: root bus resource [mem 0x780000000-0x79fffffff]
+Oct 02 23:05:38.525426 glymur kernel: pci 0004:00:00.0: [17cb:0120] type 01 class 0x060400 PCIe Root Port
+Oct 02 23:05:38.525485 glymur kernel: pci 0004:00:00.0: BAR 0 [mem 0x00000000-0x00000fff]
+Oct 02 23:05:38.525546 glymur kernel: pci 0004:00:00.0: PCI bridge to [bus 01-ff]
+Oct 02 23:05:38.525606 glymur kernel: pci 0004:00:00.0:   bridge window [io  0x0000-0x0fff]
+Oct 02 23:05:38.525666 glymur kernel: pci 0004:00:00.0:   bridge window [mem 0x00000000-0x000fffff]
+Oct 02 23:05:38.525725 glymur kernel: pci 0004:00:00.0:   bridge window [mem 0x00000000-0x000fffff 64bit pref]
+Oct 02 23:05:38.525784 glymur kernel: pci 0004:00:00.0: PME# supported from D0 D3hot D3cold
+Oct 02 23:05:38.525843 glymur kernel: pci 0004:00:00.0: Adding to iommu group 18
+Oct 02 23:05:38.525905 glymur kernel: pci 0004:01:00.0: [17cb:1112] type 00 class 0x028000 PCIe Endpoint
+Oct 02 23:05:38.525963 glymur kernel: pci 0004:01:00.0: BAR 0 [mem 0x00000000-0x001fffff 64bit]
+Oct 02 23:05:38.526020 glymur kernel: pci 0004:01:00.0: BAR 2 [mem 0x00000000-0x00007fff 64bit]
+Oct 02 23:05:38.526074 glymur kernel: pci 0004:01:00.0: PME# supported from D0 D3hot D3cold
+Oct 02 23:05:38.526127 glymur kernel: pci 0004:01:00.0: Adding to iommu group 19
+Oct 02 23:05:38.526181 glymur kernel: pci 0004:01:00.0: ASPM: default states L1
+Oct 02 23:05:38.526238 glymur kernel: pci 0004:00:00.0: bridge window [io  0x1000-0x0fff] to [bus 01-ff] add_size 1000
+Oct 02 23:05:38.526297 glymur kernel: pci 0004:00:00.0: bridge window [mem 0x00100000-0x000fffff 64bit pref] to [bus 01-ff] add_size 200000 add_align 100000
+Oct 02 23:05:38.526356 glymur kernel: pci 0004:00:00.0: bridge window [mem 0x78300000-0x785fffff]: assigned
+Oct 02 23:05:38.526414 glymur kernel: pci 0004:00:00.0: bridge window [mem 0x780000000-0x7801fffff 64bit pref]: assigned
+Oct 02 23:05:38.526473 glymur kernel: pci 0004:00:00.0: BAR 0 [mem 0x78205000-0x78205fff]: assigned
+Oct 02 23:05:38.526532 glymur kernel: pci 0004:00:00.0: bridge window [io  0x1000-0x1fff]: assigned
+Oct 02 23:05:38.526587 glymur kernel: pci 0004:01:00.0: BAR 0 [mem 0x78400000-0x785fffff 64bit]: assigned
+Oct 02 23:05:38.526642 glymur kernel: pci 0004:01:00.0: BAR 2 [mem 0x78300000-0x78307fff 64bit]: assigned
+Oct 02 23:05:38.526694 glymur kernel: qcom-pcie 1b40000.pcie: PCI host bridge to bus 0005:00
+Oct 02 23:05:38.526756 glymur kernel: pci_bus 0005:00: root bus resource [bus 00-ff]
+Oct 02 23:05:38.526811 glymur kernel: pci_bus 0005:00: root bus resource [io  0x100000-0x1fffff] (bus address [0x0000-0xfffff])
+Oct 02 23:05:38.526867 glymur kernel: pci_bus 0005:00: root bus resource [mem 0x7a300000-0x7dffffff]
+Oct 02 23:05:38.526918 glymur kernel: pci_bus 0005:00: root bus resource [mem 0x7a0000000-0x7dfffffff]
+Oct 02 23:05:38.526977 glymur kernel: pci 0004:00:00.0: PCI bridge to [bus 01-ff]
+Oct 02 23:05:38.527035 glymur kernel: pci 0004:00:00.0:   bridge window [io  0x1000-0x1fff]
+Oct 02 23:05:38.527091 glymur kernel: pci 0004:00:00.0:   bridge window [mem 0x78300000-0x785fffff]
+Oct 02 23:05:38.527148 glymur kernel: pci 0004:00:00.0:   bridge window [mem 0x780000000-0x7801fffff 64bit pref]
+Oct 02 23:05:38.527202 glymur kernel: pci_bus 0004:00: resource 4 [io  0x0000-0xfffff]
+Oct 02 23:05:38.527256 glymur kernel: pci_bus 0004:00: resource 5 [mem 0x78205000-0x79ffffff]
+Oct 02 23:05:38.527310 glymur kernel: pci_bus 0004:00: resource 6 [mem 0x780000000-0x79fffffff]
+Oct 02 23:05:38.527377 glymur kernel: pci_bus 0004:01: resource 0 [io  0x1000-0x1fff]
+Oct 02 23:05:38.527433 glymur kernel: pci_bus 0004:01: resource 1 [mem 0x78300000-0x785fffff]
+Oct 02 23:05:38.527489 glymur kernel: pci_bus 0004:01: resource 2 [mem 0x780000000-0x7801fffff 64bit pref]
+Oct 02 23:05:38.527553 glymur kernel: pci 0005:00:00.0: [17cb:0120] type 01 class 0x060400 PCIe Root Port
+Oct 02 23:05:38.527613 glymur kernel: pci 0005:00:00.0: BAR 0 [mem 0x00000000-0x000fffff]
+Oct 02 23:05:38.527673 glymur kernel: pci 0005:00:00.0: PCI bridge to [bus 01-ff]
+Oct 02 23:05:38.527731 glymur kernel: pci 0005:00:00.0:   bridge window [io  0x100000-0x100fff]
+Oct 02 23:05:38.527789 glymur kernel: pci 0005:00:00.0:   bridge window [mem 0x00000000-0x000fffff]
+Oct 02 23:05:38.527846 glymur kernel: pci 0005:00:00.0:   bridge window [mem 0x00000000-0x000fffff 64bit pref]
+Oct 02 23:05:38.527903 glymur kernel: pci 0005:00:00.0: PME# supported from D0 D3hot D3cold
+Oct 02 23:05:38.527960 glymur kernel: pci 0005:00:00.0: Adding to iommu group 20
+Oct 02 23:05:38.528023 glymur kernel: pci 0005:01:00.0: [144d:a80f] type 00 class 0x010802 PCIe Endpoint
+Oct 02 23:05:38.528080 glymur kernel: pci 0005:01:00.0: BAR 0 [mem 0x00000000-0x00003fff 64bit]
+Oct 02 23:05:38.528136 glymur kernel: pci 0005:01:00.0: Adding to iommu group 21
+Oct 02 23:05:38.528193 glymur kernel: pci 0005:01:00.0: ASPM: default states L1
+Oct 02 23:05:38.528250 glymur kernel: pci 0005:00:00.0: BAR 0 [mem 0x7a300000-0x7a3fffff]: assigned
+Oct 02 23:05:38.528309 glymur kernel: pci 0005:00:00.0: bridge window [mem 0x7a400000-0x7a4fffff]: assigned
+Oct 02 23:05:38.528367 glymur kernel: pci 0005:01:00.0: BAR 0 [mem 0x7a400000-0x7a403fff 64bit]: assigned
+Oct 02 23:05:38.528427 glymur kernel: pci 0005:00:00.0: PCI bridge to [bus 01-ff]
+Oct 02 23:05:38.528484 glymur kernel: pci 0005:00:00.0:   bridge window [mem 0x7a400000-0x7a4fffff]
+Oct 02 23:05:38.528537 glymur kernel: pci_bus 0005:00: resource 4 [io  0x100000-0x1fffff]
+Oct 02 23:05:38.528590 glymur kernel: pci_bus 0005:00: resource 5 [mem 0x7a300000-0x7dffffff]
+Oct 02 23:05:38.528643 glymur kernel: pci_bus 0005:00: resource 6 [mem 0x7a0000000-0x7dfffffff]
+Oct 02 23:05:38.528703 glymur kernel: pci_bus 0005:01: resource 1 [mem 0x7a400000-0x7a4fffff]
+Oct 02 23:05:38.528762 glymur kernel: pcieport 0004:00:00.0: PME: Signaling with IRQ 171
+Oct 02 23:05:38.528822 glymur kernel: pcieport 0004:00:00.0: AER: enabled with IRQ 166
+Oct 02 23:05:38.528881 glymur kernel: pcieport 0004:00:00.0: pciehp: Slot #0 AttnBtn- PwrCtrl+ MRL+ AttnInd+ PwrInd+ HotPlug+ Surprise+ Interlock+ NoCompl+ IbPresDis- LLActRep+
+Oct 02 23:05:38.528940 glymur kernel: pcieport 0005:00:00.0: PME: Signaling with IRQ 179
+Oct 02 23:05:38.528998 glymur kernel: pcieport 0005:00:00.0: AER: enabled with IRQ 174
+Oct 02 23:05:38.529059 glymur kernel: nvme nvme0: pci function 0005:01:00.0
+Oct 02 23:05:38.529119 glymur kernel: nvme 0005:01:00.0: enabling device (0000 -> 0002)
+Oct 02 23:05:38.529169 glymur kernel: nvme nvme0: D3 entry latency set to 10 seconds
+Oct 02 23:05:38.529241 glymur kernel: hwmon hwmon0: temp1_input not attached to any thermal zone
+Oct 02 23:05:38.529303 glymur kernel: hwmon hwmon0: temp2_input not attached to any thermal zone
+Oct 02 23:05:38.529380 glymur kernel: hwmon hwmon0: temp3_input not attached to any thermal zone
+Oct 02 23:05:38.529429 glymur kernel: nvme nvme0: passthrough uses implicit buffer lengths
+Oct 02 23:05:38.529478 glymur kernel: nvme nvme0: allocated 64 MiB host memory buffer (1 segment).
+Oct 02 23:05:38.529526 glymur kernel: nvme nvme0: 12/0/0 default/read/poll queues
+Oct 02 23:05:38.529529 glymur kernel:  nvme0n1: p1 p2 p3 p4 p5
+Oct 02 23:05:38.529533 glymur kernel: Freeing unused kernel memory: 16000K
+Oct 02 23:05:38.529536 glymur kernel: Checked W+X mappings: passed, no W+X pages found
+Oct 02 23:05:38.529539 glymur kernel: Run /init as init process
+Oct 02 23:05:38.529542 glymur kernel:   with arguments:
+Oct 02 23:05:38.529545 glymur kernel:     /init
+Oct 02 23:05:38.529548 glymur kernel:     splash
+Oct 02 23:05:38.529552 glymur kernel:   with environment:
+Oct 02 23:05:38.529555 glymur kernel:     HOME=/
+Oct 02 23:05:38.529558 glymur kernel:     TERM=linux
+Oct 02 23:05:38.529561 glymur systemd[1]: System time advanced to built-in epoch: Fri 2026-10-02 17:35:38 UTC
+Oct 02 23:05:38.529566 glymur systemd[1]: Failed to find module 'autofs4'
+Oct 02 23:05:38.529570 glymur systemd[1]: Successfully made /usr/ read-only.
+Oct 02 23:05:38.529574 glymur systemd[1]: systemd 261.3-0ubuntu3 running in system mode (+PAM +AUDIT +SELINUX +APPARMOR +IMA +IPE +SMACK +SECCOMP +GCRYPT -GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 +KMOD +LIBCRYPTSETUP +LIBCRYPTSETUP_PLUGINS +LIBFDISK +PCRE2 +PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +BPF_FRAMEWORK +BTF -XKBCOMMON -UTMP +LIBARCHIVE)
+Oct 02 23:05:38.529578 glymur systemd[1]: Detected architecture arm64.
+Oct 02 23:05:38.529582 glymur systemd[1]: Running in initrd.
+Oct 02 23:05:38.529586 glymur systemd[1]: Hostname set to <glymur>.
+Oct 02 23:05:38.529589 glymur systemd[1]: bpf-restrict-fs: BPF LSM hook not enabled in the kernel, BPF LSM not supported.
+Oct 02 23:05:38.529592 glymur systemd[1]: Queued start job for default target initrd.target.
+Oct 02 23:05:38.529596 glymur systemd[1]: Expecting device dev-disk-by\x2dpartuuid-<uuid>.device - /dev/disk/by-partuuid/<uuid>...
+Oct 02 23:05:38.529600 glymur systemd[1]: Reached target initrd-usr-fs.target - Initrd /usr File System.
+Oct 02 23:05:38.529603 glymur systemd[1]: Reached target slices.target - Slice Units.
+Oct 02 23:05:38.529606 glymur systemd[1]: Reached target swap.target - Swaps.
+Oct 02 23:05:38.529610 glymur systemd[1]: Reached target timers.target - Timer Units.
+Oct 02 23:05:38.529614 glymur systemd[1]: Listening on systemd-journald-dev-log.socket - Journal Socket (/dev/log).
+Oct 02 23:05:38.529617 glymur systemd[1]: Listening on systemd-journald.socket - Journal Sockets.
+Oct 02 23:05:38.529621 glymur systemd[1]: Listening on systemd-udevd-control.socket - udev Control Socket.
+Oct 02 23:05:38.529624 glymur systemd[1]: Listening on systemd-udevd-kernel.socket - udev Kernel Socket.
+Oct 02 23:05:38.529628 glymur systemd[1]: Listening on systemd-udevd-varlink.socket - udev Varlink Socket.
+Oct 02 23:05:38.529631 glymur systemd[1]: Reached target sockets.target - Socket Units.
+Oct 02 23:05:38.529635 glymur systemd[1]: Starting dracut-cmdline-ask.service - dracut ask for additional cmdline parameters...
+Oct 02 23:05:38.529639 glymur systemd[1]: kmod-static-nodes.service - Create List of Static Device Nodes skipped, unmet condition check ConditionFileNotEmpty=/lib/modules/7.3.0-rc6-glymur-18/modules.devname
+Oct 02 23:05:38.529642 glymur systemd[1]: Starting systemd-journald.service - Journal Service...
+Oct 02 23:05:38.529646 glymur systemd[1]: Starting systemd-modules-load.service - Load Kernel Modules...
+Oct 02 23:05:38.529649 glymur systemd[1]: systemd-pcrnvdone.service - TPM PCR NvPCR Initialization Separator skipped, unmet condition check ConditionSecurity=measured-os
+Oct 02 23:05:38.529653 glymur systemd[1]: systemd-pcrosseparator.service - TPM PCR OS Separator skipped, unmet condition check ConditionSecurity=measured-os
+Oct 02 23:05:38.529656 glymur systemd[1]: systemd-pcrphase-initrd.service - TPM PCR Barrier (initrd) skipped, unmet condition check ConditionSecurity=measured-os
+Oct 02 23:05:38.529660 glymur systemd[1]: Starting systemd-tmpfiles-setup-dev-early.service - Create Static Device Nodes in /dev gracefully...
+Oct 02 23:05:38.529663 glymur systemd[1]: Finished systemd-tmpfiles-setup-dev-early.service - Create Static Device Nodes in /dev gracefully.
+Oct 02 23:05:38.529667 glymur systemd[1]: Starting systemd-tmpfiles-setup-dev.service - Create Static Device Nodes in /dev...
+Oct 02 23:05:38.529670 glymur systemd[1]: Finished systemd-modules-load.service - Load Kernel Modules.
+Oct 02 23:05:38.529674 glymur systemd[1]: Starting systemd-sysctl.service - Apply Kernel Variables...
+Oct 02 23:05:38.529678 glymur systemd[1]: Finished dracut-cmdline-ask.service - dracut ask for additional cmdline parameters.
+Oct 02 23:05:38.529681 glymur systemd[1]: Starting dracut-cmdline.service - dracut cmdline hook...
+Oct 02 23:05:38.529691 glymur systemd-journald[223]: Collecting audit messages is disabled.
+Oct 02 23:05:38.529702 glymur systemd[1]: Finished systemd-tmpfiles-setup-dev.service - Create Static Device Nodes in /dev.
+Oct 02 23:05:38.529706 glymur systemd[1]: Reached target local-fs-pre.target - Preparation for Local File Systems.
+Oct 02 23:05:38.529709 glymur systemd[1]: Reached target local-fs.target - Local File Systems.
+Oct 02 23:05:38.529713 glymur systemd[1]: Finished systemd-sysctl.service - Apply Kernel Variables.
+Oct 02 23:05:38.530347 glymur systemd[1]: Started systemd-journald.service - Journal Service.
+Oct 02 23:05:39.605398 glymur kernel: EXT4-fs (nvme0n1p4): mounted filesystem <uuid> ro with ordered data mode. Quota mode: none.
+Oct 02 23:05:40.818014 glymur systemd-journald[223]: Received SIGTERM from PID 1 (systemd).
+Oct 02 23:05:40.818053 glymur systemd[1]: Inserted module 'autofs4'
+Oct 02 23:05:40.818067 glymur systemd[1]: systemd 261.3-0ubuntu3 running in system mode (+PAM +AUDIT +SELINUX +APPARMOR +IMA +IPE +SMACK +SECCOMP +GCRYPT -GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 +KMOD +LIBCRYPTSETUP +LIBCRYPTSETUP_PLUGINS +LIBFDISK +PCRE2 +PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +BPF_FRAMEWORK +BTF -XKBCOMMON -UTMP +LIBARCHIVE)
+Oct 02 23:05:40.818074 glymur systemd[1]: Detected architecture arm64.
+Oct 02 23:05:40.818083 glymur systemd[1]: bpf-restrict-fs: BPF LSM hook not enabled in the kernel, BPF LSM not supported.
+Oct 02 23:05:40.818089 glymur systemd[1]: initrd-switch-root.service: Deactivated successfully.
+Oct 02 23:05:40.818097 glymur systemd[1]: Stopped initrd-switch-root.service - Switch Root.
+Oct 02 23:05:40.818101 glymur systemd[1]: systemd-journald.service: Scheduled restart job, restart counter is at 1.
+Oct 02 23:05:40.818110 glymur systemd[1]: Created slice system-cups.slice - CUPS Slice.
+Oct 02 23:05:40.818115 glymur systemd[1]: Created slice user.slice - User and Session Slice.
+Oct 02 23:05:40.818120 glymur systemd[1]: systemd-ask-password-console.path - Dispatch Password Requests to Console Directory Watch skipped, unmet condition check ConditionPathExists=!/run/plymouth/pid
+Oct 02 23:05:40.818126 glymur systemd[1]: Started systemd-ask-password-wall.path - Forward Password Requests to Wall Directory Watch.
+Oct 02 23:05:40.818131 glymur systemd[1]: Set up automount proc-sys-fs-binfmt_misc.automount - Arbitrary Executable File Formats File System Automount Point.
+Oct 02 23:05:40.818137 glymur systemd[1]: Reached target imports.target - Image Downloads.
+Oct 02 23:05:40.818144 glymur systemd[1]: Stopped target initrd-switch-root.target - Switch Root.
+Oct 02 23:05:40.818148 glymur systemd[1]: Stopped target initrd-fs.target - Initrd File Systems.
+Oct 02 23:05:40.818153 glymur systemd[1]: Stopped target initrd-root-fs.target - Initrd Root File System.
+Oct 02 23:05:40.818158 glymur systemd[1]: Reached target integritysetup.target - Local Integrity Protected Volumes.
+Oct 02 23:05:40.818162 glymur systemd[1]: Reached target remote-fs.target - Remote File Systems.
+Oct 02 23:05:40.818167 glymur systemd[1]: Reached target slices.target - Slice Units.
+Oct 02 23:05:40.818172 glymur systemd[1]: Reached target snapd.mounts-pre.target - Mounting snaps.
+Oct 02 23:05:40.818179 glymur systemd[1]: Reached target swap.target - Swaps.
+Oct 02 23:05:40.818188 glymur systemd[1]: Reached target time-set.target - System Time Set.
+Oct 02 23:05:40.818192 glymur systemd[1]: Reached target veritysetup.target - Local Verity Protected Volumes.
+Oct 02 23:05:40.818197 glymur systemd[1]: Listening on syslog.socket - Syslog Socket.
+Oct 02 23:05:40.818203 glymur systemd[1]: Listening on systemd-ask-password.socket - Query the User Interactively for a Password.
+Oct 02 23:05:40.818211 glymur systemd[1]: Listening on systemd-creds.socket - Credential Encryption/Decryption.
+Oct 02 23:05:40.818215 glymur systemd[1]: Listening on systemd-factory-reset.socket - Factory Reset Management.
+Oct 02 23:05:40.818219 glymur systemd[1]: Listening on systemd-hostnamed.socket - Hostname Service Socket.
+Oct 02 23:05:40.818224 glymur systemd[1]: Listening on systemd-mute-console.socket - Console Output Muting Service Socket.
+Oct 02 23:05:40.818229 glymur systemd[1]: Listening on systemd-oomd.socket - Userspace Out-Of-Memory (OOM) Killer Socket.
+Oct 02 23:05:40.818233 glymur systemd[1]: systemd-pcrextend.socket - TPM PCR Measurements skipped, unmet condition check ConditionSecurity=measured-os
+Oct 02 23:05:40.818238 glymur systemd[1]: systemd-pcrlock.socket - Make TPM PCR Policy skipped, unmet condition check ConditionSecurity=measured-uki
+Oct 02 23:05:40.818243 glymur systemd[1]: Listening on systemd-resolved-monitor.socket - Resolve Monitor Varlink Socket.
+Oct 02 23:05:40.818247 glymur systemd[1]: Listening on systemd-resolved-varlink.socket - Resolve Service Varlink Socket.
+Oct 02 23:05:40.818252 glymur systemd[1]: Listening on systemd-udevd-control.socket - udev Control Socket.
+Oct 02 23:05:40.818257 glymur systemd[1]: Listening on systemd-udevd-varlink.socket - udev Varlink Socket.
+Oct 02 23:05:40.818263 glymur systemd[1]: Mounting dev-hugepages.mount - Huge Pages File System...
+Oct 02 23:05:40.818268 glymur systemd[1]: Mounting dev-mqueue.mount - POSIX Message Queue File System...
+Oct 02 23:05:40.818273 glymur systemd[1]: Mounting sys-kernel-debug.mount - Kernel Debug File System...
+Oct 02 23:05:40.818278 glymur systemd[1]: Mounting sys-kernel-tracing.mount - Kernel Trace File System...
+Oct 02 23:05:40.818282 glymur systemd[1]: tmp.mount: Directory /tmp to mount over is not empty, mounting anyway.
+Oct 02 23:05:40.818289 glymur systemd[1]: Mounting tmp.mount - Temporary Directory /tmp...
+Oct 02 23:05:40.818293 glymur systemd[1]: Starting systemd-journald.service - Journal Service...
+Oct 02 23:05:40.818298 glymur systemd[1]: Starting keyboard-setup.service - Set the console keyboard layout...
+Oct 02 23:05:40.818302 glymur systemd[1]: Starting kmod-static-nodes.service - Create List of Static Device Nodes...
+Oct 02 23:05:40.818306 glymur systemd[1]: <email> - Load Kernel Module configfs skipped, unmet condition check ConditionKernelModuleLoaded=!configfs
+Oct 02 23:05:40.818312 glymur systemd[1]: <email> - Load Kernel Module drm skipped, unmet condition check ConditionKernelModuleLoaded=!drm
+Oct 02 23:05:40.818316 glymur systemd[1]: Starting modprobe@efi_pstore.service - Load Kernel Module efi_pstore...
+Oct 02 23:05:40.818320 glymur systemd[1]: <email> - Load Kernel Module fuse skipped, unmet condition check ConditionKernelModuleLoaded=!fuse
+Oct 02 23:05:40.818325 glymur systemd[1]: Mounting sys-fs-fuse-connections.mount - FUSE Control File System...
+Oct 02 23:05:40.818329 glymur systemd[1]: plymouth-switch-root.service: Deactivated successfully.
+Oct 02 23:05:40.818333 glymur systemd[1]: Stopped plymouth-switch-root.service - Plymouth switch root service.
+Oct 02 23:05:40.818338 glymur systemd[1]: systemd-hibernate-clear.service - Clear Stale Hibernate Storage Info skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/HibernateLocation-<uuid>
+Oct 02 23:05:40.818345 glymur systemd[1]: Starting systemd-modules-load.service - Load Kernel Modules...
+Oct 02 23:05:40.818351 glymur systemd[1]: systemd-pcrmachine.service - TPM PCR Machine ID Measurement skipped, unmet condition check ConditionSecurity=measured-os
+Oct 02 23:05:40.818358 glymur systemd[1]: systemd-pcrosseparator.service - TPM PCR OS Separator skipped, unmet condition check ConditionSecurity=measured-os
+Oct 02 23:05:40.818362 glymur systemd[1]: Starting systemd-remount-fs.service - Remount Root and Kernel File Systems...
+Oct 02 23:05:40.818367 glymur systemd[1]: systemd-tpm2-setup-early.service - Early TPM SRK Setup skipped, unmet condition check ConditionSecurity=measured-os
+Oct 02 23:05:40.818371 glymur systemd[1]: systemd-pcrnvdone.service - TPM PCR NvPCR Initialization Separator skipped, unmet condition check ConditionPathExists=/etc/initrd-release
+Oct 02 23:05:40.818376 glymur systemd[1]: Reached target cryptsetup.target - Local Encrypted Volumes.
+Oct 02 23:05:40.818380 glymur systemd[1]: systemd-pcrproduct.service - TPM NvPCR Product ID Measurement skipped, unmet condition check ConditionSecurity=measured-os
+Oct 02 23:05:40.818384 glymur systemd[1]: Starting systemd-udev-load-credentials.service - Load udev Rules from Credentials...
+Oct 02 23:05:40.818390 glymur systemd[1]: Starting systemd-udev-trigger.service - Coldplug All udev Devices...
+Oct 02 23:05:40.818394 glymur systemd[1]: Mounted dev-hugepages.mount - Huge Pages File System.
+Oct 02 23:05:40.818398 glymur systemd[1]: Mounted dev-mqueue.mount - POSIX Message Queue File System.
+Oct 02 23:05:40.818403 glymur systemd[1]: Mounted sys-kernel-debug.mount - Kernel Debug File System.
+Oct 02 23:05:40.818407 glymur systemd[1]: Mounted sys-kernel-tracing.mount - Kernel Trace File System.
+Oct 02 23:05:40.818411 glymur systemd[1]: Mounted tmp.mount - Temporary Directory /tmp.
+Oct 02 23:05:40.818416 glymur systemd[1]: Finished kmod-static-nodes.service - Create List of Static Device Nodes.
+Oct 02 23:05:40.818420 glymur systemd[1]: Mounted sys-fs-fuse-connections.mount - FUSE Control File System.
+Oct 02 23:05:40.818425 glymur systemd[1]: Starting systemd-tmpfiles-setup-dev-early.service - Create Static Device Nodes in /dev gracefully...
+Oct 02 23:05:40.818429 glymur systemd[1]: modprobe@efi_pstore.service: Deactivated successfully.
+Oct 02 23:05:40.818434 glymur systemd[1]: Finished modprobe@efi_pstore.service - Load Kernel Module efi_pstore.
+Oct 02 23:05:40.818438 glymur systemd[1]: Finished systemd-modules-load.service - Load Kernel Modules.
+Oct 02 23:05:40.818442 glymur systemd[1]: Starting systemd-sysctl.service - Apply Kernel Variables...
+Oct 02 23:05:40.818447 glymur systemd[1]: Finished systemd-udev-load-credentials.service - Load udev Rules from Credentials.
+Oct 02 23:05:40.818457 glymur systemd-journald[458]: Collecting audit messages is disabled.
+Oct 02 23:05:40.819345 glymur systemd[1]: Started systemd-journald.service - Journal Service.
+Oct 02 23:05:40.821346 glymur kernel: EXT4-fs (nvme0n1p4): re-mounted <uuid> r/w.
+Oct 02 23:05:40.907155 glymur systemd-journald[458]: Received client request to flush runtime journal.
+Oct 02 23:05:40.907281 glymur systemd-journald[458]: /var/log/journal/72d80a48b0a14cd6ae41c45f52a2e16f/system.journal: Realtime clock jumped backwards relative to last journal entry, rotating.
+Oct 02 23:05:40.907359 glymur systemd-journald[458]: Rotating system journal.
+Oct 02 23:05:41.130390 glymur kernel: GICv3: SPI 4115 out of range (use ESPI?)
+Oct 02 23:05:41.133350 glymur kernel: arm-scmi arm-scmi.0.auto: Using scmi_mailbox_transport
+Oct 02 23:05:41.138657 glymur kernel: arm-scmi arm-scmi.0.auto: SCMI max-rx-timeout: 30ms / max-msg-size: 104bytes / max-msg: 20
+Oct 02 23:05:41.140220 glymur kernel: input: gpio-keys as /devices/platform/gpio-keys/input/input0
+Oct 02 23:05:41.140238 glymur kernel: scmi_protocol scmi_dev.1: Enabled polling mode TX channel - prot_id:16
+Oct 02 23:05:41.140935 glymur kernel: arm-scmi arm-scmi.0.auto: SCMI RAW Mode initialized for instance 0
+Oct 02 23:05:41.141089 glymur kernel: arm-scmi arm-scmi.0.auto: SCMI RAW Mode COEX enabled !
+Oct 02 23:05:41.141203 glymur kernel: arm-scmi arm-scmi.0.auto: SCMI Notifications - Core Enabled.
+Oct 02 23:05:41.141302 glymur kernel: arm-scmi arm-scmi.0.auto: SCMI Protocol v2.0 'Qualcomm:PDP0' Firmware version 0x0
+Oct 02 23:05:41.141412 glymur kernel: arm-scmi arm-scmi.0.auto: Enabling SCMI Quirk [quirk_clock_rates_triplet_out_of_spec]
+Oct 02 23:05:41.141514 glymur kernel: arm-scmi arm-scmi.1.auto: Using scmi_mailbox_transport
+Oct 02 23:05:41.141626 glymur kernel: arm-scmi arm-scmi.1.auto: SCMI max-rx-timeout: 30ms / max-msg-size: 104bytes / max-msg: 20
+Oct 02 23:05:41.141740 glymur kernel: arm-scmi arm-scmi.1.auto: SCMI RAW Mode initialized for instance 1
+Oct 02 23:05:41.141841 glymur kernel: arm-scmi arm-scmi.1.auto: SCMI RAW Mode COEX enabled !
+Oct 02 23:05:41.141940 glymur kernel: arm-scmi arm-scmi.1.auto: SCMI Notifications - Core Enabled.
+Oct 02 23:05:41.142037 glymur kernel: arm-scmi arm-scmi.1.auto: SCMI Protocol v2.0 'Qualcomm:' Firmware version 0x20000
+Oct 02 23:05:41.142129 glymur kernel: arm-scmi arm-scmi.1.auto: Enabling SCMI Quirk [quirk_perf_level_get_fc_force]
+Oct 02 23:05:41.142233 glymur kernel: qcom-smem ffe00000.smem: Found an unknown type of DRAM info struct (size = 872)
+Oct 02 23:05:41.149348 glymur kernel: NET: Registered PF_QIPCRTR protocol family
+Oct 02 23:05:41.156348 glymur kernel: qcom-m31eusb2-phy fa0000.phy: supply vdd not found, using dummy regulator
+Oct 02 23:05:41.165393 glymur kernel: qcom-m31eusb2-phy fa0000.phy: supply vdda12 not found, using dummy regulator
+Oct 02 23:05:41.169059 glymur kernel: qcomtee: QTEE version 5.2.0
+Oct 02 23:05:41.169073 glymur kernel: qcomtee: Failed to get service! error: 11
+Oct 02 23:05:41.169082 glymur kernel: qcom-m31eusb2-phy 88e0000.phy: supply vdd not found, using dummy regulator
+Oct 02 23:05:41.169595 glymur kernel: qcom-m31eusb2-phy 88e0000.phy: supply vdda12 not found, using dummy regulator
+Oct 02 23:05:41.170461 glymur kernel: qcomtee: QTEE does not implement service 413.
+Oct 02 23:05:41.170476 glymur kernel: qcomtee: Failed to get service! error: 11
+Oct 02 23:05:41.174351 glymur kernel: cfg80211: Loading compiled-in X.509 certificates for regulatory database
+Oct 02 23:05:41.174388 glymur kernel: Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+Oct 02 23:05:41.174396 glymur kernel: Loaded X.509 cert 'wens: 61c038651aabdcf94bd0ac7ff06c7248db18c600'
+Oct 02 23:05:41.175344 glymur kernel: qcomtee: QTEE does not implement service 81.
+Oct 02 23:05:41.193348 glymur kernel: remoteproc remoteproc0: soccp is available
+Oct 02 23:05:41.209259 glymur kernel: remoteproc remoteproc0: attaching to soccp
+Oct 02 23:05:41.214759 glymur kernel: qcom_q6v5_pas d00000.remoteproc: failed to get shutdown_state: -22
+Oct 02 23:05:41.215164 glymur kernel: remoteproc remoteproc1: adsp is available
+Oct 02 23:05:41.216278 glymur kernel: qcom-qmp-combo-phy fd5000.phy: supply vdda-phy not found, using dummy regulator
+Oct 02 23:05:41.216518 glymur kernel: qcom-qmp-combo-phy fd5000.phy: supply vdda-pll not found, using dummy regulator
+Oct 02 23:05:41.216604 glymur kernel: qcom-qmp-combo-phy fd5000.phy: supply refgen not found, using dummy regulator
+Oct 02 23:05:41.216693 glymur kernel: remoteproc remoteproc0: remote processor soccp is now attached
+Oct 02 23:05:41.216768 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier fd5000.phy for /pmic-glink/connector@0
+Oct 02 23:05:41.216845 glymur kernel: qcom-qmp-combo-phy fde000.phy: supply vdda-phy not found, using dummy regulator
+Oct 02 23:05:41.216920 glymur kernel: qcom-qmp-combo-phy fde000.phy: supply vdda-pll not found, using dummy regulator
+Oct 02 23:05:41.216986 glymur kernel: qcom-qmp-combo-phy fde000.phy: supply refgen not found, using dummy regulator
+Oct 02 23:05:41.217065 glymur kernel: remoteproc remoteproc2: cdsp is available
+Oct 02 23:05:41.217345 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier fde000.phy for /pmic-glink/connector@1
+Oct 02 23:05:41.217423 glymur kernel: qcom-qmp-combo-phy 88e1000.phy: supply vdda-phy not found, using dummy regulator
+Oct 02 23:05:41.217508 glymur kernel: qcom-qmp-combo-phy 88e1000.phy: supply vdda-pll not found, using dummy regulator
+Oct 02 23:05:41.217574 glymur kernel: qcom-qmp-combo-phy 88e1000.phy: supply refgen not found, using dummy regulator
+Oct 02 23:05:41.217639 glymur kernel: aux_bridge.aux_bridge aux_bridge.aux_bridge.2: error -ENODEV: failed to acquire drm_bridge
+Oct 02 23:05:41.220344 glymur kernel: spmi_pmic_arb c400000.arbiter: PMIC arbiter version v8 (0x80000002)
+Oct 02 23:05:41.220421 glymur kernel: ath12k_wifi7_pci 0004:01:00.0: BAR 0 [mem 0x78400000-0x785fffff 64bit]: assigned
+Oct 02 23:05:41.220508 glymur kernel: ath12k_wifi7_pci 0004:01:00.0: enabling device (0000 -> 0002)
+Oct 02 23:05:41.220584 glymur kernel: ath12k_wifi7_pci 0004:01:00.0: Wi-Fi 7 Hardware name: qcc2072 hw1.0
+Oct 02 23:05:41.220661 glymur kernel: ath12k_wifi7_pci 0004:01:00.0: MSI vectors: 16
+Oct 02 23:05:41.238894 glymur kernel: remoteproc remoteproc2: powering up cdsp
+Oct 02 23:05:41.239051 glymur kernel: remoteproc remoteproc2: Booting fw image qcom/glymur/HP/omnibook-5-16-bf1xxx/qccdsp8480.mbn, size 3252504
+Oct 02 23:05:41.302379 glymur kernel: remoteproc remoteproc1: powering up adsp
+Oct 02 23:05:41.311353 glymur kernel: remoteproc remoteproc1: Booting fw image qcom/glymur/HP/omnibook-5-16-bf1xxx/qcadsp8480.mbn, size 21432280
+Oct 02 23:05:41.338348 glymur kernel: Bluetooth: Core ver 2.22
+Oct 02 23:05:41.339353 glymur kernel: NET: Registered PF_BLUETOOTH protocol family
+Oct 02 23:05:41.339378 glymur kernel: Bluetooth: HCI device and connection manager initialized
+Oct 02 23:05:41.339400 glymur kernel: Bluetooth: HCI socket layer initialized
+Oct 02 23:05:41.339411 glymur kernel: Bluetooth: L2CAP socket layer initialized
+Oct 02 23:05:41.339426 glymur kernel: Bluetooth: SCO socket layer initialized
+Oct 02 23:05:41.345347 glymur kernel: qcom-edp-phy faac00.phy: supply vdda-phy not found, using dummy regulator
+Oct 02 23:05:41.349349 glymur kernel: qcom-edp-phy faac00.phy: supply vdda-pll not found, using dummy regulator
+Oct 02 23:05:41.361349 glymur kernel: mhi mhi0: Requested to power ON
+Oct 02 23:05:41.363890 glymur kernel: mhi mhi0: Power on setup success
+Oct 02 23:05:41.367886 glymur kernel: Bluetooth: HCI UART driver ver 2.3
+Oct 02 23:05:41.367896 glymur kernel: Bluetooth: HCI UART protocol H4 registered
+Oct 02 23:05:41.367908 glymur kernel: Bluetooth: HCI UART protocol BCSP registered
+Oct 02 23:05:41.367917 glymur kernel: Bluetooth: HCI UART protocol LL registered
+Oct 02 23:05:41.367929 glymur kernel: Bluetooth: HCI UART protocol ATH3K registered
+Oct 02 23:05:41.367943 glymur kernel: Bluetooth: HCI UART protocol Three-wire (H5) registered
+Oct 02 23:05:41.367952 glymur kernel: Bluetooth: HCI UART protocol Intel registered
+Oct 02 23:05:41.367962 glymur kernel: Bluetooth: HCI UART protocol Broadcom registered
+Oct 02 23:05:41.368346 glymur kernel: remoteproc remoteproc2: remote processor cdsp is now up
+Oct 02 23:05:41.370937 glymur kernel: Bluetooth: HCI UART protocol QCA registered
+Oct 02 23:05:41.370947 glymur kernel: Bluetooth: HCI UART protocol AG6XX registered
+Oct 02 23:05:41.370955 glymur kernel: Bluetooth: hci0: setting up qcc2072
+Oct 02 23:05:41.371347 glymur kernel: Bluetooth: HCI UART protocol Marvell registered
+Oct 02 23:05:41.373346 glymur kernel: Bluetooth: HCI UART protocol AML registered
+Oct 02 23:05:41.454355 glymur kernel: mhi mhi0: Wait for device to enter SBL or Mission mode
+Oct 02 23:05:41.477347 glymur kernel: Bluetooth: hci0: QCA Product ID   :0x00000020
+Oct 02 23:05:41.477383 glymur kernel: Bluetooth: hci0: QCA SOC Version  :0x40292100
+Oct 02 23:05:41.477488 glymur kernel: Bluetooth: hci0: QCA ROM Version  :0x00000101
+Oct 02 23:05:41.477497 glymur kernel: Bluetooth: hci0: QCA Patch Version:0x00007b40
+Oct 02 23:05:41.487348 glymur kernel: Bluetooth: hci0: QCA controller version 0x21000101
+Oct 02 23:05:41.487377 glymur kernel: Bluetooth: hci0: QCA Downloading qca/ornbtfw11.tlv
+Oct 02 23:05:41.503348 glymur kernel: xhci-hcd xhci-hcd.2.auto: xHCI Host Controller
+Oct 02 23:05:41.505075 glymur kernel: xhci-hcd xhci-hcd.2.auto: new USB bus registered, assigned bus number 1
+Oct 02 23:05:41.506950 glymur kernel: xhci-hcd xhci-hcd.2.auto: USB0 root hub has no ports
+Oct 02 23:05:41.509657 glymur kernel: xhci-hcd xhci-hcd.2.auto: hcc params 0x0220fe65 hci version 0x110 quirks 0x000080a000000810
+Oct 02 23:05:41.512150 glymur kernel: xhci-hcd xhci-hcd.2.auto: irq 243, io mem 0x0a200000
+Oct 02 23:05:41.513578 glymur kernel: usb usb1: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Oct 02 23:05:41.516172 glymur kernel: usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Oct 02 23:05:41.516245 glymur kernel: usb usb1: Product: xHCI Host Controller
+Oct 02 23:05:41.516311 glymur kernel: usb usb1: Manufacturer: Linux 7.3.0-rc6-glymur-18 xhci-hcd
+Oct 02 23:05:41.516375 glymur kernel: usb usb1: SerialNumber: <serial>
+Oct 02 23:05:41.516455 glymur kernel: hub 1-0:1.0: USB hub found
+Oct 02 23:05:41.516551 glymur kernel: hub 1-0:1.0: 1 port detected
+Oct 02 23:05:41.516647 glymur kernel: xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+Oct 02 23:05:41.516739 glymur kernel: xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 2
+Oct 02 23:05:41.516816 glymur kernel: xhci-hcd xhci-hcd.3.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x000080a000000810
+Oct 02 23:05:41.516893 glymur kernel: xhci-hcd xhci-hcd.3.auto: irq 284, io mem 0x0a000000
+Oct 02 23:05:41.520683 glymur kernel: xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+Oct 02 23:05:41.523414 glymur kernel: xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 3
+Oct 02 23:05:41.526702 glymur kernel: xhci-hcd xhci-hcd.3.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Oct 02 23:05:41.529854 glymur kernel: usb usb2: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Oct 02 23:05:41.534468 glymur kernel: usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Oct 02 23:05:41.536534 glymur kernel: usb usb2: Product: xHCI Host Controller
+Oct 02 23:05:41.538756 glymur kernel: usb usb2: Manufacturer: Linux 7.3.0-rc6-glymur-18 xhci-hcd
+Oct 02 23:05:41.541177 glymur kernel: usb usb2: SerialNumber: <serial>
+Oct 02 23:05:41.542664 glymur kernel: hub 2-0:1.0: USB hub found
+Oct 02 23:05:41.545365 glymur kernel: hub 2-0:1.0: 1 port detected
+Oct 02 23:05:41.546112 glymur kernel: usb usb3: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+Oct 02 23:05:41.546604 glymur kernel: usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Oct 02 23:05:41.546854 glymur kernel: usb usb3: Product: xHCI Host Controller
+Oct 02 23:05:41.546956 glymur kernel: usb usb3: Manufacturer: Linux 7.3.0-rc6-glymur-18 xhci-hcd
+Oct 02 23:05:41.547060 glymur kernel: usb usb3: SerialNumber: <serial>
+Oct 02 23:05:41.547154 glymur kernel: hid: raw HID events driver (C) Jiri Kosina
+Oct 02 23:05:41.547163 glymur kernel: hub 3-0:1.0: USB hub found
+Oct 02 23:05:41.547287 glymur kernel: hub 3-0:1.0: 1 port detected
+Oct 02 23:05:41.547400 glymur kernel: i2c_hid_of 8-0010: supply vdd not found, using dummy regulator
+Oct 02 23:05:41.547524 glymur kernel: i2c_hid_of 8-0010: supply vddl not found, using dummy regulator
+Oct 02 23:05:41.547661 glymur kernel: i2c_hid_of 4-0015: supply vdd not found, using dummy regulator
+Oct 02 23:05:41.548401 glymur kernel: i2c_hid_of 0-003a: supply vdd not found, using dummy regulator
+Oct 02 23:05:41.551763 glymur kernel: i2c_hid_of 4-0015: supply vddl not found, using dummy regulator
+Oct 02 23:05:41.554752 glymur kernel: i2c_hid_of 0-003a: supply vddl not found, using dummy regulator
+Oct 02 23:05:41.560350 glymur kernel: input: HP OmniBook 5 EC hotkeys as /devices/platform/soc@0/ac0000.geniqup/a84000.i2c/i2c-9/9-0076/input/input1
+Oct 02 23:05:41.563346 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@1: Adding to iommu group 22
+Oct 02 23:05:41.564345 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@2: Adding to iommu group 23
+Oct 02 23:05:41.564393 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@3: Adding to iommu group 24
+Oct 02 23:05:41.565349 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@4: Adding to iommu group 25
+Oct 02 23:05:41.566344 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@5: Adding to iommu group 26
+Oct 02 23:05:41.566369 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@6: Adding to iommu group 27
+Oct 02 23:05:41.567344 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@7: Adding to iommu group 28
+Oct 02 23:05:41.568344 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@8: Adding to iommu group 29
+Oct 02 23:05:41.568367 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@c: Adding to iommu group 30
+Oct 02 23:05:41.569347 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@d: Adding to iommu group 31
+Oct 02 23:05:41.569408 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@e: Adding to iommu group 32
+Oct 02 23:05:41.627358 glymur kernel: i2c_hid_of 8-0010: i2c_hid_get_input: IRQ triggered but there's no data
+Oct 02 23:05:41.666444 glymur kernel: msm_dpu ae01000.display-controller: bound af6c000.displayport-controller (ops msm_dp_display_comp_ops [msm])
+Oct 02 23:05:41.668384 glymur kernel: adreno 3d00000.gpu: supply vdd not found, using dummy regulator
+Oct 02 23:05:41.668525 glymur kernel: adreno 3d00000.gpu: supply vddcx not found, using dummy regulator
+Oct 02 23:05:41.690358 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: parent PMIC subtype 0x5f v2.0
+Oct 02 23:05:41.691634 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: supply vdd18 not found, using dummy regulator
+Oct 02 23:05:41.692120 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: supply vdd3 not found, using dummy regulator
+Oct 02 23:05:41.692315 glymur kernel: input: hid-over-i2c 04F3:44BF Touchscreen as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input2
+Oct 02 23:05:41.692331 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: parent PMIC subtype 0x5f v2.0
+Oct 02 23:05:41.692490 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: supply vdd18 not found, using dummy regulator
+Oct 02 23:05:41.692618 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: supply vdd3 not found, using dummy regulator
+Oct 02 23:05:41.692740 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input3
+Oct 02 23:05:41.692752 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input4
+Oct 02 23:05:41.692761 glymur kernel: hid-generic 0018:04F3:44BF.0001: input,hidraw0: I2C HID v1.00 Device [hid-over-i2c 04F3:44BF] on 8-0010
+Oct 02 23:05:41.692886 glymur kernel: input: hid-over-i2c 04F3:32EF Mouse as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input6
+Oct 02 23:05:41.692898 glymur kernel: input: hid-over-i2c 04F3:32EF Touchpad as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input8
+Oct 02 23:05:41.692909 glymur kernel: input: hid-over-i2c 04F3:32EF Consumer Control as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input9
+Oct 02 23:05:41.692920 glymur kernel: hid-generic 0018:04F3:32EF.0002: input,hidraw1: I2C HID v1.00 Mouse [hid-over-i2c 04F3:32EF] on 4-0015
+Oct 02 23:05:41.693050 glymur kernel: hid-generic 0018:0416:C300.0003: ignoring exceeding usage max
+Oct 02 23:05:41.693176 glymur kernel: input: hid-over-i2c 0416:C300 Keyboard as /devices/platform/soc@0/bc0000.geniqup/b80000.i2c/i2c-0/0-003a/0018:0416:C300.0003/input/input10
+Oct 02 23:05:41.693184 glymur kernel: hid-generic 0018:0416:C300.0003: input,hidraw2: I2C HID v1.00 Keyboard [hid-over-i2c 0416:C300] on 0-003a
+Oct 02 23:05:41.694344 glymur kernel: qcom-m31eusb2-phy fd3000.phy: supply vdd not found, using dummy regulator
+Oct 02 23:05:41.695936 glymur kernel: qcom-m31eusb2-phy fd3000.phy: supply vdda12 not found, using dummy regulator
+Oct 02 23:05:41.696974 glymur kernel: qcom-m31eusb2-phy fdd000.phy: supply vdd not found, using dummy regulator
+Oct 02 23:05:41.698180 glymur kernel: qcom-m31eusb2-phy fdd000.phy: supply vdda12 not found, using dummy regulator
+Oct 02 23:05:41.698694 glymur kernel: remoteproc remoteproc1: remote processor adsp is now up
+Oct 02 23:05:41.710689 glymur kernel: msm_dpu ae01000.display-controller: bound 3d00000.gpu (ops a3xx_ops [msm])
+Oct 02 23:05:41.711346 glymur kernel: input: pmic_pwrkey as /devices/platform/soc@0/c400000.arbiter/spmi-0/0-00/c426000.spmi:pmic@0:pon@1300/c426000.spmi:pmic@0:pon@1300:pwrkey/input/input11
+Oct 02 23:05:41.713347 glymur kernel: qcom,fastrpc 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1: assigned reserved memory node adsp-rpc-remote-heap
+Oct 02 23:05:41.713398 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@3: Adding to iommu group 33
+Oct 02 23:05:41.713435 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@4: Adding to iommu group 34
+Oct 02 23:05:41.714347 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@5: Adding to iommu group 35
+Oct 02 23:05:41.714389 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@6: Adding to iommu group 36
+Oct 02 23:05:41.714420 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@7: Adding to iommu group 37
+Oct 02 23:05:41.714443 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@8: Adding to iommu group 38
+Oct 02 23:05:41.742347 glymur kernel: Console: switching to colour dummy device 80x25
+Oct 02 23:05:41.742369 glymur kernel: [drm:dpu_kms_hw_init:1200] dpu hardware revision:0xc0020000
+Oct 02 23:05:41.743346 glymur kernel: qcom,apr 6800000.remoteproc:glink-edge.adsp_apps.-1.-1: Adding APR/GPR dev: gprsvc:service:2:1
+Oct 02 23:05:41.743388 glymur kernel: qcom,apr 6800000.remoteproc:glink-edge.adsp_apps.-1.-1: Adding APR/GPR dev: gprsvc:service:2:2
+Oct 02 23:05:41.749347 glymur kernel: platform 6800000.remoteproc:glink-edge:gpr:service@1:dais: Adding to iommu group 39
+Oct 02 23:05:41.749400 glymur kernel: [drm] Initialized msm 1.13.0 for ae01000.display-controller on minor 1
+Oct 02 23:05:41.750360 glymur kernel: usb 1-1: new high-speed USB device number 2 using xhci-hcd
+Oct 02 23:05:41.753347 glymur kernel: msm_dpu ae01000.display-controller: [drm:adreno_request_fw [msm]] loaded qcom/gen80100_sqe.fw from new location
+Oct 02 23:05:41.754364 glymur kernel: msm_dpu ae01000.display-controller: [drm:adreno_request_fw [msm]] loaded qcom/gen80100_gmu.bin from new location
+Oct 02 23:05:41.756349 glymur kernel: msm_dpu ae01000.display-controller: [drm:adreno_request_fw [msm]] loaded qcom/gen80100_aqe.fw from new location
+Oct 02 23:05:41.757344 glymur kernel: [drm] Loaded GMU firmware v5.2.38
+Oct 02 23:05:41.790347 glymur kernel: msm_dpu ae01000.display-controller: Zap shader not enabled - using SECVID_TRUST_CNTL instead
+Oct 02 23:05:41.790501 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input12
+Oct 02 23:05:41.790511 glymur kernel: input: hid-over-i2c 04F3:44BF UNKNOWN as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input13
+Oct 02 23:05:41.790530 glymur kernel: input: hid-over-i2c 04F3:44BF UNKNOWN as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input14
+Oct 02 23:05:41.790539 glymur kernel: hid-multitouch 0018:04F3:44BF.0001: input,hidraw0: I2C HID v1.00 Device [hid-over-i2c 04F3:44BF] on 8-0010
+Oct 02 23:05:41.793344 glymur kernel: loop0: detected capacity change from 0 to 8
+Oct 02 23:05:41.795383 glymur kernel: loop1: detected capacity change from 0 to 185800
+Oct 02 23:05:41.795400 glymur kernel: loop2: detected capacity change from 0 to 126688
+Oct 02 23:05:41.797359 glymur kernel: loop3: detected capacity change from 0 to 506936
+Oct 02 23:05:41.798349 glymur kernel: loop4: detected capacity change from 0 to 185848
+Oct 02 23:05:41.799346 glymur kernel: loop5: detected capacity change from 0 to 187776
+Oct 02 23:05:41.800406 glymur kernel: loop6: detected capacity change from 0 to 126640
+Oct 02 23:05:41.800419 glymur kernel: loop7: detected capacity change from 0 to 385528
+Oct 02 23:05:41.802351 glymur kernel: loop9: detected capacity change from 0 to 35872
+Oct 02 23:05:41.802381 glymur kernel: loop8: detected capacity change from 0 to 1132440
+Oct 02 23:05:41.829351 glymur kernel: Console: switching to colour frame buffer device 240x75
+Oct 02 23:05:41.829377 glymur kernel: msm_dpu ae01000.display-controller: [drm] fb0: msmdrmfb frame buffer device
+Oct 02 23:05:41.841387 glymur kernel: ath12k_wifi7_pci 0004:01:00.0: chip_id 0x21 chip_family 0x4 board_id 0xff soc_id 0x40292100
+Oct 02 23:05:41.841526 glymur kernel: ath12k_wifi7_pci 0004:01:00.0: fw_version 0x100581de fw_build_timestamp 2024-09-11 23:52 fw_build_id QC_IMAGE_VERSION_STRING=WLAN.COL.1.0.c2-00277-QCACOLSWPL_V1_TO_SILICONZ-1
+Oct 02 23:05:41.854345 glymur kernel: input: hid-over-i2c 04F3:32EF Mouse as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input16
+Oct 02 23:05:41.854378 glymur kernel: input: hid-over-i2c 04F3:32EF Touchpad as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input18
+Oct 02 23:05:41.854394 glymur kernel: input: hid-over-i2c 04F3:32EF Consumer Control as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input19
+Oct 02 23:05:41.855347 glymur kernel: hid-multitouch 0018:04F3:32EF.0002: input,hidraw1: I2C HID v1.00 Mouse [hid-over-i2c 04F3:32EF] on 4-0015
+Oct 02 23:05:41.856117 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier a800000.usb for /pmic-glink/connector@1
+Oct 02 23:05:41.860347 glymur kernel: tx_macro 6a90000.codec: Driver needs fixing: Unsorted reg_defaults, sorting the copy
+Oct 02 23:05:41.876348 glymur kernel: usb 1-1: New USB device found, idVendor=30c9, idProduct=00d9, bcdDevice= 0.07
+Oct 02 23:05:41.880345 glymur kernel: usb 1-1: New USB device strings: Mfr=3, Product=1, SerialNumber=2
+Oct 02 23:05:41.880487 glymur kernel: usb 1-1: Product: HP True Vision FHD Camera
+Oct 02 23:05:41.880583 glymur kernel: usb 1-1: Manufacturer: DUKUF0A8PLT4ZB
+Oct 02 23:05:41.880669 glymur kernel: usb 1-1: SerialNumber: <serial>
+Oct 02 23:05:41.885363 glymur kernel: audit: type=1400 audit(1790962541.883:2): apparmor="STATUS" operation="profile_load" profile="unconfined" name="buildah" pid=1131 comm="apparmor_parser"
+Oct 02 23:05:41.885392 glymur kernel: audit: type=1400 audit(1790962541.883:3): apparmor="STATUS" operation="profile_load" profile="unconfined" name=4D6F6E676F444220436F6D70617373 pid=1122 comm="apparmor_parser"
+Oct 02 23:05:41.885402 glymur kernel: audit: type=1400 audit(1790962541.883:4): apparmor="STATUS" operation="profile_load" profile="unconfined" name="Discord" pid=1121 comm="apparmor_parser"
+Oct 02 23:05:41.885410 glymur kernel: audit: type=1400 audit(1790962541.883:5): apparmor="STATUS" operation="profile_load" profile="unconfined" name="balena-etcher" pid=1127 comm="apparmor_parser"
+Oct 02 23:05:41.885417 glymur kernel: audit: type=1400 audit(1790962541.883:6): apparmor="STATUS" operation="profile_load" profile="unconfined" name="1password" pid=1120 comm="apparmor_parser"
+Oct 02 23:05:41.885425 glymur kernel: audit: type=1400 audit(1790962541.883:7): apparmor="STATUS" operation="profile_load" profile="unconfined" name="QtWebEngineProcess" pid=1123 comm="apparmor_parser"
+Oct 02 23:05:41.885433 glymur kernel: audit: type=1400 audit(1790962541.883:8): apparmor="STATUS" operation="profile_load" profile="unconfined" name="brave" pid=1130 comm="apparmor_parser"
+Oct 02 23:05:41.887358 glymur kernel: audit: type=1400 audit(1790962541.885:9): apparmor="STATUS" operation="profile_load" profile="unconfined" name="cam" pid=1133 comm="apparmor_parser"
+Oct 02 23:05:41.887378 glymur kernel: audit: type=1400 audit(1790962541.885:10): apparmor="STATUS" operation="profile_load" profile="unconfined" name="ch-checkns" pid=1134 comm="apparmor_parser"
+Oct 02 23:05:41.944348 glymur kernel: mc: Linux media interface: v0.10
+Oct 02 23:05:41.948344 glymur kernel: videodev: Linux video capture interface: v2.00
+Oct 02 23:05:41.956346 glymur kernel: uvcvideo 1-1:1.0: Found UVC 1.10 device HP True Vision FHD Camera (30c9:00d9)
+Oct 02 23:05:41.959354 glymur kernel: uvcvideo 1-1:1.2: Found UVC 1.50 device HP True Vision FHD Camera (30c9:00d9)
+Oct 02 23:05:41.960344 glymur kernel: usbcore: registered new interface driver uvcvideo
+Oct 02 23:05:41.965345 glymur kernel: wsa_macro 6c90000.codec: ASoC error (-5): at snd_soc_component_update_bits() on 6c90000.codec for register: [0x000005dc]
+Oct 02 23:05:41.966347 glymur kernel: snd-x1e80100 sound: ASoC: Parent card not yet available, widget card binding deferred
+Oct 02 23:05:41.966436 glymur kernel: va_macro 7660000.codec: supply vdd-micb not found, using dummy regulator
+Oct 02 23:05:41.968353 glymur kernel: ALSA: Control name 'stream0.vol_ctrl0 MultiMedia1 Playback Volume' truncated to 'stream0.vol_ctrl0 MultiMedia1 Playback Volu'
+Oct 02 23:05:41.969349 glymur kernel: input: MAHUA-HP-OmniBook-5-16-bf1xxx Headset Jack as /devices/platform/sound/sound/card0/input20
+Oct 02 23:05:42.411397 glymur kernel: Bluetooth: hci0: QCA Downloading qca/ornnv11.b17
+Oct 02 23:05:42.416385 glymur kernel: bluetooth hci0: Direct firmware load for qca/ornbcscal11.b17 failed with error -2
+Oct 02 23:05:42.416638 glymur kernel: Bluetooth: hci0: QCA Downloading qca/ornbcscal11.bin
+Oct 02 23:05:42.501452 glymur kernel: usb 3-1: new SuperSpeed USB device number 2 using xhci-hcd
+Oct 02 23:05:42.512384 glymur kernel: usb 3-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Oct 02 23:05:42.513348 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Oct 02 23:05:42.513476 glymur kernel: usb 3-1: Product: Ultra
+Oct 02 23:05:42.513560 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Oct 02 23:05:42.513637 glymur kernel: usb 3-1: SerialNumber: <serial>
+Oct 02 23:05:42.532346 glymur kernel: usb-storage 3-1:1.0: USB Mass Storage device detected
+Oct 02 23:05:42.532493 glymur kernel: scsi host0: usb-storage 3-1:1.0
+Oct 02 23:05:42.532628 glymur kernel: usbcore: registered new interface driver usb-storage
+Oct 02 23:05:42.534345 glymur kernel: usbcore: registered new interface driver uas
+Oct 02 23:05:42.687966 glymur kernel: ath12k_wifi7_pci 0004:01:00.0 wlo1: renamed from wlan0
+Oct 02 23:05:42.807346 glymur kernel: Bluetooth: hci0: QCA FW build version: BTFW.ORNE.1.1.0-00206-PATCHZ-1_DEF NVM_LABEL:BTFW.ORNE.1.1.0-00206-PATCHZ-1_DEFCSCAL_MTP_260210
+Oct 02 23:05:42.807370 glymur kernel: Bluetooth: hci0: QCA setup on UART is completed
+Oct 02 23:05:42.813345 glymur kernel: kauditd_printk_skb: 194 callbacks suppressed
+Oct 02 23:05:42.813358 glymur kernel: audit: type=1400 audit(1790962542.811:205): apparmor="STATUS" operation="profile_load" profile="unconfined" name="snap-update-ns.mesa-2404" pid=1397 comm="apparmor_parser"
+Oct 02 23:05:42.817344 glymur kernel: audit: type=1400 audit(1790962542.815:206): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/snap/snapd/28255/usr/lib/snapd/snap-confine" pid=1394 comm="apparmor_parser"
+Oct 02 23:05:42.819346 glymur kernel: audit: type=1400 audit(1790962542.817:207): apparmor="STATUS" operation="profile_load" profile="unconfined" name="snap.desktop-security-center.hook.configure" pid=1403 comm="apparmor_parser"
+Oct 02 23:05:42.820344 glymur kernel: audit: type=1400 audit(1790962542.818:208): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/snap/snapd/27740/usr/lib/snapd/snap-confine" pid=1393 comm="apparmor_parser"
+Oct 02 23:05:42.820350 glymur kernel: audit: type=1400 audit(1790962542.818:209): apparmor="STATUS" operation="profile_load" profile="unconfined" name="snap-update-ns.desktop-security-center" pid=1395 comm="apparmor_parser"
+Oct 02 23:05:42.820355 glymur kernel: audit: type=1400 audit(1790962542.818:210): apparmor="STATUS" operation="profile_load" profile="unconfined" name="snap-update-ns.prompting-client" pid=1398 comm="apparmor_parser"
+Oct 02 23:05:42.821344 glymur kernel: audit: type=1400 audit(1790962542.819:211): apparmor="STATUS" operation="profile_load" profile="unconfined" name="snap-update-ns.snap-store" pid=1399 comm="apparmor_parser"
+Oct 02 23:05:42.822353 glymur kernel: audit: type=1400 audit(1790962542.820:212): apparmor="STATUS" operation="profile_load" profile="unconfined" name="snap-update-ns.firefox" pid=1396 comm="apparmor_parser"
+Oct 02 23:05:42.823354 glymur kernel: audit: type=1400 audit(1790962542.821:213): apparmor="STATUS" operation="profile_load" profile="unconfined" name="snap-update-ns.snapd-desktop-integration" pid=1400 comm="apparmor_parser"
+Oct 02 23:05:42.823383 glymur kernel: audit: type=1400 audit(1790962542.821:214): apparmor="STATUS" operation="profile_load" profile="unconfined" name="snap-update-ns.thunderbird" pid=1401 comm="apparmor_parser"
+Oct 02 23:05:42.836370 glymur kernel: Bluetooth: hci0: AOSP extensions version v1.05
+Oct 02 23:05:42.836384 glymur kernel: Bluetooth: hci0: AOSP quality report is supported
+Oct 02 23:05:42.923388 glymur kernel: arm-scmi arm-scmi.0.auto: Failed to query supported version for protocol 0x13.
+Oct 02 23:05:42.923596 glymur kernel: arm-scmi arm-scmi.0.auto: Trying version 0x40000. Backward compatibility is NOT assured.
+Oct 02 23:05:42.923677 glymur kernel: arm-scmi arm-scmi.0.auto: Failed to get FC for protocol 13 [MSG_ID:6 / RES_ID:0] - ret:-22. Using regular messaging.
+Oct 02 23:05:42.923739 glymur kernel: arm-scmi arm-scmi.0.auto: Failed to get FC for protocol 13 [MSG_ID:5 / RES_ID:0] - ret:-22. Using regular messaging.
+Oct 02 23:05:42.923804 glymur kernel: arm-scmi arm-scmi.0.auto: Failed to get FC for protocol 13 [MSG_ID:6 / RES_ID:1] - ret:-22. Using regular messaging.
+Oct 02 23:05:42.923877 glymur kernel: arm-scmi arm-scmi.0.auto: Failed to get FC for protocol 13 [MSG_ID:5 / RES_ID:1] - ret:-22. Using regular messaging.
+Oct 02 23:05:42.924382 glymur kernel: cpu cpu0: EM: OPP:355200 is inefficient
+Oct 02 23:05:42.924483 glymur kernel: cpu cpu0: EM: created perf domain
+Oct 02 23:05:42.961405 glymur kernel: cpu cpu6: EM: OPP:4569600 is inefficient
+Oct 02 23:05:42.961581 glymur kernel: cpu cpu6: EM: created perf domain
+Oct 02 23:05:42.961710 glymur kernel: energy_model: updating cpu0 cpu_cap=553 old capacity=764
+Oct 02 23:05:42.961723 glymur kernel: cpu cpu0: EM: OPP:355200 is inefficient
+Oct 02 23:05:42.965348 glymur kernel: Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+Oct 02 23:05:42.965369 glymur kernel: Bluetooth: BNEP filters: protocol multicast
+Oct 02 23:05:42.965386 glymur kernel: Bluetooth: BNEP socket layer initialized
+Oct 02 23:05:42.969346 glymur kernel: Bluetooth: MGMT ver 1.23
+Oct 02 23:05:43.548267 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Oct 02 23:05:43.552350 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Oct 02 23:05:43.552521 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Oct 02 23:05:43.552647 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Oct 02 23:05:43.552718 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Oct 02 23:05:43.553364 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Oct 02 23:05:43.566350 glymur kernel:  sda: sda1 sda2
+Oct 02 23:05:43.566430 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Oct 02 23:05:43.701348 glymur kernel: Bluetooth: RFCOMM TTY layer initialized
+Oct 02 23:05:43.701382 glymur kernel: Bluetooth: RFCOMM socket layer initialized
+Oct 02 23:05:43.701388 glymur kernel: Bluetooth: RFCOMM ver 1.11
+Oct 02 23:05:44.894845 glymur kernel: rfkill: input handler disabled
+Oct 02 23:05:49.633489 glymur kernel: wlo1: authenticate with xx:xx:xx:xx:xx:xx (local address=xx:xx:xx:xx:xx:xx)
+Oct 02 23:05:49.633541 glymur kernel: wlo1: send auth to xx:xx:xx:xx:xx:xx (try 1/3)
+Oct 02 23:05:49.638399 glymur kernel: wlo1: authenticated
+Oct 02 23:05:49.641389 glymur kernel: wlo1: associate with xx:xx:xx:xx:xx:xx (try 1/3)
+Oct 02 23:05:49.653980 glymur kernel: wlo1: RX AssocResp from xx:xx:xx:xx:xx:xx (capab=0x1511 status=0 aid=1)
+Oct 02 23:05:49.685959 glymur kernel: wlo1: associated
+Oct 02 23:05:49.747408 glymur kernel: wlo1: Limiting TX power to 24 (24 - 0) dBm as advertised by xx:xx:xx:xx:xx:xx
+Oct 02 23:05:54.441258 glymur systemd-journald[458]: /var/log/journal/72d80a48b0a14cd6ae41c45f52a2e16f/user-1000.journal: Realtime clock jumped backwards relative to last journal entry, rotating.
+Oct 02 23:05:54.613348 glymur kernel: kauditd_printk_skb: 40 callbacks suppressed
+Oct 02 23:05:54.613368 glymur kernel: audit: type=1400 audit(1790962554.611:255): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=3709 comm="fusermount3" capability=1  capname="dac_override"
+Oct 02 23:05:54.613378 glymur kernel: audit: type=1400 audit(1790962554.611:256): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=3709 comm="fusermount3" capability=7  capname="setuid"
+Oct 02 23:05:54.613387 glymur kernel: audit: type=1400 audit(1790962554.611:257): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=3710 comm="fusermount3" capability=7  capname="setuid"
+Oct 02 23:05:54.621346 glymur kernel: audit: type=1400 audit(1790962554.619:258): apparmor="DENIED" operation="mount" class="mount" profile="/usr/lib/snapd/snap-confine" pid=3629 comm="snap-confine" flags="rw, rbind"
+Oct 02 23:05:54.845412 glymur kernel: rfkill: input handler enabled
+Oct 02 23:05:54.928405 glymur kernel: audit: type=1400 audit(1790962554.926:259): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=3956 comm="fusermount3" capability=1  capname="dac_override"
+Oct 02 23:05:54.928426 glymur kernel: audit: type=1400 audit(1790962554.926:260): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=3956 comm="fusermount3" capability=7  capname="setuid"
+Oct 02 23:05:54.928442 glymur kernel: audit: type=1400 audit(1790962554.926:261): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=3958 comm="fusermount3" capability=7  capname="setuid"
+Oct 02 23:05:55.870459 glymur kernel: rfkill: input handler disabled
+Oct 24 21:58:38.206187 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Oct 24 21:58:38.287189 glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+Oct 24 21:58:38.684193 glymur kernel: audit: type=1400 audit(1792859318.682:262): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=5040 comm="fusermount3" capability=1  capname="dac_override"
+Oct 24 21:58:38.684222 glymur kernel: audit: type=1400 audit(1792859318.682:263): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=5040 comm="fusermount3" capability=7  capname="setuid"
+Oct 24 21:58:38.684228 glymur kernel: audit: type=1400 audit(1792859318.682:264): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=5043 comm="fusermount3" capability=7  capname="setuid"
+Oct 24 21:58:40.716242 glymur kernel: qnoc-glymur interconnect-1: sync_state() pending due to 1dfa000.crypto
+Oct 24 21:58:40.716450 glymur kernel: qnoc-glymur 16e0000.interconnect: sync_state() pending due to 1dfa000.crypto
+Oct 24 21:58:40.716529 glymur kernel: gxclkctl-kaanapali 3d64000.clock-controller: sync_state() pending due to 3d6c000.gmu
+Oct 24 21:58:40.716597 glymur kernel: gcc-glymur 100000.clock-controller: sync_state() pending due to 3d6c000.gmu
+Oct 24 21:58:40.716663 glymur kernel: gpucc-glymur 3d90000.clock-controller: sync_state() pending due to 3d6c000.gmu
+Oct 24 21:59:54.132188 glymur kernel: kauditd_printk_skb: 1 callbacks suppressed
+Oct 24 21:59:54.132237 glymur kernel: audit: type=1400 audit(1792859394.130:266): apparmor="DENIED" operation="mount" class="mount" profile="/usr/lib/snapd/snap-confine" pid=7376 comm="snap-confine" flags="rw, rbind"
+Oct 24 22:00:30.171205 glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+Oct 24 22:22:51.451187 glymur kernel: audit: type=1107 audit(1792860771.449:267): pid=1433 uid=995 auid=4294967295 ses=4294967295 subj=unconfined msg='apparmor="DENIED" operation="dbus_signal" bus="system" path="/org/freedesktop/login1" interface="org.freedesktop.login1.Manager" member="PrepareForShutdownWithMetadata" mask="receive" name=":1.11" label="snap.firefox.firefox" peer_label="unconfined" exe="/usr/bin/dbus-broker" sauid=0 hostname=? addr=? terminal=?'
+Oct 24 22:22:51.451214 glymur kernel: audit: type=1107 audit(1792860771.449:268): pid=1433 uid=995 auid=4294967295 ses=4294967295 subj=unconfined msg='apparmor="DENIED" operation="dbus_signal" bus="system" path="/org/freedesktop/login1" interface="org.freedesktop.login1.Manager" member="PrepareForShutdown" mask="receive" name=":1.11" label="snap.firefox.firefox" peer_label="unconfined" exe="/usr/bin/dbus-broker" sauid=0 hostname=? addr=? terminal=?'
+Oct 24 22:22:51.454892 glymur kernel: rfkill: input handler enabled
+Oct 24 22:22:51.483189 glymur kernel: audit: type=1400 audit(1792860771.481:269): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=12514 comm="fusermount3" capability=1  capname="dac_override"
+Oct 24 22:22:51.483260 glymur kernel: audit: type=1400 audit(1792860771.481:270): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=12514 comm="fusermount3" capability=7  capname="setuid"
+Oct 24 22:22:51.483278 glymur kernel: audit: type=1400 audit(1792860771.481:271): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=12515 comm="fusermount3" capability=7  capname="setuid"
+Oct 24 22:22:51.484188 glymur kernel: audit: type=1400 audit(1792860771.482:272): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=12516 comm="fusermount3" capability=1  capname="dac_override"
+Oct 24 22:22:51.484225 glymur kernel: audit: type=1400 audit(1792860771.482:273): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=12516 comm="fusermount3" capability=7  capname="setuid"
+Oct 24 22:22:51.484242 glymur kernel: audit: type=1400 audit(1792860771.482:274): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=12517 comm="fusermount3" capability=7  capname="setuid"
+Oct 24 22:22:51.486213 glymur kernel: audit: type=1400 audit(1792860771.484:275): apparmor="DENIED" operation="mount" class="mount" info="failed mntpnt match" error=-13 profile="fusermount3" name="/" pid=12519 comm="fusermount3" flags="rw, rprivate"
+Oct 24 22:22:51.516189 glymur kernel: audit: type=1400 audit(1792860771.514:276): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=12597 comm="fusermount3" capability=1  capname="dac_override"
+Oct 24 22:22:52.240202 glymur kernel: wlo1: deauthenticating from xx:xx:xx:xx:xx:xx by local choice (Reason: 3=DEAUTH_LEAVING)
+Oct 24 22:22:54.648233 glymur systemd-shutdown[1]: Syncing filesystems and block devices.
+Oct 24 22:22:54.736362 glymur systemd-shutdown[1]: Sending SIGTERM to remaining processes...
+Oct 24 22:22:54.736487 glymur systemd-journald[458]: Received SIGTERM from PID 1 (systemd-shutdow).
