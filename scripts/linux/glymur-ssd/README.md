@@ -261,7 +261,9 @@ the headset it routes the DSP by hand for each step
 (`RX_CODEC_DMA_RX_0 Audio Mixer MultiMedia1` on and the speakers' mixer
 off; `MultiMedia2 Mixer TX_CODEC_DMA_TX_3` on and the built-in microphones'
 mixer off) and puts both back afterwards. The log goes to
-`/var/log/glymur/headset-test-*.txt`.
+`/var/log/glymur/headset-test-*.txt`. `install-from-usb.sh` copies it to the
+home folder with the other checks, and puts the `iris-test/` WirePlumber
+file in `~/glymur-iris-test/` without installing it.
 
 `check-audio.sh` lists every SoundWire device that attached (named
 link:manufacturer:part:version:unique id, also when no device-tree node

@@ -2,10 +2,18 @@
 
 Kernel `7.3.0-glymur-19` on "Ubuntu on SSD: test device tree". What changed
 and why: `docs/kernel-19-plan-2026-11-05.md`. Everything here is read-only
-or a normal use of the laptop.
+or a normal use of the laptop. The USB kit holds the package
+`glymur-kernel-7.3.0-glymur-19.tar.gz` (sha256 `67a8bb32…`); the
+installer checks every file on the stick before it installs anything.
+
+Order of boots: A on `-18`, then B and C on `-19`, then D (one edited
+boot), then E if there is time (another edited boot). Each later part only
+needs the one before it to have finished.
 
 - Do **not** plug a monitor or a DisplayPort adapter into the USB-C ports.
 - UEFI variables stay read-only (`docs/uefi-variables-2026-10-23.md`).
+- Do not run TPM tools (`tpm2_*`, `systemd-cryptenroll`): Linux has no TPM
+  driver on purpose (`docs/tpm-2026-11-06.md`).
 - To go back: "Ubuntu on SSD: previous kernel" boots `-18`.
 - If the desktop freezes for seconds at a time and `dmesg` shows
   `CMD timeout`, stop the audio session:
@@ -33,9 +41,11 @@ From the USB stick's `glymur-tools/kernels/` directory:
 
     bash install-from-usb.sh
 
-It defaults to `-19`, builds its initramfs and reinstalls the plain audio
-topology, which now has the headset graphs. Reboot into "Ubuntu on SSD:
-test device tree".
+It defaults to `-19`, builds its initramfs, reinstalls the plain audio
+topology (which now has the headset graphs), copies the check scripts
+(`check-headset.sh` among them) to your home folder, and keeps part E's
+WirePlumber file aside in `~/glymur-iris-test/`. Reboot into "Ubuntu on
+SSD: test device tree".
 
 ## C. On `-19`
 
@@ -67,12 +77,14 @@ test device tree".
 
         ls /sys/class/rtc/; cat /sys/class/rtc/rtc*/name /sys/class/rtc/rtc*/date /sys/class/rtc/rtc*/time; date -u
         cat /sys/class/misc/hw_random/rng_available /sys/class/misc/hw_random/rng_current
-        sudo dmesg | grep -iE "rtc|qce|qcrypto|qcom-rng|sync_state"
+        sudo dmesg | grep -iE "rtc|qce|qcom-rng|sync_state"
         timedatectl
 
    The RTC should read the same time as the clock after NTP (Linux only
    reads it; it never writes the time). `sync_state() pending due to
-   1dfa000.crypto` should be gone now that the crypto engine binds.
+   1dfa000.crypto` should be gone now that the crypto engine's core driver
+   (`qce-core`) binds; the three lines about `3d6c000.gmu` stay (an
+   upstream series, `docs/gmu-sync-state-2026-11-06.md`).
 
 ## D. On `-19`, last: one boot without Ubuntu's generic boot options
 
@@ -118,7 +130,7 @@ Iris on; nothing on the USB changes.
    `-17`):
 
         mkdir -p ~/.config/wireplumber/wireplumber.conf.d
-        cp "<USB>/glymur-tools/kernels/iris-test/52-no-v4l2-monitor.conf" ~/.config/wireplumber/wireplumber.conf.d/
+        cp ~/glymur-iris-test/52-no-v4l2-monitor.conf ~/.config/wireplumber/wireplumber.conf.d/
 
 2. Reboot. In GRUB, highlight "Ubuntu on SSD: test device tree", press `e`,
    and on the `set glymur_dtb=` line change
@@ -135,6 +147,14 @@ Iris on; nothing on the USB changes.
 
 ## Hand back
 
-`/var/log/glymur/*.txt` from both boots (the `audio-watch-*` from part A
-and everything from part C), and the times of any freeze. Raw journals stay
-private.
+- `/var/log/glymur/*.txt` from every boot: `audio-watch-*` from part A;
+  the boot report, `audio-test-*`, `headset-test-*`, `usb-test-*` and
+  `charging-watch-*` from part C; the boot reports of parts D and E;
+  `video-test-*` from part E.
+- The times of any freeze, and what part D's boot did if it failed.
+- The `-18` laptop session's private logs, which are only on the SSD: copy
+  `.work/k18-raw-2026-11-05/` from the repository checkout there to the
+  stick's FAT partition (`glymur-logs/`), for example
+  `tar czf /media/$USER/*/glymur-logs/k18-raw-2026-11-05.tgz -C <checkout> .work/k18-raw-2026-11-05`.
+
+Raw journals stay private; the sanitized logs go into `captures/`.

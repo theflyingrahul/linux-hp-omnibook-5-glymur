@@ -84,15 +84,21 @@ sudo apt-get install -y mesa-utils mesa-utils-bin vulkan-tools glmark2-es2-wayla
     echo 'apt failed (offline?); install them later, check-mesa.sh names them'
 
 for f in check-gpu-test.sh check-mesa.sh charging-watch.sh check-usb.sh check-ec.sh gpu-corruption-test.sh \
-         check-audio.sh watch-audio.sh check-battmgr-notify.sh check-video.sh check-display.sh \
-         check-hotkeys.sh ec-event-capture.sh dump-efivars.sh; do
+         check-audio.sh check-headset.sh watch-audio.sh check-battmgr-notify.sh check-video.sh \
+         check-display.sh check-hotkeys.sh ec-event-capture.sh dump-efivars.sh; do
     if [ -f "$K/$f" ]; then cp "$K/$f" "$HOME/$f"; fi
 done
+# The WirePlumber rule for a boot with Iris on: kept aside, never installed.
+if [ -d "$K/iris-test" ]; then
+    mkdir -p "$HOME/glymur-iris-test"
+    cp "$K/iris-test/"*.conf "$HOME/glymur-iris-test/"
+fi
 sync
 echo
 echo "Done. Reboot into \"Ubuntu on SSD: test device tree\" and,"
 echo "from a terminal on the desktop, run:"
 echo "  bash ~/check-mesa.sh"
+echo "  sudo bash ~/check-headset.sh    (headset jack; have a wired headset at hand)"
 echo "  sudo bash ~/check-ec.sh         (fan, temperatures, backlight, mute LEDs, hotkeys)"
 echo "  sudo bash ~/check-usb.sh        (plug USB-C and USB 2.0 devices in first)"
 echo "  sudo bash ~/charging-watch.sh   (plug, unplug, replug; type notes)"
