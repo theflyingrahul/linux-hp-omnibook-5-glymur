@@ -57,6 +57,19 @@ CONFIG_KEYBOARD_GPIO=m
 CONFIG_DRM_PANEL_SAMSUNG_ATNA33XC20=m
 CONFIG_EC_HP_OMNIBOOK5=m
 CONFIG_EFI_VARS_PSTORE_DEFAULT_DISABLE=y
+# Headset codec (WCD9378) through the SDCA class driver, from -19.
+CONFIG_SND_SOC_SDCA=m
+CONFIG_SND_SOC_SDCA_CLASS=m
+CONFIG_SND_SOC_WCD9378_SDCA=m
+# Crypto engine core (binds the node, drops its bandwidth vote when idle) and
+# TRNG, from -19. CRYPTO_DEV_QCE (=m in Ubuntu's config) is turned off:
+# qcom-next 17bbb4b37bbc's drivers/crypto/qce/core.c does not compile (two
+# "res" declarations).
+CONFIG_QCOM_CRYPTO_CORE=m
+# CONFIG_CRYPTO_DEV_QCE is not set
+CONFIG_HW_RANDOM_QCOM=m
+# RTC read through the ADSP's PMIC GLink service, as Windows does; read-only.
+CONFIG_RTC_DRV_QCOM_GLINK=m
 CFG
 
 cp "$UBUNTU_CONFIG" "$OUT/.config"

@@ -1,0 +1,41 @@
+From 0dde75ce87d04ebfd8b4233174d42983f8a5acb3 Mon Sep 17 00:00:00 2001
+From: Maulik Shah <maulik.shah@oss.qualcomm.com>
+Date: Mon, 14 Sep 2026 12:29:37 +0530
+Subject: [PATCH] arm64: dts: qcom: glymur: Add domain idle state names
+
+Add the idle-state-name property for the domain idle state so low power
+modes are described consistently and its name is printed in pmdomain
+debugfs.
+
+Signed-off-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Link: https://patch.msgid.link/20260914-b4-idle-state-name-v1-5-660c31187819@oss.qualcomm.com
+Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+---
+ arch/arm64/boot/dts/qcom/glymur.dtsi | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
+index d348814dad..b6ee1cca72 100644
+--- a/arch/arm64/boot/dts/qcom/glymur.dtsi
++++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
+@@ -369,6 +369,7 @@
+ 		domain-idle-states {
+ 			cluster_cl5: cluster-sleep-0 {
+ 				compatible = "domain-idle-state";
++				idle-state-name = "cluster-cl5";
+ 				arm,psci-suspend-param = <0x01000054>;
+ 				entry-latency-us = <2000>;
+ 				exit-latency-us = <2000>;
+@@ -377,6 +378,7 @@
+ 
+ 			domain_ss3: domain-sleep-0 {
+ 				compatible = "domain-idle-state";
++				idle-state-name = "cluster-ss3";
+ 				arm,psci-suspend-param = <0x0200c354>;
+ 				entry-latency-us = <2800>;
+ 				exit-latency-us = <4400>;
+-- 
+2.53.0
+

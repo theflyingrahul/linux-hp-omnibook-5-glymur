@@ -9,7 +9,11 @@ set -u
 # core powered for each trial and decodes a short clip with each pipe and
 # core ID setting, logging what the firmware answers
 # (docs/video-iris-fuse-2026-10-23.md).
-#   sudo bash check-video.sh [--diag]
+# --mahua (kernel -19, glymur-bringup/0004): the same with what Windows does
+# on Mahua (docs/video-iris-windows-2026-11-06.md): one core on vcodec 0's
+# power domain, HFI core ID 2, hardware core 1's register bits, and the
+# wrapper power control released; each trial leaves one of these out.
+#   sudo bash check-video.sh [--diag | --mahua]
 
 [ "$(id -u)" -eq 0 ] || { echo 'run with sudo' >&2; exit 1; }
 OUT="/var/log/glymur/video-test-$(date +%Y%m%dT%H%M%S).txt"
@@ -59,6 +63,38 @@ if [ "${1:-}" = --diag ]; then
             -i "$TMP/short.mp4" -f null - 2>&1 | tail -4
         echo "ffmpeg exit: ${PIPESTATUS[0]}"
         journalctl -k --no-pager --since "$since" | grep -E 'diag:|not supported|fatal|power on failed|Oops' | sed 's/^.*qcom-iris [^ ]* //' | sort | uniq -c | head -12
+    done
+    modprobe -r qcom_iris 2>&1
+    modprobe qcom_iris 2>&1
+    echo "Saved to $OUT"
+    exit 0
+fi
+
+if [ "${1:-}" = --mahua ]; then
+    sect "Mahua trials: one core, core ID 2, hardware core and power release"
+    command -v ffmpeg >/dev/null || { echo 'ffmpeg missing: sudo apt install ffmpeg'; exit 1; }
+    modinfo -p qcom_iris 2>/dev/null | grep -q diag_pwr_ctl || { echo 'qcom_iris has no diag_pwr_ctl (needs kernel -19)'; exit 1; }
+    ffmpeg -hide_banner -loglevel error -y -f lavfi -i testsrc2=size=1920x1080:rate=30 \
+        -t 2 -c:v libx264 -pix_fmt yuv420p "$TMP/short.mp4"
+    # hw_core pwr_ctl pipes: the Windows-like set first, then one change each
+    for t in "1 1 0" "1 1 2" "-1 1 0" "1 0 0"; do
+        set -- $t
+        echo; echo "-- trial: diag_hw_core=$1 diag_pwr_ctl=$2 diag_pipes=$3 (diag_cores=1 diag_core_id=2)"
+        if ! modprobe -r qcom_iris 2>&1; then
+            echo 'qcom_iris is still in use (a stuck decoder?); stopping the trials'
+            break
+        fi
+        sleep 1
+        modprobe qcom_iris diag_cores=1 diag_core_id=2 diag_hw_core="$1" diag_pwr_ctl="$2" diag_pipes="$3" 2>&1
+        sleep 2
+        echo "loaded with: $(grep -H . /sys/module/qcom_iris/parameters/diag_* 2>/dev/null | sed 's#.*/##' | tr '\n' ' ')"
+        since=$(date '+%Y-%m-%d %H:%M:%S')
+        timeout -k 5 30 ffmpeg -hide_banner -loglevel warning -c:v h264_v4l2m2m \
+            -i "$TMP/short.mp4" -f null - 2>&1 | tail -4
+        echo "ffmpeg exit: ${PIPESTATUS[0]} (124: timed out, 137: killed)"
+        journalctl -k --no-pager --since "$since" |
+            grep -E 'diag:|not supported|fatal|power on failed|stuck|failed to suspend|Oops|timeout' |
+            sed 's/^.*qcom-iris [^ ]* //' | sort | uniq -c | head -16
     done
     modprobe -r qcom_iris 2>&1
     modprobe qcom_iris 2>&1

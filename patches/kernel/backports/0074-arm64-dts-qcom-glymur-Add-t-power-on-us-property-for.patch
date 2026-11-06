@@ -1,0 +1,61 @@
+From 77e3c2981a06ca50aaa8c0afc6fe91bc1e610bc8 Mon Sep 17 00:00:00 2001
+From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+Date: Fri, 11 Sep 2026 12:20:06 +0530
+Subject: [PATCH] arm64: dts: qcom: glymur: Add t-power-on-us property for PCIe
+ root ports
+
+Currently the PCIe controller is not programming the T_POWER_ON value,
+which can result in improper L1.2 exit behavior. Add the
+t-power-on-us property to the PCIe root ports so that this value is
+correctly programmed during host initialization.
+
+Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+Link: https://patch.msgid.link/20260911-t_pwr_on-v1-5-c9eee197d082@oss.qualcomm.com
+Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+---
+ arch/arm64/boot/dts/qcom/glymur.dtsi | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
+index b6ee1cca72..35c591946c 100644
+--- a/arch/arm64/boot/dts/qcom/glymur.dtsi
++++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
+@@ -3408,6 +3408,8 @@
+ 				#size-cells = <2>;
+ 				ranges;
+ 
++				t-power-on-us = <80>;
++
+ 				port {
+ 					pcie4_port0_ep: endpoint {
+ 					};
+@@ -3680,6 +3682,8 @@
+ 				#size-cells = <2>;
+ 				ranges;
+ 
++				t-power-on-us = <80>;
++
+ 				port {
+ 					pcie5_port0_ep: endpoint {
+ 					};
+@@ -3896,6 +3900,8 @@
+ 				#size-cells = <2>;
+ 				ranges;
+ 
++				t-power-on-us = <80>;
++
+ 				port {
+ 					pcie6_port0_ep: endpoint {
+ 					};
+@@ -4168,6 +4174,8 @@
+ 				#size-cells = <2>;
+ 				ranges;
+ 
++				t-power-on-us = <80>;
++
+ 				port {
+ 					pcie3b_port0_ep: endpoint {
+ 					};
+-- 
+2.53.0
+

@@ -245,6 +245,24 @@ test device tree".
 devices the names Windows uses ("Internal Speakers" and "Microphone Array" on
 "Qualcomm(R) Aqstic(TM) ACX Static Endpoints Audio Device").
 
+### `check-headset.sh`
+
+    sudo bash check-headset.sh
+
+The headset jack test of `-19`'s test device tree
+(`docs/kernel-19-plan-2026-11-05.md`): the WCD9378 on `swr2` with `swr1` as
+its data lanes, the reset line (TLMM 191), the modules and kernel log, every
+mixer control with its value (the material for the headset UCM, which does
+not exist yet) and the jack controls and input devices before and after a
+headset is plugged in. Only when asked, it plays a 1 kHz tone at about
+-30 dBFS on the left, then the right headphone, and records 5 s from the
+headset microphone, through PipeWire as the desktop user. With no UCM for
+the headset it routes the DSP by hand for each step
+(`RX_CODEC_DMA_RX_0 Audio Mixer MultiMedia1` on and the speakers' mixer
+off; `MultiMedia2 Mixer TX_CODEC_DMA_TX_3` on and the built-in microphones'
+mixer off) and puts both back afterwards. The log goes to
+`/var/log/glymur/headset-test-*.txt`.
+
 `check-audio.sh` lists every SoundWire device that attached (named
 link:manufacturer:part:version:unique id, also when no device-tree node
 matches), the amplifier reset candidates (LPASS TLMM GPIOs 12 and 13, TLMM
@@ -298,6 +316,20 @@ the first video core powered) and a `diag_pipes`/`diag_core_id` setting
 (`patches/kernel/glymur-bringup/0003`), decodes a 2 s clip and lists what
 the kernel and the firmware logged: the fuse word, the settings sent, and
 any refusal. It ends by reloading the module without parameters.
+
+    sudo bash check-video.sh --mahua
+
+From kernel `-19`, booted with the `-test-iris` device tree (chosen at the
+GRUB menu, `docs/linux-runbook-19-2026-11-05.md` part E): what Windows does
+on Mahua (`docs/video-iris-windows-2026-11-06.md`). Every trial loads
+`qcom_iris` with `diag_cores=1 diag_core_id=2` and a
+`diag_hw_core`/`diag_pwr_ctl`/`diag_pipes` setting
+(`patches/kernel/glymur-bringup/0004`): the Windows-like set first, then
+without the wrapper power release, without core 1's register bits, and with
+2 pipes. ffmpeg is killed 5 s after its 30 s limit, and if the module can
+no longer be unloaded (a stuck decoder) the trials stop. For that boot
+`boards/hp-omnibook-5-16-bf1xxx/video/52-no-v4l2-monitor.conf` (staged in
+`iris-test/`) keeps WirePlumber off the video nodes.
 
 ### `check-display.sh`
 

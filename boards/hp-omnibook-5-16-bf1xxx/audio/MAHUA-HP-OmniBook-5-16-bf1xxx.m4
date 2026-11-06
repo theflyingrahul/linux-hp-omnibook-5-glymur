@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
 # HP OmniBook 5 16-bf1xxx (Snapdragon X2 Elite X2E84100 / Mahua):
-# stereo WSA884x speakers, 2x DMIC. Build with linux-msm/audioreach-topology.
+# stereo WSA884x speakers, 2x DMIC, WCD9378 headset (from -19).
+# Build with linux-msm/audioreach-topology.
 # Based on MAHUA-LENOVO-ThinkPad-T14s-Gen7.m4 without its DisplayPort sinks.
 # Apart from comments, the same as GLYMUR-ASUS-Zenbook-A14-UX3407NA.m4.
 # Copyright, Linaro Ltd, 2023
@@ -50,11 +51,25 @@ DEVICE_SG_ADD(audioreach/subgraph-device-codec-dma-capture.m4, `VA_CODEC_DMA_TX_
 	LPAIF_INTF_TYPE_VA, CODEC_INTF_IDX_TX0, 0, DATA_FORMAT_FIXED_POINT,
 	0x00004018, 0x00004018, 0x00006180)
 dnl
+dnl Headset playback (WCD9378 through the RX macro), as on X1E80100-CRD.m4
+DEVICE_SG_ADD(audioreach/subgraph-device-codec-dma-playback.m4, `RX_CODEC_DMA_RX_0', RX_CODEC_DMA_RX_0,
+	`S16_LE', 48000, 48000, 2, 2,
+	LPAIF_INTF_TYPE_RXTX, CODEC_INTF_IDX_RX0, 0, DATA_FORMAT_FIXED_POINT,
+	0x00004006, 0x00004006, 0x00006060)
+dnl
+dnl Headset mic capture (WCD9378 through the TX macro), as on X1E80100-CRD.m4
+DEVICE_SG_ADD(audioreach/subgraph-device-codec-dma-capture.m4, `TX_CODEC_DMA_TX_3', TX_CODEC_DMA_TX_3,
+	`S16_LE', 48000, 48000, 1, 2,
+	LPAIF_INTF_TYPE_RXTX, CODEC_INTF_IDX_TX3, 0, DATA_FORMAT_FIXED_POINT,
+	0x00004019, 0x00004019, 0x00006190)
+dnl
 
 STREAM_DEVICE_PLAYBACK_MIXER(WSA_CODEC_DMA_RX_0, ``WSA_CODEC_DMA_RX_0'', ``MultiMedia1'')
 STREAM_DEVICE_PLAYBACK_ROUTE(WSA_CODEC_DMA_RX_0, ``WSA_CODEC_DMA_RX_0 Audio Mixer'', ``MultiMedia1, stream0.logger1'')
+STREAM_DEVICE_PLAYBACK_MIXER(RX_CODEC_DMA_RX_0, ``RX_CODEC_DMA_RX_0'', ``MultiMedia1'')
+STREAM_DEVICE_PLAYBACK_ROUTE(RX_CODEC_DMA_RX_0, ``RX_CODEC_DMA_RX_0 Audio Mixer'', ``MultiMedia1, stream0.logger1'')
 
 dnl STREAM_DEVICE_CAPTURE_MIXER(stream-index, kcontrol1, kcontrol2... kcontrolN)
-STREAM_DEVICE_CAPTURE_MIXER(FRONTEND_DAI_MULTIMEDIA2, ``VA_CODEC_DMA_TX_0'')
+STREAM_DEVICE_CAPTURE_MIXER(FRONTEND_DAI_MULTIMEDIA2, ``VA_CODEC_DMA_TX_0'', ``TX_CODEC_DMA_TX_3'')
 dnl STREAM_DEVICE_CAPTURE_ROUTE(stream-index, mixer-name, route1, route2.. routeN)
-STREAM_DEVICE_CAPTURE_ROUTE(FRONTEND_DAI_MULTIMEDIA2, ``MultiMedia2 Mixer'', ``VA_CODEC_DMA_TX_0, device110.logger1'')
+STREAM_DEVICE_CAPTURE_ROUTE(FRONTEND_DAI_MULTIMEDIA2, ``MultiMedia2 Mixer'', ``VA_CODEC_DMA_TX_0, device110.logger1'', ``TX_CODEC_DMA_TX_3, device120.logger1'')

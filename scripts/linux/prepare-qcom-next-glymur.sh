@@ -7,7 +7,7 @@ set -euo pipefail
 CLONE="${1:?usage: prepare-qcom-next-glymur.sh <qcom-next-clone> <new-worktree> [repo]}"
 WORKTREE="${2:?usage: prepare-qcom-next-glymur.sh <qcom-next-clone> <new-worktree> [repo]}"
 REPO="${3:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
-BASE=c7896917e523946138ce654d4b6c1e33d5a8f4e5
+BASE=17bbb4b37bbc4fc5827b4667445a0c43967c0f48
 
 if [ -e "$WORKTREE" ]; then
     printf 'Refusing to reuse existing path: %s\n' "$WORKTREE" >&2

@@ -19,14 +19,15 @@ Wi-Fi board data, firmware) are not kernel code. They live in
 
 ## Boot series (built by `scripts/linux/build-qcom-next-glymur.sh`)
 
-Apply to qcom-next `c7896917e523` (tag `qcom-next-7.3-rc6-20261023`, from
-kernel `-18`; it was `1a0586064ee1` (`qcom-next-7.3-rc4-20261014`) for `-13`
+Apply to qcom-next `17bbb4b37bbc` (tag `qcom-next-7.3-20261031`, 7.3, from
+kernel `-19`; it was `c7896917e523` (`qcom-next-7.3-rc6-20261023`) for
+`-18`, `1a0586064ee1` (`qcom-next-7.3-rc4-20261014`) for `-13`
 to `-17`, `6b4daa845239` for
 `-8` to `-12`, `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to `-4`)
 in order:
-`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0009`,
-`glymur-bringup/0001–0003`, then `backports/` (`0001–0002`, `0013–0014`,
-`0017`, `0020`, `0023–0037`, `0040–0043`, `0046`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
+`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0006` and
+`0009`, `glymur-bringup/0001–0004`, then `backports/` (`0001–0002`,
+`0023–0026`, `0030–0037`, `0040–0043`, `0047–0075`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
 `upstream/qcom-next/0001`; `-7` adds `upstream/qcom-next/0002`; `-8` moves
 to the new base and adds `upstream/qcom-next/0003`; `-9` adds `0004`–`0005`
@@ -117,6 +118,78 @@ tree. `0005` reads the EC's pending event from register `0x00`, where HP's
 `IC10.INTR` reads it (field `CMD5`, no offset), instead of `0x05`; the old
 value left a fan notice unacknowledged and the event line firing about nine
 times a second (`docs/audit-2026-10-22.md`).
+
+Base move for `-19` (2026-11-05). qcom-next was rebuilt on 7.3
+(`17bbb4b37bbc`, tags `qcom-next-7.3-20261031` and `qcom-7.3-20261102`;
+1326 commits not in `c7896917e523`, 452 of its commits rewritten). Mainline
+is at `v7.4-rc1-132-g05441d697f`, linux-next at `next-20261105`, and the
+laptops tree was rewritten (now `8c9d1255de`). Dropped:
+
+- `backports/0014`, `0017`, `0020`, `0027`, `0029` and `0046` are in the new
+  base unchanged (they reverse-apply). `0013` (Mahua GPU) and `0028` (secondary
+  rail vote) are there as Qualcomm's own FROMLIST commits (`2b119b01c9f7`,
+  `d702f99c3135`; same 15.75 MB GMEM). The base also brings the rest of
+  that A8x vote series (BX rail, MX clamp), which `-17` left out as
+  Hawi-only. The CLX change is not in the base, so no revert is needed.
+- `upstream/qcom-next/0007` and `0008` are fixed in 7.4-rc1 by Qualcomm the
+  same way (`54c121eaee`, Srinivas Kandagatla: `devm_pm_runtime_enable()`
+  in wsa884x; `e21fb64a8c`, Ravi Hothi: the module configuration blob sized
+  in words and bounded by the private data). They are carried in their
+  mainline form as `backports/0047–0048`, so neither needs sending.
+
+`upstream/qcom-next/0002` (GMEM) is in 7.4-rc1 (`efbda69d92`), but not in
+qcom-next yet, so it stays. Taken from 7.4-rc1 (`M`) and linux-next (`N`),
+all accepted, all with `Fixes:` tags, in drivers this laptop runs:
+
+- Audio, `0049–0057`: wsa884x VI-sense channel count (`a6093f98cb`) and
+  temperature trim range (`00535515e3`); lpass-wsa-macro's v2.5+
+  Compander1 addresses (`233d36a960`; it matters only if this LPASS
+reports v2.5 or later, which the logs do not show yet);
+  three q6apm buffer-unmap fixes (`4b832a2af5`, `43c6960427`,
+  `a51c5dd7f7`); GPR service clean-up on a failed registration
+  (`7dc14f37ca`); SoundWire's interrupt disabled before its clock is gated
+  (`6c06767719`, N); an lpass-rx-macro runtime-PM reference leak
+  (`e2df0223ba`, N). The q6apm position changes dropped from `-18` as a bisect
+  step (`0ea3e0b196`, `0337b8129c`) stay out.
+- Display, `0058–0059`: DPU bandwidth from the state being checked
+  (`480ba24aa3`); DP debugfs connector pointer (`c2f772ec52`).
+- Clocks, `0060–0062`: rcg2 force-enable handling (`d4e8c6b9ae`,
+  `8c0f93e10f`); Lucid Ole PLL status checked before configuring
+  (`eb34e2804c`; Glymur's GCC and video clock controllers use it).
+- `0063` PCIe: `-ENODEV` ignored after a Root Port reset (`bea2ff3b9d`).
+- USB-C, `0064–0065`: UCSI skips the CAM query when a partner has no alt modes
+  (`7c590f0716`), and sets `ucsi->connector` before notifications are
+  enabled (`5b4b83c2ff`, N).
+- SPMI, `0066–0067`: pmic-arb's multi-bus registration returns 0
+  (`82f4c1948a`), and the `of_node` reference is held (`f7aa9de4f2`).
+- Wi-Fi, `0068–0070`: ath12k TX DMA address truncation, stale skb pointers,
+  DMA unwind (`979ecb88ed`, `6c40719489`, `4de5a8a0ed`).
+- `0071` cpufreq stats out-of-bounds access (`8a70298967`).
+
+Not taken: interconnect `e0667aa9c6` and UCSI `b8320a8b56`, which need earlier
+changes the base lacks; Iris fixes (Iris is off); fixes for other SoCs.
+
+From the laptops tree (posted by Qualcomm, not yet accepted), `0072–0075`,
+Glymur SoC device-tree fixes: the USB controllers' missing `hs_phy_irq` and
+the HS-only controller's swapped DP/DM interrupts (`eab4913e40`, Krishna
+Kurapati); the HS-only controller (the camera's) clocked at its 60 MHz
+LOW_SVS point instead of 200 MHz (`29a70f3d23`, Konrad Dybcio); the PCIe root
+ports' `t-power-on-us` for L1.2 exit (`77e3c2981a`, Krishna Chaitanya
+Chundru); names for the domain idle states (`0dde75ce87`, Maulik Shah). Not
+taken from there: the `HACK: eusb2_hack` commit (it forces the eUSB2 path in
+dwc3-qcom; no evidence it bears on the USB-C full/low-speed `-71`), the
+Glymur DP PHY series (USB-C SuperSpeed shares that PHY; it needs a test of
+its own) and the videocc sleep clock (no functional change).
+
+`glymur-bringup/0004` (new for `-19`, not for upstream) extends `0003`'s
+Iris diagnostics with `diag_hw_core` and `diag_pwr_ctl` for the Mahua video
+trials (`docs/video-iris-windows-2026-11-06.md`).
+
+Every patch applies with no fuzz on the new base (61 commits). The headset
+codec of `-19`'s test device tree needs nothing beyond the base: qcom-next
+now carries the WCD9378 SDCA driver, the Glymur LPASS clock controllers,
+SoundWire multi-lane support and the RX/TX macro and `swr1`/`swr2` nodes
+(`docs/kernel-19-plan-2026-11-05.md`).
 
 Upstream check of 2026-10-23 (no build yet). qcom-next is still
 `1a0586064ee1` and mainline still `v7.3-1703-ga804c5742b`, so the base

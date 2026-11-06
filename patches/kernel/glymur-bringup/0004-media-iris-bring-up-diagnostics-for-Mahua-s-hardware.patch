@@ -1,0 +1,198 @@
+From a5ae0892aeea0eb1489ea17bea58e0f47311b1e3 Mon Sep 17 00:00:00 2001
+From: Rahul Pon <theflyingrahul@gmail.com>
+Date: Thu, 5 Nov 2026 10:59:11 -0800
+Subject: [PATCH] media: iris: bring-up diagnostics for Mahua's hardware core
+ and power release
+
+On the HP OmniBook 5 (Mahua) the firmware accepts only HFI_PROP_CORE_ID 2
+(core 1), while the one video core is powered through vcodec 0's domain
+(video_cc_mvs0_gdsc). Windows' Adreno driver sends core 1, uses core 1's
+power status bit, and writes 0 to the wrapper's core power control
+register (WRAPPER_BASE + 0x84) before waiting for it. Add two default-off
+module parameters for a test of that:
+
+  diag_hw_core  hardware core (0 or 1) whose status, bridge reset and NOC
+                handshake bits vcodec 0 uses
+  diag_pwr_ctl  clear WRAPPER_BASE + 0x84 once the vcodec domains are in
+                hardware mode, wait for the core's power status, and log
+                both registers
+
+Not for upstream.
+---
+ drivers/media/platform/qcom/iris/iris_diag.c  | 43 ++++++++++++++++++-
+ drivers/media/platform/qcom/iris/iris_diag.h  |  2 +
+ drivers/media/platform/qcom/iris/iris_vpu3x.c | 20 +++++----
+ 3 files changed, 56 insertions(+), 9 deletions(-)
+
+diff --git a/drivers/media/platform/qcom/iris/iris_diag.c b/drivers/media/platform/qcom/iris/iris_diag.c
+index f3fd83c1bef5..6f455d1dfcfa 100644
+--- a/drivers/media/platform/qcom/iris/iris_diag.c
++++ b/drivers/media/platform/qcom/iris/iris_diag.c
+@@ -6,6 +6,7 @@
+ 
+ #include <linux/device.h>
+ #include <linux/io.h>
++#include <linux/iopoll.h>
+ #include <linux/module.h>
+ #include <linux/slab.h>
+ 
+@@ -15,6 +16,7 @@
+ #include "iris_vpu_register_defines.h"
+ 
+ #define WRAPPER_EFUSE_MONITOR	(WRAPPER_BASE_OFFS + 0x08)
++#define WRAPPER_CORE_POWER_CONTROL	(WRAPPER_BASE_OFFS + 0x84)
+ 
+ static unsigned int diag_cores;
+ module_param(diag_cores, uint, 0444);
+@@ -28,6 +30,14 @@ static int diag_core_id = -1;
+ module_param(diag_core_id, int, 0644);
+ MODULE_PARM_DESC(diag_core_id, "HFI_PROP_CORE_ID for new sessions (-1: driver choice, 0: not sent)");
+ 
++static int diag_hw_core = -1;
++module_param(diag_hw_core, int, 0444);
++MODULE_PARM_DESC(diag_hw_core, "Hardware core (0 or 1) whose status, reset and NOC bits vcodec 0 uses (-1: its own)");
++
++static bool diag_pwr_ctl;
++module_param(diag_pwr_ctl, bool, 0444);
++MODULE_PARM_DESC(diag_pwr_ctl, "Clear WRAPPER_CORE_POWER_CONTROL in hardware mode and wait for the core power status");
++
+ int iris_diag_apply(struct iris_core *core)
+ {
+ 	struct iris_platform_data *plat;
+@@ -48,7 +58,7 @@ int iris_diag_apply(struct iris_core *core)
+ 
+ void iris_diag_log_fuses(struct iris_core *core)
+ {
+-	if (!diag_cores && !diag_pipes && diag_core_id < 0)
++	if (!diag_cores && !diag_pipes && diag_core_id < 0 && diag_hw_core < 0 && !diag_pwr_ctl)
+ 		return;
+ 
+ 	dev_info(core->dev, "diag: efuse monitor %#010x, core power status %#010x\n",
+@@ -79,3 +89,34 @@ u32 iris_diag_core_id(struct iris_core *core, u32 core_id)
+ 
+ 	return val;
+ }
++
++u32 iris_diag_hw_core(u32 core_id)
++{
++	int val = READ_ONCE(diag_hw_core);
++
++	return (val == 0 || val == 1) && core_id == 0 ? val : core_id;
++}
++
++/*
++ * Windows' kernel driver writes 0 to the wrapper's core power control
++ * register before it waits for a video core's power status bit (bit 1
++ * core 0, bit 4 core 1). Do the same once the vcodec domains are in
++ * hardware mode, and log what the registers held.
++ */
++void iris_diag_power_release(struct iris_core *core)
++{
++	u32 bit = iris_diag_hw_core(0) ? VCODEC1_POWER_STATUS : VCODEC0_POWER_STATUS;
++	u32 ctl, status;
++	int ret;
++
++	if (!diag_pwr_ctl)
++		return;
++
++	ctl = readl(core->reg_base + WRAPPER_CORE_POWER_CONTROL);
++	status = readl(core->reg_base + WRAPPER_CORE_POWER_STATUS);
++	writel(0, core->reg_base + WRAPPER_CORE_POWER_CONTROL);
++	ret = readl_poll_timeout(core->reg_base + WRAPPER_CORE_POWER_STATUS, status,
++				 status & bit, 40, 200000);
++	dev_info(core->dev, "diag: power control was %#010x; status %#010x after release (%s, bit %#x)\n",
++		 ctl, status, ret ? "timed out" : "core on", bit);
++}
+diff --git a/drivers/media/platform/qcom/iris/iris_diag.h b/drivers/media/platform/qcom/iris/iris_diag.h
+index 5b45bb9ecd7d..25a5194a155a 100644
+--- a/drivers/media/platform/qcom/iris/iris_diag.h
++++ b/drivers/media/platform/qcom/iris/iris_diag.h
+@@ -10,5 +10,7 @@ int iris_diag_apply(struct iris_core *core);
+ void iris_diag_log_fuses(struct iris_core *core);
+ u32 iris_diag_pipes(struct iris_core *core, u32 pipes);
+ u32 iris_diag_core_id(struct iris_core *core, u32 core_id);
++u32 iris_diag_hw_core(u32 core_id);
++void iris_diag_power_release(struct iris_core *core);
+ 
+ #endif
+diff --git a/drivers/media/platform/qcom/iris/iris_vpu3x.c b/drivers/media/platform/qcom/iris/iris_vpu3x.c
+index e1b1216b251c..ae88ee8ee31d 100644
+--- a/drivers/media/platform/qcom/iris/iris_vpu3x.c
++++ b/drivers/media/platform/qcom/iris/iris_vpu3x.c
+@@ -7,6 +7,7 @@
+ #include <linux/iopoll.h>
+ #include <linux/reset.h>
+ 
++#include "iris_diag.h"
+ #include "iris_instance.h"
+ #include "iris_vpu_common.h"
+ #include "iris_vpu_register_defines.h"
+@@ -231,11 +232,12 @@ static void iris_vpu36_power_off_vcodec(struct iris_core *core, u32 core_id)
+ 	u32 bridge_sw_reset[] = {CORE_BRIDGE_SW_RESET, VCODEC1_BRIDGE_SW_RESET};
+ 	u32 idle_status[] = {VCODEC_SS_IDLE_STATUSN, VCODEC1_SS_IDLE_STATUSN};
+ 	u32 power_status[] = {VCODEC0_POWER_STATUS, VCODEC1_POWER_STATUS};
++	u32 hw = iris_diag_hw_core(core_id);
+ 	bool handshake_done, handshake_busy;
+ 	u32 value, i, count = 0;
+ 	int ret;
+ 
+-	if (iris_vpu3x_hw_power_collapsed(core, power_status[core_id]))
++	if (iris_vpu3x_hw_power_collapsed(core, power_status[hw]))
+ 		goto disable_power;
+ 
+ 	value = readl(core->reg_base + WRAPPER_CORE_CLOCK_CONFIG);
+@@ -243,19 +245,19 @@ static void iris_vpu36_power_off_vcodec(struct iris_core *core, u32 core_id)
+ 		writel(CORE_CLK_RUN, core->reg_base + WRAPPER_CORE_CLOCK_CONFIG);
+ 
+ 	for (i = 0; i < core->iris_platform_data->num_vpp_pipe; i++) {
+-		ret = readl_poll_timeout(core->reg_base + idle_status[core_id] + 4 * i,
++		ret = readl_poll_timeout(core->reg_base + idle_status[hw] + 4 * i,
+ 					 value, value & DMA_NOC_IDLE, 2000, 20000);
+ 		if (ret)
+ 			goto disable_power;
+ 	}
+ 
+ 	do {
+-		writel(power_down_prep[core_id], core->reg_base + AON_WRAPPER_MVP_NOC_LPI_CONTROL);
++		writel(power_down_prep[hw], core->reg_base + AON_WRAPPER_MVP_NOC_LPI_CONTROL);
+ 		usleep_range(15, 20);
+ 		value = readl(core->reg_base + AON_WRAPPER_MVP_NOC_LPI_STATUS);
+ 
+-		handshake_done = value & lpi_status_done[core_id];
+-		handshake_busy = value & (lpi_status_deny[core_id] | lpi_status_active[core_id]);
++		handshake_done = value & lpi_status_done[hw];
++		handshake_busy = value & (lpi_status_deny[hw] | lpi_status_active[hw]);
+ 
+ 		if (handshake_done || !handshake_busy)
+ 			break;
+@@ -268,15 +270,15 @@ static void iris_vpu36_power_off_vcodec(struct iris_core *core, u32 core_id)
+ 		goto disable_power;
+ 
+ 	ret = readl_poll_timeout(core->reg_base + AON_WRAPPER_MVP_NOC_LPI_STATUS, value,
+-				 value & lpi_status_done[core_id], 200, 2000);
++				 value & lpi_status_done[hw], 200, 2000);
+ 	if (ret)
+ 		goto disable_power;
+ 
+ 	writel(0, core->reg_base + AON_WRAPPER_MVP_NOC_LPI_CONTROL);
+ 
+-	writel(bridge_sw_reset[core_id] | bridge_hw_reset[core_id],
++	writel(bridge_sw_reset[hw] | bridge_hw_reset[hw],
+ 	       core->reg_base + CPU_CS_AHB_BRIDGE_SYNC_RESET);
+-	writel(bridge_hw_reset[core_id], core->reg_base + CPU_CS_AHB_BRIDGE_SYNC_RESET);
++	writel(bridge_hw_reset[hw], core->reg_base + CPU_CS_AHB_BRIDGE_SYNC_RESET);
+ 	writel(0x0, core->reg_base + CPU_CS_AHB_BRIDGE_SYNC_RESET);
+ 
+ disable_power:
+@@ -324,6 +326,8 @@ static int iris_vpu36_set_hwmode(struct iris_core *core)
+ 			goto error;
+ 	}
+ 
++	iris_diag_power_release(core);
++
+ 	return 0;
+ 
+ error:
+-- 
+2.53.0
+

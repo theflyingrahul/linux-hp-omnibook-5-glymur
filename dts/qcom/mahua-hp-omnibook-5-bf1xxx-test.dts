@@ -49,6 +49,13 @@
  * - the PMK8850 RTC is off: HP's firmware has no RTCInfo variable, so the
  *   driver failed with -ENOENT. Windows reads the time through the ADSP's
  *   PMIC GLink service (\_SB.PRTC._GRT), which Linux does not have.
+ *
+ * In test from kernel -19 (docs/kernel-19-plan-2026-11-05.md):
+ * - the headset jack: the WCD9378 (Tambora) codec on swr2, with swr1 as its
+ *   second pair of data lanes, wired as Qualcomm's Glymur CRD wires it
+ *   (glymur-crd.dtsi in qcom-next), with HP's values where they differ.
+ * - USB full and low speed: LDO7_B (3.072 V, HP's USB vote) always on, and
+ *   the USB-C repeaters' vdd18/vdd3 supplies.
  */
 /dts-v1/;
 
@@ -89,7 +96,11 @@
 		audio-routing = "SpkrLeft IN", "WSA WSA_SPK1 OUT",
 				"SpkrRight IN", "WSA WSA_SPK2 OUT",
 				"VA DMIC0", "vdd-micb",
-				"VA DMIC1", "vdd-micb";
+				"VA DMIC1", "vdd-micb",
+				"IT 41 Playback", "HPHL_OUT",
+				"IT 41 Playback", "HPHR_OUT",
+				/* headset mic: WCD9378 OT 36 (DP2) into the TX macro */
+				"TX SWR_INPUT1", "OT 36 Capture";
 
 		wsa-dai-link {
 			link-name = "WSA Playback";
@@ -101,6 +112,39 @@
 			codec {
 				sound-dai = <&spkr_left>, <&spkr_right>,
 					    <&swr0 0>, <&lpass_wsamacro 0>;
+			};
+
+			platform {
+				sound-dai = <&q6apm>;
+			};
+		};
+
+		/* headset: swr2 cell 0 is its playback port, cell 1 capture */
+		wcd-playback-dai-link {
+			link-name = "WCD Playback";
+
+			cpu {
+				sound-dai = <&q6apmbedai RX_CODEC_DMA_RX_0>;
+			};
+
+			codec {
+				sound-dai = <&wcd9378c 0>, <&swr2 0>, <&lpass_rxmacro 0>;
+			};
+
+			platform {
+				sound-dai = <&q6apm>;
+			};
+		};
+
+		wcd-capture-dai-link {
+			link-name = "WCD Capture";
+
+			cpu {
+				sound-dai = <&q6apmbedai TX_CODEC_DMA_TX_3>;
+			};
+
+			codec {
+				sound-dai = <&wcd9378c 18>, <&swr2 1>, <&lpass_txmacro 0>;
 			};
 
 			platform {
@@ -159,6 +203,85 @@
 };
 
 /*
+ * Headset jack (docs/audio-headset-path-2026-10-17.md,
+ * docs/kernel-19-plan-2026-11-05.md). The only SoundWire peripheral HP's
+ * ACPI lists besides the amplifiers is MAN_0217 PART_0110, the WCD9378. As
+ * on the Glymur CRD (whose audio configuration HP's Windows drivers run),
+ * swr2 is the bus master and swr1 adds data lanes 2 and 3; HP's QSJ0 maps
+ * lanes 1-4 to the manager's lanes 1-4, its data ports are 2 (capture) and
+ * 6, 7, 8 (playback), as below. The per-port values are the CRD's.
+ * From HP's evidence: reset on GPIO 191 (DSDT ASCD GpioIo), vdd-buck and
+ * vdd-rxtx on L15B 1.8 V (ACDResources.bin, ASCDResources.bin). vdd-io is
+ * L18B 1.2 V as on the CRD; no audio device votes it, but it is held on
+ * for the amplifiers anyway. Not described, because nothing here evidences
+ * them: the mic-bias supply (the CRD's BOB1; left as a dummy regulator,
+ * BOB stays on as the parent of the LDOs), HP's GpioInt on GPIO 193 (the
+ * codec signals jack events in band), and HP's GpioIo pin 2. The unique
+ * ID 3 is the CRD's; HP's _ADR does not give it.
+ */
+&swr1 {
+	/* data lanes only: no bus master and no peripherals of its own */
+	#qcom,swrm-lane-cells = <1>;
+
+	status = "okay";
+};
+
+&swr2 {
+	qcom,secondary-lanes = <&swr1 0>, <&swr1 1>;
+
+	qcom,ports-block-pack-mode =
+		/bits/ 8 <0xff 0xff 0xff 0xff 0xff 0xff 0x00
+			  0x01 0xff 0xff 0xff 0xff 0xff 0xff>;
+	qcom,ports-word-length =
+		/bits/ 8 <0xff 0x01 0xff 0xff 0xff 0x01 0x07
+			  0x04 0xff 0xff 0xff 0xff 0xff 0xff>;
+	qcom,ports-offset1 =
+		/bits/ 8 <0x00 0x01 0x02 0x00 0x00 0x00 0x00
+			  0x0b 0x00 0x00 0x00 0x00 0x00 0x00>;
+	qcom,ports-offset2 =
+		/bits/ 8 <0x00 0x00 0x00 0x00 0xff 0x00 0x00
+			  0x0b 0x00 0x00 0x00 0x00 0x00 0x00>;
+	qcom,ports-sinterval-low =
+		/bits/ 8 <0x00 0x01 0x03 0x03 0x00 0x03 0x1f
+			  0x1f 0x00 0x00 0x00 0x00 0x00 0x00>;
+	qcom,ports-hstart =
+		/bits/ 8 <0xff 0xff 0xff 0xff 0xff 0x00 0x00
+			  0x00 0xff 0xff 0xff 0xff 0xff 0xff>;
+	qcom,ports-hstop =
+		/bits/ 8 <0xff 0x0f 0xff 0xff 0xff 0x0f 0x0f
+			  0x0f 0xff 0xff 0xff 0xff 0xff 0xff>;
+	qcom,ports-lane-control =
+		/bits/ 8 <0xff 0x01 0x00 0x01 0xff 0x03 0x02
+			  0x02 0xff 0xff 0xff 0xff 0xff 0xff>;
+	qcom,ports-ch-mask =
+		/bits/ 8 <0xff 0x01 0xff 0xff 0xff 0x03 0x01
+			  0x03 0xff 0xff 0xff 0xff 0xff 0xff>;
+	qcom,ports-block-group-count =
+		/bits/ 8 <0xff 0xff 0xff 0xff 0xff 0xff 0xff
+			  0xff 0xff 0xff 0xff 0xff 0xff 0xff>;
+
+	status = "okay";
+
+	wcd9378c: codec@3,0 {
+		compatible = "qcom,wcd9378c", "sdw20217011000";
+		reg = <0 3>;
+
+		pinctrl-0 = <&wcd_default>;
+		pinctrl-names = "default";
+
+		qcom,port-mapping = <2 2 3 4 5 6 7 8>;
+
+		reset-gpios = <&tlmm 191 GPIO_ACTIVE_LOW>;
+
+		vdd-buck-supply = <&vreg_l15b_e0_1p8>;
+		vdd-rxtx-supply = <&vreg_l15b_e0_1p8>;
+		vdd-io-supply = <&vreg_l18b_e0_1p2>;
+
+		#sound-dai-cells = <1>;
+	};
+};
+
+/*
  * The two rails of the speaker amplifiers (WSA884x vdd-1p8 and vdd-io), on
  * PMH0101 (B_E0) as on the CRD. HP's own PEP votes: LDO15_B 1.8 V
  * (ACDResources.bin, ASCDResources.bin, and the USB ports) and LDO18_B
@@ -184,6 +307,24 @@
 			regulator-name = "vreg_l18b_e0_1p2";
 			regulator-min-microvolt = <1200000>;
 			regulator-max-microvolt = <1200000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+			regulator-always-on;
+			regulator-boot-on;
+		};
+
+		/*
+		 * From kernel -19, for USB full and low speed: LDO7_B at
+		 * 3.072 V, which HP's PEP tables vote for every USB port and
+		 * nothing else (\_SB.URS0.USB0, URS1.USB1, URS2.USB2 and their
+		 * device-mode functions; off only in D3). It is the 3 V side of
+		 * an eUSB2 repeater (the CRD's vdd3, there at 2.79 V), which
+		 * full- and low-speed signalling needs. Shared by all ports, so
+		 * always on.
+		 */
+		vreg_l7b_e0_3p07: ldo7 {
+			regulator-name = "vreg_l7b_e0_3p07";
+			regulator-min-microvolt = <3072000>;
+			regulator-max-microvolt = <3072000>;
 			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
 			regulator-always-on;
 			regulator-boot-on;
@@ -424,6 +565,10 @@
 			compatible = "qcom,smb2370-eusb2-repeater";
 			reg = <0xfd00>;
 			#phy-cells = <0>;
+
+			/* from -19: HP's votes for usb_0 (L15B 1.8 V, L7B 3.072 V) */
+			vdd18-supply = <&vreg_l15b_e0_1p8>;
+			vdd3-supply = <&vreg_l7b_e0_3p07>;
 		};
 	};
 
@@ -437,6 +582,10 @@
 			compatible = "qcom,smb2370-eusb2-repeater";
 			reg = <0xfd00>;
 			#phy-cells = <0>;
+
+			/* from -19: HP's votes for usb_1 (L15B 1.8 V, L7B 3.072 V) */
+			vdd18-supply = <&vreg_l15b_e0_1p8>;
+			vdd3-supply = <&vreg_l7b_e0_3p07>;
 		};
 	};
 };
@@ -450,15 +599,28 @@
 };
 
 &tlmm {
-	/* The daily allow-list plus the EC event line (GPIO 66) */
+	/*
+	 * The daily allow-list plus the EC event line (GPIO 66) and the
+	 * headset codec's reset (GPIO 191)
+	 */
 	gpio-reserved-ranges = <2 1>, <4 12>, <19 13>, <34 2>, <38 13>,
 			       <52 4>, <60 6>, <68 2>, <71 21>, <93 23>,
-			       <117 2>, <120 26>, <149 3>, <155 96>;
+			       <117 2>, <120 26>, <149 3>, <155 36>,
+			       <192 59>;
 
 	ec_int_n_default: ec-int-n-state {
 		pins = "gpio66";
 		function = "gpio";
 		bias-pull-up;
+	};
+
+	/* the CRD's state for the WCD9378 reset line */
+	wcd_default: wcd-reset-n-active-state {
+		pins = "gpio191";
+		function = "gpio";
+		drive-strength = <16>;
+		bias-disable;
+		output-low;
 	};
 };
 
