@@ -193,8 +193,10 @@ The embedded-controller report, from kernel `-9`; the event line needs
 - full kernel warnings;
 - the keyboard backlight timeout (`kbd_backlight_timeout`, from `-10`):
   it tries `30s` and `always` and asks whether the backlight went off;
-- the keyboard backlight level (`kbd_backlight_level`, from `-11`,
-  read-only): it reads it after each of three F5 presses;
+- the keyboard backlight level, read-only (`kbd_backlight_level` from
+  `-11`; from `-20` the `platform::kbd_backlight` LED, as in the upstream
+  v2 driver): it reads it after each of three F5 presses, and on the LED
+  also `brightness_hw_changed` and that a write is ignored;
 - the F6/F9 mute LEDs (`platform::mute`, `platform::micmute`): it asks
   what Windows last had muted and what is lit, then lights each LED alone;
 - the EC event line: its interrupt count and GPIO 66's state;

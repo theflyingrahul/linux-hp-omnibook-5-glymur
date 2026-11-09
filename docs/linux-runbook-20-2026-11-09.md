@@ -52,6 +52,12 @@ from step 5 to step 11.
 4. **RTC:** `sudo bash ~/check-rtc.sh`. It says whether the RTC holds UTC
    or local time and fires one alarm 20 s ahead (`wakealarm` empty
    afterwards). If it holds local time, answer `y` to `set-local-rtc`.
+4b. **EC, as the upstream v2 driver has it:** `sudo bash ~/check-ec.sh`.
+   The keyboard backlight level is now the `platform::kbd_backlight`
+   LED: after each F5 press it should read 1, 0, 2 as before, and
+   writing to it changes nothing. Also fan, temperatures, the backlight
+   timeout and both mute LEDs, as on `-13`. This is what the reply to
+   the v1 review promises, so it gates sending v2.
 5. **Speakers and microphones:** `sudo bash ~/check-audio.sh`, then start
    music and, in a second terminal, the long audio watch:
    `sudo bash ~/watch-audio.sh 3600`. Leave both running and use the laptop
@@ -124,7 +130,7 @@ from step 5 to step 11.
 ## Hand back
 
 - `/var/log/glymur/*.txt` from both boots: the two boot reports,
-  `efivar-write-*`, `rtc-test-*`, `audio-test-*`, `audio-watch-*`,
+  `efivar-write-*`, `rtc-test-*`, `ec-test-*`, `audio-test-*`, `audio-watch-*`,
   `headset-test-*`, `usb-test-*`, `charging-watch-*`, `npu-test-*`,
   `suspend-test-*`, `video-test-*`, `display-test-*`, `chid.txt`.
 - The times of any freeze, what boot B's first try did if it failed, and

@@ -77,18 +77,34 @@ else
     echo "no kbd_backlight_timeout attribute"
 fi
 
-# Read-only from -11: only F5 changes the level, inside the EC.
+# Read-only: only F5 changes the level, inside the EC. From -20 (the
+# upstream v2 driver) it is the platform::kbd_backlight LED, with
+# brightness_hw_changed notified on the EC's backlight events; before, a
+# kbd_backlight_level attribute.
 sect "keyboard backlight level"
+KL=/sys/class/leds/platform::kbd_backlight
 L=
-[ -n "$BUS" ] && L=/sys/bus/i2c/devices/${BUS}-0076/kbd_backlight_level
-if [ -n "$L" ] && [ -e "$L" ]; then
+if [ -d "$KL" ]; then
+    L=$KL/brightness
+    echo "LED: $KL, max_brightness $(cat "$KL/max_brightness")"
+elif [ -n "$BUS" ] && [ -e "/sys/bus/i2c/devices/${BUS}-0076/kbd_backlight_level" ]; then
+    L=/sys/bus/i2c/devices/${BUS}-0076/kbd_backlight_level
+fi
+if [ -n "$L" ]; then
     echo "level now: $(cat "$L")"
     for i in 1 2 3; do
         ask "Press F5 once (press $i of 3), then Enter. Is the backlight off, dim or bright?"
         echo "level reads: $(cat "$L")"
+        [ -e "$KL/brightness_hw_changed" ] && echo "brightness_hw_changed: $(cat "$KL/brightness_hw_changed")"
     done
+    if [ -d "$KL" ]; then
+        before=$(cat "$L")
+        echo 0 > "$L" 2>&1
+        echo "after writing 0 (must be ignored): $(cat "$L") (was $before)"
+        journalctl -k --no-pager --since '-10 s' | grep -i "brightness failed" || echo "no LED core error"
+    fi
 else
-    echo "no kbd_backlight_level attribute"
+    echo "no keyboard backlight level (LED or attribute)"
 fi
 
 # EC LED 8 is taken as F6 (speaker mute) and 9 as F9 (mic mute). Start
