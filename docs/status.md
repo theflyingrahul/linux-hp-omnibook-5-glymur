@@ -8,6 +8,13 @@ Ubuntu 26.10 on the internal SSD (upgraded from 26.04 on 2026-10-21), kernel
 from the USB stick's GRUB with the daily device tree
 (`dts/qcom/mahua-hp-omnibook-5-bf1xxx.dts`) or the test tree, which adds what
 is being tested (audio, the EC event line, skin temperature).
+Kernel `-20` (built 2026-11-09, not booted; `docs/kernel-20-plan-2026-11-09.md`)
+replaces `-19`, which was never booted: suspend, UEFI writes, the RTC, the
+NPU's userspace, USB full and low speed, video and external displays are
+all tested in two boots (`docs/linux-runbook-20-2026-11-09.md`). From `-20`
+the daily device tree also carries what the test tree proved: the EC event
+line, the skin-temperature zones, the speakers and microphones and the USB-C
+repeaters.
 Evidence for each line is in the linked notes; the sections after this one
 are the history. Open work is tracked as GitHub issues: issue #28 maps
 every device Windows enumerates to its Linux state and its issue.
@@ -35,10 +42,10 @@ every device Windows enumerates to its Linux state and its issue.
 | Audio | Partly | Kernel `-16` test device tree: the speakers play (both WSA884x on `swr0`, reset through LPASS TLMM 12, supplies L15B and L18B always on at HP's voltages) and the two microphones record. The speaker and microphone names and the F6/F9 LEDs follow the desktop's mute; the card's Windows name did not apply (rule fixed, not yet installed). After the SoundWire bus idles, the amplifiers detach and take about 25 s to re-attach, so a first sound can be lost. HP's DSP tuning is not carried yet (#2); the headset jack (WCD9378) waits on unposted LPASS patches. Notes: `docs/audio-headset-path-2026-10-17.md`, `docs/audio-mute-leds-2026-10-20.md`, `docs/audio-speakers-down-2026-10-21.md`, `docs/runbook-results-16-2026-10-21.md` **`-17`, 2026-10-23:** the DSP's APM and power manager stopped answering at 815 s on the first boot; on the second, WirePlumber's v4l2 monitor (blocked by the Iris codec) stalled the session until it was disabled; once the session ran, the DSP stalled again, and a DSP stall freezes input and the GPU through the clock prepare lock (`docs/runbook-results-17-2026-10-23.md`). **`-18`, 2026-11-05** (`backports/0038–0039` out, Qualcomm's GPR probe-race fix in the base): no `CMD timeout` at boot or later and no parity error in three boots (about 4 and 24 minutes, and at least 12), nor across three WirePlumber restarts with a tone playing; left and right tones on the right sides, muted recording silent, both mute LEDs follow the desktop. One SoundWire bus clash at 17 s on the first `-18` boot. Short runs against `-17`'s stall at 815 s, so the bisect is not settled. |
 | Video decode/encode | Failing | Iris with HP's `qcvss8480.mbn`: on `-15` the second video core's GDSC stayed off; on `-16`, with one core, the firmware answered "Configured core 0 is not supported". Iris is off again in the test device tree and the one-core patch is dropped. Software decoding works (Firefox). `docs/video-iris-2026-10-20.md`, `docs/audit-2026-10-22.md`. Off in `-18`'s test device tree (it blocked WirePlumber on `-17`) |
 | Sensors | None present | 2026-11-06: HP installs Qualcomm's CRD "nosensor" sensor configuration and Windows' sensor API lists no sensors; the human-presence feature needs an always-on MIPI camera, and this laptop's cameras are USB. Windows' occasional self-locking is Bluetooth Dynamic Lock. Issue #21 closed |
-| NPU | Not started | the CDSP boots with HP's signed firmware; FastRPC and userspace untried |
-| RTC | Not working | no `/dev/rtc` on `-16`; the clock restarts from the last saved time until NTP. Upstream reads the offset from a UEFI variable, which waits on UEFI variable access (#17, #18, deferred) **`-17`:** the PMIC RTC node is there but `rtc-pm8xxx` fails with `-ENOENT`: HP's firmware has no `RTCInfo` variable. The node is off again in `-18`'s test device tree. |
-| Suspend | Untested | masked |
-| TPM | Not working | TPM2 start method 9 (vendor-specific), no Linux driver |
+| NPU | Not started | the CDSP boots with HP's signed firmware and `fastrpc` binds its compute banks (`-18` log). From `-20`'s kit: HP's CDSP FastRPC shell (`qcnspmcdm8480`) installed and `check-npu.sh` runs Qualcomm's `fastrpc_test`; models need Qualcomm's AI Runtime 2.39 for Linux (matches HP's `libQnnHtpV81Skel.so`) |
+| RTC | Not working | no `/dev/rtc` on `-16`; the clock restarts from the last saved time until NTP. Upstream reads the offset from a UEFI variable, which waits on UEFI variable access (#17, #18, deferred) **`-17`:** the PMIC RTC node is there but `rtc-pm8xxx` fails with `-ENOENT`: HP's firmware has no `RTCInfo` variable. The node is off again in `-18`'s test device tree. From `-19`: the ADSP's PMIC GLink RTC (`rtc-qcom-glink`, what Windows reads as `\_SB.PRTC`; Glymur has no RTC UEFI variable); read and alarms only, since Windows keeps the RTC in local time. Untested (`check-rtc.sh`, `-20`) |
+| Suspend | Untested | masked. `-20`: Tyler Baker's Glymur xHCI reset on resume, Abel Vesa's Wi-Fi and UCSI resume fixes, PCIe GDSC collapse voting; `check-suspend.sh` runs three supervised cycles and logs the RPMh sleep counters |
+| TPM | Not working | TPM2 start method 9 (vendor-specific), no Linux driver. Kept off on purpose: Qualcomm's posted driver needs a TrustZone service HP's firmware lacks, and the TPM keeps its state through Windows-side listeners, a BitLocker risk (`docs/tpm-2026-11-06.md`) |
 
 ACPI boot (no device tree) also reaches a desktop with input, Wi-Fi, the EC
 and the lid, through the interim drivers in `patches/kernel/glymur-bringup/`;
