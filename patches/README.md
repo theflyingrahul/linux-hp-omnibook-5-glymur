@@ -165,10 +165,10 @@ notifications and GPI fixes (`0023–0025`) and Oleg Keri's DP training
 result (`0031`). Already in the base: the repeater power-leak fix, the GPI
 register ordering, Glymur's `rpmh-stats` node, the CDSP FastRPC context
 banks with the right numbers, and most of Qualcomm's Glymur DP PHY series
-(v6 patches 1�3 as FROMLIST `c202053823b5`, `45b4851e05b7`,
+(v6 patches 1–3 as FROMLIST `c202053823b5`, `45b4851e05b7`,
 `e154e22d9a0a`, and an earlier revision of its init and configure rework,
 `5323704e28fd`). Not taken: the rest of that series (5, 6 and 11 apply,
-4 needs a merge, 7�10 overlap the base's rework and apply neither way; two
+4 needs a merge, 7–10 overlap the base's rework and apply neither way; two
 revisions are not mixed blind in the PHY that carries USB-C SuperSpeed);
 Akhil P Oommen's GMU driver v2 (open regression, and patch 3 does not apply
 to `msm_drv.c` here); Kamal Wadhwa's RTC v2 (it fixes an unbind
@@ -610,6 +610,18 @@ These apply to mainline `fd179f8a05` (7.3-rc5 era) and compile cleanly with
    the text reworded without this laptop, is the form carried as
    `upstream/qcom-next/0002`. The second version is in msm-next as
    `efbda69d92e6` (2026-10-10), on its way to the next merge window.
+
+Sent on 2026-11-09, on `next-20261105`, to the ARM64 platform-driver
+maintainers: the HP EC binding and driver (`upstream/qcom-next/0004–0005`),
+as "platform: arm64: HP OmniBook 5 16 embedded controller" v1
+([Patchwork](https://patchwork.kernel.org/project/platform-driver-x86/patch/20261109104914.1534-2-theflyingrahul@gmail.com/)).
+The upstream form adds a MAINTAINERS entry, places the Kconfig and Makefile
+lines among linux-next's newer EC drivers, and corrects the commit text (the
+driver reads events from register `0x00`). It builds with `W=1` and passes
+`checkpatch --strict` and `dt_binding_check`. Held: the board series
+(`hp,omnibook-5-16-bf1xxx`, the QSEECOM entry `upstream/qcom-next/0009`, the
+board DT), because `dtbs_check` asks for the PCIe, USB and TCSR supplies
+that the board DT does not declare yet.
 
 ## Drafts and archive
 
