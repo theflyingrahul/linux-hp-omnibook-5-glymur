@@ -10,11 +10,23 @@
  *  - the embedded controller: fan speed, thermistors, mute LEDs and the
  *    keyboard backlight timeout (-9, -10).
  *
+ * Moved here from the -test device tree for kernel -20 (2026-11-09), each
+ * as it was tested there:
+ *  - the EC's event line with HP's pull-up: F9 as KEY_MICMUTE, the line
+ *    quiet (-17, -18);
+ *  - HP's skin-temperature limits on the EC thermistors (-16);
+ *  - the speakers (both WSA8845 on swr0) and the two microphones, with the
+ *    amplifiers' L15B and L18B held on (-16, -18);
+ *  - the USB-C ports' SMB2370 eUSB2 repeaters, without supplies, as on -9
+ *    to -18 (they identify; high speed and SuperSpeed work with them).
+ *
  * The -test device tree adds what is still being tested. The -minimal
  * device tree is the fallback when the display or GPU does not come up.
  */
 /dts-v1/;
 
+#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
+#include <dt-bindings/sound/qcom,q6dsp-lpass-ports.h>
 #include "mahua-hp-omnibook-5-bf1xxx.dtsi"
 
 / {
@@ -42,8 +54,8 @@
 	 * notifications ask for before they are acknowledged. UCSI drives the
 	 * data role through the controllers' usb-role-switch.
 	 *
-	 * Full and low speed fail on every port without the eUSB2 repeaters
-	 * (a USB mouse, error -71); the -test device tree declares them.
+	 * Full and low speed fail on every port (a USB mouse, error -71),
+	 * also with the eUSB2 repeaters declared below.
 	 * DisplayPort alternate mode is not described (mdss_dp0/dp1 stay
 	 * disabled).
 	 */
@@ -131,6 +143,71 @@
 
 		regulator-boot-on;
 	};
+
+	/*
+	 * Speakers and microphones (docs/audio-headset-path-2026-10-17.md).
+	 * HP runs Qualcomm's Glymur CRD audio configuration: WSA884x smart
+	 * amplifiers on the WSA macro and two DMICs on the VA macro. The first
+	 * test (2026-10-17) found both amplifiers on swr0, unique IDs 0 and 1
+	 * (part 0x0204, WSA8845), as on the ThinkPad T14s Gen 7, and nothing on
+	 * swr3, with HP's AUCD GPIOs 204 and 205 both driven high. HP runs the
+	 * CRD's audio configuration; the CRD resets its amplifiers with LPASS
+	 * TLMM GPIOs 12 and 13, and TLMM 204 and 205 are eGPIOs (192 + 12,
+	 * 192 + 13), so they are taken to be the same two lines. Both
+	 * amplifiers share LPASS TLMM 12, as on the ThinkPad T14s Gen 7 (same
+	 * layout); check-audio.sh's unbind/rebind check tests it. The model
+	 * names the topology, qcom/glymur/<model>-tplg.bin, built from
+	 * boards/hp-omnibook-5-16-bf1xxx/audio/MAHUA-HP-OmniBook-5-16-bf1xxx.m4.
+	 * From kernel -16 the amplifiers' two supplies are declared (see
+	 * &apps_rsc below). -15 left them as dummy regulators, so Linux held
+	 * neither L15B nor L18B, and both amplifiers left the bus a few
+	 * minutes after a bus clash (docs/audio-speakers-down-2026-10-21.md).
+	 * The Glymur CRD, the ASUS Zenbook A14, the HP EliteBook X G2q and the
+	 * ThinkPad T14s Gen 7 all give the WSA884x these two supplies. Whether
+	 * that is the cause here is untested. The DMIC bias (L1B) still runs
+	 * on what HP's firmware leaves on.
+	 */
+	sound: sound {
+		compatible = "qcom,glymur-sndcard";
+		model = "MAHUA-HP-OmniBook-5-16-bf1xxx";
+		audio-routing = "SpkrLeft IN", "WSA WSA_SPK1 OUT",
+				"SpkrRight IN", "WSA WSA_SPK2 OUT",
+				"VA DMIC0", "vdd-micb",
+				"VA DMIC1", "vdd-micb";
+
+		wsa-dai-link {
+			link-name = "WSA Playback";
+
+			cpu {
+				sound-dai = <&q6apmbedai WSA_CODEC_DMA_RX_0>;
+			};
+
+			codec {
+				sound-dai = <&spkr_left>, <&spkr_right>,
+					    <&swr0 0>, <&lpass_wsamacro 0>;
+			};
+
+			platform {
+				sound-dai = <&q6apm>;
+			};
+		};
+
+		va-dai-link {
+			link-name = "VA Capture";
+
+			cpu {
+				sound-dai = <&q6apmbedai VA_CODEC_DMA_TX_0>;
+			};
+
+			codec {
+				sound-dai = <&lpass_vamacro 0>;
+			};
+
+			platform {
+				sound-dai = <&q6apm>;
+			};
+		};
+	};
 };
 
 /*
@@ -186,8 +263,8 @@
  * SSDT and DSDT). IC10's PEP entry votes gcc_qupv3_wrap1_s1_clk and pins
  * 36/37 (function 1, pull-up), which is qup_i2c9_data_clk; firmware leaves
  * the controller in GSI (GPI DMA) mode, which i2c-qcom-geni detects and
- * runs through gpi_dma1. The EC's event line (F9/F11 hotkeys) is in the
- * -test device tree.
+ * runs through gpi_dma1. The EC's event line (F9/F11 hotkeys) is set up
+ * further down.
  */
 &i2c9 {
 	clock-frequency = <400000>;
@@ -357,11 +434,11 @@
 	 * Allow-list: 0-1 i2c0, 3 touchpad, 16-17 i2c4, 18 eDP backlight
 	 * enable, 32-33 i2c8, 36-37 i2c9 (EC), 51 touchscreen, 56-59 uart14,
 	 * 67 keyboard, 70 eDP power, 92 lid, 116 BT enable, 119 eDP HPD,
-	 * 146-148 PCIe 4, 152-154 PCIe 5. Everything else, up to GPIO 250, is
-	 * reserved.
+	 * 146-148 PCIe 4, 152-154 PCIe 5 and, from -20, 66 (the EC's event
+	 * line). Everything else, up to GPIO 250, is reserved.
 	 */
 	gpio-reserved-ranges = <2 1>, <4 12>, <19 13>, <34 2>, <38 13>,
-			       <52 4>, <60 7>, <68 2>, <71 21>, <93 23>,
+			       <52 4>, <60 6>, <68 2>, <71 21>, <93 23>,
 			       <117 2>, <120 26>, <149 3>, <155 96>;
 
 	edp_bl_en: edp-bl-en-state {
@@ -383,4 +460,302 @@
 		function = "edp0_hot";
 		bias-disable;
 	};
+
+	ec_int_n_default: ec-int-n-state {
+		pins = "gpio66";
+		function = "gpio";
+		bias-pull-up;
+	};
+};
+
+&lpass_vamacro {
+	pinctrl-0 = <&dmic01_default>;
+	pinctrl-names = "default";
+	qcom,dmic-sample-rate = <4800000>;
+};
+
+&swr0 {
+	status = "okay";
+
+	spkr_left: speaker@0,0 {
+		compatible = "sdw20217020400";
+		reg = <0 0>;
+		reset-gpios = <&lpass_tlmm 12 GPIO_ACTIVE_LOW>;
+		#sound-dai-cells = <0>;
+		sound-name-prefix = "SpkrLeft";
+		vdd-1p8-supply = <&vreg_l15b_e0_1p8>;
+		vdd-io-supply = <&vreg_l18b_e0_1p2>;
+		qcom,port-mapping = <1 2 3 7 12 14>;
+	};
+
+	spkr_right: speaker@0,1 {
+		compatible = "sdw20217020400";
+		reg = <0 1>;
+		reset-gpios = <&lpass_tlmm 12 GPIO_ACTIVE_LOW>;
+		#sound-dai-cells = <0>;
+		sound-name-prefix = "SpkrRight";
+		vdd-1p8-supply = <&vreg_l15b_e0_1p8>;
+		vdd-io-supply = <&vreg_l18b_e0_1p2>;
+		qcom,port-mapping = <4 5 6 7 13 15>;
+	};
+};
+
+/*
+ * The two rails of the speaker amplifiers (WSA884x vdd-1p8 and vdd-io), on
+ * PMH0101 (B_E0) as on the CRD. HP's own PEP votes: LDO15_B 1.8 V
+ * (ACDResources.bin, ASCDResources.bin, and the USB ports) and LDO18_B
+ * 1.2 V (the display, SDC2). Both are shared with other consumers (L15B
+ * feeds the USB PHYs and eUSB2 repeaters, L18B the display), so they are
+ * always on, as the display lab does (lab-rails.dtso).
+ */
+&apps_rsc {
+	regulators-0 {
+		compatible = "qcom,pmh0101-rpmh-regulators";
+		qcom,pmic-id = "B_E0";
+
+		vreg_l15b_e0_1p8: ldo15 {
+			regulator-name = "vreg_l15b_e0_1p8";
+			regulator-min-microvolt = <1800000>;
+			regulator-max-microvolt = <1800000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+			regulator-always-on;
+			regulator-boot-on;
+		};
+
+		vreg_l18b_e0_1p2: ldo18 {
+			regulator-name = "vreg_l18b_e0_1p2";
+			regulator-min-microvolt = <1200000>;
+			regulator-max-microvolt = <1200000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+			regulator-always-on;
+			regulator-boot-on;
+		};
+	};
+};
+
+/*
+ * EC event line (docs/ec-2026-09-30.md): HP's ECGE (ACPI0013) GpioInt,
+ * edge triggered, active low, pull-up, PDC pin 768 = GPIO 66. ECGE._EVT
+ * reads the event from EC register 0x00 and writes 0 back. On kernel -10,
+ * without a pinctrl state, the line produced no event: nothing set the
+ * pull-up that Windows applies from the GpioInt descriptor. Qualcomm's
+ * Glymur and X1 CRDs use the same line with bias-disable; HP's descriptor
+ * asks for the pull-up.
+ */
+&hp_ec {
+	interrupts-extended = <&tlmm 66 IRQ_TYPE_EDGE_FALLING>;
+
+	pinctrl-0 = <&ec_int_n_default>;
+	pinctrl-names = "default";
+};
+
+/*
+ * Skin temperature (docs/thermal-skin-2026-10-20.md): HP's ACPI thermal
+ * zones TZ31-TZ34 on the EC's four thermistors (channels 0-3), with HP's
+ * passive and critical trips. HP's passive trips throttle the CPUs, GPU,
+ * NSP and Wi-Fi; the CPUs and the GPU are the cooling devices here, as on
+ * the ThinkPad X13s's skin zone. HP's _TSP is 5 s.
+ */
+&hp_ec {
+	#thermal-sensor-cells = <1>;
+};
+
+/ {
+	thermal-zones {
+		ec-therm1-thermal {
+			/* HP's TZ31 */
+			polling-delay-passive = <5000>;
+			polling-delay = <5000>;
+			thermal-sensors = <&hp_ec 0>;
+
+			trips {
+				ec_thermistor1_passive: trip-point0 {
+					temperature = <65000>;
+					hysteresis = <2000>;
+					type = "passive";
+				};
+
+				trip-point1 {
+					temperature = <115000>;
+					hysteresis = <1000>;
+					type = "critical";
+				};
+			};
+
+			cooling-maps {
+				map0 {
+					trip = <&ec_thermistor1_passive>;
+					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&gpu THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
+				};
+			};
+		};
+
+		ec-therm2-thermal {
+			/* HP's TZ32 (its passive trip acts only through Qualcomm's PowerLimits device) */
+			polling-delay-passive = <5000>;
+			polling-delay = <5000>;
+			thermal-sensors = <&hp_ec 1>;
+
+			trips {
+				trip-point1 {
+					temperature = <90000>;
+					hysteresis = <1000>;
+					type = "critical";
+				};
+			};
+		};
+
+		ec-therm3-thermal {
+			/* HP's TZ33 */
+			polling-delay-passive = <5000>;
+			polling-delay = <5000>;
+			thermal-sensors = <&hp_ec 2>;
+
+			trips {
+				ec_thermistor3_passive: trip-point0 {
+					temperature = <75000>;
+					hysteresis = <2000>;
+					type = "passive";
+				};
+
+				trip-point1 {
+					temperature = <90000>;
+					hysteresis = <1000>;
+					type = "critical";
+				};
+			};
+
+			cooling-maps {
+				map0 {
+					trip = <&ec_thermistor3_passive>;
+					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&gpu THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
+				};
+			};
+		};
+
+		ec-therm4-thermal {
+			/* HP's TZ34 */
+			polling-delay-passive = <5000>;
+			polling-delay = <5000>;
+			thermal-sensors = <&hp_ec 3>;
+
+			trips {
+				ec_thermistor4_passive: trip-point0 {
+					temperature = <50000>;
+					hysteresis = <2000>;
+					type = "passive";
+				};
+
+				trip-point1 {
+					temperature = <85000>;
+					hysteresis = <1000>;
+					type = "critical";
+				};
+			};
+
+			cooling-maps {
+				map0 {
+					trip = <&ec_thermistor4_passive>;
+					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu4 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu5 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu6 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu7 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu8 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu9 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu10 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&cpu11 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+							 <&gpu THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
+				};
+			};
+		};
+	};
+};
+
+/*
+ * eUSB2 repeaters (docs/eusb2-repeater-2026-09-30.md): high speed works on
+ * all three ports but full and low speed fail on all three (a USB mouse,
+ * error -71). On the ACPI boot, where Linux leaves the PHY as firmware set
+ * it, the USB-A port ran a Dell receiver at 12 Mb/s (full speed). An eUSB2
+ * PHY reaches a USB 2 connector only through a repeater, and the Linux
+ * repeater driver puts it in host mode (it forces the repeater's 19.2 MHz
+ * clock on, an eUSB 1.2 workaround); without a repeater node that never
+ * happens. HP's ACPI does not describe the repeaters (Windows' PMIC driver
+ * and firmware own them; the PHYC tuning methods are empty for usb_0 and
+ * usb_1), so:
+ * - placement follows Qualcomm's Mahua/Glymur CRD (smb2370.dtsi): SMB2370
+ *   PMICs on SPMI bus 2 at SID 9 (usb_0) and SID 10 (usb_1), repeater at
+ *   0xfd00. Kernels -8 to -10 identified both (PMIC subtype 0x5f, v2.0);
+ * - HP's PEP votes for usb_0 and usb_1 include L15B 1.8 V and L7B
+ *   3.072 V, the rails the CRD gives these repeaters (vdd18, vdd3);
+ * - patches/kernel/upstream/qcom-next/0003 makes the repeater driver
+ *   check that the PMIC at that SID reports the SMB2370 subtype before
+ *   anything writes to it. If not, it refuses: then the USB-C ports lose
+ *   data for that boot, but nothing is written to the wrong PMIC.
+ *   Charging does not depend on it.
+ * - The CRD's third SMB2370 (SID 11) does not answer on this laptop
+ *   (kernel -10: SPMI transaction error at probe), so it is not declared.
+ *   usb_2 (USB-A) stays without a repeater.
+ */
+&spmi_bus2 {
+	smb2370_j_e2: pmic@9 {
+		compatible = "qcom,smb2370", "qcom,spmi-pmic";
+		reg = <0x9 SPMI_USID>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		smb2370_j_e2_eusb2_repeater: phy@fd00 {
+			compatible = "qcom,smb2370-eusb2-repeater";
+			reg = <0xfd00>;
+			#phy-cells = <0>;
+		};
+	};
+
+	smb2370_k_e2: pmic@a {
+		compatible = "qcom,smb2370", "qcom,spmi-pmic";
+		reg = <0xa SPMI_USID>;
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		smb2370_k_e2_eusb2_repeater: phy@fd00 {
+			compatible = "qcom,smb2370-eusb2-repeater";
+			reg = <0xfd00>;
+			#phy-cells = <0>;
+		};
+	};
+};
+
+&usb_0_hsphy {
+	phys = <&smb2370_j_e2_eusb2_repeater>;
+};
+
+&usb_1_hsphy {
+	phys = <&smb2370_k_e2_eusb2_repeater>;
 };

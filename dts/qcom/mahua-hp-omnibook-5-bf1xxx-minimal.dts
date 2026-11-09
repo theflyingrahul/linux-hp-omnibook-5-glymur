@@ -4,7 +4,7 @@
  * the native display and the GPU left out, so the firmware framebuffer
  * stays lit. The fallback when the display or the GPU does not come up.
  * USB and the EC stay on, so a kernel can still be installed from the
- * USB stick.
+ * USB stick. Audio stays off in the fallback.
  */
 /dts-v1/;
 
@@ -59,9 +59,18 @@
 &tlmm {
 	/*
 	 * The daily allow-list with the eDP pins 18, 70 and 119 reserved: the
-	 * firmware drives them and nothing in this tree does.
+	 * firmware drives them and nothing in this tree does. GPIO 66 is the
+	 * EC's event line, as in the daily tree.
 	 */
 	gpio-reserved-ranges = <2 1>, <4 12>, <18 14>, <34 2>, <38 13>,
-			       <52 4>, <60 7>, <68 24>, <93 23>, <117 29>,
+			       <52 4>, <60 6>, <68 24>, <93 23>, <117 29>,
 			       <149 3>, <155 96>;
+};
+
+&sound {
+	status = "disabled";
+};
+
+&swr0 {
+	status = "disabled";
 };

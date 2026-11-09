@@ -1,0 +1,108 @@
+From eb9ea1a0fa28abe7a511cb67363a0cc835a02f04 Mon Sep 17 00:00:00 2001
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Date: Wed, 2 Sep 2026 12:28:38 +0100
+Subject: [PATCH] soundwire: qcom: cache SCP_ADDRPAGE1/2 to preserve MBQ
+ atomicity
+
+qcom_swrm_xfer_msg() reprograms SCP_ADDRPAGE1/2 before every paged
+transfer, even when the paging window hasn't changed. Besides the
+wasted bus transactions, this breaks the atomicity that SoundWire
+Classic Multi-Byte Quantity (MBQ) writes rely on: the kernel's MBQ
+regmap emits an MBQ pair as two sdw_write_no_pm() calls to bit-13
+aliases sharing the same page, and the intervening PAGE writes
+invalidate the MBQ high-byte staging on Peripherals that observe
+them.  On WCD9378 FU42 Q7.8 Channel Volume this drops the MSB byte
+silently.
+
+Per SDCA v1.1 sections 12.2.5 and 12.2.8.2.1, MBQ pairs are expected
+to be atomic on the wire.  Cache the last-programmed page values per
+Slave, skip the FIFO write when they match, and invalidate on
+re-attach since SCP_ADDRPAGE1/2 reset to defaults on re-enumeration.
+
+Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Cc: Faiz Nabi Kuchay <fkuchay@oss.qualcomm.com>
+Link: https://patch.msgid.link/20260902112838.1369446-1-srinivas.kandagatla@oss.qualcomm.com
+[Backported to qcom-next 17bbb4b37bbc: the transfer function there takes
+the device number as an argument, which can be the broadcast address on a
+multi-master bus, so only device numbers within the cache are cached.]
+Signed-off-by: Vinod Koul <vkoul@kernel.org>
+---
+ drivers/soundwire/qcom.c | 40 ++++++++++++++++++++++++++++++++--------
+ 1 file changed, 32 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
+index 43cb3845b727..4734758556f4 100644
+--- a/drivers/soundwire/qcom.c
++++ b/drivers/soundwire/qcom.c
+@@ -296,6 +296,9 @@ struct qcom_swrm_ctrl {
+ 	u32 wr_fifo_depth;
+ 	bool clock_stop_not_supported;
+ 	unsigned int reg_layout_local[SWRM_OFFSET_DP_SAMPLECTRL2_BANK + 1];
++	/* Per-Slave SCP_ADDRPAGE1/2 shadow; -1 = unknown. */
++	s16 page1_cache[SDW_MAX_DEVICES + 1];
++	s16 page2_cache[SDW_MAX_DEVICES + 1];
+ };
+ 
+ struct qcom_swrm_data {
+@@ -752,6 +755,10 @@ static void qcom_swrm_set_slave_dev_num(struct sdw_bus *bus,
+ 		mutex_lock(&bus->bus_lock);
+ 		set_bit(devnum, bus->assigned);
+ 		mutex_unlock(&bus->bus_lock);
++
++		/* Re-attach resets SCP_ADDRPAGE1/2 to defaults; invalidate. */
++		ctrl->page1_cache[devnum] = -1;
++		ctrl->page2_cache[devnum] = -1;
+ 	}
+ }
+ 
+@@ -1164,15 +1171,29 @@ static enum sdw_command_response qcom_swrm_xfer_msg_one(struct qcom_swrm_ctrl *c
+ 	int ret, i, len;
+ 
+ 	if (msg->page) {
+-		ret = qcom_swrm_cmd_fifo_wr_cmd(ctrl, msg->addr_page1, dev_num,
+-						SDW_SCP_ADDRPAGE1);
+-		if (ret)
+-			return ret;
++		bool cached = dev_num <= SDW_MAX_DEVICES;
+ 
+-		ret = qcom_swrm_cmd_fifo_wr_cmd(ctrl, msg->addr_page2, dev_num,
+-						SDW_SCP_ADDRPAGE2);
+-		if (ret)
+-			return ret;
++		if (!cached || ctrl->page1_cache[dev_num] != msg->addr_page1) {
++			ret = qcom_swrm_cmd_fifo_wr_cmd(ctrl, msg->addr_page1,
++							dev_num,
++							SDW_SCP_ADDRPAGE1);
++			if (ret)
++				return ret;
++
++			if (cached)
++				ctrl->page1_cache[dev_num] = msg->addr_page1;
++		}
++
++		if (!cached || ctrl->page2_cache[dev_num] != msg->addr_page2) {
++			ret = qcom_swrm_cmd_fifo_wr_cmd(ctrl, msg->addr_page2,
++							dev_num,
++							SDW_SCP_ADDRPAGE2);
++			if (ret)
++				return ret;
++
++			if (cached)
++				ctrl->page2_cache[dev_num] = msg->addr_page2;
++		}
+ 	}
+ 
+ 	if (msg->flags == SDW_MSG_FLAG_READ) {
+@@ -2021,6 +2042,9 @@ static int qcom_swrm_probe(struct platform_device *pdev)
+ 	if (!ctrl)
+ 		return -ENOMEM;
+ 
++	memset(ctrl->page1_cache, 0xff, sizeof(ctrl->page1_cache));
++	memset(ctrl->page2_cache, 0xff, sizeof(ctrl->page2_cache));
++
+ 	data = of_device_get_match_data(dev);
+ 	ctrl->is_lane_provider = of_property_present(dev->of_node,
+ 						     "#qcom,swrm-lane-cells");
+-- 
+2.53.0
+

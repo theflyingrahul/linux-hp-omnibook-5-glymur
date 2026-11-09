@@ -1,0 +1,56 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * HP OmniBook 5 16-bf1xxx, test device tree with the video codec and the
+ * external displays on, for one boot from kernel -20
+ * (docs/kernel-20-plan-2026-11-09.md). Chosen at the GRUB menu in place of
+ * the test device tree. Replaces -19's -test-iris.
+ *
+ * - Iris, for the Mahua video trials (check-video.sh --mahua,
+ *   docs/video-iris-windows-2026-11-06.md). Glymur's description (both
+ *   vcodec domains); the trials power only vcodec 0, as Windows does here.
+ * - DisplayPort over both USB-C ports. On -15 a monitor made the EDID read
+ *   fail and the display controller then timed out until the machine reset
+ *   (docs/runbook-results-2026-10-21.md). Since -17 the driver no longer
+ *   reports a failed training as success (backports/0031). The endpoints
+ *   use two lanes and the combo PHYs lose mode-switch, so a monitor never
+ *   takes the USB 3 lanes: Qualcomm's change for Glymur laptops (Saurabh
+ *   Anand, "arm64: dts: qcom: glymur: Configure DP endpoints for 2-lane
+ *   operation", in the Linux MSM laptops tree).
+ */
+/dts-v1/;
+
+#include "mahua-hp-omnibook-5-bf1xxx-test.dts"
+
+/ {
+	model = "HP OmniBook 5 Laptop 16-bf1xxx (test, A/V)";
+};
+
+&iris {
+	status = "okay";
+};
+
+&mdss_dp0 {
+	status = "okay";
+};
+
+&mdss_dp0_out {
+	data-lanes = <0 1>;
+	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
+};
+
+&mdss_dp1 {
+	status = "okay";
+};
+
+&mdss_dp1_out {
+	data-lanes = <0 1>;
+	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
+};
+
+&usb_0_qmpphy {
+	/delete-property/ mode-switch;
+};
+
+&usb_1_qmpphy {
+	/delete-property/ mode-switch;
+};

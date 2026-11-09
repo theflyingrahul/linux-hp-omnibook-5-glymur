@@ -27,7 +27,7 @@ to `-17`, `6b4daa845239` for
 in order:
 `upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0006` and
 `0009`, `glymur-bringup/0001–0004`, then `backports/` (`0001–0002`,
-`0023–0026`, `0030–0037`, `0040–0043`, `0047–0075`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
+`0023–0026`, `0030–0037`, `0040–0043`, `0047–0085`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
 `upstream/qcom-next/0001`; `-7` adds `upstream/qcom-next/0002`; `-8` moves
 to the new base and adds `upstream/qcom-next/0003`; `-9` adds `0004`–`0005`
@@ -118,6 +118,67 @@ tree. `0005` reads the EC's pending event from register `0x00`, where HP's
 `IC10.INTR` reads it (field `CMD5`, no offset), instead of `0x05`; the old
 value left a fan notice unacknowledged and the event line firing about nine
 times a second (`docs/audit-2026-10-22.md`).
+
+Kernel `-20` (2026-11-09, `docs/kernel-20-plan-2026-11-09.md`), same
+base. qcom-next is still `17bbb4b37bbc`, linux-next's newest tag still
+`next-20261105` and the laptops tree still `8c9d1255de`. Mainline moved to
+`v7.4-rc2` (`7475ea8b58`); of its commits in drivers this laptop uses,
+`e2df0223ba` is `backports/0057` already and `ef7062864c` ("ASoC: qcom:
+q6apm: Guard callbacks until probe data is ready") is in the base as
+Qualcomm's FROMLIST `d023cbd2af88`. Also read: Tyler Baker's ASUS Zenbook
+A16 (Glymur) branch (`github.com/EmbeddedAndroid/linux` `a16-zenbook`,
+`7bf252e17abe`) and Patchwork (linux-arm-msm, linux-phy, linux-usb). Added,
+for suspend, USB and the headset:
+
+- `0076` UCSI's connector worker on the freezable workqueue (Abel Vesa,
+  posted 2025, laptops tree `d3b9973eb8`): a plug event during suspend
+  waits until the devices have resumed.
+- `0077–0078` (laptops tree `848e04855f`, `b3d41e63f7`; Abel Vesa's
+  "HACK" commits, not posted): QRTR sends HELLO before MHI receive on
+  resume, and ath12k keeps its thermal devices across a firmware recovery
+  during resume. Both for Wi-Fi after s2idle.
+- `0079` xhci-plat reads `xhci-reset-on-resume-quirk` as a device property
+  (Faisal Hassan, posted, laptops tree `f5fb8b1b60`), and `0084` Tyler
+  Baker's "usb: dwc3: qcom: reset the xHCI on resume on Glymur"
+  (`12b940c257d0`, not posted): the Glymur controllers lose their state in
+  s2idle, so they stop being wakeup sources and xHCI is reset on resume.
+  Ported: our dwc3 has no `xhci_reset_on_resume` software property, so the
+  port adds one to `struct dwc3_properties` instead of the original
+  tree's dwc3 prerequisite.
+- `0080` the M31 eUSB2 PHY's SE0 timeout (Elson Serrao and Peter Chen, v2,
+  2026-10-27, reviewed by Konrad Dybcio, Abel Vesa and Krishna Kurapati,
+  tested on the Zenbook A16), for the full- and low-speed `-71` (#6).
+- `0081` collapse voting for the Glymur PCIe GDSCs (Taniya Das, accepted
+  2026-10-28).
+- `0082` pmic_glink_altmode work items on unbind (Abel Vesa, accepted
+  2026-11-02).
+- `0083` Glymur USB 3 PHY settings from the latest hardware reference guide
+  (Konrad Dybcio, 2026-11-02, reviewed by Abel Vesa).
+- `0085` SoundWire SCP page cache (Srinivas Kandagatla, `eb9ea1a0fa28`, in
+  7.4-rc2), so the WCD9378's two-byte volume writes stay atomic.
+  Backported: our transfer function takes the device number as an argument,
+  which can be the broadcast address, so only device numbers within the
+  cache are cached.
+
+Already carried, so not added again: Tyler Baker's battery-manager
+notifications and GPI fixes (`0023–0025`) and Oleg Keri's DP training
+result (`0031`). Already in the base: the repeater power-leak fix, the GPI
+register ordering, Glymur's `rpmh-stats` node, the CDSP FastRPC context
+banks with the right numbers, and most of Qualcomm's Glymur DP PHY series
+(v6 patches 1�3 as FROMLIST `c202053823b5`, `45b4851e05b7`,
+`e154e22d9a0a`, and an earlier revision of its init and configure rework,
+`5323704e28fd`). Not taken: the rest of that series (5, 6 and 11 apply,
+4 needs a merge, 7�10 overlap the base's rework and apply neither way; two
+revisions are not mixed blind in the PHY that carries USB-C SuperSpeed);
+Akhil P Oommen's GMU driver v2 (open regression, and patch 3 does not apply
+to `msm_drv.c` here); Kamal Wadhwa's RTC v2 (it fixes an unbind
+use-after-free and a late-reply timeout, but drops the `allow-set-time`
+gate, so the kernel would write Windows' local-time RTC; it waits for
+`check-rtc.sh`);
+Tyler's gpio-keys lid filter, eDP self-test bit (our 2-lane path already
+writes `0x3`), hid-asus and iris changes (other hardware or already
+handled). The config is `-19`'s. Every patch applies with no fuzz
+(71 commits), and a fresh `prepare` reproduces the build tree.
 
 Base move for `-19` (2026-11-05). qcom-next was rebuilt on 7.3
 (`17bbb4b37bbc`, tags `qcom-next-7.3-20261031` and `qcom-7.3-20261102`;

@@ -1,0 +1,60 @@
+From 848e04855fa85ff41effe73a25fe7d590a0cf6ec Mon Sep 17 00:00:00 2001
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Date: Wed, 30 Sep 2026 13:58:48 +0300
+Subject: [PATCH] HACK net: qrtr: Send HELLO before enabling MHI receive on
+ resume
+
+The MHI resume callback queues receive buffers before restarting the
+local HELLO handshake. This allows a remote HELLO to reach the name
+service while hello_sent is false. The resulting service announcements
+are then rejected by qrtr_node_enqueue() with -EAGAIN.
+
+Restart the local handshake before queueing receive buffers and wait
+for the initial HELLO work to complete. Use mod_delayed_work() to run
+any pending HELLO retry immediately. Subsequent retries are still
+scheduled if the initial attempt fails.
+
+Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+---
+ net/qrtr/af_qrtr.c | 4 +++-
+ net/qrtr/mhi.c     | 5 +++--
+ 2 files changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/net/qrtr/af_qrtr.c b/net/qrtr/af_qrtr.c
+index e7b3647424b8..96f62f8f2443 100644
+--- a/net/qrtr/af_qrtr.c
++++ b/net/qrtr/af_qrtr.c
+@@ -632,7 +632,9 @@ void qrtr_endpoint_hello(struct qrtr_endpoint *ep)
+ 	node->hello_sent = false;
+ 	mutex_unlock(&node->ep_lock);
+ 
+-	schedule_delayed_work(&node->say_hello, 0);
++	/* Finish the first HELLO attempt before the transport enables RX. */
++	mod_delayed_work(system_percpu_wq, &node->say_hello, 0);
++	flush_delayed_work(&node->say_hello);
+ }
+ EXPORT_SYMBOL_GPL(qrtr_endpoint_hello);
+ 
+diff --git a/net/qrtr/mhi.c b/net/qrtr/mhi.c
+index e9a4bb92ce76..0ce051084814 100644
+--- a/net/qrtr/mhi.c
++++ b/net/qrtr/mhi.c
+@@ -202,12 +202,13 @@ static int __maybe_unused qcom_mhi_qrtr_pm_resume_early(struct device *dev)
+ 		return rc;
+ 	}
+ 
++	/* Send our HELLO before receiving the remote's service requests. */
++	qrtr_endpoint_hello(&qdev->ep);
++
+ 	rc = qcom_mhi_qrtr_queue_dl_buffers(mhi_dev);
+ 	if (rc)
+ 		return rc;
+ 
+-	qrtr_endpoint_hello(&qdev->ep);
+-
+ 	return 0;
+ }
+ 
+-- 
+2.53.0
+

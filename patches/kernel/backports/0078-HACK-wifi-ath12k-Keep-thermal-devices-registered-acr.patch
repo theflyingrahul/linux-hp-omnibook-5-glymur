@@ -1,0 +1,125 @@
+From b3d41e63f7fc678ab292bff13157bc38d9b29c7b Mon Sep 17 00:00:00 2001
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Date: Wed, 30 Sep 2026 13:58:48 +0300
+Subject: [PATCH] HACK wifi: ath12k: Keep thermal devices registered across
+ firmware recovery
+
+Firmware recovery unregisters and recreates the thermal devices even
+though their parent wiphy remains registered. When recovery runs during
+system resume, registering the hwmon device under a wiphy that is still
+prepared for suspend triggers:
+
+  hwmon hwmon110: PM: parent phy0 should not be sleeping
+
+Tie thermal device registration to the hardware group lifetime instead
+of the firmware lifetime. Register the devices on initial startup and
+unregister them before removing the wiphys, including on recovery
+failure.
+
+Skip radios without a registered hwmon device during cleanup to handle
+partial registration failures.
+
+Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+---
+ drivers/net/wireless/ath/ath12k/core.c    | 30 +++++++++++++----------
+ drivers/net/wireless/ath/ath12k/thermal.c |  2 +-
+ 2 files changed, 18 insertions(+), 14 deletions(-)
+
+diff --git a/drivers/net/wireless/ath/ath12k/core.c b/drivers/net/wireless/ath/ath12k/core.c
+index b25202effb00..e184ac8a0619 100644
+--- a/drivers/net/wireless/ath/ath12k/core.c
++++ b/drivers/net/wireless/ath/ath12k/core.c
+@@ -843,24 +843,13 @@ static int ath12k_core_pdev_create(struct ath12k_base *ab)
+ 		return ret;
+ 	}
+ 
+-	ret = ath12k_thermal_register(ab);
+-	if (ret) {
+-		ath12k_err(ab, "could not register thermal device: %d\n", ret);
+-		goto err_dp_pdev_free;
+-	}
+-
+ 	ath12k_debugfs_pdev_create(ab);
+ 
+ 	return 0;
+-
+-err_dp_pdev_free:
+-	ath12k_dp_pdev_free(ab);
+-	return ret;
+ }
+ 
+ static void ath12k_core_pdev_destroy(struct ath12k_base *ab)
+ {
+-	ath12k_thermal_unregister(ab);
+ 	ath12k_dp_pdev_free(ab);
+ }
+ 
+@@ -1025,6 +1014,7 @@ static void ath12k_core_hw_group_stop(struct ath12k_hw_group *ag)
+ 
+ 		clear_bit(ATH12K_FLAG_REGISTERED, &ab->dev_flags);
+ 
++		ath12k_thermal_unregister(ab);
+ 		ath12k_core_device_cleanup(ab);
+ 	}
+ 
+@@ -1137,13 +1127,19 @@ static int ath12k_core_mlo_setup(struct ath12k_hw_group *ag)
+ static int ath12k_core_hw_group_start(struct ath12k_hw_group *ag)
+ {
+ 	struct ath12k_base *ab;
++	bool recovery;
+ 	int ret, i;
+ 
+ 	lockdep_assert_held(&ag->mutex);
+ 
+-	if (test_bit(ATH12K_GROUP_FLAG_REGISTERED, &ag->flags)) {
++	recovery = test_bit(ATH12K_GROUP_FLAG_REGISTERED, &ag->flags);
++	if (recovery) {
+ 		ret = ath12k_core_mlo_setup(ag);
+ 		if (WARN_ON(ret)) {
++			for (i = 0; i < ag->num_devices; i++) {
++				if (ag->ab[i])
++					ath12k_thermal_unregister(ag->ab[i]);
++			}
+ 			ath12k_mac_unregister(ag);
+ 			goto err_mac_destroy;
+ 		}
+@@ -1175,6 +1171,15 @@ static int ath12k_core_hw_group_start(struct ath12k_hw_group *ag)
+ 		ret = ath12k_core_device_setup(ab);
+ 		if (ret)
+ 			goto err;
++
++		/* Thermal devices follow the wiphy lifetime, not firmware restarts. */
++		if (!recovery) {
++			ret = ath12k_thermal_register(ab);
++			if (ret) {
++				ath12k_err(ab, "could not register thermal device: %d\n", ret);
++				goto err;
++			}
++		}
+ 	}
+ 
+ 	return 0;
+@@ -1371,7 +1376,6 @@ static int ath12k_core_reconfigure_on_crash(struct ath12k_base *ab)
+ 
+ 	mutex_lock(&ab->core_lock);
+ 	ath12k_link_sta_rhash_tbl_destroy(ab);
+-	ath12k_thermal_unregister(ab);
+ 	ath12k_dp_pdev_free(ab);
+ 	ath12k_ce_cleanup_pipes(ab);
+ 	ath12k_wmi_detach(ab);
+diff --git a/drivers/net/wireless/ath/ath12k/thermal.c b/drivers/net/wireless/ath/ath12k/thermal.c
+index 97fc49c40ac1..e83a2ffe9d26 100644
+--- a/drivers/net/wireless/ath/ath12k/thermal.c
++++ b/drivers/net/wireless/ath/ath12k/thermal.c
+@@ -257,7 +257,7 @@ static void ath12k_thermal_cleanup_radio(struct ath12k_base *ab, int i)
+ 	struct ath12k *ar;
+ 
+ 	ar = ab->pdevs[i].ar;
+-	if (!ar)
++	if (!ar || !ar->thermal.hwmon_dev)
+ 		return;
+ 
+ 	hwmon_device_unregister(ar->thermal.hwmon_dev);
+-- 
+2.53.0
+

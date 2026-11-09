@@ -1,0 +1,147 @@
+From 12b940c257d0f94bf656240c95b0ad35d15eb9f5 Mon Sep 17 00:00:00 2001
+From: Tyler Baker <forcedinductionz@gmail.com>
+Date: Sun, 27 Sep 2026 10:37:28 -0400
+Subject: [PATCH] usb: dwc3: qcom: reset the xHCI on resume on Glymur
+
+The Glymur USB controllers lose their state in s2idle. dwc3 keeps the
+core across system suspend while the controller is a wakeup source, and
+xhci_resume() restores the saved registers, so a controller with a
+device attached writes through a stale address on resume:
+
+  arm-smmu 15000000.iommu: Unhandled context fault: fsr=0x402, iova=0x792c2da4c0, fsynr=0x770010, cbfrsynra=0xda0, cb=11
+  xhci-hcd xhci-hcd.3.auto: WARNING: Host System Error
+  usb usb5-port1: couldn't allocate usb_device
+
+and every device behind it is lost until reboot. Resetting the xHCI on
+resume while the controller stays a wakeup source instead times out:
+
+  xhci-hcd xhci-hcd.3.auto: PM: failed to resume async: error -110
+
+A controller that is powered down cannot wake the system, so do not
+register the Glymur controllers as wakeup sources, and request
+XHCI_RESET_ON_RESUME so the host is reset and its devices re-enumerated.
+
+[Ported to qcom-next 17bbb4b37bbc: its dwc3 core has no
+xhci_reset_on_resume software property, so this adds one to struct
+dwc3_properties and passes it to xhci-plat as
+"xhci-reset-on-resume-quirk", in place of the original tree's dwc3
+prerequisite.]
+
+Signed-off-by: Tyler Baker <forcedinductionz@gmail.com>
+Link: https://github.com/EmbeddedAndroid/linux/commit/12b940c257d0f94bf656240c95b0ad35d15eb9f5
+---
+ drivers/usb/dwc3/core.c      |  3 +++
+ drivers/usb/dwc3/core.h      |  1 +
+ drivers/usb/dwc3/dwc3-qcom.c | 12 +++++++++++-
+ drivers/usb/dwc3/glue.h      |  3 +++
+ drivers/usb/dwc3/host.c      |  5 ++++-
+ 5 files changed, 22 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
+index d9f4e4109abb..d782d5ef9c57 100644
+--- a/drivers/usb/dwc3/core.c
++++ b/drivers/usb/dwc3/core.c
+@@ -1697,6 +1697,9 @@ static void dwc3_get_software_properties(struct dwc3 *dwc,
+ 	if (properties->skip_phy_init)
+ 		dwc->skip_phy_init = true;
+ 
++	if (properties->xhci_reset_on_resume)
++		dwc->xhci_reset_on_resume = true;
++
+ 	dwc->gsbuscfg0_reqinfo = DWC3_GSBUSCFG0_REQINFO_UNSPECIFIED;
+ 
+ 	if (properties->gsbuscfg0_reqinfo !=
+diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
+index 1c8d441ea9f8..ae8b6548615e 100644
+--- a/drivers/usb/dwc3/core.h
++++ b/drivers/usb/dwc3/core.h
+@@ -1403,6 +1403,7 @@ struct dwc3 {
+ 	unsigned		usb2_lpm_disable:1;
+ 	unsigned		usb2_gadget_lpm_disable:1;
+ 	unsigned		needs_full_reinit:1;
++	unsigned		xhci_reset_on_resume:1;
+ 
+ 	unsigned		disable_scramble_quirk:1;
+ 	unsigned		u2exit_lfps_quirk:1;
+diff --git a/drivers/usb/dwc3/dwc3-qcom.c b/drivers/usb/dwc3/dwc3-qcom.c
+index 8116dc94c181..4d1deaeb4620 100644
+--- a/drivers/usb/dwc3/dwc3-qcom.c
++++ b/drivers/usb/dwc3/dwc3-qcom.c
+@@ -654,6 +654,7 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
+ 	int			ret;
+ 	bool			ignore_pipe_clk;
+ 	bool			wakeup_source;
++	bool			glymur;
+ 
+ 	qcom = devm_kzalloc(&pdev->dev, sizeof(*qcom), GFP_KERNEL);
+ 	if (!qcom)
+@@ -747,6 +748,13 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
+ 	probe_data.ignore_clocks_and_resets = true;
+ 	probe_data.properties = DWC3_DEFAULT_PROPERTIES;
+ 	probe_data.properties.skip_phy_init = true;
++
++	/* Glymur powers the controllers down in s2idle: xHCI state is lost. */
++	glymur = of_device_is_compatible(dev->of_node, "qcom,glymur-dwc3") ||
++		 of_device_is_compatible(dev->of_node, "qcom,glymur-dwc3-mp");
++	if (glymur)
++		probe_data.properties.xhci_reset_on_resume = true;
++
+ 	ret = dwc3_core_probe(&probe_data);
+ 	if (ret)  {
+ 		ret = dev_err_probe(dev, ret, "failed to register DWC3 Core\n");
+@@ -757,7 +765,9 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
+ 	if (ret)
+ 		goto remove_core;
+ 
+-	wakeup_source = of_property_read_bool(dev->of_node, "wakeup-source");
++	/* A controller that loses power in s2idle cannot wake the system. */
++	wakeup_source = !glymur &&
++			of_property_read_bool(dev->of_node, "wakeup-source");
+ 	device_init_wakeup(&pdev->dev, wakeup_source);
+ 
+ 	qcom->is_suspended = false;
+diff --git a/drivers/usb/dwc3/glue.h b/drivers/usb/dwc3/glue.h
+index 72c5593e657a..0c38d8d03fa3 100644
+--- a/drivers/usb/dwc3/glue.h
++++ b/drivers/usb/dwc3/glue.h
+@@ -15,11 +15,14 @@
+  * @needs_full_reinit: indicate the controller may not remain power during system
+  *			pm and need full initialization
+  * @skip_phy_init: skip xHCI PHY initialization on host init
++ * @xhci_reset_on_resume: the controller loses its state in system suspend,
++ *			  so the xHCI host must be reset on resume
+  */
+ struct dwc3_properties {
+ 	u32 gsbuscfg0_reqinfo;
+ 	unsigned needs_full_reinit:1;
+ 	unsigned skip_phy_init:1;
++	unsigned xhci_reset_on_resume:1;
+ };
+ 
+ #define DWC3_DEFAULT_PROPERTIES ((struct dwc3_properties){		\
+diff --git a/drivers/usb/dwc3/host.c b/drivers/usb/dwc3/host.c
+index 3fb8be8be590..512cc187c420 100644
+--- a/drivers/usb/dwc3/host.c
++++ b/drivers/usb/dwc3/host.c
+@@ -130,7 +130,7 @@ static int dwc3_host_get_irq(struct dwc3 *dwc)
+ 
+ int dwc3_host_init(struct dwc3 *dwc)
+ {
+-	struct property_entry	props[7];
++	struct property_entry	props[8];
+ 	struct platform_device	*xhci;
+ 	int			ret, irq;
+ 	int			prop_idx = 0;
+@@ -174,6 +174,9 @@ int dwc3_host_init(struct dwc3 *dwc)
+ 	if (dwc->usb2_lpm_disable)
+ 		props[prop_idx++] = PROPERTY_ENTRY_BOOL("usb2-lpm-disable");
+ 
++	if (dwc->xhci_reset_on_resume)
++		props[prop_idx++] = PROPERTY_ENTRY_BOOL("xhci-reset-on-resume-quirk");
++
+ 	if (dwc->skip_phy_init)
+ 		props[prop_idx++] = PROPERTY_ENTRY_BOOL("xhci-skip-phy-init-quirk");
+ 
+-- 
+2.53.0
+

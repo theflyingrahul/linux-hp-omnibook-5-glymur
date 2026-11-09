@@ -3,11 +3,11 @@ set -euo pipefail
 
 # Install everything staged on the USB. See README.md.
 #   bash install-from-usb.sh [--keep-ubuntu-mesa] [kernel release]
-# Default kernel: 7.3.0-glymur-19.
+# Default kernel: 7.3.0-glymur-20.
 
 SYSTEM_MESA=1
 if [ "${1:-}" = --keep-ubuntu-mesa ]; then SYSTEM_MESA=0; shift; fi
-KREL="${1:-7.3.0-glymur-19}"
+KREL="${1:-7.3.0-glymur-20}"
 K="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 [ "$(id -u)" -ne 0 ] || { echo 'run as your normal user, not with sudo' >&2; exit 1; }
 [ "$(findmnt -n -o LABEL /)" = glymur-root ] || { echo 'not booted from the SSD install (glymur-root); refusing' >&2; exit 1; }
@@ -32,6 +32,14 @@ if [ -f "$K/hp-fw/qcvss8480.mbn" ]; then
     echo "== installing HP's video firmware"
     sudo install -D -m 644 "$K/hp-fw/qcvss8480.mbn" \
         /usr/lib/firmware/updates/qcom/glymur/HP/omnibook-5-16-bf1xxx/qcvss8480.mbn
+fi
+
+# HP's CDSP-side FastRPC files (NPU driver qcnspmcdm8480), from -20.
+if [ -d "$K/npu/cdsp" ]; then
+    echo "== installing HP's CDSP FastRPC files"
+    D=/usr/share/qcom/glymur/HP/omnibook-5-16-bf1xxx/dsp/cdsp
+    sudo install -d "$D"
+    sudo install -m 644 "$K/npu/cdsp/"* "$D/"
 fi
 
 MESA="$(ls "$K"/mesa-glymur-*.tar.gz 2>/dev/null | sort -V | tail -1)"
@@ -62,11 +70,15 @@ if [ -f "$K/lscpu-oryon2.tar.gz" ]; then
     echo "as root: $(sudo lscpu | grep 'Model name' | head -1)"
 fi
 
-# EFI variables (from -17): read-only until writes are allowed on purpose.
-# Remount read-write by hand for a single write (docs/uefi-variables-2026-10-23.md).
-if ! grep -q '^efivarfs ' /etc/fstab; then
-    echo "== mounting efivarfs read-only from the next boot on"
-    echo 'efivarfs /sys/firmware/efi/efivars efivarfs ro,nosuid,nodev,noexec 0 0' | sudo tee -a /etc/fstab
+# EFI variables: read-only from -17, read-write from -20 (the owner allowed
+# writes on 2026-11-09; docs/kernel-20-plan-2026-11-09.md). The EFI pstore
+# backend stays off in the kernel, and grub-install and fwupd stay disabled.
+EFI_LINE='efivarfs /sys/firmware/efi/efivars efivarfs rw,nosuid,nodev,noexec 0 0'
+if ! grep -qxF "$EFI_LINE" /etc/fstab; then
+    echo "== mounting efivarfs read-write from the next boot on"
+    sudo cp -n /etc/fstab /etc/fstab.before-glymur-20
+    sudo sed -i '/^efivarfs /d' /etc/fstab
+    echo "$EFI_LINE" | sudo tee -a /etc/fstab
 fi
 
 if [ -d "$K/boot-logo" ]; then
@@ -85,7 +97,7 @@ sudo apt-get install -y mesa-utils mesa-utils-bin vulkan-tools glmark2-es2-wayla
 
 for f in check-gpu-test.sh check-mesa.sh charging-watch.sh check-usb.sh check-ec.sh gpu-corruption-test.sh \
          check-audio.sh check-headset.sh watch-audio.sh check-battmgr-notify.sh check-video.sh \
-         check-display.sh check-hotkeys.sh ec-event-capture.sh dump-efivars.sh; do
+         check-display.sh check-hotkeys.sh ec-event-capture.sh dump-efivars.sh          check-suspend.sh check-rtc.sh check-efivars-write.sh check-npu.sh; do
     if [ -f "$K/$f" ]; then cp "$K/$f" "$HOME/$f"; fi
 done
 # The WirePlumber rule for a boot with Iris on: kept aside, never installed.
@@ -95,8 +107,12 @@ if [ -d "$K/iris-test" ]; then
 fi
 sync
 echo
-echo "Done. Reboot into \"Ubuntu on SSD: test device tree\" and,"
-echo "from a terminal on the desktop, run:"
+echo "Done. Reboot into \"Ubuntu on SSD: test device tree\" and follow"
+echo "docs/linux-runbook-20-2026-11-09.md. The checks, from a terminal:"
+echo "  sudo bash ~/check-efivars-write.sh   (one EFI variable write; --verify after the reboot)"
+echo "  sudo bash ~/check-rtc.sh        (RTC time, UTC or local, one alarm)"
+echo "  sudo bash ~/check-npu.sh        (NPU: FastRPC on the CDSP)"
+echo "  sudo bash ~/check-suspend.sh    (last: three supervised suspend cycles)"
 echo "  bash ~/check-mesa.sh"
 echo "  sudo bash ~/check-headset.sh    (headset jack; have a wired headset at hand)"
 echo "  sudo bash ~/check-ec.sh         (fan, temperatures, backlight, mute LEDs, hotkeys)"

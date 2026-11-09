@@ -321,8 +321,9 @@ any refusal. It ends by reloading the module without parameters.
 
     sudo bash check-video.sh --mahua
 
-From kernel `-19`, booted with the `-test-iris` device tree (chosen at the
-GRUB menu, `docs/linux-runbook-19-2026-11-05.md` part E): what Windows does
+From kernel `-19`, booted with the `-test-iris` device tree (`-test-av`
+from `-20`; chosen at the GRUB menu, `docs/linux-runbook-20-2026-11-09.md`
+part B): what Windows does
 on Mahua (`docs/video-iris-windows-2026-11-06.md`). Every trial loads
 `qcom_iris` with `diag_cores=1 diag_core_id=2` and a
 `diag_hw_core`/`diag_pwr_ctl`/`diag_pipes` setting
@@ -458,8 +459,67 @@ with its size and attributes, copies them into
 `/var/log/glymur/efivars-*/efivars.tar.gz` and names the ones that matter
 here (`RTCInfo`, `SmartAmpCalibrationData`, `BootOrder`, `SecureBoot`).
 The copy holds machine-specific data; keep it in `.work/`, never commit it.
-`install-from-usb.sh` mounts `efivarfs` read-only (an `/etc/fstab` line) from
-`-17` on, so nothing writes a variable without an explicit remount.
+`install-from-usb.sh` mounted `efivarfs` read-only (an `/etc/fstab` line)
+from `-17`; from `-20` the line is read-write (the owner allowed writes on
+2026-11-09). The EFI pstore backend stays off in the kernel configuration,
+and `grub-install` and fwupd stay disabled.
+
+### `check-efivars-write.sh`
+
+    sudo bash check-efivars-write.sh [--verify]
+
+From kernel `-20`. Writes one non-volatile variable, `GlymurWriteTest`
+under this project's own GUID (32 bytes), reads it back and remembers its
+contents in `/var/lib/glymur/`. After a reboot, `--verify` checks that the
+variable survived unchanged and deletes it. It writes nothing else; if
+`efivarfs` is mounted read-only it remounts it for the test and back.
+
+### `check-rtc.sh`
+
+    sudo bash check-rtc.sh
+
+From kernel `-19` (`CONFIG_RTC_DRV_QCOM_GLINK`): the RTC that the ADSP's
+PMIC GLink service provides, which Windows reads as `\_SB.PRTC`. It reads
+the time and works out whether the RTC holds UTC or local time (Windows
+keeps local time unless `RealTimeIsUniversal` is set, and this laptop's
+Windows does not set it), logs the raw words the service returns through
+dynamic debug, and fires one alarm 20 s ahead without suspending. If the
+RTC holds local time it offers `timedatectl set-local-rtc 1`. It never
+sets the RTC: the driver refuses without `allow-set-time`, which the device
+tree leaves out so that Linux cannot move Windows' clock.
+
+### `check-npu.sh`
+
+    sudo bash check-npu.sh [dsp-dir]
+
+From kernel `-20`'s kit (issue #20). The kernel side of the NPU is in
+every device-tree kernel: the CDSP runs HP's signed firmware and `fastrpc`
+binds its compute banks. The script lists the remote processors and
+`/dev/fastrpc-*`, installs Qualcomm's FastRPC userspace from the
+distribution (`fastrpc-support`, `fastrpc-tests`) if it is missing, and
+runs `fastrpc_test` on the CDSP, unsigned and signed, with HP's DSP-side
+shell (`fastrpc_shell_3` from HP's Windows NPU driver `qcnspmcdm8480`,
+staged in `npu/cdsp/` and installed by `install-from-usb.sh` under
+`/usr/share/qcom/glymur/HP/omnibook-5-16-bf1xxx/dsp/cdsp`). Running models
+needs Qualcomm's AI Runtime (QNN) 2.39 for Linux, matching HP's
+`libQnnHtpV81Skel.so`.
+
+### `check-suspend.sh`
+
+    sudo bash check-suspend.sh [--sync-state]
+
+From kernel `-20`: three supervised s2idle cycles, woken by an RTC alarm,
+by opening the lid and by the power button. Before and after each cycle it
+logs the RPMh sleep counters (`qcom_stats`: how often the SoC reached AOSS
+sleep, CX collapse and DDR sleep), `/sys/power/suspend_stats`, the USB
+tree, Wi-Fi, the sound cards, the power supplies, the display connectors
+and the EC, plus the kernel log of the cycle. It unmasks `sleep.target` and
+`suspend.target` for the test and masks them again at the end unless every
+cycle resumed and the operator asks to keep suspend. `--sync-state` first
+writes `state_synced` for every provider still waiting for `sync_state`
+(the clock controllers held by the unbound GPU management unit,
+`docs/gmu-sync-state-2026-11-06.md`), as Tyler Baker did on the ASUS
+Zenbook A16 to reach CX collapse.
 
 ### `install-boot-logo.sh`
 

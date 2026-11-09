@@ -1,0 +1,42 @@
+From f5fb8b1b600a0fa59575905263a74f340d3e0f32 Mon Sep 17 00:00:00 2001
+From: Faisal Hassan <faisal.hassan@oss.qualcomm.com>
+Date: Thu, 3 Sep 2026 21:08:24 +0530
+Subject: [PATCH] usb: host: xhci-plat: Support XHCI_RESET_ON_RESUME via device
+ property
+
+When the USB controller loses power during PM suspend (as occurs
+on targets like SA8255P that fully power off the controller),
+it generates a Host Controller Error (HCE) on resume requiring
+full reinitialization. This is handled by the XHCI_RESET_ON_RESUME
+quirk (introduced upstream in 8b328f8002bc).
+
+Read the "xhci-reset-on-resume-quirk" device property to set
+XHCI_RESET_ON_RESUME. This allows parent drivers (e.g., dwc3)
+to enable the quirk via software nodes.
+
+Co-developed-by: Sriram Dash <sriram.dash@oss.qualcomm.com>
+Signed-off-by: Sriram Dash <sriram.dash@oss.qualcomm.com>
+Signed-off-by: Faisal Hassan <faisal.hassan@oss.qualcomm.com>
+Link: https://lore.kernel.org/r/20260903153827.3463313-5-faisal.hassan@oss.qualcomm.com
+Signed-off-by: Tyler Baker <forcedinductionz@gmail.com>
+---
+ drivers/usb/host/xhci-plat.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drivers/usb/host/xhci-plat.c b/drivers/usb/host/xhci-plat.c
+index 6fd595f81a30..0093ed24ac3f 100644
+--- a/drivers/usb/host/xhci-plat.c
++++ b/drivers/usb/host/xhci-plat.c
+@@ -277,6 +277,9 @@ int xhci_plat_probe(struct platform_device *pdev, struct device *sysdev, const s
+ 		if (device_property_read_bool(tmpdev, "xhci-skip-phy-init-quirk"))
+ 			xhci->quirks |= XHCI_SKIP_PHY_INIT;
+ 
++		if (device_property_read_bool(tmpdev, "xhci-reset-on-resume-quirk"))
++			xhci->quirks |= XHCI_RESET_ON_RESUME;
++
+ 		device_property_read_u32(tmpdev, "imod-interval-ns",
+ 					 &xhci->imod_interval);
+ 		device_property_read_u16(tmpdev, "num-hc-interrupters",
+-- 
+2.53.0
+
