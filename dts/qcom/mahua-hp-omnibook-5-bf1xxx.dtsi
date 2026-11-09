@@ -1,20 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * HP OmniBook 5 Laptop 16-bf1xxx (Snapdragon X2 Elite X2E84100, "Mahua").
- *
- * Every board value comes from this machine: HP's DSDT (decoded with
- * scripts/linux/acpi-crs-decode.py), HP's PEP power tables
- * (analyze-acpi-pep.py, parse-bsrc.py on the HP driver pack), the MADT and
- * the Windows device tree. See docs/device-tree-review-2026-09-28.md.
- * Qualcomm's mahua.dtsi describes the SoC.
- *
- * Deliberately conservative:
- *  - no RPMh regulators are declared, so Linux changes no PMIC rail and
- *    every rail stays as HP's firmware left it;
- *  - every TLMM pin that a board file does not use is reserved
- *    (gpio-reserved-ranges, set per .dts and checked by
- *    scripts/linux/check-dt-gpio-allowlist.py), so an unknown pin such as
- *    an EC reset can never be touched.
+ * HP OmniBook 5 Laptop 16-bf1xxx
  */
 
 #include <dt-bindings/gpio/gpio.h>
@@ -22,15 +8,6 @@
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/interrupt-controller/irq.h>
 
-/*
- * The die is Mahua, not a Glymur with a fused cluster. HP's DSDT serves
- * both dies and selects on \_SB.SDFE, which is 0xA8 here. For 0xA8 it
- * disables the "CPU Cluster 2" and "QMX2" thermal zones and the cluster 2
- * limits policy, exactly what mahua.dtsi deletes, and gives GPU0 the
- * MHID QCOM0FF5, the ID Windows binds on this laptop (0xA1 has GHID
- * QCOM0F36). mahua.dtsi removes cluster 2, TSENS 6/7 and PCIe 3a and sets
- * the Mahua interconnect, TLMM and TCSR compatibles.
- */
 #include "mahua.dtsi"
 
 / {
@@ -46,11 +23,6 @@
 	chosen {
 	};
 
-	/*
-	 * Root clocks from the PMK8850 PMIC (PMIC "A": HP's PEP tables vote its
-	 * CLK6_A/CLK7_A buffers). The 38.4 MHz XO and the 32 kHz sleep clock
-	 * are properties of that PMIC, not board choices.
-	 */
 	clocks {
 		sleep_clk: sleep-clk {
 			compatible = "fixed-clock";
@@ -65,11 +37,6 @@
 		};
 	};
 
-	/*
-	 * Lid: \_SB.LID0._LID returns GIO0.LIDR, the level of GPIO 92, with
-	 * 1 = open, so the line is low when closed. LIGE signals it on PDC
-	 * pin 960 (GPIO 92), both edges.
-	 */
 	gpio-keys {
 		compatible = "gpio-keys";
 
@@ -87,7 +54,6 @@
 	};
 };
 
-/* HP I2C1 (0xb80000, PEP pins 0/1): keyboard ECKB QTEC0001 at 0x3a. */
 &i2c0 {
 	clock-frequency = <400000>;
 
@@ -97,9 +63,7 @@
 		compatible = "hid-over-i2c";
 		reg = <0x3a>;
 
-		/* _DSM 3cdff6f7 function 1 returns 1. */
 		hid-descr-addr = <0x1>;
-		/* GpioInt level-low, wake, pull-up; PDC pin 704 = GPIO 67. */
 		interrupts-extended = <&tlmm 67 IRQ_TYPE_LEVEL_LOW>;
 
 		pinctrl-0 = <&kybd_default>;
@@ -109,19 +73,16 @@
 	};
 };
 
-/* HP I2C5 (0xb90000, PEP pins 16/17): touchpad TCPD at 0x15. */
 &i2c4 {
 	clock-frequency = <400000>;
 
 	status = "okay";
 
-	/* ELAN0189 on this SKU (\_SB.SPID == 0). */
 	touchpad@15 {
 		compatible = "hid-over-i2c";
 		reg = <0x15>;
 
 		hid-descr-addr = <0x1>;
-		/* GpioInt level-low, wake, pull-up; PDC pin 896 = GPIO 3. */
 		interrupts-extended = <&tlmm 3 IRQ_TYPE_LEVEL_LOW>;
 
 		pinctrl-0 = <&tpad_default>;
@@ -131,19 +92,16 @@
 	};
 };
 
-/* HP I2C9 (0xa80000, PEP pins 32/33): touchscreen TSC1 at 0x10. */
 &i2c8 {
 	clock-frequency = <400000>;
 
 	status = "okay";
 
-	/* ELAN2513, present on this SKU (\_SB.SKID == 1). */
 	touchscreen@10 {
 		compatible = "hid-over-i2c";
 		reg = <0x10>;
 
 		hid-descr-addr = <0x1>;
-		/* GpioInt level-low, pull-up, GPIO 51. No reset line in _CRS. */
 		interrupts-extended = <&tlmm 51 IRQ_TYPE_LEVEL_LOW>;
 
 		pinctrl-0 = <&ts_default>;
@@ -151,18 +109,7 @@
 	};
 };
 
-/*
- * PERST# and WAKE# come from HP's DSDT. The PCIe manager \_SB.QPPX
- * (QCOM0F96) lists one PERST# GpioIo per root port, PCI0-PCI7 in order:
- * PCI4 = GPIO 146 and PCI5 = GPIO 152, no pull. PCI4 and PCI5 each carry a
- * wake GpioInt (edge, active-low, pull-up, wake-capable) on the PDC pins
- * 384 and 448, which GIO0 maps to GPIO 148 and 154. PEP drives CLKREQ# on
- * 147 and 153 (function 1, pull-up).
- *
- * PCIe 4 (ACPI PCI4, DBI 0x78000000): the QCC2072 Wi-Fi module (17cb:1112,
- * HP 103c:8ef3). Its 3.3 V (GPIO 94) and enables (GPIO 116/117) stay as
- * firmware left them; GPIO 94 and 117 are reserved.
- */
+/* Wi-Fi */
 &pcie4 {
 	pinctrl-0 = <&pcie4_default>;
 	pinctrl-names = "default";
@@ -179,7 +126,7 @@
 	wake-gpios = <&tlmm 148 GPIO_ACTIVE_LOW>;
 };
 
-/* PCIe 5 (ACPI PCI5, DBI 0x7a000000): NVMe, the root filesystem. */
+/* NVMe */
 &pcie5 {
 	pinctrl-0 = <&pcie5_default>;
 	pinctrl-names = "default";
@@ -268,20 +215,11 @@
 	};
 };
 
-/*
- * The SoC debug UART (glymur.dtsi enables it; GPIO 86/87) is not used on
- * this laptop's DT boot. Disabled, its pins stay reserved.
- */
 &uart21 {
 	status = "disabled";
 };
 
-/*
- * qcom-next (from kernel -13) adds the APSS CoreSight trace path to
- * glymur.dtsi, enabled by default: the per-CPU ETMs, funnels, replicators
- * and trace buffers. Nothing here needs tracing, and whether this laptop's
- * firmware leaves the debug blocks accessible is unknown, so they stay off.
- */
+/* APSS CoreSight trace path, unused */
 &{/etm-0} {
 	status = "disabled";
 };
@@ -406,14 +344,7 @@
 	status = "disabled";
 };
 
-/*
- * glymur.dtsi enables the Adreno GPU, its GMU, clock controllers and SMMU
- * by default. msm binds an available GPU into the same DRM device as the
- * display, so a GPU that fails to come up would also take the panel down.
- * The GPU block stays off here; the daily .dts turns it on (proven from
- * kernel -5, which builds CLK_GLYMUR_GPUCC: gpucc-glymur, gxclkctl) and
- * the -minimal fallback turns it off again.
- */
+/* The GPU is enabled by the board .dts */
 &gpu {
 	status = "disabled";
 };
@@ -434,14 +365,6 @@
 	status = "disabled";
 };
 
-/*
- * HP UR15 (QUP_1_SE_6, 4-wire; UART pins 56-59 per HP's
- * BSRC_UART_4Wire_1.bin): QCC2072 Bluetooth (BTH0, QCOM0F6B). Windows runs
- * it at 3.2 Mbaud (qcbluetooth8480.inf BaudRate). BTH0's GpioIo is GPIO
- * 116, the Bluetooth enable (bt-enable on the Glymur/Mahua CRD too). With
- * enable-gpios, hci_qca drives BT_EN itself and needs no regulators for
- * QCC2072.
- */
 &uart14 {
 	status = "okay";
 

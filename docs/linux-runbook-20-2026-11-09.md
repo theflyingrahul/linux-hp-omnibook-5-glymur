@@ -43,6 +43,10 @@ from step 5 to step 11.
    reboot to "previous kernel" and hand back the boot report.
 2. **Boot report:** `/var/log/glymur/boot-*.txt` reads release
    `7.3.0-glymur-20`, model `... (test)`, no `CMD timeout`.
+   Also save the hardware IDs that distributions use to pick this
+   laptop's device tree (systemd-stub, Ubuntu's stubble, Omarchy):
+   `systemd-analyze chid | tee /var/log/glymur/chid.txt` (needs systemd
+   257 or later; it only reads the firmware's SMBIOS strings).
 3. **UEFI write:** `sudo bash ~/check-efivars-write.sh`. It should print
    `PASS: written and read back`. (Boot B checks that it survived.)
 4. **RTC:** `sudo bash ~/check-rtc.sh`. It says whether the RTC holds UTC
@@ -122,7 +126,7 @@ from step 5 to step 11.
 - `/var/log/glymur/*.txt` from both boots: the two boot reports,
   `efivar-write-*`, `rtc-test-*`, `audio-test-*`, `audio-watch-*`,
   `headset-test-*`, `usb-test-*`, `charging-watch-*`, `npu-test-*`,
-  `suspend-test-*`, `video-test-*`, `display-test-*`.
+  `suspend-test-*`, `video-test-*`, `display-test-*`, `chid.txt`.
 - The times of any freeze, what boot B's first try did if it failed, and
   which suspend cycles came back.
 - The `-18` laptop session's private logs, still only on the SSD: copy
