@@ -33,6 +33,21 @@ done
 DEV=/dev/${R##*/}
 echo "using $DEV"
 
+# On -20 the service answered nothing to 0x68 (-110) and the fallbacks
+# (0x67 ticks, 0x65 property) failed too. The driver's debug lines show
+# what it sends and what comes back (RX opcode, return status), per request.
+sect "PMIC GLink RTC requests, with debug logging"
+DD=/sys/kernel/debug/dynamic_debug/control
+for m in rtc_qcom_glink pmic_glink; do
+    echo "module $m +p" > "$DD" 2>/dev/null && echo "debug on: $m" || echo "no dynamic debug for $m"
+done
+t0=$(date '+%Y-%m-%d %H:%M:%S')
+cat "$R/time" 2>&1 | sed 's/^/time read: /'
+cat "$R/since_epoch" 2>&1 | sed 's/^/since_epoch read: /'
+sleep 1
+journalctl -k --no-pager --since "$t0" | grep -iE 'rtc|glink' | sed 's/^.*kernel: //' | head -40
+for m in rtc_qcom_glink pmic_glink; do echo "module $m -p" > "$DD" 2>/dev/null; done
+
 sect "time"
 rtc_s=$(cat "$R/since_epoch")
 now=$(date +%s)

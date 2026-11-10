@@ -63,6 +63,23 @@ the action-keys value, and is still notified on `0x88`. Left Shift+Fn
 stays the way to change it, as on Windows, where HP's ACPI only reads it.
 `check-ec.sh` no longer writes it.
 
+## The RTC (review on Windows, same day)
+
+`rtc_qcom_glink` (Qualcomm's FROMLIST driver, owner `0x8010`) waits out its
+1 s timeout on `0x68` (get real time) at every read, and both fallbacks
+(`0x67` ticks, `0x65` property) fail within the following second, so at
+least one of them gets an answer quickly. So the service is there but does
+not serve `0x68`. The posted v2 (2026-11-02) uses the same opcodes, so it
+would not change this. HP's `\_SB.PRTC` (`ACPI000E`, the ACPI time and
+alarm device) reads the time through the PMIC GLink region of `\_SB.ABD`
+at offset `0x30200` (`XRTD`, 16 bytes), in a block that also holds the
+TAD methods' fields (`GWS`, `CWS`, `TPA`, `TPD`, `TVA`, `TVD`), next to the
+battery block (`0x1xxxx`) and UCSI (`0x2xxxx`). How Qualcomm's ABD driver
+turns that offset into a PMIC GLink message is not known; it may not be
+owner `0x8010` with `0x68`. `check-rtc.sh` now logs the driver's and
+pmic_glink's debug lines for each request (the replies and their status),
+which is the next piece of evidence.
+
 ## Open: the backlight timeout from the keyboard
 
 Per the owner, a long press changes the keyboard backlight timeout (an

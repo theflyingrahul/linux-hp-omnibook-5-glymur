@@ -1,0 +1,55 @@
+From d3fecdd52a9e849def0a39adca3eedad3ea11758 Mon Sep 17 00:00:00 2001
+From: Rahul Pon <theflyingrahul@gmail.com>
+Date: Tue, 10 Nov 2026 01:40:48 -0800
+Subject: [PATCH] ASoC: SDCA: give statically described controls their widths
+ and types
+
+A codec without DisCo properties, such as the WCD9378 on device-tree
+platforms, fills its SDCA function from static tables and then calls
+sdca_apply_default_control_classifiers() for what sdca_parse_function()
+would have derived. That helper sets the volatile and reset fields but
+not the width and data type, which sdca_parse_function() takes from the
+specification for every control.
+
+The WCD9378 tables set them for two controls only, so every other control
+has nbits 0 and the one-bit type. GENMASK(nbits - 1, 0) then shifts by 64
+for the power domain entities' Requested PS (UBSAN at module load in
+sdca_asoc_populate_dapm()), and the Detected Mode control of the jack's
+group entity gets a range of 0, so jack insertion can never be reported.
+
+Give every control without a width the specification's width and type.
+A width of 0 is never valid, so codec-set values are kept.
+---
+ sound/soc/sdca/sdca_functions.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/sound/soc/sdca/sdca_functions.c b/sound/soc/sdca/sdca_functions.c
+index 6da65e1bd334..cb54114cd068 100644
+--- a/sound/soc/sdca/sdca_functions.c
++++ b/sound/soc/sdca/sdca_functions.c
+@@ -2274,7 +2274,9 @@ EXPORT_SYMBOL_NS(sdca_parse_function, "SND_SOC_SDCA");
+  * @function: Function populated via static tables (populate_function path).
+  *
+  * Runs the same per-Control classifiers as sdca_parse_function() so both
+- * entry paths land on identical @is_volatile and @has_reset/@reset fields.
++ * entry paths land on identical @is_volatile and @has_reset/@reset fields,
++ * and gives a Control the codec left without a width (@nbits 0, never
++ * valid) the @type and @nbits the specification defines for it.
+  * Elevate-only: codec-set flags/values are preserved.
+  */
+ void sdca_apply_default_control_classifiers(struct sdca_function_data *function)
+@@ -2287,6 +2289,11 @@ void sdca_apply_default_control_classifiers(struct sdca_function_data *function)
+ 		for (j = 0; j < entity->num_controls; j++) {
+ 			struct sdca_control *control = &entity->controls[j];
+ 
++			if (!control->nbits) {
++				control->type = find_sdca_control_datatype(entity, control);
++				control->nbits = find_sdca_control_bits(entity, control);
++			}
++
+ 			if (!control->is_volatile)
+ 				control->is_volatile =
+ 					find_sdca_control_volatile(entity, control);
+-- 
+2.53.0
+

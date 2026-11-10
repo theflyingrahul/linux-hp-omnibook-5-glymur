@@ -1,0 +1,92 @@
+From 66cc0eecf279ce8f583fab13468889c49cd273de Mon Sep 17 00:00:00 2001
+From: Rahul Pon <theflyingrahul@gmail.com>
+Date: Tue, 10 Nov 2026 01:48:25 -0800
+Subject: [PATCH] media: iris: bring-up option to attach the partial-data
+ buffer for AV1 only
+
+Not for upstream. Mahua's video firmware rejects the partial-data
+internal buffer on H.264 sessions ("vDec_AttachInternalBuffers(862):
+Buffer type 5 should be used for AV1 only"), and the decoder attaches it
+for every codec, sized for AV1. With qcom_iris.diag_partial_av1_only=1 it
+is attached to AV1 sessions only, so check-video.sh can test whether that
+is what stalls H.264 decoding. Default off: nothing changes without it.
+---
+ drivers/media/platform/qcom/iris/iris_buffer.c |  6 ++++++
+ drivers/media/platform/qcom/iris/iris_diag.c   | 10 ++++++++++
+ drivers/media/platform/qcom/iris/iris_diag.h   |  2 ++
+ 3 files changed, 18 insertions(+)
+
+diff --git a/drivers/media/platform/qcom/iris/iris_buffer.c b/drivers/media/platform/qcom/iris/iris_buffer.c
+index 6e03d13ac1a7..9af5c1188f4e 100644
+--- a/drivers/media/platform/qcom/iris/iris_buffer.c
++++ b/drivers/media/platform/qcom/iris/iris_buffer.c
+@@ -7,6 +7,7 @@
+ #include <media/v4l2-mem2mem.h>
+ 
+ #include "iris_buffer.h"
++#include "iris_diag.h"
+ #include "iris_instance.h"
+ #include "iris_power.h"
+ #include "iris_vpu_buffer.h"
+@@ -490,6 +491,11 @@ static void iris_fill_internal_buf_info(struct iris_inst *inst,
+ 
+ 	buffers->size = inst->core->iris_firmware_desc->get_vpu_buffer_size(inst, buffer_type);
+ 	buffers->min_count = iris_vpu_buf_count(inst, buffer_type);
++
++	if (buffer_type == BUF_PARTIAL && iris_diag_skip_partial(inst)) {
++		buffers->size = 0;
++		buffers->min_count = 0;
++	}
+ }
+ 
+ static void iris_get_int_buf_tbl(struct iris_inst *inst, u32 plane,
+diff --git a/drivers/media/platform/qcom/iris/iris_diag.c b/drivers/media/platform/qcom/iris/iris_diag.c
+index 6f455d1dfcfa..eec9601eb62b 100644
+--- a/drivers/media/platform/qcom/iris/iris_diag.c
++++ b/drivers/media/platform/qcom/iris/iris_diag.c
+@@ -12,6 +12,7 @@
+ 
+ #include "iris_core.h"
+ #include "iris_diag.h"
++#include "iris_instance.h"
+ #include "iris_platform_common.h"
+ #include "iris_vpu_register_defines.h"
+ 
+@@ -38,6 +39,15 @@ static bool diag_pwr_ctl;
+ module_param(diag_pwr_ctl, bool, 0444);
+ MODULE_PARM_DESC(diag_pwr_ctl, "Clear WRAPPER_CORE_POWER_CONTROL in hardware mode and wait for the core power status");
+ 
++static bool diag_partial_av1_only;
++module_param(diag_partial_av1_only, bool, 0644);
++MODULE_PARM_DESC(diag_partial_av1_only, "Attach the decoder's partial-data buffer to AV1 sessions only");
++
++bool iris_diag_skip_partial(struct iris_inst *inst)
++{
++	return diag_partial_av1_only && inst->codec != V4L2_PIX_FMT_AV1;
++}
++
+ int iris_diag_apply(struct iris_core *core)
+ {
+ 	struct iris_platform_data *plat;
+diff --git a/drivers/media/platform/qcom/iris/iris_diag.h b/drivers/media/platform/qcom/iris/iris_diag.h
+index 25a5194a155a..a143c56b633e 100644
+--- a/drivers/media/platform/qcom/iris/iris_diag.h
++++ b/drivers/media/platform/qcom/iris/iris_diag.h
+@@ -5,6 +5,7 @@
+ #include <linux/types.h>
+ 
+ struct iris_core;
++struct iris_inst;
+ 
+ int iris_diag_apply(struct iris_core *core);
+ void iris_diag_log_fuses(struct iris_core *core);
+@@ -12,5 +13,6 @@ u32 iris_diag_pipes(struct iris_core *core, u32 pipes);
+ u32 iris_diag_core_id(struct iris_core *core, u32 core_id);
+ u32 iris_diag_hw_core(u32 core_id);
+ void iris_diag_power_release(struct iris_core *core);
++bool iris_diag_skip_partial(struct iris_inst *inst);
+ 
+ #endif
+-- 
+2.53.0
+

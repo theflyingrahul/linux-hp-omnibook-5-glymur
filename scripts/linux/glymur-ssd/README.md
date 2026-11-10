@@ -94,6 +94,10 @@ It checks every file against `SHA256SUMS`, then installs:
 - the audio topology and UCM profile (`install-audio.sh`), when `audio/` is
   staged;
 - HP's video firmware (`qcvss8480.mbn`), when `hp-fw/` is staged;
+- from `-20`, `efivarfs` read-write in `/etc/fstab` and HP's CDSP FastRPC
+  files; from `-21`, s2idle as the only suspend mode
+  (`/etc/systemd/sleep.conf.d/glymur-s2idle.conf`, `MemorySleepMode=s2idle`:
+  the firmware refuses deep sleep);
 - the check scripts, into your home directory.
 
 ### `install-kernel.sh`
@@ -360,9 +364,11 @@ part B): what Windows does
 on Mahua (`docs/video-iris-windows-2026-11-06.md`). Every trial loads
 `qcom_iris` with `diag_cores=1 diag_core_id=2` and a
 `diag_hw_core`/`diag_pwr_ctl`/`diag_pipes` setting
-(`patches/kernel/glymur-bringup/0004`): the Windows-like set first, then
-without the wrapper power release, without core 1's register bits, and with
-2 pipes. ffmpeg is killed 5 s after its 30 s limit, and if the module can
+(`patches/kernel/glymur-bringup/0004`): from `-21` first the Windows-like
+set with `diag_partial_av1_only=1` (`glymur-bringup/0005`: no partial-data
+buffer on H.264, which `-20`'s firmware rejected), then the Windows-like set
+as before, without the wrapper power release, without core 1's register
+bits, and with 2 pipes. ffmpeg is killed 5 s after its 30 s limit, and if the module can
 no longer be unloaded (a stuck decoder) the trials stop. For that boot
 `boards/hp-omnibook-5-16-bf1xxx/video/52-no-v4l2-monitor.conf` (staged in
 `iris-test/`) keeps WirePlumber off the video nodes.
@@ -512,7 +518,10 @@ variable survived unchanged and deletes it. It writes nothing else; if
     sudo bash check-rtc.sh
 
 From kernel `-19` (`CONFIG_RTC_DRV_QCOM_GLINK`): the RTC that the ADSP's
-PMIC GLink service provides, which Windows reads as `\_SB.PRTC`. It reads
+PMIC GLink service provides, which Windows reads as `\_SB.PRTC`. First, with
+`rtc_qcom_glink` and `pmic_glink` debug logging on, it reads the time once
+and logs each request and reply (on `-20` the service never answered `0x68`).
+Then it reads
 the time and works out whether the RTC holds UTC or local time (Windows
 keeps local time unless `RealTimeIsUniversal` is set, and this laptop's
 Windows does not set it), logs the raw words the service returns through

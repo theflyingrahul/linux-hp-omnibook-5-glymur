@@ -119,6 +119,39 @@ tree. `0005` reads the EC's pending event from register `0x00`, where HP's
 value left a fan notice unacknowledged and the event line firing about nine
 times a second (`docs/audit-2026-10-22.md`).
 
+Kernel `-21` (2026-11-10, `docs/linux-runbook-21-2026-11-10.md`), same
+base: qcom-next is still `17bbb4b37bbc` (fetched 2026-11-10), linux-next
+moved to `next-20261109` with nothing new for the drivers changed here.
+Fixes from `-20`'s boots (`docs/runbook-results-20-2026-11-10.md`):
+
+- `upstream/qcom-next/0005`, the EC series v2 corrected: `fn_lock`
+  read-only with the EC's polarity, `kbd_backlight_timeout` notified on
+  the backlight events, the standby exit retried on resume.
+- `upstream/qcom-next/0010`, new: `sdca_apply_default_control_classifiers()`
+  (Qualcomm's PENDING helper in the base) now also gives a control without
+  a width the specification's width and type, as `sdca_parse_function()`
+  does on ACPI. The WCD9378's DT tables set them for two controls only, so
+  the Requested PS controls shifted by 64 (UBSAN) and `GE 35 Detected Mode`
+  had a range of 0: no jack detection. A fix to the PENDING code, for
+  Qualcomm.
+- `backports/0086`, new: reverts qcom-next's FROMLIST `6436ceccf83c`
+  ("i2c: i2c-qcom-geni: serve transfers during early resume", v6, which
+  the list superseded with v7 in July; neither is in mainline). Its
+  `resume_noirq` enables runtime PM itself, so every resume warned
+  "Unbalanced pm_runtime_enable!" for four controllers, and it keeps the GPI
+  interrupt live through suspend; the EC bus's first transfer after one
+  resume failed in GPI DMA. Mainline's `resume_noirq` does neither.
+- `glymur-bringup/0005`, new: `qcom_iris.diag_partial_av1_only` (default
+  off) attaches the decoder's partial-data buffer to AV1 sessions only;
+  Mahua's firmware rejects it on H.264, and every decoder session attaches
+  it in mainline too.
+
+A fresh `prepare` applies all of it (74 commits) and gives the same tree as
+the incremental work. Built on the 48-core cross-build host with kernel.org
+GCC 15.2 and binutils 2.45 (the WSL builds used Ubuntu's GCC 15.2 and
+binutils 2.46; the kernel configuration differs only in version fields
+and in two userspace samples the kernel-only toolchain cannot link).
+
 Kernel `-20` (2026-11-09, `docs/kernel-20-plan-2026-11-09.md`), same
 base. qcom-next is still `17bbb4b37bbc`, linux-next's newest tag still
 `next-20261105` and the laptops tree still `8c9d1255de`. Mainline moved to

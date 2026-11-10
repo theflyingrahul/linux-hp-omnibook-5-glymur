@@ -76,16 +76,19 @@ if [ "${1:-}" = --mahua ]; then
     modinfo -p qcom_iris 2>/dev/null | grep -q diag_pwr_ctl || { echo 'qcom_iris has no diag_pwr_ctl (needs kernel -19)'; exit 1; }
     ffmpeg -nostdin -hide_banner -loglevel error -y -f lavfi -i testsrc2=size=1920x1080:rate=30 \
         -t 2 -c:v libx264 -pix_fmt yuv420p "$TMP/short.mp4"
-    # hw_core pwr_ctl pipes: the Windows-like set first, then one change each
-    for t in "1 1 0" "1 1 2" "-1 1 0" "1 0 0"; do
+    # hw_core pwr_ctl pipes partial_av1_only: the Windows-like set with the
+    # partial-data buffer kept to AV1 (glymur-bringup/0005, from -21) first,
+    # since -20's firmware rejected it on H.264; then one change each.
+    for t in "1 1 0 1" "1 1 0 0" "1 1 2 0" "-1 1 0 0" "1 0 0 0"; do
         set -- $t
-        echo; echo "-- trial: diag_hw_core=$1 diag_pwr_ctl=$2 diag_pipes=$3 (diag_cores=1 diag_core_id=2)"
+        echo; echo "-- trial: diag_hw_core=$1 diag_pwr_ctl=$2 diag_pipes=$3 diag_partial_av1_only=$4 (diag_cores=1 diag_core_id=2)"
         if ! modprobe -r qcom_iris 2>&1; then
             echo 'qcom_iris is still in use (a stuck decoder?); stopping the trials'
             break
         fi
         sleep 1
-        modprobe qcom_iris diag_cores=1 diag_core_id=2 diag_hw_core="$1" diag_pwr_ctl="$2" diag_pipes="$3" 2>&1
+        modprobe qcom_iris diag_cores=1 diag_core_id=2 diag_hw_core="$1" diag_pwr_ctl="$2" diag_pipes="$3" \
+            diag_partial_av1_only="$4" 2>&1
         sleep 2
         echo "loaded with: $(grep -H . /sys/module/qcom_iris/parameters/diag_* 2>/dev/null | sed 's#.*/##' | tr '\n' ' ')"
         since=$(date '+%Y-%m-%d %H:%M:%S')
@@ -93,7 +96,7 @@ if [ "${1:-}" = --mahua ]; then
             -i "$TMP/short.mp4" -f null - 2>&1 | tail -4
         echo "ffmpeg exit: ${PIPESTATUS[0]} (124: timed out, 137: killed)"
         journalctl -k --no-pager --since "$since" |
-            grep -E 'diag:|not supported|fatal|power on failed|stuck|failed to suspend|Oops|timeout' |
+            grep -E 'diag:|not supported|fatal|power on failed|stuck|failed to suspend|Oops|timeout|Buffer type' |
             sed 's/^.*qcom-iris [^ ]* //' | sort | uniq -c | head -16
     done
     modprobe -r qcom_iris 2>&1
