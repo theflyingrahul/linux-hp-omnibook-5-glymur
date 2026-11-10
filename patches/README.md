@@ -189,8 +189,14 @@ review against the other arm64 EC drivers and HP's tables
 (`docs/ec-review-2026-11-10.md`) v2 also tells the EC about suspend and
 resume as HP's modern standby `_DSM` does (OS flags `0x81`/`0x82`, register
 `0x23` as on Qualcomm's reference EC), adds an `fn_lock` attribute (read
-with `0xbd/0x01`, written through the action-keys flag, notified on event
-`0x88`) and logs every EC event at debug level. Only the three EC files
+with `0xbd/0x01`, notified on event `0x88`) and logs every EC event at
+debug level. After `-20`'s boot A (`docs/runbook-results-20-2026-11-10.md`)
+`fn_lock` became read-only with the reading inverted (the EC replies 1 in
+action-keys mode, and a write through the action-keys flag put its reported
+state out of step), the backlight events also notify
+`kbd_backlight_timeout`, and resume retries the standby exit (the EC bus's
+first transfer after wake-up failed once); that version is in the repo's
+`0005` but not in the `-20` package, which carries the first. Only the three EC files
 differ from the v1 tree, so the build tree was moved to the v2 commits and
 rebuilt incrementally.
 

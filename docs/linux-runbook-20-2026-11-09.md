@@ -71,8 +71,10 @@ from step 5 to step 11.
    it changes nothing, and GNOME should show its keyboard-brightness OSD
    (answer each time). New in v2, from `docs/ec-review-2026-11-10.md`:
    the function-key lock. It reads `fn_lock`, asks you to press F7, then
-   Left Shift+Fn once (it waits for the EC's notification), F7 again,
-   and then writes 1 and 0 itself, with F7 after each. Also fan,
+   Left Shift+Fn (it waits for the EC's notification), twice. From the
+   corrected v2 it never writes the mode (on `-20` a write flipped the
+   row; `docs/runbook-results-20-2026-11-10.md`), and it asks for a 3 s
+   hold of F5 and of F6 to catch the timeout change. Also fan,
    temperatures, the backlight timeout and both mute LEDs, as on `-13`.
    The script logs every EC event the driver sees. This gates sending
    v2.

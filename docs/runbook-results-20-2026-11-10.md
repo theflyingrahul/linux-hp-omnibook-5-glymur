@@ -36,48 +36,58 @@ terminal received F7 escape codes while the next question was waiting
 (`answer: [18~[18~...`), and the F-key capture and the audio check afterwards
 show F5, F6, F9 and F11 as plain F-keys.
 
-Why, from the script and `patches/kernel/upstream/qcom-next/0005`:
+What the log shows (`ec-test-20261110T131308.txt`, function-key lock):
 
-- `fn_lock_show` returns 1 when the EC's `0xBD/0x01` reply is 1, and that
-  is the **action-keys** state (read 1 with F7 = volume-down; read 0 after
-  Left Shift+Fn with F7 = F7).
-- `fn_lock_store` follows the ABI text instead, where 1 means function
-  keys: it writes the OS flag `0x80` *without* the set bit for 1, which
-  clears action-keys mode.
-- So `echo "$orig" > fn_lock`, the script's restore, flips the mode instead
-  of restoring it. This is the same flag as the 2026-10-22 incident (clearing
-  `0x80` made the row plain F-keys).
-- The effect on the keyboard also trails the write by one step: F7 after
-  `wrote 0` still sent F7 and F7 after the restore sent volume-down, then F7
-  again on the next press. The `fn_lock` read after the restore (1) did not
-  match the keyboard either.
+| Step | `fn_lock` read | F7 sent |
+| --- | --- | --- |
+| start | 1 | VOLUMEDOWN (action keys) |
+| Left Shift+Fn (notified after 3.8 s, EC event `0x88`) | 0 | F7 |
+| write 1 (OS flag `0x80` cleared) | 0 | F7 |
+| write 0 (OS flag `0x80` set) | 1 | VOLUMEDOWN |
+| "restore" 1 (flag cleared) | **1** | **F7** |
 
-The sysfs read now says 1. The mode on the keyboard is whatever F6 and F7
-do (press them without Fn); `Left Shift+Fn` toggles it back without any
-write from us. Not fixed in the series yet: show and store need the same
-polarity (`show` as `reply[0] != ON`, matching the ABI text), and the
-script's restore must write the value in the polarity it read.
+- The EC's `0xBD/0x01` reply is 1 in **action-keys** mode, so
+  `fn_lock_show` had the polarity backwards: it returned 1 for action keys,
+  while the ABI text and `fn_lock_store` take 1 as function keys. The
+  script's "restore" wrote back the inverted reading, which flipped the row.
+- The keys followed every write at once. What went wrong after the last
+  write is the read-back: the EC kept reporting action keys (1) while the
+  row sent plain F-keys. So setting the mode through the OS flag puts the
+  EC's reported state out of step; reading it is reliable.
+- Each write also made the EC raise `0x88` (13:16:19 and 13:16:24 in
+  `journal-kernel-boot0.txt`), like Left Shift+Fn.
 
-## Open: F6 long press
+Fixed in the series on 2026-11-10 (`upstream/qcom-next/0005`, linux-next
+`073b753696`): `fn_lock` is read-only, reads 1 when the EC's reply is not
+the action-keys value, and is still notified on `0x88`. Left Shift+Fn
+stays the way to change it, as on Windows, where HP's ACPI only reads it.
+`check-ec.sh` no longer writes it.
 
-Per the owner, a long press of F6 changes the keyboard backlight timeout
-(an EC-side action, the same three values as `kbd_backlight_timeout`), and
-GNOME shows nothing. No `EC event` line for it exists in these logs (event
-logging was on, and no long press was made). To capture it: leave
-`dyndbg` on, read `kbd_backlight_timeout`, long-press F6, read it again
-and `journalctl -k | grep "EC event"`. If the EC raises an event the driver
-can notify `kbd_backlight_timeout` and the OSD can be a desktop-side matter;
-if it raises none, nothing can tell the desktop.
+## Open: the backlight timeout from the keyboard
+
+Per the owner, a long press changes the keyboard backlight timeout (an
+EC-side action, the same three values as `kbd_backlight_timeout`), and
+GNOME shows nothing; Windows shows "Backlight Low" with "30 sec / 3 min /
+Always" and "Hold to change duration". The owner first named F6; Windows'
+hint points at the backlight key. No `EC event` line for a long press
+exists in these logs. HP's `WMID._WED` reads the timeout
+(`HQEX(0x05, 0xFE)`) and the level on EC event `0x1d` (WMI `0x21AA`), the
+event F5 raised here, so the corrected v2 also notifies
+`kbd_backlight_timeout` on it. `check-ec.sh` now asks for a 3 s hold of F5
+and then of F6, waiting for that notification. GNOME's OSD can only be
+drawn by GNOME's own services (`org.gnome.Shell.ShowOSD` checks the
+caller), so showing the timeout needs a small GNOME Shell extension that
+watches the attribute.
 
 ## Follow-up: the Fn toggle and the headset (same boot)
 
-**Fn toggle.** After `check-ec.sh` Left Shift+Fn no longer toggled the
-function row: no `EC event 0x88` and no interrupt for several minutes
-(`captures/2026-11-10-k20/fn-lock-watch.txt`). Writing `fn_lock` 0 as the
-owner did (action-keys flag set again) brought the media keys back, as on
-2026-10-22. After a write the EC no longer reports the Fn+Shift toggle until
-the flag is set again; the series needs the show/store polarity fix above
-and a script that never restores through the inverted write.
+**Fn toggle.** After `check-ec.sh` the row stayed in function-key mode.
+Writing `fn_lock` 0 (action-keys flag set again) brought the media keys
+back, as on 2026-10-22. That Left Shift+Fn stopped working is not shown by
+the logs: the `EC event` lines end at 13:16 because `check-ec.sh` turned
+event logging off when it finished, and `fn-lock-watch.txt` (13:25–13:26)
+shows the EC interrupt count rising from 31 to 52 and `fn_lock` changing
+with it. `check-ec.sh` now leaves event logging on until the next boot.
 
 **Headset (`headset-test-20261110T132742.txt`).** A 4-pole headset with a
 microphone and one button: nothing played, the microphone recording was
@@ -100,8 +110,15 @@ the plug went in or out. What the log shows:
   module load is the same shift: the SDCA control for the detected mode is
   built with a 64-bit width, hence `max=0`. The `ASoC error (-16)` reads of
   register `0x40c00908` fit a jack detect register being read while the
-  codec is busy. So the jack-detect interrupt path and the control range
-  both need the SDCA fix before the buttons or plug events can work.
+  codec is busy. The width of 0 is not an SDCA core bug: on ACPI the core
+  fills each control's width with `find_sdca_control_bits()`
+  (`sdca_functions.c`), but on device-tree boots the WCD9378 driver seeds
+  its descriptor from static tables (`wcd9378-sdca.c`, Qualcomm's FROMLIST
+  `7059d185e513`), and almost none of its controls set `.nbits`, among them
+  the power domains' Requested PS and `GE 35 Detected Mode`, which carries
+  the jack interrupt. Giving the seeded controls the core's widths should
+  fix both UBSANs, the `max=0` range and jack detection, before the buttons
+  or plug events can work. (Corrected on review, 2026-11-10.)
 - The microphone path (`TX_CODEC_DMA_TX_3`) was routed and recorded silence;
   with the jack not detected, the codec's input is probably not selected
   (`GE 35 Selected Mode` stays 0).
@@ -225,6 +242,15 @@ syncs the journal before each cycle. A permanent setting would be
 `mem_sleep_default=s2idle` on the kernel command line. `last_failed_errno`
 and the `Gen5` NVMe line (`failed to set target rate Gen5 (-11)`, every few
 seconds) are also worth a look.
+
+**The EC's standby notices** (corrected v2's suspend hooks) ran in both
+s2idle cycles; the suspend side never failed. On the first resume the
+EC bus's first transfer failed below the driver (`geni_i2c a84000.i2c: DMA
+txn failed:3`, `GPI transfer failed: -5`) and the driver logged `cannot
+tell the EC about resume: -5`; the second resume was clean. v2 now retries
+the standby exit (three tries, 100 ms apart, as the Huawei Gaokun EC driver
+does). Every resume also logs `geni_i2c ...: Unbalanced pm_runtime_enable!`
+for four controllers, a separate GENI I2C issue to look at.
 
 **Prompts.** The script's questions went through the log pipe, where `sed`
 only passes complete lines, so a prompt appeared after the answer; and keys

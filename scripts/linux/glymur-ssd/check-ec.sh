@@ -117,8 +117,7 @@ else
     echo "no keyboard backlight level (LED or attribute)"
 fi
 
-# From -20. Which raw reading of command 0xbd/0x01 means "locked" is what
-# this checks: in action-keys mode F7 sends VOLUMEDOWN (114), locked F7 (65).
+# In action-keys mode F7 sends VOLUMEDOWN (114), with the Fn lock F7 (65).
 f7() {
     python3 - <<'PY'
 import os, re, select, struct, time
@@ -141,34 +140,49 @@ names = {114: "VOLUMEDOWN (action keys)", 65: "F7 (Fn lock)"}
 print("F7 sent:", ", ".join(f"{k} {names.get(k, '')}" for k in keys) or "nothing")
 PY
 }
+# Wait for a sysfs notification on $1 (poll POLLPRI), up to $2 seconds.
+waitnotify() {
+    python3 - "$1" "$2" <<'PY'
+import select, sys, time
+f = open(sys.argv[1]); f.read()
+p = select.poll(); p.register(f, select.POLLPRI | select.POLLERR)
+t = time.time(); r = p.poll(int(sys.argv[2]) * 1000)
+print(f"notified after {time.time() - t:.1f} s" if r else f"no notification in {sys.argv[2]} s")
+PY
+}
+# Read only, from -20's corrected v2 (2026-11-10): 1 = function keys first.
+# Writing the mode is not done: on -20 a write put the EC's reported state
+# out of step with the keys (docs/runbook-results-20-2026-11-10.md).
 sect "function-key lock"
 FL=
 [ -n "$BUS" ] && FL=/sys/bus/i2c/devices/${BUS}-0076/fn_lock
 if [ -n "$FL" ] && [ -e "$FL" ]; then
-    orig=$(cat "$FL")
-    echo "fn_lock reads: $orig"
-    f7
-    echo "Now press Left Shift+Fn once (waiting 20 s for the EC's notification)."
-    python3 - "$FL" <<'PY'
-import select, sys, time
-f = open(sys.argv[1]); f.read()
-p = select.poll(); p.register(f, select.POLLPRI | select.POLLERR)
-t = time.time(); r = p.poll(20000)
-print(f"notified after {time.time() - t:.1f} s" if r else "no notification in 20 s")
-PY
-    echo "fn_lock reads: $(cat "$FL")"
-    ask "Did anything appear on screen? (Windows shows Function key mode / Action key mode)"
-    f7
-    for v in 1 0; do
-        echo "$v" > "$FL"
-        echo "wrote $v, fn_lock reads: $(cat "$FL")"
+    ls -l "$FL"
+    for n in 1 2; do
+        echo "fn_lock reads: $(cat "$FL") (1 = F-keys first, 0 = media keys first)"
         f7
+        echo "Now press Left Shift+Fn once ($n of 2)."
+        waitnotify "$FL" 20
     done
-    echo "$orig" > "$FL"
-    echo "restored $orig, fn_lock reads: $(cat "$FL")"
+    echo "fn_lock reads: $(cat "$FL") (back where it started)"
     f7
 else
     echo "no fn_lock attribute"
+fi
+
+# The EC's backlight events also notify the timeout (corrected v2). The key
+# that changes the timeout from the keyboard is not established: Windows
+# says "Hold to change duration" for the backlight key.
+sect "keyboard backlight timeout from the keyboard"
+if [ -n "$T" ] && [ -e "$T" ]; then
+    echo "timeout now: $(cat "$T")"
+    for k in "the backlight key (F5)" "F6"; do
+        echo "Hold $k for 3 s, then let go (waiting 20 s for a notification)."
+        waitnotify "$T" 20
+        echo "timeout reads: $(cat "$T")"
+        ask "Did the backlight or its timeout change when you held $k? Anything on screen?"
+    done
+    journalctl -k --no-pager --since "-2 min" | grep -E 'EC event' | tail -10 || true
 fi
 
 # EC LED 8 is taken as F6 (speaker mute) and 9 as F9 (mic mute). Start
@@ -255,7 +269,8 @@ if [ -d "${EV:-/nonexistent}" ]; then
 fi
 sect "EC events logged by the driver since the start"
 journalctl -k --no-pager --since "$START" | grep -E 'EC event' || echo "none"
-[ -w "$DD" ] && echo 'module hp_omnibook_5_ec -p' > "$DD" 2>/dev/null
+# Event logging stays on until reboot, so later watches still see events.
+echo "EC event logging stays on until the next boot"
 
 # Read only. Its vendor collection (usage page 0xff85, usage 0x68 on
 # Windows) is a candidate for a backlight level control.

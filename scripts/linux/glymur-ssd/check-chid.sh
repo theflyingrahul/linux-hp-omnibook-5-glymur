@@ -31,10 +31,13 @@ for n in sys_vendor product_family product_name product_sku product_version \
 done
 
 sect "panels with an EDID"
+# sysfs reports size 0 for edid, so count the bytes.
 for e in /sys/class/drm/*/edid; do
-    [ -s "$e" ] || continue
+    [ -e "$e" ] || continue
+    n=$(wc -c < "$e" 2>/dev/null || echo 0)
+    [ "$n" -gt 0 ] || continue
     c=${e%/edid}
-    printf '%s: %s, %s bytes\n' "${c##*/}" "$(cat "$c/status" 2>/dev/null)" "$(stat -c %s "$e")"
+    printf '%s: %s, %s bytes\n' "${c##*/}" "$(cat "$c/status" 2>/dev/null)" "$n"
 done
 
 sect "systemd-analyze chid"

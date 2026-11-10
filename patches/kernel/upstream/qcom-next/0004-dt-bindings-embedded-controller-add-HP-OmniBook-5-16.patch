@@ -1,4 +1,4 @@
-From 50ebb506d07a179f3a5d8a76ed8e3229855c9167 Mon Sep 17 00:00:00 2001
+From 7af166d4ae78df22b59580fe2c08b9558677f360 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Wed, 30 Sep 2026 04:33:53 -0700
 Subject: [PATCH 4/5] dt-bindings: embedded-controller: Add HP OmniBook 5 16 EC

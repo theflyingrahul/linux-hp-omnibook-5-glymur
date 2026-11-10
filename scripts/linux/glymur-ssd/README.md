@@ -214,10 +214,13 @@ The embedded-controller report, from kernel `-9`; the event line needs
   v2 driver): it reads it after each of three F5 presses, and on the LED
   also `brightness_hw_changed`, UPower's reading, whether GNOME showed its
   OSD, and that a write is ignored;
-- the function-key lock (`fn_lock`, from `-20`): F7 before and after Left
-  Shift+Fn, whether the attribute was notified, then a write of 1 and 0
-  with F7 after each, and the original state restored;
-- every EC event the driver logs (`dyndbg`, from `-20`);
+- the function-key lock (`fn_lock`, read-only from the corrected v2): F7
+  before and after each of two Left Shift+Fn presses, and whether the
+  attribute was notified; it never writes the mode;
+- the backlight timeout changed from the keyboard: a 3 s hold of F5, then
+  of F6, each waiting for a notification on `kbd_backlight_timeout`;
+- every EC event the driver logs (`dyndbg`, from `-20`; left on until the
+  next boot);
 - the F6/F9 mute LEDs (`platform::mute`, `platform::micmute`): it asks
   what Windows last had muted and what is lit, then lights each LED alone;
 - the EC event line: its interrupt count and GPIO 66's state;
