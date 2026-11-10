@@ -181,3 +181,15 @@ capabilities (architecture version, HVX, VTCM, HMX) through
 but `DOMAIN_SUPPORT` (1) because `/dev/fastrpc-cdsp` is root-only, so
 `check-npu.sh` compiles and runs it as root. `fastrpc_test` is still blocked
 on its v68/v75 sample skeletons.
+
+## NPU, third run: first capabilities (`npu-test-20261110T140930.txt`)
+
+`npu-caps` asked the CDSP through FastRPC, all calls `rc=0`: domain
+supported, unsigned PD supported, HVX 128-byte contexts 8, 64-byte 0, VTCM
+one 8 MiB block, `ARCH_VER` 32897 (`0x8081`: Hexagon v81), async FastRPC and
+user-PD status notification supported, HMX depth/spatial reported 0 (the
+query may not cover this HMX generation; unverified). So the NPU answers
+FastRPC from userspace with HP's signed firmware and shell. What is missing
+for real work is a v81 skeleton and its host stub: `fastrpc_test`'s samples
+are v68/v75, and HP's `libQnnHtpV81Skel.so` needs Qualcomm's QNN host
+libraries.

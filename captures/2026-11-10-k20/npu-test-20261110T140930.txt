@@ -1,0 +1,101 @@
+
+==== remote processors
+remoteproc0: soccp attached unknown
+remoteproc1: adsp running qcom/glymur/HP/omnibook-5-16-bf1xxx/qcadsp8480.mbn
+remoteproc2: cdsp running qcom/glymur/HP/omnibook-5-16-bf1xxx/qccdsp8480.mbn
+
+==== FastRPC devices
+crw------- 1 root root 10, 265 Oct  2 23:05 /dev/fastrpc-adsp-secure
+crw------- 1 root root 10, 264 Oct  2 23:05 /dev/fastrpc-cdsp
+crw------- 1 root root 10, 263 Oct  2 23:05 /dev/fastrpc-cdsp-secure
+Oct 02 23:05:38 glymur kernel: OF: reserved mem: 0x000000008d900000..0x00000000918fffff (65536 KiB) nomap non-reusable cdsp@8d900000
+Oct 02 23:05:38 glymur kernel: OF: reserved mem: 0x0000000091900000..0x000000009197ffff (512 KiB) nomap non-reusable q6-cdsp-dtb@91900000
+Oct 02 23:05:38 glymur kernel: /tpdm-cdsp-llm: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Oct 02 23:05:38 glymur kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /tpdm-cdsp-llm
+Oct 02 23:05:38 glymur kernel: /tpdm-cdsp-llm2: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Oct 02 23:05:38 glymur kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /tpdm-cdsp-llm2
+Oct 02 23:05:38 glymur kernel: /tpdm-cdsp-cmsr: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Oct 02 23:05:38 glymur kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /tpdm-cdsp-cmsr
+Oct 02 23:05:38 glymur kernel: /tpdm-cdsp-cmsr2: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Oct 02 23:05:38 glymur kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /tpdm-cdsp-cmsr2
+Oct 02 23:05:38 glymur kernel: remoteproc remoteproc2: cdsp is available
+Oct 02 23:05:38 glymur kernel: remoteproc remoteproc2: powering up cdsp
+Oct 02 23:05:38 glymur kernel: remoteproc remoteproc2: Booting fw image qcom/glymur/HP/omnibook-5-16-bf1xxx/qccdsp8480.mbn, size 3252504
+Oct 02 23:05:39 glymur kernel: remoteproc remoteproc2: remote processor cdsp is now up
+Oct 02 23:05:46 glymur kernel: qcom,fastrpc 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1: assigned reserved memory node adsp-rpc-remote-heap
+
+==== userspace
+ii  fastrpc-support      1.0.6-2      arm64        Qualcomm FastRPC - support daemons and udev rules
+ii  libfastrpc-dev       1.0.6-2      arm64        Qualcomm FastRPC - development files
+ii  libfastrpc1          1.0.6-2      arm64        Qualcomm FastRPC and library
+total 28384
+-rw-r--r-- 1 root root    59472 Nov 10 13:07 example_image.so
+-rw-r--r-- 1 root root    98296 Nov 10 13:07 example_image_runner.so
+-rw-r--r-- 1 root root  1442916 Nov 10 13:07 fastrpc_shell_3
+-rw-r--r-- 1 root root  1462216 Nov 10 13:07 fastrpc_shell_unsigned_3
+-rw-r--r-- 1 root root 10248204 Nov 10 13:07 libQnnHtpV81Skel.so
+-rw-r--r-- 1 root root   175560 Nov 10 13:07 libUbwcD.so
+-rw-r--r-- 1 root root  4987936 Nov 10 13:07 libbenchmark_skel.so
+-rw-r--r-- 1 root root  4516224 Nov 10 13:07 libc++.so.1
+-rw-r--r-- 1 root root   980224 Nov 10 13:07 libc++abi.so.1
+-rw-r--r-- 1 root root   129040 Nov 10 13:07 libcrm_test_skel.so
+-rw-r--r-- 1 root root   159128 Nov 10 13:07 libhcpfrc.so
+-rw-r--r-- 1 root root    55448 Nov 10 13:07 libloadalgo_skel.so
+-rw-r--r-- 1 root root   140216 Nov 10 13:07 libstabilitydomain_skel.so
+-rw-r--r-- 1 root root  4422464 Nov 10 13:07 libsysmondomain_skel.so
+-rw-r--r-- 1 root root    81272 Nov 10 13:07 libsysmondspload_skel.so
+-rw-r--r-- 1 root root    21328 Nov 10 13:07 libsysmonhvxthrottle_skel.so
+-rw-r--r-- 1 root root    48560 Nov 10 13:07 libsysmonquery_skel.so
+-rw-r--r-- 1 root root     7216 Nov 10 13:07 version.so
+
+==== FastRPC test on the CDSP
+--- fastrpc-healthcheck
+DSP firmware path : /lib/firmware/
+DSP build ID      : CDSP.HT.3.3-00304-GLYMUR-1_20260114_014505
+DSP dynamic libs path : /usr/share/qcom//glymur/HP/omnibook-5-16-bf1xxx/dsp
+
+DMA-BUF Heap Support:
+System heap -> available
+
+DSP Summary:
+DSP      State      SignedPD  UnsignedPD* FastRPC Support
+---------------------------------------------------------------------------------
+ADSP     Online     No        No          No (Missing shell build ID)
+CDSP     Online     Yes       Yes         Yes
+
+* If Unsigned PD not supported, needs signing to run
+--- npu-caps (the CDSP asked what it is)
+DOMAIN_SUPPORT               1 (rc=0)
+UNSIGNED_PD_SUPPORT          1 (rc=0)
+HVX_SUPPORT_64B              0 (rc=0)
+HVX_SUPPORT_128B             8 (rc=0)
+VTCM_PAGE                    8388608 (rc=0)
+VTCM_COUNT                   1 (rc=0)
+ARCH_VER                     32897 (rc=0)
+HMX_SUPPORT_DEPTH            0 (rc=0)
+HMX_SUPPORT_SPATIAL          0 (rc=0)
+ASYNC_FASTRPC_SUPPORT        1 (rc=0)
+STATUS_NOTIFICATION_SUPPORT  1 (rc=0)
+MCID_MULTICAST               0 (rc=0)
+fastrpc_test: invalid option -- 'h'
+Usage:
+    fastrpc_test [-d domain] [-U unsigned_PD] [-t target] [-a arch_version]
+
+Options:
+-d domain: Run on a specific domain.
+    0: Run the example on ADSP
+    1: Run the example on MDSP
+    2: Run the example on SDSP
+    3: Run the example on CDSP
+    4: Run the example on CDSP1
+    5: Run the example on GDSP0
+    6: Run the example on GDSP1
+        Default Value: 3(CDSP) for targets having CDSP.
+-U unsigned_PD: Run on signed or unsigned PD.
+--- fastrpc_test -d 3 -U 1
+Error opening directory /usr/local/lib/fastrpc_test: No such file or directory
+exit 0
+--- fastrpc_test -d 3 -U 0
+Error opening directory /usr/local/lib/fastrpc_test: No such file or directory
+exit 0
+log: /var/log/glymur/npu-test-20261110T140930.txt
