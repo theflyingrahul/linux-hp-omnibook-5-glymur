@@ -74,6 +74,7 @@ jacks
 ask "Plug in a wired headset (or headphones) now, then press Enter."
 sleep 2
 sect "jack state, plugged"
+ask "What did you plug in: a combo headset with a microphone (4-pole plug, three rings) or headphones only (3-pole)? Does it have buttons?"
 jacks
 journalctl -k -b --no-pager --since "-30s" | grep -iE 'wcd|sdca|jack|swr|sdw' || true
 
@@ -107,6 +108,34 @@ PY
         asuser pw-play "$WAV/$side.wav" 2>&1 | tail -2
         ask "Tone '$side': where did you hear it: headset left, headset right, both, speakers, or nothing?"
     done
+    # The codec's volume is a two-byte write over SoundWire paging; -20's
+    # backports/0085 keeps both bytes. Readback may be cached, so listen too.
+    sect "headset volume writes (two-byte, SoundWire paging)"
+    mapfile -t VOLS < <(amixer -c "$CARD" controls 2>/dev/null | sed -n "s/.*name='\(.*\)'/\1/p" |
+        grep -iE 'volume' | grep -iE 'hph|headphone|ear|wcd' | head -2)
+    if [ ${#VOLS[@]} -eq 0 ]; then
+        echo "no headphone volume control found"
+    fi
+    for v in "${VOLS[@]}"; do
+        info=$(amixer -c "$CARD" cget "name=$v" 2>&1)
+        echo "$v: $(echo "$info" | sed -n 's/.*\(min=[^,]*,max=[^,]*\).*/\1/p') now $(cget "$v")"
+    done
+    if [ ${#VOLS[@]} -gt 0 ]; then
+        declare -A ORIG
+        for v in "${VOLS[@]}"; do ORIG[$v]=$(cget "$v"); done
+        for frac in 4 2; do
+            for v in "${VOLS[@]}"; do
+                info=$(amixer -c "$CARD" cget "name=$v" 2>&1)
+                lo=$(echo "$info" | sed -n 's/.*min=\([-0-9]*\).*/\1/p'); hi=$(echo "$info" | sed -n 's/.*max=\([-0-9]*\).*/\1/p')
+                [ -n "$lo" ] && [ -n "$hi" ] && cset "$v" $(( lo + (hi - lo) / frac ))
+            done
+            echo "playing left at 1/$frac of the range"
+            asuser pw-play "$WAV/left.wav" 2>&1 | tail -2
+        done
+        ask "Was the second tone clearly louder than the first?"
+        for v in "${VOLS[@]}"; do cset "$v" "${ORIG[$v]}"; done
+        journalctl -k -b --no-pager --since "-60s" | grep -iE 'sdw|swr|wcd|sdca|error' || true
+    fi
     journalctl -k -b --no-pager --since "-60s" | grep -iE 'wcd|sdca|swr|sdw|q6apm|CMD timeout|error' || true
     cset "$M_RX" 0
     cset "$M_WSA" 1
@@ -130,7 +159,45 @@ PY
     journalctl -k -b --no-pager --since "-30s" | grep -iE 'wcd|sdca|swr|sdw|q6apm|CMD timeout|error' || true
     cset "$M_TX" 0
     cset "$M_VA" 1
+    ask "Play the recording back in the headset? (y/N)"
+    if [ "$REPLY" = y ] && [ -s "$WAV/headset-mic.wav" ]; then
+        cset "$M_WSA" 0
+        cset "$M_RX" 1
+        asuser pw-play "$WAV/headset-mic.wav" 2>&1 | tail -2
+        ask "Did you hear your voice, and how did it sound (clear, quiet, noisy, distorted, nothing)?"
+        cset "$M_RX" 0
+        cset "$M_WSA" 1
+    fi
 fi
+
+# Combo headsets report their buttons through the jack's input device.
+sect "headset buttons (15 s capture)"
+echo "Press each headset button once, slowly: play/pause, then volume up and down if it has them."
+python3 - <<'PY'
+import os, re, select, struct, time
+fds = {}
+for block in open("/proc/bus/input/devices").read().split(chr(10) * 2):
+    name = re.search(r'N: Name="([^"]*)"', block)
+    ev = re.search(r"H: Handlers=.*?(event\d+)", block)
+    if name and ev and re.search("jack|headset|headphone", name.group(1), re.I):
+        fds[os.open("/dev/input/" + ev.group(1), os.O_RDONLY)] = name.group(1)
+print("devices:", sorted(set(fds.values())) or "none", flush=True)
+fmt = "llHHi"; size = struct.calcsize(fmt); end = time.time() + 15
+while fds and time.time() < end:
+    for fd in select.select(list(fds), [], [], 1.0)[0]:
+        data = os.read(fd, size * 16)
+        for i in range(0, len(data) - size + 1, size):
+            sec, usec, typ, code, val = struct.unpack(fmt, data[i:i + size])
+            if typ in (1, 5):
+                print(f"{sec}.{usec:06d} {fds[fd]}: {'KEY' if typ == 1 else 'SW'} code={code} value={val}", flush=True)
+print("capture done", flush=True)
+PY
+ask "Which buttons did you press, in order?"
+
+ask "Unplug the headset now, then press Enter."
+sleep 2
+sect "jack state, unplugged"
+jacks
 
 sect "mixers restored"
 for c in "$M_WSA" "$M_RX" "$M_VA" "$M_TX"; do printf '  %-40s %s\n' "$c" "$(cget "$c")"; done

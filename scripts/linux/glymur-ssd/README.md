@@ -181,6 +181,22 @@ USB-C port, and a mouse in each port in turn.
 - `-8` adds the USB-C repeaters. On USB-A, a mouse is still expected to fail.
 - A charger makes its port a sink and USB device, which is correct.
 
+### `check-chid.sh`
+
+    sudo bash check-chid.sh
+
+From `-20`, read-only, with no external monitor plugged in: the hardware
+IDs (CHIDs) that systemd-stub, Ubuntu's stubble and Omarchy use to pick this
+laptop's device tree. It saves `systemd-analyze chid` to
+`/var/log/glymur/chid.txt`, the output of stubble's own `hwids.py` (the
+format of stubble's `hwids/txt`, with the EDID CHIDs of the panel) to
+`stubble-hwids-*.txt`, `fwupdtool hwids` (read-only, the one fwupd command
+allowed, owner 2026-11-10; the service stays masked) to
+`fwupd-hwids-*.txt`, and the SMBIOS strings without serials, the panels
+with an EDID and the device tree's compatible to `chid-*.txt`. The kit
+carries `hwids.py` as `stubble-hwids.py`, pinned to ubuntu/stubble
+`14963a6` (LGPL-2.1); it is not in this repository.
+
 ### `check-ec.sh`
 
     sudo bash check-ec.sh
@@ -196,11 +212,16 @@ The embedded-controller report, from kernel `-9`; the event line needs
 - the keyboard backlight level, read-only (`kbd_backlight_level` from
   `-11`; from `-20` the `platform::kbd_backlight` LED, as in the upstream
   v2 driver): it reads it after each of three F5 presses, and on the LED
-  also `brightness_hw_changed` and that a write is ignored;
+  also `brightness_hw_changed`, UPower's reading, whether GNOME showed its
+  OSD, and that a write is ignored;
+- the function-key lock (`fn_lock`, from `-20`): F7 before and after Left
+  Shift+Fn, whether the attribute was notified, then a write of 1 and 0
+  with F7 after each, and the original state restored;
+- every EC event the driver logs (`dyndbg`, from `-20`);
 - the F6/F9 mute LEDs (`platform::mute`, `platform::micmute`): it asks
   what Windows last had muted and what is lit, then lights each LED alone;
 - the EC event line: its interrupt count and GPIO 66's state;
-- a 30 s key capture while you press F6, F9, F11, F5 and Fn, from the
+- a 30 s key capture while you press F6, F9, F11, F5 and Left Shift+Fn, from the
   keyboard, the consumer-control device and the EC hotkeys device;
 - the keyboard's HID report descriptor, read-only.
 
@@ -258,7 +279,14 @@ mixer control with its value (the material for the headset UCM, which does
 not exist yet) and the jack controls and input devices before and after a
 headset is plugged in. Only when asked, it plays a 1 kHz tone at about
 -30 dBFS on the left, then the right headphone, and records 5 s from the
-headset microphone, through PipeWire as the desktop user. With no UCM for
+headset microphone, through PipeWire as the desktop user, and plays the
+recording back in the headset. After the tones it sets the headphone volume
+controls to a quarter and then half of their range, logs the readback, plays
+the left tone at each and asks whether the second was louder (the codec's
+two-byte volume writes over SoundWire paging, `backports/0085`). It also asks what was plugged in (a 4-pole
+combo headset or 3-pole headphones), captures the headset buttons from the
+jack's input device for 15 s, and reads the jack state after unplugging.
+With no UCM for
 the headset it routes the DSP by hand for each step
 (`RX_CODEC_DMA_RX_0 Audio Mixer MultiMedia1` on and the speakers' mixer
 off; `MultiMedia2 Mixer TX_CODEC_DMA_TX_3` on and the built-in microphones'
@@ -511,7 +539,12 @@ needs Qualcomm's AI Runtime (QNN) 2.39 for Linux, matching HP's
     sudo bash check-suspend.sh [--sync-state]
 
 From kernel `-20`: three supervised s2idle cycles, woken by an RTC alarm,
-by opening the lid and by the power button. Before and after each cycle it
+by opening the lid (with the charger unplugged and replugged while asleep)
+and by the power button, then a fourth that does not gate keeping suspend:
+the lid closed on AC for 2 minutes, to catch a lid line that wakes it. Each
+cycle logs its wake IRQ, the network state and the EC's debug events, and
+asks what the fan, keyboard backlight and power LED did while asleep and
+whether the USB mouse and Wi-Fi came back. Before and after each cycle it
 logs the RPMh sleep counters (`qcom_stats`: how often the SoC reached AOSS
 sleep, CX collapse and DDR sleep), `/sys/power/suspend_stats`, the USB
 tree, Wi-Fi, the sound cards, the power supplies, the display connectors

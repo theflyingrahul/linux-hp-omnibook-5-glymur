@@ -15,6 +15,15 @@ sect system
 uname -r
 tr -d '\0' < /sys/firmware/devicetree/base/model 2>/dev/null; echo
 
+# From -20 the driver logs every EC event at debug level.
+DD=/sys/kernel/debug/dynamic_debug/control
+START=$(date '+%Y-%m-%d %H:%M:%S')
+if [ -w "$DD" ] && echo 'module hp_omnibook_5_ec +p' > "$DD" 2>/dev/null; then
+    echo "EC event logging on"
+else
+    echo "EC event logging not available"
+fi
+
 sect "kernel log: EC bus and driver"
 journalctl -k -b --no-pager |
     grep -iE 'a84000|i2c9|gpi|geni|hp-omnibook|hp_omnibook|embedded-controller|0-0076|-0076' | tail -60
@@ -93,10 +102,11 @@ fi
 if [ -n "$L" ]; then
     echo "level now: $(cat "$L")"
     for i in 1 2 3; do
-        ask "Press F5 once (press $i of 3), then Enter. Is the backlight off, dim or bright?"
+        ask "Press F5 once (press $i of 3), then Enter. Is the backlight off, dim or bright? Did GNOME show a keyboard-brightness OSD?"
         echo "level reads: $(cat "$L")"
-        [ -e "$KL/brightness_hw_changed" ] && echo "brightness_hw_changed: $(cat "$KL/brightness_hw_changed")"
+        [ -e "$KL/brightness_hw_changed" ] && echo "brightness_hw_changed: $(cat "$KL/brightness_hw_changed" 2>&1)"
     done
+    echo "UPower keyboard backlight: $(busctl --system call org.freedesktop.UPower /org/freedesktop/UPower/KbdBacklight org.freedesktop.UPower.KbdBacklight GetBrightness 2>&1) of $(busctl --system call org.freedesktop.UPower /org/freedesktop/UPower/KbdBacklight org.freedesktop.UPower.KbdBacklight GetMaxBrightness 2>&1)"
     if [ -d "$KL" ]; then
         before=$(cat "$L")
         echo 0 > "$L" 2>&1
@@ -105,6 +115,60 @@ if [ -n "$L" ]; then
     fi
 else
     echo "no keyboard backlight level (LED or attribute)"
+fi
+
+# From -20. Which raw reading of command 0xbd/0x01 means "locked" is what
+# this checks: in action-keys mode F7 sends VOLUMEDOWN (114), locked F7 (65).
+f7() {
+    python3 - <<'PY'
+import os, re, select, struct, time
+fds = []
+for block in open("/proc/bus/input/devices").read().split(chr(10) * 2):
+    name = re.search(r'N: Name="([^"]*)"', block)
+    ev = re.search(r"H: Handlers=.*?(event\d+)", block)
+    if name and ev and "Keyboard" in name.group(1):
+        fds.append(os.open("/dev/input/" + ev.group(1), os.O_RDONLY))
+print("Press F7 (without Fn) within 10 s.", flush=True)
+fmt = "llHHi"; size = struct.calcsize(fmt); end = time.time() + 10; keys = []
+while time.time() < end and not keys:
+    for fd in select.select(fds, [], [], 1.0)[0]:
+        data = os.read(fd, size * 16)
+        for i in range(0, len(data) - size + 1, size):
+            _, _, typ, code, val = struct.unpack(fmt, data[i:i + size])
+            if typ == 1 and val == 1:
+                keys.append(code)
+names = {114: "VOLUMEDOWN (action keys)", 65: "F7 (Fn lock)"}
+print("F7 sent:", ", ".join(f"{k} {names.get(k, '')}" for k in keys) or "nothing")
+PY
+}
+sect "function-key lock"
+FL=
+[ -n "$BUS" ] && FL=/sys/bus/i2c/devices/${BUS}-0076/fn_lock
+if [ -n "$FL" ] && [ -e "$FL" ]; then
+    orig=$(cat "$FL")
+    echo "fn_lock reads: $orig"
+    f7
+    echo "Now press Left Shift+Fn once (waiting 20 s for the EC's notification)."
+    python3 - "$FL" <<'PY'
+import select, sys, time
+f = open(sys.argv[1]); f.read()
+p = select.poll(); p.register(f, select.POLLPRI | select.POLLERR)
+t = time.time(); r = p.poll(20000)
+print(f"notified after {time.time() - t:.1f} s" if r else "no notification in 20 s")
+PY
+    echo "fn_lock reads: $(cat "$FL")"
+    ask "Did anything appear on screen? (Windows shows Function key mode / Action key mode)"
+    f7
+    for v in 1 0; do
+        echo "$v" > "$FL"
+        echo "wrote $v, fn_lock reads: $(cat "$FL")"
+        f7
+    done
+    echo "$orig" > "$FL"
+    echo "restored $orig, fn_lock reads: $(cat "$FL")"
+    f7
+else
+    echo "no fn_lock attribute"
 fi
 
 # EC LED 8 is taken as F6 (speaker mute) and 9 as F9 (mic mute). Start
@@ -146,15 +210,15 @@ grep -E 'hp-omnibook-5-ec' /proc/interrupts || echo "no hp-omnibook-5-ec interru
 D=/sys/kernel/debug
 grep -E 'gpio66[^0-9]|pin 66 ' "$D"/gpio "$D"/pinctrl/*/pinconf-pins 2>/dev/null
 sect "hotkeys (30 s capture)"
-# The event bytes the driver reads from EC register 0x05, from -12 on.
+# The event bytes the driver reads from EC register 0x00 (0x05 before -17).
 TR=/sys/kernel/tracing
 EV=$TR/events/smbus/smbus_reply
 if [ -n "$BUS" ] && [ -d "$EV" ]; then
     echo 0 > $TR/tracing_on; : > $TR/trace
-    echo "adapter_nr == $BUS && command == 5" > $EV/filter
+    echo "adapter_nr == $BUS && command == 0" > $EV/filter
     echo 1 > $EV/enable; echo 1 > $TR/tracing_on
 fi
-echo "Press, slowly and in order: F6, F9, F11, F5, then Fn alone (Fn lock)."
+echo "Press, slowly and in order: F6, F9, F11, F5, then Left Shift+Fn twice (Fn lock)."
 python3 - <<'PY'
 import os, re, select, struct, time
 want = ("Keyboard", "Consumer Control", "EC hotkeys", "gpio-keys")
@@ -189,6 +253,9 @@ if [ -d "${EV:-/nonexistent}" ]; then
     grep smbus_reply $TR/trace | sed -n '1,5p;$p'
     : > $TR/trace
 fi
+sect "EC events logged by the driver since the start"
+journalctl -k --no-pager --since "$START" | grep -E 'EC event' || echo "none"
+[ -w "$DD" ] && echo 'module hp_omnibook_5_ec -p' > "$DD" 2>/dev/null
 
 # Read only. Its vendor collection (usage page 0xff85, usage 0x68 on
 # Windows) is a candidate for a backlight level control.

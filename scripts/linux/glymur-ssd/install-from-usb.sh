@@ -97,7 +97,8 @@ sudo apt-get install -y mesa-utils mesa-utils-bin vulkan-tools glmark2-es2-wayla
 
 for f in check-gpu-test.sh check-mesa.sh charging-watch.sh check-usb.sh check-ec.sh gpu-corruption-test.sh \
          check-audio.sh check-headset.sh watch-audio.sh check-battmgr-notify.sh check-video.sh \
-         check-display.sh check-hotkeys.sh ec-event-capture.sh dump-efivars.sh          check-suspend.sh check-rtc.sh check-efivars-write.sh check-npu.sh; do
+         check-display.sh check-hotkeys.sh ec-event-capture.sh dump-efivars.sh          check-suspend.sh check-rtc.sh check-efivars-write.sh check-npu.sh \
+         check-chid.sh stubble-hwids.py; do
     if [ -f "$K/$f" ]; then cp "$K/$f" "$HOME/$f"; fi
 done
 # The WirePlumber rule for a boot with Iris on: kept aside, never installed.
@@ -109,6 +110,7 @@ sync
 echo
 echo "Done. Reboot into \"Ubuntu on SSD: test device tree\" and follow"
 echo "docs/linux-runbook-20-2026-11-09.md. The checks, from a terminal:"
+echo "  sudo bash ~/check-chid.sh       (hardware IDs for systemd-stub/stubble; no external monitor)"
 echo "  sudo bash ~/check-efivars-write.sh   (one EFI variable write; --verify after the reboot)"
 echo "  sudo bash ~/check-rtc.sh        (RTC time, UTC or local, one alarm)"
 echo "  sudo bash ~/check-npu.sh        (NPU: FastRPC on the CDSP)"

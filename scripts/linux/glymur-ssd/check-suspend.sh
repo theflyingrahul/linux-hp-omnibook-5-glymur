@@ -3,8 +3,9 @@ set -u
 
 # Supervised s2idle test (kernel -20 on). See README.md.
 #   sudo bash check-suspend.sh [--sync-state]
-# Three suspend cycles: woken by an RTC alarm, by opening the lid, by the
-# power button. Each resume records what came back. Suspend stays unmasked
+# Three suspend cycles: woken by an RTC alarm, by opening the lid (the
+# charger replugged while asleep), by the power button; then a fourth, not
+# gating, lid closed on AC for 2 minutes. Each logs its wake IRQ. Each resume records what came back. Suspend stays unmasked
 # only if you say so at the end, after every cycle resumed; if a resume
 # hangs and the laptop is powered off, a one-shot unit masks it again at
 # the next boot.
@@ -31,6 +32,10 @@ sect system
 uname -r
 tr -d '\0' < /sys/firmware/devicetree/base/model 2>/dev/null; echo
 sed 's/root=[^ ]*/root=…/' /proc/cmdline
+# From -20 the EC driver tells the EC about standby; its events and any
+# "cannot tell the EC" warning land in each cycle's kernel log.
+echo 'module hp_omnibook_5_ec +p' > /sys/kernel/debug/dynamic_debug/control 2>/dev/null &&
+    echo "EC event logging on" || echo "EC event logging not available"
 echo "mem_sleep: $(cat /sys/power/mem_sleep)   state: $(cat /sys/power/state)"
 systemctl is-enabled $TARGETS 2>&1 | paste -sd' ' | sed 's/^/targets: /'
 
@@ -54,6 +59,7 @@ devices() {
     lsusb -t 2>&1
     ip -br link 2>&1 | grep -v '^lo'
     iw dev 2>/dev/null | grep -E 'Interface|type|channel'
+    echo "network: $(nmcli -t -f STATE,CONNECTIVITY general 2>&1)"
     aplay -l 2>&1 | grep -E '^card'
     for p in /sys/class/power_supply/*; do
         printf '%s: %s %s\n' "${p##*/}" "$(cat "$p/status" 2>/dev/null)" "$(cat "$p/capacity" 2>/dev/null)"
@@ -62,7 +68,7 @@ devices() {
         printf '%s: %s %s\n' "${c##*/}" "$(cat "$c/status" 2>/dev/null)" "$(cat "$c/enabled" 2>/dev/null)"
     done
     for h in /sys/class/hwmon/hwmon*; do
-        [ "$(cat "$h/name" 2>/dev/null)" = hp_omnibook5_ec ] || continue
+        [ "$(cat "$h/name" 2>/dev/null)" = hp_omnibook_ec ] || continue
         printf 'EC fan %s rpm, temp1 %s\n' "$(cat "$h/fan1_input" 2>/dev/null)" "$(cat "$h/temp1_input" 2>/dev/null)"
     done
     ls /dev/rtc* 2>/dev/null
@@ -141,18 +147,25 @@ cycle() {
     done
     sleep 8
     echo "resumed after $(( $(date +%s) - t0 )) s; suspend successes $before -> $after"
+    w=$(cat /sys/power/pm_wakeup_irq 2>/dev/null)
+    echo "wake IRQ: ${w:-none}${w:+ ($(awk -v i="$w:" '$1 == i {$1 = ""; print}' /proc/interrupts | tr -s ' ' | cut -c1-120))}"
     sect "kernel log of the cycle"
     journalctl -k --no-pager --since "@$t0" -o short-monotonic | tail -250
     devices "after $name"
     snapshot "after $name"
     echo
+    echo "EC while asleep: $(ask "Cycle $name: while it slept, was the fan audible, the keyboard backlight on, and the power LED steady, breathing or off?")"
+    echo "USB and Wi-Fi after: $(ask "Cycle $name: does the USB mouse move the pointer, and is Wi-Fi connected again (a web page loads)?")"
     ask "Cycle $name: did the screen, keyboard and touchpad come back? [y/N]" > /tmp/glymur-cycle-$name
     echo "owner: $(cat /tmp/glymur-cycle-$name)"
 }
 
 cycle rtc "Suspending now; the RTC alarm wakes it in about 40 s. If it is still asleep after 90 s, press the power button."
-cycle lid "Close the lid now, wait 20 s, then open it."
+cycle lid "Close the lid now. While it sleeps, unplug the charger, wait 10 s, plug it back in, wait 10 s more, then open the lid."
 cycle button "Suspending in 3 s; wait 20 s, then press the power button briefly."
+# Not gating: on the Zenbook A16 the lid line pulses once in deep sleep on
+# AC and wakes it; a short "resumed after" here shows the same.
+cycle lid-ac "With the charger plugged in, close the lid and leave it closed for 2 minutes, then open it."
 
 sect result
 ok=1
