@@ -1,0 +1,139 @@
+
+==== system
+7.3.0-glymur-20
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+compatible: hp,omnibook-5-16-bf1xxx qcom,mahua 
+systemd 261 (261.3-0ubuntu3)
+
+==== SMBIOS strings (serials and UUID left out)
+sys_vendor           HP
+product_family       103C_5335KV HP OmniBook 5
+product_name         HP OmniBook 5 Laptop 16-bf1xxx
+product_sku          D3ZN3UA#ABA
+product_version      ConfigID
+board_vendor         HP
+board_name           8F47
+board_version        24.28
+chassis_vendor       HP
+chassis_type         10
+bios_vendor          Insyde
+bios_version         F.06
+bios_date            07/14/2026
+bios_release         15.6
+ec_firmware_release  24.28
+
+==== panels with an EDID
+
+==== systemd-analyze chid
+TYPE    INPUT     CHID
+   0 MFPS--BvRr-- 8292003e-8879-55df-92d7-a5e5cfac5bef
+   1 MFP---BvRr-- 7e342790-6740-5e94-a170-29c1e5d9e1b3
+   2 M-P---BvRr-- b011dd23-7091-5ce6-b6c2-6576a2603ad4
+   3 MFPSmp------ 3edd06a3-b301-5468-9216-2884a31ceab4
+   4 MFPS-------- 103ed2a3-9e48-57fd-b7b4-1c5d20ee06c3
+   5 MFP--------- 2ca25d79-a03b-5c14-8cd2-22376e452eb2
+   6 M--Smp------ c8c76b28-fbcb-5fe0-abcd-40ab7ef7bcd6
+   7 M--S-------- 1807ef5a-8baf-50ca-b998-c3d7457b83db
+   8 M-P-mp------ 4ddf1f98-9166-536f-853d-452ee94ac07a
+   9 M-P--------- aa26cf43-45d4-5a10-901b-0358db424bf1
+  10 MF--mp------ 54c8efcb-a28f-560d-8ea2-dd03771ade08
+  11 MF---------- b95e57c6-0395-526b-a79e-003c982210c5
+  12 M---------e- f999e8e2-2bed-5ee7-85be-a69096b9544d
+  13 M---mp------ 04615eb0-be2e-5e21-b6f5-7732101ac5e2
+  14 M----------- 93f84748-c854-5d6b-b78a-13c2361e0758
+ext0 MFP--------E c9bdbc0f-206c-5435-8bd7-053e84b99830
+ext1 MF---------E 9be0f56c-f92b-55ca-bda6-8e0acec54d3e
+ext2 M--S-------E 5706c6fa-a375-5b7d-8a9a-dae27e6bca20
+
+LEGEND: M → manufacturer (HP) ┄ F → family (103C_5335KV HP OmniBook 5) ┄ P → product-name (HP OmniBook 5 Laptop 16-bf1xxx)
+        S → product-sku (D3ZN3UA#ABA) ┄ m → baseboard-manufacturer (HP) ┄ p → baseboard-product (8F47)
+        B → bios-vendor (Insyde) ┄ v → bios-version (F.06) ┄ R → bios-major (0f)
+        r → bios-minor (06) ┄ e → enclosure-type (a) ┄ E → edid-panel (SDC4214)
+
+==== stubble hwids.py (ubuntu/stubble 14963a6, the format of its hwids/txt)
+sha256 12153ecd72ef2577a771a13715670097ec5258d7edd3dc061c6f98156b91f677
+Computer Information
+--------------------
+Manufacturer: HP
+Family: 103C_5335KV HP OmniBook 5
+ProductName: HP OmniBook 5 Laptop 16-bf1xxx
+ProductSku: D3ZN3UA#ABA
+BaseboardManufacturer: HP
+BaseboardProduct: 8F47
+EDID: SDC4214
+Hardware IDs
+------------
+{3edd06a3-b301-5468-9216-2884a31ceab4}	<- #3   Manufacturer + Family + ProductName + ProductSku + BaseboardManufacturer + BaseboardProduct
+{103ed2a3-9e48-57fd-b7b4-1c5d20ee06c3}	<- #4   Manufacturer + Family + ProductName + ProductSku
+{2ca25d79-a03b-5c14-8cd2-22376e452eb2}	<- #5   Manufacturer + Family + ProductName
+{c8c76b28-fbcb-5fe0-abcd-40ab7ef7bcd6}	<- #6   Manufacturer + ProductSku + BaseboardManufacturer + BaseboardProduct
+{1807ef5a-8baf-50ca-b998-c3d7457b83db}	<- #7   Manufacturer + ProductSku
+{4ddf1f98-9166-536f-853d-452ee94ac07a}	<- #8   Manufacturer + ProductName + BaseboardManufacturer + BaseboardProduct
+{aa26cf43-45d4-5a10-901b-0358db424bf1}	<- #9   Manufacturer + ProductName
+{54c8efcb-a28f-560d-8ea2-dd03771ade08}	<- #10  Manufacturer + Family + BaseboardManufacturer + BaseboardProduct
+{b95e57c6-0395-526b-a79e-003c982210c5}	<- #11  Manufacturer + Family
+{4c84c882-b54c-58d5-b412-26bcdf254c3e}	<- #12  Manufacturer + EnclosureKind
+{04615eb0-be2e-5e21-b6f5-7732101ac5e2}	<- #13  Manufacturer + BaseboardManufacturer + BaseboardProduct
+{93f84748-c854-5d6b-b78a-13c2361e0758}	<- #14  Manufacturer
+{c9bdbc0f-206c-5435-8bd7-053e84b99830}	<- #15  Manufacturer + Family + ProductName + EDID
+{9be0f56c-f92b-55ca-bda6-8e0acec54d3e}	<- #16  Manufacturer + Family + EDID
+{5706c6fa-a375-5b7d-8a9a-dae27e6bca20}	<- #17  Manufacturer + ProductSku + EDID
+
+==== fwupdtool hwids
+runtime   org.freedesktop.fwupd         2.1.6
+runtime   com.hughsie.libxmlb           0.3.29
+Loading…
+Loading…: 0.1%
+Loading…: 1.0%
+Loading…: 1.9%
+Loading…: 2.9%
+Loading…: 3.8%
+Loading…: 3.9%
+Loading…: 4.7%
+Loading…: 4.8%
+Loading…: 5.7%
+Loading…: 6.7%
+Loading…: 7.6%
+Loading…: 8.6%
+Loading…: 0.0%
+Loading…: 9.5%
+Loading…: 12.4%
+Loading…: 98.1%
+Loading…: 99.0%
+Idle…: 0.0%
+Computer Information
+--------------------
+BiosVendor: Insyde
+BiosVersion: F.06
+BiosMajorRelease: 15
+BiosMinorRelease: 6
+BiosReleaseDate: 7/14/2026
+FirmwareMajorRelease: 18
+FirmwareMinorRelease: 1c
+Manufacturer: HP
+Family: 103C_5335KV HP OmniBook 5
+ProductName: HP OmniBook 5 Laptop 16-bf1xxx
+ProductSku: D3ZN3UA#ABA
+EnclosureKind: a
+BaseboardManufacturer: HP
+BaseboardProduct: 8F47
+Hardware IDs
+------------
+{8292003e-8879-55df-92d7-a5e5cfac5bef}   <- Manufacturer + Family + ProductName + ProductSku + BiosVendor + BiosVersion + BiosMajorRelease + BiosMinorRelease
+{7e342790-6740-5e94-a170-29c1e5d9e1b3}   <- Manufacturer + Family + ProductName + BiosVendor + BiosVersion + BiosMajorRelease + BiosMinorRelease
+{b011dd23-7091-5ce6-b6c2-6576a2603ad4}   <- Manufacturer + ProductName + BiosVendor + BiosVersion + BiosMajorRelease + BiosMinorRelease
+{3edd06a3-b301-5468-9216-2884a31ceab4}   <- Manufacturer + Family + ProductName + ProductSku + BaseboardManufacturer + BaseboardProduct
+{103ed2a3-9e48-57fd-b7b4-1c5d20ee06c3}   <- Manufacturer + Family + ProductName + ProductSku
+{2ca25d79-a03b-5c14-8cd2-22376e452eb2}   <- Manufacturer + Family + ProductName
+{c8c76b28-fbcb-5fe0-abcd-40ab7ef7bcd6}   <- Manufacturer + ProductSku + BaseboardManufacturer + BaseboardProduct
+{1807ef5a-8baf-50ca-b998-c3d7457b83db}   <- Manufacturer + ProductSku
+{4ddf1f98-9166-536f-853d-452ee94ac07a}   <- Manufacturer + ProductName + BaseboardManufacturer + BaseboardProduct
+{aa26cf43-45d4-5a10-901b-0358db424bf1}   <- Manufacturer + ProductName
+{54c8efcb-a28f-560d-8ea2-dd03771ade08}   <- Manufacturer + Family + BaseboardManufacturer + BaseboardProduct
+{b95e57c6-0395-526b-a79e-003c982210c5}   <- Manufacturer + Family
+{f999e8e2-2bed-5ee7-85be-a69096b9544d}   <- Manufacturer + EnclosureKind
+{04615eb0-be2e-5e21-b6f5-7732101ac5e2}   <- Manufacturer + BaseboardManufacturer + BaseboardProduct
+{93f84748-c854-5d6b-b78a-13c2361e0758}   <- Manufacturer
+fwupd.service: masked
+
+saved to /var/log/glymur/chid-20261110T131253.txt, /var/log/glymur/chid.txt, /var/log/glymur/stubble-hwids-20261110T131253.txt and /var/log/glymur/fwupd-hwids-20261110T131253.txt

@@ -1,0 +1,222 @@
+
+==== system
+7.3.0-glymur-20
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+EC event logging on
+
+==== kernel log: EC bus and driver
+Oct 02 23:05:38 glymur kernel: platform 8c0000.geniqup: Adding to iommu group 3
+Oct 02 23:05:38 glymur kernel: platform ac0000.geniqup: Adding to iommu group 5
+Oct 02 23:05:38 glymur kernel: platform bc0000.geniqup: Adding to iommu group 7
+Oct 02 23:05:38 glymur kernel: input: gpio-keys as /devices/platform/gpio-keys/input/input0
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF Touchscreen as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input1
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input2
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input3
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Mouse as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input5
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Touchpad as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input7
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Consumer Control as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input8
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 0416:C300 Keyboard as /devices/platform/soc@0/bc0000.geniqup/b80000.i2c/i2c-0/0-003a/0018:0416:C300.0003/input/input9
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input10
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF UNKNOWN as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input11
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:44BF UNKNOWN as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input12
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Mouse as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input14
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Touchpad as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input16
+Oct 02 23:05:39 glymur kernel: input: hid-over-i2c 04F3:32EF Consumer Control as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input17
+Oct 02 23:05:46 glymur kernel: input: HP OmniBook 5 EC hotkeys as /devices/platform/soc@0/ac0000.geniqup/a84000.i2c/i2c-9/9-0076/input/input18
+Oct 02 23:05:46 glymur kernel: input: MAHUA-HP-OmniBook-5-16-bf1xxx Headset Jack as /devices/platform/sound/sound/card0/input20
+
+==== kernel warnings and errors, in full
+[    9.772008] glymur kernel: ------------[ cut here ]------------
+[    9.772037] glymur kernel: UBSAN: shift-out-of-bounds in /home/login/glymur-build/.work/linux-qcom-next-20/sound/soc/sdca/sdca_asoc.c:501:20
+[    9.772046] glymur kernel: shift exponent 64 is too large for 64-bit type 'long unsigned int'
+[    9.772058] glymur kernel: CPU: 7 UID: 0 PID: 992 Comm: (udev-worker) Not tainted 7.3.0-glymur-20 #1 PREEMPT(lazy) 
+[    9.772070] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[    9.772086] glymur kernel: Call trace:
+[    9.772095] glymur kernel:  show_stack+0x24/0x50 (C)
+[    9.772102] glymur kernel:  dump_stack_lvl+0x8c/0xd8
+[    9.772109] glymur kernel:  dump_stack+0x1c/0x44
+[    9.772117] glymur kernel:  ubsan_epilogue+0x14/0x60
+[    9.772128] glymur kernel:  __ubsan_handle_shift_out_of_bounds+0x1a0/0x240
+[    9.772143] glymur kernel:  sdca_asoc_populate_dapm+0xe84/0x1010 [snd_soc_sdca]
+[    9.772153] glymur kernel:  sdca_asoc_populate_component+0x13c/0x240 [snd_soc_sdca]
+[    9.772161] glymur kernel:  class_function_probe+0x254/0x528 [snd_soc_sdca_class_function]
+[    9.772169] glymur kernel:  auxiliary_bus_probe+0x50/0xa8
+[    9.772176] glymur kernel:  really_probe+0xd8/0x430
+[    9.772186] glymur kernel:  __driver_probe_device+0x194/0x230
+[    9.772196] glymur kernel:  driver_probe_device+0x48/0x1b0
+[    9.772206] glymur kernel:  __driver_attach+0x10c/0x2c8
+[    9.772216] glymur kernel:  bus_for_each_dev+0x88/0x110
+[    9.772226] glymur kernel:  driver_attach+0x30/0x60
+[    9.772237] glymur kernel:  bus_add_driver+0x17c/0x2e0
+[    9.772246] glymur kernel:  driver_register+0x74/0x178
+[    9.772253] glymur kernel:  __auxiliary_driver_register+0x78/0x150
+[    9.772263] glymur kernel:  class_function_drv_init+0x38/0xfd0 [snd_soc_sdca_class_function]
+[    9.772271] glymur kernel:  do_one_initcall+0x60/0x4b8
+[    9.772278] glymur kernel:  do_init_module+0xa0/0x300
+[    9.772288] glymur kernel:  load_module+0x1c5c/0x2558
+[    9.772296] glymur kernel:  init_module_from_file+0x10c/0x178
+[    9.772306] glymur kernel:  __arm64_sys_finit_module+0x218/0x3a0
+[    9.772316] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[    9.772324] glymur kernel:  el0_svc_common.constprop.0+0x114/0x140
+[    9.772333] glymur kernel:  do_el0_svc+0x28/0x58
+[    9.772341] glymur kernel:  el0_svc+0x48/0x310
+[    9.772349] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+[    9.772360] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+[    9.772438] glymur kernel: ---[ end trace ]---
+[    9.783008] glymur kernel: snd-x1e80100 sound: ASoC: Parent card not yet available, widget card binding deferred
+[    9.783127] glymur kernel: va_macro 7660000.codec: supply vdd-micb not found, using dummy regulator
+[    9.787026] glymur kernel: ALSA: Control name 'stream0.vol_ctrl0 MultiMedia1 Playback Volume' truncated to 'stream0.vol_ctrl0 MultiMedia1 Playback Volu'
+[    9.788005] glymur kernel: input: MAHUA-HP-OmniBook-5-16-bf1xxx Headset Jack as /devices/platform/sound/sound/card0/input20
+[    9.856063] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[    9.974089] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: chip_id 0x21 chip_family 0x4 board_id 0xff soc_id 0x40292100
+[    9.974316] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: fw_version 0x100581de fw_build_timestamp 2024-09-11 23:52 fw_build_id QC_IMAGE_VERSION_STRING=WLAN.COL.1.0.c2-00277-QCACOLSWPL_V1_TO_SILICONZ-1
+[   10.053050] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+
+==== EC device and driver
+i2c bus for a84000: 9
+client: /sys/bus/i2c/devices/9-0076
+driver: hp-omnibook-5-ec
+reset_gpio             12288  1
+gpio_shared_proxy      20480  1
+hp_omnibook_5_ec       24576  0
+sparse_keymap          12288  1 hp_omnibook_5_ec
+pinctrl_spmi_gpio      36864  0
+i2c_qcom_geni          53248  0
+gpi                    53248  3 i2c_qcom_geni
+gpio_keys              24576  0
+
+==== hwmon (5 samples, 2 s apart)
+fan1 2514 rpm | EC thermistor 1: 40000 | EC thermistor 2: 42000 | EC thermistor 3: 43000 | EC thermistor 4: 38000
+fan1 2514 rpm | EC thermistor 1: 40000 | EC thermistor 2: 42000 | EC thermistor 3: 43000 | EC thermistor 4: 38000
+fan1 2501 rpm | EC thermistor 1: 40000 | EC thermistor 2: 42000 | EC thermistor 3: 43000 | EC thermistor 4: 38000
+fan1 2514 rpm | EC thermistor 1: 40000 | EC thermistor 2: 42000 | EC thermistor 3: 43000 | EC thermistor 4: 38000
+fan1 2507 rpm | EC thermistor 1: 40000 | EC thermistor 2: 42000 | EC thermistor 3: 43000 | EC thermistor 4: 38000
+
+==== keyboard backlight timeout
+timeout now: 3min (Windows: 30 sec, 3 min, Always)
+set 30s, reads back 30s
+Turn the backlight on with F5, then keep off the keyboard and touchpad for 45 s.
+After 45 s untouched with '30s': is the backlight on or off? answer: off
+set always, reads back always
+Turn the backlight on with F5, then keep off the keyboard and touchpad for 45 s.
+After 45 s untouched with 'always': is the backlight on or off? answer: on
+restored: 3min
+
+==== keyboard backlight level
+LED: /sys/class/leds/platform::kbd_backlight, max_brightness 2
+level now: 1
+Press F5 once (press 1 of 3), then Enter. Is the backlight off, dim or bright? Did GNOME show a keyboard-brightness OSD? answer: off, OSD came up
+level reads: 0
+brightness_hw_changed: 0
+Press F5 once (press 2 of 3), then Enter. Is the backlight off, dim or bright? Did GNOME show a keyboard-brightness OSD? answer: bright, osd came up
+level reads: 2
+brightness_hw_changed: 2
+Press F5 once (press 3 of 3), then Enter. Is the backlight off, dim or bright? Did GNOME show a keyboard-brightness OSD? answer: dim, osd came up
+level reads: 1
+brightness_hw_changed: 1
+UPower keyboard backlight: i 1 of i 2
+after writing 0 (must be ignored): 1 (was 1)
+no LED core error
+
+==== function-key lock
+fn_lock reads: 1
+Press F7 (without Fn) within 10 s.
+F7 sent: 114 VOLUMEDOWN (action keys)
+Now press Left Shift+Fn once (waiting 20 s for the EC's notification).
+notified after 3.8 s
+fn_lock reads: 0
+Did anything appear on screen? (Windows shows Function key mode / Action key mode) answer: No
+Press F7 (without Fn) within 10 s.
+F7 sent: 65 F7 (Fn lock)
+wrote 1, fn_lock reads: 0
+Press F7 (without Fn) within 10 s.
+F7 sent: 65 F7 (Fn lock)
+wrote 0, fn_lock reads: 1
+Press F7 (without Fn) within 10 s.
+F7 sent: 114 VOLUMEDOWN (action keys)
+restored 1, fn_lock reads: 1
+Press F7 (without Fn) within 10 s.
+F7 sent: 65 F7 (Fn lock)
+
+==== mute LEDs
+platform::mute reads 1, trigger audio-mute
+platform::micmute reads 0, trigger audio-micmute
+In the last Windows session, were the speakers or the microphone muted (speaker, mic, both, none, unsure)? Was this boot a restart from Windows, or from power off? answer: [18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~[18~Speakers unmuted, mic muted; reboot for linux
+Before any change, which key LEDs are lit: F6, F9, both or none? answer: F6
+both off, read back: mute 0, micmute 0
+Both set off. Which are lit now: F6, F9, both or none? answer: none
+platform::mute on, read back: mute 1, micmute 0
+Only platform::mute set on. Which are lit now: F6, F9, both or none? answer: F6
+platform::micmute on, read back: mute 0, micmute 1
+Only platform::micmute set on. Which are lit now: F6, F9, both or none? answer: F9
+restored: mute 1, micmute 0; triggers audio-mute, audio-micmute
+
+==== EC event line before the capture
+ 274:         31          0          0          0          0          0          0          0          0          0          0          0  msmgpio                     66 Edge      hp-omnibook-5-ec
+/sys/kernel/debug/gpio: gpio66  : in  high func0 2mA pull up
+/sys/kernel/debug/pinctrl/f100000.pinctrl/pinconf-pins:pin 66 (GPIO_66): 
+
+==== hotkeys (30 s capture)
+Press, slowly and in order: F6, F9, F11, F5, then Left Shift+Fn twice (Fn lock).
+devices: ['HP OmniBook 5 EC hotkeys', 'gpio-keys', 'hid-over-i2c 0416:C300 Keyboard', 'hid-over-i2c 04F3:32EF Consumer Control']
+1794296856.579072 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458815
+1794296856.579072 hid-over-i2c 0416:C300 Keyboard: KEY code=64 value=1
+1794296856.754645 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458815
+1794296856.754645 hid-over-i2c 0416:C300 Keyboard: KEY code=64 value=0
+1794296858.790595 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458818
+1794296858.790595 hid-over-i2c 0416:C300 Keyboard: KEY code=67 value=1
+1794296858.991128 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458818
+1794296858.991128 hid-over-i2c 0416:C300 Keyboard: KEY code=67 value=0
+1794296861.727127 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458820
+1794296861.727127 hid-over-i2c 0416:C300 Keyboard: KEY code=87 value=1
+1794296861.958176 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458820
+1794296861.958176 hid-over-i2c 0416:C300 Keyboard: KEY code=87 value=0
+1794296864.619759 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458814
+1794296864.619759 hid-over-i2c 0416:C300 Keyboard: KEY code=63 value=1
+1794296864.821481 hid-over-i2c 0416:C300 Keyboard: MSC code=4 value=458814
+1794296864.821481 hid-over-i2c 0416:C300 Keyboard: KEY code=63 value=0
+capture done
+Nov 10 13:13:25 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:23 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:33 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:43 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:44 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:44 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:53 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:16:06 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+Nov 10 13:16:19 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+Nov 10 13:16:24 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+Nov 10 13:16:24 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+interrupts after:  274:         31          0          0          0          0          0          0          0          0          0          0          0  msmgpio                     66 Edge      hp-omnibook-5-ec
+EC event bytes read during the capture (count, byte):
+first and last reads, with times:
+
+==== EC events logged by the driver since the start
+Nov 10 13:13:25 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:23 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:33 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:43 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:44 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:44 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:53 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:16:06 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+Nov 10 13:16:19 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+Nov 10 13:16:24 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+Nov 10 13:16:24 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+
+==== keyboard HID report descriptor
+/sys/bus/hid/devices/0018:0416:C300.0003
+ 05 01 09 06 a1 01 85 08 05 07 19 e0 29 e7 15 00
+ 25 01 75 01 95 08 81 02 95 01 75 08 81 03 95 05
+ 75 01 05 08 19 01 29 05 91 02 95 01 75 03 91 03
+ 95 06 75 10 15 00 26 00 80 05 07 19 00 2a 00 80
+ 81 00 c0 05 0c 09 01 a1 01 85 09 19 00 2a 3c 02
+ 15 00 26 3c 02 95 01 75 10 81 00 c0 06 85 ff 09
+ 68 a1 01 85 0a 09 01 15 00 26 ff 00 75 08 95 08
+ b1 00 85 0b 09 01 15 00 26 ff 00 75 08 95 20 b1
+ 00 c0
+
+==== manual mailbox probe (only without the driver)
+skipped: the driver is bound
+
+saved to /var/log/glymur/ec-test-20261110T131308.txt

@@ -1,0 +1,24 @@
+TYPE    INPUT     CHID
+   0 MFPS--BvRr-- 8292003e-8879-55df-92d7-a5e5cfac5bef
+   1 MFP---BvRr-- 7e342790-6740-5e94-a170-29c1e5d9e1b3
+   2 M-P---BvRr-- b011dd23-7091-5ce6-b6c2-6576a2603ad4
+   3 MFPSmp------ 3edd06a3-b301-5468-9216-2884a31ceab4
+   4 MFPS-------- 103ed2a3-9e48-57fd-b7b4-1c5d20ee06c3
+   5 MFP--------- 2ca25d79-a03b-5c14-8cd2-22376e452eb2
+   6 M--Smp------ c8c76b28-fbcb-5fe0-abcd-40ab7ef7bcd6
+   7 M--S-------- 1807ef5a-8baf-50ca-b998-c3d7457b83db
+   8 M-P-mp------ 4ddf1f98-9166-536f-853d-452ee94ac07a
+   9 M-P--------- aa26cf43-45d4-5a10-901b-0358db424bf1
+  10 MF--mp------ 54c8efcb-a28f-560d-8ea2-dd03771ade08
+  11 MF---------- b95e57c6-0395-526b-a79e-003c982210c5
+  12 M---------e- f999e8e2-2bed-5ee7-85be-a69096b9544d
+  13 M---mp------ 04615eb0-be2e-5e21-b6f5-7732101ac5e2
+  14 M----------- 93f84748-c854-5d6b-b78a-13c2361e0758
+ext0 MFP--------E c9bdbc0f-206c-5435-8bd7-053e84b99830
+ext1 MF---------E 9be0f56c-f92b-55ca-bda6-8e0acec54d3e
+ext2 M--S-------E 5706c6fa-a375-5b7d-8a9a-dae27e6bca20
+
+LEGEND: M → manufacturer (HP) ┄ F → family (103C_5335KV HP OmniBook 5) ┄ P → product-name (HP OmniBook 5 Laptop 16-bf1xxx)
+        S → product-sku (D3ZN3UA#ABA) ┄ m → baseboard-manufacturer (HP) ┄ p → baseboard-product (8F47)
+        B → bios-vendor (Insyde) ┄ v → bios-version (F.06) ┄ R → bios-major (0f)
+        r → bios-minor (06) ┄ e → enclosure-type (a) ┄ E → edid-panel (SDC4214)

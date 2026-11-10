@@ -1,0 +1,26 @@
+Computer Information
+--------------------
+Manufacturer: HP
+Family: 103C_5335KV HP OmniBook 5
+ProductName: HP OmniBook 5 Laptop 16-bf1xxx
+ProductSku: D3ZN3UA#ABA
+BaseboardManufacturer: HP
+BaseboardProduct: 8F47
+EDID: SDC4214
+Hardware IDs
+------------
+{3edd06a3-b301-5468-9216-2884a31ceab4}	<- #3   Manufacturer + Family + ProductName + ProductSku + BaseboardManufacturer + BaseboardProduct
+{103ed2a3-9e48-57fd-b7b4-1c5d20ee06c3}	<- #4   Manufacturer + Family + ProductName + ProductSku
+{2ca25d79-a03b-5c14-8cd2-22376e452eb2}	<- #5   Manufacturer + Family + ProductName
+{c8c76b28-fbcb-5fe0-abcd-40ab7ef7bcd6}	<- #6   Manufacturer + ProductSku + BaseboardManufacturer + BaseboardProduct
+{1807ef5a-8baf-50ca-b998-c3d7457b83db}	<- #7   Manufacturer + ProductSku
+{4ddf1f98-9166-536f-853d-452ee94ac07a}	<- #8   Manufacturer + ProductName + BaseboardManufacturer + BaseboardProduct
+{aa26cf43-45d4-5a10-901b-0358db424bf1}	<- #9   Manufacturer + ProductName
+{54c8efcb-a28f-560d-8ea2-dd03771ade08}	<- #10  Manufacturer + Family + BaseboardManufacturer + BaseboardProduct
+{b95e57c6-0395-526b-a79e-003c982210c5}	<- #11  Manufacturer + Family
+{4c84c882-b54c-58d5-b412-26bcdf254c3e}	<- #12  Manufacturer + EnclosureKind
+{04615eb0-be2e-5e21-b6f5-7732101ac5e2}	<- #13  Manufacturer + BaseboardManufacturer + BaseboardProduct
+{93f84748-c854-5d6b-b78a-13c2361e0758}	<- #14  Manufacturer
+{c9bdbc0f-206c-5435-8bd7-053e84b99830}	<- #15  Manufacturer + Family + ProductName + EDID
+{9be0f56c-f92b-55ca-bda6-8e0acec54d3e}	<- #16  Manufacturer + Family + EDID
+{5706c6fa-a375-5b7d-8a9a-dae27e6bca20}	<- #17  Manufacturer + ProductSku + EDID

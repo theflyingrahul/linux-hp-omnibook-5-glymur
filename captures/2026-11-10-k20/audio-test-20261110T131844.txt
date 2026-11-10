@@ -1,0 +1,317 @@
+
+==== system
+7.3.0-glymur-20
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+lrwxrwxrwx 1 root root 62 Nov 10 13:07 /lib/firmware/updates/qcom/glymur/MAHUA-HP-OmniBook-5-16-bf1xxx-tplg.bin -> HP/omnibook-5-16-bf1xxx/MAHUA-HP-OmniBook-5-16-bf1xxx-tplg.bin
+dcb4ae9c9f47072737ef3ae3766e71d710d623739fb40c59d58d6897ab77e9f1  /usr/lib/firmware/updates/qcom/glymur/HP/omnibook-5-16-bf1xxx/MAHUA-HP-OmniBook-5-16-bf1xxx-tplg.bin
+
+==== SoundWire devices (link:manufacturer:part:version:unique id)
+sdw-master-1-0                           driver=driver master=6c80000.soundwire
+sdw-master-3-0                           driver=driver master=7630000.soundwire
+sdw:1:0:0217:0204:00:0                   driver=wsa884x-codec master=sdw-master-1-0
+    status: Attached
+    dev-properties/mipi_revision: 0x0
+sdw:1:0:0217:0204:00:1                   driver=wsa884x-codec master=sdw-master-1-0
+    status: Attached
+    dev-properties/mipi_revision: 0x0
+sdw:3:0:0217:0110:00:3                   driver=wcd9378 master=sdw-master-3-0
+    status: Attached
+    dev-properties/mipi_revision: 0x0
+
+==== amplifier reset lines (LPASS TLMM 12, 13; TLMM 204, 205; direction and function)
+ gpio12  : out 0 2mA no pull
+ gpio13  : in  0 2mA pull down
+
+==== audio modules
+snd_soc_wsa884x        28672  2
+regmap_sdw             12288  2 snd_soc_wsa884x,snd_soc_sdca_class
+q6prm_clocks           16384  19
+q6apm_dai              32768  1
+q6apm_lpass_dais       20480  1
+snd_q6dsp_common       65536  2 q6apm_lpass_dais,q6prm_clocks
+snd_ctl_led            28672  0
+snd_soc_x1e80100       12288  6
+snd_soc_qcom_sdw       12288  1 snd_soc_x1e80100
+snd_soc_qcom_common    24576  1 snd_soc_x1e80100
+q6prm                  12288  1 q6prm_clocks
+soundwire_qcom         45056  2
+slimbus                36864  1 soundwire_qcom
+hp_omnibook_5_ec       24576  0
+soundwire_bus        1183744  8 regmap_sdw,snd_soc_wcd9378,snd_soc_sdca_class_function,regmap_sdw_mbq,snd_soc_wsa884x,snd_soc_qcom_sdw,snd_soc_sdca_class,soundwire_qcom
+snd_soc_lpass_tx_macro   139264  2
+snd_soc_lpass_rx_macro   118784  2
+snd_soc_lpass_va_macro    73728  6
+snd_soc_lpass_wsa_macro    73728  2
+snd_q6apm              69632  4 q6apm_dai,q6prm,q6apm_lpass_dais
+snd_soc_sdca          131072  4 snd_soc_wcd9378,snd_soc_sdca_class_function,snd_soc_sdca_class,soundwire_bus
+sparse_keymap          12288  1 hp_omnibook_5_ec
+snd_soc_lpass_macro_common    12288  4 snd_soc_lpass_wsa_macro,snd_soc_lpass_va_macro,snd_soc_lpass_rx_macro,snd_soc_lpass_tx_macro
+snd_soc_core          446464  14 snd_q6apm,q6apm_dai,snd_soc_sdca_class_function,snd_soc_qcom_common,q6apm_lpass_dais,snd_soc_lpass_wsa_macro,snd_soc_wsa884x,snd_soc_sdca,snd_soc_qcom_sdw,snd_soc_lpass_va_macro,snd_soc_lpass_rx_macro,soundwire_qcom,snd_soc_x1e80100,snd_soc_lpass_tx_macro
+apr                    20480  2 snd_q6apm,q6prm
+pinctrl_sm8650_lpass_lpi    20480  0
+pinctrl_lpass_lpi      24576  12 pinctrl_sm8650_lpass_lpi
+lpasscc_glymur         12288  2
+
+==== kernel log: audio and EC
+Oct 02 23:05:38 glymur kernel: Machine model: HP OmniBook 5 Laptop 16-bf1xxx (test)
+Oct 02 23:05:38 glymur kernel: psci: [Firmware Bug]: failed to set PC mode: -3
+Oct 02 23:05:38 glymur kernel: DMI: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+Oct 02 23:05:38 glymur kernel: CPUidle PSCI: Initialized CPU PM domain topology using OSI mode
+Oct 02 23:05:38 glymur kernel: remoteproc remoteproc1: Booting fw image qcom/glymur/HP/omnibook-5-16-bf1xxx/qcadsp8480.mbn, size 21432280
+Oct 02 23:05:38 glymur kernel: remoteproc remoteproc2: Booting fw image qcom/glymur/HP/omnibook-5-16-bf1xxx/qccdsp8480.mbn, size 3252504
+Oct 02 23:05:45 glymur systemd[1]: Mounting sys-kernel-debug.mount - Kernel Debug File System...
+Oct 02 23:05:45 glymur systemd[1]: Mounted sys-kernel-debug.mount - Kernel Debug File System.
+Oct 02 23:05:46 glymur kernel: input: HP OmniBook 5 EC hotkeys as /devices/platform/soc@0/ac0000.geniqup/a84000.i2c/i2c-9/9-0076/input/input18
+Oct 02 23:05:46 glymur kernel: soundwire sdw:1:0:0217:0204:00:0: no matching ACPI device found, ignoring peripheral
+Oct 02 23:05:46 glymur kernel: soundwire sdw:1:0:0217:0204:00:1: no matching ACPI device found, ignoring peripheral
+Oct 02 23:05:46 glymur kernel: soundwire sdw:3:0:0217:0110:00:3: no matching ACPI device found, ignoring peripheral
+Oct 02 23:05:46 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: supply vdd-mic-bias not found, using dummy regulator
+Oct 02 23:05:46 glymur kernel: qcom-soundwire 6a80000.soundwire: swrm_wait_for_frame_gen_enabled: link status not disconnected
+Oct 02 23:05:46 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: SWFT not available
+Oct 02 23:05:46 glymur kernel: UBSAN: shift-out-of-bounds in /home/login/glymur-build/.work/linux-qcom-next-20/sound/soc/sdca/sdca_asoc.c:501:20
+Oct 02 23:05:46 glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+Oct 02 23:05:46 glymur kernel:  sdca_asoc_populate_dapm+0xe84/0x1010 [snd_soc_sdca]
+Oct 02 23:05:46 glymur kernel:  sdca_asoc_populate_component+0x13c/0x240 [snd_soc_sdca]
+Oct 02 23:05:46 glymur kernel:  class_function_probe+0x254/0x528 [snd_soc_sdca_class_function]
+Oct 02 23:05:46 glymur kernel:  class_function_drv_init+0x38/0xfd0 [snd_soc_sdca_class_function]
+Oct 02 23:05:46 glymur kernel: snd-x1e80100 sound: ASoC: Parent card not yet available, widget card binding deferred
+Oct 02 23:05:46 glymur kernel: va_macro 7660000.codec: supply vdd-micb not found, using dummy regulator
+Oct 02 23:05:46 glymur kernel: input: MAHUA-HP-OmniBook-5-16-bf1xxx Headset Jack as /devices/platform/sound/sound/card0/input20
+Oct 02 23:05:48 glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: ASoC error (-16): at soc_component_read_no_lock() on snd_soc_sdca.SimpleJack.0 for register: [0x40c00908]
+Oct 02 23:05:48 glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: ASoC error (-16): at soc_component_read_no_lock() on snd_soc_sdca.SimpleJack.0 for register: [0x40c00908]
+Oct 02 23:05:58 glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: ASoC error (-16): at soc_component_read_no_lock() on snd_soc_sdca.SimpleJack.0 for register: [0x40c00908]
+Oct 02 23:05:58 glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: ASoC error (-16): at soc_component_read_no_lock() on snd_soc_sdca.SimpleJack.0 for register: [0x40c00908]
+Nov 10 13:13:25 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:23 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:33 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:43 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:44 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:44 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:53 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:16:06 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+Nov 10 13:16:19 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+Nov 10 13:16:24 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+Nov 10 13:16:24 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+
+==== ALSA cards
+ 0 [MAHUAHPOmniBook]: glymur - MAHUA-HP-OmniBook-5-16-bf1xxx
+                      HP-HPOmniBook5Laptop16_bf1xxx-ConfigID-8F47
+card: 0
+
+==== ALSA UCM profile (what PipeWire uses)
+/etc/wireplumber/wireplumber.conf.d/:
+total 4
+-rw-r--r-- 1 root root 1219 Nov 10 13:07 51-hp-omnibook-5-16-audio.conf
+
+/usr/share/alsa/ucm2/conf.d/glymur/:
+total 4
+lrwxrwxrwx 1 root root  37 Aug 24 11:29 GLYMUR-CRD.conf -> ../../Qualcomm/glymur/GLYMUR-CRD.conf
+-rw-r--r-- 1 root root 920 Nov 10 13:07 HP-HPOmniBook5Laptop16_bf1xxx-ConfigID-8F47.conf
+Verb.HiFi {
+	Comment "HiFi quality Music"
+	Device.Speaker {
+		Comment "Internal Speakers"
+		Values {
+			CaptureCTL "_ucm0001.hw:MAHUAHPOmniBook"
+			PlaybackCTL "_ucm0001.hw:MAHUAHPOmniBook"
+			PlaybackChannels 2
+			PlaybackMixer "_ucm0001.default:MAHUAHPOmniBook"
+			PlaybackMixerElem Speakers
+			PlaybackPCM "_ucm0001.hw:MAHUAHPOmniBook,0"
+			PlaybackPriority 100
+			PlaybackSwitch "Speakers Switch"
+			TQ HiFi
+		}
+	}
+	Device.Mic {
+		Comment "Microphone Array"
+		Values {
+			CaptureCTL "_ucm0001.hw:MAHUAHPOmniBook"
+			CaptureMixerElem "Mic LED"
+			CapturePCM "_ucm0001.hw:MAHUAHPOmniBook,1"
+			CapturePriority 100
+			CaptureSwitch "Mic LED Capture Switch"
+			Format S16_LE
+			PlaybackCTL "_ucm0001.hw:MAHUAHPOmniBook"
+			TQ HiFi
+		}
+	}
+}
+
+==== PipeWire: names (Windows: Qualcomm(R) Aqstic(TM) ACX Static Endpoints Audio Device)
+Audio
+ ├─ Devices:
+ │      52. Qualcomm(R) Aqstic(TM) ACX Static Endpoints Audio Device [alsa]
+ │  
+ ├─ Sinks:
+ │  *   60. Internal Speakers                   [vol: 1.00]
+ │  
+ ├─ Sources:
+ │  *   61. Microphone Array                    [vol: 1.00]
+ │  
+ ├─ Filters:
+ │  
+ └─ Streams:
+
+Video
+            "name": "api.alsa.path",
+        "api.alsa.path": "hw:0",
+        "api.alsa.path": "hw:MAHUAHPOmniBook,0",
+        "api.alsa.path": "hw:MAHUAHPOmniBook,1",
+        "device.description": "HP True Vision FHD Camera",
+        "device.description": "Qualcomm(R) Aqstic(TM) ACX Static Endpoints Audio Device",
+        "device.name": "alsa_card.platform-sound",
+        "device.name": "v4l2_device.platform-xhci-hcd.2.auto-usb-0_1_1.0",
+        "device.name": "v4l2_device.platform-xhci-hcd.2.auto-usb-0_1_1.0.2",
+        "device.name": "v4l2_device.platform-xhci-hcd.2.auto-usb-0_1_1.2",
+        "device.name": "v4l2_device.platform-xhci-hcd.2.auto-usb-0_1_1.2.2",
+        "device.nick": "MAHUA-HP-OmniBook-5-16-bf1xxx",
+        "node.description": "BLE MIDI 1",
+        "node.description": "HP True Vision FHD Camera (V4L2)",
+        "node.description": "Internal Speakers",
+        "node.description": "Microphone Array",
+        "node.name": "Dummy-Driver",
+        "node.name": "Freewheel-Driver",
+        "node.name": "Midi-Bridge",
+        "node.name": "alsa_input.platform-sound.HiFi__Mic__source",
+        "node.name": "alsa_output.platform-sound.HiFi__Speaker__sink",
+        "node.name": "bluez_midi.server",
+        "node.name": "v4l2_input.platform-xhci-hcd.2.auto-usb-0_1_1.0",
+        "node.name": "v4l2_input.platform-xhci-hcd.2.auto-usb-0_1_1.2",
+        "node.nick": "HP True Vision FHD Camera",
+        "node.nick": "Internal Speakers",
+        "node.nick": "Microphone Array",
+
+==== mute switches, LED binding and LEDs
+  /sys/class/sound/ctl-led/mic/card0/list: 245
+  /sys/class/sound/ctl-led/speaker/card0/list: 244
+  Speakers Switch          on
+  Mic LED Capture Switch   on
+  platform::mute     brightness=0 trigger=[audio-mute]
+  platform::micmute  brightness=0 trigger=[audio-micmute]
+  sink muted: Volume: 1.00   source muted: Volume: 1.00
+
+==== microphones (DMIC0, DMIC1) through PipeWire
+Record 5 s from the Microphone Array? Speak or tap near the microphones. (y/N) answer: y
+/tmp/glymur-audio/mic.wav
+channel 0: 250880 frames, peak 32767, rms 1052 (of 32767), 8081 distinct values
+channel 1: 250880 frames, peak 32767, rms 1006 (of 32767), 8530 distinct values
+
+==== speakers through PipeWire
+Play a quiet 1 kHz tone on the Internal Speakers, left then right, about 2 s each? (y/N) answer: y
+amplifiers attached: 3 of 2 after the wake-up
+playing left
+Tone 'left': which speaker played, left, right, both or none? answer: left
+playing right
+Tone 'right': which speaker played, left, right, both or none? answer: right
+
+==== mute from the desktop: switches and LEDs follow
+Mute the speakers, then the microphones, from software and watch the F6 and F9 LEDs? (y/N) answer: y
+speakers muted:
+  Speakers Switch          off
+  Mic LED Capture Switch   on
+  platform::mute     brightness=1 trigger=[audio-mute]
+  platform::micmute  brightness=0 trigger=[audio-micmute]
+  sink muted: Volume: 0.50 [MUTED]   source muted: Volume: 1.00
+Which mute LEDs are lit now: F6, F9, both or none? answer: F6
+microphones muted:
+  Speakers Switch          on
+  Mic LED Capture Switch   off
+  platform::mute     brightness=0 trigger=[audio-mute]
+  platform::micmute  brightness=1 trigger=[audio-micmute]
+  sink muted: Volume: 0.50   source muted: Volume: 1.00 [MUTED]
+Which mute LEDs are lit now: F6, F9, both or none? answer: FF9
+recording 3 s while muted (speak now):
+/tmp/glymur-audio/muted.wav
+muted recording: 150528 frames, peak 0 -> SILENT, OK
+both unmuted:
+  Speakers Switch          on
+  Mic LED Capture Switch   on
+  platform::mute     brightness=0 trigger=[audio-mute]
+  platform::micmute  brightness=0 trigger=[audio-micmute]
+  sink muted: Volume: 0.50   source muted: Volume: 1.00
+
+==== mute keys: F6 (speakers) and F9 (microphones)
+Press F6 once, then answer: did GNOME show the speaker-mute icon? (y/N) answer: N
+after F6:
+  Speakers Switch          on
+  Mic LED Capture Switch   on
+  platform::mute     brightness=0 trigger=[audio-mute]
+  platform::micmute  brightness=0 trigger=[audio-micmute]
+  sink muted: Volume: 0.50   source muted: Volume: 1.00
+Press F9 once, then answer: which icon did GNOME show, speaker mute, microphone mute, both or none? answer: none
+after F9:
+  Speakers Switch          on
+  Mic LED Capture Switch   on
+  platform::mute     brightness=0 trigger=[audio-mute]
+  platform::micmute  brightness=0 trigger=[audio-micmute]
+  sink muted: Volume: 0.50   source muted: Volume: 1.00
+EC interrupts during F9: 97 -> 97
+Nov 10 13:15:53 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:16:06 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+Nov 10 13:16:19 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+Nov 10 13:16:24 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+Nov 10 13:16:24 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+
+==== kernel log after the tests
+Nov 10 13:14:15 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:14:15 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:14:16 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:14:16 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:14:38 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:14:42 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:14:47 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:15:18 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:15:23 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:33 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:43 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:44 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:44 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:15:46 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:15:48 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:15:53 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x1d
+Nov 10 13:16:06 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+Nov 10 13:16:19 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+Nov 10 13:16:19 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:16:24 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+Nov 10 13:16:24 glymur kernel: hp-omnibook-5-ec 9-0076: EC event 0x88
+Nov 10 13:16:38 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:16:50 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:16:50 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:16:55 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:17:15 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:17:26 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:17:47 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:17:57 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:14 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:14 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:16 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:16 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:16 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:20 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:22 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:28 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:33 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:33 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:44 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:46 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:50 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:50 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:50 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:55 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:18:58 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:19:00 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:19:01 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:19:01 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:19:02 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:19:02 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:19:06 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:19:08 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:19:13 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:19:13 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:19:25 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:19:29 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:19:29 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:19:37 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 10 13:19:41 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Saved to /var/log/glymur/audio-test-20261110T131844.txt
