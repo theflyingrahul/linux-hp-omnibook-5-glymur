@@ -21,5 +21,5 @@ Run so far: A1 to A6, A9. Not yet run: USB, charging, power button, suspend
 - Fix `check-headset.sh` to print the jack control values, and give the
   headset a UCM device.
 - RTC: the PMIC GLink RTC gets no time from the firmware; see
-  `docs/rtc-2026-11-10.md`.
+  the earlier RTC analysis (commit `cf9d0ef`).
 - The rest of boot A, then B and C.
