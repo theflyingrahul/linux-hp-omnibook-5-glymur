@@ -1,0 +1,1302 @@
+[   31.910146] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   32.285038] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   32.398008] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   32.501080] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   37.914102] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   39.477411] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   42.066099] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   47.725101] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   52.570015] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   52.782111] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   53.194035] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   54.926245] glymur systemd-journald[594]: File /var/log/journal/72d80a48b0a14cd6ae41c45f52a2e16f/user-1000.journal corrupted or uncleanly shut down, renaming and replacing.
+[   54.965053] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   55.142007] glymur kernel: kauditd_printk_skb: 243 callbacks suppressed
+[   55.142027] glymur kernel: audit: type=1400 audit(1794300618.879:255): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=3864 comm="fusermount3" capability=1  capname="dac_override"
+[   55.142045] glymur kernel: audit: type=1400 audit(1794300618.879:256): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=3864 comm="fusermount3" capability=7  capname="setuid"
+[   55.142051] glymur kernel: audit: type=1400 audit(1794300618.879:257): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=3865 comm="fusermount3" capability=7  capname="setuid"
+[   55.147004] glymur kernel: audit: type=1400 audit(1794300618.884:258): apparmor="DENIED" operation="mount" class="mount" profile="/usr/lib/snapd/snap-confine" pid=3782 comm="snap-confine" flags="rw, rbind"
+[   55.178326] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   55.274063] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   55.376010] glymur kernel: rfkill: input handler enabled
+[   55.380006] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   55.388154] glymur kernel: ------------[ cut here ]------------
+[   55.388207] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[   55.388217] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#8: v4l_id/3937
+[   55.388226] glymur kernel: Modules linked in: aes_ce_ccm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc snd_soc_sdca_class_function qrtr_mhi regmap_sdw_mbq snd_soc_wcd9378 snd_soc_sdca_class reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_dai q6apm_lpass_dais snd_q6dsp_common pm8941_pwrkey snd_ctl_led hci_uart uvcvideo uvc btqca btrtl videobuf2_vmalloc btbcm snd_soc_x1e80100 btintel snd_soc_qcom_sdw bluetooth snd_soc_qcom_common qcom_spel ath12k_wifi7 ath12k hp_omnibook_5_ec sparse_keymap qcom_iris q6prm soundwire_qcom slimbus snd_soc_hdmi_codec v4l2_mem2mem mac80211 snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro qcom_tsens soundwire_bus videobuf2_dma_contig snd_soc_sdca snd_q6apm videobuf2_memops snd_soc_lpass_macro_common videobuf2_v4l2 videobuf2_common snd_soc_core cfg80211 videodev snd_compress mc mhi ac97_bus libarc4 snd_pcm_dmaengine fastrpc qcomtee qcom_rng tee sg joydev
+[   55.388270] glymur kernel:  input_leds sch_fq_codel efi_pstore uas usb_storage apr hid_multitouch panel_samsung_atna33xc20 hid_generic phy_qcom_eusb2_repeater nvmem_qcom_spmi_sdam qcom_pon pinctrl_spmi_gpio i2c_hid_of i2c_hid_acpi_prp0001 rpmsg_ctrl i2c_hid rpmsg_char qrtr_smd qcom_pd_mapper hid qcom_spmi_pmic regmap_spmi xhci_plat_hcd ucsi_glink rtc_qcom_glink pmic_glink_altmode socinfo typec_ucsi qcom_battmgr aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher msm i2c_qcom_geni sm4 spmi_pmic_arb ubwc_config spmi_devres dispcc_glymur ocmem phy_qcom_edp spmi drm_gpuvm camcc_glymur qcom_stats drm_exec qcom_q6v5_pas gpu_sched qcom_pil_info qmi_tmd dwc3_qcom videocc_glymur evacc_glymur phy_qcom_qmp_combo qcom_eud qcom_common aux_bridge qcom_glink_smem drm_display_helper qrtr dwc3 typec qcom_glink cec ulpi pinctrl_sm8650_lpass_lpi qcom_q6v5 thunderbolt qcom_rpmh_regulator udc_core qcom_sysmon pinctrl_lpass_lpi rc_core gpi phy_qcom_m31_eusb2 pmic_glink mdt_loader lpasscc_glymur drm_dp_aux_bus
+[   55.388295] glymur kernel:  pdr_interface qcom_smd nvmem_qfprom qcom_pdr_msg llcc_qcom qcom_aoss qcom_hwspinlock qce_core bam_dma qcom_cpucp_mbox qmi_helpers icc_bwmon rpmsg_core smp2p qcom_smem fixed gpio_keys dmi_sysfs autofs4
+[   55.388304] glymur kernel: CPU: 8 UID: 0 PID: 3937 Comm: v4l_id Tainted: G        W           7.3.0-glymur-20 #1 PREEMPT(lazy) 
+[   55.388317] glymur kernel: Tainted: [W]=WARN
+[   55.388325] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[   55.388334] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[   55.388344] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[   55.388352] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[   55.388360] glymur kernel: sp : ffff80008eeeb6f0
+[   55.388368] glymur kernel: x29: ffff80008eeeb6f0 x28: 0000000000000101 x27: 0000000000000000
+[   55.388376] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff0008029f0800
+[   55.388385] glymur kernel: x23: ffffcb7f16289680 x22: 0000000000000000 x21: 0000000000000001
+[   55.388392] glymur kernel: x20: 0000000000000001 x19: ffffcb7f16289260 x18: ffff80008e6a50d8
+[   55.388400] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[   55.388408] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[   55.388415] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffcb7f5a5da608
+[   55.388425] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[   55.388432] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[   55.388440] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[   55.388447] glymur kernel: Call trace:
+[   55.388455] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[   55.388462] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[   55.388469] glymur kernel:  _genpd_power_on+0xc0/0x208
+[   55.388477] glymur kernel:  genpd_power_on+0x208/0x478
+[   55.388484] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[   55.388493] glymur kernel:  __rpm_callback+0x54/0x250
+[   55.388501] glymur kernel:  rpm_callback+0x88/0xa0
+[   55.388508] glymur kernel:  rpm_resume+0x550/0x748
+[   55.388516] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[   55.388523] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[   55.388531] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[   55.388538] glymur kernel:  iris_vpu_power_on+0x5c/0x118 [qcom_iris]
+[   55.388546] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[   55.388553] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[   55.388563] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[   55.388570] glymur kernel:  chrdev_open+0xbc/0x270
+[   55.388578] glymur kernel:  do_dentry_open+0x12c/0x548
+[   55.388585] glymur kernel:  vfs_open+0x34/0x130
+[   55.388593] glymur kernel:  path_openat+0x5d4/0x938
+[   55.388600] glymur kernel:  do_file_open+0xbc/0x190
+[   55.388608] glymur kernel:  do_sys_openat2+0x8c/0x120
+[   55.388615] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[   55.388623] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[   55.388632] glymur kernel:  el0_svc_common.constprop.0+0x114/0x140
+[   55.388639] glymur kernel:  do_el0_svc+0x28/0x58
+[   55.388646] glymur kernel:  el0_svc+0x48/0x310
+[   55.388654] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+[   55.388661] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+[   55.388668] glymur kernel: ---[ end trace 0000000000000000 ]---
+[   55.389042] glymur kernel: qcom-iris aa00000.video-codec: power on failed
+[   55.390011] glymur kernel: qcom-iris aa00000.video-codec: core init failed
+[   55.392150] glymur kernel: ------------[ cut here ]------------
+[   55.392167] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[   55.392172] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#5: v4l_id/3936
+[   55.392178] glymur kernel: Modules linked in: aes_ce_ccm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc snd_soc_sdca_class_function qrtr_mhi regmap_sdw_mbq snd_soc_wcd9378 snd_soc_sdca_class reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_dai q6apm_lpass_dais snd_q6dsp_common pm8941_pwrkey snd_ctl_led hci_uart uvcvideo uvc btqca btrtl videobuf2_vmalloc btbcm snd_soc_x1e80100 btintel snd_soc_qcom_sdw bluetooth snd_soc_qcom_common qcom_spel ath12k_wifi7 ath12k hp_omnibook_5_ec sparse_keymap qcom_iris q6prm soundwire_qcom slimbus snd_soc_hdmi_codec v4l2_mem2mem mac80211 snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro qcom_tsens soundwire_bus videobuf2_dma_contig snd_soc_sdca snd_q6apm videobuf2_memops snd_soc_lpass_macro_common videobuf2_v4l2 videobuf2_common snd_soc_core cfg80211 videodev snd_compress mc mhi ac97_bus libarc4 snd_pcm_dmaengine fastrpc qcomtee qcom_rng tee sg joydev
+[   55.392201] glymur kernel:  input_leds sch_fq_codel efi_pstore uas usb_storage apr hid_multitouch panel_samsung_atna33xc20 hid_generic phy_qcom_eusb2_repeater nvmem_qcom_spmi_sdam qcom_pon pinctrl_spmi_gpio i2c_hid_of i2c_hid_acpi_prp0001 rpmsg_ctrl i2c_hid rpmsg_char qrtr_smd qcom_pd_mapper hid qcom_spmi_pmic regmap_spmi xhci_plat_hcd ucsi_glink rtc_qcom_glink pmic_glink_altmode socinfo typec_ucsi qcom_battmgr aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher msm i2c_qcom_geni sm4 spmi_pmic_arb ubwc_config spmi_devres dispcc_glymur ocmem phy_qcom_edp spmi drm_gpuvm camcc_glymur qcom_stats drm_exec qcom_q6v5_pas gpu_sched qcom_pil_info qmi_tmd dwc3_qcom videocc_glymur evacc_glymur phy_qcom_qmp_combo qcom_eud qcom_common aux_bridge qcom_glink_smem drm_display_helper qrtr dwc3 typec qcom_glink cec ulpi pinctrl_sm8650_lpass_lpi qcom_q6v5 thunderbolt qcom_rpmh_regulator udc_core qcom_sysmon pinctrl_lpass_lpi rc_core gpi phy_qcom_m31_eusb2 pmic_glink mdt_loader lpasscc_glymur drm_dp_aux_bus
+[   55.392212] glymur kernel:  pdr_interface qcom_smd nvmem_qfprom qcom_pdr_msg llcc_qcom qcom_aoss qcom_hwspinlock qce_core bam_dma qcom_cpucp_mbox qmi_helpers icc_bwmon rpmsg_core smp2p qcom_smem fixed gpio_keys dmi_sysfs autofs4
+[   55.392218] glymur kernel: CPU: 5 UID: 0 PID: 3936 Comm: v4l_id Tainted: G        W           7.3.0-glymur-20 #1 PREEMPT(lazy) 
+[   55.392223] glymur kernel: Tainted: [W]=WARN
+[   55.392228] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[   55.392233] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[   55.392238] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[   55.392257] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[   55.392263] glymur kernel: sp : ffff80008efe35b0
+[   55.392267] glymur kernel: x29: ffff80008efe35b0 x28: 0000000000000101 x27: 0000000000000000
+[   55.392272] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff0008029f0800
+[   55.392278] glymur kernel: x23: ffffcb7f16289680 x22: 0000000000000000 x21: 0000000000000001
+[   55.392283] glymur kernel: x20: 0000000000000001 x19: ffffcb7f16289260 x18: ffff80008e01b0d8
+[   55.392287] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[   55.392292] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[   55.392297] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffcb7f5a5da608
+[   55.392301] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[   55.392307] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[   55.392312] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[   55.392316] glymur kernel: Call trace:
+[   55.392321] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[   55.392325] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[   55.392330] glymur kernel:  _genpd_power_on+0xc0/0x208
+[   55.392335] glymur kernel:  genpd_power_on+0x208/0x478
+[   55.392339] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[   55.392344] glymur kernel:  __rpm_callback+0x54/0x250
+[   55.392348] glymur kernel:  rpm_callback+0x88/0xa0
+[   55.392353] glymur kernel:  rpm_resume+0x550/0x748
+[   55.392359] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[   55.392364] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[   55.392368] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[   55.392373] glymur kernel:  iris_vpu_power_on+0x5c/0x118 [qcom_iris]
+[   55.392378] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[   55.392382] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[   55.392387] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[   55.392391] glymur kernel:  chrdev_open+0xbc/0x270
+[   55.392396] glymur kernel:  do_dentry_open+0x12c/0x548
+[   55.392402] glymur kernel:  vfs_open+0x34/0x130
+[   55.392407] glymur kernel:  path_openat+0x5d4/0x938
+[   55.392412] glymur kernel:  do_file_open+0xbc/0x190
+[   55.392418] glymur kernel:  do_sys_openat2+0x8c/0x120
+[   55.392422] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[   55.392427] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[   55.392432] glymur kernel:  el0_svc_common.constprop.0+0x114/0x140
+[   55.392436] glymur kernel:  do_el0_svc+0x28/0x58
+[   55.392441] glymur kernel:  el0_svc+0x48/0x310
+[   55.392446] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+[   55.392451] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+[   55.392456] glymur kernel: ---[ end trace 0000000000000000 ]---
+[   55.393018] glymur kernel: qcom-iris aa00000.video-codec: power on failed
+[   55.394006] glymur kernel: qcom-iris aa00000.video-codec: core init failed
+[   55.488008] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   55.492043] glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: ASoC error (-16): at soc_component_read_no_lock() on snd_soc_sdca.SimpleJack.0 for register: [0x40c00908]
+[   55.493005] glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: ASoC error (-16): at soc_component_read_no_lock() on snd_soc_sdca.SimpleJack.0 for register: [0x40c00908]
+[   55.538006] glymur kernel: audit: type=1400 audit(1794300619.275:259): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=4057 comm="fusermount3" capability=1  capname="dac_override"
+[   55.538027] glymur kernel: audit: type=1400 audit(1794300619.275:260): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=4057 comm="fusermount3" capability=7  capname="setuid"
+[   55.538033] glymur kernel: audit: type=1400 audit(1794300619.275:261): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=4058 comm="fusermount3" capability=7  capname="setuid"
+[   55.540137] glymur kernel: ------------[ cut here ]------------
+[   55.540158] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[   55.540167] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#6: wireplumber/3785
+[   55.540176] glymur kernel: Modules linked in: aes_ce_ccm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc snd_soc_sdca_class_function qrtr_mhi regmap_sdw_mbq snd_soc_wcd9378 snd_soc_sdca_class reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_dai q6apm_lpass_dais snd_q6dsp_common pm8941_pwrkey snd_ctl_led hci_uart uvcvideo uvc btqca btrtl videobuf2_vmalloc btbcm snd_soc_x1e80100 btintel snd_soc_qcom_sdw bluetooth snd_soc_qcom_common qcom_spel ath12k_wifi7 ath12k hp_omnibook_5_ec sparse_keymap qcom_iris q6prm soundwire_qcom slimbus snd_soc_hdmi_codec v4l2_mem2mem mac80211 snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro qcom_tsens soundwire_bus videobuf2_dma_contig snd_soc_sdca snd_q6apm videobuf2_memops snd_soc_lpass_macro_common videobuf2_v4l2 videobuf2_common snd_soc_core cfg80211 videodev snd_compress mc mhi ac97_bus libarc4 snd_pcm_dmaengine fastrpc qcomtee qcom_rng tee sg joydev
+[   55.540205] glymur kernel:  input_leds sch_fq_codel efi_pstore uas usb_storage apr hid_multitouch panel_samsung_atna33xc20 hid_generic phy_qcom_eusb2_repeater nvmem_qcom_spmi_sdam qcom_pon pinctrl_spmi_gpio i2c_hid_of i2c_hid_acpi_prp0001 rpmsg_ctrl i2c_hid rpmsg_char qrtr_smd qcom_pd_mapper hid qcom_spmi_pmic regmap_spmi xhci_plat_hcd ucsi_glink rtc_qcom_glink pmic_glink_altmode socinfo typec_ucsi qcom_battmgr aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher msm i2c_qcom_geni sm4 spmi_pmic_arb ubwc_config spmi_devres dispcc_glymur ocmem phy_qcom_edp spmi drm_gpuvm camcc_glymur qcom_stats drm_exec qcom_q6v5_pas gpu_sched qcom_pil_info qmi_tmd dwc3_qcom videocc_glymur evacc_glymur phy_qcom_qmp_combo qcom_eud qcom_common aux_bridge qcom_glink_smem drm_display_helper qrtr dwc3 typec qcom_glink cec ulpi pinctrl_sm8650_lpass_lpi qcom_q6v5 thunderbolt qcom_rpmh_regulator udc_core qcom_sysmon pinctrl_lpass_lpi rc_core gpi phy_qcom_m31_eusb2 pmic_glink mdt_loader lpasscc_glymur drm_dp_aux_bus
+[   55.540221] glymur kernel:  pdr_interface qcom_smd nvmem_qfprom qcom_pdr_msg llcc_qcom qcom_aoss qcom_hwspinlock qce_core bam_dma qcom_cpucp_mbox qmi_helpers icc_bwmon rpmsg_core smp2p qcom_smem fixed gpio_keys dmi_sysfs autofs4
+[   55.540229] glymur kernel: CPU: 6 UID: 1000 PID: 3785 Comm: wireplumber Tainted: G        W           7.3.0-glymur-20 #1 PREEMPT(lazy) 
+[   55.540250] glymur kernel: Tainted: [W]=WARN
+[   55.540258] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[   55.540265] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[   55.540272] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[   55.540279] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[   55.540286] glymur kernel: sp : ffff80008ed135d0
+[   55.540294] glymur kernel: x29: ffff80008ed135d0 x28: 0000000000000101 x27: 0000000000000000
+[   55.540301] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff0008029f0800
+[   55.540308] glymur kernel: x23: ffffcb7f16289680 x22: 0000000000000000 x21: 0000000000000001
+[   55.540315] glymur kernel: x20: 0000000000000001 x19: ffffcb7f16289260 x18: ffff80008e6450d8
+[   55.540322] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[   55.540332] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[   55.540339] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffcb7f5a5da608
+[   55.540347] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[   55.540354] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[   55.540361] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[   55.540368] glymur kernel: Call trace:
+[   55.540376] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[   55.540383] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[   55.540390] glymur kernel:  _genpd_power_on+0xc0/0x208
+[   55.540397] glymur kernel:  genpd_power_on+0x208/0x478
+[   55.540403] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[   55.540410] glymur kernel:  __rpm_callback+0x54/0x250
+[   55.540418] glymur kernel:  rpm_callback+0x88/0xa0
+[   55.540426] glymur kernel:  rpm_resume+0x550/0x748
+[   55.540434] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[   55.540441] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[   55.540448] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[   55.540455] glymur kernel:  iris_vpu_power_on+0x5c/0x118 [qcom_iris]
+[   55.540462] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[   55.540468] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[   55.540475] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[   55.540482] glymur kernel:  chrdev_open+0xbc/0x270
+[   55.540490] glymur kernel:  do_dentry_open+0x12c/0x548
+[   55.540496] glymur kernel:  vfs_open+0x34/0x130
+[   55.540503] glymur kernel:  path_openat+0x5d4/0x938
+[   55.540531] glymur kernel:  do_file_open+0xbc/0x190
+[   55.540539] glymur kernel:  do_sys_openat2+0x8c/0x120
+[   55.540546] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[   55.540553] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[   55.540560] glymur kernel:  el0_svc_common.constprop.0+0x114/0x140
+[   55.540568] glymur kernel:  do_el0_svc+0x28/0x58
+[   55.540575] glymur kernel:  el0_svc+0x48/0x310
+[   55.540582] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+[   55.540598] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+[   55.540606] glymur kernel: ---[ end trace 0000000000000000 ]---
+[   55.540614] glymur kernel: qcom-iris aa00000.video-codec: power on failed
+[   55.542003] glymur kernel: qcom-iris aa00000.video-codec: core init failed
+[   55.588044] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   55.692108] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   55.797141] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   55.902071] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   56.108100] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   56.219124] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   56.341223] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   56.425097] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   56.635055] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   56.658047] glymur kernel: ------------[ cut here ]------------
+[   56.658072] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[   56.658081] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#0: gst-plugin-scan/4167
+[   56.658090] glymur kernel: Modules linked in: aes_ce_ccm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc snd_soc_sdca_class_function qrtr_mhi regmap_sdw_mbq snd_soc_wcd9378 snd_soc_sdca_class reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_dai q6apm_lpass_dais snd_q6dsp_common pm8941_pwrkey snd_ctl_led hci_uart uvcvideo uvc btqca btrtl videobuf2_vmalloc btbcm snd_soc_x1e80100 btintel snd_soc_qcom_sdw bluetooth snd_soc_qcom_common qcom_spel ath12k_wifi7 ath12k hp_omnibook_5_ec sparse_keymap qcom_iris q6prm soundwire_qcom slimbus snd_soc_hdmi_codec v4l2_mem2mem mac80211 snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro qcom_tsens soundwire_bus videobuf2_dma_contig snd_soc_sdca snd_q6apm videobuf2_memops snd_soc_lpass_macro_common videobuf2_v4l2 videobuf2_common snd_soc_core cfg80211 videodev snd_compress mc mhi ac97_bus libarc4 snd_pcm_dmaengine fastrpc qcomtee qcom_rng tee sg joydev
+[   56.658120] glymur kernel:  input_leds sch_fq_codel efi_pstore uas usb_storage apr hid_multitouch panel_samsung_atna33xc20 hid_generic phy_qcom_eusb2_repeater nvmem_qcom_spmi_sdam qcom_pon pinctrl_spmi_gpio i2c_hid_of i2c_hid_acpi_prp0001 rpmsg_ctrl i2c_hid rpmsg_char qrtr_smd qcom_pd_mapper hid qcom_spmi_pmic regmap_spmi xhci_plat_hcd ucsi_glink rtc_qcom_glink pmic_glink_altmode socinfo typec_ucsi qcom_battmgr aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher msm i2c_qcom_geni sm4 spmi_pmic_arb ubwc_config spmi_devres dispcc_glymur ocmem phy_qcom_edp spmi drm_gpuvm camcc_glymur qcom_stats drm_exec qcom_q6v5_pas gpu_sched qcom_pil_info qmi_tmd dwc3_qcom videocc_glymur evacc_glymur phy_qcom_qmp_combo qcom_eud qcom_common aux_bridge qcom_glink_smem drm_display_helper qrtr dwc3 typec qcom_glink cec ulpi pinctrl_sm8650_lpass_lpi qcom_q6v5 thunderbolt qcom_rpmh_regulator udc_core qcom_sysmon pinctrl_lpass_lpi rc_core gpi phy_qcom_m31_eusb2 pmic_glink mdt_loader lpasscc_glymur drm_dp_aux_bus
+[   56.658135] glymur kernel:  pdr_interface qcom_smd nvmem_qfprom qcom_pdr_msg llcc_qcom qcom_aoss qcom_hwspinlock qce_core bam_dma qcom_cpucp_mbox qmi_helpers icc_bwmon rpmsg_core smp2p qcom_smem fixed gpio_keys dmi_sysfs autofs4
+[   56.658143] glymur kernel: CPU: 0 UID: 1000 PID: 4167 Comm: gst-plugin-scan Tainted: G        W           7.3.0-glymur-20 #1 PREEMPT(lazy) 
+[   56.658151] glymur kernel: Tainted: [W]=WARN
+[   56.658158] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[   56.658166] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[   56.658173] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[   56.658192] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[   56.658200] glymur kernel: sp : ffff80008f613490
+[   56.658207] glymur kernel: x29: ffff80008f613490 x28: 0000000000000101 x27: 0000000000000000
+[   56.658215] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff0008029f0800
+[   56.658222] glymur kernel: x23: ffffcb7f16289680 x22: 0000000000000000 x21: 0000000000000001
+[   56.658230] glymur kernel: x20: 0000000000000001 x19: ffffcb7f16289260 x18: ffff80008ee750d8
+[   56.658237] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[   56.658244] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[   56.658252] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffcb7f5a5da608
+[   56.658259] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[   56.658266] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[   56.658275] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[   56.658283] glymur kernel: Call trace:
+[   56.658291] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[   56.658299] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[   56.658307] glymur kernel:  _genpd_power_on+0xc0/0x208
+[   56.658314] glymur kernel:  genpd_power_on+0x208/0x478
+[   56.658321] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[   56.658329] glymur kernel:  __rpm_callback+0x54/0x250
+[   56.658336] glymur kernel:  rpm_callback+0x88/0xa0
+[   56.658343] glymur kernel:  rpm_resume+0x550/0x748
+[   56.658351] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[   56.658359] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[   56.658369] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[   56.658376] glymur kernel:  iris_vpu_power_on+0x5c/0x118 [qcom_iris]
+[   56.658384] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[   56.658391] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[   56.658398] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[   56.658405] glymur kernel:  chrdev_open+0xbc/0x270
+[   56.658412] glymur kernel:  do_dentry_open+0x12c/0x548
+[   56.658420] glymur kernel:  vfs_open+0x34/0x130
+[   56.658427] glymur kernel:  path_openat+0x5d4/0x938
+[   56.658465] glymur kernel:  do_file_open+0xbc/0x190
+[   56.658474] glymur kernel:  do_sys_openat2+0x8c/0x120
+[   56.658482] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[   56.658490] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[   56.658498] glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+[   56.658505] glymur kernel:  do_el0_svc+0x28/0x58
+[   56.658513] glymur kernel:  el0_svc+0x48/0x310
+[   56.658520] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+[   56.658528] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+[   56.658535] glymur kernel: ---[ end trace 0000000000000000 ]---
+[   56.658544] glymur kernel: qcom-iris aa00000.video-codec: power on failed
+[   56.659053] glymur kernel: qcom-iris aa00000.video-codec: core init failed
+[   56.662004] glymur kernel: ------------[ cut here ]------------
+[   56.662023] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[   56.662031] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#0: gst-plugin-scan/4167
+[   56.662040] glymur kernel: Modules linked in: aes_ce_ccm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc snd_soc_sdca_class_function qrtr_mhi regmap_sdw_mbq snd_soc_wcd9378 snd_soc_sdca_class reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_dai q6apm_lpass_dais snd_q6dsp_common pm8941_pwrkey snd_ctl_led hci_uart uvcvideo uvc btqca btrtl videobuf2_vmalloc btbcm snd_soc_x1e80100 btintel snd_soc_qcom_sdw bluetooth snd_soc_qcom_common qcom_spel ath12k_wifi7 ath12k hp_omnibook_5_ec sparse_keymap qcom_iris q6prm soundwire_qcom slimbus snd_soc_hdmi_codec v4l2_mem2mem mac80211 snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro qcom_tsens soundwire_bus videobuf2_dma_contig snd_soc_sdca snd_q6apm videobuf2_memops snd_soc_lpass_macro_common videobuf2_v4l2 videobuf2_common snd_soc_core cfg80211 videodev snd_compress mc mhi ac97_bus libarc4 snd_pcm_dmaengine fastrpc qcomtee qcom_rng tee sg joydev
+[   56.662061] glymur kernel:  input_leds sch_fq_codel efi_pstore uas usb_storage apr hid_multitouch panel_samsung_atna33xc20 hid_generic phy_qcom_eusb2_repeater nvmem_qcom_spmi_sdam qcom_pon pinctrl_spmi_gpio i2c_hid_of i2c_hid_acpi_prp0001 rpmsg_ctrl i2c_hid rpmsg_char qrtr_smd qcom_pd_mapper hid qcom_spmi_pmic regmap_spmi xhci_plat_hcd ucsi_glink rtc_qcom_glink pmic_glink_altmode socinfo typec_ucsi qcom_battmgr aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher msm i2c_qcom_geni sm4 spmi_pmic_arb ubwc_config spmi_devres dispcc_glymur ocmem phy_qcom_edp spmi drm_gpuvm camcc_glymur qcom_stats drm_exec qcom_q6v5_pas gpu_sched qcom_pil_info qmi_tmd dwc3_qcom videocc_glymur evacc_glymur phy_qcom_qmp_combo qcom_eud qcom_common aux_bridge qcom_glink_smem drm_display_helper qrtr dwc3 typec qcom_glink cec ulpi pinctrl_sm8650_lpass_lpi qcom_q6v5 thunderbolt qcom_rpmh_regulator udc_core qcom_sysmon pinctrl_lpass_lpi rc_core gpi phy_qcom_m31_eusb2 pmic_glink mdt_loader lpasscc_glymur drm_dp_aux_bus
+[   56.662077] glymur kernel:  pdr_interface qcom_smd nvmem_qfprom qcom_pdr_msg llcc_qcom qcom_aoss qcom_hwspinlock qce_core bam_dma qcom_cpucp_mbox qmi_helpers icc_bwmon rpmsg_core smp2p qcom_smem fixed gpio_keys dmi_sysfs autofs4
+[   56.662085] glymur kernel: CPU: 0 UID: 1000 PID: 4167 Comm: gst-plugin-scan Tainted: G        W           7.3.0-glymur-20 #1 PREEMPT(lazy) 
+[   56.662092] glymur kernel: Tainted: [W]=WARN
+[   56.662099] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[   56.662115] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[   56.662123] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[   56.662130] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[   56.662137] glymur kernel: sp : ffff80008f613680
+[   56.662146] glymur kernel: x29: ffff80008f613680 x28: 0000000000000101 x27: 0000000000000000
+[   56.662153] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff0008029f0800
+[   56.662160] glymur kernel: x23: ffffcb7f16289680 x22: 0000000000000000 x21: 0000000000000001
+[   56.662168] glymur kernel: x20: 0000000000000001 x19: ffffcb7f16289260 x18: ffff80008ee750d8
+[   56.662176] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[   56.662183] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[   56.662191] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffcb7f5a5da608
+[   56.662199] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[   56.662209] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[   56.662217] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[   56.662225] glymur kernel: Call trace:
+[   56.662233] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[   56.662240] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[   56.662248] glymur kernel:  _genpd_power_on+0xc0/0x208
+[   56.662255] glymur kernel:  genpd_power_on+0x208/0x478
+[   56.662262] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[   56.662269] glymur kernel:  __rpm_callback+0x54/0x250
+[   56.662276] glymur kernel:  rpm_callback+0x88/0xa0
+[   56.662283] glymur kernel:  rpm_resume+0x550/0x748
+[   56.662290] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[   56.662299] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[   56.662306] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[   56.662313] glymur kernel:  iris_vpu_power_on+0x5c/0x118 [qcom_iris]
+[   56.662321] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[   56.662328] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[   56.662336] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[   56.662343] glymur kernel:  chrdev_open+0xbc/0x270
+[   56.662349] glymur kernel:  do_dentry_open+0x12c/0x548
+[   56.662356] glymur kernel:  vfs_open+0x34/0x130
+[   56.662363] glymur kernel:  path_openat+0x5d4/0x938
+[   56.662371] glymur kernel:  do_file_open+0xbc/0x190
+[   56.662379] glymur kernel:  do_sys_openat2+0x8c/0x120
+[   56.662386] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[   56.662394] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[   56.662402] glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+[   56.662410] glymur kernel:  do_el0_svc+0x28/0x58
+[   56.662417] glymur kernel:  el0_svc+0x48/0x310
+[   56.662424] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+[   56.662431] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+[   56.662439] glymur kernel: ---[ end trace 0000000000000000 ]---
+[   56.662446] glymur kernel: qcom-iris aa00000.video-codec: power on failed
+[   56.663006] glymur kernel: qcom-iris aa00000.video-codec: core init failed
+[   56.724006] glymur kernel: rfkill: input handler disabled
+[   56.727044] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   56.833075] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   56.943055] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   57.050045] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   57.149011] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   57.186016] glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+[   57.187012] glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+[   57.187048] glymur kernel: ntfs3: Enabled Linux POSIX ACLs support
+[   57.187055] glymur kernel: ntfs3: Read-only LZX/Xpress compression included
+[   57.253077] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   57.359039] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   57.460037] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   57.567107] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   57.666009] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   57.760015] glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+[   57.771008] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   57.856477] glymur kernel: audit: type=1400 audit(1794300621.593:262): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=5123 comm="fusermount3" capability=1  capname="dac_override"
+[   57.856503] glymur kernel: audit: type=1400 audit(1794300621.593:263): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=5123 comm="fusermount3" capability=7  capname="setuid"
+[   57.856510] glymur kernel: audit: type=1400 audit(1794300621.593:264): apparmor="DENIED" operation="capable" class="cap" profile="fusermount3" pid=5125 comm="fusermount3" capability=7  capname="setuid"
+[   57.877059] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   57.986012] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   58.084048] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   58.192009] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   58.297114] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   58.401231] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   58.502054] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   58.611216] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   58.706007] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   58.788074] glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+[   58.814076] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   58.913080] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   59.023089] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   59.128105] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   59.228071] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   59.339080] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   59.434141] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   59.552057] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   59.648069] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   59.747208] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   59.862111] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   59.960104] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   60.059084] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   60.162050] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   60.264056] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   60.378051] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   60.473571] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   61.210013] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   61.313811] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   61.410094] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   62.994178] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   63.505235] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   65.050174] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   66.192066] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   66.300111] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   66.430042] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   66.506854] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   66.618058] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   66.711549] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   66.822110] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   66.923058] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   67.024043] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   67.128150] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   67.443048] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   67.545057] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   67.966069] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   68.064061] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   68.172006] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   68.280051] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   68.376055] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   68.480059] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   68.586098] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   68.698011] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   68.794014] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   68.900051] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   69.001028] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   69.113074] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   69.212090] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   69.326014] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   69.427054] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   69.520095] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   69.628074] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   69.733053] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   69.835645] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   69.936093] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   70.041112] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   70.158121] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   70.260013] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   70.352016] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   70.471105] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   72.334056] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   72.436089] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   72.744108] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   72.848084] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   72.954059] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   73.058085] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   73.371181] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   74.720128] glymur kernel: gxclkctl-kaanapali 3d64000.clock-controller: sync_state() pending due to 3d6c000.gmu
+[   74.720706] glymur kernel: gcc-glymur 100000.clock-controller: sync_state() pending due to 3d6c000.gmu
+[   74.720831] glymur kernel: gpucc-glymur 3d90000.clock-controller: sync_state() pending due to 3d6c000.gmu
+[   76.708212] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   78.082025] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   78.363264] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   81.910149] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   82.942062] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   83.872101] glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+[   84.899142] glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+[   85.017019] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   85.546056] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   85.744061] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   85.867742] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   85.957059] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   86.079372] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   86.168194] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   86.272854] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   86.370333] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   87.622190] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   90.117052] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   95.880117] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   96.907076] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[   96.982275] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  116.222586] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  117.782028] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  126.525106] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  130.571019] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  130.884105] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  136.288055] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  137.224018] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  137.957018] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  138.060059] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  138.160055] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  138.269128] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  138.372101] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  138.473069] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  138.579114] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  138.692165] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  138.791060] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  138.889054] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  138.992049] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  139.101059] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  139.202113] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  139.305053] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  139.409058] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  139.616106] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  139.730212] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  141.904059] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  150.120060] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  151.061145] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  155.217018] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  157.193047] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  162.712062] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  170.921062] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  171.544485] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  176.858171] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  176.959010] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  184.856050] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  187.981054] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  198.692066] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  208.464054] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  218.656053] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  220.743256] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  244.268059] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  245.488052] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  249.356055] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  249.443305] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  265.043013] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  265.062006] glymur kernel: ------------[ cut here ]------------
+[  265.062089] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[  265.062105] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#6: v4l2-ctl/7309
+[  265.062128] glymur kernel: Modules linked in: ntfs3 nls_iso8859_1 aes_ce_ccm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc snd_soc_sdca_class_function qrtr_mhi regmap_sdw_mbq snd_soc_wcd9378 snd_soc_sdca_class reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_dai q6apm_lpass_dais snd_q6dsp_common pm8941_pwrkey snd_ctl_led hci_uart uvcvideo uvc btqca btrtl videobuf2_vmalloc btbcm snd_soc_x1e80100 btintel snd_soc_qcom_sdw bluetooth snd_soc_qcom_common qcom_spel ath12k_wifi7 ath12k hp_omnibook_5_ec sparse_keymap qcom_iris q6prm soundwire_qcom slimbus snd_soc_hdmi_codec v4l2_mem2mem mac80211 snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro qcom_tsens soundwire_bus videobuf2_dma_contig snd_soc_sdca snd_q6apm videobuf2_memops snd_soc_lpass_macro_common videobuf2_v4l2 videobuf2_common snd_soc_core cfg80211 videodev snd_compress mc mhi ac97_bus libarc4 snd_pcm_dmaengine fastrpc qcomtee
+[  265.062219] glymur kernel:  qcom_rng tee sg joydev input_leds sch_fq_codel efi_pstore uas usb_storage apr hid_multitouch panel_samsung_atna33xc20 hid_generic phy_qcom_eusb2_repeater nvmem_qcom_spmi_sdam qcom_pon pinctrl_spmi_gpio i2c_hid_of i2c_hid_acpi_prp0001 rpmsg_ctrl i2c_hid rpmsg_char qrtr_smd qcom_pd_mapper hid qcom_spmi_pmic regmap_spmi xhci_plat_hcd ucsi_glink rtc_qcom_glink pmic_glink_altmode socinfo typec_ucsi qcom_battmgr aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher msm i2c_qcom_geni sm4 spmi_pmic_arb ubwc_config spmi_devres dispcc_glymur ocmem phy_qcom_edp spmi drm_gpuvm camcc_glymur qcom_stats drm_exec qcom_q6v5_pas gpu_sched qcom_pil_info qmi_tmd dwc3_qcom videocc_glymur evacc_glymur phy_qcom_qmp_combo qcom_eud qcom_common aux_bridge qcom_glink_smem drm_display_helper qrtr dwc3 typec qcom_glink cec ulpi pinctrl_sm8650_lpass_lpi qcom_q6v5 thunderbolt qcom_rpmh_regulator udc_core qcom_sysmon pinctrl_lpass_lpi rc_core gpi phy_qcom_m31_eusb2 pmic_glink mdt_loader lpasscc_glymur
+[  265.062253] glymur kernel:  drm_dp_aux_bus pdr_interface qcom_smd nvmem_qfprom qcom_pdr_msg llcc_qcom qcom_aoss qcom_hwspinlock qce_core bam_dma qcom_cpucp_mbox qmi_helpers icc_bwmon rpmsg_core smp2p qcom_smem fixed gpio_keys dmi_sysfs autofs4
+[  265.062265] glymur kernel: CPU: 6 UID: 1000 PID: 7309 Comm: v4l2-ctl Tainted: G        W           7.3.0-glymur-20 #1 PREEMPT(lazy) 
+[  265.062319] glymur kernel: Tainted: [W]=WARN
+[  265.062330] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[  265.062384] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[  265.062392] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[  265.062402] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[  265.062410] glymur kernel: sp : ffff800091e73610
+[  265.062423] glymur kernel: x29: ffff800091e73610 x28: 0000000000000101 x27: 0000000000000000
+[  265.062431] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff0008029f0800
+[  265.062441] glymur kernel: x23: ffffcb7f16289680 x22: 0000000000000000 x21: 0000000000000001
+[  265.062449] glymur kernel: x20: 0000000000000001 x19: ffffcb7f16289260 x18: ffff80008fafd0d8
+[  265.062458] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[  265.062467] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[  265.062475] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffcb7f5a5da608
+[  265.062485] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[  265.062494] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[  265.062502] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[  265.062510] glymur kernel: Call trace:
+[  265.062517] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[  265.062523] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[  265.062529] glymur kernel:  _genpd_power_on+0xc0/0x208
+[  265.062537] glymur kernel:  genpd_power_on+0x208/0x478
+[  265.062545] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[  265.062551] glymur kernel:  __rpm_callback+0x54/0x250
+[  265.062559] glymur kernel:  rpm_callback+0x88/0xa0
+[  265.062566] glymur kernel:  rpm_resume+0x550/0x748
+[  265.062575] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[  265.062598] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[  265.062609] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[  265.062616] glymur kernel:  iris_vpu_power_on+0x5c/0x118 [qcom_iris]
+[  265.062623] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[  265.062631] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[  265.062638] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[  265.062645] glymur kernel:  chrdev_open+0xbc/0x270
+[  265.062649] glymur kernel:  do_dentry_open+0x12c/0x548
+[  265.062657] glymur kernel:  vfs_open+0x34/0x130
+[  265.062663] glymur kernel:  path_openat+0x5d4/0x938
+[  265.062669] glymur kernel:  do_file_open+0xbc/0x190
+[  265.062676] glymur kernel:  do_sys_openat2+0x8c/0x120
+[  265.062683] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[  265.062688] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[  265.062694] glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+[  265.062703] glymur kernel:  do_el0_svc+0x28/0x58
+[  265.062710] glymur kernel:  el0_svc+0x48/0x310
+[  265.062716] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+[  265.062724] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+[  265.062730] glymur kernel: ---[ end trace 0000000000000000 ]---
+[  265.062738] glymur kernel: qcom-iris aa00000.video-codec: power on failed
+[  265.062853] glymur kernel: qcom-iris aa00000.video-codec: core init failed
+[  265.065461] glymur kernel: ------------[ cut here ]------------
+[  265.065469] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[  265.065476] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#6: v4l2-ctl/7309
+[  265.065482] glymur kernel: Modules linked in: ntfs3 nls_iso8859_1 aes_ce_ccm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc snd_soc_sdca_class_function qrtr_mhi regmap_sdw_mbq snd_soc_wcd9378 snd_soc_sdca_class reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_dai q6apm_lpass_dais snd_q6dsp_common pm8941_pwrkey snd_ctl_led hci_uart uvcvideo uvc btqca btrtl videobuf2_vmalloc btbcm snd_soc_x1e80100 btintel snd_soc_qcom_sdw bluetooth snd_soc_qcom_common qcom_spel ath12k_wifi7 ath12k hp_omnibook_5_ec sparse_keymap qcom_iris q6prm soundwire_qcom slimbus snd_soc_hdmi_codec v4l2_mem2mem mac80211 snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro qcom_tsens soundwire_bus videobuf2_dma_contig snd_soc_sdca snd_q6apm videobuf2_memops snd_soc_lpass_macro_common videobuf2_v4l2 videobuf2_common snd_soc_core cfg80211 videodev snd_compress mc mhi ac97_bus libarc4 snd_pcm_dmaengine fastrpc qcomtee
+[  265.065496] glymur kernel:  qcom_rng tee sg joydev input_leds sch_fq_codel efi_pstore uas usb_storage apr hid_multitouch panel_samsung_atna33xc20 hid_generic phy_qcom_eusb2_repeater nvmem_qcom_spmi_sdam qcom_pon pinctrl_spmi_gpio i2c_hid_of i2c_hid_acpi_prp0001 rpmsg_ctrl i2c_hid rpmsg_char qrtr_smd qcom_pd_mapper hid qcom_spmi_pmic regmap_spmi xhci_plat_hcd ucsi_glink rtc_qcom_glink pmic_glink_altmode socinfo typec_ucsi qcom_battmgr aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher msm i2c_qcom_geni sm4 spmi_pmic_arb ubwc_config spmi_devres dispcc_glymur ocmem phy_qcom_edp spmi drm_gpuvm camcc_glymur qcom_stats drm_exec qcom_q6v5_pas gpu_sched qcom_pil_info qmi_tmd dwc3_qcom videocc_glymur evacc_glymur phy_qcom_qmp_combo qcom_eud qcom_common aux_bridge qcom_glink_smem drm_display_helper qrtr dwc3 typec qcom_glink cec ulpi pinctrl_sm8650_lpass_lpi qcom_q6v5 thunderbolt qcom_rpmh_regulator udc_core qcom_sysmon pinctrl_lpass_lpi rc_core gpi phy_qcom_m31_eusb2 pmic_glink mdt_loader lpasscc_glymur
+[  265.065507] glymur kernel:  drm_dp_aux_bus pdr_interface qcom_smd nvmem_qfprom qcom_pdr_msg llcc_qcom qcom_aoss qcom_hwspinlock qce_core bam_dma qcom_cpucp_mbox qmi_helpers icc_bwmon rpmsg_core smp2p qcom_smem fixed gpio_keys dmi_sysfs autofs4
+[  265.065514] glymur kernel: CPU: 6 UID: 1000 PID: 7309 Comm: v4l2-ctl Tainted: G        W           7.3.0-glymur-20 #1 PREEMPT(lazy) 
+[  265.065521] glymur kernel: Tainted: [W]=WARN
+[  265.065526] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[  265.065530] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[  265.065536] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[  265.065542] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[  265.065548] glymur kernel: sp : ffff800091e73600
+[  265.065557] glymur kernel: x29: ffff800091e73600 x28: 0000000000000101 x27: 0000000000000000
+[  265.065561] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff0008029f0800
+[  265.065567] glymur kernel: x23: ffffcb7f16289680 x22: 0000000000000000 x21: 0000000000000001
+[  265.065572] glymur kernel: x20: 0000000000000001 x19: ffffcb7f16289260 x18: ffff80008fafd0d8
+[  265.065578] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[  265.065584] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[  265.065589] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffcb7f5a5da608
+[  265.065595] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[  265.065601] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[  265.065607] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[  265.065613] glymur kernel: Call trace:
+[  265.065618] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[  265.065624] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[  265.065629] glymur kernel:  _genpd_power_on+0xc0/0x208
+[  265.065635] glymur kernel:  genpd_power_on+0x208/0x478
+[  265.065641] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[  265.065647] glymur kernel:  __rpm_callback+0x54/0x250
+[  265.065652] glymur kernel:  rpm_callback+0x88/0xa0
+[  265.065659] glymur kernel:  rpm_resume+0x550/0x748
+[  265.065664] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[  265.065670] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[  265.065675] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[  265.065679] glymur kernel:  iris_vpu_power_on+0x5c/0x118 [qcom_iris]
+[  265.065684] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[  265.065691] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[  265.065696] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[  265.065703] glymur kernel:  chrdev_open+0xbc/0x270
+[  265.065709] glymur kernel:  do_dentry_open+0x12c/0x548
+[  265.065714] glymur kernel:  vfs_open+0x34/0x130
+[  265.065719] glymur kernel:  path_openat+0x5d4/0x938
+[  265.065725] glymur kernel:  do_file_open+0xbc/0x190
+[  265.065731] glymur kernel:  do_sys_openat2+0x8c/0x120
+[  265.065738] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[  265.065745] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[  265.065750] glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+[  265.065756] glymur kernel:  do_el0_svc+0x28/0x58
+[  265.065761] glymur kernel:  el0_svc+0x48/0x310
+[  265.065766] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+[  265.065772] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+[  265.065779] glymur kernel: ---[ end trace 0000000000000000 ]---
+[  265.065783] glymur kernel: qcom-iris aa00000.video-codec: power on failed
+[  265.067009] glymur kernel: qcom-iris aa00000.video-codec: core init failed
+[  265.144051] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  265.484464] glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+[  280.127190] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  290.104056] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  306.536058] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  308.980088] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  310.804325] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  311.534051] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  311.644158] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  313.122813] glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+[  314.150370] glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+[  341.589022] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  344.618211] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  350.008053] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  350.117014] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  372.308177] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  377.923311] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  382.496054] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  384.059271] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  403.028051] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  407.917055] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  408.021054] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  408.224180] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  408.643264] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  433.712049] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  438.801082] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  438.912481] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  440.672070] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  440.785113] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  440.881121] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  441.949511] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  464.482600] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  474.733149] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  495.191110] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  526.453159] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  557.662222] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  562.751147] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  580.678054] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  580.777579] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  581.413053] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  588.376162] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  593.495113] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  602.513811] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  603.568107] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  605.120827] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  605.232335] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  605.323577] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  609.171033] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  615.115143] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  619.053096] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  624.666160] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  649.750108] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  649.864246] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  680.990320] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  711.703110] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  742.438201] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  773.202096] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  803.932123] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  835.159309] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  866.400444] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  897.625139] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  909.378027] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  909.482275] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  928.881108] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  928.968335] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  960.107332] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[  991.320109] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1022.549104] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1053.304087] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1063.468094] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1083.992095] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1088.675901] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1088.773057] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1088.880060] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1089.188053] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1107.183059] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1108.223028] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1109.790014] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1109.986574] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1112.692060] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1115.189806] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1115.499309] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1119.346042] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1119.351167] glymur kernel: ------------[ cut here ]------------
+[ 1119.351196] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[ 1119.351211] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#2: v4l2-ctl/8276
+[ 1119.351232] glymur kernel: Modules linked in: ntfs3 nls_iso8859_1 aes_ce_ccm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc snd_soc_sdca_class_function qrtr_mhi regmap_sdw_mbq snd_soc_wcd9378 snd_soc_sdca_class reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_dai q6apm_lpass_dais snd_q6dsp_common pm8941_pwrkey snd_ctl_led hci_uart uvcvideo uvc btqca btrtl videobuf2_vmalloc btbcm snd_soc_x1e80100 btintel snd_soc_qcom_sdw bluetooth snd_soc_qcom_common qcom_spel ath12k_wifi7 ath12k hp_omnibook_5_ec sparse_keymap qcom_iris q6prm soundwire_qcom slimbus snd_soc_hdmi_codec v4l2_mem2mem mac80211 snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro qcom_tsens soundwire_bus videobuf2_dma_contig snd_soc_sdca snd_q6apm videobuf2_memops snd_soc_lpass_macro_common videobuf2_v4l2 videobuf2_common snd_soc_core cfg80211 videodev snd_compress mc mhi ac97_bus libarc4 snd_pcm_dmaengine fastrpc qcomtee
+[ 1119.351257] glymur kernel:  qcom_rng tee sg joydev input_leds sch_fq_codel efi_pstore uas usb_storage apr hid_multitouch panel_samsung_atna33xc20 hid_generic phy_qcom_eusb2_repeater nvmem_qcom_spmi_sdam qcom_pon pinctrl_spmi_gpio i2c_hid_of i2c_hid_acpi_prp0001 rpmsg_ctrl i2c_hid rpmsg_char qrtr_smd qcom_pd_mapper hid qcom_spmi_pmic regmap_spmi xhci_plat_hcd ucsi_glink rtc_qcom_glink pmic_glink_altmode socinfo typec_ucsi qcom_battmgr aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher msm i2c_qcom_geni sm4 spmi_pmic_arb ubwc_config spmi_devres dispcc_glymur ocmem phy_qcom_edp spmi drm_gpuvm camcc_glymur qcom_stats drm_exec qcom_q6v5_pas gpu_sched qcom_pil_info qmi_tmd dwc3_qcom videocc_glymur evacc_glymur phy_qcom_qmp_combo qcom_eud qcom_common aux_bridge qcom_glink_smem drm_display_helper qrtr dwc3 typec qcom_glink cec ulpi pinctrl_sm8650_lpass_lpi qcom_q6v5 thunderbolt qcom_rpmh_regulator udc_core qcom_sysmon pinctrl_lpass_lpi rc_core gpi phy_qcom_m31_eusb2 pmic_glink mdt_loader lpasscc_glymur
+[ 1119.351275] glymur kernel:  drm_dp_aux_bus pdr_interface qcom_smd nvmem_qfprom qcom_pdr_msg llcc_qcom qcom_aoss qcom_hwspinlock qce_core bam_dma qcom_cpucp_mbox qmi_helpers icc_bwmon rpmsg_core smp2p qcom_smem fixed gpio_keys dmi_sysfs autofs4
+[ 1119.351281] glymur kernel: CPU: 2 UID: 0 PID: 8276 Comm: v4l2-ctl Tainted: G        W           7.3.0-glymur-20 #1 PREEMPT(lazy) 
+[ 1119.351293] glymur kernel: Tainted: [W]=WARN
+[ 1119.351301] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[ 1119.351309] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[ 1119.351317] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[ 1119.351326] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[ 1119.351333] glymur kernel: sp : ffff80009389b3a0
+[ 1119.351340] glymur kernel: x29: ffff80009389b3a0 x28: 0000000000000101 x27: 0000000000000000
+[ 1119.351349] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff0008029f0800
+[ 1119.351357] glymur kernel: x23: ffffcb7f16289680 x22: 0000000000000000 x21: 0000000000000001
+[ 1119.351364] glymur kernel: x20: 0000000000000001 x19: ffffcb7f16289260 x18: ffff8000914650d8
+[ 1119.351373] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[ 1119.351379] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[ 1119.351385] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffcb7f5a5da608
+[ 1119.351392] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[ 1119.351405] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[ 1119.351411] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[ 1119.351418] glymur kernel: Call trace:
+[ 1119.351425] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[ 1119.351432] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[ 1119.351438] glymur kernel:  _genpd_power_on+0xc0/0x208
+[ 1119.351444] glymur kernel:  genpd_power_on+0x208/0x478
+[ 1119.351450] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[ 1119.351457] glymur kernel:  __rpm_callback+0x54/0x250
+[ 1119.351464] glymur kernel:  rpm_callback+0x88/0xa0
+[ 1119.351470] glymur kernel:  rpm_resume+0x550/0x748
+[ 1119.351476] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[ 1119.351482] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[ 1119.351487] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[ 1119.351492] glymur kernel:  iris_vpu_power_on+0x5c/0x118 [qcom_iris]
+[ 1119.351498] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[ 1119.351504] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[ 1119.351510] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[ 1119.351517] glymur kernel:  chrdev_open+0xbc/0x270
+[ 1119.351524] glymur kernel:  do_dentry_open+0x12c/0x548
+[ 1119.351529] glymur kernel:  vfs_open+0x34/0x130
+[ 1119.351535] glymur kernel:  path_openat+0x5d4/0x938
+[ 1119.351542] glymur kernel:  do_file_open+0xbc/0x190
+[ 1119.351548] glymur kernel:  do_sys_openat2+0x8c/0x120
+[ 1119.351555] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[ 1119.351561] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[ 1119.351567] glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+[ 1119.351575] glymur kernel:  do_el0_svc+0x28/0x58
+[ 1119.351581] glymur kernel:  el0_svc+0x48/0x310
+[ 1119.351588] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+[ 1119.351593] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+[ 1119.351599] glymur kernel: ---[ end trace 0000000000000000 ]---
+[ 1119.352082] glymur kernel: qcom-iris aa00000.video-codec: power on failed
+[ 1119.352499] glymur kernel: qcom-iris aa00000.video-codec: core init failed
+[ 1119.356108] glymur kernel: ------------[ cut here ]------------
+[ 1119.356134] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[ 1119.356144] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#2: v4l2-ctl/8276
+[ 1119.356151] glymur kernel: Modules linked in: ntfs3 nls_iso8859_1 aes_ce_ccm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc snd_soc_sdca_class_function qrtr_mhi regmap_sdw_mbq snd_soc_wcd9378 snd_soc_sdca_class reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_dai q6apm_lpass_dais snd_q6dsp_common pm8941_pwrkey snd_ctl_led hci_uart uvcvideo uvc btqca btrtl videobuf2_vmalloc btbcm snd_soc_x1e80100 btintel snd_soc_qcom_sdw bluetooth snd_soc_qcom_common qcom_spel ath12k_wifi7 ath12k hp_omnibook_5_ec sparse_keymap qcom_iris q6prm soundwire_qcom slimbus snd_soc_hdmi_codec v4l2_mem2mem mac80211 snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro qcom_tsens soundwire_bus videobuf2_dma_contig snd_soc_sdca snd_q6apm videobuf2_memops snd_soc_lpass_macro_common videobuf2_v4l2 videobuf2_common snd_soc_core cfg80211 videodev snd_compress mc mhi ac97_bus libarc4 snd_pcm_dmaengine fastrpc qcomtee
+[ 1119.356170] glymur kernel:  qcom_rng tee sg joydev input_leds sch_fq_codel efi_pstore uas usb_storage apr hid_multitouch panel_samsung_atna33xc20 hid_generic phy_qcom_eusb2_repeater nvmem_qcom_spmi_sdam qcom_pon pinctrl_spmi_gpio i2c_hid_of i2c_hid_acpi_prp0001 rpmsg_ctrl i2c_hid rpmsg_char qrtr_smd qcom_pd_mapper hid qcom_spmi_pmic regmap_spmi xhci_plat_hcd ucsi_glink rtc_qcom_glink pmic_glink_altmode socinfo typec_ucsi qcom_battmgr aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher msm i2c_qcom_geni sm4 spmi_pmic_arb ubwc_config spmi_devres dispcc_glymur ocmem phy_qcom_edp spmi drm_gpuvm camcc_glymur qcom_stats drm_exec qcom_q6v5_pas gpu_sched qcom_pil_info qmi_tmd dwc3_qcom videocc_glymur evacc_glymur phy_qcom_qmp_combo qcom_eud qcom_common aux_bridge qcom_glink_smem drm_display_helper qrtr dwc3 typec qcom_glink cec ulpi pinctrl_sm8650_lpass_lpi qcom_q6v5 thunderbolt qcom_rpmh_regulator udc_core qcom_sysmon pinctrl_lpass_lpi rc_core gpi phy_qcom_m31_eusb2 pmic_glink mdt_loader lpasscc_glymur
+[ 1119.356185] glymur kernel:  drm_dp_aux_bus pdr_interface qcom_smd nvmem_qfprom qcom_pdr_msg llcc_qcom qcom_aoss qcom_hwspinlock qce_core bam_dma qcom_cpucp_mbox qmi_helpers icc_bwmon rpmsg_core smp2p qcom_smem fixed gpio_keys dmi_sysfs autofs4
+[ 1119.356191] glymur kernel: CPU: 2 UID: 0 PID: 8276 Comm: v4l2-ctl Tainted: G        W           7.3.0-glymur-20 #1 PREEMPT(lazy) 
+[ 1119.356199] glymur kernel: Tainted: [W]=WARN
+[ 1119.356207] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[ 1119.356214] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[ 1119.356221] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[ 1119.356227] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[ 1119.356234] glymur kernel: sp : ffff80009389b6f0
+[ 1119.356240] glymur kernel: x29: ffff80009389b6f0 x28: 0000000000000101 x27: 0000000000000000
+[ 1119.356247] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff0008029f0800
+[ 1119.356253] glymur kernel: x23: ffffcb7f16289680 x22: 0000000000000000 x21: 0000000000000001
+[ 1119.356262] glymur kernel: x20: 0000000000000001 x19: ffffcb7f16289260 x18: ffff8000914650d8
+[ 1119.356270] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[ 1119.356276] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[ 1119.356284] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffcb7f5a5da608
+[ 1119.356290] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[ 1119.356297] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[ 1119.356305] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[ 1119.356317] glymur kernel: Call trace:
+[ 1119.356323] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[ 1119.356327] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[ 1119.356333] glymur kernel:  _genpd_power_on+0xc0/0x208
+[ 1119.356340] glymur kernel:  genpd_power_on+0x208/0x478
+[ 1119.356347] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[ 1119.356353] glymur kernel:  __rpm_callback+0x54/0x250
+[ 1119.356359] glymur kernel:  rpm_callback+0x88/0xa0
+[ 1119.356365] glymur kernel:  rpm_resume+0x550/0x748
+[ 1119.356370] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[ 1119.356376] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[ 1119.356382] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[ 1119.356388] glymur kernel:  iris_vpu_power_on+0x5c/0x118 [qcom_iris]
+[ 1119.356394] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[ 1119.356400] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[ 1119.356406] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[ 1119.356411] glymur kernel:  chrdev_open+0xbc/0x270
+[ 1119.356417] glymur kernel:  do_dentry_open+0x12c/0x548
+[ 1119.356422] glymur kernel:  vfs_open+0x34/0x130
+[ 1119.356428] glymur kernel:  path_openat+0x5d4/0x938
+[ 1119.356434] glymur kernel:  do_file_open+0xbc/0x190
+[ 1119.356440] glymur kernel:  do_sys_openat2+0x8c/0x120
+[ 1119.356445] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[ 1119.356450] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[ 1119.356458] glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+[ 1119.356463] glymur kernel:  do_el0_svc+0x28/0x58
+[ 1119.356470] glymur kernel:  el0_svc+0x48/0x310
+[ 1119.356475] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+[ 1119.356481] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+[ 1119.356488] glymur kernel: ---[ end trace 0000000000000000 ]---
+[ 1119.356493] glymur kernel: qcom-iris aa00000.video-codec: power on failed
+[ 1119.356581] glymur kernel: qcom-iris aa00000.video-codec: core init failed
+[ 1119.777404] glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+[ 1119.921125] glymur kernel: ------------[ cut here ]------------
+[ 1119.921245] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[ 1119.921264] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#4: v4l2-ctl/8278
+[ 1119.921280] glymur kernel: Modules linked in: ntfs3 nls_iso8859_1 aes_ce_ccm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc snd_soc_sdca_class_function qrtr_mhi regmap_sdw_mbq snd_soc_wcd9378 snd_soc_sdca_class reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_dai q6apm_lpass_dais snd_q6dsp_common pm8941_pwrkey snd_ctl_led hci_uart uvcvideo uvc btqca btrtl videobuf2_vmalloc btbcm snd_soc_x1e80100 btintel snd_soc_qcom_sdw bluetooth snd_soc_qcom_common qcom_spel ath12k_wifi7 ath12k hp_omnibook_5_ec sparse_keymap qcom_iris q6prm soundwire_qcom slimbus snd_soc_hdmi_codec v4l2_mem2mem mac80211 snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro qcom_tsens soundwire_bus videobuf2_dma_contig snd_soc_sdca snd_q6apm videobuf2_memops snd_soc_lpass_macro_common videobuf2_v4l2 videobuf2_common snd_soc_core cfg80211 videodev snd_compress mc mhi ac97_bus libarc4 snd_pcm_dmaengine fastrpc qcomtee
+[ 1119.921311] glymur kernel:  qcom_rng tee sg joydev input_leds sch_fq_codel efi_pstore uas usb_storage apr hid_multitouch panel_samsung_atna33xc20 hid_generic phy_qcom_eusb2_repeater nvmem_qcom_spmi_sdam qcom_pon pinctrl_spmi_gpio i2c_hid_of i2c_hid_acpi_prp0001 rpmsg_ctrl i2c_hid rpmsg_char qrtr_smd qcom_pd_mapper hid qcom_spmi_pmic regmap_spmi xhci_plat_hcd ucsi_glink rtc_qcom_glink pmic_glink_altmode socinfo typec_ucsi qcom_battmgr aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher msm i2c_qcom_geni sm4 spmi_pmic_arb ubwc_config spmi_devres dispcc_glymur ocmem phy_qcom_edp spmi drm_gpuvm camcc_glymur qcom_stats drm_exec qcom_q6v5_pas gpu_sched qcom_pil_info qmi_tmd dwc3_qcom videocc_glymur evacc_glymur phy_qcom_qmp_combo qcom_eud qcom_common aux_bridge qcom_glink_smem drm_display_helper qrtr dwc3 typec qcom_glink cec ulpi pinctrl_sm8650_lpass_lpi qcom_q6v5 thunderbolt qcom_rpmh_regulator udc_core qcom_sysmon pinctrl_lpass_lpi rc_core gpi phy_qcom_m31_eusb2 pmic_glink mdt_loader lpasscc_glymur
+[ 1119.921329] glymur kernel:  drm_dp_aux_bus pdr_interface qcom_smd nvmem_qfprom qcom_pdr_msg llcc_qcom qcom_aoss qcom_hwspinlock qce_core bam_dma qcom_cpucp_mbox qmi_helpers icc_bwmon rpmsg_core smp2p qcom_smem fixed gpio_keys dmi_sysfs autofs4
+[ 1119.921335] glymur kernel: CPU: 4 UID: 0 PID: 8278 Comm: v4l2-ctl Tainted: G        W           7.3.0-glymur-20 #1 PREEMPT(lazy) 
+[ 1119.921352] glymur kernel: Tainted: [W]=WARN
+[ 1119.921359] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[ 1119.921369] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[ 1119.921377] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[ 1119.921385] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[ 1119.921393] glymur kernel: sp : ffff800093833640
+[ 1119.921403] glymur kernel: x29: ffff800093833640 x28: 0000000000000101 x27: 0000000000000000
+[ 1119.921412] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff0008029f0800
+[ 1119.921418] glymur kernel: x23: ffffcb7f16289680 x22: 0000000000000000 x21: 0000000000000001
+[ 1119.921425] glymur kernel: x20: 0000000000000001 x19: ffffcb7f16289260 x18: ffff8000913850d8
+[ 1119.921435] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[ 1119.921441] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[ 1119.921449] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffcb7f5a5da608
+[ 1119.921455] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[ 1119.921463] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[ 1119.921470] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[ 1119.921477] glymur kernel: Call trace:
+[ 1119.921482] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[ 1119.921487] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[ 1119.921495] glymur kernel:  _genpd_power_on+0xc0/0x208
+[ 1119.921500] glymur kernel:  genpd_power_on+0x208/0x478
+[ 1119.921506] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[ 1119.921514] glymur kernel:  __rpm_callback+0x54/0x250
+[ 1119.921522] glymur kernel:  rpm_callback+0x88/0xa0
+[ 1119.921529] glymur kernel:  rpm_resume+0x550/0x748
+[ 1119.921536] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[ 1119.921542] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[ 1119.921549] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[ 1119.921558] glymur kernel:  iris_vpu_power_on+0x5c/0x118 [qcom_iris]
+[ 1119.921563] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[ 1119.921568] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[ 1119.921575] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[ 1119.921581] glymur kernel:  chrdev_open+0xbc/0x270
+[ 1119.921587] glymur kernel:  do_dentry_open+0x12c/0x548
+[ 1119.921591] glymur kernel:  vfs_open+0x34/0x130
+[ 1119.921598] glymur kernel:  path_openat+0x5d4/0x938
+[ 1119.921604] glymur kernel:  do_file_open+0xbc/0x190
+[ 1119.921610] glymur kernel:  do_sys_openat2+0x8c/0x120
+[ 1119.921616] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[ 1119.921622] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[ 1119.921628] glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+[ 1119.921635] glymur kernel:  do_el0_svc+0x28/0x58
+[ 1119.921640] glymur kernel:  el0_svc+0x48/0x310
+[ 1119.921646] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+[ 1119.921652] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+[ 1119.921660] glymur kernel: ---[ end trace 0000000000000000 ]---
+[ 1119.921666] glymur kernel: qcom-iris aa00000.video-codec: power on failed
+[ 1119.921829] glymur kernel: qcom-iris aa00000.video-codec: core init failed
+[ 1119.926044] glymur kernel: ------------[ cut here ]------------
+[ 1119.926062] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[ 1119.926069] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#9: v4l2-ctl/8281
+[ 1119.926077] glymur kernel: Modules linked in: ntfs3 nls_iso8859_1 aes_ce_ccm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc snd_soc_sdca_class_function qrtr_mhi regmap_sdw_mbq snd_soc_wcd9378 snd_soc_sdca_class reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_dai q6apm_lpass_dais snd_q6dsp_common pm8941_pwrkey snd_ctl_led hci_uart uvcvideo uvc btqca btrtl videobuf2_vmalloc btbcm snd_soc_x1e80100 btintel snd_soc_qcom_sdw bluetooth snd_soc_qcom_common qcom_spel ath12k_wifi7 ath12k hp_omnibook_5_ec sparse_keymap qcom_iris q6prm soundwire_qcom slimbus snd_soc_hdmi_codec v4l2_mem2mem mac80211 snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro qcom_tsens soundwire_bus videobuf2_dma_contig snd_soc_sdca snd_q6apm videobuf2_memops snd_soc_lpass_macro_common videobuf2_v4l2 videobuf2_common snd_soc_core cfg80211 videodev snd_compress mc mhi ac97_bus libarc4 snd_pcm_dmaengine fastrpc qcomtee
+[ 1119.926091] glymur kernel:  qcom_rng tee sg joydev input_leds sch_fq_codel efi_pstore uas usb_storage apr hid_multitouch panel_samsung_atna33xc20 hid_generic phy_qcom_eusb2_repeater nvmem_qcom_spmi_sdam qcom_pon pinctrl_spmi_gpio i2c_hid_of i2c_hid_acpi_prp0001 rpmsg_ctrl i2c_hid rpmsg_char qrtr_smd qcom_pd_mapper hid qcom_spmi_pmic regmap_spmi xhci_plat_hcd ucsi_glink rtc_qcom_glink pmic_glink_altmode socinfo typec_ucsi qcom_battmgr aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher msm i2c_qcom_geni sm4 spmi_pmic_arb ubwc_config spmi_devres dispcc_glymur ocmem phy_qcom_edp spmi drm_gpuvm camcc_glymur qcom_stats drm_exec qcom_q6v5_pas gpu_sched qcom_pil_info qmi_tmd dwc3_qcom videocc_glymur evacc_glymur phy_qcom_qmp_combo qcom_eud qcom_common aux_bridge qcom_glink_smem drm_display_helper qrtr dwc3 typec qcom_glink cec ulpi pinctrl_sm8650_lpass_lpi qcom_q6v5 thunderbolt qcom_rpmh_regulator udc_core qcom_sysmon pinctrl_lpass_lpi rc_core gpi phy_qcom_m31_eusb2 pmic_glink mdt_loader lpasscc_glymur
+[ 1119.926103] glymur kernel:  drm_dp_aux_bus pdr_interface qcom_smd nvmem_qfprom qcom_pdr_msg llcc_qcom qcom_aoss qcom_hwspinlock qce_core bam_dma qcom_cpucp_mbox qmi_helpers icc_bwmon rpmsg_core smp2p qcom_smem fixed gpio_keys dmi_sysfs autofs4
+[ 1119.926108] glymur kernel: CPU: 9 UID: 0 PID: 8281 Comm: v4l2-ctl Tainted: G        W           7.3.0-glymur-20 #1 PREEMPT(lazy) 
+[ 1119.926115] glymur kernel: Tainted: [W]=WARN
+[ 1119.926120] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[ 1119.926127] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[ 1119.926131] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[ 1119.926136] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[ 1119.926141] glymur kernel: sp : ffff8000941b3660
+[ 1119.926148] glymur kernel: x29: ffff8000941b3660 x28: 0000000000000101 x27: 0000000000000000
+[ 1119.926155] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff0008029f0800
+[ 1119.926161] glymur kernel: x23: ffffcb7f16289680 x22: 0000000000000000 x21: 0000000000000001
+[ 1119.926166] glymur kernel: x20: 0000000000000001 x19: ffffcb7f16289260 x18: ffff80009148d0d8
+[ 1119.926174] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[ 1119.926180] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[ 1119.926185] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffcb7f5a5da608
+[ 1119.926191] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[ 1119.926197] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[ 1119.926203] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[ 1119.926210] glymur kernel: Call trace:
+[ 1119.926215] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[ 1119.926221] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[ 1119.926227] glymur kernel:  _genpd_power_on+0xc0/0x208
+[ 1119.926233] glymur kernel:  genpd_power_on+0x208/0x478
+[ 1119.926238] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[ 1119.926244] glymur kernel:  __rpm_callback+0x54/0x250
+[ 1119.926250] glymur kernel:  rpm_callback+0x88/0xa0
+[ 1119.926255] glymur kernel:  rpm_resume+0x550/0x748
+[ 1119.926261] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[ 1119.926266] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[ 1119.926272] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[ 1119.926277] glymur kernel:  iris_vpu_power_on+0x5c/0x118 [qcom_iris]
+[ 1119.926283] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[ 1119.926288] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[ 1119.926294] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[ 1119.926299] glymur kernel:  chrdev_open+0xbc/0x270
+[ 1119.926305] glymur kernel:  do_dentry_open+0x12c/0x548
+[ 1119.926309] glymur kernel:  vfs_open+0x34/0x130
+[ 1119.926315] glymur kernel:  path_openat+0x5d4/0x938
+[ 1119.926320] glymur kernel:  do_file_open+0xbc/0x190
+[ 1119.926325] glymur kernel:  do_sys_openat2+0x8c/0x120
+[ 1119.926332] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[ 1119.926338] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[ 1119.926343] glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+[ 1119.926348] glymur kernel:  do_el0_svc+0x28/0x58
+[ 1119.926353] glymur kernel:  el0_svc+0x48/0x310
+[ 1119.926358] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+[ 1119.926366] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+[ 1119.926371] glymur kernel: ---[ end trace 0000000000000000 ]---
+[ 1119.927043] glymur kernel: qcom-iris aa00000.video-codec: power on failed
+[ 1119.927139] glymur kernel: qcom-iris aa00000.video-codec: core init failed
+[ 1119.972053] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1120.110223] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1120.194965] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1120.315117] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1120.406612] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1120.493054] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1120.597052] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1121.122051] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1122.139028] glymur kernel: qcom-iris aa00000.video-codec: diag: 1 video core(s)
+[ 1122.141011] glymur kernel: platform non-pixel.7.auto: Adding to iommu group 33
+[ 1122.141144] glymur kernel: platform pixel.8.auto: Adding to iommu group 35
+[ 1122.142012] glymur kernel: platform video-firmware.9.auto: Adding to iommu group 37
+[ 1122.205064] glymur kernel: qcom-iris aa00000.video-codec: diag: efuse monitor 0x88000800, core power status 0x00000002
+[ 1122.405105] glymur kernel: qcom-iris aa00000.video-codec: diag: power control was 0x00000003; status 0x00000003 after release (timed out, bit 0x10)
+[ 1125.399110] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1145.957109] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1146.006809] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1161.815939] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1177.075486] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1177.189107] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1188.620918] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1208.382389] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1209.434123] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1220.256030] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1239.076131] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1269.911229] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1275.252032] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1300.978052] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1301.392008] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1331.697017] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1357.732054] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1362.512088] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1385.416056] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1385.942263] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1393.217091] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1411.666054] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1416.256106] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1423.968098] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1455.120916] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1468.816059] glymur kernel: qcom-iris aa00000.video-codec: diag: power control was 0x00000003; status 0x00000003 after release (timed out, bit 0x10)
+[ 1468.816282] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(999): QC_IMAGE_VERSION_STRING=video-firmware.3.6-aeb98f00ce9fd019d4902f480bfe2f73a56f7c4d
+[ 1468.816366] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1001): IMAGE_VARIANT_STRING=PROD
+[ 1468.816437] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1003): OEM_IMAGE_VERSION_STRING=hyd-lablnx446
+[ 1468.816503] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1005): BUILD_TIME: Jan  5 2026 14:07:39
+[ 1469.237007] glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+[ 1470.973015] glymur kernel: qcom-iris aa00000.video-codec: diag: 1 video core(s)
+[ 1470.973264] glymur kernel: platform non-pixel.7.auto: Adding to iommu group 33
+[ 1470.973411] glymur kernel: platform pixel.8.auto: Adding to iommu group 35
+[ 1470.973548] glymur kernel: platform video-firmware.9.auto: Adding to iommu group 37
+[ 1471.020008] glymur kernel: qcom-iris aa00000.video-codec: diag: efuse monitor 0x88000800, core power status 0x00000002
+[ 1471.220085] glymur kernel: qcom-iris aa00000.video-codec: diag: power control was 0x00000003; status 0x00000003 after release (timed out, bit 0x10)
+[ 1473.085013] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1473.264056] glymur kernel: qcom-iris aa00000.video-codec: diag: power control was 0x00000003; status 0x00000003 after release (timed out, bit 0x10)
+[ 1473.266021] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(999): QC_IMAGE_VERSION_STRING=video-firmware.3.6-aeb98f00ce9fd019d4902f480bfe2f73a56f7c4d
+[ 1473.266339] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1001): IMAGE_VARIANT_STRING=PROD
+[ 1473.266444] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1003): OEM_IMAGE_VERSION_STRING=hyd-lablnx446
+[ 1473.266539] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1005): BUILD_TIME: Jan  5 2026 14:07:39
+[ 1473.270031] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(999): QC_IMAGE_VERSION_STRING=video-firmware.3.6-aeb98f00ce9fd019d4902f480bfe2f73a56f7c4d
+[ 1473.270352] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1001): IMAGE_VARIANT_STRING=PROD
+[ 1473.270454] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1003): OEM_IMAGE_VERSION_STRING=hyd-lablnx446
+[ 1473.270549] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1005): BUILD_TIME: Jan  5 2026 14:07:39
+[ 1473.272071] glymur kernel: qcom-iris aa00000.video-codec: diag: HFI_PROP_CORE_ID 2 instead of 1
+[ 1473.273041] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:CmdDec:264d:da116008:00> vDec_AttachInternalBuffers(862): Buffer type 5 should be used for AV1 only
+[ 1473.275581] glymur kernel: qcom-iris aa00000.video-codec: diag: HFI_PROP_CORE_ID 2 instead of 1
+[ 1475.010109] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1475.010707] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1476.657082] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1476.657487] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1478.176054] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1478.176296] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1480.015012] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1480.015216] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1481.660014] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1481.660240] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1483.162106] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1483.162522] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1485.020048] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1485.020267] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1485.874577] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1486.895090] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1486.895477] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1488.495032] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1488.495449] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1490.283109] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1490.283524] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1490.992108] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1492.009061] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1492.009287] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1493.637054] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1493.637274] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1495.481063] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1495.481333] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1497.337051] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1497.337257] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1499.013048] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1499.013255] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1500.889614] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1500.889857] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1502.688054] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1502.688293] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1504.376100] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1504.376513] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1505.883052] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1505.883293] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1506.676055] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1507.476014] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1507.476227] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1509.688059] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1510.152018] glymur kernel: qcom-iris aa00000.video-codec: diag: 1 video core(s)
+[ 1510.153016] glymur kernel: platform non-pixel.7.auto: Adding to iommu group 33
+[ 1510.153128] glymur kernel: platform pixel.8.auto: Adding to iommu group 35
+[ 1510.153240] glymur kernel: platform video-firmware.9.auto: Adding to iommu group 37
+[ 1510.200979] glymur kernel: qcom-iris aa00000.video-codec: diag: efuse monitor 0x88000800, core power status 0x00000002
+[ 1510.401040] glymur kernel: qcom-iris aa00000.video-codec: diag: power control was 0x00000003; status 0x00000003 after release (timed out, bit 0x10)
+[ 1510.730047] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1512.397114] glymur kernel: qcom-iris aa00000.video-codec: diag: power control was 0x00000003; status 0x00000003 after release (timed out, bit 0x10)
+[ 1512.397894] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(999): QC_IMAGE_VERSION_STRING=video-firmware.3.6-aeb98f00ce9fd019d4902f480bfe2f73a56f7c4d
+[ 1512.398044] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1001): IMAGE_VARIANT_STRING=PROD
+[ 1512.398142] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1003): OEM_IMAGE_VERSION_STRING=hyd-lablnx446
+[ 1512.398217] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1005): BUILD_TIME: Jan  5 2026 14:07:39
+[ 1512.398322] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(999): QC_IMAGE_VERSION_STRING=video-firmware.3.6-aeb98f00ce9fd019d4902f480bfe2f73a56f7c4d
+[ 1512.398401] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1001): IMAGE_VARIANT_STRING=PROD
+[ 1512.398489] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1003): OEM_IMAGE_VERSION_STRING=hyd-lablnx446
+[ 1512.398570] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1005): BUILD_TIME: Jan  5 2026 14:07:39
+[ 1512.403043] glymur kernel: qcom-iris aa00000.video-codec: diag: HFI_PROP_CORE_ID 2 instead of 1
+[ 1512.403150] glymur kernel: qcom-iris aa00000.video-codec: diag: HFI_PROP_PIPE 2 instead of 4
+[ 1512.404044] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:CmdDec:264d:464cc008:00> vDec_AttachInternalBuffers(862): Buffer type 5 should be used for AV1 only
+[ 1512.405007] glymur kernel: qcom-iris aa00000.video-codec: diag: HFI_PROP_CORE_ID 2 instead of 1
+[ 1514.062050] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1514.062281] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1515.608020] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1515.608286] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1516.553059] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1517.156091] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1517.156509] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1518.729073] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1518.729421] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1520.304080] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1520.304481] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1521.824079] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1521.824481] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1523.504095] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1523.504453] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1525.024097] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1525.024509] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1526.528098] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1526.528506] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1528.089105] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1528.089509] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1529.661028] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1529.661360] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1531.232102] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1531.232516] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1533.095057] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1533.128316] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1534.744069] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1534.744400] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1536.263066] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1536.263347] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1537.864033] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1537.864444] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1539.444115] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1539.444458] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1540.984027] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1540.984438] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1542.590117] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1542.590537] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1544.096101] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1544.096506] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1545.761183] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1545.761584] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1547.381095] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1549.397033] glymur kernel: qcom-iris aa00000.video-codec: diag: 1 video core(s)
+[ 1549.430539] glymur kernel: platform non-pixel.7.auto: Adding to iommu group 33
+[ 1549.430705] glymur kernel: platform pixel.8.auto: Adding to iommu group 35
+[ 1549.430796] glymur kernel: platform video-firmware.9.auto: Adding to iommu group 37
+[ 1549.461049] glymur kernel: qcom-iris aa00000.video-codec: diag: efuse monitor 0x88000800, core power status 0x00000002
+[ 1549.461158] glymur kernel: qcom-iris aa00000.video-codec: diag: power control was 0x00000003; status 0x00000003 after release (core on, bit 0x2)
+[ 1549.462038] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(999): QC_IMAGE_VERSION_STRING=video-firmware.3.6-aeb98f00ce9fd019d4902f480bfe2f73a56f7c4d
+[ 1549.462510] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1001): IMAGE_VARIANT_STRING=PROD
+[ 1549.462634] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1003): OEM_IMAGE_VERSION_STRING=hyd-lablnx446
+[ 1549.462749] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1005): BUILD_TIME: Jan  5 2026 14:07:39
+[ 1551.439029] glymur kernel: qcom-iris aa00000.video-codec: diag: power control was 0x00000003; status 0x00000003 after release (core on, bit 0x2)
+[ 1551.439470] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(999): QC_IMAGE_VERSION_STRING=video-firmware.3.6-aeb98f00ce9fd019d4902f480bfe2f73a56f7c4d
+[ 1551.439579] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1001): IMAGE_VARIANT_STRING=PROD
+[ 1551.439676] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1003): OEM_IMAGE_VERSION_STRING=hyd-lablnx446
+[ 1551.439820] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1005): BUILD_TIME: Jan  5 2026 14:07:39
+[ 1551.443046] glymur kernel: qcom-iris aa00000.video-codec: diag: HFI_PROP_CORE_ID 2 instead of 1
+[ 1551.444008] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:CmdDec:264d:da110008:00> vDec_AttachInternalBuffers(862): Buffer type 5 should be used for AV1 only
+[ 1551.445390] glymur kernel: qcom-iris aa00000.video-codec: diag: HFI_PROP_CORE_ID 2 instead of 1
+[ 1552.972102] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1552.972822] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1554.531723] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1554.535154] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1556.266042] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1556.266614] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1558.133551] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1558.134140] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1560.009116] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1560.044977] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1561.570068] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1561.570640] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1563.383221] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1563.383754] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1564.953088] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1564.953663] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1566.465114] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1566.465707] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1568.032145] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1568.032698] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1569.898791] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1569.899389] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1571.773066] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1571.779059] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1573.539348] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1573.539909] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1575.097086] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1575.097641] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1576.612853] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1576.613426] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1578.428879] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1578.429455] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1578.550081] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1580.027064] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1580.027644] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1581.538139] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1581.538702] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1583.123260] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1583.123808] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1584.999722] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1585.000098] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1588.630022] glymur kernel: qcom-iris aa00000.video-codec: diag: 1 video core(s)
+[ 1588.631116] glymur kernel: platform non-pixel.7.auto: Adding to iommu group 33
+[ 1588.632012] glymur kernel: platform pixel.8.auto: Adding to iommu group 35
+[ 1588.632167] glymur kernel: platform video-firmware.9.auto: Adding to iommu group 37
+[ 1588.688005] glymur kernel: qcom-iris aa00000.video-codec: diag: efuse monitor 0x88000800, core power status 0x00000002
+[ 1588.690012] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(999): QC_IMAGE_VERSION_STRING=video-firmware.3.6-aeb98f00ce9fd019d4902f480bfe2f73a56f7c4d
+[ 1588.690098] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1001): IMAGE_VARIANT_STRING=PROD
+[ 1588.690167] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1003): OEM_IMAGE_VERSION_STRING=hyd-lablnx446
+[ 1588.690238] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1005): BUILD_TIME: Jan  5 2026 14:07:39
+[ 1590.676023] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(999): QC_IMAGE_VERSION_STRING=video-firmware.3.6-aeb98f00ce9fd019d4902f480bfe2f73a56f7c4d
+[ 1590.676441] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1001): IMAGE_VARIANT_STRING=PROD
+[ 1590.676522] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1003): OEM_IMAGE_VERSION_STRING=hyd-lablnx446
+[ 1590.676605] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1005): BUILD_TIME: Jan  5 2026 14:07:39
+[ 1590.680006] glymur kernel: qcom-iris aa00000.video-codec: diag: HFI_PROP_CORE_ID 2 instead of 1
+[ 1590.682006] glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:CmdDec:264d:da112008:00> vDec_AttachInternalBuffers(862): Buffer type 5 should be used for AV1 only
+[ 1590.683004] glymur kernel: qcom-iris aa00000.video-codec: diag: HFI_PROP_CORE_ID 2 instead of 1
+[ 1592.553105] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1592.553533] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1594.428086] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1594.428516] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1596.009067] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1596.009312] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1597.538095] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1597.538520] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1599.121029] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1599.121458] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1600.672113] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1600.672522] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1602.296103] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1602.296528] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1604.007187] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1604.007604] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1605.570113] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1605.570539] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1607.445092] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1607.482825] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1609.058086] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1609.058513] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1609.219814] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1610.562095] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1610.562537] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1612.257102] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1612.257533] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1614.098097] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1614.098538] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1615.650088] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1615.650508] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1617.186107] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1617.186538] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1619.004055] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1619.004418] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1620.879119] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1620.879543] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1622.418109] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1622.418531] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1624.068110] glymur kernel: qcom-iris aa00000.video-codec: skip power collapse, wfi=0x0, idle=0x0, pcr=0x0, ctrl=0x1)
+[ 1624.068532] glymur kernel: qcom-iris aa00000.video-codec: failed to suspend
+[ 1626.911013] glymur kernel: platform non-pixel.7.auto: Adding to iommu group 33
+[ 1626.912015] glymur kernel: platform pixel.8.auto: Adding to iommu group 35
+[ 1626.912243] glymur kernel: platform video-firmware.9.auto: Adding to iommu group 37
+[ 1626.917520] glymur kernel: arm-smmu 15000000.iommu: Unhandled context fault: fsr=0x402, iova=0x00086340, fsynr=0x250060, cbfrsynra=0x19e2, cb=33
+[ 1626.917642] glymur kernel: arm-smmu 15000000.iommu: FSR    = 00000402 [Format=2 TF], SID=0x19e2
+[ 1626.917720] glymur kernel: arm-smmu 15000000.iommu: FSYNR0 = 00250060 [S1CBNDX=37 IND PNU PLVL=0]
+[ 1626.918208] glymur kernel: ------------[ cut here ]------------
+[ 1626.918224] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[ 1626.918234] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#0: v4l_id/9466
+[ 1626.918245] glymur kernel: Modules linked in: qcom_iris v4l2_mem2mem videobuf2_dma_contig ntfs3 nls_iso8859_1 aes_ce_ccm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc snd_soc_sdca_class_function qrtr_mhi regmap_sdw_mbq snd_soc_wcd9378 snd_soc_sdca_class reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_dai q6apm_lpass_dais snd_q6dsp_common pm8941_pwrkey snd_ctl_led hci_uart uvcvideo uvc btqca btrtl videobuf2_vmalloc btbcm snd_soc_x1e80100 btintel snd_soc_qcom_sdw bluetooth snd_soc_qcom_common qcom_spel ath12k_wifi7 ath12k hp_omnibook_5_ec sparse_keymap q6prm soundwire_qcom slimbus snd_soc_hdmi_codec mac80211 snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro qcom_tsens soundwire_bus snd_soc_sdca snd_q6apm videobuf2_memops snd_soc_lpass_macro_common videobuf2_v4l2 videobuf2_common snd_soc_core cfg80211 videodev snd_compress mc mhi ac97_bus libarc4 snd_pcm_dmaengine fastrpc qcomtee
+[ 1626.918283] glymur kernel:  qcom_rng tee sg joydev input_leds sch_fq_codel efi_pstore uas usb_storage apr hid_multitouch panel_samsung_atna33xc20 hid_generic phy_qcom_eusb2_repeater nvmem_qcom_spmi_sdam qcom_pon pinctrl_spmi_gpio i2c_hid_of i2c_hid_acpi_prp0001 rpmsg_ctrl i2c_hid rpmsg_char qrtr_smd qcom_pd_mapper hid qcom_spmi_pmic regmap_spmi xhci_plat_hcd ucsi_glink rtc_qcom_glink pmic_glink_altmode socinfo typec_ucsi qcom_battmgr aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher msm i2c_qcom_geni sm4 spmi_pmic_arb ubwc_config spmi_devres dispcc_glymur ocmem phy_qcom_edp spmi drm_gpuvm camcc_glymur qcom_stats drm_exec qcom_q6v5_pas gpu_sched qcom_pil_info qmi_tmd dwc3_qcom videocc_glymur evacc_glymur phy_qcom_qmp_combo qcom_eud qcom_common aux_bridge qcom_glink_smem drm_display_helper qrtr dwc3 typec qcom_glink cec ulpi pinctrl_sm8650_lpass_lpi qcom_q6v5 thunderbolt qcom_rpmh_regulator udc_core qcom_sysmon pinctrl_lpass_lpi rc_core gpi phy_qcom_m31_eusb2 pmic_glink mdt_loader lpasscc_glymur
+[ 1626.918314] glymur kernel:  drm_dp_aux_bus pdr_interface qcom_smd nvmem_qfprom qcom_pdr_msg llcc_qcom qcom_aoss qcom_hwspinlock qce_core bam_dma qcom_cpucp_mbox qmi_helpers icc_bwmon rpmsg_core smp2p qcom_smem fixed gpio_keys dmi_sysfs autofs4 [last unloaded: v4l2_mem2mem]
+[ 1626.918322] glymur kernel: CPU: 0 UID: 0 PID: 9466 Comm: v4l_id Tainted: G        W           7.3.0-glymur-20 #1 PREEMPT(lazy) 
+[ 1626.918329] glymur kernel: Tainted: [W]=WARN
+[ 1626.918338] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[ 1626.918345] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[ 1626.918351] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[ 1626.918360] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[ 1626.918368] glymur kernel: sp : ffff80008dccb4c0
+[ 1626.918376] glymur kernel: x29: ffff80008dccb4c0 x28: 0000000000000101 x27: 0000000000000000
+[ 1626.918383] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff00080de7d800
+[ 1626.918391] glymur kernel: x23: ffffcb7f16289680 x22: 0000000000000000 x21: 0000000000000001
+[ 1626.918399] glymur kernel: x20: 0000000000000001 x19: ffffcb7f16289260 x18: ffff8000802990d8
+[ 1626.918407] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[ 1626.918413] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[ 1626.918420] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffcb7f5a5da608
+[ 1626.918426] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[ 1626.918434] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[ 1626.918441] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[ 1626.918448] glymur kernel: Call trace:
+[ 1626.918455] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[ 1626.918462] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[ 1626.918469] glymur kernel:  _genpd_power_on+0xc0/0x208
+[ 1626.918475] glymur kernel:  genpd_power_on+0x208/0x478
+[ 1626.918482] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[ 1626.918488] glymur kernel:  __rpm_callback+0x54/0x250
+[ 1626.918496] glymur kernel:  rpm_callback+0x88/0xa0
+[ 1626.918502] glymur kernel:  rpm_resume+0x550/0x748
+[ 1626.918509] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[ 1626.918517] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[ 1626.918524] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[ 1626.918532] glymur kernel:  iris_vpu_power_on+0x5c/0x118 [qcom_iris]
+[ 1626.918539] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[ 1626.918546] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[ 1626.918553] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[ 1626.918560] glymur kernel:  chrdev_open+0xbc/0x270
+[ 1626.918567] glymur kernel:  do_dentry_open+0x12c/0x548
+[ 1626.918572] glymur kernel:  vfs_open+0x34/0x130
+[ 1626.918579] glymur kernel:  path_openat+0x5d4/0x938
+[ 1626.918584] glymur kernel:  do_file_open+0xbc/0x190
+[ 1626.918592] glymur kernel:  do_sys_openat2+0x8c/0x120
+[ 1626.918599] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[ 1626.918605] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[ 1626.918611] glymur kernel:  el0_svc_common.constprop.0+0x114/0x140
+[ 1626.918617] glymur kernel:  do_el0_svc+0x28/0x58
+[ 1626.918623] glymur kernel:  el0_svc+0x48/0x310
+[ 1626.918628] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+[ 1626.918636] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+[ 1626.918642] glymur kernel: ---[ end trace 0000000000000000 ]---
+[ 1626.919038] glymur kernel: qcom-iris aa00000.video-codec: power on failed
+[ 1626.920008] glymur kernel: qcom-iris aa00000.video-codec: core init failed
+[ 1626.922135] glymur kernel: ------------[ cut here ]------------
+[ 1626.922150] glymur kernel: video_cc_mvs1_gdsc status stuck at 'off'
+[ 1626.922157] glymur kernel: WARNING: drivers/clk/qcom/gdsc.c:192 at gdsc_toggle_logic+0x1f8/0x210, CPU#1: v4l_id/9468
+[ 1626.922165] glymur kernel: Modules linked in: qcom_iris v4l2_mem2mem videobuf2_dma_contig ntfs3 nls_iso8859_1 aes_ce_ccm snd_seq_dummy snd_hrtimer rfcomm snd_seq_midi snd_seq_midi_event snd_rawmidi snd_seq snd_seq_device bnep scmi_cpufreq binfmt_misc snd_soc_sdca_class_function qrtr_mhi regmap_sdw_mbq snd_soc_wcd9378 snd_soc_sdca_class reset_gpio snd_soc_wsa884x regmap_sdw gpio_shared_proxy q6prm_clocks q6apm_dai q6apm_lpass_dais snd_q6dsp_common pm8941_pwrkey snd_ctl_led hci_uart uvcvideo uvc btqca btrtl videobuf2_vmalloc btbcm snd_soc_x1e80100 btintel snd_soc_qcom_sdw bluetooth snd_soc_qcom_common qcom_spel ath12k_wifi7 ath12k hp_omnibook_5_ec sparse_keymap q6prm soundwire_qcom slimbus snd_soc_hdmi_codec mac80211 snd_soc_lpass_rx_macro snd_soc_lpass_tx_macro snd_soc_lpass_va_macro snd_soc_lpass_wsa_macro qcom_tsens soundwire_bus snd_soc_sdca snd_q6apm videobuf2_memops snd_soc_lpass_macro_common videobuf2_v4l2 videobuf2_common snd_soc_core cfg80211 videodev snd_compress mc mhi ac97_bus libarc4 snd_pcm_dmaengine fastrpc qcomtee
+[ 1626.922184] glymur kernel:  qcom_rng tee sg joydev input_leds sch_fq_codel efi_pstore uas usb_storage apr hid_multitouch panel_samsung_atna33xc20 hid_generic phy_qcom_eusb2_repeater nvmem_qcom_spmi_sdam qcom_pon pinctrl_spmi_gpio i2c_hid_of i2c_hid_acpi_prp0001 rpmsg_ctrl i2c_hid rpmsg_char qrtr_smd qcom_pd_mapper hid qcom_spmi_pmic regmap_spmi xhci_plat_hcd ucsi_glink rtc_qcom_glink pmic_glink_altmode socinfo typec_ucsi qcom_battmgr aux_hpd_bridge aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher msm i2c_qcom_geni sm4 spmi_pmic_arb ubwc_config spmi_devres dispcc_glymur ocmem phy_qcom_edp spmi drm_gpuvm camcc_glymur qcom_stats drm_exec qcom_q6v5_pas gpu_sched qcom_pil_info qmi_tmd dwc3_qcom videocc_glymur evacc_glymur phy_qcom_qmp_combo qcom_eud qcom_common aux_bridge qcom_glink_smem drm_display_helper qrtr dwc3 typec qcom_glink cec ulpi pinctrl_sm8650_lpass_lpi qcom_q6v5 thunderbolt qcom_rpmh_regulator udc_core qcom_sysmon pinctrl_lpass_lpi rc_core gpi phy_qcom_m31_eusb2 pmic_glink mdt_loader lpasscc_glymur
+[ 1626.922197] glymur kernel:  drm_dp_aux_bus pdr_interface qcom_smd nvmem_qfprom qcom_pdr_msg llcc_qcom qcom_aoss qcom_hwspinlock qce_core bam_dma qcom_cpucp_mbox qmi_helpers icc_bwmon rpmsg_core smp2p qcom_smem fixed gpio_keys dmi_sysfs autofs4 [last unloaded: v4l2_mem2mem]
+[ 1626.922205] glymur kernel: CPU: 1 UID: 0 PID: 9468 Comm: v4l_id Tainted: G        W           7.3.0-glymur-20 #1 PREEMPT(lazy) 
+[ 1626.922212] glymur kernel: Tainted: [W]=WARN
+[ 1626.922218] glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+[ 1626.922225] glymur kernel: pstate: 61400009 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+[ 1626.922231] glymur kernel: pc : gdsc_toggle_logic+0x1f8/0x210
+[ 1626.922238] glymur kernel: lr : gdsc_toggle_logic+0x1f8/0x210
+[ 1626.922244] glymur kernel: sp : ffff80008dbdb560
+[ 1626.922252] glymur kernel: x29: ffff80008dbdb560 x28: 0000000000000101 x27: 0000000000000000
+[ 1626.922260] glymur kernel: x26: 0000000000000000 x25: 0000000000000000 x24: ffff00080de7d800
+[ 1626.922266] glymur kernel: x23: ffffcb7f16289680 x22: 0000000000000000 x21: 0000000000000001
+[ 1626.922272] glymur kernel: x20: 0000000000000001 x19: ffffcb7f16289260 x18: ffff8000807a90d8
+[ 1626.922279] glymur kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+[ 1626.922285] glymur kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000000
+[ 1626.922292] glymur kernel: x11: 0000000000000000 x10: 0000000000000000 x9 : ffffcb7f5a5da608
+[ 1626.922297] glymur kernel: x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000
+[ 1626.922305] glymur kernel: x5 : 0000000000000000 x4 : 0000000000000000 x3 : 0000000000000000
+[ 1626.922310] glymur kernel: x2 : 0000000000000000 x1 : 0000000000000000 x0 : 0000000000000000
+[ 1626.922315] glymur kernel: Call trace:
+[ 1626.922322] glymur kernel:  gdsc_toggle_logic+0x1f8/0x210 (P)
+[ 1626.922326] glymur kernel:  gdsc_enable+0x6c/0x2b0
+[ 1626.922333] glymur kernel:  _genpd_power_on+0xc0/0x208
+[ 1626.922340] glymur kernel:  genpd_power_on+0x208/0x478
+[ 1626.922346] glymur kernel:  genpd_runtime_resume+0xd8/0x320
+[ 1626.922352] glymur kernel:  __rpm_callback+0x54/0x250
+[ 1626.922359] glymur kernel:  rpm_callback+0x88/0xa0
+[ 1626.922364] glymur kernel:  rpm_resume+0x550/0x748
+[ 1626.922371] glymur kernel:  __pm_runtime_resume+0x64/0xd8
+[ 1626.922376] glymur kernel:  iris_enable_power_domain_and_clocks+0xbc/0x268 [qcom_iris]
+[ 1626.922384] glymur kernel:  iris_vpu36_power_on_hw+0x58/0xe0 [qcom_iris]
+[ 1626.922390] glymur kernel:  iris_vpu_power_on+0x5c/0x118 [qcom_iris]
+[ 1626.922397] glymur kernel:  iris_core_init+0x9c/0x190 [qcom_iris]
+[ 1626.922402] glymur kernel:  iris_open+0x88/0x4d0 [qcom_iris]
+[ 1626.922409] glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+[ 1626.922415] glymur kernel:  chrdev_open+0xbc/0x270
+[ 1626.922423] glymur kernel:  do_dentry_open+0x12c/0x548
+[ 1626.922427] glymur kernel:  vfs_open+0x34/0x130
+[ 1626.922433] glymur kernel:  path_openat+0x5d4/0x938
+[ 1626.922440] glymur kernel:  do_file_open+0xbc/0x190
+[ 1626.922444] glymur kernel:  do_sys_openat2+0x8c/0x120
+[ 1626.922450] glymur kernel:  __arm64_sys_openat+0x80/0xf0
+[ 1626.922456] glymur kernel:  invoke_syscall.constprop.0+0xb0/0x130
+[ 1626.922463] glymur kernel:  el0_svc_common.constprop.0+0x114/0x140
+[ 1626.922469] glymur kernel:  do_el0_svc+0x28/0x58
+[ 1626.922475] glymur kernel:  el0_svc+0x48/0x310
+[ 1626.922482] glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+[ 1626.922488] glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+[ 1626.922494] glymur kernel: ---[ end trace 0000000000000000 ]---
+[ 1626.923041] glymur kernel: qcom-iris aa00000.video-codec: power on failed
+[ 1626.924008] glymur kernel: qcom-iris aa00000.video-codec: core init failed
+[ 1640.003184] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1660.449580] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1670.642056] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1670.746047] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1684.170055] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 1701.471087] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1

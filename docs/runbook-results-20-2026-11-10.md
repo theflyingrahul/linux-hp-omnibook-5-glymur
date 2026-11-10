@@ -249,3 +249,33 @@ from the video nodes (runbook B step 1) was not installed before this boot;
 `wpctl` still answers. Not run: B step 3 (the UEFI write of A step 3 was
 never made, so there is nothing to verify), step 5 (A's suspend did not
 pass), step 6 `sudo bash ~/check-video.sh --mahua`, step 7 displays.
+
+## Video, boot B step 6: `check-video.sh --mahua` (`video-test-20261110T144352.txt`)
+
+The first attempt (`video-test-20261110T143803.txt`) stalled on a script bug:
+`timeout` started `ffmpeg` in the background while it read the terminal, so
+the shell stopped both (state `T`) and the 30 s limit could never fire.
+`check-video.sh` now passes `-nostdin` to every `ffmpeg`.
+
+Second run, four trials (one core, HFI core ID 2, with/without hardware core
+1's bits, pipe 2, and the wrapper power release): **in every trial the
+video firmware boots**, which the plain driver never gets to. The firmware
+prints its banner (`video-firmware.3.6-aeb98f00...`, `PROD`, built Jan 5
+2026), the driver answers its core ID and pipe properties, and a decode
+session starts. No trial decodes: `ffmpeg` is killed after 30 s (exit 137)
+and the driver then logs `skip power collapse, wfi=0x0 idle=0x0 pcr=0x0
+ctrl=0x1` / `failed to suspend` about every 1.5 s (20 times per trial).
+The wrapper power control still reads `0x3` after the release (`timed out,
+bit 0x10`) in the trials that wait for it; trial 3 (no hardware-core bits)
+reports the core on (bit 0x2).
+
+One firmware complaint repeats in every trial and does not discriminate
+between them: `vDec_AttachInternalBuffers(862): Buffer type 5 should be
+used for AV1 only`. Type 5 is `HFI_BUFFER_PARTIAL_DATA`; in this kernel tree
+`BUF_PARTIAL` sits in the decoder's input internal-buffer table for every
+codec (`sm8550_dec_ip_int_buf_tbl`) and `iris_vpu_dec_partial_size()`
+returns the AV1 IBC size from the picture size whatever the codec. Whether
+that is what stalls the H.264 session, or only noise, is not established.
+Next candidates: attach the partial-data buffer for AV1 only and rerun
+trial 1; read the firmware's session messages before the stall; compare
+with what Windows' log shows for the same stream.
