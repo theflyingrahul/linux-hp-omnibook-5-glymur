@@ -12,7 +12,7 @@ set -euo pipefail
 REF=8f59273
 SRC="${SRC:-/var/tmp/fastrpc-src}"
 
-apt-get install -y fastrpc-support libfastrpc1 libfastrpc-dev \
+apt-get install -y --no-install-recommends fastrpc-support libfastrpc1 libfastrpc-dev \
     git build-essential autoconf automake libtool pkg-config libyaml-dev libbsd-dev
 
 if [ ! -d "$SRC/.git" ]; then
@@ -21,8 +21,8 @@ fi
 git -C "$SRC" fetch -q origin "$REF" 2>/dev/null || true
 git -C "$SRC" checkout -q "$REF"
 cd "$SRC"
-[ -x configure ] || ./autogen.sh
+[ -f configure ] || bash ./autogen.sh
 ./configure --prefix=/usr/local
-make -j2 -C test fastrpc_test fastrpc-healthcheck
+make -j2 -C test
 install -m 755 test/fastrpc_test test/fastrpc-healthcheck /usr/local/bin/
 command -v fastrpc_test fastrpc-healthcheck
