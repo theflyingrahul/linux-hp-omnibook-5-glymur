@@ -64,7 +64,7 @@ else
     echo "no hp_omnibook_ec hwmon device"
 fi
 
-ask() { local a; read -r -p "$1 " a </dev/tty; echo "answer: $a"; }
+ask() { local a; while read -r -t 0.05 -n 4096 _ </dev/tty 2>/dev/null; do :; done; read -r -p "$1 " a </dev/tty; a=$(printf '%s' "$a" | sed -E 's/\x1b\[[0-9;]*[~A-Za-z]//g; s/\[[0-9]+~//g'); echo "answer: $a"; }
 
 # The EC runs the keyboard backlight (F5); the driver sets only its timeout.
 sect "keyboard backlight timeout"

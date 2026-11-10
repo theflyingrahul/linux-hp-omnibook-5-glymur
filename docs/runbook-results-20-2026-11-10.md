@@ -193,3 +193,59 @@ FastRPC from userspace with HP's signed firmware and shell. What is missing
 for real work is a v81 skeleton and its host stub: `fastrpc_test`'s samples
 are v68/v75, and HP's `libQnnHtpV81Skel.so` needs Qualcomm's QNN host
 libraries.
+
+## Suspend (boot A, test tree) and boot B (A/V tree)
+
+`captures/2026-11-10-k20/suspend-test-*.txt`,
+`journal-kernel-suspend-freeze-boot.txt`.
+
+**Cycles.** The first script run stopped at its own "Continue?" (answered
+"stopped"). The second ran three cycles:
+
+| Cycle | Result |
+| --- | --- |
+| rtc | `rtcwake: read rtc time failed`: the RTC has no time source (`rtc_qcom_glink ... all time sources failed`), so no alarm. The owner woke it: wake IRQ 257, the touchpad (`hid-over-i2c`, GPIO 3); asleep 108 s. Power LED breathing, keyboard backlight off, fan unsure. Wi-Fi came back. |
+| lid | closed, charger unplugged and replugged while asleep, opened: woke on the lid line (GPIO 92) after 39 s. Wi-Fi came back; screen, keyboard and touchpad "seem ok"; USB untested. |
+| button | **froze.** The log ends at "Suspending in 3 s". The journal's last kernel line is `PM: suspend entry (deep)` with nothing after it. |
+
+**Deep sleep is not available.** Every cycle shows `suspend entry (deep)`,
+`Freezing`, `Disabling non-boot CPUs`, then `Enabling non-boot CPUs` and
+`suspend exit` within 0.2 s, with `last_failed_errno:-95` (not supported):
+the firmware does not implement PSCI system suspend. systemd then retries as
+`suspend entry (s2idle)`, and that is the sleep that worked. On the way down
+the deep attempt logs `dwc3-qcom ... port-1 HS-PHY not in L2` for all four
+USB controllers and `qcom-pcie 1bf0000.pcie: Timeout waiting for L2 entry!
+LTSSM: 0x11`, and on the way up `geni_i2c ...: Unbalanced
+pm_runtime_enable!` for four controllers. The freeze happened inside such a
+deep attempt, before `Freezing user space processes`, so the journal could
+not say more. `check-suspend.sh` now writes `s2idle` to `/sys/power/mem_sleep`
+for the test (restored at the end; `--deep` keeps the default), turns on
+`pm_debug_messages` and `pm_print_times` so each device step is logged, and
+syncs the journal before each cycle. A permanent setting would be
+`mem_sleep_default=s2idle` on the kernel command line. `last_failed_errno`
+and the `Gen5` NVMe line (`failed to set target rate Gen5 (-11)`, every few
+seconds) are also worth a look.
+
+**Prompts.** The script's questions went through the log pipe, where `sed`
+only passes complete lines, so a prompt appeared after the answer; and keys
+pressed while it slept (the wake-up presses) answered the first question
+with an empty line, shifting every answer by one. Questions now go to the
+terminal directly, stale keys are discarded, and they are single short
+questions with their options. Function-key escape codes are stripped from
+answers in `check-ec.sh`, `check-audio.sh`, `check-headset.sh` and
+`check-rtc.sh`.
+
+**Boot B (A/V tree), checked from the running system.** Model `(test, A/V)`,
+command line without `$cmdline` (no `clk_ignore_unused`, `pd_ignore_unused`,
+`arm64.nopauth`): `paca pacg` in `/proc/cpuinfo`, `Address authentication
+(architected QARMA3 algorithm)` detected, `clk: Disabling unused clocks` and
+`PM: genpd: Disabling unused power domains` in the log. `DP-1` and `DP-2`
+connectors exist (disconnected), no DP errors, no `CMD timeout`, three
+SoundWire devices attached, keyboard, touchpad, Wi-Fi and the camera
+(`xhci-hcd.0.auto`) work. Iris is on and fails exactly as before: twelve
+`video_cc_mvs1_gdsc status stuck at 'off'` / `power on failed` from
+`v4l_id` opening the node, because the WirePlumber file that keeps it away
+from the video nodes (runbook B step 1) was not installed before this boot;
+`wpctl` still answers. Not run: B step 3 (the UEFI write of A step 3 was
+never made, so there is nothing to verify), step 5 (A's suspend did not
+pass), step 6 `sudo bash ~/check-video.sh --mahua`, step 7 displays.

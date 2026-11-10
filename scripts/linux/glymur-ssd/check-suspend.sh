@@ -2,7 +2,9 @@
 set -u
 
 # Supervised s2idle test (kernel -20 on). See README.md.
-#   sudo bash check-suspend.sh [--sync-state]
+#   sudo bash check-suspend.sh [--sync-state] [--deep]
+# s2idle only, unless --deep: the firmware refuses PSCI system suspend
+# (-95), so every "deep" attempt takes the CPUs offline, fails and falls back.
 # Three suspend cycles: woken by an RTC alarm, by opening the lid (the
 # charger replugged while asleep), by the power button; then a fourth, not
 # gating, lid closed on AC for 2 minutes. Each logs its wake IRQ. Each resume records what came back. Suspend stays unmasked
@@ -15,7 +17,11 @@ set -u
 
 [ "$(id -u)" -eq 0 ] || { echo 'run with sudo' >&2; exit 1; }
 SYNC=0
-[ "${1:-}" = --sync-state ] && SYNC=1
+DEEP=0
+for a in "$@"; do
+    [ "$a" = --sync-state ] && SYNC=1
+    [ "$a" = --deep ] && DEEP=1
+done
 OUT="/var/log/glymur/suspend-test-$(date +%Y%m%dT%H%M%S).txt"
 mkdir -p /var/log/glymur
 redact() {
@@ -23,9 +29,18 @@ redact() {
         -e 's/\b[0-9A-Fa-f]{8}(-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}\b/<uuid>/g' \
         -e 's/(SSID|ssid)[ :=]+.*/\1 <ssid>/'
 }
+exec 3>/dev/tty 2>/dev/null || exec 3>&2
 exec > >(redact | tee "$OUT") 2>&1
 sect() { printf '\n==== %s\n' "$*"; }
-ask() { local a; read -r -p "$1 " a </dev/tty; printf '%s\n' "$a"; }
+# The question goes straight to the terminal (the log pipe only passes whole
+# lines, so a prompt sent through it shows up after the answer). Keys pressed
+# while it slept are thrown away first. The answer is left in $REPLY.
+ask() {
+    while read -r -t 0.05 -n 4096 _ </dev/tty 2>/dev/null; do :; done
+    printf '\n%s ' "$1" >&3
+    read -r REPLY </dev/tty
+    printf '  Q: %s\n  A: %s\n' "$1" "$REPLY"
+}
 TARGETS="sleep.target suspend.target"
 
 sect system
@@ -103,7 +118,18 @@ snapshot before
 
 echo
 echo "Suspend is about to be unmasked for this test ($TARGETS)."
-[ "$(ask 'Continue? [y/N]')" = y ] || { echo stopped; exit 0; }
+ask 'Continue? (y/n)'
+[ "$REPLY" = y ] || { echo stopped; exit 0; }
+MEM_SLEEP_WAS=$(sed -n 's/.*\[\(.*\)\].*/\1/p' /sys/power/mem_sleep)
+if [ "$DEEP" = 0 ] && grep -q s2idle /sys/power/mem_sleep; then
+    echo s2idle > /sys/power/mem_sleep
+    echo "mem_sleep set to s2idle (was $MEM_SLEEP_WAS): $(cat /sys/power/mem_sleep)"
+fi
+# Log every device's suspend and resume step, so a hang names its device.
+PMDBG=$(cat /sys/power/pm_debug_messages 2>/dev/null)
+PMPT=$(cat /sys/power/pm_print_times 2>/dev/null)
+echo 1 > /sys/power/pm_debug_messages 2>/dev/null
+echo 1 > /sys/power/pm_print_times 2>/dev/null
 # If a resume hangs and the laptop is powered off, the next boot masks
 # suspend again before anyone can close the lid.
 GUARD=/etc/systemd/system/glymur-suspend-guard.service
@@ -131,9 +157,12 @@ cycle() {
     before=$(cat /sys/power/suspend_stats/success 2>/dev/null || echo 0)
     t0=$(date +%s)
     echo "$how"
+    echo "While it sleeps, look at: the fan, the keyboard backlight, the power LED. You are asked afterwards."
     sync
+    journalctl --sync 2>/dev/null
+    logger -t check-suspend "cycle $name: suspending now"
     if [ "$name" = rtc ]; then
-        rtcwake -d rtc0 -m no -s 40 2>&1 || echo 'rtcwake failed: wake it with the power button'
+        rtcwake -d rtc0 -m no -s 40 2>&1 || echo 'No RTC alarm (the RTC has no time source): wake it yourself after 20 s with a key or the touchpad.'
         sleep 2
         systemctl suspend
     elif [ "$name" = button ]; then
@@ -154,9 +183,14 @@ cycle() {
     devices "after $name"
     snapshot "after $name"
     echo
-    echo "EC while asleep: $(ask "Cycle $name: while it slept, was the fan audible, the keyboard backlight on, and the power LED steady, breathing or off?")"
-    echo "USB and Wi-Fi after: $(ask "Cycle $name: does the USB mouse move the pointer, and is Wi-Fi connected again (a web page loads)?")"
-    ask "Cycle $name: did the screen, keyboard and touchpad come back? [y/N]" > /tmp/glymur-cycle-$name
+    ask "Cycle $name: fan while it slept? (on / off / unsure)"
+    ask "Cycle $name: keyboard backlight while it slept? (on / off / unsure)"
+    ask "Cycle $name: power LED while it slept? (steady / breathing / off / unsure)"
+    ask "Cycle $name: did the screen come back? (y / n)"; screen=$REPLY
+    ask "Cycle $name: did the keyboard and touchpad work after? (y / n)"; input=$REPLY
+    ask "Cycle $name: USB mouse moves the pointer? (y / n / none plugged in)"
+    ask "Cycle $name: Wi-Fi back, a web page loads? (y / n / unsure)"
+    [ "$screen" = y ] && [ "$input" = y ] && echo y > /tmp/glymur-cycle-$name || echo n > /tmp/glymur-cycle-$name
     echo "owner: $(cat /tmp/glymur-cycle-$name)"
 }
 
@@ -176,7 +210,12 @@ done
 systemctl disable glymur-suspend-guard.service >/dev/null 2>&1
 rm -f "$GUARD"
 systemctl daemon-reload
-if [ "$ok" = 1 ] && [ "$(ask 'Keep suspend enabled (lid close suspends from now on)? [y/N]')" = y ]; then
+[ -n "$PMDBG" ] && echo "$PMDBG" > /sys/power/pm_debug_messages
+[ -n "$PMPT" ] && echo "$PMPT" > /sys/power/pm_print_times
+[ -n "${MEM_SLEEP_WAS:-}" ] && echo "$MEM_SLEEP_WAS" > /sys/power/mem_sleep 2>/dev/null
+KEEP=n
+if [ "$ok" = 1 ]; then ask 'Keep suspend enabled (lid close suspends from now on)? (y / n)'; KEEP=$REPLY; fi
+if [ "$KEEP" = y ]; then
     echo 'suspend stays unmasked'
 else
     systemctl mask $TARGETS

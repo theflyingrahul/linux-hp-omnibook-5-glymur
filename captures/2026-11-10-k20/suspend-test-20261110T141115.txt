@@ -1,0 +1,137 @@
+
+==== system
+7.3.0-glymur-20
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+BOOT_IMAGE=(hd1,gpt5)/boot/vmlinuz-glymur root=… rootfstype=ext4 ro rootwait clk_ignore_unused pd_ignore_unused arm64.nopauth quiet splash log_buf_len=16M console=tty0 loglevel=4
+EC event logging on
+mem_sleep: s2idle [deep]   state: freeze mem
+targets: masked masked
+
+==== sync_state still pending at boot
+gcc-glymur 100000.clock-controller: sync_state() pending due to 3d6c000.gmu
+gpucc-glymur 3d90000.clock-controller: sync_state() pending due to 3d6c000.gmu
+gxclkctl-kaanapali 3d64000.clock-controller: sync_state() pending due to 3d6c000.gmu
+
+==== power domains still on
+disp_cc_mdss_core_int2_gdsc     on                              0
+disp_cc_mdss_core_gdsc          on                              0
+gpu_cc_cx_gdsc                  on                              0
+gcc_usb_2_phy_gdsc              on                              0
+gcc_usb_1_phy_gdsc              on                              0
+gcc_usb_0_phy_gdsc              on                              0
+gcc_usb3_mp_ss1_phy_gdsc        on                              0
+gcc_usb3_mp_ss0_phy_gdsc        on                              0
+gcc_usb30_tert_gdsc             on                              256
+gcc_usb30_sec_gdsc              on                              256
+gcc_usb30_prim_gdsc             on                              256
+gcc_usb30_mp_gdsc               on                              0
+gcc_usb20_prim_gdsc             on                              64
+gcc_pcie_5_phy_gdsc             on                              0
+gcc_pcie_5_gdsc                 on                              64
+gcc_pcie_4_phy_gdsc             on                              0
+gcc_pcie_4_gdsc                 on                              64
+mx                              on                              64
+mmcx                            on                              64
+cx                              on                              256
+power-domain-system             on                              0
+power-domain-cpu-cluster1       on                              0
+power-domain-cpu-cluster0       on                              0
+power-domain-cpu11              on                              0
+power-domain-cpu10              on                              0
+power-domain-cpu8               on                              0
+power-domain-cpu7               on                              0
+power-domain-cpu6               on                              0
+power-domain-cpu5               on                              0
+power-domain-cpu4               on                              0
+power-domain-cpu3               on                              0
+power-domain-cpu2               on                              0
+power-domain-cpu1               on                              0
+power-domain-cpu0               on                              0
+
+==== wakeup sources enabled
+auxiliary/devices/pmic_glink.rtc-glink.0
+auxiliary/devices/pmic_glink.ucsi.0
+i2c/devices/0-003a
+i2c/devices/4-0015
+mhi/devices/mhi0
+pci/devices/0004:00:00.0
+pci/devices/0005:00:00.0
+platform/devices/32300000.remoteproc
+platform/devices/6800000.remoteproc
+platform/devices/alarmtimer.4.auto
+platform/devices/c22c000.thermal-sensor
+platform/devices/c22d000.thermal-sensor
+platform/devices/c22e000.thermal-sensor
+platform/devices/c22f000.thermal-sensor
+platform/devices/c230000.thermal-sensor
+platform/devices/c231000.thermal-sensor
+platform/devices/c426000.spmi:pmic@0:pon@1300:pwrkey
+platform/devices/d00000.remoteproc
+platform/devices/gpio-keys
+
+==== devices (before)
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+    |__ Port 001: Dev 002, If 0, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 1, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 2, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 3, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 4, Class=Application Specific Interface, Driver=[none], 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 003.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+    |__ Port 001: Dev 002, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
+wlo1             UP             xx:xx:xx:xx:xx:xx <BROADCAST,MULTICAST,UP,LOWER_UP> 
+		type P2P-device
+	Interface wlo1
+		type managed
+		channel 37 (6135 MHz), width: 160 MHz, center1: 6185 MHz
+network: connected:full
+card 0: MAHUAHPOmniBook [MAHUA-HP-OmniBook-5-16-bf1xxx], device 0: MultiMedia1 Playback (*) []
+qcom-battmgr-ac:  
+qcom-battmgr-bat: Discharging 47
+qcom-battmgr-usb:  
+qcom-battmgr-wls:  
+ucsi-source-psy-pmic_glink.ucsi.01: Not charging 
+ucsi-source-psy-pmic_glink.ucsi.02: Not charging 
+card1-Writeback-1: unknown disabled
+card1-eDP-1: connected enabled
+EC fan 0 rpm, temp1 36000
+/dev/rtc
+/dev/rtc0
+
+==== sleep counters (before)
+adsp: Count: 7 Last Entered At: 72725686241 Last Exited At: 72725692402 Accumulated Duration: 141199571 
+adsp_island: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+aosd: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+apss: Count: 100960 Last Entered At: 72735767500 Last Exited At: 72735855694 Accumulated Duration: 23218461416 
+cdsp1: 
+cdsp_nsp: Count: 7 Last Entered At: 70731339187 Last Exited At: 70731230027 Accumulated Duration: 71720842804 
+cdsp_nsp_1: 
+cdsp_nsp_2: 
+cdsp_nsp_3: 
+cxsd: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+dcp: 
+ddr: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+ddr_stats: DDR LPM Stat Name:0xd4	count:0	Duration (ticks):0 DDR LPM Stat Name:0xd3	count:0	Duration (ticks):0 DDR LPM Stat Name:0x11	count:0	Duration (ticks):0 DDR LPM Stat Name:0xd0	count:0	Duration (ticks):0 DDR Freq 200Mhz:	CP IDX:1	count:1	Duration (ticks):0 DDR Freq 547Mhz:	CP IDX:2	count:1	Duration (ticks):0 DDR Freq 1353Mhz:	CP IDX:3	count:1	Duration (ticks):0 DDR Freq 1555Mhz:	CP IDX:4	count:1	Duration (ticks):0 DDR Freq 1708Mhz:	CP IDX:5	count:1	Duration (ticks):0 DDR Freq 2092Mhz:	CP IDX:6	count:1	Duration (ticks):0 DDR Freq 2736Mhz:	CP IDX:7	count:1	Duration (ticks):0 DDR Freq 3187Mhz:	CP IDX:8	count:1	Duration (ticks):0 DDR Freq 3686Mhz:	CP IDX:9	count:1	Duration (ticks):0 DDR Freq 4224Mhz:	CP IDX:10	count:1	Duration (ticks):0 DDR Freq 4761Mhz:	CP IDX:11	count:1	Duration (ticks):0 
+display: 
+gpdsp0: 
+gpdsp1: 
+gpu: 
+modem: 
+slpi: 
+slpi_island: 
+soccp: Count: 12622 Last Entered At: 72761022098 Last Exited At: 72760995025 Accumulated Duration: 71267805838 
+wpss: 
+fail:0
+failed_freeze:0
+failed_prepare:0
+failed_resume:0
+failed_resume_early:0
+failed_resume_noirq:0
+failed_suspend:0
+failed_suspend_late:0
+failed_suspend_noirq:0
+last_failed_errno:0
+success:0
+
+Suspend is about to be unmasked for this test (sleep.target suspend.target).
+Continue? [y/N] stopped

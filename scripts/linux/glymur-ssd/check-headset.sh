@@ -16,7 +16,7 @@ mkdir -p /var/log/glymur "$WAV"
 chown "$SUDO_USER" "$WAV"
 exec > >(tee "$OUT") 2>&1
 sect() { printf '\n==== %s\n' "$*"; }
-ask() { local a; read -r -p "$1 " a </dev/tty; echo "answer: $a"; REPLY=$a; }
+ask() { local a; while read -r -t 0.05 -n 4096 _ </dev/tty 2>/dev/null; do :; done; read -r -p "$1 " a </dev/tty; a=$(printf '%s' "$a" | sed -E 's/\x1b\[[0-9;]*[~A-Za-z]//g; s/\[[0-9]+~//g'); echo "answer: $a"; REPLY=$a; }
 asuser() { sudo -u "$SUDO_USER" XDG_RUNTIME_DIR="/run/user/$(id -u "$SUDO_USER")" "$@"; }
 cget() { amixer -c "$CARD" cget "name=$1" 2>&1 | sed -n 's/.*: values=//p'; }
 cset() { amixer -c "$CARD" -q cset "name=$1" "$2" 2>&1; echo "  $1 = $(cget "$1")"; }

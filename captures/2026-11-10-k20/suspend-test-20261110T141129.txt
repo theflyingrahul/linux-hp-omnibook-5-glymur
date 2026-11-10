@@ -1,0 +1,595 @@
+
+==== system
+7.3.0-glymur-20
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+BOOT_IMAGE=(hd1,gpt5)/boot/vmlinuz-glymur root=… rootfstype=ext4 ro rootwait clk_ignore_unused pd_ignore_unused arm64.nopauth quiet splash log_buf_len=16M console=tty0 loglevel=4
+EC event logging on
+mem_sleep: s2idle [deep]   state: freeze mem
+targets: masked masked
+
+==== sync_state still pending at boot
+gcc-glymur 100000.clock-controller: sync_state() pending due to 3d6c000.gmu
+gpucc-glymur 3d90000.clock-controller: sync_state() pending due to 3d6c000.gmu
+gxclkctl-kaanapali 3d64000.clock-controller: sync_state() pending due to 3d6c000.gmu
+
+==== power domains still on
+disp_cc_mdss_core_int2_gdsc     on                              0
+disp_cc_mdss_core_gdsc          on                              0
+gpu_cc_cx_gdsc                  on                              0
+gcc_usb_2_phy_gdsc              on                              0
+gcc_usb_1_phy_gdsc              on                              0
+gcc_usb_0_phy_gdsc              on                              0
+gcc_usb3_mp_ss1_phy_gdsc        on                              0
+gcc_usb3_mp_ss0_phy_gdsc        on                              0
+gcc_usb30_tert_gdsc             on                              256
+gcc_usb30_sec_gdsc              on                              256
+gcc_usb30_prim_gdsc             on                              256
+gcc_usb30_mp_gdsc               on                              0
+gcc_usb20_prim_gdsc             on                              64
+gcc_pcie_5_phy_gdsc             on                              0
+gcc_pcie_5_gdsc                 on                              64
+gcc_pcie_4_phy_gdsc             on                              0
+gcc_pcie_4_gdsc                 on                              64
+mx                              on                              64
+mmcx                            on                              64
+cx                              on                              256
+power-domain-system             on                              0
+power-domain-cpu-cluster1       on                              0
+power-domain-cpu-cluster0       on                              0
+power-domain-cpu11              on                              0
+power-domain-cpu10              on                              0
+power-domain-cpu8               on                              0
+power-domain-cpu7               on                              0
+power-domain-cpu6               on                              0
+power-domain-cpu5               on                              0
+power-domain-cpu4               on                              0
+power-domain-cpu3               on                              0
+power-domain-cpu2               on                              0
+power-domain-cpu1               on                              0
+power-domain-cpu0               on                              0
+
+==== wakeup sources enabled
+auxiliary/devices/pmic_glink.rtc-glink.0
+auxiliary/devices/pmic_glink.ucsi.0
+i2c/devices/0-003a
+i2c/devices/4-0015
+mhi/devices/mhi0
+pci/devices/0004:00:00.0
+pci/devices/0005:00:00.0
+platform/devices/32300000.remoteproc
+platform/devices/6800000.remoteproc
+platform/devices/alarmtimer.4.auto
+platform/devices/c22c000.thermal-sensor
+platform/devices/c22d000.thermal-sensor
+platform/devices/c22e000.thermal-sensor
+platform/devices/c22f000.thermal-sensor
+platform/devices/c230000.thermal-sensor
+platform/devices/c231000.thermal-sensor
+platform/devices/c426000.spmi:pmic@0:pon@1300:pwrkey
+platform/devices/d00000.remoteproc
+platform/devices/gpio-keys
+
+==== devices (before)
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+    |__ Port 001: Dev 002, If 0, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 1, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 2, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 3, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 4, Class=Application Specific Interface, Driver=[none], 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 003.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+    |__ Port 001: Dev 002, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
+wlo1             UP             xx:xx:xx:xx:xx:xx <BROADCAST,MULTICAST,UP,LOWER_UP> 
+		type P2P-device
+	Interface wlo1
+		type managed
+		channel 37 (6135 MHz), width: 160 MHz, center1: 6185 MHz
+network: connected:full
+card 0: MAHUAHPOmniBook [MAHUA-HP-OmniBook-5-16-bf1xxx], device 0: MultiMedia1 Playback (*) []
+qcom-battmgr-ac:  
+qcom-battmgr-bat: Discharging 47
+qcom-battmgr-usb:  
+qcom-battmgr-wls:  
+ucsi-source-psy-pmic_glink.ucsi.01: Not charging 
+ucsi-source-psy-pmic_glink.ucsi.02: Not charging 
+card1-Writeback-1: unknown disabled
+card1-eDP-1: connected enabled
+EC fan 0 rpm, temp1 36000
+/dev/rtc
+/dev/rtc0
+
+==== sleep counters (before)
+adsp: Count: 7 Last Entered At: 72894612503 Last Exited At: 72894605675 Accumulated Duration: 271139363 
+adsp_island: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+aosd: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+apss: Count: 101246 Last Entered At: 73012518866 Last Exited At: 73012881186 Accumulated Duration: 23302748613 
+cdsp1: 
+cdsp_nsp: Count: 7 Last Entered At: 70731339187 Last Exited At: 70731230027 Accumulated Duration: 71981240950 
+cdsp_nsp_1: 
+cdsp_nsp_2: 
+cdsp_nsp_3: 
+cxsd: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+dcp: 
+ddr: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+ddr_stats: DDR LPM Stat Name:0xd4	count:0	Duration (ticks):0 DDR LPM Stat Name:0xd3	count:0	Duration (ticks):0 DDR LPM Stat Name:0x11	count:0	Duration (ticks):0 DDR LPM Stat Name:0xd0	count:0	Duration (ticks):0 DDR Freq 200Mhz:	CP IDX:1	count:1	Duration (ticks):0 DDR Freq 547Mhz:	CP IDX:2	count:1	Duration (ticks):0 DDR Freq 1353Mhz:	CP IDX:3	count:1	Duration (ticks):0 DDR Freq 1555Mhz:	CP IDX:4	count:1	Duration (ticks):0 DDR Freq 1708Mhz:	CP IDX:5	count:1	Duration (ticks):0 DDR Freq 2092Mhz:	CP IDX:6	count:1	Duration (ticks):0 DDR Freq 2736Mhz:	CP IDX:7	count:1	Duration (ticks):0 DDR Freq 3187Mhz:	CP IDX:8	count:1	Duration (ticks):0 DDR Freq 3686Mhz:	CP IDX:9	count:1	Duration (ticks):0 DDR Freq 4224Mhz:	CP IDX:10	count:1	Duration (ticks):0 DDR Freq 4761Mhz:	CP IDX:11	count:1	Duration (ticks):0 
+display: 
+gpdsp0: 
+gpdsp1: 
+gpu: 
+modem: 
+slpi: 
+slpi_island: 
+soccp: Count: 12680 Last Entered At: 73021673275 Last Exited At: 73021654080 Accumulated Duration: 71521927929 
+wpss: 
+fail:0
+failed_freeze:0
+failed_prepare:0
+failed_resume:0
+failed_resume_early:0
+failed_resume_noirq:0
+failed_suspend:0
+failed_suspend_late:0
+failed_suspend_noirq:0
+last_failed_errno:0
+success:0
+
+Suspend is about to be unmasked for this test (sleep.target suspend.target).
+Continue? [y/N] Created symlink '/etc/systemd/system/sysinit.target.wants/glymur-suspend-guard.service' → '/etc/systemd/system/glymur-suspend-guard.service'.
+Removed '/etc/systemd/system/sleep.target'.
+Removed '/etc/systemd/system/suspend.target'.
+
+==== cycle: rtc
+Suspending now; the RTC alarm wakes it in about 40 s. If it is still asleep after 90 s, press the power button.
+rtcwake: read rtc time failed: Input/output error
+rtcwake: assuming RTC uses UTC ...
+rtcwake failed: wake it with the power button
+resumed after 108 s; suspend successes 0 -> 1
+wake IRQ: 257 ( 32573 0 0 0 0 0 0 0 0 0 0 0 msmgpio 3 Level hid-over-i2c)
+
+==== kernel log of the cycle
+[ 3753.601593] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 3754.530089] glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+[ 3755.559466] glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+[ 3757.628007] glymur kernel: wlo1: deauthenticating from xx:xx:xx:xx:xx:xx by local choice (Reason: 3=DEAUTH_LEAVING)
+[ 3757.761049] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 3758.661007] glymur kernel: PM: suspend entry (deep)
+[ 3758.674069] glymur kernel: Filesystems sync: 0.012 seconds
+[ 3758.702677] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 3763.361290] glymur kernel: Freezing user space processes
+[ 3763.361412] glymur kernel: Freezing user space processes completed (elapsed 0.001 seconds)
+[ 3763.361461] glymur kernel: OOM killer disabled.
+[ 3763.361486] glymur kernel: Freezing remaining freezable tasks
+[ 3763.361509] glymur kernel: Freezing remaining freezable tasks completed (elapsed 0.000 seconds)
+[ 3763.361522] glymur kernel: printk: Suspending console(s) (use no_console_suspend to debug)
+[ 3763.361550] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 3763.361802] glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+[ 3763.361948] glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+[ 3763.362080] glymur kernel: dwc3-qcom a800000.usb: port-1 HS-PHY not in L2
+[ 3763.362203] glymur kernel: dwc3-qcom a600000.usb: port-1 HS-PHY not in L2
+[ 3763.362335] glymur kernel: dwc3-qcom a000000.usb: port-1 HS-PHY not in L2
+[ 3763.362444] glymur kernel: dwc3-qcom a200000.usb: port-1 HS-PHY not in L2
+[ 3763.362544] glymur kernel: qcom-pcie 1bf0000.pcie: Timeout waiting for L2 entry! LTSSM: 0x11
+[ 3763.362650] glymur kernel: Disabling non-boot CPUs ...
+[ 3763.362662] glymur kernel: psci: CPU11 killed (polled 0 ms)
+[ 3763.362675] glymur kernel: psci: CPU10 killed (polled 0 ms)
+[ 3763.362686] glymur kernel: psci: CPU9 killed (polled 0 ms)
+[ 3763.362698] glymur kernel: psci: CPU8 killed (polled 0 ms)
+[ 3763.362712] glymur kernel: psci: CPU7 killed (polled 0 ms)
+[ 3763.362733] glymur kernel: psci: CPU6 killed (polled 0 ms)
+[ 3763.362744] glymur kernel: psci: CPU5 killed (polled 1 ms)
+[ 3763.362753] glymur kernel: psci: CPU4 killed (polled 0 ms)
+[ 3763.362764] glymur kernel: psci: CPU3 killed (polled 0 ms)
+[ 3763.362783] glymur kernel: psci: CPU2 killed (polled 0 ms)
+[ 3763.362795] glymur kernel: psci: CPU1 killed (polled 0 ms)
+[ 3763.362805] glymur kernel: Enabling non-boot CPUs ...
+[ 3763.362814] glymur kernel: Detected PIPT I-cache on CPU1
+[ 3763.362881] glymur kernel: GICv3: CPU1: found redistributor 100 region 0:0x00000000170c0000
+[ 3763.363158] glymur kernel: CPU1: Booted secondary processor 0x0000000100 [0x512f0021]
+[ 3763.363169] glymur kernel: CPU1 is up
+[ 3763.363180] glymur kernel: Detected PIPT I-cache on CPU2
+[ 3763.363190] glymur kernel: GICv3: CPU2: found redistributor 200 region 0:0x0000000017100000
+[ 3763.363204] glymur kernel: CPU2: Booted secondary processor 0x0000000200 [0x512f0021]
+[ 3763.363215] glymur kernel: CPU2 is up
+[ 3763.363225] glymur kernel: Detected PIPT I-cache on CPU3
+[ 3763.363235] glymur kernel: GICv3: CPU3: found redistributor 300 region 0:0x0000000017140000
+[ 3763.363280] glymur kernel: CPU3: Booted secondary processor 0x0000000300 [0x512f0021]
+[ 3763.363291] glymur kernel: CPU3 is up
+[ 3763.363302] glymur kernel: Detected PIPT I-cache on CPU4
+[ 3763.363323] glymur kernel: GICv3: CPU4: found redistributor 400 region 0:0x0000000017180000
+[ 3763.363334] glymur kernel: CPU4: Booted secondary processor 0x0000000400 [0x512f0021]
+[ 3763.363346] glymur kernel: CPU4 is up
+[ 3763.363357] glymur kernel: Detected PIPT I-cache on CPU5
+[ 3763.363367] glymur kernel: GICv3: CPU5: found redistributor 500 region 0:0x00000000171c0000
+[ 3763.363376] glymur kernel: CPU5: Booted secondary processor 0x0000000500 [0x512f0021]
+[ 3763.363390] glymur kernel: CPU5 is up
+[ 3763.363401] glymur kernel: Detected PIPT I-cache on CPU6
+[ 3763.363414] glymur kernel: GICv3: CPU6: found redistributor 10000 region 0:0x0000000017200000
+[ 3763.363425] glymur kernel: CPU6: Booted secondary processor 0x0000010000 [0x511f0021]
+[ 3763.363438] glymur kernel: CPU6 is up
+[ 3763.363448] glymur kernel: Detected PIPT I-cache on CPU7
+[ 3763.363459] glymur kernel: GICv3: CPU7: found redistributor 10100 region 0:0x0000000017240000
+[ 3763.363470] glymur kernel: CPU7: Booted secondary processor 0x0000010100 [0x511f0021]
+[ 3763.363480] glymur kernel: CPU7 is up
+[ 3763.363491] glymur kernel: Detected PIPT I-cache on CPU8
+[ 3763.363499] glymur kernel: GICv3: CPU8: found redistributor 10200 region 0:0x0000000017280000
+[ 3763.363510] glymur kernel: CPU8: Booted secondary processor 0x0000010200 [0x511f0021]
+[ 3763.363521] glymur kernel: CPU8 is up
+[ 3763.363532] glymur kernel: Detected PIPT I-cache on CPU9
+[ 3763.363562] glymur kernel: GICv3: CPU9: found redistributor 10300 region 0:0x00000000172c0000
+[ 3763.363580] glymur kernel: CPU9: Booted secondary processor 0x0000010300 [0x511f0021]
+[ 3763.363596] glymur kernel: CPU9 is up
+[ 3763.363609] glymur kernel: Detected PIPT I-cache on CPU10
+[ 3763.363620] glymur kernel: GICv3: CPU10: found redistributor 10400 region 0:0x0000000017300000
+[ 3763.363631] glymur kernel: CPU10: Booted secondary processor 0x0000010400 [0x511f0021]
+[ 3763.363640] glymur kernel: CPU10 is up
+[ 3763.363651] glymur kernel: Detected PIPT I-cache on CPU11
+[ 3763.363662] glymur kernel: GICv3: CPU11: found redistributor 10500 region 0:0x0000000017340000
+[ 3763.363680] glymur kernel: CPU11: Booted secondary processor 0x0000010500 [0x511f0021]
+[ 3763.363695] glymur kernel: CPU11 is up
+[ 3763.363705] glymur kernel: qcom-pcie 1bf0000.pcie: PCIe Gen.3 x1 link up
+[ 3763.363803] glymur kernel: qcom-pcie 1b40000.pcie: PCIe Gen.4 x4 link up
+[ 3763.363905] glymur kernel: geni_i2c a80000.i2c: Unbalanced pm_runtime_enable!
+[ 3763.364015] glymur kernel: geni_i2c a84000.i2c: Unbalanced pm_runtime_enable!
+[ 3763.364126] glymur kernel: geni_i2c b80000.i2c: Unbalanced pm_runtime_enable!
+[ 3763.364231] glymur kernel: geni_i2c b90000.i2c: Unbalanced pm_runtime_enable!
+[ 3763.364334] glymur kernel: mhi mhi0: Requested to power ON
+[ 3763.364444] glymur kernel: mhi mhi0: Power on setup success
+[ 3763.364535] glymur kernel: mhi mhi0: Wait for device to enter SBL or Mission mode
+[ 3763.364634] glymur kernel: usb usb1: root hub lost power or was reset
+[ 3763.364834] glymur kernel: nvme nvme0: D3 entry latency set to 10 seconds
+[ 3763.364922] glymur kernel: usb usb2: root hub lost power or was reset
+[ 3763.365083] glymur kernel: usb usb3: root hub lost power or was reset
+[ 3763.365244] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: chip_id 0x21 chip_family 0x4 board_id 0xff soc_id 0x40292100
+[ 3763.365376] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: fw_version 0x100581de fw_build_timestamp 2024-09-11 23:52 fw_build_id QC_IMAGE_VERSION_STRING=WLAN.COL.1.0.c2-00277-QCACOLSWPL_V1_TO_SILICONZ-1
+[ 3763.365487] glymur kernel: nvme nvme0: 12/0/0 default/read/poll queues
+[ 3763.365576] glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+[ 3763.365730] glymur kernel: usb 3-1: reset SuperSpeed USB device number 2 using xhci-hcd
+[ 3763.365875] glymur kernel: debugfs: 'simulate_fw_crash' already exists in 'pci-0004:01:00.0'
+[ 3763.365887] glymur kernel: debugfs: 'device_dp_stats' already exists in 'pci-0004:01:00.0'
+[ 3763.365896] glymur kernel: OOM killer enabled.
+[ 3763.365907] glymur kernel: Restarting tasks: Starting
+[ 3763.365919] glymur kernel: Restarting tasks: Done
+[ 3763.365928] glymur kernel: efivarfs: resyncing variable state
+[ 3763.522130] glymur kernel: efivarfs: finished resyncing variable state
+[ 3763.543659] glymur kernel: PM: suspend exit
+[ 3763.543846] glymur kernel: PM: suspend entry (s2idle)
+[ 3763.588499] glymur kernel: Filesystems sync: 0.044 seconds
+[ 3768.166988] glymur kernel: Freezing user space processes
+[ 3768.167113] glymur kernel: Freezing user space processes completed (elapsed 0.001 seconds)
+[ 3768.167155] glymur kernel: OOM killer disabled.
+[ 3768.167173] glymur kernel: Freezing remaining freezable tasks
+[ 3768.167188] glymur kernel: Freezing remaining freezable tasks completed (elapsed 0.002 seconds)
+[ 3768.167210] glymur kernel: printk: Suspending console(s) (use no_console_suspend to debug)
+[ 3768.167223] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 3768.167506] glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+[ 3768.167654] glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+[ 3768.167783] glymur kernel: dwc3-qcom a800000.usb: port-1 HS-PHY not in L2
+[ 3768.167920] glymur kernel: dwc3-qcom a600000.usb: port-1 HS-PHY not in L2
+[ 3768.168034] glymur kernel: dwc3-qcom a000000.usb: port-1 HS-PHY not in L2
+[ 3768.168150] glymur kernel: dwc3-qcom a200000.usb: port-1 HS-PHY not in L2
+[ 3768.168250] glymur kernel: qcom-pcie 1bf0000.pcie: Timeout waiting for L2 entry! LTSSM: 0x11
+[ 3768.168839] glymur kernel: qcom-pcie 1bf0000.pcie: PCIe Gen.3 x1 link up
+[ 3768.168953] glymur kernel: qcom-pcie 1b40000.pcie: PCIe Gen.4 x4 link up
+[ 3768.169084] glymur kernel: geni_i2c a80000.i2c: Unbalanced pm_runtime_enable!
+[ 3768.169201] glymur kernel: geni_i2c a84000.i2c: Unbalanced pm_runtime_enable!
+[ 3768.169322] glymur kernel: geni_i2c b80000.i2c: Unbalanced pm_runtime_enable!
+[ 3768.169453] glymur kernel: geni_i2c b90000.i2c: Unbalanced pm_runtime_enable!
+[ 3768.169562] glymur kernel: mhi mhi0: Requested to power ON
+[ 3768.169684] glymur kernel: mhi mhi0: Power on setup success
+[ 3768.169796] glymur kernel: mhi mhi0: Wait for device to enter SBL or Mission mode
+[ 3768.169898] glymur kernel: gpi a00000.dma-controller: Error in Transaction
+[ 3768.170041] glymur kernel: geni_i2c a84000.i2c: DMA txn failed:3
+[ 3768.170145] glymur kernel: geni_i2c a84000.i2c: GPI transfer failed: -5
+[ 3768.170258] glymur kernel: usb usb1: root hub lost power or was reset
+[ 3768.170444] glymur kernel: usb usb2: root hub lost power or was reset
+[ 3768.170606] glymur kernel: usb usb3: root hub lost power or was reset
+[ 3768.170761] glymur kernel: nvme nvme0: D3 entry latency set to 10 seconds
+[ 3768.170853] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: chip_id 0x21 chip_family 0x4 board_id 0xff soc_id 0x40292100
+[ 3768.171062] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: fw_version 0x100581de fw_build_timestamp 2024-09-11 23:52 fw_build_id QC_IMAGE_VERSION_STRING=WLAN.COL.1.0.c2-00277-QCACOLSWPL_V1_TO_SILICONZ-1
+[ 3768.171182] glymur kernel: hp-omnibook-5-ec 9-0076: cannot tell the EC about resume: -5
+[ 3768.171302] glymur kernel: nvme nvme0: 12/0/0 default/read/poll queues
+[ 3768.171409] glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+[ 3768.171571] glymur kernel: usb 3-1: reset SuperSpeed USB device number 2 using xhci-hcd
+[ 3768.171811] glymur kernel: debugfs: 'simulate_fw_crash' already exists in 'pci-0004:01:00.0'
+[ 3768.171872] glymur kernel: debugfs: 'device_dp_stats' already exists in 'pci-0004:01:00.0'
+[ 3768.171894] glymur kernel: OOM killer enabled.
+[ 3768.171908] glymur kernel: Restarting tasks: Starting
+[ 3768.171924] glymur kernel: Restarting tasks: Done
+[ 3768.171938] glymur kernel: efivarfs: resyncing variable state
+[ 3768.353082] glymur kernel: efivarfs: finished resyncing variable state
+[ 3768.369678] glymur kernel: PM: suspend exit
+[ 3769.059050] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 3773.122011] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 3773.223101] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 3773.434044] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+
+==== devices (after rtc)
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+    |__ Port 001: Dev 002, If 0, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 1, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 2, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 3, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 4, Class=Application Specific Interface, Driver=[none], 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 003.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+    |__ Port 001: Dev 002, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
+wlo1             DOWN           xx:xx:xx:xx:xx:xx <NO-CARRIER,BROADCAST,MULTICAST,UP> 
+		type P2P-device
+	Interface wlo1
+		type managed
+network: disconnected:none
+card 0: MAHUAHPOmniBook [MAHUA-HP-OmniBook-5-16-bf1xxx], device 0: MultiMedia1 Playback (*) []
+qcom-battmgr-ac:  
+qcom-battmgr-bat: Discharging 47
+qcom-battmgr-usb:  
+qcom-battmgr-wls:  
+ucsi-source-psy-pmic_glink.ucsi.01: Not charging 
+ucsi-source-psy-pmic_glink.ucsi.02: Not charging 
+card1-Writeback-1: unknown disabled
+card1-eDP-1: connected enabled
+EC fan 0 rpm, temp1 35000
+/dev/rtc
+/dev/rtc0
+
+==== sleep counters (after rtc)
+adsp: Count: 7 Last Entered At: 74983538364 Last Exited At: 74983531961 Accumulated Duration: 307854821 
+adsp_island: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+aosd: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+apss: Count: 101554 Last Entered At: 75145184282 Last Exited At: 75145187460 Accumulated Duration: 25010378258 
+cdsp1: 
+cdsp_nsp: Count: 7 Last Entered At: 70731339187 Last Exited At: 70731230027 Accumulated Duration: 74106837235 
+cdsp_nsp_1: 
+cdsp_nsp_2: 
+cdsp_nsp_3: 
+cxsd: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+dcp: 
+ddr: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+ddr_stats: DDR LPM Stat Name:0xd4	count:0	Duration (ticks):0 DDR LPM Stat Name:0xd3	count:0	Duration (ticks):0 DDR LPM Stat Name:0x11	count:0	Duration (ticks):0 DDR LPM Stat Name:0xd0	count:0	Duration (ticks):0 DDR Freq 200Mhz:	CP IDX:1	count:1	Duration (ticks):0 DDR Freq 547Mhz:	CP IDX:2	count:1	Duration (ticks):0 DDR Freq 1353Mhz:	CP IDX:3	count:1	Duration (ticks):0 DDR Freq 1555Mhz:	CP IDX:4	count:1	Duration (ticks):0 DDR Freq 1708Mhz:	CP IDX:5	count:1	Duration (ticks):0 DDR Freq 2092Mhz:	CP IDX:6	count:1	Duration (ticks):0 DDR Freq 2736Mhz:	CP IDX:7	count:1	Duration (ticks):0 DDR Freq 3187Mhz:	CP IDX:8	count:1	Duration (ticks):0 DDR Freq 3686Mhz:	CP IDX:9	count:1	Duration (ticks):0 DDR Freq 4224Mhz:	CP IDX:10	count:1	Duration (ticks):0 DDR Freq 4761Mhz:	CP IDX:11	count:1	Duration (ticks):0 
+display: 
+gpdsp0: 
+gpdsp1: 
+gpu: 
+modem: 
+slpi: 
+slpi_island: 
+soccp: Count: 13028 Last Entered At: 75147530163 Last Exited At: 75147510172 Accumulated Duration: 73586854970 
+wpss: 
+fail:1
+failed_freeze:0
+failed_prepare:0
+failed_resume:0
+failed_resume_early:0
+failed_resume_noirq:0
+failed_suspend:0
+failed_suspend_late:0
+failed_suspend_noirq:0
+last_failed_errno:-95
+success:1
+
+Cycle rtc: while it slept, was the fan audible, the keyboard backlight on, and the power LED steady, breathing or off? EC while asleep: 
+Cycle rtc: does the USB mouse move the pointer, and is Wi-Fi connected again (a web page loads)? USB and Wi-Fi after: power led was breathing, keyboard backlight off, unsure of the fans
+Cycle rtc: did the screen, keyboard and touchpad come back? [y/N] owner: wifi seems ok. haven't checked usb mouse
+
+==== cycle: lid
+Close the lid now. While it sleeps, unplug the charger, wait 10 s, plug it back in, wait 10 s more, then open the lid.
+resumed after 39 s; suspend successes 1 -> 2
+wake IRQ: 200 ( 2 0 0 0 0 0 0 0 0 0 0 0 msmgpio 92 Edge lid)
+
+==== kernel log of the cycle
+[ 3835.440055] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 3850.099015] glymur kernel: wlo1: deauthenticating from xx:xx:xx:xx:xx:xx by local choice (Reason: 3=DEAUTH_LEAVING)
+[ 3850.110006] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 3850.322012] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 3851.195011] glymur kernel: PM: suspend entry (deep)
+[ 3851.222006] glymur kernel: Filesystems sync: 0.027 seconds
+[ 3855.721750] glymur kernel: Freezing user space processes
+[ 3855.721835] glymur kernel: Freezing user space processes completed (elapsed 0.001 seconds)
+[ 3855.721868] glymur kernel: OOM killer disabled.
+[ 3855.721881] glymur kernel: Freezing remaining freezable tasks
+[ 3855.721901] glymur kernel: Freezing remaining freezable tasks completed (elapsed 0.001 seconds)
+[ 3855.721931] glymur kernel: printk: Suspending console(s) (use no_console_suspend to debug)
+[ 3855.721941] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 3855.722151] glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+[ 3855.722258] glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+[ 3855.722323] glymur kernel: dwc3-qcom a800000.usb: port-1 HS-PHY not in L2
+[ 3855.722408] glymur kernel: dwc3-qcom a600000.usb: port-1 HS-PHY not in L2
+[ 3855.722478] glymur kernel: dwc3-qcom a000000.usb: port-1 HS-PHY not in L2
+[ 3855.722549] glymur kernel: dwc3-qcom a200000.usb: port-1 HS-PHY not in L2
+[ 3855.722633] glymur kernel: qcom-pcie 1bf0000.pcie: Timeout waiting for L2 entry! LTSSM: 0x11
+[ 3855.722711] glymur kernel: Disabling non-boot CPUs ...
+[ 3855.722722] glymur kernel: psci: CPU11 killed (polled 0 ms)
+[ 3855.722733] glymur kernel: psci: CPU10 killed (polled 0 ms)
+[ 3855.722741] glymur kernel: psci: CPU9 killed (polled 0 ms)
+[ 3855.722758] glymur kernel: psci: CPU8 killed (polled 0 ms)
+[ 3855.722769] glymur kernel: psci: CPU7 killed (polled 0 ms)
+[ 3855.722775] glymur kernel: psci: CPU6 killed (polled 0 ms)
+[ 3855.722782] glymur kernel: psci: CPU5 killed (polled 1 ms)
+[ 3855.722788] glymur kernel: psci: CPU4 killed (polled 0 ms)
+[ 3855.722797] glymur kernel: psci: CPU3 killed (polled 0 ms)
+[ 3855.722805] glymur kernel: psci: CPU2 killed (polled 0 ms)
+[ 3855.722812] glymur kernel: psci: CPU1 killed (polled 0 ms)
+[ 3855.722820] glymur kernel: Enabling non-boot CPUs ...
+[ 3855.722828] glymur kernel: Detected PIPT I-cache on CPU1
+[ 3855.722836] glymur kernel: GICv3: CPU1: found redistributor 100 region 0:0x00000000170c0000
+[ 3855.722844] glymur kernel: CPU1: Booted secondary processor 0x0000000100 [0x512f0021]
+[ 3855.722864] glymur kernel: CPU1 is up
+[ 3855.722878] glymur kernel: Detected PIPT I-cache on CPU2
+[ 3855.722885] glymur kernel: GICv3: CPU2: found redistributor 200 region 0:0x0000000017100000
+[ 3855.722892] glymur kernel: CPU2: Booted secondary processor 0x0000000200 [0x512f0021]
+[ 3855.722899] glymur kernel: CPU2 is up
+[ 3855.722905] glymur kernel: Detected PIPT I-cache on CPU3
+[ 3855.722912] glymur kernel: GICv3: CPU3: found redistributor 300 region 0:0x0000000017140000
+[ 3855.722918] glymur kernel: CPU3: Booted secondary processor 0x0000000300 [0x512f0021]
+[ 3855.722925] glymur kernel: CPU3 is up
+[ 3855.722932] glymur kernel: Detected PIPT I-cache on CPU4
+[ 3855.722938] glymur kernel: GICv3: CPU4: found redistributor 400 region 0:0x0000000017180000
+[ 3855.722945] glymur kernel: CPU4: Booted secondary processor 0x0000000400 [0x512f0021]
+[ 3855.722954] glymur kernel: CPU4 is up
+[ 3855.722961] glymur kernel: Detected PIPT I-cache on CPU5
+[ 3855.722970] glymur kernel: GICv3: CPU5: found redistributor 500 region 0:0x00000000171c0000
+[ 3855.722976] glymur kernel: CPU5: Booted secondary processor 0x0000000500 [0x512f0021]
+[ 3855.722984] glymur kernel: CPU5 is up
+[ 3855.722990] glymur kernel: Detected PIPT I-cache on CPU6
+[ 3855.722996] glymur kernel: GICv3: CPU6: found redistributor 10000 region 0:0x0000000017200000
+[ 3855.723010] glymur kernel: CPU6: Booted secondary processor 0x0000010000 [0x511f0021]
+[ 3855.723017] glymur kernel: CPU6 is up
+[ 3855.723024] glymur kernel: Detected PIPT I-cache on CPU7
+[ 3855.723029] glymur kernel: GICv3: CPU7: found redistributor 10100 region 0:0x0000000017240000
+[ 3855.723036] glymur kernel: CPU7: Booted secondary processor 0x0000010100 [0x511f0021]
+[ 3855.723043] glymur kernel: CPU7 is up
+[ 3855.723050] glymur kernel: Detected PIPT I-cache on CPU8
+[ 3855.723057] glymur kernel: GICv3: CPU8: found redistributor 10200 region 0:0x0000000017280000
+[ 3855.723065] glymur kernel: CPU8: Booted secondary processor 0x0000010200 [0x511f0021]
+[ 3855.723269] glymur kernel: CPU8 is up
+[ 3855.723278] glymur kernel: Detected PIPT I-cache on CPU9
+[ 3855.723285] glymur kernel: GICv3: CPU9: found redistributor 10300 region 0:0x00000000172c0000
+[ 3855.723292] glymur kernel: CPU9: Booted secondary processor 0x0000010300 [0x511f0021]
+[ 3855.723300] glymur kernel: CPU9 is up
+[ 3855.723306] glymur kernel: Detected PIPT I-cache on CPU10
+[ 3855.723313] glymur kernel: GICv3: CPU10: found redistributor 10400 region 0:0x0000000017300000
+[ 3855.723319] glymur kernel: CPU10: Booted secondary processor 0x0000010400 [0x511f0021]
+[ 3855.723326] glymur kernel: CPU10 is up
+[ 3855.723335] glymur kernel: Detected PIPT I-cache on CPU11
+[ 3855.723341] glymur kernel: GICv3: CPU11: found redistributor 10500 region 0:0x0000000017340000
+[ 3855.723348] glymur kernel: CPU11: Booted secondary processor 0x0000010500 [0x511f0021]
+[ 3855.723355] glymur kernel: CPU11 is up
+[ 3855.723363] glymur kernel: qcom-pcie 1bf0000.pcie: PCIe Gen.3 x1 link up
+[ 3855.723434] glymur kernel: qcom-pcie 1b40000.pcie: PCIe Gen.4 x4 link up
+[ 3855.723499] glymur kernel: geni_i2c a80000.i2c: Unbalanced pm_runtime_enable!
+[ 3855.723573] glymur kernel: geni_i2c a84000.i2c: Unbalanced pm_runtime_enable!
+[ 3855.723640] glymur kernel: geni_i2c b80000.i2c: Unbalanced pm_runtime_enable!
+[ 3855.723708] glymur kernel: geni_i2c b90000.i2c: Unbalanced pm_runtime_enable!
+[ 3855.723783] glymur kernel: mhi mhi0: Requested to power ON
+[ 3855.723852] glymur kernel: mhi mhi0: Power on setup success
+[ 3855.723913] glymur kernel: mhi mhi0: Wait for device to enter SBL or Mission mode
+[ 3855.723978] glymur kernel: usb usb1: root hub lost power or was reset
+[ 3855.724107] glymur kernel: usb usb2: root hub lost power or was reset
+[ 3855.724224] glymur kernel: usb usb3: root hub lost power or was reset
+[ 3855.724338] glymur kernel: nvme nvme0: D3 entry latency set to 10 seconds
+[ 3855.724416] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: chip_id 0x21 chip_family 0x4 board_id 0xff soc_id 0x40292100
+[ 3855.724516] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: fw_version 0x100581de fw_build_timestamp 2024-09-11 23:52 fw_build_id QC_IMAGE_VERSION_STRING=WLAN.COL.1.0.c2-00277-QCACOLSWPL_V1_TO_SILICONZ-1
+[ 3855.724609] glymur kernel: nvme nvme0: 12/0/0 default/read/poll queues
+[ 3855.724678] glymur kernel: usb 3-1: reset SuperSpeed USB device number 2 using xhci-hcd
+[ 3855.724802] glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+[ 3855.724914] glymur kernel: debugfs: 'simulate_fw_crash' already exists in 'pci-0004:01:00.0'
+[ 3855.724922] glymur kernel: debugfs: 'device_dp_stats' already exists in 'pci-0004:01:00.0'
+[ 3855.724929] glymur kernel: OOM killer enabled.
+[ 3855.724933] glymur kernel: Restarting tasks: Starting
+[ 3855.724941] glymur kernel: Restarting tasks: Done
+[ 3855.724947] glymur kernel: efivarfs: resyncing variable state
+[ 3855.910070] glymur kernel: efivarfs: finished resyncing variable state
+[ 3855.924281] glymur kernel: PM: suspend exit
+[ 3855.924292] glymur kernel: PM: suspend entry (s2idle)
+[ 3855.937061] glymur kernel: Filesystems sync: 0.012 seconds
+[ 3860.385594] glymur kernel: Freezing user space processes
+[ 3860.385753] glymur kernel: Freezing user space processes completed (elapsed 0.000 seconds)
+[ 3860.385779] glymur kernel: OOM killer disabled.
+[ 3860.386064] glymur kernel: Freezing remaining freezable tasks
+[ 3860.386077] glymur kernel: Freezing remaining freezable tasks completed (elapsed 0.000 seconds)
+[ 3860.386102] glymur kernel: printk: Suspending console(s) (use no_console_suspend to debug)
+[ 3860.386109] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 3860.386267] glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+[ 3860.386368] glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+[ 3860.386437] glymur kernel: dwc3-qcom a800000.usb: port-1 HS-PHY not in L2
+[ 3860.386531] glymur kernel: dwc3-qcom a600000.usb: port-1 HS-PHY not in L2
+[ 3860.386603] glymur kernel: dwc3-qcom a000000.usb: port-1 HS-PHY not in L2
+[ 3860.386690] glymur kernel: dwc3-qcom a200000.usb: port-1 HS-PHY not in L2
+[ 3860.386757] glymur kernel: qcom-pcie 1bf0000.pcie: Timeout waiting for L2 entry! LTSSM: 0x11
+[ 3860.386829] glymur kernel: qcom-pcie 1bf0000.pcie: PCIe Gen.3 x1 link up
+[ 3860.386890] glymur kernel: qcom-pcie 1b40000.pcie: PCIe Gen.4 x4 link up
+[ 3860.386968] glymur kernel: geni_i2c a80000.i2c: Unbalanced pm_runtime_enable!
+[ 3860.387067] glymur kernel: geni_i2c a84000.i2c: Unbalanced pm_runtime_enable!
+[ 3860.387141] glymur kernel: geni_i2c b80000.i2c: Unbalanced pm_runtime_enable!
+[ 3860.387220] glymur kernel: geni_i2c b90000.i2c: Unbalanced pm_runtime_enable!
+[ 3860.387302] glymur kernel: mhi mhi0: Requested to power ON
+[ 3860.387398] glymur kernel: mhi mhi0: Power on setup success
+[ 3860.387460] glymur kernel: mhi mhi0: Wait for device to enter SBL or Mission mode
+[ 3860.387525] glymur kernel: usb usb1: root hub lost power or was reset
+[ 3860.387650] glymur kernel: usb usb2: root hub lost power or was reset
+[ 3860.387764] glymur kernel: usb usb3: root hub lost power or was reset
+[ 3860.387870] glymur kernel: nvme nvme0: D3 entry latency set to 10 seconds
+[ 3860.387944] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: chip_id 0x21 chip_family 0x4 board_id 0xff soc_id 0x40292100
+[ 3860.388148] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: fw_version 0x100581de fw_build_timestamp 2024-09-11 23:52 fw_build_id QC_IMAGE_VERSION_STRING=WLAN.COL.1.0.c2-00277-QCACOLSWPL_V1_TO_SILICONZ-1
+[ 3860.388231] glymur kernel: nvme nvme0: 12/0/0 default/read/poll queues
+[ 3860.388296] glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+[ 3860.388406] glymur kernel: usb 3-1: reset SuperSpeed USB device number 2 using xhci-hcd
+[ 3860.388512] glymur kernel: debugfs: 'simulate_fw_crash' already exists in 'pci-0004:01:00.0'
+[ 3860.388523] glymur kernel: debugfs: 'device_dp_stats' already exists in 'pci-0004:01:00.0'
+[ 3860.388537] glymur kernel: OOM killer enabled.
+[ 3860.388544] glymur kernel: Restarting tasks: Starting
+[ 3860.388552] glymur kernel: Restarting tasks: Done
+[ 3860.388560] glymur kernel: efivarfs: resyncing variable state
+[ 3860.574071] glymur kernel: efivarfs: finished resyncing variable state
+[ 3860.584004] glymur kernel: PM: suspend exit
+[ 3865.656101] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+[ 3865.755054] glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+
+==== devices (after lid)
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+    |__ Port 001: Dev 002, If 0, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 1, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 2, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 3, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 4, Class=Application Specific Interface, Driver=[none], 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 003.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+    |__ Port 001: Dev 002, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
+wlo1             DOWN           xx:xx:xx:xx:xx:xx <NO-CARRIER,BROADCAST,MULTICAST,UP> 
+		type P2P-device
+	Interface wlo1
+		type managed
+network: disconnected:none
+card 0: MAHUAHPOmniBook [MAHUA-HP-OmniBook-5-16-bf1xxx], device 0: MultiMedia1 Playback (*) []
+qcom-battmgr-ac:  
+qcom-battmgr-bat: Discharging 47
+qcom-battmgr-usb:  
+qcom-battmgr-wls:  
+ucsi-source-psy-pmic_glink.ucsi.01: Not charging 
+ucsi-source-psy-pmic_glink.ucsi.02: Not charging 
+card1-Writeback-1: unknown disabled
+card1-eDP-1: connected enabled
+EC fan 0 rpm, temp1 36000
+/dev/rtc
+/dev/rtc0
+
+==== sleep counters (after lid)
+adsp: Count: 7 Last Entered At: 76860915436 Last Exited At: 76860909208 Accumulated Duration: 308871766 
+adsp_island: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+aosd: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+apss: Count: 103782 Last Entered At: 77023287211 Last Exited At: 77023309861 Accumulated Duration: 25589539640 
+cdsp1: 
+cdsp_nsp: Count: 7 Last Entered At: 70731339187 Last Exited At: 70731230027 Accumulated Duration: 75985250873 
+cdsp_nsp_1: 
+cdsp_nsp_2: 
+cdsp_nsp_3: 
+cxsd: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+dcp: 
+ddr: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+ddr_stats: DDR LPM Stat Name:0xd4	count:0	Duration (ticks):0 DDR LPM Stat Name:0xd3	count:0	Duration (ticks):0 DDR LPM Stat Name:0x11	count:0	Duration (ticks):0 DDR LPM Stat Name:0xd0	count:0	Duration (ticks):0 DDR Freq 200Mhz:	CP IDX:1	count:1	Duration (ticks):0 DDR Freq 547Mhz:	CP IDX:2	count:1	Duration (ticks):0 DDR Freq 1353Mhz:	CP IDX:3	count:1	Duration (ticks):0 DDR Freq 1555Mhz:	CP IDX:4	count:1	Duration (ticks):0 DDR Freq 1708Mhz:	CP IDX:5	count:1	Duration (ticks):0 DDR Freq 2092Mhz:	CP IDX:6	count:1	Duration (ticks):0 DDR Freq 2736Mhz:	CP IDX:7	count:1	Duration (ticks):0 DDR Freq 3187Mhz:	CP IDX:8	count:1	Duration (ticks):0 DDR Freq 3686Mhz:	CP IDX:9	count:1	Duration (ticks):0 DDR Freq 4224Mhz:	CP IDX:10	count:1	Duration (ticks):0 DDR Freq 4761Mhz:	CP IDX:11	count:1	Duration (ticks):0 
+display: 
+gpdsp0: 
+gpdsp1: 
+gpu: 
+modem: 
+slpi: 
+slpi_island: 
+soccp: Count: 13411 Last Entered At: 77025722730 Last Exited At: 77025694506 Accumulated Duration: 75413290782 
+wpss: 
+fail:2
+failed_freeze:0
+failed_prepare:0
+failed_resume:0
+failed_resume_early:0
+failed_resume_noirq:0
+failed_suspend:0
+failed_suspend_late:0
+failed_suspend_noirq:0
+last_failed_errno:-95
+success:2
+
+Cycle lid: while it slept, was the fan audible, the keyboard backlight on, and the power LED steady, breathing or off? EC while asleep: 
+Cycle lid: does the USB mouse move the pointer, and is Wi-Fi connected again (a web page loads)? USB and Wi-Fi after: no idea, display was closed
+Cycle lid: did the screen, keyboard and touchpad come back? [y/N] owner: wifi seems ok, haven't tested USB
+
+==== cycle: button
+Suspending in 3 s; wait 20 s, then press the power button briefly.

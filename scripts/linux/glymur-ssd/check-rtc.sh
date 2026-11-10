@@ -16,7 +16,7 @@ OUT="/var/log/glymur/rtc-test-$(date +%Y%m%dT%H%M%S).txt"
 mkdir -p /var/log/glymur
 exec > >(tee "$OUT") 2>&1
 sect() { printf '\n==== %s\n' "$*"; }
-ask() { local a; read -r -p "$1 " a </dev/tty; printf '%s\n' "$a"; }
+ask() { local a; while read -r -t 0.05 -n 4096 _ </dev/tty 2>/dev/null; do :; done; read -r -p "$1 " a </dev/tty; a=$(printf '%s' "$a" | sed -E 's/\x1b\[[0-9;]*[~A-Za-z]//g; s/\[[0-9]+~//g'); printf '%s\n' "$a"; }
 
 sect "driver"
 modprobe rtc-qcom-glink 2>&1
