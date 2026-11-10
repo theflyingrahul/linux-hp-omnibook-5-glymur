@@ -556,7 +556,13 @@ and by the power button, then a fourth that does not gate keeping suspend:
 the lid closed on AC for 2 minutes, to catch a lid line that wakes it. Each
 cycle logs its wake IRQ, the network state and the EC's debug events, and
 asks what the fan, keyboard backlight and power LED did while asleep and
-whether the USB mouse and Wi-Fi came back. Before and after each cycle it
+whether the USB mouse and Wi-Fi came back. Each cycle also prints how long
+the SoC spent in CX collapse, AOSS sleep and DDR low power (`qcom_stats`,
+19.2 MHz ticks) and the battery drain in mW; an optional 10-minute cycle on
+battery gives a real drain figure. Before the cycles (and after the drain
+cycle) it lists what can keep the SoC up: crystal and RPMh clock users,
+non-zero interconnect votes, enabled regulators, the DSPs and PCIe link
+power management. Before and after each cycle it
 logs the RPMh sleep counters (`qcom_stats`: how often the SoC reached AOSS
 sleep, CX collapse and DDR sleep), `/sys/power/suspend_stats`, the USB
 tree, Wi-Fi, the sound cards, the power supplies, the display connectors

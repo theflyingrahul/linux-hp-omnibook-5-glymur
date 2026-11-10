@@ -61,9 +61,19 @@ the charger.
 11. **Suspend, last:** mouse in one USB-C port, stick in the other, Wi-Fi
     on, charger in. `sudo bash ~/check-suspend.sh`. `/sys/power/mem_sleep`
     should now show `[s2idle]`, so no cycle tries "deep". The RTC cycle
-    still has no alarm unless step 3 found one; wake it with a key. Check
-    afterwards: `journalctl -k -b | grep -E "cannot tell the EC|Unbalanced|GPI transfer failed"`
+    still has no alarm unless step 3 found one; wake it with a key. Each
+    cycle now prints how long the SoC spent in CX collapse (`cxsd`), AOSS
+    sleep (`aosd`) and DDR low power (`ddr`); on `-20` all three stayed at
+    0, so the SoC never slept (`docs/suspend-2026-11-10.md`). At the end,
+    answer `y` to the 10-minute drain cycle (on battery, lid closed): it
+    gives the sleep power in mW. Check afterwards:
+    `journalctl -k -b | grep -E "cannot tell the EC|Unbalanced|GPI transfer failed"`
     should print nothing.
+12. **Suspend with the boot votes released:** if the cycles came back, run
+    `sudo bash ~/check-suspend.sh --sync-state` once more, again with the
+    drain cycle. It releases the three clock controllers that wait for the
+    GPU management unit (`sync_state`) and keep their boot votes; whether
+    `cxsd` then moves is the main question of this boot.
 
 ## B. Second boot: A/V device tree (as in `-20`, B)
 

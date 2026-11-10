@@ -69,6 +69,43 @@ snapshot() {
     stats
     grep -H . /sys/power/suspend_stats/* 2>/dev/null | sed 's#/sys/power/suspend_stats/##'
 }
+# "Count Accumulated" of one AOP sleep state: cxsd (CX collapse), aosd
+# (AOSS sleep, XO off), ddr (DDR low power). On -20 all three stayed 0.
+aop() {
+    local f=/sys/kernel/debug/qcom_stats/$1
+    [ -r "$f" ] || { echo "0 0"; return; }
+    awk -F': *' '/^Count/ {c=$2} /^Accumulated Duration/ {a=$2} END {print c+0, a+0}' "$f"
+}
+# Battery energy in µWh: energy_now, or charge_now x voltage_now.
+energy() {
+    local p e c v
+    for p in /sys/class/power_supply/*; do
+        [ "$(cat "$p/type" 2>/dev/null)" = Battery ] || continue
+        e=$(cat "$p/energy_now" 2>/dev/null)
+        if [ -n "$e" ]; then echo "$e"; return; fi
+        c=$(cat "$p/charge_now" 2>/dev/null); v=$(cat "$p/voltage_now" 2>/dev/null)
+        [ -n "$c" ] && [ -n "$v" ] && { echo $(( c / 1000 * (v / 1000) / 1000 )); return; }
+    done
+    echo ""
+}
+# What keeps the SoC up: the crystal and RPMh clock users, non-zero
+# interconnect votes, enabled regulators, the DSPs, PCIe link power states.
+blockers() {
+    sect "possible sleep blockers ($1)"
+    local D=/sys/kernel/debug
+    echo "-- clocks: crystal and RPMh (enable/prepare counts and consumers)"
+    grep -E 'bi_tcxo|xo_board|cxo|rpmh' "$D/clk/clk_summary" 2>/dev/null | head -20
+    echo "-- interconnect paths with a non-zero vote"
+    awk 'NF >= 3 && ($(NF-1) + 0 > 0 || $NF + 0 > 0)' "$D/interconnect/interconnect_summary" 2>/dev/null | head -40
+    echo "-- regulators enabled"
+    awk '$2 + 0 > 0 || $3 + 0 > 0' "$D/regulator/regulator_summary" 2>/dev/null | head -40
+    echo "-- remote processors"
+    for r in /sys/class/remoteproc/remoteproc*; do
+        printf '%s %s %s\n' "${r##*/}" "$(cat "$r/name" 2>/dev/null)" "$(cat "$r/state" 2>/dev/null)"
+    done
+    echo "-- PCIe link power management"
+    lspci -vv 2>/dev/null | grep -E '^[0-9a-f]|LnkCtl:|L1SubCtl1:' | head -20
+}
 devices() {
     sect "devices ($1)"
     lsusb -t 2>&1
@@ -115,6 +152,7 @@ done | sort
 
 devices before
 snapshot before
+blockers before
 
 echo
 echo "Suspend is about to be unmasked for this test ($TARGETS)."
@@ -152,9 +190,12 @@ systemctl enable glymur-suspend-guard.service 2>&1 | tail -1
 systemctl unmask $TARGETS
 
 cycle() {
-    local name=$1 how=$2 t0 before after i
+    local name=$1 how=$2 maxwait=${3:-240} t0 before after i s el e0 e1
+    local -A c0 a0
     sect "cycle: $name"
     before=$(cat /sys/power/suspend_stats/success 2>/dev/null || echo 0)
+    for s in cxsd aosd ddr; do read -r c0[$s] a0[$s] < <(aop $s); done
+    e0=$(energy)
     t0=$(date +%s)
     echo "$how"
     echo "While it sleeps, look at: the fan, the keyboard backlight, the power LED. You are asked afterwards."
@@ -169,13 +210,25 @@ cycle() {
         sleep 3
         systemctl suspend
     fi
-    for i in $(seq 1 240); do
+    for i in $(seq 1 "$maxwait"); do
         after=$(cat /sys/power/suspend_stats/success 2>/dev/null || echo 0)
         [ "$after" -gt "$before" ] && break
         sleep 1
     done
     sleep 8
-    echo "resumed after $(( $(date +%s) - t0 )) s; suspend successes $before -> $after"
+    el=$(( $(date +%s) - t0 ))
+    echo "resumed after $el s; suspend successes $before -> $after"
+    # How deep the SoC went: the AOP counters' growth during the cycle
+    # (durations are AOP timer ticks, 19.2 MHz).
+    for s in cxsd aosd ddr; do
+        read -r c a < <(aop $s)
+        printf 'residency %-4s: entries +%d, %d ticks = %d s of %d s\n' "$s" \
+            $(( c - ${c0[$s]} )) $(( a - ${a0[$s]} )) $(( (a - ${a0[$s]}) / 19200000 )) "$el"
+    done
+    e1=$(energy)
+    if [ -n "$e0" ] && [ -n "$e1" ] && [ "$el" -gt 0 ]; then
+        echo "battery: $e0 -> $e1 uWh, $(( (e0 - e1) * 3600 / el / 1000 )) mW average (meaningful on battery only)"
+    fi
     w=$(cat /sys/power/pm_wakeup_irq 2>/dev/null)
     echo "wake IRQ: ${w:-none}${w:+ ($(awk -v i="$w:" '$1 == i {$1 = ""; print}' /proc/interrupts | tr -s ' ' | cut -c1-120))}"
     sect "kernel log of the cycle"
@@ -200,6 +253,12 @@ cycle button "Suspending in 3 s; wait 20 s, then press the power button briefly.
 # Not gating: on the Zenbook A16 the lid line pulses once in deep sleep on
 # AC and wakes it; a short "resumed after" here shows the same.
 cycle lid-ac "With the charger plugged in, close the lid and leave it closed for 2 minutes, then open it."
+# Not gating: a real drain figure needs the battery and some minutes.
+ask 'Measure the sleep drain: 10 minutes on battery with the lid closed? (y / n)'
+if [ "$REPLY" = y ]; then
+    cycle drain "Unplug the charger now, close the lid, wait 10 minutes, then open it and plug the charger back in." 900
+    blockers "after drain"
+fi
 
 sect result
 ok=1
