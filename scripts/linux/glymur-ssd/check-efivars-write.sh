@@ -29,7 +29,7 @@ count=$(ls "$V" | wc -l)
 echo "$count variables visible"
 t0=$(date +%s)
 
-payload() { od -An -tx1 -v -j4 "$1" | tr -d ' \n'; }
+payload() { tail -c +5 "$1" | od -An -tx1 -v | tr -d ' \n'; }
 
 if [ "${1:-}" = --verify ]; then
     [ -f "$STATE" ] || { echo "no $STATE: the write step did not run"; exit 1; }

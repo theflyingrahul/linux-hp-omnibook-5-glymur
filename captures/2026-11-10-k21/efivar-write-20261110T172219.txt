@@ -1,0 +1,8 @@
+kernel: 7.3.0-glymur-21
+efivarfs: rw,nosuid,nodev,noexec,relatime
+98 variables visible
+od: cannot skip past end of combined input
+FAIL: read back 
+Reboot, then run: sudo bash ~/check-efivars-write.sh --verify
+99 variables visible now
+log: /var/log/glymur/efivar-write-20261110T172219.txt
