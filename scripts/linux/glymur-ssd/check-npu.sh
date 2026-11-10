@@ -35,10 +35,18 @@ ls -l "$DSP" 2>&1 | head -30
 sect "FastRPC test on the CDSP"
 export ADSP_LIBRARY_PATH="$DSP:/usr/lib/dsp/cdsp:/usr/share/qcom/glymur/dsp/cdsp"
 export DSP_LIBRARY_PATH="$ADSP_LIBRARY_PATH"
+# The healthcheck only looks in its configured libdir and /usr/lib.
+export LD_LIBRARY_PATH="/usr/lib/aarch64-linux-gnu${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 if command -v fastrpc_test >/dev/null 2>&1; then
     if command -v fastrpc-healthcheck >/dev/null 2>&1; then
         echo '--- fastrpc-healthcheck'
         timeout 60 fastrpc-healthcheck 2>&1 | tail -40
+    fi
+    CAPS="$(dirname "$0")/npu-caps.c"
+    if [ -f "$CAPS" ] && command -v gcc >/dev/null 2>&1; then
+        echo '--- npu-caps (the CDSP asked what it is)'
+        gcc -Wall -o /tmp/npu-caps "$CAPS" -I/usr/include/fastrpc -lcdsprpc 2>&1 | head -5
+        timeout 60 /tmp/npu-caps 2>&1
     fi
     fastrpc_test -h 2>&1 | head -15
     for args in "-d 3 -U 1" "-d 3 -U 0"; do

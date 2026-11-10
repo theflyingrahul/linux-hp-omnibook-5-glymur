@@ -97,7 +97,7 @@ sudo apt-get install -y mesa-utils mesa-utils-bin vulkan-tools glmark2-es2-wayla
 
 for f in check-gpu-test.sh check-mesa.sh charging-watch.sh check-usb.sh check-ec.sh gpu-corruption-test.sh \
          check-audio.sh check-headset.sh watch-audio.sh check-battmgr-notify.sh check-video.sh \
-         check-display.sh check-hotkeys.sh ec-event-capture.sh dump-efivars.sh          check-suspend.sh check-rtc.sh check-efivars-write.sh check-npu.sh setup-npu.sh \
+         check-display.sh check-hotkeys.sh ec-event-capture.sh dump-efivars.sh          check-suspend.sh check-rtc.sh check-efivars-write.sh check-npu.sh setup-npu.sh npu-caps.c \
          check-chid.sh stubble-hwids.py; do
     if [ -f "$K/$f" ]; then cp "$K/$f" "$HOME/$f"; fi
 done

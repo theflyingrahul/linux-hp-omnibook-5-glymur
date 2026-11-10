@@ -160,3 +160,24 @@ opening directory /usr/local/lib/fastrpc_test`: it wants its sample skeletons
 installed, and those are Hexagon v68/v75 while the NPU is v81, so it cannot
 run a real offload here. The healthcheck result decides the next step
 (a v81 skeleton, or a QNN-based test through HP's `libQnnHtpV81Skel.so`).
+
+## NPU, second run (`npu-test-20261110T140603.txt`)
+
+With the machine YAML and the firmware link in place, `fastrpc-healthcheck`
+reports both DSPs `Online`, firmware build ID
+`CDSP.HT.3.3-00304-GLYMUR-1_20260114_014505`, the DSP libraries path
+`/usr/share/qcom/glymur/HP/omnibook-5-16-bf1xxx/dsp`, and for the CDSP signed
+and unsigned PDs. It still said "Missing FastRPC user-space libs": the
+healthcheck only searches the libdir it was configured with
+(`/usr/local/lib`) and `/usr/lib`, not Ubuntu's
+`/usr/lib/aarch64-linux-gnu`. With `LD_LIBRARY_PATH` set to that directory
+(it reads the variable) the result is **CDSP: FastRPC Support Yes**. The
+ADSP says "Missing shell build ID": HP ships a CDSP shell only, which is
+fine for the NPU. `check-npu.sh` now sets the variable.
+
+New: `scripts/linux/glymur-ssd/npu-caps.c`, a read-only query of the CDSP's
+capabilities (architecture version, HVX, VTCM, HMX) through
+`remote_handle_control`. Built as the owner it gets `rc=114` on everything
+but `DOMAIN_SUPPORT` (1) because `/dev/fastrpc-cdsp` is root-only, so
+`check-npu.sh` compiles and runs it as root. `fastrpc_test` is still blocked
+on its v68/v75 sample skeletons.
