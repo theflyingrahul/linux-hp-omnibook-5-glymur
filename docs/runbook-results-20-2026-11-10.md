@@ -105,3 +105,32 @@ the plug went in or out. What the log shows:
 - The microphone path (`TX_CODEC_DMA_TX_3`) was routed and recorded silence;
   with the jack not detected, the codec's input is probably not selected
   (`GE 35 Selected Mode` stays 0).
+
+## Follow-up 2: unmuting the headset path, with the headset plugged in
+
+Before: `FU 6 Channel Switch` off,off, volume 25088, `RX_CODEC_DMA_RX_0`
+route off, `WSA_CODEC_DMA_RX_0` route on. Set `FU 6` on, the RX route on and
+the speaker route off, then `pw-play` a 3 % amplitude 1 kHz tone, left and
+right. Neither `pw-play` finished: each sat in `epoll` until killed (about
+60 s), with no kernel message, no `CMD timeout`, `wpctl` answering and all
+three SoundWire devices `Attached`. The stream never started, so no sound was
+tested. Every control was put back to the values above. The sink PipeWire
+plays to is still the speakers' (`Internal Speakers`, `MultiMedia1`) and the
+card has no headset sink, so the mixer routing alone does not make a
+stream run; the headset needs its own UCM device and sink, which waits for
+jack detection (the SDCA `max=0` range bug above).
+
+## NPU setup
+
+`check-npu.sh` asked apt for `fastrpc-tests`, which does not exist. Ubuntu
+has `fastrpc-support` (daemons, udev rules), `libfastrpc1` and
+`libfastrpc-dev`, and no test binary. `scripts/linux/glymur-ssd/setup-npu.sh`
+installs those plus a toolchain, builds `fastrpc_test` and
+`fastrpc-healthcheck` from Qualcomm's source (pinned at `8f59273`) into
+`/usr/local/bin`; `check-npu.sh` now runs the healthcheck first. Not built
+or run here (no compiler on the laptop, `sudo` needs the owner). Known
+limit: the upstream test's skeletons are Hexagon v68/v75, and this NPU is
+v81 (HP's `libQnnHtpV81Skel.so`), so `fastrpc_test` may start the CDSP
+session and still fail to find a matching skeleton; the healthcheck and the
+session setup are the first result to read. The `hexagon-dsp-binaries-*`
+packages are other boards' files and are not installed.

@@ -28,10 +28,7 @@ ls -l /dev/fastrpc-* 2>&1
 journalctl -k -b --no-pager | grep -iE 'fastrpc|cdsp' | grep -v 'Adding to iommu group' | tail -20
 
 sect "userspace"
-if ! command -v fastrpc_test >/dev/null 2>&1; then
-    apt-get install -y fastrpc-support fastrpc-tests 2>&1 | tail -3 ||
-        echo 'fastrpc packages not installable (offline, or not in this release)'
-fi
+command -v fastrpc_test >/dev/null 2>&1 || echo 'fastrpc_test missing: run sudo bash setup-npu.sh first'
 dpkg -l 'fastrpc*' 'libfastrpc*' 'hexagon-dsp*' 2>/dev/null | grep '^ii'
 ls -l "$DSP" 2>&1 | head -30
 
@@ -39,6 +36,10 @@ sect "FastRPC test on the CDSP"
 export ADSP_LIBRARY_PATH="$DSP:/usr/lib/dsp/cdsp:/usr/share/qcom/glymur/dsp/cdsp"
 export DSP_LIBRARY_PATH="$ADSP_LIBRARY_PATH"
 if command -v fastrpc_test >/dev/null 2>&1; then
+    if command -v fastrpc-healthcheck >/dev/null 2>&1; then
+        echo '--- fastrpc-healthcheck'
+        timeout 60 fastrpc-healthcheck 2>&1 | tail -40
+    fi
     fastrpc_test -h 2>&1 | head -15
     for args in "-d 3 -U 1" "-d 3 -U 0"; do
         echo "--- fastrpc_test $args"
