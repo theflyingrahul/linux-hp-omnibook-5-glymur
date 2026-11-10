@@ -1,0 +1,96 @@
+
+==== driver
+Oct 02 23:05:46 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@5: Adding to iommu group 27
+Oct 02 23:05:46 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@6: Adding to iommu group 28
+Oct 02 23:05:46 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@7: Adding to iommu group 29
+Oct 02 23:05:46 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@8: Adding to iommu group 30
+Oct 02 23:05:46 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@c: Adding to iommu group 31
+Oct 02 23:05:46 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@d: Adding to iommu group 32
+Oct 02 23:05:46 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@e: Adding to iommu group 33
+Oct 02 23:05:46 glymur kernel: qcom,fastrpc 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1: assigned reserved memory node adsp-rpc-remote-heap
+Oct 02 23:05:46 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@3: Adding to iommu group 34
+Oct 02 23:05:46 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@4: Adding to iommu group 35
+Oct 02 23:05:46 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@5: Adding to iommu group 36
+Oct 02 23:05:46 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@6: Adding to iommu group 37
+Oct 02 23:05:46 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@7: Adding to iommu group 38
+Oct 02 23:05:46 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@8: Adding to iommu group 39
+Nov 10 17:18:56 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 10 17:18:57 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+Nov 10 17:19:22 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 10 17:19:23 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+Nov 10 17:23:18 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 10 17:23:19 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+rtc0: name=rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0 hctosys=0
+using /dev/rtc0
+
+==== PMIC GLink RTC requests, with debug logging
+debug on: rtc_qcom_glink
+debug on: pmic_glink
+time read: cat: /sys/class/rtc/rtc0/time: Input/output error
+since_epoch read: cat: /sys/class/rtc/rtc0/since_epoch: Input/output error
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x68
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x67
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x65 property=0
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: RX opcode=0x65 type=0x1 owner=0x8010 len=16
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: ACK opcode=0x65 resp_value=4294967295
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x68
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x67
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x65 property=0
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: RX opcode=0x65 type=0x1 owner=0x8010 len=16
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: ACK opcode=0x65 resp_value=4294967295
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x68
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x67
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x65 property=0
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: RX opcode=0x65 type=0x1 owner=0x8010 len=16
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: ACK opcode=0x65 resp_value=4294967295
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x68
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x67
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x65 property=0
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: RX opcode=0x65 type=0x1 owner=0x8010 len=16
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: ACK opcode=0x65 resp_value=4294967295
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+
+==== time
+cat: /sys/class/rtc/rtc0/since_epoch: Input/output error
+cat: /sys/class/rtc/rtc0/date: Input/output error
+cat: /sys/class/rtc/rtc0/time: Input/output error
+RTC        (since_epoch )
+system  2026-11-10 11:58:31 UTC, 2026-11-10 17:28:31 IST local, offset +0530
+RTC - UTC = -1794311903 s
+=> neither UTC nor local time (off by -1794311903 s): is the system clock synced?
+  Failed to query server: Failed to read RTC: Input/output error
+
+==== raw words from the service (dynamic debug)
+cat: /sys/class/rtc/rtc0/time: Input/output error
+Nov 10 17:28:34 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 10 17:28:34 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x67
+Nov 10 17:28:35 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x65 property=0
+Nov 10 17:28:35 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: RX opcode=0x65 type=0x1 owner=0x8010 len=16
+Nov 10 17:28:35 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: ACK opcode=0x65 resp_value=4294967295
+Nov 10 17:28:35 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+Nov 10 17:28:35 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x68
+Nov 10 17:28:36 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 10 17:28:36 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x67
+Nov 10 17:28:37 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x65 property=0
+Nov 10 17:28:37 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: RX opcode=0x65 type=0x1 owner=0x8010 len=16
+Nov 10 17:28:37 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: ACK opcode=0x65 resp_value=4294967295
+Nov 10 17:28:37 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+Nov 10 17:28:37 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x68
+Nov 10 17:28:38 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 10 17:28:38 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x67
+Nov 10 17:28:39 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x65 property=0
+Nov 10 17:28:39 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: RX opcode=0x65 type=0x1 owner=0x8010 len=16
+Nov 10 17:28:39 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: ACK opcode=0x65 resp_value=4294967295
+Nov 10 17:28:39 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+
+==== alarm, 20 s ahead, no suspend
+/home/user/check-rtc.sh: line 90: echo: write error: Input/output error
+setting the alarm failed
+log: /var/log/glymur/rtc-test-20261110T172807.txt

@@ -1,0 +1,1633 @@
+
+==== system
+7.3.0-glymur-21
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+lrwxrwxrwx 1 root root 62 Nov 10 17:17 /lib/firmware/updates/qcom/glymur/MAHUA-HP-OmniBook-5-16-bf1xxx-tplg.bin -> HP/omnibook-5-16-bf1xxx/MAHUA-HP-OmniBook-5-16-bf1xxx-tplg.bin
+dcb4ae9c9f47072737ef3ae3766e71d710d623739fb40c59d58d6897ab77e9f1  /usr/lib/firmware/updates/qcom/glymur/HP/omnibook-5-16-bf1xxx/MAHUA-HP-OmniBook-5-16-bf1xxx-tplg.bin
+
+==== SoundWire controllers (swr1 6a80000 lanes only, swr2 7630000 the headset bus)
+6a80000.soundwire driver=qcom-soundwire runtime=unsupported
+7630000.soundwire driver=qcom-soundwire runtime=suspended
+
+==== SoundWire devices (link:manufacturer:part:version:unique id)
+sdw-master-1-0                           driver=driver status=
+sdw-master-3-0                           driver=driver status=
+sdw:1:0:0217:0204:00:0                   driver=wsa884x-codec status=Attached
+sdw:1:0:0217:0204:00:1                   driver=wsa884x-codec status=Attached
+sdw:3:0:0217:0110:00:3                   driver=wcd9378 status=Attached
+
+==== headset reset line (TLMM 191)
+ gpio191 : out high func0 16mA no pull
+
+==== modules
+snd_soc_sdca_class_function    24576  1
+regmap_sdw_mbq         16384  1 snd_soc_sdca_class_function
+snd_soc_wcd9378        28672  0
+snd_soc_sdca_class     20480  1 snd_soc_wcd9378
+regmap_sdw             12288  2 snd_soc_wsa884x,snd_soc_sdca_class
+q6apm_lpass_dais       20480  1
+snd_q6dsp_common       65536  2 q6apm_lpass_dais,q6prm_clocks
+snd_soc_x1e80100       12288  5
+snd_soc_qcom_sdw       12288  1 snd_soc_x1e80100
+snd_soc_qcom_common    24576  1 snd_soc_x1e80100
+soundwire_qcom         45056  2
+slimbus                36864  1 soundwire_qcom
+soundwire_bus        1183744  8 regmap_sdw,snd_soc_wcd9378,snd_soc_sdca_class_function,regmap_sdw_mbq,snd_soc_wsa884x,snd_soc_qcom_sdw,snd_soc_sdca_class,soundwire_qcom
+snd_soc_lpass_rx_macro   118784  2
+snd_soc_lpass_tx_macro   139264  2
+snd_soc_lpass_va_macro    73728  6
+snd_soc_lpass_wsa_macro    73728  2
+snd_soc_sdca          126976  4 snd_soc_wcd9378,snd_soc_sdca_class_function,snd_soc_sdca_class,soundwire_bus
+snd_q6apm              69632  4 q6apm_dai,q6prm,q6apm_lpass_dais
+snd_soc_lpass_macro_common    12288  4 snd_soc_lpass_wsa_macro,snd_soc_lpass_va_macro,snd_soc_lpass_rx_macro,snd_soc_lpass_tx_macro
+snd_soc_core          446464  14 snd_q6apm,q6apm_dai,snd_soc_sdca_class_function,snd_soc_qcom_common,q6apm_lpass_dais,snd_soc_lpass_wsa_macro,snd_soc_wsa884x,snd_soc_sdca,snd_soc_qcom_sdw,snd_soc_lpass_va_macro,snd_soc_lpass_rx_macro,soundwire_qcom,snd_soc_x1e80100,snd_soc_lpass_tx_macro
+hid                   299008  4 i2c_hid,hid_multitouch,snd_soc_sdca,hid_generic
+pinctrl_sm8650_lpass_lpi    20480  0
+pinctrl_lpass_lpi      24576  12 pinctrl_sm8650_lpass_lpi
+lpasscc_glymur         12288  2
+
+==== kernel log: headset path
+Oct 02 23:05:38 glymur kernel: psci: [Firmware Bug]: failed to set PC mode: -3
+Oct 02 23:05:45 glymur systemd[1]: Mounting sys-kernel-debug.mount - Kernel Debug File System...
+Oct 02 23:05:45 glymur systemd[1]: Mounted sys-kernel-debug.mount - Kernel Debug File System.
+Oct 02 23:05:46 glymur kernel: tx_macro 6a90000.codec: Driver needs fixing: Unsorted reg_defaults, sorting the copy
+Oct 02 23:05:46 glymur kernel: soundwire sdw:1:0:0217:0204:00:0: no matching ACPI device found, ignoring peripheral
+Oct 02 23:05:46 glymur kernel: soundwire sdw:1:0:0217:0204:00:1: no matching ACPI device found, ignoring peripheral
+Oct 02 23:05:46 glymur kernel: soundwire sdw:3:0:0217:0110:00:3: no matching ACPI device found, ignoring peripheral
+Oct 02 23:05:46 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: supply vdd-mic-bias not found, using dummy regulator
+Oct 02 23:05:46 glymur kernel: qcom-soundwire 6a80000.soundwire: swrm_wait_for_frame_gen_enabled: link status not disconnected
+Oct 02 23:05:46 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: SWFT not available
+Oct 02 23:05:46 glymur kernel: input: MAHUA-HP-OmniBook-5-16-bf1xxx Headset Jack as /devices/platform/sound/sound/card0/input20
+
+==== ALSA card
+ 0 [MAHUAHPOmniBook]: glymur - MAHUA-HP-OmniBook-5-16-bf1xxx
+                      HP-HPOmniBook5Laptop16_bf1xxx-ConfigID-8F47
+card: 0
+card: 0
+device: 0
+stream: PLAYBACK
+id: MultiMedia1 Playback (*)
+name: 
+card: 0
+device: 1
+stream: CAPTURE
+id: MultiMedia2 Capture (*)
+name: 
+
+==== all controls with values (for the headset UCM)
+numid=105,iface=CARD,name='Headphone Jack'
+  ; type=BOOLEAN,access=r-------,values=1
+  : values=on
+numid=104,iface=CARD,name='Mic Jack'
+  ; type=BOOLEAN,access=r-------,values=1
+  : values=off
+numid=245,iface=MIXER,name='Mic LED Capture Switch'
+  ; type=BOOLEAN,access=rw----W-,values=1
+  : values=off
+numid=58,iface=MIXER,name='AUX_HPF Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=95,iface=MIXER,name='DEC0 MODE'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ADC_DEFAULT'
+  ; Item #1 'ADC_LOW_PWR'
+  ; Item #2 'ADC_HIGH_PERF'
+  : values=0
+numid=103,iface=MIXER,name='DEC0_BCS Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=96,iface=MIXER,name='DEC1 MODE'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ADC_DEFAULT'
+  ; Item #1 'ADC_LOW_PWR'
+  ; Item #2 'ADC_HIGH_PERF'
+  : values=0
+numid=97,iface=MIXER,name='DEC2 MODE'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ADC_DEFAULT'
+  ; Item #1 'ADC_LOW_PWR'
+  ; Item #2 'ADC_HIGH_PERF'
+  : values=0
+numid=98,iface=MIXER,name='DEC3 MODE'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ADC_DEFAULT'
+  ; Item #1 'ADC_LOW_PWR'
+  ; Item #2 'ADC_HIGH_PERF'
+  : values=0
+numid=99,iface=MIXER,name='DEC4 MODE'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ADC_DEFAULT'
+  ; Item #1 'ADC_LOW_PWR'
+  ; Item #2 'ADC_HIGH_PERF'
+  : values=0
+numid=100,iface=MIXER,name='DEC5 MODE'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ADC_DEFAULT'
+  ; Item #1 'ADC_LOW_PWR'
+  ; Item #2 'ADC_HIGH_PERF'
+  : values=0
+numid=101,iface=MIXER,name='DEC6 MODE'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ADC_DEFAULT'
+  ; Item #1 'ADC_LOW_PWR'
+  ; Item #2 'ADC_HIGH_PERF'
+  : values=0
+numid=102,iface=MIXER,name='DEC7 MODE'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ADC_DEFAULT'
+  ; Item #1 'ADC_LOW_PWR'
+  ; Item #2 'ADC_HIGH_PERF'
+  : values=0
+numid=44,iface=MIXER,name='FU 6 Channel Switch'
+  ; type=BOOLEAN,access=rw------,values=2
+  : values=off,off
+numid=45,iface=MIXER,name='FU 6 Channel Volume'
+  ; type=INTEGER,access=rw---R--,values=2,min=0,max=65535,step=0
+  : values=25088,25088
+  | dBminmax-min=-128.00dB,max=127.99dB
+numid=42,iface=MIXER,name='GE 35 Detected Mode'
+  ; type=INTEGER,access=r-------,values=1,min=0,max=255,step=0
+  : values=0
+numid=152,iface=MIXER,name='GE 35 Selected Mode'
+  ; type=ENUMERATED,access=rw------,values=1,items=7
+  ; Item #0 'Jack Unplugged'
+  ; Item #1 'Jack Unknown'
+  ; Item #2 'Detection in Progress'
+  ; Item #3 'Headphone'
+  ; Item #4 'Headphone'
+  ; Item #5 'Headset'
+  ; Item #6 'Headphone'
+  : values=0
+numid=77,iface=MIXER,name='IIR0 Band1'
+  ; type=BYTES,access=rw------,values=20
+  : values=0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+numid=78,iface=MIXER,name='IIR0 Band2'
+  ; type=BYTES,access=rw------,values=20
+  : values=0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+numid=79,iface=MIXER,name='IIR0 Band3'
+  ; type=BYTES,access=rw------,values=20
+  : values=0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+numid=80,iface=MIXER,name='IIR0 Band4'
+  ; type=BYTES,access=rw------,values=20
+  : values=0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+numid=81,iface=MIXER,name='IIR0 Band5'
+  ; type=BYTES,access=rw------,values=20
+  : values=0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+numid=160,iface=MIXER,name='IIR0 INP0 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'DEC2'
+  ; Item #4 'DEC3'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=59,iface=MIXER,name='IIR0 INP0 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=161,iface=MIXER,name='IIR0 INP1 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'DEC2'
+  ; Item #4 'DEC3'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=60,iface=MIXER,name='IIR0 INP1 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=162,iface=MIXER,name='IIR0 INP2 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'DEC2'
+  ; Item #4 'DEC3'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=61,iface=MIXER,name='IIR0 INP2 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=163,iface=MIXER,name='IIR0 INP3 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'DEC2'
+  ; Item #4 'DEC3'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=62,iface=MIXER,name='IIR0 INP3 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=82,iface=MIXER,name='IIR1 Band1'
+  ; type=BYTES,access=rw------,values=20
+  : values=0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+numid=67,iface=MIXER,name='IIR1 Band1 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=83,iface=MIXER,name='IIR1 Band2'
+  ; type=BYTES,access=rw------,values=20
+  : values=0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+numid=68,iface=MIXER,name='IIR1 Band2 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=84,iface=MIXER,name='IIR1 Band3'
+  ; type=BYTES,access=rw------,values=20
+  : values=0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+numid=69,iface=MIXER,name='IIR1 Band3 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=85,iface=MIXER,name='IIR1 Band4'
+  ; type=BYTES,access=rw------,values=20
+  : values=0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+numid=70,iface=MIXER,name='IIR1 Band4 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=86,iface=MIXER,name='IIR1 Band5'
+  ; type=BYTES,access=rw------,values=20
+  : values=0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00
+numid=71,iface=MIXER,name='IIR1 Band5 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=164,iface=MIXER,name='IIR1 INP0 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'DEC2'
+  ; Item #4 'DEC3'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=63,iface=MIXER,name='IIR1 INP0 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=165,iface=MIXER,name='IIR1 INP1 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'DEC2'
+  ; Item #4 'DEC3'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=64,iface=MIXER,name='IIR1 INP1 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=166,iface=MIXER,name='IIR1 INP2 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'DEC2'
+  ; Item #4 'DEC3'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=65,iface=MIXER,name='IIR1 INP2 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=167,iface=MIXER,name='IIR1 INP3 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'DEC2'
+  ; Item #4 'DEC3'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=66,iface=MIXER,name='IIR1 INP3 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=72,iface=MIXER,name='IIR2 Band1 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=73,iface=MIXER,name='IIR2 Band2 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=74,iface=MIXER,name='IIR2 Band3 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=75,iface=MIXER,name='IIR2 Band4 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=76,iface=MIXER,name='IIR2 Band5 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=43,iface=MIXER,name='IT 33 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=on
+numid=124,iface=MIXER,name='MultiMedia2 Mixer TX_CODEC_DMA_TX_3'
+  ; type=BOOLEAN,access=rw------,values=2
+  : values=off,off
+numid=125,iface=MIXER,name='MultiMedia2 Mixer VA_CODEC_DMA_TX_0'
+  ; type=BOOLEAN,access=rw------,values=2
+  : values=on,off
+numid=40,iface=MIXER,name='OT 43 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=on
+numid=41,iface=MIXER,name='OT 45 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=on
+numid=171,iface=MIXER,name='RX INT0 DEM MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'NORMAL_DSM_OUT'
+  ; Item #1 'CLSH_DSM_OUT'
+  : values=0
+numid=190,iface=MIXER,name='RX INT0 MIX2 INP'
+  ; type=ENUMERATED,access=rw------,values=1,items=4
+  ; Item #0 'ZERO'
+  ; Item #1 'SRC0'
+  ; Item #2 'SRC1'
+  ; Item #3 'SRC_SUM'
+  : values=0
+numid=184,iface=MIXER,name='RX INT0_1 INTERP'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'ZERO'
+  ; Item #1 'RX INT0_1 MIX1'
+  : values=0
+numid=175,iface=MIXER,name='RX INT0_1 MIX1 INP0'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'IIR0'
+  ; Item #4 'IIR1'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=176,iface=MIXER,name='RX INT0_1 MIX1 INP1'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'IIR0'
+  ; Item #4 'IIR1'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=177,iface=MIXER,name='RX INT0_1 MIX1 INP2'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'IIR0'
+  ; Item #4 'IIR1'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=187,iface=MIXER,name='RX INT0_2 INTERP'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'ZERO'
+  ; Item #1 'RX INT0_2 MUX'
+  : values=0
+numid=172,iface=MIXER,name='RX INT0_2 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=7
+  ; Item #0 'ZERO'
+  ; Item #1 'RX0'
+  ; Item #2 'RX1'
+  ; Item #3 'RX2'
+  ; Item #4 'RX3'
+  ; Item #5 'RX4'
+  ; Item #6 'RX5'
+  : values=0
+numid=193,iface=MIXER,name='RX INT1 DEM MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'NORMAL_DSM_OUT'
+  ; Item #1 'CLSH_DSM_OUT'
+  : values=0
+numid=191,iface=MIXER,name='RX INT1 MIX2 INP'
+  ; type=ENUMERATED,access=rw------,values=1,items=4
+  ; Item #0 'ZERO'
+  ; Item #1 'SRC0'
+  ; Item #2 'SRC1'
+  ; Item #3 'SRC_SUM'
+  : values=0
+numid=185,iface=MIXER,name='RX INT1_1 INTERP'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'ZERO'
+  ; Item #1 'RX INT1_1 MIX1'
+  : values=0
+numid=178,iface=MIXER,name='RX INT1_1 MIX1 INP0'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'IIR0'
+  ; Item #4 'IIR1'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=179,iface=MIXER,name='RX INT1_1 MIX1 INP1'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'IIR0'
+  ; Item #4 'IIR1'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=180,iface=MIXER,name='RX INT1_1 MIX1 INP2'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'IIR0'
+  ; Item #4 'IIR1'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=188,iface=MIXER,name='RX INT1_2 INTERP'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'ZERO'
+  ; Item #1 'RX INT1_2 MUX'
+  : values=0
+numid=173,iface=MIXER,name='RX INT1_2 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=7
+  ; Item #0 'ZERO'
+  ; Item #1 'RX0'
+  ; Item #2 'RX1'
+  ; Item #3 'RX2'
+  ; Item #4 'RX3'
+  ; Item #5 'RX4'
+  ; Item #6 'RX5'
+  : values=0
+numid=192,iface=MIXER,name='RX INT2 MIX2 INP'
+  ; type=ENUMERATED,access=rw------,values=1,items=4
+  ; Item #0 'ZERO'
+  ; Item #1 'SRC0'
+  ; Item #2 'SRC1'
+  ; Item #3 'SRC_SUM'
+  : values=0
+numid=186,iface=MIXER,name='RX INT2_1 INTERP'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'ZERO'
+  ; Item #1 'RX INT2_1 MIX1'
+  : values=0
+numid=181,iface=MIXER,name='RX INT2_1 MIX1 INP0'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'IIR0'
+  ; Item #4 'IIR1'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=182,iface=MIXER,name='RX INT2_1 MIX1 INP1'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'IIR0'
+  ; Item #4 'IIR1'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=183,iface=MIXER,name='RX INT2_1 MIX1 INP2'
+  ; type=ENUMERATED,access=rw------,values=1,items=11
+  ; Item #0 'ZERO'
+  ; Item #1 'DEC0'
+  ; Item #2 'DEC1'
+  ; Item #3 'IIR0'
+  ; Item #4 'IIR1'
+  ; Item #5 'RX0'
+  ; Item #6 'RX1'
+  ; Item #7 'RX2'
+  ; Item #8 'RX3'
+  ; Item #9 'RX4'
+  ; Item #10 'RX5'
+  : values=0
+numid=189,iface=MIXER,name='RX INT2_2 INTERP'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'ZERO'
+  ; Item #1 'RX INT2_2 MUX'
+  : values=0
+numid=174,iface=MIXER,name='RX INT2_2 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=7
+  ; Item #0 'ZERO'
+  ; Item #1 'RX0'
+  ; Item #2 'RX1'
+  ; Item #3 'RX2'
+  ; Item #4 'RX3'
+  ; Item #5 'RX4'
+  ; Item #6 'RX5'
+  : values=0
+numid=168,iface=MIXER,name='RX MIX TX0 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=4
+  ; Item #0 'ZERO'
+  ; Item #1 'RX_MIX0'
+  ; Item #2 'RX_MIX1'
+  ; Item #3 'RX_MIX2'
+  : values=0
+numid=169,iface=MIXER,name='RX MIX TX1 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=4
+  ; Item #0 'ZERO'
+  ; Item #1 'RX_MIX0'
+  ; Item #2 'RX_MIX1'
+  ; Item #3 'RX_MIX2'
+  : values=0
+numid=170,iface=MIXER,name='RX MIX TX2 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=4
+  ; Item #0 'ZERO'
+  ; Item #1 'RX_MIX0'
+  ; Item #2 'RX_MIX1'
+  ; Item #3 'RX_MIX2'
+  : values=0
+numid=127,iface=MIXER,name='RX_CODEC_DMA_RX_0 Audio Mixer MultiMedia1'
+  ; type=BOOLEAN,access=rw------,values=2
+  : values=off,off
+numid=52,iface=MIXER,name='RX_COMP1 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=53,iface=MIXER,name='RX_COMP2 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=54,iface=MIXER,name='RX_EAR Mode Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=55,iface=MIXER,name='RX_HPH HD2 Mode Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=56,iface=MIXER,name='RX_HPH PWR Mode'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'ULP'
+  ; Item #1 'LOHIFI'
+  : values=0
+numid=154,iface=MIXER,name='RX_MACRO RX0 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=5
+  ; Item #0 'ZERO'
+  ; Item #1 'AIF1_PB'
+  ; Item #2 'AIF2_PB'
+  ; Item #3 'AIF3_PB'
+  ; Item #4 'AIF4_PB'
+  : values=0
+numid=155,iface=MIXER,name='RX_MACRO RX1 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=5
+  ; Item #0 'ZERO'
+  ; Item #1 'AIF1_PB'
+  ; Item #2 'AIF2_PB'
+  ; Item #3 'AIF3_PB'
+  ; Item #4 'AIF4_PB'
+  : values=0
+numid=156,iface=MIXER,name='RX_MACRO RX2 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=5
+  ; Item #0 'ZERO'
+  ; Item #1 'AIF1_PB'
+  ; Item #2 'AIF2_PB'
+  ; Item #3 'AIF3_PB'
+  ; Item #4 'AIF4_PB'
+  : values=0
+numid=157,iface=MIXER,name='RX_MACRO RX3 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=5
+  ; Item #0 'ZERO'
+  ; Item #1 'AIF1_PB'
+  ; Item #2 'AIF2_PB'
+  ; Item #3 'AIF3_PB'
+  ; Item #4 'AIF4_PB'
+  : values=0
+numid=158,iface=MIXER,name='RX_MACRO RX4 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=5
+  ; Item #0 'ZERO'
+  ; Item #1 'AIF1_PB'
+  ; Item #2 'AIF2_PB'
+  ; Item #3 'AIF3_PB'
+  ; Item #4 'AIF4_PB'
+  : values=0
+numid=159,iface=MIXER,name='RX_MACRO RX5 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=5
+  ; Item #0 'ZERO'
+  ; Item #1 'AIF1_PB'
+  ; Item #2 'AIF2_PB'
+  ; Item #3 'AIF3_PB'
+  ; Item #4 'AIF4_PB'
+  : values=0
+numid=50,iface=MIXER,name='RX_RX0 Digital Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=51,iface=MIXER,name='RX_RX0 Mix Digital Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=46,iface=MIXER,name='RX_RX1 Digital Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=48,iface=MIXER,name='RX_RX1 Mix Digital Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=47,iface=MIXER,name='RX_RX2 Digital Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=49,iface=MIXER,name='RX_RX2 Mix Digital Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=57,iface=MIXER,name='RX_Softclip Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=153,iface=MIXER,name='SU 35'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'No Signal'
+  ; Item #1 'FU 33'
+  : values=1
+numid=244,iface=MIXER,name='Speakers Switch'
+  ; type=BOOLEAN,access=rw----W-,values=1
+  : values=on
+numid=5,iface=MIXER,name='SpkrLeft BOOST Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=on
+numid=4,iface=MIXER,name='SpkrLeft COMP Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=on
+numid=8,iface=MIXER,name='SpkrLeft CPS Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=3,iface=MIXER,name='SpkrLeft DAC Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=on
+numid=1,iface=MIXER,name='SpkrLeft PA Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=6,step=0
+  : values=4
+  | dBscale-min=-9.00dB,step=1.50dB,mute=1
+numid=6,iface=MIXER,name='SpkrLeft PBR Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=on
+numid=7,iface=MIXER,name='SpkrLeft VISENSE Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=2,iface=MIXER,name='SpkrLeft WSA MODE'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'Speaker'
+  ; Item #1 'Receiver'
+  : values=0
+numid=13,iface=MIXER,name='SpkrRight BOOST Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=on
+numid=12,iface=MIXER,name='SpkrRight COMP Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=on
+numid=16,iface=MIXER,name='SpkrRight CPS Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=11,iface=MIXER,name='SpkrRight DAC Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=on
+numid=9,iface=MIXER,name='SpkrRight PA Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=6,step=0
+  : values=4
+  | dBscale-min=-9.00dB,step=1.50dB,mute=1
+numid=14,iface=MIXER,name='SpkrRight PBR Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=on
+numid=15,iface=MIXER,name='SpkrRight VISENSE Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=10,iface=MIXER,name='SpkrRight WSA MODE'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'Speaker'
+  ; Item #1 'Receiver'
+  : values=0
+numid=226,iface=MIXER,name='TX DEC0 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'MSM_DMIC'
+  ; Item #1 'SWR_MIC'
+  ; Item #2 'ANC_FB_TUNE1'
+  : values=0
+numid=227,iface=MIXER,name='TX DEC1 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'MSM_DMIC'
+  ; Item #1 'SWR_MIC'
+  ; Item #2 'ANC_FB_TUNE1'
+  : values=0
+numid=228,iface=MIXER,name='TX DEC2 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'MSM_DMIC'
+  ; Item #1 'SWR_MIC'
+  ; Item #2 'ANC_FB_TUNE1'
+  : values=0
+numid=229,iface=MIXER,name='TX DEC3 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'MSM_DMIC'
+  ; Item #1 'SWR_MIC'
+  ; Item #2 'ANC_FB_TUNE1'
+  : values=0
+numid=230,iface=MIXER,name='TX DEC4 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'MSM_DMIC'
+  ; Item #1 'SWR_MIC'
+  ; Item #2 'ANC_FB_TUNE1'
+  : values=0
+numid=231,iface=MIXER,name='TX DEC5 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'MSM_DMIC'
+  ; Item #1 'SWR_MIC'
+  ; Item #2 'ANC_FB_TUNE1'
+  : values=0
+numid=232,iface=MIXER,name='TX DEC6 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'MSM_DMIC'
+  ; Item #1 'SWR_MIC'
+  ; Item #2 'ANC_FB_TUNE1'
+  : values=0
+numid=233,iface=MIXER,name='TX DEC7 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'MSM_DMIC'
+  ; Item #1 'SWR_MIC'
+  ; Item #2 'ANC_FB_TUNE1'
+  : values=0
+numid=218,iface=MIXER,name='TX DMIC MUX0'
+  ; type=ENUMERATED,access=rw------,values=1,items=9
+  ; Item #0 'ZERO'
+  ; Item #1 'DMIC0'
+  ; Item #2 'DMIC1'
+  ; Item #3 'DMIC2'
+  ; Item #4 'DMIC3'
+  ; Item #5 'DMIC4'
+  ; Item #6 'DMIC5'
+  ; Item #7 'DMIC6'
+  ; Item #8 'DMIC7'
+  : values=0
+numid=219,iface=MIXER,name='TX DMIC MUX1'
+  ; type=ENUMERATED,access=rw------,values=1,items=9
+  ; Item #0 'ZERO'
+  ; Item #1 'DMIC0'
+  ; Item #2 'DMIC1'
+  ; Item #3 'DMIC2'
+  ; Item #4 'DMIC3'
+  ; Item #5 'DMIC4'
+  ; Item #6 'DMIC5'
+  ; Item #7 'DMIC6'
+  ; Item #8 'DMIC7'
+  : values=0
+numid=220,iface=MIXER,name='TX DMIC MUX2'
+  ; type=ENUMERATED,access=rw------,values=1,items=9
+  ; Item #0 'ZERO'
+  ; Item #1 'DMIC0'
+  ; Item #2 'DMIC1'
+  ; Item #3 'DMIC2'
+  ; Item #4 'DMIC3'
+  ; Item #5 'DMIC4'
+  ; Item #6 'DMIC5'
+  ; Item #7 'DMIC6'
+  ; Item #8 'DMIC7'
+  : values=0
+numid=221,iface=MIXER,name='TX DMIC MUX3'
+  ; type=ENUMERATED,access=rw------,values=1,items=9
+  ; Item #0 'ZERO'
+  ; Item #1 'DMIC0'
+  ; Item #2 'DMIC1'
+  ; Item #3 'DMIC2'
+  ; Item #4 'DMIC3'
+  ; Item #5 'DMIC4'
+  ; Item #6 'DMIC5'
+  ; Item #7 'DMIC6'
+  ; Item #8 'DMIC7'
+  : values=0
+numid=222,iface=MIXER,name='TX DMIC MUX4'
+  ; type=ENUMERATED,access=rw------,values=1,items=9
+  ; Item #0 'ZERO'
+  ; Item #1 'DMIC0'
+  ; Item #2 'DMIC1'
+  ; Item #3 'DMIC2'
+  ; Item #4 'DMIC3'
+  ; Item #5 'DMIC4'
+  ; Item #6 'DMIC5'
+  ; Item #7 'DMIC6'
+  ; Item #8 'DMIC7'
+  : values=0
+numid=223,iface=MIXER,name='TX DMIC MUX5'
+  ; type=ENUMERATED,access=rw------,values=1,items=9
+  ; Item #0 'ZERO'
+  ; Item #1 'DMIC0'
+  ; Item #2 'DMIC1'
+  ; Item #3 'DMIC2'
+  ; Item #4 'DMIC3'
+  ; Item #5 'DMIC4'
+  ; Item #6 'DMIC5'
+  ; Item #7 'DMIC6'
+  ; Item #8 'DMIC7'
+  : values=0
+numid=224,iface=MIXER,name='TX DMIC MUX6'
+  ; type=ENUMERATED,access=rw------,values=1,items=9
+  ; Item #0 'ZERO'
+  ; Item #1 'DMIC0'
+  ; Item #2 'DMIC1'
+  ; Item #3 'DMIC2'
+  ; Item #4 'DMIC3'
+  ; Item #5 'DMIC4'
+  ; Item #6 'DMIC5'
+  ; Item #7 'DMIC6'
+  ; Item #8 'DMIC7'
+  : values=0
+numid=225,iface=MIXER,name='TX DMIC MUX7'
+  ; type=ENUMERATED,access=rw------,values=1,items=9
+  ; Item #0 'ZERO'
+  ; Item #1 'DMIC0'
+  ; Item #2 'DMIC1'
+  ; Item #3 'DMIC2'
+  ; Item #4 'DMIC3'
+  ; Item #5 'DMIC4'
+  ; Item #6 'DMIC5'
+  ; Item #7 'DMIC6'
+  ; Item #8 'DMIC7'
+  : values=0
+numid=234,iface=MIXER,name='TX SMIC MUX0'
+  ; type=ENUMERATED,access=rw------,values=1,items=13
+  ; Item #0 'ZERO'
+  ; Item #1 'SWR_MIC0'
+  ; Item #2 'SWR_MIC1'
+  ; Item #3 'SWR_MIC2'
+  ; Item #4 'SWR_MIC3'
+  ; Item #5 'SWR_MIC4'
+  ; Item #6 'SWR_MIC5'
+  ; Item #7 'SWR_MIC6'
+  ; Item #8 'SWR_MIC7'
+  ; Item #9 'SWR_MIC8'
+  ; Item #10 'SWR_MIC9'
+  ; Item #11 'SWR_MIC10'
+  ; Item #12 'SWR_MIC11'
+  : values=0
+numid=235,iface=MIXER,name='TX SMIC MUX1'
+  ; type=ENUMERATED,access=rw------,values=1,items=13
+  ; Item #0 'ZERO'
+  ; Item #1 'SWR_MIC0'
+  ; Item #2 'SWR_MIC1'
+  ; Item #3 'SWR_MIC2'
+  ; Item #4 'SWR_MIC3'
+  ; Item #5 'SWR_MIC4'
+  ; Item #6 'SWR_MIC5'
+  ; Item #7 'SWR_MIC6'
+  ; Item #8 'SWR_MIC7'
+  ; Item #9 'SWR_MIC8'
+  ; Item #10 'SWR_MIC9'
+  ; Item #11 'SWR_MIC10'
+  ; Item #12 'SWR_MIC11'
+  : values=0
+numid=236,iface=MIXER,name='TX SMIC MUX2'
+  ; type=ENUMERATED,access=rw------,values=1,items=13
+  ; Item #0 'ZERO'
+  ; Item #1 'SWR_MIC0'
+  ; Item #2 'SWR_MIC1'
+  ; Item #3 'SWR_MIC2'
+  ; Item #4 'SWR_MIC3'
+  ; Item #5 'SWR_MIC4'
+  ; Item #6 'SWR_MIC5'
+  ; Item #7 'SWR_MIC6'
+  ; Item #8 'SWR_MIC7'
+  ; Item #9 'SWR_MIC8'
+  ; Item #10 'SWR_MIC9'
+  ; Item #11 'SWR_MIC10'
+  ; Item #12 'SWR_MIC11'
+  : values=0
+numid=237,iface=MIXER,name='TX SMIC MUX3'
+  ; type=ENUMERATED,access=rw------,values=1,items=13
+  ; Item #0 'ZERO'
+  ; Item #1 'SWR_MIC0'
+  ; Item #2 'SWR_MIC1'
+  ; Item #3 'SWR_MIC2'
+  ; Item #4 'SWR_MIC3'
+  ; Item #5 'SWR_MIC4'
+  ; Item #6 'SWR_MIC5'
+  ; Item #7 'SWR_MIC6'
+  ; Item #8 'SWR_MIC7'
+  ; Item #9 'SWR_MIC8'
+  ; Item #10 'SWR_MIC9'
+  ; Item #11 'SWR_MIC10'
+  ; Item #12 'SWR_MIC11'
+  : values=0
+numid=238,iface=MIXER,name='TX SMIC MUX4'
+  ; type=ENUMERATED,access=rw------,values=1,items=13
+  ; Item #0 'ZERO'
+  ; Item #1 'SWR_MIC0'
+  ; Item #2 'SWR_MIC1'
+  ; Item #3 'SWR_MIC2'
+  ; Item #4 'SWR_MIC3'
+  ; Item #5 'SWR_MIC4'
+  ; Item #6 'SWR_MIC5'
+  ; Item #7 'SWR_MIC6'
+  ; Item #8 'SWR_MIC7'
+  ; Item #9 'SWR_MIC8'
+  ; Item #10 'SWR_MIC9'
+  ; Item #11 'SWR_MIC10'
+  ; Item #12 'SWR_MIC11'
+  : values=0
+numid=239,iface=MIXER,name='TX SMIC MUX5'
+  ; type=ENUMERATED,access=rw------,values=1,items=13
+  ; Item #0 'ZERO'
+  ; Item #1 'SWR_MIC0'
+  ; Item #2 'SWR_MIC1'
+  ; Item #3 'SWR_MIC2'
+  ; Item #4 'SWR_MIC3'
+  ; Item #5 'SWR_MIC4'
+  ; Item #6 'SWR_MIC5'
+  ; Item #7 'SWR_MIC6'
+  ; Item #8 'SWR_MIC7'
+  ; Item #9 'SWR_MIC8'
+  ; Item #10 'SWR_MIC9'
+  ; Item #11 'SWR_MIC10'
+  ; Item #12 'SWR_MIC11'
+  : values=0
+numid=240,iface=MIXER,name='TX SMIC MUX6'
+  ; type=ENUMERATED,access=rw------,values=1,items=13
+  ; Item #0 'ZERO'
+  ; Item #1 'SWR_MIC0'
+  ; Item #2 'SWR_MIC1'
+  ; Item #3 'SWR_MIC2'
+  ; Item #4 'SWR_MIC3'
+  ; Item #5 'SWR_MIC4'
+  ; Item #6 'SWR_MIC5'
+  ; Item #7 'SWR_MIC6'
+  ; Item #8 'SWR_MIC7'
+  ; Item #9 'SWR_MIC8'
+  ; Item #10 'SWR_MIC9'
+  ; Item #11 'SWR_MIC10'
+  ; Item #12 'SWR_MIC11'
+  : values=0
+numid=241,iface=MIXER,name='TX SMIC MUX7'
+  ; type=ENUMERATED,access=rw------,values=1,items=13
+  ; Item #0 'ZERO'
+  ; Item #1 'SWR_MIC0'
+  ; Item #2 'SWR_MIC1'
+  ; Item #3 'SWR_MIC2'
+  ; Item #4 'SWR_MIC3'
+  ; Item #5 'SWR_MIC4'
+  ; Item #6 'SWR_MIC5'
+  ; Item #7 'SWR_MIC6'
+  ; Item #8 'SWR_MIC7'
+  ; Item #9 'SWR_MIC8'
+  ; Item #10 'SWR_MIC9'
+  ; Item #11 'SWR_MIC10'
+  ; Item #12 'SWR_MIC11'
+  : values=0
+numid=194,iface=MIXER,name='TX_AIF1_CAP Mixer DEC0'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=195,iface=MIXER,name='TX_AIF1_CAP Mixer DEC1'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=196,iface=MIXER,name='TX_AIF1_CAP Mixer DEC2'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=197,iface=MIXER,name='TX_AIF1_CAP Mixer DEC3'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=198,iface=MIXER,name='TX_AIF1_CAP Mixer DEC4'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=199,iface=MIXER,name='TX_AIF1_CAP Mixer DEC5'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=200,iface=MIXER,name='TX_AIF1_CAP Mixer DEC6'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=201,iface=MIXER,name='TX_AIF1_CAP Mixer DEC7'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=202,iface=MIXER,name='TX_AIF2_CAP Mixer DEC0'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=203,iface=MIXER,name='TX_AIF2_CAP Mixer DEC1'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=204,iface=MIXER,name='TX_AIF2_CAP Mixer DEC2'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=205,iface=MIXER,name='TX_AIF2_CAP Mixer DEC3'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=206,iface=MIXER,name='TX_AIF2_CAP Mixer DEC4'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=207,iface=MIXER,name='TX_AIF2_CAP Mixer DEC5'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=208,iface=MIXER,name='TX_AIF2_CAP Mixer DEC6'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=209,iface=MIXER,name='TX_AIF2_CAP Mixer DEC7'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=210,iface=MIXER,name='TX_AIF3_CAP Mixer DEC0'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=211,iface=MIXER,name='TX_AIF3_CAP Mixer DEC1'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=212,iface=MIXER,name='TX_AIF3_CAP Mixer DEC2'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=213,iface=MIXER,name='TX_AIF3_CAP Mixer DEC3'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=214,iface=MIXER,name='TX_AIF3_CAP Mixer DEC4'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=215,iface=MIXER,name='TX_AIF3_CAP Mixer DEC5'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=216,iface=MIXER,name='TX_AIF3_CAP Mixer DEC6'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=217,iface=MIXER,name='TX_AIF3_CAP Mixer DEC7'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=87,iface=MIXER,name='TX_DEC0 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=88,iface=MIXER,name='TX_DEC1 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=89,iface=MIXER,name='TX_DEC2 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=90,iface=MIXER,name='TX_DEC3 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=91,iface=MIXER,name='TX_DEC4 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=92,iface=MIXER,name='TX_DEC5 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=93,iface=MIXER,name='TX_DEC6 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=94,iface=MIXER,name='TX_DEC7 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=148,iface=MIXER,name='VA DEC0 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'VA_DMIC'
+  ; Item #1 'SWR_MIC'
+  : values=0
+numid=149,iface=MIXER,name='VA DEC1 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'VA_DMIC'
+  ; Item #1 'SWR_MIC'
+  : values=0
+numid=150,iface=MIXER,name='VA DEC2 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'VA_DMIC'
+  ; Item #1 'SWR_MIC'
+  : values=0
+numid=151,iface=MIXER,name='VA DEC3 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'VA_DMIC'
+  ; Item #1 'SWR_MIC'
+  : values=0
+numid=140,iface=MIXER,name='VA DMIC MUX0'
+  ; type=ENUMERATED,access=rw------,values=1,items=9
+  ; Item #0 'ZERO'
+  ; Item #1 'DMIC0'
+  ; Item #2 'DMIC1'
+  ; Item #3 'DMIC2'
+  ; Item #4 'DMIC3'
+  ; Item #5 'DMIC4'
+  ; Item #6 'DMIC5'
+  ; Item #7 'DMIC6'
+  ; Item #8 'DMIC7'
+  : values=1
+numid=141,iface=MIXER,name='VA DMIC MUX1'
+  ; type=ENUMERATED,access=rw------,values=1,items=9
+  ; Item #0 'ZERO'
+  ; Item #1 'DMIC0'
+  ; Item #2 'DMIC1'
+  ; Item #3 'DMIC2'
+  ; Item #4 'DMIC3'
+  ; Item #5 'DMIC4'
+  ; Item #6 'DMIC5'
+  ; Item #7 'DMIC6'
+  ; Item #8 'DMIC7'
+  : values=2
+numid=142,iface=MIXER,name='VA DMIC MUX2'
+  ; type=ENUMERATED,access=rw------,values=1,items=9
+  ; Item #0 'ZERO'
+  ; Item #1 'DMIC0'
+  ; Item #2 'DMIC1'
+  ; Item #3 'DMIC2'
+  ; Item #4 'DMIC3'
+  ; Item #5 'DMIC4'
+  ; Item #6 'DMIC5'
+  ; Item #7 'DMIC6'
+  ; Item #8 'DMIC7'
+  : values=0
+numid=143,iface=MIXER,name='VA DMIC MUX3'
+  ; type=ENUMERATED,access=rw------,values=1,items=9
+  ; Item #0 'ZERO'
+  ; Item #1 'DMIC0'
+  ; Item #2 'DMIC1'
+  ; Item #3 'DMIC2'
+  ; Item #4 'DMIC3'
+  ; Item #5 'DMIC4'
+  ; Item #6 'DMIC5'
+  ; Item #7 'DMIC6'
+  ; Item #8 'DMIC7'
+  : values=0
+numid=144,iface=MIXER,name='VA SMIC MUX0'
+  ; type=ENUMERATED,access=rw------,values=1,items=9
+  ; Item #0 'ZERO'
+  ; Item #1 'SWR_MIC0'
+  ; Item #2 'SWR_MIC1'
+  ; Item #3 'SWR_MIC2'
+  ; Item #4 'SWR_MIC3'
+  ; Item #5 'SWR_MIC4'
+  ; Item #6 'SWR_MIC5'
+  ; Item #7 'SWR_MIC6'
+  ; Item #8 'SWR_MIC7'
+  : values=0
+numid=145,iface=MIXER,name='VA SMIC MUX1'
+  ; type=ENUMERATED,access=rw------,values=1,items=9
+  ; Item #0 'ZERO'
+  ; Item #1 'SWR_MIC0'
+  ; Item #2 'SWR_MIC1'
+  ; Item #3 'SWR_MIC2'
+  ; Item #4 'SWR_MIC3'
+  ; Item #5 'SWR_MIC4'
+  ; Item #6 'SWR_MIC5'
+  ; Item #7 'SWR_MIC6'
+  ; Item #8 'SWR_MIC7'
+  : values=0
+numid=146,iface=MIXER,name='VA SMIC MUX2'
+  ; type=ENUMERATED,access=rw------,values=1,items=9
+  ; Item #0 'ZERO'
+  ; Item #1 'SWR_MIC0'
+  ; Item #2 'SWR_MIC1'
+  ; Item #3 'SWR_MIC2'
+  ; Item #4 'SWR_MIC3'
+  ; Item #5 'SWR_MIC4'
+  ; Item #6 'SWR_MIC5'
+  ; Item #7 'SWR_MIC6'
+  ; Item #8 'SWR_MIC7'
+  : values=0
+numid=147,iface=MIXER,name='VA SMIC MUX3'
+  ; type=ENUMERATED,access=rw------,values=1,items=9
+  ; Item #0 'ZERO'
+  ; Item #1 'SWR_MIC0'
+  ; Item #2 'SWR_MIC1'
+  ; Item #3 'SWR_MIC2'
+  ; Item #4 'SWR_MIC3'
+  ; Item #5 'SWR_MIC4'
+  ; Item #6 'SWR_MIC5'
+  ; Item #7 'SWR_MIC6'
+  ; Item #8 'SWR_MIC7'
+  : values=0
+numid=128,iface=MIXER,name='VA_AIF1_CAP Mixer DEC0'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=on
+numid=129,iface=MIXER,name='VA_AIF1_CAP Mixer DEC1'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=on
+numid=130,iface=MIXER,name='VA_AIF1_CAP Mixer DEC2'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=131,iface=MIXER,name='VA_AIF1_CAP Mixer DEC3'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=132,iface=MIXER,name='VA_AIF2_CAP Mixer DEC0'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=133,iface=MIXER,name='VA_AIF2_CAP Mixer DEC1'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=134,iface=MIXER,name='VA_AIF2_CAP Mixer DEC2'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=135,iface=MIXER,name='VA_AIF2_CAP Mixer DEC3'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=136,iface=MIXER,name='VA_AIF3_CAP Mixer DEC0'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=137,iface=MIXER,name='VA_AIF3_CAP Mixer DEC1'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=138,iface=MIXER,name='VA_AIF3_CAP Mixer DEC2'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=139,iface=MIXER,name='VA_AIF3_CAP Mixer DEC3'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=36,iface=MIXER,name='VA_DEC0 MODE'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ADC_DEFAULT'
+  ; Item #1 'ADC_LOW_PWR'
+  ; Item #2 'ADC_HIGH_PERF'
+  : values=0
+numid=32,iface=MIXER,name='VA_DEC0 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=100
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=37,iface=MIXER,name='VA_DEC1 MODE'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ADC_DEFAULT'
+  ; Item #1 'ADC_LOW_PWR'
+  ; Item #2 'ADC_HIGH_PERF'
+  : values=0
+numid=33,iface=MIXER,name='VA_DEC1 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=100
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=38,iface=MIXER,name='VA_DEC2 MODE'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ADC_DEFAULT'
+  ; Item #1 'ADC_LOW_PWR'
+  ; Item #2 'ADC_HIGH_PERF'
+  : values=0
+numid=34,iface=MIXER,name='VA_DEC2 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=39,iface=MIXER,name='VA_DEC3 MODE'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ADC_DEFAULT'
+  ; Item #1 'ADC_LOW_PWR'
+  ; Item #2 'ADC_HIGH_PERF'
+  : values=0
+numid=35,iface=MIXER,name='VA_DEC3 Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=17,iface=MIXER,name='WSA EAR SPKR PA Gain'
+  ; type=ENUMERATED,access=rw------,values=1,items=8
+  ; Item #0 'G_DEFAULT'
+  ; Item #1 'G_0_DB'
+  ; Item #2 'G_1_DB'
+  ; Item #3 'G_2_DB'
+  ; Item #4 'G_3_DB'
+  ; Item #5 'G_4_DB'
+  ; Item #6 'G_5_DB'
+  ; Item #7 'G_6_DB'
+  : values=0
+numid=110,iface=MIXER,name='WSA WSA RX0 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ZERO'
+  ; Item #1 'AIF1_PB'
+  ; Item #2 'AIF_MIX1_PB'
+  : values=1
+numid=111,iface=MIXER,name='WSA WSA RX1 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ZERO'
+  ; Item #1 'AIF1_PB'
+  ; Item #2 'AIF_MIX1_PB'
+  : values=1
+numid=108,iface=MIXER,name='WSA WSA RX_MIX EC0_MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ZERO'
+  ; Item #1 'RX_MIX_TX0'
+  ; Item #2 'RX_MIX_TX1'
+  : values=0
+numid=109,iface=MIXER,name='WSA WSA RX_MIX EC1_MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ZERO'
+  ; Item #1 'RX_MIX_TX0'
+  ; Item #2 'RX_MIX_TX1'
+  : values=0
+numid=112,iface=MIXER,name='WSA WSA RX_MIX0 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ZERO'
+  ; Item #1 'AIF1_PB'
+  ; Item #2 'AIF_MIX1_PB'
+  : values=0
+numid=113,iface=MIXER,name='WSA WSA RX_MIX1 MUX'
+  ; type=ENUMERATED,access=rw------,values=1,items=3
+  ; Item #0 'ZERO'
+  ; Item #1 'AIF1_PB'
+  ; Item #2 'AIF_MIX1_PB'
+  : values=0
+numid=106,iface=MIXER,name='WSA WSA_AIF_VI Mixer WSA_SPKR_VI_1'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=107,iface=MIXER,name='WSA WSA_AIF_VI Mixer WSA_SPKR_VI_2'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=28,iface=MIXER,name='WSA WSA_COMP1 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=29,iface=MIXER,name='WSA WSA_COMP2 Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=24,iface=MIXER,name='WSA WSA_RX0 Digital Mute'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=20,iface=MIXER,name='WSA WSA_RX0 Digital Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=81,step=0
+  : values=81
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=30,iface=MIXER,name='WSA WSA_RX0 EC_HQ Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=115,iface=MIXER,name='WSA WSA_RX0 INP0'
+  ; type=ENUMERATED,access=rw------,values=1,items=12
+  ; Item #0 'ZERO'
+  ; Item #1 'RX0'
+  ; Item #2 'RX1'
+  ; Item #3 'RX_MIX0'
+  ; Item #4 'RX_MIX1'
+  ; Item #5 'RX4'
+  ; Item #6 'RX5'
+  ; Item #7 'RX6'
+  ; Item #8 'RX7'
+  ; Item #9 'RX8'
+  ; Item #10 'DEC0'
+  ; Item #11 'DEC1'
+  : values=1
+numid=116,iface=MIXER,name='WSA WSA_RX0 INP1'
+  ; type=ENUMERATED,access=rw------,values=1,items=12
+  ; Item #0 'ZERO'
+  ; Item #1 'RX0'
+  ; Item #2 'RX1'
+  ; Item #3 'RX_MIX0'
+  ; Item #4 'RX_MIX1'
+  ; Item #5 'RX4'
+  ; Item #6 'RX5'
+  ; Item #7 'RX6'
+  ; Item #8 'RX7'
+  ; Item #9 'RX8'
+  ; Item #10 'DEC0'
+  ; Item #11 'DEC1'
+  : values=0
+numid=117,iface=MIXER,name='WSA WSA_RX0 INP2'
+  ; type=ENUMERATED,access=rw------,values=1,items=12
+  ; Item #0 'ZERO'
+  ; Item #1 'RX0'
+  ; Item #2 'RX1'
+  ; Item #3 'RX_MIX0'
+  ; Item #4 'RX_MIX1'
+  ; Item #5 'RX4'
+  ; Item #6 'RX5'
+  ; Item #7 'RX6'
+  ; Item #8 'RX7'
+  ; Item #9 'RX8'
+  ; Item #10 'DEC0'
+  ; Item #11 'DEC1'
+  : values=0
+numid=114,iface=MIXER,name='WSA WSA_RX0 INT0 SIDETONE MIX'
+  ; type=ENUMERATED,access=rw------,values=1,items=2
+  ; Item #0 'ZERO'
+  ; Item #1 'SRC0'
+  : values=0
+numid=118,iface=MIXER,name='WSA WSA_RX0 MIX INP'
+  ; type=ENUMERATED,access=rw------,values=1,items=10
+  ; Item #0 'ZERO'
+  ; Item #1 'RX0'
+  ; Item #2 'RX1'
+  ; Item #3 'RX_MIX0'
+  ; Item #4 'RX_MIX1'
+  ; Item #5 'RX4'
+  ; Item #6 'RX5'
+  ; Item #7 'RX6'
+  ; Item #8 'RX7'
+  ; Item #9 'RX8'
+  : values=0
+numid=26,iface=MIXER,name='WSA WSA_RX0_MIX Digital Mute'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=22,iface=MIXER,name='WSA WSA_RX0_MIX Digital Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=25,iface=MIXER,name='WSA WSA_RX1 Digital Mute'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=21,iface=MIXER,name='WSA WSA_RX1 Digital Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=81,step=0
+  : values=81
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=31,iface=MIXER,name='WSA WSA_RX1 EC_HQ Switch'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=119,iface=MIXER,name='WSA WSA_RX1 INP0'
+  ; type=ENUMERATED,access=rw------,values=1,items=12
+  ; Item #0 'ZERO'
+  ; Item #1 'RX0'
+  ; Item #2 'RX1'
+  ; Item #3 'RX_MIX0'
+  ; Item #4 'RX_MIX1'
+  ; Item #5 'RX4'
+  ; Item #6 'RX5'
+  ; Item #7 'RX6'
+  ; Item #8 'RX7'
+  ; Item #9 'RX8'
+  ; Item #10 'DEC0'
+  ; Item #11 'DEC1'
+  : values=2
+numid=120,iface=MIXER,name='WSA WSA_RX1 INP1'
+  ; type=ENUMERATED,access=rw------,values=1,items=12
+  ; Item #0 'ZERO'
+  ; Item #1 'RX0'
+  ; Item #2 'RX1'
+  ; Item #3 'RX_MIX0'
+  ; Item #4 'RX_MIX1'
+  ; Item #5 'RX4'
+  ; Item #6 'RX5'
+  ; Item #7 'RX6'
+  ; Item #8 'RX7'
+  ; Item #9 'RX8'
+  ; Item #10 'DEC0'
+  ; Item #11 'DEC1'
+  : values=0
+numid=121,iface=MIXER,name='WSA WSA_RX1 INP2'
+  ; type=ENUMERATED,access=rw------,values=1,items=12
+  ; Item #0 'ZERO'
+  ; Item #1 'RX0'
+  ; Item #2 'RX1'
+  ; Item #3 'RX_MIX0'
+  ; Item #4 'RX_MIX1'
+  ; Item #5 'RX4'
+  ; Item #6 'RX5'
+  ; Item #7 'RX6'
+  ; Item #8 'RX7'
+  ; Item #9 'RX8'
+  ; Item #10 'DEC0'
+  ; Item #11 'DEC1'
+  : values=0
+numid=122,iface=MIXER,name='WSA WSA_RX1 MIX INP'
+  ; type=ENUMERATED,access=rw------,values=1,items=10
+  ; Item #0 'ZERO'
+  ; Item #1 'RX0'
+  ; Item #2 'RX1'
+  ; Item #3 'RX_MIX0'
+  ; Item #4 'RX_MIX1'
+  ; Item #5 'RX4'
+  ; Item #6 'RX5'
+  ; Item #7 'RX6'
+  ; Item #8 'RX7'
+  ; Item #9 'RX8'
+  : values=0
+numid=27,iface=MIXER,name='WSA WSA_RX1_MIX Digital Mute'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=23,iface=MIXER,name='WSA WSA_RX1_MIX Digital Volume'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=124,step=0
+  : values=84
+  | dBscale-min=-84.00dB,step=1.00dB,mute=1
+numid=18,iface=MIXER,name='WSA WSA_Softclip0 Enable'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=19,iface=MIXER,name='WSA WSA_Softclip1 Enable'
+  ; type=BOOLEAN,access=rw------,values=1
+  : values=off
+numid=126,iface=MIXER,name='WSA_CODEC_DMA_RX_0 Audio Mixer MultiMedia1'
+  ; type=BOOLEAN,access=rw------,values=2
+  : values=on,off
+numid=123,iface=MIXER,name='stream0.vol_ctrl0 MultiMedia1 Playback Volu'
+  ; type=INTEGER,access=rw---R--,values=1,min=0,max=65535,step=0
+  : values=8192
+  | dBscale-min=0.00dB,step=1.00dB,mute=0
+
+==== jack state, nothing plugged
+  'Headphone Jack'                         
+  'Mic Jack'                               
+N: Name="MAHUA-HP-OmniBook-5-16-bf1xxx Headset Jack"
+H: Handlers=kbd event10 
+Plug in a wired headset (or headphones) now, then press Enter. answer: 
+
+==== jack state, plugged
+What did you plug in: a combo headset with a microphone (4-pole plug, three rings) or headphones only (3-pole)? Does it have buttons? answer: combo headset; one button
+  'Headphone Jack'                         
+  'Mic Jack'                               
+N: Name="MAHUA-HP-OmniBook-5-16-bf1xxx Headset Jack"
+H: Handlers=kbd event10 
+
+==== headphones: a quiet tone, speakers routed off
+Play a quiet 1 kHz tone into the headset, left then right, about 2 s each? Keep the headset away from your ears at first. (y/N) answer: y
+  WSA_CODEC_DMA_RX_0 Audio Mixer MultiMedia1 = off,off
+  RX_CODEC_DMA_RX_0 Audio Mixer MultiMedia1 = on,off
+playing left
+Tone 'left': where did you hear it: headset left, headset right, both, speakers, or nothing? answer: none; play was stuck
+playing right
+Tone 'right': where did you hear it: headset left, headset right, both, speakers, or nothing? answer: none; play was stuck
+
+==== headset volume writes (two-byte, SoundWire paging)
+no headphone volume control found
+  RX_CODEC_DMA_RX_0 Audio Mixer MultiMedia1 = off,off
+  WSA_CODEC_DMA_RX_0 Audio Mixer MultiMedia1 = on,off
+
+==== headset microphone: 5 s recording, built-in microphones routed off
+Record 5 s from the headset microphone? Speak into it. (y/N) answer: y
+  MultiMedia2 Mixer VA_CODEC_DMA_TX_0 = off,off
+  MultiMedia2 Mixer TX_CODEC_DMA_TX_3 = on,off
+/tmp/glymur-headset/headset-mic.wav
+frames 13312, peak 0 (SILENT)
+  MultiMedia2 Mixer TX_CODEC_DMA_TX_3 = off,off
+  MultiMedia2 Mixer VA_CODEC_DMA_TX_0 = on,off
+Play the recording back in the headset? (y/N) answer: y
+  WSA_CODEC_DMA_RX_0 Audio Mixer MultiMedia1 = off,off
+  RX_CODEC_DMA_RX_0 Audio Mixer MultiMedia1 = on,off
+Did you hear your voice, and how did it sound (clear, quiet, noisy, distorted, nothing)? answer: none; play was stuck
+  RX_CODEC_DMA_RX_0 Audio Mixer MultiMedia1 = off,off
+  WSA_CODEC_DMA_RX_0 Audio Mixer MultiMedia1 = on,off
+
+==== headset buttons (15 s capture)
+Press each headset button once, slowly: play/pause, then volume up and down if it has them.
+devices: ['MAHUA-HP-OmniBook-5-16-bf1xxx Headset Jack']
+capture done
+Which buttons did you press, in order? answer: play/pause
+Unplug the headset now, then press Enter. answer: 
+
+==== jack state, unplugged
+  'Headphone Jack'                         
+  'Mic Jack'                               
+N: Name="MAHUA-HP-OmniBook-5-16-bf1xxx Headset Jack"
+H: Handlers=kbd event10 
+
+==== mixers restored
+  WSA_CODEC_DMA_RX_0 Audio Mixer MultiMedia1 on,off
+  RX_CODEC_DMA_RX_0 Audio Mixer MultiMedia1 off,off
+  MultiMedia2 Mixer VA_CODEC_DMA_TX_0      on,off
+  MultiMedia2 Mixer TX_CODEC_DMA_TX_3      off,off
+
+Saved to /var/log/glymur/headset-test-20261110T173458.txt
