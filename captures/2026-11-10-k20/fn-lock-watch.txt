@@ -1,0 +1,11 @@
+13:25:50 fn_lock=1 irq=31 kbd=1 timeout=3min
+13:26:18 fn_lock=0 irq=31 kbd=1 timeout=3min
+13:26:19 fn_lock=1 irq=31 kbd=1 timeout=3min
+13:26:37 fn_lock=1 irq=37 kbd=1 timeout=3min
+13:26:38 fn_lock=1 irq=45 kbd=1 timeout=3min
+13:26:39 fn_lock=0 irq=46 kbd=1 timeout=3min
+13:26:41 fn_lock=1 irq=48 kbd=1 timeout=3min
+13:26:44 fn_lock=1 irq=49 kbd=1 timeout=3min
+13:26:45 fn_lock=1 irq=50 kbd=1 timeout=3min
+13:26:46 fn_lock=1 irq=52 kbd=1 timeout=3min
+end

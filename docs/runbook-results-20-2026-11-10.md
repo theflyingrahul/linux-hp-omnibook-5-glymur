@@ -68,3 +68,40 @@ logging was on, and no long press was made). To capture it: leave
 and `journalctl -k | grep "EC event"`. If the EC raises an event the driver
 can notify `kbd_backlight_timeout` and the OSD can be a desktop-side matter;
 if it raises none, nothing can tell the desktop.
+
+## Follow-up: the Fn toggle and the headset (same boot)
+
+**Fn toggle.** After `check-ec.sh` Left Shift+Fn no longer toggled the
+function row: no `EC event 0x88` and no interrupt for several minutes
+(`captures/2026-11-10-k20/fn-lock-watch.txt`). Writing `fn_lock` 0 as the
+owner did (action-keys flag set again) brought the media keys back, as on
+2026-10-22. After a write the EC no longer reports the Fn+Shift toggle until
+the flag is set again; the series needs the show/store polarity fix above
+and a script that never restores through the inverted write.
+
+**Headset (`headset-test-20261110T132742.txt`).** A 4-pole headset with a
+microphone and one button: nothing played, the microphone recording was
+silent (peak 0), the button sent no event, and no kernel line appeared when
+the plug went in or out. What the log shows:
+
+- The wcd9378 is `Attached` on link 3 and the headset reset line (TLMM 191)
+  is high, so the codec is alive. No audio errors while the tones ran, and
+  the DSP side routed `RX_CODEC_DMA_RX_0` (the script printed it on).
+- **`FU 6 Channel Switch` is `off,off`** (muted) with the volume at 25088
+  of 65535, and nothing in the UCM profile touches it: `HiFi.conf` has no
+  headset device at all. That alone silences the headphone path. Not yet
+  tried: set it on with a headset plugged in.
+- **Jack detection is not working.** `Headphone Jack` reads on and `Mic
+  Jack` off with nothing plugged, and the script's before/after jack state
+  lines printed no values. `GE 35 Detected Mode Switch` is read-only with
+  `min=0,max=0`, and reading it triggers a second UBSAN
+  (`soc-ops.c:169`, `snd_soc_get_volsw` via `volatile_get_volsw` in
+  `snd_soc_sdca`, shift exponent 64). The first UBSAN (`sdca_asoc.c:501`) at
+  module load is the same shift: the SDCA control for the detected mode is
+  built with a 64-bit width, hence `max=0`. The `ASoC error (-16)` reads of
+  register `0x40c00908` fit a jack detect register being read while the
+  codec is busy. So the jack-detect interrupt path and the control range
+  both need the SDCA fix before the buttons or plug events can work.
+- The microphone path (`TX_CODEC_DMA_TX_3`) was routed and recorded silence;
+  with the jack not detected, the codec's input is probably not selected
+  (`GE 35 Selected Mode` stays 0).
