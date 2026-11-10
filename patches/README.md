@@ -180,6 +180,20 @@ writes `0x3`), hid-asus and iris changes (other hardware or already
 handled). The config is `-19`'s. Every patch applies with no fuzz
 (71 commits), and a fresh `prepare` reproduces the build tree.
 
+`-20` also carries the EC series' upstream v2 (2026-11-10) as
+`upstream/qcom-next/0004–0005`, so it runs on the laptop before it is sent:
+the binding requires the event line; the backlight level is a read-only
+`platform::kbd_backlight` LED with `brightness_hw_changed` instead of the
+`kbd_backlight_level` attribute; LED states use `HPEC_LED_STATE()`. After a
+review against the other arm64 EC drivers and HP's tables
+(`docs/ec-review-2026-11-10.md`) v2 also tells the EC about suspend and
+resume as HP's modern standby `_DSM` does (OS flags `0x81`/`0x82`, register
+`0x23` as on Qualcomm's reference EC), adds an `fn_lock` attribute (read
+with `0xbd/0x01`, written through the action-keys flag, notified on event
+`0x88`) and logs every EC event at debug level. Only the three EC files
+differ from the v1 tree, so the build tree was moved to the v2 commits and
+rebuilt incrementally.
+
 Base move for `-19` (2026-11-05). qcom-next was rebuilt on 7.3
 (`17bbb4b37bbc`, tags `qcom-next-7.3-20261031` and `qcom-7.3-20261102`;
 1326 commits not in `c7896917e523`, 452 of its commits rewritten). Mainline

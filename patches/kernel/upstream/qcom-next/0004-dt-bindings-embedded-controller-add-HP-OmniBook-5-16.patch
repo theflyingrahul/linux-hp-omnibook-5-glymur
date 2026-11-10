@@ -1,22 +1,22 @@
-From 068e8341bb3f8021711b2870d15b8d7de61c48ab Mon Sep 17 00:00:00 2001
+From 50ebb506d07a179f3a5d8a76ed8e3229855c9167 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Wed, 30 Sep 2026 04:33:53 -0700
-Subject: [PATCH 4/5] dt-bindings: embedded-controller: add HP OmniBook 5 16 EC
+Subject: [PATCH 4/5] dt-bindings: embedded-controller: Add HP OmniBook 5 16 EC
 
 The HP OmniBook 5 16 (Snapdragon X2) has an embedded controller on I2C
 at address 0x76. It runs the fan and the keyboard backlight and reports
 the fan speed and its thermistor temperatures.
 ---
- .../hp,omnibook-5-16-bf1xxx-ec.yaml           | 49 +++++++++++++++++++
- 1 file changed, 49 insertions(+)
+ .../hp,omnibook-5-16-bf1xxx-ec.yaml           | 54 +++++++++++++++++++
+ 1 file changed, 54 insertions(+)
  create mode 100644 Documentation/devicetree/bindings/embedded-controller/hp,omnibook-5-16-bf1xxx-ec.yaml
 
 diff --git a/Documentation/devicetree/bindings/embedded-controller/hp,omnibook-5-16-bf1xxx-ec.yaml b/Documentation/devicetree/bindings/embedded-controller/hp,omnibook-5-16-bf1xxx-ec.yaml
 new file mode 100644
-index 000000000000..be4c845067ec
+index 000000000000..c87a3781261f
 --- /dev/null
 +++ b/Documentation/devicetree/bindings/embedded-controller/hp,omnibook-5-16-bf1xxx-ec.yaml
-@@ -0,0 +1,49 @@
+@@ -0,0 +1,54 @@
 +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
 +%YAML 1.2
 +---
@@ -42,6 +42,7 @@ index 000000000000..be4c845067ec
 +    const: 0x76
 +
 +  interrupts:
++    description: The EC's event line, signalling hotkeys and backlight changes.
 +    maxItems: 1
 +
 +  "#thermal-sensor-cells":
@@ -50,11 +51,14 @@ index 000000000000..be4c845067ec
 +required:
 +  - compatible
 +  - reg
++  - interrupts
 +
 +additionalProperties: false
 +
 +examples:
 +  - |
++    #include <dt-bindings/interrupt-controller/irq.h>
++
 +    i2c {
 +        #address-cells = <1>;
 +        #size-cells = <0>;
@@ -62,7 +66,11 @@ index 000000000000..be4c845067ec
 +        embedded-controller@76 {
 +            compatible = "hp,omnibook-5-16-bf1xxx-ec";
 +            reg = <0x76>;
++            interrupts-extended = <&tlmm 66 IRQ_TYPE_EDGE_FALLING>;
 +            #thermal-sensor-cells = <1>;
 +        };
 +    };
 +...
+-- 
+2.53.0
+
