@@ -26,3 +26,19 @@ cd "$SRC"
 make -j2 -C test
 install -m 755 test/fastrpc_test test/fastrpc-healthcheck /usr/local/bin/
 command -v fastrpc_test fastrpc-healthcheck
+
+# FastRPC finds the DSP files by the device-tree model name, and its
+# healthcheck looks for firmware under /lib/firmware, not .../updates.
+install -d /usr/share/qcom/conf.d
+cat > /usr/share/qcom/conf.d/hp-omnibook-5-16-bf1xxx.yaml <<'YAML'
+machines:
+  HP OmniBook 5 Laptop 16-bf1xxx:
+    DSP_LIBRARY_PATH: glymur/HP/omnibook-5-16-bf1xxx/dsp
+  HP OmniBook 5 Laptop 16-bf1xxx (test):
+    DSP_LIBRARY_PATH: glymur/HP/omnibook-5-16-bf1xxx/dsp
+  HP OmniBook 5 Laptop 16-bf1xxx (test, A/V):
+    DSP_LIBRARY_PATH: glymur/HP/omnibook-5-16-bf1xxx/dsp
+YAML
+FW=qcom/glymur/HP
+[ -e "/lib/firmware/$FW" ] || [ ! -d "/lib/firmware/updates/$FW" ] ||
+    ln -s "../../updates/$FW" "/lib/firmware/$FW"

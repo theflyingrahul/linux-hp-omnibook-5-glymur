@@ -134,3 +134,29 @@ v81 (HP's `libQnnHtpV81Skel.so`), so `fastrpc_test` may start the CDSP
 session and still fail to find a matching skeleton; the healthcheck and the
 session setup are the first result to read. The `hexagon-dsp-binaries-*`
 packages are other boards' files and are not installed.
+
+## NPU, first run (`npu-test-20261110T134423.txt`)
+
+`setup-npu.sh` and `check-npu.sh` ran as the owner. The CDSP and ADSP are
+`running` in `/sys/class/remoteproc`, `/dev/fastrpc-*` exist, and
+`fastrpc-healthcheck` still reports both DSPs `Offline`, DSP build ID and
+dynamic libs path `N/A`. Two gaps on the Linux side, both about where
+FastRPC looks:
+
+- It maps the machine to its DSP directory with a YAML file in
+  `/usr/share/qcom/conf.d/`, keyed on the device-tree model string; there
+  was none. `setup-npu.sh` now writes one for the daily, test and A/V
+  models (`DSP_LIBRARY_PATH: glymur/HP/omnibook-5-16-bf1xxx/dsp`, where
+  install-from-usb puts HP's `fastrpc_shell_3` and `libQnnHtpV81Skel.so`).
+- Its firmware check uses `/lib/firmware/<remoteproc firmware>`, while HP's
+  files are in `/lib/firmware/updates/qcom/glymur/HP/...` (the kernel
+  searches `updates` first), so it counts the firmware as missing. The
+  script adds a symlink `/lib/firmware/qcom/glymur/HP` to the `updates`
+  one.
+
+Both land the next time `sudo bash ~/setup-npu.sh` runs (it is idempotent);
+then `sudo bash ~/check-npu.sh` again. `fastrpc_test` itself printed `Error
+opening directory /usr/local/lib/fastrpc_test`: it wants its sample skeletons
+installed, and those are Hexagon v68/v75 while the NPU is v81, so it cannot
+run a real offload here. The healthcheck result decides the next step
+(a v81 skeleton, or a QNN-based test through HP's `libQnnHtpV81Skel.so`).
