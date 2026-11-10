@@ -46,7 +46,7 @@ if [ "${1:-}" = --diag ]; then
     sect "diagnostics: one core, pipe and core ID trials"
     command -v ffmpeg >/dev/null || { echo 'ffmpeg missing: sudo apt install ffmpeg'; exit 1; }
     modinfo -p qcom_iris 2>/dev/null | grep -q diag_cores || { echo 'qcom_iris has no diag parameters (needs kernel -17)'; exit 1; }
-    ffmpeg -hide_banner -loglevel error -y -f lavfi -i testsrc2=size=1920x1080:rate=30 \
+    ffmpeg -nostdin -hide_banner -loglevel error -y -f lavfi -i testsrc2=size=1920x1080:rate=30 \
         -t 2 -c:v libx264 -pix_fmt yuv420p "$TMP/short.mp4"
     # pipes core_id: 0 = platform value / driver choice for pipes, -1 = driver choice, 0 = not sent for the core
     for t in "0 -1" "2 -1" "1 -1" "0 2" "2 2" "0 0" "2 0"; do
@@ -59,7 +59,7 @@ if [ "${1:-}" = --diag ]; then
         # a module still in use (a video app open) keeps the old settings
         echo "loaded with: $(grep -H . /sys/module/qcom_iris/parameters/diag_* 2>/dev/null | sed 's#.*/##' | tr '\n' ' ')"
         since=$(date '+%Y-%m-%d %H:%M:%S')
-        timeout 30 ffmpeg -hide_banner -loglevel warning -c:v h264_v4l2m2m \
+        timeout 30 ffmpeg -nostdin -hide_banner -loglevel warning -c:v h264_v4l2m2m \
             -i "$TMP/short.mp4" -f null - 2>&1 | tail -4
         echo "ffmpeg exit: ${PIPESTATUS[0]}"
         journalctl -k --no-pager --since "$since" | grep -E 'diag:|not supported|fatal|power on failed|Oops' | sed 's/^.*qcom-iris [^ ]* //' | sort | uniq -c | head -12
@@ -74,7 +74,7 @@ if [ "${1:-}" = --mahua ]; then
     sect "Mahua trials: one core, core ID 2, hardware core and power release"
     command -v ffmpeg >/dev/null || { echo 'ffmpeg missing: sudo apt install ffmpeg'; exit 1; }
     modinfo -p qcom_iris 2>/dev/null | grep -q diag_pwr_ctl || { echo 'qcom_iris has no diag_pwr_ctl (needs kernel -19)'; exit 1; }
-    ffmpeg -hide_banner -loglevel error -y -f lavfi -i testsrc2=size=1920x1080:rate=30 \
+    ffmpeg -nostdin -hide_banner -loglevel error -y -f lavfi -i testsrc2=size=1920x1080:rate=30 \
         -t 2 -c:v libx264 -pix_fmt yuv420p "$TMP/short.mp4"
     # hw_core pwr_ctl pipes: the Windows-like set first, then one change each
     for t in "1 1 0" "1 1 2" "-1 1 0" "1 0 0"; do
@@ -89,7 +89,7 @@ if [ "${1:-}" = --mahua ]; then
         sleep 2
         echo "loaded with: $(grep -H . /sys/module/qcom_iris/parameters/diag_* 2>/dev/null | sed 's#.*/##' | tr '\n' ' ')"
         since=$(date '+%Y-%m-%d %H:%M:%S')
-        timeout -k 5 30 ffmpeg -hide_banner -loglevel warning -c:v h264_v4l2m2m \
+        timeout -k 5 30 ffmpeg -nostdin -hide_banner -loglevel warning -c:v h264_v4l2m2m \
             -i "$TMP/short.mp4" -f null - 2>&1 | tail -4
         echo "ffmpeg exit: ${PIPESTATUS[0]} (124: timed out, 137: killed)"
         journalctl -k --no-pager --since "$since" |
@@ -106,13 +106,13 @@ sect "decode test (H.264, 1080p, 10 s)"
 if ! command -v ffmpeg >/dev/null; then
     echo 'ffmpeg missing: sudo apt install ffmpeg'
 else
-    ffmpeg -hide_banner -loglevel error -y -f lavfi -i testsrc2=size=1920x1080:rate=30 \
+    ffmpeg -nostdin -hide_banner -loglevel error -y -f lavfi -i testsrc2=size=1920x1080:rate=30 \
         -t 10 -c:v libx264 -pix_fmt yuv420p "$TMP/test.mp4"
     TIMEFORMAT='  %R s elapsed, %U s user CPU'
     echo "software:"
-    time ffmpeg -hide_banner -loglevel error -i "$TMP/test.mp4" -f null - 2>&1
+    time ffmpeg -nostdin -hide_banner -loglevel error -i "$TMP/test.mp4" -f null - 2>&1
     echo "hardware (h264_v4l2m2m):"
-    time ffmpeg -hide_banner -loglevel warning -c:v h264_v4l2m2m \
+    time ffmpeg -nostdin -hide_banner -loglevel warning -c:v h264_v4l2m2m \
         -i "$TMP/test.mp4" -f null - 2>&1 | tail -15
 fi
 
