@@ -20,9 +20,16 @@ ask() { local a; while read -r -t 0.05 -n 4096 _ </dev/tty 2>/dev/null; do :; do
 asuser() { sudo -u "$SUDO_USER" XDG_RUNTIME_DIR="/run/user/$(id -u "$SUDO_USER")" "$@"; }
 cget() { amixer -c "$CARD" cget "name=$1" 2>&1 | sed -n 's/.*: values=//p'; }
 cset() { amixer -c "$CARD" -q cset "name=$1" "$2" 2>&1; echo "  $1 = $(cget "$1")"; }
+# Jack controls are on the card interface (iface=CARD), so read them by numid;
+# GE 35 Detected Mode (the codec's jack type) as well.
 jacks() {
-    amixer -c "$CARD" controls 2>/dev/null | grep -i 'jack' | sed 's/.*name=//' |
-        while read -r c; do printf '  %-40s %s\n' "$c" "$(cget "${c//\'/}")"; done
+    amixer -c "$CARD" controls 2>/dev/null | grep -i -E "jack|Detected Mode|Selected Mode" |
+        while IFS= read -r l; do
+            n=${l%%,*}
+            printf '  %-48s %s\n' "${l#*name=}" \
+                "$(amixer -c "$CARD" cget "$n" 2>&1 | sed -n 's/.*: values=//p' | head -1)"
+        done
+    journalctl -k --no-pager --since "-20s" | grep -i -E 'jack|wcd|sdca' | tail -5 || true
     grep -B1 -A4 -i 'jack\|headset\|headphone' /proc/bus/input/devices | grep -E '^N:|^H:' || true
 }
 
@@ -83,91 +90,146 @@ M_RX='RX_CODEC_DMA_RX_0 Audio Mixer MultiMedia1'
 M_VA='MultiMedia2 Mixer VA_CODEC_DMA_TX_0'
 M_TX='MultiMedia2 Mixer TX_CODEC_DMA_TX_3'
 
-sect "headphones: a quiet tone, speakers routed off"
-ask "Play a quiet 1 kHz tone into the headset, left then right, about 2 s each? Keep the headset away from your ears at first. (y/N)"
-if [ "$REPLY" = y ]; then
-    python3 - "$WAV" <<'PY'
+# From -21: -20 and -21 played nothing and recorded silence because the RX
+# macro muxes and the TX decimator path were never set (all ZERO). This
+# routes the whole path, as alsa-ucm-conf's rx-macro HeadphoneEnableSeq and
+# tx-macro SoundwireMic*EnableSeq do, and uses the card directly with
+# PipeWire paused. Every control it changes is saved and put back.
+SAVE=("$M_WSA" "$M_RX" "$M_VA" "$M_TX" 'RX_HPH PWR Mode' 'RX_MACRO RX0 MUX' 'RX_MACRO RX1 MUX'
+      'RX INT0_1 MIX1 INP0' 'RX INT1_1 MIX1 INP0' 'RX INT0 DEM MUX' 'RX INT1 DEM MUX'
+      'FU 6 Channel Switch' 'FU 6 Channel Volume' 'GE 35 Selected Mode'
+      'TX DEC0 MUX' 'TX SMIC MUX0' 'TX_AIF1_CAP Mixer DEC0' 'DEC0 MODE' 'TX_DEC0 Volume')
+declare -A SAVED
+for c in "${SAVE[@]}"; do SAVED[$c]=$(cget "$c"); done
+restore() {
+    for c in "${SAVE[@]}"; do
+        [ -n "${SAVED[$c]}" ] && amixer -c "$CARD" -q cset "name=$c" "${SAVED[$c]}" 2>/dev/null
+    done
+}
+qset() { amixer -c "$CARD" -q cset "name=$1" "$2" 2>&1; }
+PW_STOPPED=0
+pw_stop() {
+    asuser systemctl --user stop pipewire.socket pipewire-pulse.socket pipewire pipewire-pulse wireplumber 2>&1 | tail -2
+    PW_STOPPED=1; sleep 1
+}
+pw_start() {
+    [ "$PW_STOPPED" = 1 ] || return 0
+    asuser systemctl --user start pipewire.socket pipewire-pulse.socket wireplumber 2>&1 | tail -2
+    PW_STOPPED=0
+}
+trap 'restore; pw_start' EXIT
+peak() {
+    python3 -c '
+import array, sys, wave
+try:
+    w = wave.open(sys.argv[1]); a = array.array("h", w.readframes(w.getnframes()))
+    print(max((abs(x) for x in a), default=0))
+except Exception:
+    print(-1)
+' "$1"
+}
+# The jack's group entity: the host selects the mode the codec detected.
+select_mode() {
+    local det
+    det=$(cget 'GE 35 Detected Mode')
+    echo "GE 35 Detected Mode: ${det:-?}"
+    [ -n "$det" ] && [ "$det" != 0 ] && cset 'GE 35 Selected Mode' "$det"
+}
+hp_route() {
+    select_mode
+    cset "$M_WSA" 0
+    cset "$M_RX" 1
+    cset 'RX_HPH PWR Mode' LOHIFI
+    cset 'RX_MACRO RX0 MUX' AIF1_PB
+    cset 'RX_MACRO RX1 MUX' AIF1_PB
+    cset 'RX INT0_1 MIX1 INP0' RX0
+    cset 'RX INT1_1 MIX1 INP0' RX1
+    cset 'RX INT0 DEM MUX' CLSH_DSM_OUT
+    cset 'RX INT1 DEM MUX' CLSH_DSM_OUT
+    cset 'FU 6 Channel Switch' on,on
+}
+play() {
+    timeout -k 2 12 aplay -q -D "plughw:$CARD,0" "$1" 2>&1 | tail -3
+    echo "  aplay exit ${PIPESTATUS[0]} (124: timed out)"
+}
+
+python3 -c '
 import math, struct, sys, wave
-for name, side in (('left', 0), ('right', 1)):
-    w = wave.open('%s/%s.wav' % (sys.argv[1], name), 'w')
+for name, side in (("left", 0), ("right", 1)):
+    w = wave.open("%s/%s.wav" % (sys.argv[1], name), "w")
     w.setnchannels(2); w.setsampwidth(2); w.setframerate(48000)
     amp = int(32767 * 0.03)  # about -30 dBFS
     frames = []
     for i in range(96000):
         v = int(amp * math.sin(2 * math.pi * 1000 * i / 48000))
-        frames.append(struct.pack('<hh', v if side == 0 else 0, v if side == 1 else 0))
-    w.writeframes(b''.join(frames)); w.close()
-PY
-    chown "$SUDO_USER" "$WAV"/*.wav
-    cset "$M_WSA" 0
-    cset "$M_RX" 1
-    asuser wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
-    asuser wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.3
+        frames.append(struct.pack("<hh", v if side == 0 else 0, v if side == 1 else 0))
+    w.writeframes(b"".join(frames)); w.close()
+' "$WAV"
+chown "$SUDO_USER" "$WAV"/*.wav
+
+sect "headphones: the full RX path, played directly to the card"
+ask "Play a quiet 1 kHz tone into the headset, left then right, about 2 s each? Keep the headset away from your ears. Desktop sound pauses during the test. (y/N)"
+if [ "$REPLY" = y ]; then
+    pw_stop
+    hp_route
     for side in left right; do
         echo "playing $side"
-        asuser pw-play "$WAV/$side.wav" 2>&1 | tail -2
+        play "$WAV/$side.wav"
         ask "Tone '$side': where did you hear it: headset left, headset right, both, speakers, or nothing?"
     done
     # The codec's volume is a two-byte write over SoundWire paging; -20's
     # backports/0085 keeps both bytes. Readback may be cached, so listen too.
     sect "headset volume writes (two-byte, SoundWire paging)"
-    mapfile -t VOLS < <(amixer -c "$CARD" controls 2>/dev/null | sed -n "s/.*name='\(.*\)'/\1/p" |
-        grep -iE 'volume' | grep -iE 'hph|headphone|ear|wcd' | head -2)
-    if [ ${#VOLS[@]} -eq 0 ]; then
-        echo "no headphone volume control found"
-    fi
-    for v in "${VOLS[@]}"; do
-        info=$(amixer -c "$CARD" cget "name=$v" 2>&1)
-        echo "$v: $(echo "$info" | sed -n 's/.*\(min=[^,]*,max=[^,]*\).*/\1/p') now $(cget "$v")"
-    done
-    if [ ${#VOLS[@]} -gt 0 ]; then
-        declare -A ORIG
-        for v in "${VOLS[@]}"; do ORIG[$v]=$(cget "$v"); done
+    info=$(amixer -c "$CARD" cget "name=FU 6 Channel Volume" 2>&1)
+    lo=$(echo "$info" | sed -n 's/.*min=\([-0-9]*\).*/\1/p')
+    hi=$(echo "$info" | sed -n 's/.*max=\([-0-9]*\).*/\1/p')
+    echo "FU 6 Channel Volume: min=$lo max=$hi now $(cget 'FU 6 Channel Volume')"
+    if [ -n "$lo" ] && [ -n "$hi" ]; then
         for frac in 4 2; do
-            for v in "${VOLS[@]}"; do
-                info=$(amixer -c "$CARD" cget "name=$v" 2>&1)
-                lo=$(echo "$info" | sed -n 's/.*min=\([-0-9]*\).*/\1/p'); hi=$(echo "$info" | sed -n 's/.*max=\([-0-9]*\).*/\1/p')
-                [ -n "$lo" ] && [ -n "$hi" ] && cset "$v" $(( lo + (hi - lo) / frac ))
-            done
+            v=$(( lo + (hi - lo) / frac ))
+            cset 'FU 6 Channel Volume' "$v,$v"
             echo "playing left at 1/$frac of the range"
-            asuser pw-play "$WAV/left.wav" 2>&1 | tail -2
+            play "$WAV/left.wav"
         done
         ask "Was the second tone clearly louder than the first?"
-        for v in "${VOLS[@]}"; do cset "$v" "${ORIG[$v]}"; done
-        journalctl -k -b --no-pager --since "-60s" | grep -iE 'sdw|swr|wcd|sdca|error' || true
     fi
-    journalctl -k -b --no-pager --since "-60s" | grep -iE 'wcd|sdca|swr|sdw|q6apm|CMD timeout|error' || true
-    cset "$M_RX" 0
-    cset "$M_WSA" 1
+    journalctl -k -b --no-pager --since "-90s" | grep -iE 'wcd|sdca|swr|sdw|q6apm|CMD timeout|error' | tail -20 || true
+    restore
+    pw_start
 fi
 
-sect "headset microphone: 5 s recording, built-in microphones routed off"
-ask "Record 5 s from the headset microphone? Speak into it. (y/N)"
+sect "headset microphone: scan of the TX macro's SoundWire inputs"
+ask "Find the headset microphone: 12 recordings of 2 s, one per TX input. Keep talking into it (or tap it) for about 40 s. Desktop sound pauses. (y/N)"
 if [ "$REPLY" = y ]; then
+    pw_stop
+    select_mode
     cset "$M_VA" 0
     cset "$M_TX" 1
-    asuser timeout 5 pw-record --rate 48000 --channels 2 --format s16 "$WAV/headset-mic.wav" 2>&1 | tail -3
-    python3 - "$WAV/headset-mic.wav" <<'PY'
-import array, sys, wave
-try:
-    w = wave.open(sys.argv[1]); a = array.array('h', w.readframes(w.getnframes()))
-    peak = max((abs(x) for x in a), default=0)
-    print('frames %d, peak %d (%s)' % (w.getnframes(), peak, 'SILENT' if peak < 50 else 'signal'))
-except Exception as e:
-    print('no recording:', e)
-PY
-    journalctl -k -b --no-pager --since "-30s" | grep -iE 'wcd|sdca|swr|sdw|q6apm|CMD timeout|error' || true
-    cset "$M_TX" 0
-    cset "$M_VA" 1
-    ask "Play the recording back in the headset? (y/N)"
-    if [ "$REPLY" = y ] && [ -s "$WAV/headset-mic.wav" ]; then
-        cset "$M_WSA" 0
-        cset "$M_RX" 1
-        asuser pw-play "$WAV/headset-mic.wav" 2>&1 | tail -2
-        ask "Did you hear your voice, and how did it sound (clear, quiet, noisy, distorted, nothing)?"
-        cset "$M_RX" 0
-        cset "$M_WSA" 1
+    cset 'TX DEC0 MUX' SWR_MIC
+    cset 'TX_AIF1_CAP Mixer DEC0' 1
+    cset 'DEC0 MODE' ADC_DEFAULT
+    cset 'TX_DEC0 Volume' 110
+    echo "Talk now."
+    best=; bestpk=0
+    for i in 0 1 2 3 4 5 6 7 8 9 10 11; do
+        qset 'TX SMIC MUX0' "SWR_MIC$i"
+        timeout -k 2 6 arecord -q -D "plughw:$CARD,1" -f S16_LE -r 48000 -c 2 -d 2 "$WAV/mic$i.wav" 2>&1 | tail -1
+        pk=$(peak "$WAV/mic$i.wav")
+        printf '  SWR_MIC%-2s peak %s\n' "$i" "$pk"
+        if [ "$pk" -gt "$bestpk" ] 2>/dev/null; then bestpk=$pk; best=$i; fi
+    done
+    echo "loudest: ${best:+SWR_MIC$best} (peak $bestpk; under 50 is silence)"
+    journalctl -k -b --no-pager --since "-90s" | grep -iE 'wcd|sdca|swr|sdw|q6apm|CMD timeout|error' | tail -20 || true
+    if [ -n "$best" ] && [ "$bestpk" -ge 50 ]; then
+        ask "Play the loudest recording back in the headset? (y/N)"
+        if [ "$REPLY" = y ]; then
+            hp_route
+            play "$WAV/mic$best.wav"
+            ask "Did you hear your voice, and how did it sound (clear, quiet, noisy, distorted, nothing)?"
+        fi
     fi
+    restore
+    pw_start
 fi
 
 # Combo headsets report their buttons through the jack's input device.

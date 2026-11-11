@@ -284,20 +284,23 @@ The headset jack test of `-19`'s test device tree
 its data lanes, the reset line (TLMM 191), the modules and kernel log, every
 mixer control with its value (the material for the headset UCM, which does
 not exist yet) and the jack controls and input devices before and after a
-headset is plugged in. Only when asked, it plays a 1 kHz tone at about
--30 dBFS on the left, then the right headphone, and records 5 s from the
-headset microphone, through PipeWire as the desktop user, and plays the
-recording back in the headset. After the tones it sets the headphone volume
-controls to a quarter and then half of their range, logs the readback, plays
-the left tone at each and asks whether the second was louder (the codec's
-two-byte volume writes over SoundWire paging, `backports/0085`). It also asks what was plugged in (a 4-pole
-combo headset or 3-pole headphones), captures the headset buttons from the
-jack's input device for 15 s, and reads the jack state after unplugging.
-With no UCM for
-the headset it routes the DSP by hand for each step
-(`RX_CODEC_DMA_RX_0 Audio Mixer MultiMedia1` on and the speakers' mixer
-off; `MultiMedia2 Mixer TX_CODEC_DMA_TX_3` on and the built-in microphones'
-mixer off) and puts both back afterwards. The log goes to
+headset is plugged in, read by numid with `GE 35 Detected Mode`. From `-21`
+it routes the whole headset path itself, since `-20` and `-21` played nothing
+and recorded silence with the RX macro muxes and the TX decimator left at
+`ZERO`: the RX macro as alsa-ucm-conf's `rx-macro/HeadphoneEnableSeq.conf`,
+`FU 6 Channel Switch` on, the detected jack mode copied into `GE 35 Selected
+Mode`, and plays a 1 kHz tone at about -30 dBFS, left then right, with
+`aplay` straight to the card while PipeWire is stopped for the test. It then
+sets `FU 6 Channel Volume` to a quarter and half of its range with the tone
+at each (the codec's two-byte volume writes, `backports/0085`). For the
+microphone it routes the TX decimator (`TX DEC0 MUX` SWR_MIC, `TX_AIF1_CAP
+Mixer DEC0`) and records 2 s from each of `TX SMIC MUX0`'s twelve SoundWire
+inputs while you talk, printing each peak, and offers the loudest back in
+the headset: no profile names the WCD9378's input yet. It also asks what was
+plugged in, captures the headset buttons from the jack's input device for
+15 s, and reads the jack state after unplugging. Every control it changes
+is saved first and put back, and PipeWire is restarted, also when the
+script stops early. The log goes to
 `/var/log/glymur/headset-test-*.txt`. `install-from-usb.sh` copies it to the
 home folder with the other checks, and puts the `iris-test/` WirePlumber
 file in `~/glymur-iris-test/` without installing it.
@@ -549,6 +552,14 @@ needs Qualcomm's AI Runtime (QNN) 2.39 for Linux, matching HP's
 ### `check-suspend.sh`
 
     sudo bash check-suspend.sh [--sync-state]
+
+From `-21` it starts with a `pm_test` pass that bisects a hang without
+sleeping: `freezer` (tasks frozen) and `devices` (every driver's normal
+suspend callback run), each resuming after 5 s by itself; `--pm-test-only`
+stops there. Every step leaves a synced marker (`check-suspend`) in the
+persistent journal, so after a hard reset `journalctl -b -1` shows the last
+step reached. Its blocker snapshot reads only the clock framework's
+counters: `clk_summary` reads every clock's hardware and can hang.
 
 From kernel `-20`: three supervised s2idle cycles, woken by an RTC alarm,
 by opening the lid (with the charger unplugged and replugged while asleep)

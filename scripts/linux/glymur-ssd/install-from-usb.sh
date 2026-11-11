@@ -101,6 +101,23 @@ if [ -d "$K/audio" ]; then
     sudo bash "$K/install-audio.sh"
 fi
 
+# GNOME shows the backlight level itself; the timeout (hold F5) needs this
+# extension. A new extension loads at the next login on Wayland.
+EXT=kbd-backlight-timeout-osd@hp-omnibook-5
+if [ -d "$K/gnome-shell/$EXT" ]; then
+    echo "== GNOME extension: the keyboard backlight timeout OSD"
+    D="$HOME/.local/share/gnome-shell/extensions/$EXT"
+    mkdir -p "$D"
+    cp "$K/gnome-shell/$EXT/"* "$D/"
+    cur=$(gsettings get org.gnome.shell enabled-extensions 2>/dev/null)
+    case "$cur" in
+        *"'$EXT'"*) ;;
+        "@as []"|"[]"|"") gsettings set org.gnome.shell enabled-extensions "['$EXT']" ;;
+        *) gsettings set org.gnome.shell enabled-extensions "${cur%]}, '$EXT']" ;;
+    esac
+    echo "enabled from the next login: $(gsettings get org.gnome.shell enabled-extensions 2>/dev/null)"
+fi
+
 echo "== test tools from Ubuntu (glxinfo/eglinfo, vulkaninfo/vkcube, glmark2, kmscube)"
 sudo apt-get install -y mesa-utils mesa-utils-bin vulkan-tools glmark2-es2-wayland kmscube ||
     echo 'apt failed (offline?); install them later, check-mesa.sh names them'

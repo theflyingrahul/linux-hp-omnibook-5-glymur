@@ -1,0 +1,7 @@
+{
+    "uuid": "kbd-backlight-timeout-osd@hp-omnibook-5",
+    "name": "Keyboard backlight timeout OSD",
+    "description": "Shows GNOME's on-screen display when the HP OmniBook 5 16's keyboard backlight timeout is changed from the keyboard (hold F5).",
+    "shell-version": ["45", "46", "47", "48", "49", "50", "51"],
+    "url": "https://github.com/theflyingrahul/linux-hp-omnibook-5-glymur"
+}

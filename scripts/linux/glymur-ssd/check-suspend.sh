@@ -2,7 +2,9 @@
 set -u
 
 # Supervised s2idle test (kernel -20 on). See README.md.
-#   sudo bash check-suspend.sh [--sync-state] [--deep]
+#   sudo bash check-suspend.sh [--sync-state] [--deep] [--pm-test-only]
+# First a pm_test pass (freezer, devices) that bisects a hang without
+# sleeping; --pm-test-only stops after it.
 # s2idle only, unless --deep: the firmware refuses PSCI system suspend
 # (-95), so every "deep" attempt takes the CPUs offline, fails and falls back.
 # Three suspend cycles: woken by an RTC alarm, by opening the lid (the
@@ -18,9 +20,11 @@ set -u
 [ "$(id -u)" -eq 0 ] || { echo 'run with sudo' >&2; exit 1; }
 SYNC=0
 DEEP=0
+PMTEST_ONLY=0
 for a in "$@"; do
     [ "$a" = --sync-state ] && SYNC=1
     [ "$a" = --deep ] && DEEP=1
+    [ "$a" = --pm-test-only ] && PMTEST_ONLY=1
 done
 OUT="/var/log/glymur/suspend-test-$(date +%Y%m%dT%H%M%S).txt"
 mkdir -p /var/log/glymur
@@ -32,6 +36,9 @@ redact() {
 exec 3>/dev/tty 2>/dev/null || exec 3>&2
 exec > >(redact | tee "$OUT") 2>&1
 sect() { printf '\n==== %s\n' "$*"; }
+# A marker in the persistent journal, synced, so that after a hang the
+# previous boot's journal shows the last step reached.
+mark() { logger -t check-suspend "$*"; journalctl --sync 2>/dev/null; sync; }
 # The question goes straight to the terminal (the log pipe only passes whole
 # lines, so a prompt sent through it shows up after the answer). Keys pressed
 # while it slept are thrown away first. The answer is left in $REPLY.
@@ -93,8 +100,16 @@ energy() {
 blockers() {
     sect "possible sleep blockers ($1)"
     local D=/sys/kernel/debug
-    echo "-- clocks: crystal and RPMh (enable/prepare counts and consumers)"
-    grep -E 'bi_tcxo|xo_board|cxo|rpmh' "$D/clk/clk_summary" 2>/dev/null | head -20
+    # Software counters only: clk_summary reads every clock's hardware and
+    # can hang on a block whose power domain is off.
+    echo "-- clocks: crystal and RPMh (enable/prepare counts, consumers)"
+    for c in "$D"/clk/*; do
+        case "${c##*/}" in *xo*|*cxo*|*rpmh*) ;; *) continue ;; esac
+        [ -r "$c/clk_prepare_count" ] || continue
+        printf '%-28s prepared %s enabled %s  %s\n' "${c##*/}" \
+            "$(cat "$c/clk_prepare_count" 2>/dev/null)" "$(cat "$c/clk_enable_count" 2>/dev/null)" \
+            "$(tr '\n' ' ' < "$c/clk_consumers" 2>/dev/null | tr -s ' ' | cut -c1-150)"
+    done | head -24
     echo "-- interconnect paths with a non-zero vote"
     awk 'NF >= 3 && ($(NF-1) + 0 > 0 || $NF + 0 > 0)' "$D/interconnect/interconnect_summary" 2>/dev/null | head -40
     echo "-- regulators enabled"
@@ -152,7 +167,9 @@ done | sort
 
 devices before
 snapshot before
+mark "blocker snapshot: start"
 blockers before
+mark "blocker snapshot: done"
 
 echo
 echo "Suspend is about to be unmasked for this test ($TARGETS)."
@@ -189,6 +206,36 @@ systemctl daemon-reload
 systemctl enable glymur-suspend-guard.service 2>&1 | tail -1
 systemctl unmask $TARGETS
 
+# Bisect a hang without sleeping: pm_test stops a suspend at a level and
+# resumes after 5 s by itself. "freezer": tasks frozen; "devices": every
+# driver's normal suspend callback has run (the late and noirq phases and
+# the s2idle loop come after). A hang at "devices" is a driver.
+pmtest() {
+    local lvl=$1 t0 rc
+    sect "pm_test: $lvl"
+    grep -qw "$lvl" /sys/power/pm_test 2>/dev/null || { echo "pm_test has no $lvl: $(cat /sys/power/pm_test 2>&1)"; return; }
+    echo "$lvl" > /sys/power/pm_test
+    mark "pm_test $lvl: suspending"
+    t0=$(date +%s)
+    echo mem > /sys/power/state 2>&1; rc=$?
+    echo none > /sys/power/pm_test
+    mark "pm_test $lvl: back"
+    echo "came back after $(( $(date +%s) - t0 )) s, rc=$rc"
+    journalctl -k --no-pager --since "@$t0" -o short-monotonic |
+        grep -E 'PM:|suspend|resum|error|fail|timeout|Unbalanced|returns' | tail -40
+}
+echo "pm_test levels: $(cat /sys/power/pm_test 2>&1)"
+pmtest freezer
+pmtest devices
+if [ "$PMTEST_ONLY" = 1 ]; then
+    systemctl mask $TARGETS
+    systemctl disable glymur-suspend-guard.service >/dev/null 2>&1; rm -f "$GUARD"; systemctl daemon-reload
+    [ -n "$PMDBG" ] && echo "$PMDBG" > /sys/power/pm_debug_messages
+    [ -n "$PMPT" ] && echo "$PMPT" > /sys/power/pm_print_times
+    echo "pm_test only: suspend masked again. log: $OUT"
+    exit 0
+fi
+
 cycle() {
     local name=$1 how=$2 maxwait=${3:-240} t0 before after i s el e0 e1
     local -A c0 a0
@@ -201,7 +248,7 @@ cycle() {
     echo "While it sleeps, look at: the fan, the keyboard backlight, the power LED. You are asked afterwards."
     sync
     journalctl --sync 2>/dev/null
-    logger -t check-suspend "cycle $name: suspending now"
+    mark "cycle $name: suspending now"
     if [ "$name" = rtc ]; then
         rtcwake -d rtc0 -m no -s 40 2>&1 || echo 'No RTC alarm (the RTC has no time source): wake it yourself after 20 s with a key or the touchpad.'
         sleep 2
@@ -218,6 +265,7 @@ cycle() {
     sleep 8
     el=$(( $(date +%s) - t0 ))
     echo "resumed after $el s; suspend successes $before -> $after"
+    mark "cycle $name: resumed after $el s"
     # How deep the SoC went: the AOP counters' growth during the cycle
     # (durations are AOP timer ticks, 19.2 MHz).
     for s in cxsd aosd ddr; do

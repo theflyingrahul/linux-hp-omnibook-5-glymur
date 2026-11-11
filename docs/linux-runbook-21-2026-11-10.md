@@ -17,6 +17,45 @@ The rules of the `-20` runbook still hold (UEFI writes only through
 `check-efivars-write.sh`, no TPM tools, a monitor only at the end of B, the
 audio-session escape). "Ubuntu on SSD: previous kernel" now boots `-20`.
 
+## Continuation, November 11 (still on `-21`, test device tree)
+
+Done on November 10: A1 to A6 and A9 (`docs/runbook-results-21-2026-11-10.md`).
+Then the suspend test froze the laptop. In this order:
+
+1. **The freeze's evidence first,** before anything else touches the
+   journal (suspend is masked again by the script's guard unit):
+
+        journalctl --list-boots | tail -3
+        sudo journalctl -b -1 -k -o short-monotonic --no-pager | tail -200 > ~/freeze-kernel-tail.txt
+        sudo journalctl -b -1 --no-pager | grep check-suspend | tail -5
+        tail -60 "$(ls -t /var/log/glymur/suspend-test-*.txt | head -1)"
+
+   and note what the screen showed: frozen before any cycle (the last
+   section "possible sleep blockers"), or during which cycle.
+2. **Refresh the kit:** `bash install-from-usb.sh` from the stick (the kernel
+   is already `-21`, so it only copies the scripts and installs the GNOME
+   extension). Log out and in once, for the extension.
+3. **Headset again:** `sudo bash ~/check-headset.sh` with the combo headset.
+   New: it routes the RX macro and plays with `aplay` (desktop sound pauses);
+   the jack lines now show values; the microphone part records 2 s from
+   each of 12 inputs while you keep talking, and names the loudest.
+4. **Timeout OSD:** hold F5 for 3 s, twice. GNOME should show "Keyboard
+   backlight: off after 3 min" (or the next value) in its OSD.
+5. **Not yet run from A:** USB (A7), charging and battery-manager
+   notifications (A8), the power button (A10).
+6. **Suspend, in stages:**
+   - `sudo bash ~/check-suspend.sh --pm-test-only`: two simulated suspends
+     (`freezer`, `devices`) that come back after 5 s each, no real sleep.
+     If this freezes, the `devices` stage names a driver: hand back
+     `journalctl -b -1 -k | tail -200`.
+   - If both came back: `sudo bash ~/check-suspend.sh` (the full cycles,
+     with the residency and drain figures, and the 10-minute drain cycle).
+   - If those came back: `sudo bash ~/check-suspend.sh --sync-state`.
+
+   After any freeze: hold the power button, boot normally (suspend is
+   masked again) and hand back the step 1 commands' output.
+7. Then boots B and C as below.
+
 ## Install (on `-20`, now)
 
 From the USB stick's `glymur-tools/kernels/` directory:
