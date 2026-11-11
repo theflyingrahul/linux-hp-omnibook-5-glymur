@@ -25,9 +25,9 @@ kernel `-19`; it was `c7896917e523` (`qcom-next-7.3-rc6-20261023`) for
 to `-17`, `6b4daa845239` for
 `-8` to `-12`, `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to `-4`)
 in order:
-`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0006` and
-`0009`, `glymur-bringup/0001–0004`, then `backports/` (`0001–0002`,
-`0023–0026`, `0030–0037`, `0040–0043`, `0047–0085`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
+`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0006`,
+`0009` and `0010`, `glymur-bringup/0001–0006`, then `backports/` (`0001–0002`,
+`0023–0026`, `0030–0037`, `0040–0043`, `0047–0088`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
 `upstream/qcom-next/0001`; `-7` adds `upstream/qcom-next/0002`; `-8` moves
 to the new base and adds `upstream/qcom-next/0003`; `-9` adds `0004`–`0005`
@@ -118,6 +118,23 @@ tree. `0005` reads the EC's pending event from register `0x00`, where HP's
 `IC10.INTR` reads it (field `CMD5`, no offset), instead of `0x05`; the old
 value left a fan notice unacknowledged and the event line firing about nine
 times a second (`docs/audit-2026-10-22.md`).
+
+Kernel `-23` (2026-11-11, `docs/linux-runbook-23-2026-11-11.md`), same
+base (package sha256 `7b951b11…`); it replaces `-22`, which was never booted. qcom-next fetched again
+before it: still `17bbb4b37bbc`. One change, for the USB-A port's
+SuperSpeed failures (`docs/usb-a-superspeed-2026-11-11.md`):
+
+- `glymur-bringup/0006`, new, not for upstream: an optional
+  `qcom,usb3-lane-a-overrides` property on the QMP combo PHY. It takes
+  `<offset value>` pairs in lane A, written after the lane tables on every
+  power-on, with a read-back logged once. HP's ACPI `\_SB.USB2.PHYC`
+  gives two such writes for the USB-A port: `RX_MODE_RATE_0_1_B1` = `0xa0`
+  and `RX_MODE_RATE2_B1` = `0x90`, where Linux writes `0xa2` and `0x93`.
+  Only the test device tree sets them, so the test and daily entries form an
+  A/B pair on one kernel. Upstream, the values would go into the PHY's
+  tables or a described tuning property; there is no such property for QMP
+  PHYs yet. The nearest precedent is `qcom,hs-drv-slope` on the HS PHY (June
+  2026).
 
 Kernel `-22` (2026-11-11), same base. Upstream on November 11: qcom-next
 still `17bbb4b37bbc` (no 7.4 line yet), the laptops trees unchanged

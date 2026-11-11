@@ -188,6 +188,17 @@ USB-C port, and a mouse in each port in turn.
 - `-8` adds the USB-C repeaters. On USB-A, a mouse is still expected to fail.
 - A charger makes its port a sink and USB device, which is correct.
 
+    sudo bash check-usb.sh --ss-stress [cycles]
+
+From `-23`: the USB-A port's SuperSpeed link, which failed on two boots
+(`docs/usb-a-superspeed-2026-11-11.md`). It never writes to the stick in
+the port. After asking, it unmounts the stick and reads 1 GiB. Then it runs
+the cycles (default 20), alternating a USB device reset with a power cycle
+of the SuperSpeed port, each followed by a 64 MiB read. It counts how
+often the stick came back at SuperSpeed, at high speed, or not at all, and
+the link errors. Run it on the test device tree (HP's PHY values) and on
+the daily one (Linux's) with the same stick, and compare the two.
+
 ### `check-chid.sh`
 
     sudo bash check-chid.sh
@@ -456,7 +467,9 @@ use.
 ### `glymur-boot-report.sh`
 
 Run by `glymur-boot-report.service` 60 s after each boot; it writes
-`/var/log/glymur/boot-*.txt`.
+`/var/log/glymur/boot-*.txt`. From `-23` it also reports the USB-A port's
+link on every boot: whether the device tree has HP's PHY values, the
+kernel's read-back of them, the stick's speed, and a count of link errors.
 
 ### `check-hotkeys.sh`
 

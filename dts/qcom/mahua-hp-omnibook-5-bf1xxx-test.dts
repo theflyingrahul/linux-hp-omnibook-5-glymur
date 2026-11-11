@@ -64,6 +64,10 @@
  * RTC comes from the ADSP's PMIC GLink service (rtc-qcom-glink, no node of
  * its own); suspend, the M31 PHY's SE0 timeout and the xHCI reset on resume
  * are kernel changes. Iris and DisplayPort are in the -test-av device tree.
+ *
+ * In test from kernel -23 (docs/usb-a-superspeed-2026-11-11.md):
+ * - HP's two USB3 PHY writes for the USB-A port (ACPI \_SB.USB2.PHYC),
+ *   through the default-off glymur-bringup/0006 property.
  */
 /dts-v1/;
 
@@ -264,6 +268,16 @@
  * The USB-C repeaters are in the daily device tree from -20. From -19 they
  * get HP's USB rails here: L15B 1.8 V and L7B 3.072 V (vdd18, vdd3).
  */
+/*
+ * USB-A: HP's ACPI PHYC method writes 0xa0 to 0x088e5158 and 0x90 to
+ * 0x088e5178 after the PHY's init sequence; in lane A (0x088e5000) those
+ * are RX_MODE_RATE_0_1_B1 and RX_MODE_RATE2_B1, receiver mode settings
+ * (Linux writes 0xa2 and 0x93). The USB-C PHYs have empty PHYC packages.
+ */
+&usb_2_qmpphy {
+	qcom,usb3-lane-a-overrides = <0x158 0xa0>, <0x178 0x90>;
+};
+
 &smb2370_j_e2_eusb2_repeater {
 	vdd18-supply = <&vreg_l15b_e0_1p8>;
 	vdd3-supply = <&vreg_l7b_e0_3p07>;

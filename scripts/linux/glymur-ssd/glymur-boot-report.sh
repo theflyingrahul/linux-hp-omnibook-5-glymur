@@ -17,11 +17,14 @@ OUT="$DIR/boot-$(date +%Y%m%dT%H%M%S)-$boot_id.txt"
 section() { printf '\n### %s\n' "$1"; }
 run() { printf '$ %s\n' "$*"; "$@" 2>&1; }
 # Personal identifiers stay out of the report (it may end up in the
-# repository): MAC and Bluetooth addresses, UUIDs, USB serial numbers.
+# repository): MAC and Bluetooth addresses, UUIDs, USB serial numbers,
+# the camera's serial-like manufacturer string, user names in paths.
 redact() {
     sed -u -E -e 's/\b([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}\b/xx:xx:xx:xx:xx:xx/g' \
         -e 's/\b[0-9A-Fa-f]{8}(-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}\b/<uuid>/g' \
-        -e 's/(SerialNumber: ).*/\1<serial>/'
+        -e 's/(SerialNumber: ).*/\1<serial>/' \
+        -e 's/(Manufacturer: )[A-Z0-9]{12,}$/\1<id>/' \
+        -e 's#(/home/|/media/)[^/ ]+#\1user#g'
 }
 
 {
@@ -103,6 +106,21 @@ redact() {
         section 'device tree: storage and PCIe'
         run lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINTS
         run lspci -nnk
+        # From -23: the boot stick's SuperSpeed link, once per boot (it
+        # failed on 2 of ~15 boots; docs/usb-a-superspeed-2026-11-11.md).
+        section 'device tree: USB-A (a000000.usb) link'
+        ov=$(find /sys/firmware/devicetree/base -path '*phy@88e1000/qcom,usb3-lane-a-overrides' 2>/dev/null | head -1)
+        printf 'HP PHYC overrides in the device tree: %s\n' "$( [ -n "$ov" ] && od -An -tx4 --endian=big "$ov" | xargs || echo none)"
+        journalctl -k -b --no-pager | grep 'USB3 lane A' | head -4
+        buses=""
+        for u in /sys/bus/usb/devices/usb*; do
+            readlink -f "$u" | grep -q 'a000000\.usb' && buses="$buses ${u##*/usb}"
+        done
+        for b in $buses; do
+            printf 'bus %s (%s Mb/s root): device %s\n' "$b" "$(cat /sys/bus/usb/devices/usb$b/speed 2>/dev/null)" \
+                "$( [ -e /sys/bus/usb/devices/$b-1 ] && echo "$b-1 at $(cat /sys/bus/usb/devices/$b-1/speed) Mb/s" || echo none)"
+            printf '  errors: %s\n' "$(journalctl -k -b --no-pager | grep -cE "usb $b-1: (device not accepting address|Device not responding to setup address|device descriptor read)|usb usb$b-port1: (Cannot enable|attempt power cycle|unable to enumerate)")"
+        done
         section 'device tree: remoteprocs'
         for r in /sys/class/remoteproc/remoteproc*; do
             [ -d "$r" ] && printf '%s %s %s %s\n' "$(basename "$r")" "$(cat "$r/name" 2>/dev/null)" \

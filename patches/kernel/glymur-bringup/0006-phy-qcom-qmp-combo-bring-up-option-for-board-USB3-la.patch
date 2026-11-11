@@ -1,0 +1,92 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Rahul Pon <theflyingrahul@gmail.com>
+Date: Wed, 11 Nov 2026 09:35:34 -0800
+Subject: [PATCH] phy: qcom: qmp-combo: bring-up option for board USB3 lane
+ writes
+
+HP's ACPI tables give the OmniBook 5's USB-A port (USB2, QCOM0F9A) a PHYC
+method with two register writes into its USB3 PHY, for the OS driver to
+apply after the PHY's init sequence: 0xa0 to lane A's
+RX_MODE_RATE_0_1_B1 and 0x90 to its RX_MODE_RATE2_B1, two receiver mode
+settings. Linux writes the reference values instead (0xa2, 0x93), and on
+two boots out of about fifteen the stick in that port did not stay at
+SuperSpeed.
+
+Read such pairs from an optional "qcom,usb3-lane-a-overrides" property
+(offset into lane A, value) and write them after the lane tables on every
+power-on, and log the first application with a read-back. Without the
+property nothing changes.
+
+Bring-up only: the property is a register list, not a binding; the values
+belong in the PHY's tables or in a described tuning property upstream.
+---
+ drivers/phy/qualcomm/phy-qcom-qmp-combo.c | 42 +++++++++++++++++++++++
+ 1 file changed, 42 insertions(+)
+
+diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+index e8f31c7854b9..a2962a343fd4 100644
+--- a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
++++ b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+@@ -2632,6 +2632,8 @@ struct qmp_combo {
+ 	enum typec_orientation orientation;
+ 
+ 	struct typec_mux_dev *mux;
++
++	bool usb3_overrides_reported;
+ };
+ 
+ static void qmp_v3_dp_aux_init(struct qmp_combo *qmp);
+@@ -4322,6 +4324,44 @@ static int qmp_combo_dp_power_off(struct phy *phy)
+ 	return 0;
+ }
+ 
++/*
++ * Bring-up: board register writes for the USB3 lane A, read from
++ * "qcom,usb3-lane-a-overrides" as <offset value> pairs (offsets into the
++ * lane, as in the board's ACPI PHYC method). Applied after the init table
++ * on every power-on.
++ */
++#define QMP_COMBO_MAX_USB3_OVERRIDES	8
++
++static void qmp_combo_usb3_board_overrides(struct qmp_combo *qmp)
++{
++	static const char prop[] = "qcom,usb3-lane-a-overrides";
++	struct device *dev = qmp->dev;
++	u32 ov[2 * QMP_COMBO_MAX_USB3_OVERRIDES];
++	int n, i;
++
++	n = of_property_count_u32_elems(dev->of_node, prop);
++	if (n <= 0)
++		return;
++	if (n % 2 || n > ARRAY_SIZE(ov) ||
++	    of_property_read_u32_array(dev->of_node, prop, ov, n)) {
++		dev_warn_once(dev, "%s: invalid, ignored\n", prop);
++		return;
++	}
++
++	for (i = 0; i < n; i += 2) {
++		if (ov[i] >= 0x1000 || ov[i] & 3 || ov[i + 1] > 0xff) {
++			dev_warn_once(dev, "%s: bad pair %#x %#x, skipped\n",
++				      prop, ov[i], ov[i + 1]);
++			continue;
++		}
++		writel(ov[i + 1], qmp->tx + ov[i]);
++		if (!qmp->usb3_overrides_reported)
++			dev_info(dev, "USB3 lane A %#x = %#x (read back %#x)\n",
++				 ov[i], ov[i + 1], readl(qmp->tx + ov[i]));
++	}
++	qmp->usb3_overrides_reported = true;
++}
++
+ static int qmp_combo_usb_power_on(struct phy *phy)
+ {
+ 	struct qmp_combo *qmp = phy_get_drvdata(phy);
+@@ -4346,6 +4386,8 @@ static int qmp_combo_usb_power_on(struct phy *phy)
+ 	qmp_configure_lane(qmp->dev, rx, cfg->rx_tbl, cfg->rx_tbl_num, 1);
+ 	qmp_configure_lane(qmp->dev, rx2, cfg->rx_tbl, cfg->rx_tbl_num, 2);
+ 
++	qmp_combo_usb3_board_overrides(qmp);
++
+ 	qmp_configure(qmp->dev, pcs, cfg->pcs_tbl, cfg->pcs_tbl_num);
+ 	qmp_configure(qmp->dev, qmp->pcs_misc, cfg->pcs_misc_tbl, cfg->pcs_misc_tbl_num);
+ 
