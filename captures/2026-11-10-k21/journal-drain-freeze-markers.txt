@@ -1,0 +1,77 @@
+Oct 02 23:05:46 glymur systemd[1]: Starting glymur-suspend-guard.service - Mask suspend again after an unfinished check-suspend.sh...
+Oct 02 23:05:46 glymur systemd[1]: Finished glymur-suspend-guard.service - Mask suspend again after an unfinished check-suspend.sh.
+Oct 02 23:05:48 glymur systemd[1]: Starting glymur-suspend-guard.service - Mask suspend again after an unfinished check-suspend.sh...
+Oct 02 23:05:49 glymur systemd[1]: Listening on systemd-logind-varlink.socket - User Login Management Varlink Socket.
+Oct 02 23:05:49 glymur systemd[1]: getty-static.service - getty on tty2-tty6 if dbus and logind are not available skipped, unmet condition check ConditionPathExists=!/usr/bin/dbus-broker
+Oct 02 23:05:49 glymur systemd[1]: Starting systemd-logind.service - User Login Management...
+Oct 02 23:05:49 glymur systemd-logind[1523]: New seat seat0.
+Oct 02 23:05:49 glymur systemd-logind[1523]: Watching system buttons on /dev/input/event0 (gpio-keys)
+Oct 02 23:05:49 glymur systemd-logind[1523]: Watching system buttons on /dev/input/event7 (hid-over-i2c 0416:C300 Keyboard)
+Oct 02 23:05:49 glymur systemd-logind[1523]: Watching system buttons on /dev/input/event6 (hid-over-i2c 04F3:32EF Consumer Control)
+Oct 02 23:05:49 glymur systemd-logind[1523]: Watching system buttons on /dev/input/event8 (pmic_pwrkey)
+Oct 02 23:05:49 glymur systemd[1]: Started systemd-logind.service - User Login Management.
+Oct 02 23:05:50 glymur systemd-logind[1523]: New session 'c1' of user 'gdm-greeter' with class 'greeter' and type 'wayland'.
+Oct 02 23:05:50 glymur systemd-logind[1523]: New session '1' of user 'gdm-greeter' with class 'manager-early' and type 'unspecified'.
+Oct 02 23:05:50 glymur rtkit-daemon[1886]: Handling system-suspend using logind.
+Oct 02 23:05:52 glymur gnome-shell[2007]: Unset XDG_SESSION_ID, getCurrentSessionProxy() called outside a user session. Asking logind directly.
+Oct 02 23:05:52 glymur systemd[1]: Starting upower.service - Daemon for power management...
+Oct 02 23:05:52 glymur gnome-shell[2007]: Unset XDG_SESSION_ID, getCurrentSessionProxy() called outside a user session. Asking logind directly.
+Oct 02 23:05:52 glymur upowerd[2131]: did not recognize type Wireless, please report
+Oct 02 23:05:52 glymur systemd[1]: Started upower.service - Daemon for power management.
+Nov 11 14:39:57 glymur systemd-logind[1523]: New session '2' of user 'user' with class 'user' and type 'wayland'.
+Nov 11 14:39:57 glymur systemd-logind[1523]: New session '3' of user 'user' with class 'manager' and type 'unspecified'.
+Nov 11 14:39:59 glymur gnome-shell[4209]: Unset XDG_SESSION_ID, getCurrentSessionProxy() called outside a user session. Asking logind directly.
+Nov 11 14:40:00 glymur systemd-logind[1523]: Session c1 logged out. Waiting for processes to exit.
+Nov 11 14:40:00 glymur systemd-logind[1523]: Removed session c1.
+Nov 11 14:40:11 glymur systemd-logind[1523]: Removed session 1.
+Nov 11 14:45:33 glymur sudo[8080]: user : TTY=/dev/pts/1 ; PWD=/home/user ; USER=root ; COMMAND=/usr/bin/bash check-suspend.sh
+Nov 11 14:45:34 glymur check-suspend[8475]: blocker snapshot: start
+Nov 11 14:45:34 glymur check-suspend[8619]: blocker snapshot: done
+Nov 11 14:45:37 glymur check-suspend[9055]: pm_test freezer: suspending
+Nov 11 14:45:43 glymur check-suspend[9060]: pm_test freezer: back
+Nov 11 14:45:43 glymur check-suspend[9068]: pm_test devices: suspending
+Nov 11 14:45:52 glymur check-suspend[9078]: pm_test devices: back
+Nov 11 14:45:52 glymur check-suspend[9101]: cycle rtc: suspending now
+Nov 11 14:45:56 glymur systemd-logind[1523]: suspend requested from client PID 9174 ('systemctl') (unit <email>)...
+Nov 11 14:45:56 glymur systemd-logind[1523]: The system will suspend now!
+Nov 11 14:45:57 glymur systemd-sleep[9345]: Successfully froze unit 'user.slice'.
+Nov 11 14:45:57 glymur systemd-sleep[9345]: Performing sleep operation 'suspend'...
+Nov 11 14:46:46 glymur systemd-sleep[9345]: System returned from sleep operation 'suspend'.
+Nov 11 14:46:46 glymur systemd-sleep[9345]: Successfully thawed unit 'user.slice'.
+Nov 11 14:46:46 glymur systemd-logind[1523]: Operation 'suspend' finished.
+Nov 11 14:46:54 glymur check-suspend[9878]: cycle rtc: resumed after 62 s
+Nov 11 14:47:32 glymur check-suspend[11429]: cycle lid: suspending now
+Nov 11 14:47:46 glymur systemd-logind[1523]: Lid closed.
+Nov 11 14:47:46 glymur systemd-logind[1523]: Suspending...
+Nov 11 14:47:47 glymur systemd-sleep[11656]: Successfully froze unit 'user.slice'.
+Nov 11 14:47:47 glymur systemd-sleep[11656]: Performing sleep operation 'suspend'...
+Nov 11 14:48:09 glymur systemd-logind[1523]: Lid opened.
+Nov 11 14:48:09 glymur systemd-sleep[11656]: System returned from sleep operation 'suspend'.
+Nov 11 14:48:09 glymur systemd-sleep[11656]: Successfully thawed unit 'user.slice'.
+Nov 11 14:48:09 glymur systemd-logind[1523]: Operation 'suspend' finished.
+Nov 11 14:48:17 glymur check-suspend[11864]: cycle lid: resumed after 45 s
+Nov 11 14:49:11 glymur check-suspend[12350]: cycle button: suspending now
+Nov 11 14:49:14 glymur systemd-logind[1523]: suspend requested from client PID 12363 ('systemctl') (unit <email>)...
+Nov 11 14:49:14 glymur systemd-logind[1523]: The system will suspend now!
+Nov 11 14:49:15 glymur systemd-sleep[12412]: Successfully froze unit 'user.slice'.
+Nov 11 14:49:15 glymur systemd-sleep[12412]: Performing sleep operation 'suspend'...
+Nov 11 14:49:29 glymur systemd-logind[1523]: Power key pressed short.
+Nov 11 14:49:29 glymur systemd-sleep[12412]: System returned from sleep operation 'suspend'.
+Nov 11 14:49:29 glymur systemd-sleep[12412]: Successfully thawed unit 'user.slice'.
+Nov 11 14:49:29 glymur systemd-logind[1523]: Operation 'suspend' finished.
+Nov 11 14:49:37 glymur check-suspend[12601]: cycle button: resumed after 26 s
+Nov 11 14:50:03 glymur check-suspend[13002]: cycle lid-ac: suspending now
+Nov 11 14:50:41 glymur systemd-logind[1523]: suspend requested from client PID 4164 ('gnome-session-s') (unit <email>)...
+Nov 11 14:50:41 glymur systemd-logind[1523]: The system will suspend now!
+Nov 11 14:50:42 glymur systemd-sleep[14053]: Successfully froze unit 'user.slice'.
+Nov 11 14:50:42 glymur systemd-sleep[14053]: Performing sleep operation 'suspend'...
+Nov 11 14:51:30 glymur systemd-logind[1523]: Power key pressed short.
+Nov 11 14:51:30 glymur systemd-sleep[14053]: System returned from sleep operation 'suspend'.
+Nov 11 14:51:30 glymur systemd-sleep[14053]: Successfully thawed unit 'user.slice'.
+Nov 11 14:51:30 glymur systemd-logind[1523]: Operation 'suspend' finished.
+Nov 11 14:51:38 glymur check-suspend[14172]: cycle lid-ac: resumed after 95 s
+Nov 11 14:52:30 glymur check-suspend[14631]: cycle drain: suspending now
+Nov 11 14:52:36 glymur systemd-logind[1523]: Lid closed.
+Nov 11 14:52:36 glymur systemd-logind[1523]: Suspending...
+Nov 11 14:52:38 glymur systemd-sleep[14716]: Successfully froze unit 'user.slice'.
+Nov 11 14:52:38 glymur systemd-sleep[14716]: Performing sleep operation 'suspend'...

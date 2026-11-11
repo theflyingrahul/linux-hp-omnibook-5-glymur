@@ -45,3 +45,42 @@ Next: `check-suspend.sh` (now installed in `~`, with the pm_test pass) and a
 kernel run with the console visible (`no_console_suspend`, loglevel 8) to
 see the last message; the pm_test levels `platform`/`core` are not available
 for s2idle.
+
+## Suspend, second attempt (November 11, 14:45): four cycles came back, the drain cycle froze
+
+`captures/2026-11-10-k21/suspend-test-20261111T144533.txt`. The pm_test pass
+(`freezer`, `devices`) came back after 6 s and 9 s. Then, in s2idle:
+
+| Cycle | Wake | Result |
+| --- | --- | --- |
+| rtc (no alarm possible) | key on the keyboard (hid-over-i2c IRQ) | resumed; power LED breathing; screen, keyboard and touchpad back |
+| lid (charger unplugged and replugged while asleep) | lid switch (GPIO 92) | resumed |
+| button | power key (`pmic_pwrkey`) | resumed |
+| lid-ac, 2 minutes | power key | resumed (the lid on AC did not wake it, as expected) |
+| drain (10 min, on battery, lid closed) | lid open | **froze** |
+
+So the first-cycle hang of 17:40 on November 10 was the old script (no
+pm_test, no wake plan); with the key as the wake source suspend works. The
+sleep itself is still shallow: `cxsd`, `aosd` and `ddr` stayed at 0 in every
+cycle, and the battery fell at 2.3 to 5.6 W (average about 4.5 W), the
+"only the CPUs slept" state of `-20`.
+
+The drain cycle: the journal's last line is `PM: suspend entry (s2idle)` at
+14:52:38, nothing after. The owner reports no power LED (it breathed in the
+other cycles), no reaction to a press or a long press of the power button,
+and a forced power cycle. The battery was not flat: 57.0 Wh at the start of
+the test, 55.5 Wh (91 %) at the next boot, about 1 Wh over the 10 minutes,
+so the machine kept drawing power (roughly 5 W) until the cycle. The
+difference from the four good cycles is that this one entered suspend on
+battery (charger unplugged before the lid closed), and was left for 10
+minutes. Hypotheses, not tested: the EC (standby entered, LED off) stops
+answering when the machine is on battery in standby for minutes; the EC's
+standby state needs the exit write the retry covers, but the lid-open wake
+came to nothing; or the SoC wedged in a state the power button cannot
+reach (button wake is a PMIC interrupt).
+
+Next: repeat the drain cycle on AC (charger in, lid closed 10 minutes,
+lid open) to separate "long sleep" from "on battery"; with `--console`
+and the console on a text VT; then with `hp_omnibook_5_ec` unloaded
+(no standby message to the EC) if it still freezes. The drain figure
+without a working sleep depth is not yet useful.
