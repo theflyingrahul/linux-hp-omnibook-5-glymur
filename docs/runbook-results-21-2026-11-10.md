@@ -106,3 +106,40 @@ dialog only for a 2 to 3 s hold, not for a quick press, with
 `power-button-action` = `'interactive'`. Kernel side passes; the quick-press
 dialog is a GNOME 51 behaviour not explained yet. (My first interrupt-count
 reads of 0 were mistimed.)
+
+## Keyboard backlight: OSD and the quick-settings slider (November 11)
+
+- Holding F5 for 3 s now shows GNOME's timeout OSD (the shell extension of
+  `e9e2ec4`): confirmed by the owner.
+- GNOME's quick-settings keyboard-brightness slider does nothing. Expected:
+  the `platform::kbd_backlight` LED has no set callback, so the LED core drops
+  the writes. A callback cannot help: the EC has no command that sets the
+  level. `WMID.SBKT` is `HQEX(0x05, n)`, which sets the timeout (so the
+  September 30 "writes accepted, nothing visible" result is explained), the
+  level is only read (`0x05`/`0xff`, event `0x0d`/`0x1d` from F5), and no HP
+  Windows binary mentions a backlight (`docs/keyboard-backlight-2026-10-23.md`).
+  Open for the Windows side: a bus trace of Windows changing the level, or a
+  newer EC firmware. No change made on Linux.
+
+## Power button, raw evidence
+
+`power-key-capture.txt` (press/release of `KEY_POWER`, 0.67 s),
+`pon-registers-0x1300.txt` and `pon-rt-sts-samples.txt` (PMK8350 PON
+interrupt registers: edge, both polarities, bit 7 enabled; real-time status
+bit 7 went high during a hold), `journal-user-session-power-button.txt`
+(logind "Power key pressed short" and gnome-shell `endSessionDialog` for
+every press).
+
+## What is left of the runbook
+
+Boot A, not run or not finished: USB-C ports with the mouse and the USB-C
+stick (A7), headset again with the new script (A6), charging and
+battery-manager notifications (A8, need the adapter), the drain cycle and
+`--sync-state` suspend (adapter), `--console` suspend. Boot B (A/V device
+tree, GRUB edit, WirePlumber file first): B3 `check-efivars-write.sh
+--verify` (the variable from A2 is waiting), B4 boot options without
+`$cmdline`, B5 suspend without `pd_ignore_unused`, B6 `check-video.sh
+--mahua` (first trial: partial-data buffer for AV1 only), B7 external
+displays last (the machine crashed at this step on `-20`). Boot C: the
+daily entry (model without `(test)`, speakers and microphones, F6/F9,
+USB-C stick at SuperSpeed).

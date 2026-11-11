@@ -1,0 +1,173 @@
+Oct 02 23:05:47 glymur systemd[1]: Listening on systemd-logind-varlink.socket - User Login Management Varlink Socket.
+Oct 02 23:05:47 glymur systemd[1]: getty-static.service - getty on tty2-tty6 if dbus and logind are not available skipped, unmet condition check ConditionPathExists=!/usr/bin/dbus-broker
+Oct 02 23:05:47 glymur systemd[1]: Starting systemd-logind.service - User Login Management...
+Oct 02 23:05:47 glymur systemd-logind[1500]: New seat seat0.
+Oct 02 23:05:47 glymur systemd-logind[1500]: Watching system buttons on /dev/input/event0 (gpio-keys)
+Oct 02 23:05:47 glymur systemd-logind[1500]: Watching system buttons on /dev/input/event7 (hid-over-i2c 0416:C300 Keyboard)
+Oct 02 23:05:47 glymur systemd-logind[1500]: Watching system buttons on /dev/input/event6 (hid-over-i2c 04F3:32EF Consumer Control)
+Oct 02 23:05:47 glymur systemd-logind[1500]: Watching system buttons on /dev/input/event9 (pmic_pwrkey)
+Oct 02 23:05:47 glymur systemd[1]: Started systemd-logind.service - User Login Management.
+Oct 02 23:05:48 glymur systemd-logind[1500]: New session 'c1' of user 'gdm-greeter' with class 'greeter' and type 'wayland'.
+Oct 02 23:05:48 glymur systemd-logind[1500]: New session '1' of user 'gdm-greeter' with class 'manager-early' and type 'unspecified'.
+Oct 02 23:05:48 glymur rtkit-daemon[1898]: Handling system-suspend using logind.
+Oct 02 23:05:48 glymur gnome-shell[2001]: Running GNOME Shell (using mutter 51.0) as a Wayland display server
+Oct 02 23:05:49 glymur gnome-shell[2001]: Thread 'KMS thread' will be using high priority scheduling
+Oct 02 23:05:49 glymur gnome-shell[2001]: Added device '/dev/dri/card1' (msm) using atomic mode setting.
+Oct 02 23:05:49 glymur gnome-shell[2001]: Created gbm renderer for '/dev/dri/card1'
+Oct 02 23:05:49 glymur gnome-shell[2001]: GPU /dev/dri/card1 selected primary from builtin panel presence
+Oct 02 23:05:49 glymur gnome-shell[2001]: Obtained a high priority EGL context
+Oct 02 23:05:49 glymur gnome-shell[2001]: Using public X11 display :1024, (using unix:/tmp/.X11-unix/X1025 for managed services)
+Oct 02 23:05:49 glymur gnome-shell[2001]: Using Wayland display name 'wayland-0'
+Oct 02 23:05:50 glymur gnome-shell[2001]: Unset XDG_SESSION_ID, getCurrentSessionProxy() called outside a user session. Asking logind directly.
+Oct 02 23:05:50 glymur gnome-shell[2001]: Registering session with GDM
+Oct 02 23:05:50 glymur gnome-shell[2001]: Unset XDG_SESSION_ID, getCurrentSessionProxy() called outside a user session. Asking logind directly.
+Oct 02 23:05:50 glymur gnome-shell[2001]: Will monitor session c1
+Oct 02 23:05:50 glymur gnome-shell[2001]: Will monitor session c1
+Oct 02 23:05:50 glymur gnome-shell[2001]: Error looking up permission: GDBus.Error:org.freedesktop.portal.Error.NotFound: No entry for geolocation
+Oct 02 23:05:50 glymur gsd-media-keys[2131]: Failed to grab accelerator for keybinding settings:hibernate
+Oct 02 23:05:50 glymur gsd-media-keys[2131]: Failed to grab accelerator for keybinding settings:playback-repeat
+Oct 02 23:05:51 glymur gnome-shell[2001]: Registering display with GDM
+Oct 02 23:05:57 glymur gnome-shell[2001]: Failed to start gdm-authd verification for user: GDBus.Error:org.gnome.DisplayManager.SessionWorker.Error.ServiceUnavailable: GDBus.Error:org.gnome.DisplayManager.SessionWorker.Error.ServiceUnavailable: PAM service gdm-authd was not found
+Oct 02 23:05:57 glymur gnome-shell[2001]: Failed to start gdm-authd verification for user: GDBus.Error:org.gnome.DisplayManager.SessionWorker.Error.ServiceUnavailable: GDBus.Error:org.gnome.DisplayManager.SessionWorker.Error.ServiceUnavailable: PAM service gdm-authd was not found
+Oct 02 23:06:00 glymur systemd-logind[1500]: New session '2' of user 'user' with class 'user' and type 'wayland'.
+Oct 02 23:06:00 glymur systemd-logind[1500]: New session '3' of user 'user' with class 'manager' and type 'unspecified'.
+Oct 02 23:06:00 glymur gsd-media-keys[2131]: Unable to get default sink
+Oct 02 23:06:00 glymur gsd-media-keys[2131]: Unable to get default source
+Oct 02 23:06:01 glymur gnome-shell[4210]: Running GNOME Shell (using mutter 51.0) as a Wayland display server
+Oct 02 23:06:01 glymur gnome-shell[4210]: Thread 'KMS thread' will be using high priority scheduling
+Oct 02 23:06:01 glymur gnome-shell[4210]: Added device '/dev/dri/card1' (msm) using atomic mode setting.
+Oct 02 23:06:01 glymur gnome-shell[4210]: Created gbm renderer for '/dev/dri/card1'
+Oct 02 23:06:01 glymur gnome-shell[4210]: GPU /dev/dri/card1 selected primary from builtin panel presence
+Oct 02 23:06:01 glymur gnome-shell[4210]: Obtained a high priority EGL context
+Oct 02 23:06:01 glymur gnome-shell[4210]: Using public X11 display :0, (using unix:/tmp/.X11-unix/X1 for managed services)
+Oct 02 23:06:01 glymur gnome-shell[4210]: Using Wayland display name 'wayland-0'
+Oct 02 23:06:01 glymur gnome-shell[4210]: Unset XDG_SESSION_ID, getCurrentSessionProxy() called outside a user session. Asking logind directly.
+Oct 02 23:06:01 glymur gnome-shell[4210]: Registering session with GDM
+Oct 02 23:06:02 glymur gnome-shell[4210]: Will monitor session 2
+Oct 02 23:06:02 glymur gnome-shell[4210]: Error looking up permission: GDBus.Error:org.freedesktop.portal.Error.NotFound: No entry for geolocation
+Oct 02 23:06:02 glymur gsd-media-keys[4290]: Failed to grab accelerator for keybinding settings:hibernate
+Oct 02 23:06:02 glymur gsd-media-keys[4290]: Failed to grab accelerator for keybinding settings:playback-repeat
+Oct 02 23:06:02 glymur gnome-shell[4210]: GNOME Shell started at Fri Oct 02 2026 23:06:01 GMT+0530 (India Standard Time)
+Oct 02 23:06:02 glymur gnome-shell[4210]: Registering display with GDM
+Oct 02 23:06:02 glymur gnome-shell[2001]: Shutting down GNOME Shell
+Oct 02 23:06:02 glymur gnome-shell[4210]: Launching DING process
+Oct 02 23:06:02 glymur gnome-shell[2001]: GTask 0xabe7fc79a790 (source object: 0xabe7fb3885a0, source tag: (nil)) finalized without ever returning (using g_task_return_*()). This potentially indicates a bug in the program.
+Oct 02 23:06:03 glymur systemd-logind[1500]: Session c1 logged out. Waiting for processes to exit.
+Oct 02 23:06:03 glymur systemd-logind[1500]: Removed session c1.
+Oct 02 23:06:03 glymur gnome-shell[4210]: DING: Gjs-Console-Message: 23:06:03.181: Primary screen is 0
+Oct 02 23:06:03 glymur gnome-shell[4210]: DING: Gjs-Console-Message: 23:06:03.181: Creating desktop index 0
+Oct 02 23:06:03 glymur gnome-shell[4210]: DING: ** Message: 23:06:03.191: Connecting to org.freedesktop.Tracker3.Miner.Files
+Oct 02 23:06:03 glymur gnome-shell[4210]: DING: GNOME nautilus 51.0.1
+Oct 02 23:06:03 glymur gnome-shell[4210]: DING: DBus interface for Nautilus (org.gnome.Nautilus.FileOperations2) is now available.
+Oct 02 23:06:03 glymur gnome-shell[4210]: DING: DBus interface for Nautilus (org.freedesktop.FileManager1) is now available.
+Oct 02 23:06:03 glymur gnome-shell[4210]: DING: DBus interface for Gvfs daemon (org.gtk.vfs.Metadata) is now available.
+Oct 02 23:06:03 glymur gnome-shell[4210]: DING: DBus interface for Switcheroo control (net.hadess.SwitcherooControl) is now available.
+Oct 02 23:06:03 glymur gnome-shell[4210]: DING: DBus interface for File-roller (org.gnome.ArchiveManager1) is now available.
+Oct 02 23:06:03 glymur gnome-shell[4210]: Received notification for window. 0 notifications remaining.
+Oct 02 23:06:06 glymur systemd[3834]: Started app-gnome-xdg\x2dterminal\x2dexec-5854.scope - Application launched by gsd-media-keys.
+Nov 11 15:01:56 glymur systemd-logind[1500]: Removed session 1.
+Nov 11 15:02:39 glymur gnome-shell[4210]: libinput error: event5  - hid-over-i2c 04F3:32EF Touchpad: kernel bug: Touch jump detected and discarded.
+Nov 11 15:02:39 glymur gnome-shell[4210]: See https://wayland.freedesktop.org/libinput/doc/1.31.3/touchpad-jumping-cursors.html for details
+Nov 11 15:05:19 glymur gnome-shell[4210]: libinput error: event5  - hid-over-i2c 04F3:32EF Touchpad: kernel bug: Touch jump detected and discarded.
+Nov 11 15:05:19 glymur gnome-shell[4210]: See https://wayland.freedesktop.org/libinput/doc/1.31.3/touchpad-jumping-cursors.html for details
+Nov 11 15:05:19 glymur gnome-shell[4210]: libinput error: event5  - hid-over-i2c 04F3:32EF Touchpad: kernel bug: Touch jump detected and discarded.
+Nov 11 15:05:19 glymur gnome-shell[4210]: See https://wayland.freedesktop.org/libinput/doc/1.31.3/touchpad-jumping-cursors.html for details
+Nov 11 15:05:19 glymur gnome-shell[4210]: libinput error: event5  - hid-over-i2c 04F3:32EF Touchpad: kernel bug: Touch jump detected and discarded.
+Nov 11 15:05:19 glymur gnome-shell[4210]: See https://wayland.freedesktop.org/libinput/doc/1.31.3/touchpad-jumping-cursors.html for details
+Nov 11 15:05:19 glymur gnome-shell[4210]: libinput error: event5  - hid-over-i2c 04F3:32EF Touchpad: kernel bug: Touch jump detected and discarded.
+Nov 11 15:05:19 glymur gnome-shell[4210]: See https://wayland.freedesktop.org/libinput/doc/1.31.3/touchpad-jumping-cursors.html for details
+Nov 11 15:05:19 glymur gnome-shell[4210]: libinput error: event5  - hid-over-i2c 04F3:32EF Touchpad: WARNING: log rate limit exceeded (5 msgs per 24h). Discarding future messages.
+Nov 11 15:14:33 glymur systemd-logind[1500]: Power key pressed short.
+Nov 11 15:14:33 glymur gnome-shell[4210]: endSessionDialog: No XDG_SESSION_ID, fetched from logind: 2
+Nov 11 15:14:49 glymur systemd-logind[1500]: Power key pressed short.
+Nov 11 15:14:50 glymur gnome-shell[4210]: endSessionDialog: No XDG_SESSION_ID, fetched from logind: 2
+Nov 11 15:15:22 glymur systemd-logind[1500]: Power key pressed short.
+Nov 11 15:15:22 glymur gnome-shell[4210]: endSessionDialog: No XDG_SESSION_ID, fetched from logind: 2
+Nov 11 15:16:02 glymur systemd-logind[1500]: Power key pressed short.
+Nov 11 15:16:02 glymur gnome-shell[4210]: endSessionDialog: No XDG_SESSION_ID, fetched from logind: 2
+Nov 11 15:17:25 glymur systemd-logind[1500]: Power key pressed short.
+Nov 11 15:17:25 glymur gnome-shell[4210]: endSessionDialog: No XDG_SESSION_ID, fetched from logind: 2
+Nov 11 15:17:29 glymur systemd-logind[1500]: Power key pressed short.
+Nov 11 15:17:29 glymur gnome-shell[4210]: endSessionDialog: No XDG_SESSION_ID, fetched from logind: 2
+Nov 11 15:17:57 glymur gnome-shell[4210]: Owner of volume monitor org.gtk.vfs.AfcVolumeMonitor disconnected from the bus; removing drives/volumes/mounts
+Nov 11 15:17:57 glymur gnome-shell[4210]: Owner of volume monitor org.gtk.vfs.GoaVolumeMonitor disconnected from the bus; removing drives/volumes/mounts
+Nov 11 15:17:57 glymur gnome-shell[4210]: Owner of volume monitor org.gtk.vfs.GPhoto2VolumeMonitor disconnected from the bus; removing drives/volumes/mounts
+Nov 11 15:17:57 glymur gnome-shell[4210]: Owner of volume monitor org.gtk.vfs.MTPVolumeMonitor disconnected from the bus; removing drives/volumes/mounts
+Nov 11 15:17:57 glymur gnome-shell[4210]: Owner of volume monitor org.gtk.vfs.UDisks2VolumeMonitor disconnected from the bus; removing drives/volumes/mounts
+Nov 11 15:17:57 glymur gnome-shell[4210]: Launching DING process
+Nov 11 15:17:57 glymur gnome-shell[4210]: Shutting down GNOME Shell
+Nov 11 15:17:57 glymur systemd-logind[1500]: Session 2 logged out. Waiting for processes to exit.
+Nov 11 15:17:57 glymur systemd-logind[1500]: Removed session 2.
+Nov 11 15:17:57 glymur systemd-logind[1500]: New session 'c2' of user 'gdm-greeter' with class 'greeter' and type 'wayland'.
+Nov 11 15:17:57 glymur systemd-logind[1500]: New session '5' of user 'gdm-greeter' with class 'manager-early' and type 'unspecified'.
+Nov 11 15:17:58 glymur gnome-shell[12631]: Running GNOME Shell (using mutter 51.0) as a Wayland display server
+Nov 11 15:17:58 glymur gnome-shell[12631]: Thread 'KMS thread' will be using high priority scheduling
+Nov 11 15:17:58 glymur gnome-shell[12631]: Added device '/dev/dri/card1' (msm) using atomic mode setting.
+Nov 11 15:17:58 glymur gnome-shell[12631]: Created gbm renderer for '/dev/dri/card1'
+Nov 11 15:17:58 glymur gnome-shell[12631]: GPU /dev/dri/card1 selected primary from builtin panel presence
+Nov 11 15:17:58 glymur gnome-shell[12631]: Obtained a high priority EGL context
+Nov 11 15:17:58 glymur gnome-shell[12631]: Using public X11 display :1024, (using unix:/tmp/.X11-unix/X1025 for managed services)
+Nov 11 15:17:58 glymur gnome-shell[12631]: Using Wayland display name 'wayland-0'
+Nov 11 15:17:59 glymur gnome-shell[12631]: Unset XDG_SESSION_ID, getCurrentSessionProxy() called outside a user session. Asking logind directly.
+Nov 11 15:17:59 glymur gnome-shell[12631]: Registering session with GDM
+Nov 11 15:17:59 glymur gnome-shell[12631]: Unset XDG_SESSION_ID, getCurrentSessionProxy() called outside a user session. Asking logind directly.
+Nov 11 15:17:59 glymur gsd-media-keys[12708]: Failed to grab accelerator for keybinding settings:hibernate
+Nov 11 15:17:59 glymur gsd-media-keys[12708]: Failed to grab accelerator for keybinding settings:playback-repeat
+Nov 11 15:17:59 glymur gnome-shell[12631]: Error looking up permission: GDBus.Error:org.freedesktop.portal.Error.NotFound: No entry for geolocation
+Nov 11 15:17:59 glymur gnome-shell[12631]: Will monitor session c2
+Nov 11 15:17:59 glymur gnome-shell[12631]: Will monitor session c2
+Nov 11 15:17:59 glymur gnome-shell[12631]: Registering display with GDM
+Nov 11 15:18:00 glymur gnome-shell[12631]: Failed to start gdm-authd verification for user: GDBus.Error:org.gnome.DisplayManager.SessionWorker.Error.ServiceUnavailable: GDBus.Error:org.gnome.DisplayManager.SessionWorker.Error.ServiceUnavailable: PAM service gdm-authd was not found
+Nov 11 15:18:00 glymur gnome-shell[12631]: Failed to start gdm-authd verification for user: GDBus.Error:org.gnome.DisplayManager.SessionWorker.Error.ServiceUnavailable: GDBus.Error:org.gnome.DisplayManager.SessionWorker.Error.ServiceUnavailable: PAM service gdm-authd was not found
+Nov 11 15:18:03 glymur systemd-logind[1500]: New session '6' of user 'user' with class 'user' and type 'wayland'.
+Nov 11 15:18:03 glymur gsd-media-keys[12708]: Unable to get default sink
+Nov 11 15:18:03 glymur gsd-media-keys[12708]: Unable to get default source
+Nov 11 15:18:03 glymur gnome-shell[14264]: Running GNOME Shell (using mutter 51.0) as a Wayland display server
+Nov 11 15:18:03 glymur gnome-shell[14264]: Thread 'KMS thread' will be using high priority scheduling
+Nov 11 15:18:03 glymur gnome-shell[14264]: Added device '/dev/dri/card1' (msm) using atomic mode setting.
+Nov 11 15:18:03 glymur gnome-shell[14264]: Created gbm renderer for '/dev/dri/card1'
+Nov 11 15:18:03 glymur gnome-shell[14264]: GPU /dev/dri/card1 selected primary from builtin panel presence
+Nov 11 15:18:03 glymur gnome-shell[14264]: Obtained a high priority EGL context
+Nov 11 15:18:04 glymur gnome-shell[14264]: Using public X11 display :0, (using unix:/tmp/.X11-unix/X1 for managed services)
+Nov 11 15:18:04 glymur gnome-shell[14264]: Using Wayland display name 'wayland-0'
+Nov 11 15:18:04 glymur gnome-shell[14264]: Unset XDG_SESSION_ID, getCurrentSessionProxy() called outside a user session. Asking logind directly.
+Nov 11 15:18:04 glymur gnome-shell[14264]: Registering session with GDM
+Nov 11 15:18:04 glymur gnome-shell[14264]: Will monitor session 6
+Nov 11 15:18:04 glymur gnome-shell[14264]: Error looking up permission: GDBus.Error:org.freedesktop.portal.Error.NotFound: No entry for geolocation
+Nov 11 15:18:04 glymur gsd-media-keys[14349]: Failed to grab accelerator for keybinding settings:playback-repeat
+Nov 11 15:18:04 glymur gsd-media-keys[14349]: Failed to grab accelerator for keybinding settings:hibernate
+Nov 11 15:18:05 glymur gnome-shell[14264]: GNOME Shell started at Wed Nov 11 2026 15:18:04 GMT+0530 (India Standard Time)
+Nov 11 15:18:05 glymur gnome-shell[14264]: Registering display with GDM
+Nov 11 15:18:05 glymur gnome-shell[14264]: Launching DING process
+Nov 11 15:18:05 glymur gnome-shell[12631]: Shutting down GNOME Shell
+Nov 11 15:18:05 glymur gnome-shell[12631]: GTask 0xcaa1492f9a90 (source object: 0xcaa147f1d3b0, source tag: (nil)) finalized without ever returning (using g_task_return_*()). This potentially indicates a bug in the program.
+Nov 11 15:18:05 glymur systemd-logind[1500]: Session c2 logged out. Waiting for processes to exit.
+Nov 11 15:18:05 glymur systemd-logind[1500]: Removed session c2.
+Nov 11 15:18:05 glymur gnome-shell[14264]: DING: Gjs-Console-Message: 15:18:05.588: Primary screen is 0
+Nov 11 15:18:05 glymur gnome-shell[14264]: DING: Gjs-Console-Message: 15:18:05.588: Creating desktop index 0
+Nov 11 15:18:05 glymur gnome-shell[14264]: DING: ** Message: 15:18:05.618: Connecting to org.freedesktop.Tracker3.Miner.Files
+Nov 11 15:18:05 glymur gnome-shell[14264]: DING: GNOME nautilus 51.0.1
+Nov 11 15:18:05 glymur gnome-shell[14264]: DING: Gjs-Console-Message: 15:18:05.624: Primary screen is 0
+Nov 11 15:18:05 glymur gnome-shell[14264]: DING: Gjs-Console-Message: 15:18:05.627: Creating desktop index 0
+Nov 11 15:18:05 glymur gnome-shell[14264]: DING: DBus interface for Nautilus (org.gnome.Nautilus.FileOperations2) is now available.
+Nov 11 15:18:05 glymur gnome-shell[14264]: DING: DBus interface for Nautilus (org.freedesktop.FileManager1) is now available.
+Nov 11 15:18:05 glymur gnome-shell[14264]: DING: DBus interface for Gvfs daemon (org.gtk.vfs.Metadata) is now available.
+Nov 11 15:18:05 glymur gnome-shell[14264]: DING: DBus interface for Switcheroo control (net.hadess.SwitcherooControl) is now available.
+Nov 11 15:18:05 glymur gnome-shell[14264]: DING: Gjs-Console-Message: 15:18:05.632: Primary screen is 0
+Nov 11 15:18:05 glymur gnome-shell[14264]: DING: Gjs-Console-Message: 15:18:05.634: Creating desktop index 0
+Nov 11 15:18:05 glymur gnome-shell[14264]: Received notification for window. 0 notifications remaining.
+Nov 11 15:18:05 glymur gnome-shell[14264]: DING: DBus interface for File-roller (org.gnome.ArchiveManager1) is now available.
+Nov 11 15:18:15 glymur systemd-logind[1500]: Removed session 5.
+Nov 11 15:18:18 glymur gnome-shell[14264]: libinput error: event5  - hid-over-i2c 04F3:32EF Touchpad: kernel bug: Touch jump detected and discarded.
+Nov 11 15:18:18 glymur gnome-shell[14264]: See https://wayland.freedesktop.org/libinput/doc/1.31.3/touchpad-jumping-cursors.html for details
+Nov 11 15:18:24 glymur gnome-shell[14264]: libinput error: event5  - hid-over-i2c 04F3:32EF Touchpad: kernel bug: Touch jump detected and discarded.
+Nov 11 15:18:24 glymur gnome-shell[14264]: See https://wayland.freedesktop.org/libinput/doc/1.31.3/touchpad-jumping-cursors.html for details
+Nov 11 15:18:26 glymur gnome-shell[14264]: libinput error: event5  - hid-over-i2c 04F3:32EF Touchpad: kernel bug: Touch jump detected and discarded.
+Nov 11 15:18:26 glymur gnome-shell[14264]: See https://wayland.freedesktop.org/libinput/doc/1.31.3/touchpad-jumping-cursors.html for details
+Nov 11 15:18:29 glymur gnome-shell[14264]: Error calling StartServiceByName for org.freedesktop.GeoClue2: Timeout was reached
+Nov 11 15:18:36 glymur gnome-shell[14264]: libinput error: event5  - hid-over-i2c 04F3:32EF Touchpad: kernel bug: Touch jump detected and discarded.
+Nov 11 15:18:36 glymur gnome-shell[14264]: See https://wayland.freedesktop.org/libinput/doc/1.31.3/touchpad-jumping-cursors.html for details
+Nov 11 15:18:36 glymur gnome-shell[14264]: libinput error: event5  - hid-over-i2c 04F3:32EF Touchpad: kernel bug: Touch jump detected and discarded.
+Nov 11 15:18:36 glymur gnome-shell[14264]: See https://wayland.freedesktop.org/libinput/doc/1.31.3/touchpad-jumping-cursors.html for details
+Nov 11 15:18:36 glymur gnome-shell[14264]: libinput error: event5  - hid-over-i2c 04F3:32EF Touchpad: WARNING: log rate limit exceeded (5 msgs per 24h). Discarding future messages.
+Nov 11 15:18:43 glymur systemd[3834]: Started app-gnome-xdg\x2dterminal\x2dexec-16604.scope - Application launched by gsd-media-keys.
