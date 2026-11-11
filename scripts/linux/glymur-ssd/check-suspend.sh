@@ -13,6 +13,7 @@ set -u
 # only if you say so at the end, after every cycle resumed; if a resume
 # hangs and the laptop is powered off, a one-shot unit masks it again at
 # the next boot.
+# --console: see above (no_console_suspend, loglevel 8).
 # --sync-state first releases the providers still waiting for sync_state
 # (the clocks held by the unbound GPU management unit), whose boot votes
 # otherwise keep DDR and the SoC rails up in suspend.
@@ -21,10 +22,12 @@ set -u
 SYNC=0
 DEEP=0
 PMTEST_ONLY=0
+CONSOLE=0
 for a in "$@"; do
     [ "$a" = --sync-state ] && SYNC=1
     [ "$a" = --deep ] && DEEP=1
     [ "$a" = --pm-test-only ] && PMTEST_ONLY=1
+    [ "$a" = --console ] && CONSOLE=1
 done
 OUT="/var/log/glymur/suspend-test-$(date +%Y%m%dT%H%M%S).txt"
 mkdir -p /var/log/glymur
@@ -183,6 +186,15 @@ fi
 # Log every device's suspend and resume step, so a hang names its device.
 PMDBG=$(cat /sys/power/pm_debug_messages 2>/dev/null)
 PMPT=$(cat /sys/power/pm_print_times 2>/dev/null)
+# --console: keep the text console alive during suspend and print every
+# message, so a freeze leaves its last line on the screen (switch to a VT
+# with Ctrl+Alt+F3 before the cycle).
+CSUSP=$(cat /sys/module/printk/parameters/console_suspend 2>/dev/null)
+PRK=$(cat /proc/sys/kernel/printk 2>/dev/null)
+if [ "$CONSOLE" = 1 ]; then
+    echo N > /sys/module/printk/parameters/console_suspend
+    echo 8 > /proc/sys/kernel/printk
+fi
 echo 1 > /sys/power/pm_debug_messages 2>/dev/null
 echo 1 > /sys/power/pm_print_times 2>/dev/null
 # If a resume hangs and the laptop is powered off, the next boot masks
@@ -232,6 +244,7 @@ if [ "$PMTEST_ONLY" = 1 ]; then
     systemctl disable glymur-suspend-guard.service >/dev/null 2>&1; rm -f "$GUARD"; systemctl daemon-reload
     [ -n "$PMDBG" ] && echo "$PMDBG" > /sys/power/pm_debug_messages
     [ -n "$PMPT" ] && echo "$PMPT" > /sys/power/pm_print_times
+    [ -n "$CSUSP" ] && echo "$CSUSP" > /sys/module/printk/parameters/console_suspend; [ -n "$PRK" ] && echo "$PRK" > /proc/sys/kernel/printk
     echo "pm_test only: suspend masked again. log: $OUT"
     exit 0
 fi
@@ -319,6 +332,7 @@ rm -f "$GUARD"
 systemctl daemon-reload
 [ -n "$PMDBG" ] && echo "$PMDBG" > /sys/power/pm_debug_messages
 [ -n "$PMPT" ] && echo "$PMPT" > /sys/power/pm_print_times
+[ -n "$CSUSP" ] && echo "$CSUSP" > /sys/module/printk/parameters/console_suspend; [ -n "$PRK" ] && echo "$PRK" > /proc/sys/kernel/printk
 [ -n "${MEM_SLEEP_WAS:-}" ] && echo "$MEM_SLEEP_WAS" > /sys/power/mem_sleep 2>/dev/null
 KEEP=n
 if [ "$ok" = 1 ]; then ask 'Keep suspend enabled (lid close suspends from now on)? (y / n)'; KEEP=$REPLY; fi
