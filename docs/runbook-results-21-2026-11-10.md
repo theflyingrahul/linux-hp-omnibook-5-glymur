@@ -23,3 +23,25 @@ Run so far: A1 to A6, A9. Not yet run: USB, charging, power button, suspend
 - RTC: the PMIC GLink RTC gets no time from the firmware; see
   the earlier RTC analysis (commit `cf9d0ef`).
 - The rest of boot A, then B and C.
+
+## Suspend froze on the first cycle (boot A, 17:40 on November 10)
+
+The owner ran `check-suspend.sh` (the older copy, without the pm_test pass).
+The first cycle, "rtc", had no RTC alarm (the RTC has no time source), so it
+was to be woken with a key. The last kernel line of the boot is
+`PM: suspend entry (s2idle)` at 17:40:42; nothing after it reached the
+journal, and the owner had to power off. `mem_sleep` was set to s2idle, so
+this is not the PSCI "deep" path that hung on `-20`.
+
+A pm_test pass on the next boot (`freezer`, then `devices`, after the
+November 11 reboot; `captures/2026-11-10-k21/journal-kernel-pmtest.txt`)
+came back by itself after 6 s and 8 s: every driver's suspend and resume
+callback returned 0, including the EC, the audio codecs, USB and Wi-Fi. No
+"cannot tell the EC", `Unbalanced` or slow callbacks. So the hang is after
+the device callbacks: the late/noirq phase, the s2idle idle loop, or the
+wake (no wake source configured with the RTC dead).
+
+Next: `check-suspend.sh` (now installed in `~`, with the pm_test pass) and a
+kernel run with the console visible (`no_console_suspend`, loglevel 8) to
+see the last message; the pm_test levels `platform`/`core` are not available
+for s2idle.

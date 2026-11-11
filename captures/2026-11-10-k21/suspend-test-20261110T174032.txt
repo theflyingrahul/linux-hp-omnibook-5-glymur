@@ -1,0 +1,255 @@
+
+==== system
+7.3.0-glymur-21
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+BOOT_IMAGE=(hd1,gpt5)/boot/vmlinuz-glymur root=… rootfstype=ext4 ro rootwait clk_ignore_unused pd_ignore_unused arm64.nopauth quiet splash log_buf_len=16M console=tty0 loglevel=4
+EC event logging on
+mem_sleep: s2idle [deep]   state: freeze mem
+targets: masked masked
+
+==== sync_state still pending at boot
+gcc-glymur 100000.clock-controller: sync_state() pending due to 3d6c000.gmu
+gpucc-glymur 3d90000.clock-controller: sync_state() pending due to 3d6c000.gmu
+gxclkctl-kaanapali 3d64000.clock-controller: sync_state() pending due to 3d6c000.gmu
+
+==== power domains still on
+disp_cc_mdss_core_int2_gdsc     on                              0
+disp_cc_mdss_core_gdsc          on                              0
+gpu_cc_cx_gdsc                  on                              0
+gcc_usb_2_phy_gdsc              on                              0
+gcc_usb_1_phy_gdsc              on                              0
+gcc_usb_0_phy_gdsc              on                              0
+gcc_usb3_mp_ss1_phy_gdsc        on                              0
+gcc_usb3_mp_ss0_phy_gdsc        on                              0
+gcc_usb30_tert_gdsc             on                              256
+gcc_usb30_sec_gdsc              on                              256
+gcc_usb30_prim_gdsc             on                              256
+gcc_usb30_mp_gdsc               on                              0
+gcc_usb20_prim_gdsc             on                              64
+gcc_pcie_5_phy_gdsc             on                              0
+gcc_pcie_5_gdsc                 on                              64
+gcc_pcie_4_phy_gdsc             on                              0
+gcc_pcie_4_gdsc                 on                              64
+mx                              on                              64
+mmcx                            on                              64
+cx                              on                              256
+power-domain-system             on                              0
+power-domain-cpu-cluster1       on                              0
+power-domain-cpu-cluster0       on                              0
+power-domain-cpu11              on                              0
+power-domain-cpu10              on                              0
+power-domain-cpu9               on                              0
+power-domain-cpu8               on                              0
+power-domain-cpu7               on                              0
+power-domain-cpu6               on                              0
+power-domain-cpu5               on                              0
+power-domain-cpu4               on                              0
+power-domain-cpu3               on                              0
+power-domain-cpu2               on                              0
+power-domain-cpu1               on                              0
+
+==== wakeup sources enabled
+auxiliary/devices/pmic_glink.rtc-glink.0
+auxiliary/devices/pmic_glink.ucsi.0
+i2c/devices/0-003a
+i2c/devices/4-0015
+mhi/devices/mhi0
+pci/devices/0004:00:00.0
+pci/devices/0005:00:00.0
+platform/devices/32300000.remoteproc
+platform/devices/6800000.remoteproc
+platform/devices/alarmtimer.4.auto
+platform/devices/c22c000.thermal-sensor
+platform/devices/c22d000.thermal-sensor
+platform/devices/c22e000.thermal-sensor
+platform/devices/c22f000.thermal-sensor
+platform/devices/c230000.thermal-sensor
+platform/devices/c231000.thermal-sensor
+platform/devices/c426000.spmi:pmic@0:pon@1300:pwrkey
+platform/devices/d00000.remoteproc
+platform/devices/gpio-keys
+
+==== devices (before)
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+    |__ Port 001: Dev 002, If 0, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 1, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 2, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 3, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 4, Class=Application Specific Interface, Driver=[none], 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 003.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+    |__ Port 001: Dev 002, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
+wlo1             UP             xx:xx:xx:xx:xx:xx <BROADCAST,MULTICAST,UP,LOWER_UP> 
+		type P2P-device
+	Interface wlo1
+		type managed
+		channel 37 (6135 MHz), width: 160 MHz, center1: 6185 MHz
+network: connected:full
+card 0: MAHUAHPOmniBook [MAHUA-HP-OmniBook-5-16-bf1xxx], device 0: MultiMedia1 Playback (*) []
+qcom-battmgr-ac:  
+qcom-battmgr-bat: Discharging 28
+qcom-battmgr-usb:  
+qcom-battmgr-wls:  
+ucsi-source-psy-pmic_glink.ucsi.01: Not charging 
+ucsi-source-psy-pmic_glink.ucsi.02: Not charging 
+card1-Writeback-1: unknown disabled
+card1-eDP-1: connected enabled
+EC fan 0 rpm, temp1 38000
+/dev/rtc
+/dev/rtc0
+
+==== sleep counters (before)
+adsp: Count: 6 Last Entered At: 26754078531 Last Exited At: 26754081776 Accumulated Duration: 136037125 
+adsp_island: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+aosd: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+apss: Count: 28162 Last Entered At: 26781700705 Last Exited At: 26781712153 Accumulated Duration: 7414339374 
+cdsp1: 
+cdsp_nsp: Count: 15 Last Entered At: 10284432855 Last Exited At: 10284387050 Accumulated Duration: 25815073470 
+cdsp_nsp_1: 
+cdsp_nsp_2: 
+cdsp_nsp_3: 
+cxsd: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+dcp: 
+ddr: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+ddr_stats: DDR LPM Stat Name:0xd4	count:0	Duration (ticks):0 DDR LPM Stat Name:0xd3	count:0	Duration (ticks):0 DDR LPM Stat Name:0x11	count:0	Duration (ticks):0 DDR LPM Stat Name:0xd0	count:0	Duration (ticks):0 DDR Freq 200Mhz:	CP IDX:1	count:1	Duration (ticks):0 DDR Freq 547Mhz:	CP IDX:2	count:1	Duration (ticks):0 DDR Freq 1353Mhz:	CP IDX:3	count:1	Duration (ticks):0 DDR Freq 1555Mhz:	CP IDX:4	count:1	Duration (ticks):0 DDR Freq 1708Mhz:	CP IDX:5	count:1	Duration (ticks):0 DDR Freq 2092Mhz:	CP IDX:6	count:1	Duration (ticks):0 DDR Freq 2736Mhz:	CP IDX:7	count:1	Duration (ticks):0 DDR Freq 3187Mhz:	CP IDX:8	count:1	Duration (ticks):0 DDR Freq 3686Mhz:	CP IDX:9	count:1	Duration (ticks):0 DDR Freq 4224Mhz:	CP IDX:10	count:1	Duration (ticks):0 DDR Freq 4761Mhz:	CP IDX:11	count:1	Duration (ticks):0 
+display: 
+gpdsp0: 
+gpdsp1: 
+gpu: 
+modem: 
+slpi: 
+slpi_island: 
+soccp: Count: 5000 Last Entered At: 26790988008 Last Exited At: 26790968765 Accumulated Duration: 26119915964 
+wpss: 
+fail:0
+failed_freeze:0
+failed_prepare:0
+failed_resume:0
+failed_resume_early:0
+failed_resume_noirq:0
+failed_suspend:0
+failed_suspend_late:0
+failed_suspend_noirq:0
+last_failed_errno:0
+success:0
+
+==== possible sleep blockers (before)
+-- clocks: crystal and RPMh (enable/prepare counts and consumers)
+ gpu_cc_cxo_clk                      1       1        0        0           0          0     50000      Y   gmu@3d6c000                     no_connection_id         
+ gcc_qupv3_oob_tcxo_clk              0       0        0        0           0          0     50000      N   deviceless                      no_connection_id         
+    bi_tcxo_ao                       0       0        0        19200000    0          0     50000      Y      deviceless                      no_connection_id         
+    bi_tcxo                          29      29       0        19200000    0          0     50000      Y      fdd000.phy                      no_connection_id         
+-- interconnect paths with a non-zero vote
+qup1_core_master@interconnect-0                   25001        25000
+  a84000.i2c                             7            1            1
+  a98000.serial                          7        25000        25000
+qup1_core_slave@interconnect-0                    25001        25000
+  a84000.i2c                             7            1            1
+  a98000.serial                          7        25000        25000
+llcc_mc@interconnect-1                          4114519     18597657
+  3d00000.gpu                            7            0     18597657
+  a800000.usb                            7      1000000      2500000
+  a600000.usb                            7      1000000      2500000
+  ae00000.display-subsystem              7       874119       800000
+  ae00000.display-subsystem              7            0       400000
+  a000000.usb                            7      1000000      2500000
+  a200000.usb                            7       240000       700000
+  a84000.i2c                             7          400          400
+  100d400.pmu                            3            0     10944000
+  100c400.pmu                            3            0      8371200
+  1b40000.pcie                           7            0       250000
+  1bf0000.pcie                           7            0       984500
+ebi@interconnect-1                              4114519     18597657
+  3d00000.gpu                            7            0     18597657
+  a800000.usb                            7      1000000      2500000
+  a600000.usb                            7      1000000      2500000
+  ae00000.display-subsystem              7       874119       800000
+  ae00000.display-subsystem              7            0       400000
+  a000000.usb                            7      1000000      2500000
+  a200000.usb                            7       240000       700000
+  a84000.i2c                             7          400          400
+  100d400.pmu                            3            0     10944000
+  100c400.pmu                            3            0      8371200
+  1b40000.pcie                           7            0       250000
+  1bf0000.pcie                           7            0       984500
+<email>               3201        57000
+  a800000.usb                            3            0        40000
+  a600000.usb                            3            0        40000
+  ae00000.display-subsystem              3            0        57000
+  a000000.usb                            3            0        40000
+  a200000.usb                            3            0        40000
+  a84000.i2c                             7            1            1
+  a98000.serial                          7         3200         3200
+-- regulators enabled
+ regulator-dummy                 67  111      0 unknown     0mV     0mA     0mV     0mV 
+    sdw:3:0:0217:0110:00:3-vdd-mic-bias   1                                 0mA     0mV     0mV
+    fdd000.phy-vdda12             1                                 0mA     0mV     0mV
+    fdd000.phy-vdd                1                                 0mA     0mV     0mV
+    fd3000.phy-vdda12             1                                 0mA     0mV     0mV
+    fd3000.phy-vdd                1                                 0mA     0mV     0mV
+    4-0015-vddl                   1                                 0mA     0mV     0mV
+    0-003a-vddl                   1                                 0mA     0mV     0mV
+    4-0015-vdd                    1                                 0mA     0mV     0mV
+    0-003a-vdd                    1                                 0mA     0mV     0mV
+    8-0010-vddl                   1                                 0mA     0mV     0mV
+    8-0010-vdd                    1                                 0mA     0mV     0mV
+    faac00.phy-vdda-pll           1                                36mA     0mV     0mV
+    faac00.phy-vdda-phy           1                                21mA     0mV     0mV
+    88e1000.phy-refgen            1                                 3mA     0mV     0mV
+    88e1000.phy-vdda-pll          1                                36mA     0mV     0mV
+    88e1000.phy-vdda-phy          1                                21mA     0mV     0mV
+    fde000.phy-refgen             1                                 3mA     0mV     0mV
+    fde000.phy-vdda-pll           1                                36mA     0mV     0mV
+    fde000.phy-vdda-phy           1                                21mA     0mV     0mV
+    fd5000.phy-refgen             1                                 3mA     0mV     0mV
+    fd5000.phy-vdda-pll           1                                36mA     0mV     0mV
+    fd5000.phy-vdda-phy           1                                21mA     0mV     0mV
+    88e0000.phy-vdda12            1                                 0mA     0mV     0mV
+    88e0000.phy-vdd               1                                 0mA     0mV     0mV
+    fa0000.phy-vdda12             1                                 0mA     0mV     0mV
+    fa0000.phy-vdd                1                                 0mA     0mV     0mV
+    1b40000.pcie-vddpe-3v3        1                                 0mA     0mV     0mV
+    1b40000.pcie-vdda             1                                 0mA     0mV     0mV
+    1bf0000.pcie-vddpe-3v3        1                                 0mA     0mV     0mV
+    1bf0000.pcie-vdda             1                                 0mA     0mV     0mV
+    1b50000.phy-vdda-pll          1                                 0mA     0mV     0mV
+    1b50000.phy-vdda-phy          1                                 0mA     0mV     0mV
+    1bf6000.phy-vdda-pll          1                                 0mA     0mV     0mV
+    1bf6000.phy-vdda-phy          1                                 0mA     0mV     0mV
+    1fd5000.clock-controller-vdda-qrefrx1-0p9   1                                 0mA     0mV     0mV
+    1fd5000.clock-controller-vdda-qrefrpt1-0p9   1                                 0mA     0mV     0mV
+    1fd5000.clock-controller-vdda-qrefrpt0-0p9   1                                 0mA     0mV     0mV
+    1fd5000.clock-controller-vdda-qreftx1-0p9   1                                 0mA     0mV     0mV
+    1fd5000.clock-controller-vdda-refgen3-1p2   1                                 0mA     0mV     0mV
+-- remote processors
+remoteproc0 soccp attached
+remoteproc1 adsp running
+remoteproc2 cdsp running
+-- PCIe link power management
+0004:00:00.0 PCI bridge: Qualcomm Technologies, Inc SC8480XP PCIe Root Complex [Snapdragon X2] (prog-if 00 [Normal decode])
+		LnkCtl:	ASPM L1 Enabled; RCB 128 bytes, LnkDisable- CommClk+
+		L1SubCtl1: PCI-PM_L1.2+ PCI-PM_L1.1+ ASPM_L1.2+ ASPM_L1.1+
+0004:01:00.0 Network controller: Qualcomm Technologies, Inc QCC2072 Wi-Fi 7(802.11be) 320MHz [FastConnect C7700] (rev 01)
+		LnkCtl:	ASPM L1 Enabled; RCB 128 bytes, LnkDisable- CommClk+
+		L1SubCtl1: PCI-PM_L1.2+ PCI-PM_L1.1+ ASPM_L1.2+ ASPM_L1.1+
+0005:00:00.0 PCI bridge: Qualcomm Technologies, Inc SC8480XP PCIe Root Complex [Snapdragon X2] (prog-if 00 [Normal decode])
+		LnkCtl:	ASPM L1 Enabled; RCB 64 bytes, LnkDisable- CommClk+
+		L1SubCtl1: PCI-PM_L1.2+ PCI-PM_L1.1+ ASPM_L1.2+ ASPM_L1.1+
+0005:01:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd BM9C1 QLC NVME SSD (DRAM-less) (prog-if 02 [NVM Express])
+		LnkCtl:	ASPM L1 Enabled; RCB 64 bytes, LnkDisable- CommClk+
+		L1SubCtl1: PCI-PM_L1.2+ PCI-PM_L1.1+ ASPM_L1.2+ ASPM_L1.1+
+
+Suspend is about to be unmasked for this test (sleep.target suspend.target).
+  Q: Continue? (y/n)
+  A: y
+mem_sleep set to s2idle (was deep): [s2idle] deep
+Created symlink '/etc/systemd/system/sysinit.target.wants/glymur-suspend-guard.service' → '/etc/systemd/system/glymur-suspend-guard.service'.
+Removed '/etc/systemd/system/sleep.target'.
+Removed '/etc/systemd/system/suspend.target'.
+
+==== cycle: rtc
+Suspending now; the RTC alarm wakes it in about 40 s. If it is still asleep after 90 s, press the power button.
+While it sleeps, look at: the fan, the keyboard backlight, the power LED. You are asked afterwards.
+rtcwake: read rtc time failed: Input/output error
+rtcwake: assuming RTC uses UTC ...
+No RTC alarm (the RTC has no time source): wake it yourself after 20 s with a key or the touchpad.

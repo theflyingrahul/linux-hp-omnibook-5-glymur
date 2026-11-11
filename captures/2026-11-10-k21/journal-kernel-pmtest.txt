@@ -1,0 +1,1051 @@
+Nov 11 14:41:55 glymur kernel: Freezing user space processes
+Nov 11 14:41:55 glymur kernel: Freezing user space processes completed (elapsed 0.001 seconds)
+Nov 11 14:41:55 glymur kernel: OOM killer disabled.
+Nov 11 14:41:55 glymur kernel: Freezing remaining freezable tasks
+Nov 11 14:41:55 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 11 14:41:55 glymur kernel: Freezing remaining freezable tasks completed (elapsed 0.708 seconds)
+Nov 11 14:41:55 glymur kernel: PM: suspend debug: Waiting for 5 second(s).
+Nov 11 14:41:55 glymur kernel: OOM killer enabled.
+Nov 11 14:41:55 glymur kernel: Restarting tasks: Starting
+Nov 11 14:41:55 glymur kernel: Restarting tasks: Done
+Nov 11 14:41:55 glymur kernel: efivarfs: resyncing variable state
+Nov 11 14:41:55 glymur kernel: efivarfs: finished resyncing variable state
+Nov 11 14:41:55 glymur kernel: PM: suspend exit
+Nov 11 14:41:56 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 11 14:41:57 glymur systemd-journald[575]: Received client request to sync journal (with offlining).
+Nov 11 14:41:57 glymur kernel: PM: suspend entry (s2idle)
+Nov 11 14:41:57 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 11 14:41:57 glymur kernel: Filesystems sync: 0.020 seconds
+Nov 11 14:42:05 glymur kernel: Freezing user space processes
+Nov 11 14:42:05 glymur kernel: Freezing user space processes completed (elapsed 0.001 seconds)
+Nov 11 14:42:05 glymur kernel: OOM killer disabled.
+Nov 11 14:42:05 glymur kernel: Freezing remaining freezable tasks
+Nov 11 14:42:05 glymur kernel: Freezing remaining freezable tasks completed (elapsed 0.001 seconds)
+Nov 11 14:42:05 glymur kernel: printk: Suspending console(s) (use no_console_suspend to debug)
+Nov 11 14:42:05 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 11 14:42:05 glymur kernel: GFP mask restricted
+Nov 11 14:42:05 glymur kernel: rfkill rfkill1: PM: calling rfkill_suspend @ 7320, parent: phy0
+Nov 11 14:42:05 glymur kernel: rfkill rfkill1: PM: rfkill_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: scmi-cpufreq scmi_dev.5: PM: calling scmi_pm_suspend @ 7320, parent: arm-scmi.0.auto
+Nov 11 14:42:05 glymur kernel: scmi-cpufreq scmi_dev.5: PM: scmi_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input20: PM: calling input_dev_suspend @ 7320, parent: card0
+Nov 11 14:42:05 glymur kernel: input input20: PM: input_dev_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: sound pcmC0D1c: PM: calling do_pcm_suspend @ 7320, parent: card0
+Nov 11 14:42:05 glymur kernel: sound pcmC0D1c: PM: do_pcm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: sound pcmC0D0p: PM: calling do_pcm_suspend @ 7320, parent: card0
+Nov 11 14:42:05 glymur kernel: sound pcmC0D0p: PM: do_pcm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: snd-x1e80100 sound: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: snd-x1e80100 sound: PM: platform_pm_suspend returned 0 after 1 usecs
+Nov 11 14:42:05 glymur kernel: ieee80211 phy0: PM: calling wiphy_suspend [cfg80211] @ 143, parent: 0004:01:00.0
+Nov 11 14:42:05 glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: PM: calling class_function_suspend [snd_soc_sdca_class_function] @ 7320, parent: sdw:3:0:0217:0110:00:3
+Nov 11 14:42:05 glymur kernel: usb usb3: PM: calling usb_dev_suspend @ 89, parent: xhci-hcd.3.auto
+Nov 11 14:42:05 glymur kernel: usb usb2: PM: calling usb_dev_suspend @ 96, parent: xhci-hcd.3.auto
+Nov 11 14:42:05 glymur kernel: usb usb2: PM: usb_dev_suspend returned 0 after 37 usecs
+Nov 11 14:42:05 glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: PM: class_function_suspend [snd_soc_sdca_class_function] returned 0 after 419 usecs
+Nov 11 14:42:05 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: PM: calling wcd9378_sdca_system_suspend [snd_soc_wcd9378] @ 7320, parent: sdw-master-3-0
+Nov 11 14:42:05 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: PM: wcd9378_sdca_system_suspend [snd_soc_wcd9378] returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-soundwire 7630000.soundwire: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-soundwire 7630000.soundwire: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-soundwire 6a80000.soundwire: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-soundwire 6a80000.soundwire: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: rx_macro 6a70000.codec: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: wlo1: deauthenticating from xx:xx:xx:xx:xx:xx by local choice (Reason: 3=DEAUTH_LEAVING)
+Nov 11 14:42:05 glymur kernel: rx_macro 6a70000.codec: PM: platform_pm_suspend returned 0 after 928 usecs
+Nov 11 14:42:05 glymur kernel: tx_macro 6a90000.codec: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: tx_macro 6a90000.codec: PM: platform_pm_suspend returned 0 after 19 usecs
+Nov 11 14:42:05 glymur kernel: qcom-soundwire 6c80000.soundwire: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-soundwire 6c80000.soundwire: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: wsa_macro 6c90000.codec: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: wsa_macro 6c90000.codec: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: wsa_macro 6cb0000.codec: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: wsa_macro 6cb0000.codec: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: va_macro 7660000.codec: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: va_macro 7660000.codec: PM: platform_pm_suspend returned 0 after 523 usecs
+Nov 11 14:42:05 glymur kernel: leds platform::kbd_backlight: PM: calling led_suspend @ 7320, parent: 9-0076
+Nov 11 14:42:05 glymur kernel: leds platform::kbd_backlight: PM: led_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: leds platform::micmute: PM: calling led_suspend @ 7320, parent: 9-0076
+Nov 11 14:42:05 glymur kernel: leds platform::micmute: PM: led_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: leds platform::mute: PM: calling led_suspend @ 7320, parent: 9-0076
+Nov 11 14:42:05 glymur kernel: leds platform::mute: PM: led_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-sm8650-lpass-lpi-pinctrl 7760000.pinctrl: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-sm8650-lpass-lpi-pinctrl 7760000.pinctrl: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: rfkill rfkill0: PM: calling rfkill_suspend @ 7320, parent: hci0
+Nov 11 14:42:05 glymur kernel: rfkill rfkill0: PM: rfkill_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input19: PM: calling input_dev_suspend @ 7320, parent: 9-0076
+Nov 11 14:42:05 glymur kernel: input input19: PM: input_dev_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: q6prm-lpass-clock 6800000.remoteproc:glink-edge:gpr:service@2:clock-controller: PM: calling platform_pm_suspend @ 7320, parent: gprsvc:service:2:2
+Nov 11 14:42:05 glymur kernel: q6prm-lpass-clock 6800000.remoteproc:glink-edge:gpr:service@2:clock-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input18: PM: calling input_dev_suspend @ 7320, parent: c426000.spmi:pmic@0:pon@1300:pwrkey
+Nov 11 14:42:05 glymur kernel: input input18: PM: input_dev_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: calling platform_pm_suspend @ 7320, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: calling platform_pm_suspend @ 7320, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: calling platform_pm_suspend @ 7320, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: calling platform_pm_suspend @ 7320, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: calling platform_pm_suspend @ 7320, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: calling platform_pm_suspend @ 7320, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@e: PM: calling platform_pm_suspend @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@e: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@d: PM: calling platform_pm_suspend @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@d: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@c: PM: calling platform_pm_suspend @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@c: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: calling platform_pm_suspend @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: hp-omnibook-5-ec 9-0076: PM: calling hpec_suspend [hp_omnibook_5_ec] @ 431, parent: i2c-9
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: calling platform_pm_suspend @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: calling platform_pm_suspend @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: q6apm-dai 6800000.remoteproc:glink-edge:gpr:service@1:dais: PM: calling platform_pm_suspend @ 7320, parent: gprsvc:service:2:1
+Nov 11 14:42:05 glymur kernel: q6apm-dai 6800000.remoteproc:glink-edge:gpr:service@1:dais: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: calling platform_pm_suspend @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: calling platform_pm_suspend @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: q6apm-lpass-dais 6800000.remoteproc:glink-edge:gpr:service@1:bedais: PM: calling platform_pm_suspend @ 7320, parent: gprsvc:service:2:1
+Nov 11 14:42:05 glymur kernel: q6apm-lpass-dais 6800000.remoteproc:glink-edge:gpr:service@1:bedais: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: leds input9::kana: PM: calling led_suspend @ 7320, parent: input9
+Nov 11 14:42:05 glymur kernel: leds input9::kana: PM: led_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: leds input9::compose: PM: calling led_suspend @ 7320, parent: input9
+Nov 11 14:42:05 glymur kernel: leds input9::compose: PM: led_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: calling platform_pm_suspend @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: leds input9::scrolllock: PM: calling led_suspend @ 7320, parent: input9
+Nov 11 14:42:05 glymur kernel: leds input9::scrolllock: PM: led_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@2: PM: calling platform_pm_suspend @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@2: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@1: PM: calling platform_pm_suspend @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@1: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: leds input9::capslock: PM: calling led_suspend @ 7320, parent: input9
+Nov 11 14:42:05 glymur kernel: leds input9::capslock: PM: led_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: leds input9::numlock: PM: calling led_suspend @ 7320, parent: input9
+Nov 11 14:42:05 glymur kernel: leds input9::numlock: PM: led_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: alarmtimer alarmtimer.4.auto: PM: calling platform_pm_suspend @ 7320, parent: rtc0
+Nov 11 14:42:05 glymur kernel: alarmtimer alarmtimer.4.auto: PM: platform_pm_suspend returned 0 after 1 usecs
+Nov 11 14:42:05 glymur kernel: rtc rtc0: PM: calling rtc_suspend @ 7320, parent: pmic_glink.rtc-glink.0
+Nov 11 14:42:05 glymur kernel: usb 1-1: PM: calling usb_dev_suspend @ 145, parent: usb1
+Nov 11 14:42:05 glymur kernel: usb 1-1: PM: usb_dev_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: usb usb1: PM: calling usb_dev_suspend @ 113, parent: xhci-hcd.2.auto
+Nov 11 14:42:05 glymur kernel: usb usb1: PM: usb_dev_suspend returned 0 after 27 usecs
+Nov 11 14:42:05 glymur kernel: xhci-hcd xhci-hcd.2.auto: PM: calling platform_pm_suspend @ 113, parent: a200000.usb
+Nov 11 14:42:05 glymur kernel: xhci-hcd xhci-hcd.2.auto: PM: platform_pm_suspend returned 0 after 97 usecs
+Nov 11 14:42:05 glymur kernel: hp-omnibook-5-ec 9-0076: PM: hpec_suspend [hp_omnibook_5_ec] returned 0 after 18237 usecs
+Nov 11 14:42:05 glymur kernel: ieee80211 phy0: PM: wiphy_suspend [cfg80211] returned 0 after 120731 usecs
+Nov 11 14:42:05 glymur kernel: ath12k_wifi7_pci 0004:01:00.0: PM: calling pci_pm_suspend @ 432, parent: 0004:00:00.0
+Nov 11 14:42:05 glymur kernel: ath12k_wifi7_pci 0004:01:00.0: PM: pci_pm_suspend returned 0 after 145 usecs
+Nov 11 14:42:05 glymur kernel: usb usb3: PM: usb_dev_suspend returned 0 after 126590 usecs
+Nov 11 14:42:05 glymur kernel: xhci-hcd xhci-hcd.3.auto: PM: calling platform_pm_suspend @ 7332, parent: a000000.usb
+Nov 11 14:42:05 glymur kernel: xhci-hcd xhci-hcd.3.auto: PM: platform_pm_suspend returned 0 after 156 usecs
+Nov 11 14:42:05 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 11 14:42:05 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+Nov 11 14:42:05 glymur kernel: rtc rtc0: PM: rtc_suspend returned 0 after 2078059 usecs
+Nov 11 14:42:05 glymur kernel: input input17: PM: calling input_dev_suspend @ 7320, parent: 0018:04F3:32EF.0002
+Nov 11 14:42:05 glymur kernel: input input17: PM: input_dev_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input16: PM: calling input_dev_suspend @ 7320, parent: 0018:04F3:32EF.0002
+Nov 11 14:42:05 glymur kernel: input input16: PM: input_dev_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input14: PM: calling input_dev_suspend @ 7320, parent: 0018:04F3:32EF.0002
+Nov 11 14:42:05 glymur kernel: input input14: PM: input_dev_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input12: PM: calling input_dev_suspend @ 7320, parent: 0018:04F3:44BF.0001
+Nov 11 14:42:05 glymur kernel: input input12: PM: input_dev_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input11: PM: calling input_dev_suspend @ 7320, parent: 0018:04F3:44BF.0001
+Nov 11 14:42:05 glymur kernel: input input11: PM: input_dev_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input10: PM: calling input_dev_suspend @ 7320, parent: 0018:04F3:44BF.0001
+Nov 11 14:42:05 glymur kernel: input input10: PM: input_dev_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform 3d6c000.gmu: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: platform 3d6c000.gmu: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: adreno 3d00000.gpu: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: adreno 3d00000.gpu: PM: platform_pm_suspend returned 0 after 1 usecs
+Nov 11 14:42:05 glymur kernel: backlight dp_aux_backlight: PM: calling backlight_suspend @ 7320, parent: aux-af6c000.displayport-controller
+Nov 11 14:42:05 glymur kernel: backlight dp_aux_backlight: PM: backlight_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input9: PM: calling input_dev_suspend @ 7320, parent: 0018:0416:C300.0003
+Nov 11 14:42:05 glymur kernel: input input9: PM: input_dev_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: samsung_atana33xc20 aux-af6c000.displayport-controller: PM: calling pm_runtime_force_suspend @ 7320, parent: af6c000.displayport-controller
+Nov 11 14:42:05 glymur kernel: samsung_atana33xc20 aux-af6c000.displayport-controller: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: msm-dp-display af6c000.displayport-controller: PM: calling pm_runtime_force_suspend @ 7320, parent: ae00000.display-subsystem
+Nov 11 14:42:05 glymur kernel: msm-dp-display af6c000.displayport-controller: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: i2c_hid_of 4-0015: PM: calling i2c_hid_core_pm_suspend [i2c_hid] @ 7332, parent: i2c-4
+Nov 11 14:42:05 glymur kernel: msm_dpu ae01000.display-controller: PM: calling pm_runtime_force_suspend @ 7320, parent: ae00000.display-subsystem
+Nov 11 14:42:05 glymur kernel: i2c_hid_of 8-0010: PM: calling i2c_hid_core_pm_suspend [i2c_hid] @ 89, parent: i2c-8
+Nov 11 14:42:05 glymur kernel: i2c_hid_of 0-003a: PM: calling i2c_hid_core_pm_suspend [i2c_hid] @ 432, parent: i2c-0
+Nov 11 14:42:05 glymur kernel: msm_dpu ae01000.display-controller: PM: pm_runtime_force_suspend returned 0 after 693 usecs
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a800000.usb: PM: calling dwc3_qcom_pm_suspend [dwc3_qcom] @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a800000.usb: port-1 HS-PHY not in L2
+Nov 11 14:42:05 glymur kernel: i2c_hid_of 8-0010: PM: i2c_hid_core_pm_suspend [i2c_hid] returned 0 after 1829 usecs
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a800000.usb: PM: dwc3_qcom_pm_suspend [dwc3_qcom] returned 0 after 1447 usecs
+Nov 11 14:42:05 glymur kernel: pm8941-pwrkey c426000.spmi:pmic@0:pon@1300:pwrkey: PM: calling platform_pm_suspend @ 7320, parent: c426000.spmi:pmic@0:pon@1300
+Nov 11 14:42:05 glymur kernel: pm8941-pwrkey c426000.spmi:pmic@0:pon@1300:pwrkey: PM: platform_pm_suspend returned 0 after 3 usecs
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a600000.usb: PM: calling dwc3_qcom_pm_suspend [dwc3_qcom] @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a600000.usb: port-1 HS-PHY not in L2
+Nov 11 14:42:05 glymur kernel: i2c_hid_of 4-0015: PM: i2c_hid_core_pm_suspend [i2c_hid] returned 0 after 2348 usecs
+Nov 11 14:42:05 glymur kernel: i2c_hid_of 0-003a: PM: i2c_hid_core_pm_suspend [i2c_hid] returned 0 after 2224 usecs
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a600000.usb: PM: dwc3_qcom_pm_suspend [dwc3_qcom] returned 0 after 594 usecs
+Nov 11 14:42:05 glymur kernel: qcom-m31eusb2-phy fdd000.phy: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-m31eusb2-phy fdd000.phy: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-m31eusb2-phy fd3000.phy: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-m31eusb2-phy fd3000.phy: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: PM: calling platform_pm_suspend @ 7320, parent: 2-0a
+Nov 11 14:42:05 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: PM: calling platform_pm_suspend @ 7320, parent: 2-09
+Nov 11 14:42:05 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,spmi-sdam c426000.spmi:pmic@0:nvram@7100: PM: calling platform_pm_suspend @ 7320, parent: 0-00
+Nov 11 14:42:05 glymur kernel: qcom,spmi-sdam c426000.spmi:pmic@0:nvram@7100: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform c426000.spmi:pmic@0:adc@9000: PM: calling platform_pm_suspend @ 7320, parent: 0-00
+Nov 11 14:42:05 glymur kernel: platform c426000.spmi:pmic@0:adc@9000: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@0:gpio@b800: PM: calling platform_pm_suspend @ 7320, parent: 0-00
+Nov 11 14:42:05 glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@0:gpio@b800: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-pon c426000.spmi:pmic@0:pon@1300: PM: calling platform_pm_suspend @ 7320, parent: 0-00
+Nov 11 14:42:05 glymur kernel: qcom-pon c426000.spmi:pmic@0:pon@1300: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: msm-mdss ae00000.display-subsystem: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: msm-mdss ae00000.display-subsystem: PM: platform_pm_suspend returned 0 after 472 usecs
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a000000.usb: PM: calling dwc3_qcom_pm_suspend [dwc3_qcom] @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a000000.usb: port-1 HS-PHY not in L2
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a000000.usb: PM: dwc3_qcom_pm_suspend [dwc3_qcom] returned 0 after 1843 usecs
+Nov 11 14:42:05 glymur kernel: qcom_q6v5_pas 32300000.remoteproc: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_q6v5_pas 32300000.remoteproc: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a200000.usb: PM: calling dwc3_qcom_pm_suspend [dwc3_qcom] @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a200000.usb: port-1 HS-PHY not in L2
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a200000.usb: PM: dwc3_qcom_pm_suspend [dwc3_qcom] returned 0 after 484 usecs
+Nov 11 14:42:05 glymur kernel: qcom_q6v5_pas 6800000.remoteproc: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_q6v5_pas 6800000.remoteproc: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_q6v5_pas d00000.remoteproc: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_q6v5_pas d00000.remoteproc: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_smp2p smp2p-soccp: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: qcom_smp2p smp2p-soccp: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_smp2p smp2p-cdsp: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: qcom_smp2p smp2p-cdsp: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_smp2p smp2p-adsp: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: qcom_smp2p smp2p-adsp: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-socinfo qcom-socinfo: PM: calling platform_pm_suspend @ 7320, parent: ffe00000.smem
+Nov 11 14:42:05 glymur kernel: qcom-socinfo qcom-socinfo: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-smem ffe00000.smem: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: qcom-smem ffe00000.smem: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: videocc-glymur aaf0000.clock-controller: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: videocc-glymur aaf0000.clock-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-m31eusb2-phy 88e0000.phy: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-m31eusb2-phy 88e0000.phy: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: evacc-glymur abf0000.clock-controller: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: evacc-glymur abf0000.clock-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-m31eusb2-phy fa0000.phy: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-m31eusb2-phy fa0000.phy: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: camcc-glymur ade0000.clock-controller: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: camcc-glymur ade0000.clock-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: scmi_protocol scmi_dev.4: PM: calling scmi_pm_suspend @ 7320, parent: arm-scmi.1.auto
+Nov 11 14:42:05 glymur kernel: scmi_protocol scmi_dev.4: PM: scmi_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: scmi_protocol scmi_dev.3: PM: calling scmi_pm_suspend @ 7320, parent: arm-scmi.1.auto
+Nov 11 14:42:05 glymur kernel: scmi_protocol scmi_dev.3: PM: scmi_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: arm-scmi arm-scmi.1.auto: PM: calling platform_pm_suspend @ 7320, parent: firmware:scmi-1
+Nov 11 14:42:05 glymur kernel: arm-scmi arm-scmi.1.auto: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: scmi_mailbox_transport firmware:scmi-1: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: scmi_mailbox_transport firmware:scmi-1: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: regulator regulator.4: PM: calling regulator_suspend @ 7320, parent: 18900000.rsc:regulators-0
+Nov 11 14:42:05 glymur kernel: regulator regulator.4: PM: regulator_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: regulator regulator.3: PM: calling regulator_suspend @ 7320, parent: 18900000.rsc:regulators-0
+Nov 11 14:42:05 glymur kernel: regulator regulator.3: PM: regulator_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: scmi_protocol scmi_dev.2: PM: calling scmi_pm_suspend @ 7320, parent: arm-scmi.0.auto
+Nov 11 14:42:05 glymur kernel: scmi_protocol scmi_dev.2: PM: scmi_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: regulator regulator.2: PM: calling regulator_suspend @ 7320, parent: 18900000.rsc:regulators-0
+Nov 11 14:42:05 glymur kernel: regulator regulator.2: PM: regulator_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: scmi_protocol scmi_dev.1: PM: calling scmi_pm_suspend @ 7320, parent: arm-scmi.0.auto
+Nov 11 14:42:05 glymur kernel: scmi_protocol scmi_dev.1: PM: scmi_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: arm-scmi arm-scmi.0.auto: PM: calling platform_pm_suspend @ 7320, parent: firmware:scmi
+Nov 11 14:42:05 glymur kernel: arm-scmi arm-scmi.0.auto: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: scmi_mailbox_transport firmware:scmi: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: scmi_mailbox_transport firmware:scmi: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: regulator regulator.1: PM: calling regulator_suspend @ 7320, parent: regulator-edp
+Nov 11 14:42:05 glymur kernel: regulator regulator.1: PM: regulator_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input0: PM: calling input_dev_suspend @ 7320, parent: gpio-keys
+Nov 11 14:42:05 glymur kernel: input input0: PM: input_dev_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: geni_i2c b90000.i2c: PM: calling platform_pm_suspend @ 7320, parent: bc0000.geniqup
+Nov 11 14:42:05 glymur kernel: geni_i2c b90000.i2c: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: geni_i2c b80000.i2c: PM: calling platform_pm_suspend @ 7320, parent: bc0000.geniqup
+Nov 11 14:42:05 glymur kernel: geni_i2c b80000.i2c: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: geni_se_qup bc0000.geniqup: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: geni_se_qup bc0000.geniqup: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: hci_uart_qca serial0-0: PM: calling qca_suspend [hci_uart] @ 7320, parent: serial0
+Nov 11 14:42:05 glymur kernel: hci_uart_qca serial0-0: PM: qca_suspend [hci_uart] returned 0 after 1 usecs
+Nov 11 14:42:05 glymur kernel: port a98000.serial:0.0: PM: calling pm_runtime_force_suspend @ 7320, parent: a98000.serial:0
+Nov 11 14:42:05 glymur kernel: port a98000.serial:0.0: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_geni_serial a98000.serial: PM: calling platform_pm_suspend @ 7320, parent: ac0000.geniqup
+Nov 11 14:42:05 glymur kernel: pcieport 0004:00:00.0: PM: calling pci_pm_suspend @ 96, parent: pci0004:00
+Nov 11 14:42:05 glymur kernel: pcieport 0004:00:00.0: PM: pci_pm_suspend returned 0 after 21 usecs
+Nov 11 14:42:05 glymur kernel: nvme 0005:01:00.0: PM: calling pci_pm_suspend @ 96, parent: 0005:00:00.0
+Nov 11 14:42:05 glymur kernel: qcom_geni_serial a98000.serial: PM: platform_pm_suspend returned 0 after 385 usecs
+Nov 11 14:42:05 glymur kernel: geni_i2c a84000.i2c: PM: calling platform_pm_suspend @ 7320, parent: ac0000.geniqup
+Nov 11 14:42:05 glymur kernel: geni_i2c a84000.i2c: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: geni_i2c a80000.i2c: PM: calling platform_pm_suspend @ 7320, parent: ac0000.geniqup
+Nov 11 14:42:05 glymur kernel: geni_i2c a80000.i2c: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: geni_se_qup ac0000.geniqup: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: geni_se_qup ac0000.geniqup: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: geni_se_qup 8c0000.geniqup: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: geni_se_qup 8c0000.geniqup: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qce_core 1dfa000.crypto: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qce_core 1dfa000.crypto: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: bam-dma-engine 1dc4000.dma-controller: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: bam-dma-engine 1dc4000.dma-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: gpi b00000.dma-controller: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: gpi b00000.dma-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: gpi a00000.dma-controller: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: gpi a00000.dma-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: gpi 800000.dma-controller: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: gpi 800000.dma-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: arm-smmu 15000000.iommu: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: arm-smmu 15000000.iommu: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: nvme 0005:01:00.0: PM: pci_pm_suspend returned 0 after 196838 usecs
+Nov 11 14:42:05 glymur kernel: pcieport 0005:00:00.0: PM: calling pci_pm_suspend @ 959, parent: pci0005:00
+Nov 11 14:42:05 glymur kernel: pcieport 0005:00:00.0: PM: pci_pm_suspend returned 0 after 10 usecs
+Nov 11 14:42:05 glymur kernel: arm-smmu 3da0000.iommu: PM: calling arm_smmu_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: arm-smmu 3da0000.iommu: PM: arm_smmu_pm_suspend returned 0 after 17 usecs
+Nov 11 14:42:05 glymur kernel: qcomtee qcomtee: PM: calling platform_pm_suspend @ 7320, parent: firmware:scm
+Nov 11 14:42:05 glymur kernel: qcomtee qcomtee: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_qseecom qcom_qseecom: PM: calling platform_pm_suspend @ 7320, parent: firmware:scm
+Nov 11 14:42:05 glymur kernel: qcom_qseecom qcom_qseecom: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_scm firmware:scm: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: qcom_scm firmware:scm: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 7e40000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 7e40000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 7420000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 7420000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 7400000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 7400000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-bwmon 100c400.pmu: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-bwmon 100c400.pmu: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-bwmon 100d400.pmu: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-bwmon 100d400.pmu: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 2000000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 2000000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1920000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1920000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1900000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1900000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1780000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1780000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1740000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1740000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1700000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1700000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1720000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1720000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 16e0000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 16e0000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 16d0000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 16d0000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 16c0000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 16c0000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1680000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1680000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1600000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1600000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1500000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1500000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur interconnect-1: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: qnoc-glymur interconnect-1: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur interconnect-0: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: qnoc-glymur interconnect-0: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: gxclkctl-kaanapali 3d64000.clock-controller: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: gxclkctl-kaanapali 3d64000.clock-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: gpucc-glymur 3d90000.clock-controller: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: gpucc-glymur 3d90000.clock-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 320c0000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 320c0000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1f300000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1f300000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1d600000.interconnect: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1d600000.interconnect: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-rpmh-regulator 18900000.rsc:regulators-0: PM: calling platform_pm_suspend @ 7320, parent: 18900000.rsc
+Nov 11 14:42:05 glymur kernel: qcom-rpmh-regulator 18900000.rsc:regulators-0: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-rpmhpd 18900000.rsc:power-controller: PM: calling platform_pm_suspend @ 7320, parent: 18900000.rsc
+Nov 11 14:42:05 glymur kernel: qcom-rpmhpd 18900000.rsc:power-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: clk-rpmh 18900000.rsc:clock-controller: PM: calling platform_pm_suspend @ 7320, parent: 18900000.rsc
+Nov 11 14:42:05 glymur kernel: clk-rpmh 18900000.rsc:clock-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: bcm_voter 18900000.rsc:bcm-voter: PM: calling platform_pm_suspend @ 7320, parent: 18900000.rsc
+Nov 11 14:42:05 glymur kernel: bcm_voter 18900000.rsc:bcm-voter: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: gpio-keys gpio-keys: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: gpio-keys gpio-keys: PM: platform_pm_suspend returned 0 after 21 usecs
+Nov 11 14:42:05 glymur kernel: reg-fixed-voltage regulator-edp: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: reg-fixed-voltage regulator-edp: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: glymur-tlmm f100000.pinctrl: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: glymur-tlmm f100000.pinctrl: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: kgdboc kgdboc: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: kgdboc kgdboc: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.31: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.31: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.30: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.30: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.29: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.29: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.28: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.28: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.27: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.27: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.26: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.26: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.25: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.25: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.24: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.24: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.23: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.23: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.22: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.22: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.21: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.21: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.20: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.20: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.19: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.19: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.18: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.18: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.17: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.17: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.16: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.16: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.15: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.15: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.14: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.14: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.13: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.13: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.12: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.12: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.11: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.11: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.10: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.10: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.9: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.9: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.8: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.8: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.7: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.7: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.6: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.6: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.5: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.5: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.4: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.4: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.3: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.3: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.2: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.2: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.1: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.1: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.0: PM: calling pm_runtime_force_suspend @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.0: PM: pm_runtime_force_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: serial8250 serial8250: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: serial8250 serial8250: PM: platform_pm_suspend returned 0 after 2 usecs
+Nov 11 14:42:05 glymur kernel: platform efivars.0: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: platform efivars.0: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform rtc-efi.0: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: platform rtc-efi.0: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: psci-cpuidle psci-cpuidle: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: psci-cpuidle psci-cpuidle: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_pmic_glink pmic-glink: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: qcom_pmic_glink pmic-glink: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform tpdm-cdsp-cmsr2: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: platform tpdm-cdsp-cmsr2: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform tpdm-cdsp-cmsr: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: platform tpdm-cdsp-cmsr: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform tpdm-cdsp-llm2: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: platform tpdm-cdsp-llm2: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform tpdm-cdsp-llm: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: platform tpdm-cdsp-llm: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform timer: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: platform timer: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: sram 81e08600.sram: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: sram 81e08600.sram: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,qfprom 361c8000.efuse: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom,qfprom 361c8000.efuse: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-llcc 21800000.system-cache-controller: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-llcc 21800000.system-cache-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: sram 18b4e000.sram: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: sram 18b4e000.sram: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: arch-timer-mmio 17810000.timer: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: arch-timer-mmio 17810000.timer: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_cpucp_mbox 17620000.mailbox: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_cpucp_mbox 17620000.mailbox: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_cpucp_mbox 17610000.mailbox: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_cpucp_mbox 17610000.mailbox: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform 17600000.watchdog: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: platform 17600000.watchdog: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: arm-smmu-v3 15480000.iommu: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: arm-smmu-v3 15480000.iommu: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: sram 14680000.sram: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: sram 14680000.sram: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform 11200000.tn: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: platform 11200000.tn: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform 10001000.ctcu: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: platform 10001000.ctcu: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_spel ef3b000.power-limits: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_spel ef3b000.power-limits: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: spmi_pmic_arb c400000.arbiter: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: spmi_pmic_arb c400000.arbiter: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_stats c30f000.sram: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_stats c30f000.sram: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_aoss_qmp c300000.power-management: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_aoss_qmp c300000.power-management: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-tsens c231000.thermal-sensor: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-tsens c231000.thermal-sensor: PM: platform_pm_suspend returned 0 after 3 usecs
+Nov 11 14:42:05 glymur kernel: qcom-tsens c230000.thermal-sensor: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-tsens c230000.thermal-sensor: PM: platform_pm_suspend returned 0 after 1 usecs
+Nov 11 14:42:05 glymur kernel: qcom-tsens c22f000.thermal-sensor: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-tsens c22f000.thermal-sensor: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-tsens c22e000.thermal-sensor: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-tsens c22e000.thermal-sensor: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-tsens c22d000.thermal-sensor: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-tsens c22d000.thermal-sensor: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-tsens c22c000.thermal-sensor: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-tsens c22c000.thermal-sensor: PM: platform_pm_suspend returned 0 after 1 usecs
+Nov 11 14:42:05 glymur kernel: qcom_pdc b220000.interrupt-controller: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_pdc b220000.interrupt-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: lpasscc-glymur 7680000.clock-controller: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: lpasscc-glymur 7680000.clock-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: lpasscc-glymur 6a94000.clock-controller: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: lpasscc-glymur 6a94000.clock-controller: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-ipcc 3e04000.mailbox: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-ipcc 3e04000.mailbox: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_hwspinlock 1f40000.hwlock: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_hwspinlock 1f40000.hwlock: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_rng 10c3000.rng: PM: calling platform_pm_suspend @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_rng 10c3000.rng: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: simple-pm-bus soc@0: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: simple-pm-bus soc@0: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: psci-cpuidle-domain psci: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: psci-cpuidle-domain psci: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: armv8-pmu pmu: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: armv8-pmu pmu: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform dummy-sink: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: platform dummy-sink: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: cmd-db 81c60000.aop-cmd-db: PM: calling platform_pm_suspend @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: cmd-db 81c60000.aop-cmd-db: PM: platform_pm_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: regulator regulator.0: PM: calling regulator_suspend @ 7320, parent: reg-dummy
+Nov 11 14:42:05 glymur kernel: regulator regulator.0: PM: regulator_suspend returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: PM: suspend of devices complete after 2284.675 msecs
+Nov 11 14:42:05 glymur kernel: PM: start suspend of devices complete after 2441.907 msecs
+Nov 11 14:42:05 glymur kernel: PM: suspend debug: Waiting for 5 second(s).
+Nov 11 14:42:05 glymur kernel: regulator regulator.0: PM: calling regulator_resume @ 7320, parent: reg-dummy
+Nov 11 14:42:05 glymur kernel: regulator regulator.0: PM: regulator_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: cmd-db 81c60000.aop-cmd-db: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: cmd-db 81c60000.aop-cmd-db: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform dummy-sink: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: platform dummy-sink: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: armv8-pmu pmu: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: armv8-pmu pmu: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: psci-cpuidle-domain psci: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: psci-cpuidle-domain psci: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: simple-pm-bus soc@0: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: simple-pm-bus soc@0: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_rng 10c3000.rng: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_rng 10c3000.rng: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_hwspinlock 1f40000.hwlock: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_hwspinlock 1f40000.hwlock: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-ipcc 3e04000.mailbox: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-ipcc 3e04000.mailbox: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: lpasscc-glymur 6a94000.clock-controller: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: lpasscc-glymur 6a94000.clock-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: lpasscc-glymur 7680000.clock-controller: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: lpasscc-glymur 7680000.clock-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_pdc b220000.interrupt-controller: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_pdc b220000.interrupt-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-tsens c22c000.thermal-sensor: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-tsens c22c000.thermal-sensor: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-tsens c22d000.thermal-sensor: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-tsens c22d000.thermal-sensor: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-tsens c22e000.thermal-sensor: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-tsens c22e000.thermal-sensor: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-tsens c22f000.thermal-sensor: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-tsens c22f000.thermal-sensor: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-tsens c230000.thermal-sensor: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-tsens c230000.thermal-sensor: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-tsens c231000.thermal-sensor: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-tsens c231000.thermal-sensor: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_aoss_qmp c300000.power-management: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_aoss_qmp c300000.power-management: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_stats c30f000.sram: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_stats c30f000.sram: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: spmi_pmic_arb c400000.arbiter: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: spmi_pmic_arb c400000.arbiter: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_spel ef3b000.power-limits: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_spel ef3b000.power-limits: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform 10001000.ctcu: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: platform 10001000.ctcu: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform 11200000.tn: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: platform 11200000.tn: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: sram 14680000.sram: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: sram 14680000.sram: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: arm-smmu-v3 15480000.iommu: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: arm-smmu-v3 15480000.iommu: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform 17600000.watchdog: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: platform 17600000.watchdog: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_cpucp_mbox 17610000.mailbox: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_cpucp_mbox 17610000.mailbox: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_cpucp_mbox 17620000.mailbox: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_cpucp_mbox 17620000.mailbox: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: arch-timer-mmio 17810000.timer: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: arch-timer-mmio 17810000.timer: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: sram 18b4e000.sram: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: sram 18b4e000.sram: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-llcc 21800000.system-cache-controller: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-llcc 21800000.system-cache-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,qfprom 361c8000.efuse: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom,qfprom 361c8000.efuse: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: sram 81e08600.sram: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: sram 81e08600.sram: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform timer: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: platform timer: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform tpdm-cdsp-llm: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: platform tpdm-cdsp-llm: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform tpdm-cdsp-llm2: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: platform tpdm-cdsp-llm2: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform tpdm-cdsp-cmsr: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: platform tpdm-cdsp-cmsr: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform tpdm-cdsp-cmsr2: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: platform tpdm-cdsp-cmsr2: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_pmic_glink pmic-glink: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: qcom_pmic_glink pmic-glink: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: psci-cpuidle psci-cpuidle: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: psci-cpuidle psci-cpuidle: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform rtc-efi.0: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: platform rtc-efi.0: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform efivars.0: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: platform efivars.0: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: serial8250 serial8250: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: serial8250 serial8250: PM: platform_pm_resume returned 0 after 1 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.0: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.0: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.1: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.1: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.2: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.2: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.3: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.3: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.4: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.4: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.5: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.5: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.6: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.6: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.7: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.7: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.8: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.8: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.9: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.9: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.10: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.10: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.11: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.11: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.12: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.12: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.13: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.13: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.14: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.14: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.15: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.15: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.16: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.16: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.17: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.17: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.18: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.18: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.19: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.19: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.20: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.20: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.21: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.21: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.22: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.22: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.23: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.23: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.24: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.24: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.25: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.25: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.26: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.26: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.27: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.27: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.28: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.28: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.29: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.29: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.30: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.30: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: port serial8250:0.31: PM: calling pm_runtime_force_resume @ 7320, parent: serial8250:0
+Nov 11 14:42:05 glymur kernel: port serial8250:0.31: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: kgdboc kgdboc: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: kgdboc kgdboc: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: glymur-tlmm f100000.pinctrl: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: glymur-tlmm f100000.pinctrl: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: reg-fixed-voltage regulator-edp: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: reg-fixed-voltage regulator-edp: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: gpio-keys gpio-keys: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: gpio-keys gpio-keys: PM: platform_pm_resume returned 0 after 29 usecs
+Nov 11 14:42:05 glymur kernel: bcm_voter 18900000.rsc:bcm-voter: PM: calling platform_pm_resume @ 7320, parent: 18900000.rsc
+Nov 11 14:42:05 glymur kernel: bcm_voter 18900000.rsc:bcm-voter: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: clk-rpmh 18900000.rsc:clock-controller: PM: calling platform_pm_resume @ 7320, parent: 18900000.rsc
+Nov 11 14:42:05 glymur kernel: clk-rpmh 18900000.rsc:clock-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-rpmhpd 18900000.rsc:power-controller: PM: calling platform_pm_resume @ 7320, parent: 18900000.rsc
+Nov 11 14:42:05 glymur kernel: qcom-rpmhpd 18900000.rsc:power-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-rpmh-regulator 18900000.rsc:regulators-0: PM: calling platform_pm_resume @ 7320, parent: 18900000.rsc
+Nov 11 14:42:05 glymur kernel: qcom-rpmh-regulator 18900000.rsc:regulators-0: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1d600000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1d600000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1f300000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1f300000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 320c0000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 320c0000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: tcsrcc-glymur 1fd5000.clock-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: gpucc-glymur 3d90000.clock-controller: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: gpucc-glymur 3d90000.clock-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: gxclkctl-kaanapali 3d64000.clock-controller: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: gxclkctl-kaanapali 3d64000.clock-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur interconnect-0: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: qnoc-glymur interconnect-0: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur interconnect-1: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: qnoc-glymur interconnect-1: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1500000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1500000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1600000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1600000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1680000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1680000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 16c0000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 16c0000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 16d0000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 16d0000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 16e0000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 16e0000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1720000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1720000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1700000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1700000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1740000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1740000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1780000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1780000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1900000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1900000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1920000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 1920000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 2000000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 2000000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-bwmon 100d400.pmu: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-bwmon 100d400.pmu: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-bwmon 100c400.pmu: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-bwmon 100c400.pmu: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 7400000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 7400000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 7420000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 7420000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 7e40000.interconnect: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qnoc-glymur 7e40000.interconnect: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_scm firmware:scm: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: qcom_scm firmware:scm: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_qseecom qcom_qseecom: PM: calling platform_pm_resume @ 7320, parent: firmware:scm
+Nov 11 14:42:05 glymur kernel: qcom_qseecom qcom_qseecom: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcomtee qcomtee: PM: calling platform_pm_resume @ 7320, parent: firmware:scm
+Nov 11 14:42:05 glymur kernel: qcomtee qcomtee: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: arm-smmu 3da0000.iommu: PM: calling arm_smmu_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: arm-smmu 3da0000.iommu: PM: arm_smmu_pm_resume returned 0 after 546 usecs
+Nov 11 14:42:05 glymur kernel: arm-smmu 15000000.iommu: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: pcieport 0004:00:00.0: PM: calling pci_pm_resume @ 7332, parent: pci0004:00
+Nov 11 14:42:05 glymur kernel: pcieport 0005:00:00.0: PM: calling pci_pm_resume @ 89, parent: pci0005:00
+Nov 11 14:42:05 glymur kernel: pcieport 0004:00:00.0: PM: pci_pm_resume returned 0 after 42 usecs
+Nov 11 14:42:05 glymur kernel: ath12k_wifi7_pci 0004:01:00.0: PM: calling pci_pm_resume @ 7332, parent: 0004:00:00.0
+Nov 11 14:42:05 glymur kernel: ath12k_wifi7_pci 0004:01:00.0: PM: pci_pm_resume returned 0 after 1 usecs
+Nov 11 14:42:05 glymur kernel: pcieport 0005:00:00.0: PM: pci_pm_resume returned 0 after 30 usecs
+Nov 11 14:42:05 glymur kernel: nvme 0005:01:00.0: PM: calling pci_pm_resume @ 89, parent: 0005:00:00.0
+Nov 11 14:42:05 glymur kernel: nvme 0005:01:00.0: PM: pci_pm_resume returned 0 after 2 usecs
+Nov 11 14:42:05 glymur kernel: ieee80211 phy0: PM: calling wiphy_resume [cfg80211] @ 7332, parent: 0004:01:00.0
+Nov 11 14:42:05 glymur kernel: arm-smmu 15000000.iommu: PM: platform_pm_resume returned 0 after 2776 usecs
+Nov 11 14:42:05 glymur kernel: gpi 800000.dma-controller: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: gpi 800000.dma-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: gpi a00000.dma-controller: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: gpi a00000.dma-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: gpi b00000.dma-controller: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: gpi b00000.dma-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: bam-dma-engine 1dc4000.dma-controller: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: bam-dma-engine 1dc4000.dma-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qce_core 1dfa000.crypto: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qce_core 1dfa000.crypto: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: geni_se_qup 8c0000.geniqup: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: geni_se_qup 8c0000.geniqup: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: geni_se_qup ac0000.geniqup: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: geni_se_qup ac0000.geniqup: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: geni_i2c a80000.i2c: PM: calling platform_pm_resume @ 7320, parent: ac0000.geniqup
+Nov 11 14:42:05 glymur kernel: geni_i2c a80000.i2c: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: geni_i2c a84000.i2c: PM: calling platform_pm_resume @ 7320, parent: ac0000.geniqup
+Nov 11 14:42:05 glymur kernel: geni_i2c a84000.i2c: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_geni_serial a98000.serial: PM: calling platform_pm_resume @ 7320, parent: ac0000.geniqup
+Nov 11 14:42:05 glymur kernel: hp-omnibook-5-ec 9-0076: PM: calling hpec_resume [hp_omnibook_5_ec] @ 143, parent: i2c-9
+Nov 11 14:42:05 glymur kernel: i2c_hid_of 8-0010: PM: calling i2c_hid_core_pm_resume [i2c_hid] @ 96, parent: i2c-8
+Nov 11 14:42:05 glymur kernel: qcom_geni_serial a98000.serial: PM: platform_pm_resume returned 0 after 2258 usecs
+Nov 11 14:42:05 glymur kernel: port a98000.serial:0.0: PM: calling pm_runtime_force_resume @ 7320, parent: a98000.serial:0
+Nov 11 14:42:05 glymur kernel: port a98000.serial:0.0: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: hci_uart_qca serial0-0: PM: calling qca_resume [hci_uart] @ 7320, parent: serial0
+Nov 11 14:42:05 glymur kernel: hci_uart_qca serial0-0: PM: qca_resume [hci_uart] returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: geni_se_qup bc0000.geniqup: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: geni_se_qup bc0000.geniqup: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: geni_i2c b80000.i2c: PM: calling platform_pm_resume @ 7320, parent: bc0000.geniqup
+Nov 11 14:42:05 glymur kernel: geni_i2c b80000.i2c: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: geni_i2c b90000.i2c: PM: calling platform_pm_resume @ 7320, parent: bc0000.geniqup
+Nov 11 14:42:05 glymur kernel: geni_i2c b90000.i2c: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input0: PM: calling input_dev_resume @ 7320, parent: gpio-keys
+Nov 11 14:42:05 glymur kernel: input input0: PM: input_dev_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: regulator regulator.1: PM: calling regulator_resume @ 7320, parent: regulator-edp
+Nov 11 14:42:05 glymur kernel: regulator regulator.1: PM: regulator_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: scmi_mailbox_transport firmware:scmi: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: scmi_mailbox_transport firmware:scmi: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: arm-scmi arm-scmi.0.auto: PM: calling platform_pm_resume @ 7320, parent: firmware:scmi
+Nov 11 14:42:05 glymur kernel: arm-scmi arm-scmi.0.auto: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: scmi_protocol scmi_dev.1: PM: calling scmi_pm_resume @ 7320, parent: arm-scmi.0.auto
+Nov 11 14:42:05 glymur kernel: scmi_protocol scmi_dev.1: PM: scmi_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: regulator regulator.2: PM: calling regulator_resume @ 7320, parent: 18900000.rsc:regulators-0
+Nov 11 14:42:05 glymur kernel: regulator regulator.2: PM: regulator_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: scmi_protocol scmi_dev.2: PM: calling scmi_pm_resume @ 7320, parent: arm-scmi.0.auto
+Nov 11 14:42:05 glymur kernel: scmi_protocol scmi_dev.2: PM: scmi_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: regulator regulator.3: PM: calling regulator_resume @ 7320, parent: 18900000.rsc:regulators-0
+Nov 11 14:42:05 glymur kernel: regulator regulator.3: PM: regulator_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: regulator regulator.4: PM: calling regulator_resume @ 7320, parent: 18900000.rsc:regulators-0
+Nov 11 14:42:05 glymur kernel: regulator regulator.4: PM: regulator_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: scmi_mailbox_transport firmware:scmi-1: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: scmi_mailbox_transport firmware:scmi-1: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: arm-scmi arm-scmi.1.auto: PM: calling platform_pm_resume @ 7320, parent: firmware:scmi-1
+Nov 11 14:42:05 glymur kernel: arm-scmi arm-scmi.1.auto: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: scmi_protocol scmi_dev.3: PM: calling scmi_pm_resume @ 7320, parent: arm-scmi.1.auto
+Nov 11 14:42:05 glymur kernel: scmi_protocol scmi_dev.3: PM: scmi_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: scmi_protocol scmi_dev.4: PM: calling scmi_pm_resume @ 7320, parent: arm-scmi.1.auto
+Nov 11 14:42:05 glymur kernel: scmi_protocol scmi_dev.4: PM: scmi_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: camcc-glymur ade0000.clock-controller: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: camcc-glymur ade0000.clock-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-m31eusb2-phy fa0000.phy: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-m31eusb2-phy fa0000.phy: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: evacc-glymur abf0000.clock-controller: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: i2c_hid_of 4-0015: PM: calling i2c_hid_core_pm_resume [i2c_hid] @ 431, parent: i2c-4
+Nov 11 14:42:05 glymur kernel: evacc-glymur abf0000.clock-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-m31eusb2-phy 88e0000.phy: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-m31eusb2-phy 88e0000.phy: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: videocc-glymur aaf0000.clock-controller: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: videocc-glymur aaf0000.clock-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-smem ffe00000.smem: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: qcom-smem ffe00000.smem: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-socinfo qcom-socinfo: PM: calling platform_pm_resume @ 7320, parent: ffe00000.smem
+Nov 11 14:42:05 glymur kernel: qcom-socinfo qcom-socinfo: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_smp2p smp2p-adsp: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: qcom_smp2p smp2p-adsp: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_smp2p smp2p-cdsp: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: qcom_smp2p smp2p-cdsp: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_smp2p smp2p-soccp: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: qcom_smp2p smp2p-soccp: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_q6v5_pas d00000.remoteproc: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_q6v5_pas d00000.remoteproc: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom_q6v5_pas 6800000.remoteproc: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_q6v5_pas 6800000.remoteproc: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a200000.usb: PM: calling dwc3_qcom_pm_resume [dwc3_qcom] @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: i2c_hid_of 0-003a: PM: calling i2c_hid_core_pm_resume [i2c_hid] @ 959, parent: i2c-0
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a200000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 1081 usecs
+Nov 11 14:42:05 glymur kernel: qcom_q6v5_pas 32300000.remoteproc: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom_q6v5_pas 32300000.remoteproc: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a000000.usb: PM: calling dwc3_qcom_pm_resume [dwc3_qcom] @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: xhci-hcd xhci-hcd.2.auto: PM: calling platform_pm_resume @ 432, parent: a200000.usb
+Nov 11 14:42:05 glymur kernel: usb usb1: root hub lost power or was reset
+Nov 11 14:42:05 glymur kernel: xhci-hcd xhci-hcd.2.auto: PM: platform_pm_resume returned 0 after 1243 usecs
+Nov 11 14:42:05 glymur kernel: usb usb1: PM: calling usb_dev_resume @ 432, parent: xhci-hcd.2.auto
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a000000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 6291 usecs
+Nov 11 14:42:05 glymur kernel: msm-mdss ae00000.display-subsystem: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: xhci-hcd xhci-hcd.3.auto: PM: calling platform_pm_resume @ 145, parent: a000000.usb
+Nov 11 14:42:05 glymur kernel: usb usb2: root hub lost power or was reset
+Nov 11 14:42:05 glymur kernel: usb usb3: root hub lost power or was reset
+Nov 11 14:42:05 glymur kernel: msm-mdss ae00000.display-subsystem: PM: platform_pm_resume returned 0 after 417 usecs
+Nov 11 14:42:05 glymur kernel: qcom-pon c426000.spmi:pmic@0:pon@1300: PM: calling platform_pm_resume @ 7320, parent: 0-00
+Nov 11 14:42:05 glymur kernel: qcom-pon c426000.spmi:pmic@0:pon@1300: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@0:gpio@b800: PM: calling platform_pm_resume @ 7320, parent: 0-00
+Nov 11 14:42:05 glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@0:gpio@b800: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: platform c426000.spmi:pmic@0:adc@9000: PM: calling platform_pm_resume @ 7320, parent: 0-00
+Nov 11 14:42:05 glymur kernel: platform c426000.spmi:pmic@0:adc@9000: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,spmi-sdam c426000.spmi:pmic@0:nvram@7100: PM: calling platform_pm_resume @ 7320, parent: 0-00
+Nov 11 14:42:05 glymur kernel: qcom,spmi-sdam c426000.spmi:pmic@0:nvram@7100: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: PM: calling platform_pm_resume @ 7320, parent: 2-09
+Nov 11 14:42:05 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: PM: calling platform_pm_resume @ 7320, parent: 2-0a
+Nov 11 14:42:05 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-m31eusb2-phy fd3000.phy: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-m31eusb2-phy fd3000.phy: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-m31eusb2-phy fdd000.phy: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-m31eusb2-phy fdd000.phy: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a600000.usb: PM: calling dwc3_qcom_pm_resume [dwc3_qcom] @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: nvme nvme0: D3 entry latency set to 10 seconds
+Nov 11 14:42:05 glymur kernel: xhci-hcd xhci-hcd.3.auto: PM: platform_pm_resume returned 0 after 2737 usecs
+Nov 11 14:42:05 glymur kernel: usb usb2: PM: calling usb_dev_resume @ 7333, parent: xhci-hcd.3.auto
+Nov 11 14:42:05 glymur kernel: usb usb3: PM: calling usb_dev_resume @ 7336, parent: xhci-hcd.3.auto
+Nov 11 14:42:05 glymur kernel: hp-omnibook-5-ec 9-0076: PM: hpec_resume [hp_omnibook_5_ec] returned 0 after 18471 usecs
+Nov 11 14:42:05 glymur kernel: usb usb2: PM: usb_dev_resume returned 0 after 20316 usecs
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a600000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 26936 usecs
+Nov 11 14:42:05 glymur kernel: pm8941-pwrkey c426000.spmi:pmic@0:pon@1300:pwrkey: PM: calling platform_pm_resume @ 7320, parent: c426000.spmi:pmic@0:pon@1300
+Nov 11 14:42:05 glymur kernel: pm8941-pwrkey c426000.spmi:pmic@0:pon@1300:pwrkey: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a800000.usb: PM: calling dwc3_qcom_pm_resume [dwc3_qcom] @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: dwc3-qcom a800000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 24902 usecs
+Nov 11 14:42:05 glymur kernel: msm_dpu ae01000.display-controller: PM: calling pm_runtime_force_resume @ 7320, parent: ae00000.display-subsystem
+Nov 11 14:42:05 glymur kernel: msm_dpu ae01000.display-controller: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: msm-dp-display af6c000.displayport-controller: PM: calling pm_runtime_force_resume @ 7320, parent: ae00000.display-subsystem
+Nov 11 14:42:05 glymur kernel: msm-dp-display af6c000.displayport-controller: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: samsung_atana33xc20 aux-af6c000.displayport-controller: PM: calling pm_runtime_force_resume @ 7320, parent: af6c000.displayport-controller
+Nov 11 14:42:05 glymur kernel: samsung_atana33xc20 aux-af6c000.displayport-controller: PM: pm_runtime_force_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: i2c_hid_of 8-0010: PM: i2c_hid_core_pm_resume [i2c_hid] returned 0 after 61557 usecs
+Nov 11 14:42:05 glymur kernel: i2c_hid_of 0-003a: PM: i2c_hid_core_pm_resume [i2c_hid] returned 0 after 61629 usecs
+Nov 11 14:42:05 glymur kernel: input input9: PM: calling input_dev_resume @ 7320, parent: 0018:0416:C300.0003
+Nov 11 14:42:05 glymur kernel: input input9: PM: input_dev_resume returned 0 after 9 usecs
+Nov 11 14:42:05 glymur kernel: backlight dp_aux_backlight: PM: calling backlight_resume @ 7320, parent: aux-af6c000.displayport-controller
+Nov 11 14:42:05 glymur kernel: backlight dp_aux_backlight: PM: backlight_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: adreno 3d00000.gpu: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: adreno 3d00000.gpu: PM: platform_pm_resume returned 0 after 3 usecs
+Nov 11 14:42:05 glymur kernel: platform 3d6c000.gmu: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: platform 3d6c000.gmu: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input10: PM: calling input_dev_resume @ 7320, parent: 0018:04F3:44BF.0001
+Nov 11 14:42:05 glymur kernel: input input10: PM: input_dev_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input11: PM: calling input_dev_resume @ 7320, parent: 0018:04F3:44BF.0001
+Nov 11 14:42:05 glymur kernel: input input11: PM: input_dev_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input12: PM: calling input_dev_resume @ 7320, parent: 0018:04F3:44BF.0001
+Nov 11 14:42:05 glymur kernel: input input12: PM: input_dev_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: i2c_hid_of 4-0015: PM: i2c_hid_core_pm_resume [i2c_hid] returned 0 after 62095 usecs
+Nov 11 14:42:05 glymur kernel: input input14: PM: calling input_dev_resume @ 7320, parent: 0018:04F3:32EF.0002
+Nov 11 14:42:05 glymur kernel: input input14: PM: input_dev_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input16: PM: calling input_dev_resume @ 7320, parent: 0018:04F3:32EF.0002
+Nov 11 14:42:05 glymur kernel: input input16: PM: input_dev_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input17: PM: calling input_dev_resume @ 7320, parent: 0018:04F3:32EF.0002
+Nov 11 14:42:05 glymur kernel: input input17: PM: input_dev_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: rtc rtc0: PM: calling rtc_resume @ 7320, parent: pmic_glink.rtc-glink.0
+Nov 11 14:42:05 glymur kernel: rtc rtc0: PM: rtc_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: alarmtimer alarmtimer.4.auto: PM: calling platform_pm_resume @ 7320, parent: rtc0
+Nov 11 14:42:05 glymur kernel: alarmtimer alarmtimer.4.auto: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: leds input9::numlock: PM: calling led_resume @ 7320, parent: input9
+Nov 11 14:42:05 glymur kernel: leds input9::numlock: PM: led_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: leds input9::capslock: PM: calling led_resume @ 7320, parent: input9
+Nov 11 14:42:05 glymur kernel: leds input9::capslock: PM: led_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@1: PM: calling platform_pm_resume @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@1: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@2: PM: calling platform_pm_resume @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@2: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: leds input9::scrolllock: PM: calling led_resume @ 7320, parent: input9
+Nov 11 14:42:05 glymur kernel: leds input9::scrolllock: PM: led_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: calling platform_pm_resume @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: leds input9::compose: PM: calling led_resume @ 7320, parent: input9
+Nov 11 14:42:05 glymur kernel: leds input9::compose: PM: led_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: leds input9::kana: PM: calling led_resume @ 7320, parent: input9
+Nov 11 14:42:05 glymur kernel: leds input9::kana: PM: led_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: q6apm-lpass-dais 6800000.remoteproc:glink-edge:gpr:service@1:bedais: PM: calling platform_pm_resume @ 7320, parent: gprsvc:service:2:1
+Nov 11 14:42:05 glymur kernel: q6apm-lpass-dais 6800000.remoteproc:glink-edge:gpr:service@1:bedais: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: calling platform_pm_resume @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: calling platform_pm_resume @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: q6apm-dai 6800000.remoteproc:glink-edge:gpr:service@1:dais: PM: calling platform_pm_resume @ 7320, parent: gprsvc:service:2:1
+Nov 11 14:42:05 glymur kernel: q6apm-dai 6800000.remoteproc:glink-edge:gpr:service@1:dais: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: calling platform_pm_resume @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: calling platform_pm_resume @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: calling platform_pm_resume @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@c: PM: calling platform_pm_resume @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@c: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@d: PM: calling platform_pm_resume @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@d: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@e: PM: calling platform_pm_resume @ 7320, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 32300000.remoteproc:glink-edge:fastrpc:compute-cb@e: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: calling platform_pm_resume @ 7320, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: calling platform_pm_resume @ 7320, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: calling platform_pm_resume @ 7320, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: calling platform_pm_resume @ 7320, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: calling platform_pm_resume @ 7320, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: calling platform_pm_resume @ 7320, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+Nov 11 14:42:05 glymur kernel: qcom,fastrpc-cb 6800000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input18: PM: calling input_dev_resume @ 7320, parent: c426000.spmi:pmic@0:pon@1300:pwrkey
+Nov 11 14:42:05 glymur kernel: input input18: PM: input_dev_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: q6prm-lpass-clock 6800000.remoteproc:glink-edge:gpr:service@2:clock-controller: PM: calling platform_pm_resume @ 7320, parent: gprsvc:service:2:2
+Nov 11 14:42:05 glymur kernel: q6prm-lpass-clock 6800000.remoteproc:glink-edge:gpr:service@2:clock-controller: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input19: PM: calling input_dev_resume @ 7320, parent: 9-0076
+Nov 11 14:42:05 glymur kernel: input input19: PM: input_dev_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: rfkill rfkill0: PM: calling rfkill_resume @ 7320, parent: hci0
+Nov 11 14:42:05 glymur kernel: rfkill rfkill0: PM: rfkill_resume returned 0 after 4 usecs
+Nov 11 14:42:05 glymur kernel: qcom-sm8650-lpass-lpi-pinctrl 7760000.pinctrl: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-sm8650-lpass-lpi-pinctrl 7760000.pinctrl: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: leds platform::mute: PM: calling led_resume @ 7320, parent: 9-0076
+Nov 11 14:42:05 glymur kernel: leds platform::mute: PM: led_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: leds platform::micmute: PM: calling led_resume @ 7320, parent: 9-0076
+Nov 11 14:42:05 glymur kernel: leds platform::micmute: PM: led_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: leds platform::kbd_backlight: PM: calling led_resume @ 7320, parent: 9-0076
+Nov 11 14:42:05 glymur kernel: leds platform::kbd_backlight: PM: led_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: va_macro 7660000.codec: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: va_macro 7660000.codec: PM: platform_pm_resume returned 0 after 932 usecs
+Nov 11 14:42:05 glymur kernel: wsa_macro 6cb0000.codec: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: wsa_macro 6cb0000.codec: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: wsa_macro 6c90000.codec: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: wsa_macro 6c90000.codec: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-soundwire 6c80000.soundwire: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-soundwire 6c80000.soundwire: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: tx_macro 6a90000.codec: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: tx_macro 6a90000.codec: PM: platform_pm_resume returned 0 after 97 usecs
+Nov 11 14:42:05 glymur kernel: rx_macro 6a70000.codec: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: rx_macro 6a70000.codec: PM: platform_pm_resume returned 0 after 434 usecs
+Nov 11 14:42:05 glymur kernel: qcom-soundwire 6a80000.soundwire: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-soundwire 6a80000.soundwire: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: qcom-soundwire 7630000.soundwire: PM: calling platform_pm_resume @ 7320, parent: soc@0
+Nov 11 14:42:05 glymur kernel: qcom-soundwire 7630000.soundwire: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: PM: calling wcd9378_sdca_system_resume [snd_soc_wcd9378] @ 7320, parent: sdw-master-3-0
+Nov 11 14:42:05 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: PM: wcd9378_sdca_system_resume [snd_soc_wcd9378] returned 0 after 32 usecs
+Nov 11 14:42:05 glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: PM: calling class_function_resume [snd_soc_sdca_class_function] @ 7320, parent: sdw:3:0:0217:0110:00:3
+Nov 11 14:42:05 glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: PM: class_function_resume [snd_soc_sdca_class_function] returned 0 after 3537 usecs
+Nov 11 14:42:05 glymur kernel: snd-x1e80100 sound: PM: calling platform_pm_resume @ 7320, parent: platform
+Nov 11 14:42:05 glymur kernel: snd-x1e80100 sound: PM: platform_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: input input20: PM: calling input_dev_resume @ 7320, parent: card0
+Nov 11 14:42:05 glymur kernel: input input20: PM: input_dev_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: scmi-cpufreq scmi_dev.5: PM: calling scmi_pm_resume @ 7320, parent: arm-scmi.0.auto
+Nov 11 14:42:05 glymur kernel: scmi-cpufreq scmi_dev.5: PM: scmi_pm_resume returned 0 after 0 usecs
+Nov 11 14:42:05 glymur kernel: ieee80211 phy0: PM: wiphy_resume [cfg80211] returned 0 after 99985 usecs
+Nov 11 14:42:05 glymur kernel: rfkill rfkill1: PM: calling rfkill_resume @ 7320, parent: phy0
+Nov 11 14:42:05 glymur kernel: rfkill rfkill1: PM: rfkill_resume returned 0 after 2 usecs
+Nov 11 14:42:05 glymur kernel: nvme nvme0: 12/0/0 default/read/poll queues
+Nov 11 14:42:05 glymur kernel: usb usb1: PM: usb_dev_resume returned 0 after 127173 usecs
+Nov 11 14:42:05 glymur kernel: usb 1-1: PM: calling usb_dev_resume @ 7335, parent: usb1
+Nov 11 14:42:05 glymur kernel: usb usb3: PM: usb_dev_resume returned 0 after 207287 usecs
+Nov 11 14:42:05 glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+Nov 11 14:42:05 glymur kernel: usb 1-1: PM: usb_dev_resume returned 0 after 261551 usecs
+Nov 11 14:42:05 glymur kernel: PM: resume of devices complete after 397.669 msecs
+Nov 11 14:42:05 glymur kernel: GFP mask restored
+Nov 11 14:42:05 glymur kernel: OOM killer enabled.
+Nov 11 14:42:05 glymur kernel: Restarting tasks: Starting
+Nov 11 14:42:05 glymur kernel: Restarting tasks: Done
+Nov 11 14:42:05 glymur kernel: efivarfs: resyncing variable state
+Nov 11 14:42:05 glymur kernel: efivarfs: finished resyncing variable state
+Nov 11 14:42:05 glymur kernel: PM: suspend exit
+Nov 11 14:42:06 glymur kernel: wlo1: authenticate with xx:xx:xx:xx:xx:xx (local address=xx:xx:xx:xx:xx:xx)
+Nov 11 14:42:06 glymur kernel: wlo1: send auth to xx:xx:xx:xx:xx:xx (try 1/3)
+Nov 11 14:42:06 glymur kernel: wlo1: authenticate with xx:xx:xx:xx:xx:xx (local address=xx:xx:xx:xx:xx:xx)
+Nov 11 14:42:06 glymur kernel: wlo1: send auth to xx:xx:xx:xx:xx:xx (try 1/3)
+Nov 11 14:42:06 glymur kernel: wlo1: authenticated
+Nov 11 14:42:06 glymur kernel: wlo1: associate with xx:xx:xx:xx:xx:xx (try 1/3)
+Nov 11 14:42:06 glymur kernel: wlo1: RX AssocResp from xx:xx:xx:xx:xx:xx (capab=0x1511 status=0 aid=16)
+Nov 11 14:42:06 glymur kernel: wlo1: associated
+Nov 11 14:42:07 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 11 14:42:14 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 11 14:42:14 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 11 14:42:27 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
+Nov 11 14:42:28 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
