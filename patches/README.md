@@ -119,6 +119,42 @@ tree. `0005` reads the EC's pending event from register `0x00`, where HP's
 value left a fan notice unacknowledged and the event line firing about nine
 times a second (`docs/audit-2026-10-22.md`).
 
+Kernel `-22` (2026-11-11), same base. Upstream on November 11: qcom-next
+still `17bbb4b37bbc` (no 7.4 line yet), the laptops trees unchanged
+(`topic/glymur-laptops` `8c9d1255de`, `qcom-laptops` `98172d02f4`, both read
+for `-20`), mainline at `v7.4-rc2`, linux-next at `next-20261110` (229 commits
+since `next-20261105` in the drivers and device trees this laptop uses), and
+Patchwork (linux-arm-msm, alsa-devel) since November 1. Taken:
+
+- `backports/0087`, Peter Chen's "arm64: dts: qcom: glymur: Set
+  snps,resume-hs-terminations for USB controllers" (linux-next
+  `45cf7caf54`): with the M31 eUSB2 PHY, Qualcomm's hardware guide requires
+  `GUCTL1[10]` for USB2 resume, or a device cannot be reset after it
+  resumes. For USB after suspend and the full/low-speed problem (#6).
+- `backports/0088`, Qiang Yu's "clk: qcom: gcc: Set
+  FORCE_MEM_CORE_ON/FORCE_PERIPH_CORE_ON for PCIe pipe clocks" (linux-next
+  `fbfe0c4bee`), the Glymur part only: without it the PCIe endpoint can fail
+  to reach host memory (completion timeouts); here the NVMe and Wi-Fi are on
+  PCIe 5 and 4.
+- The config leaves out `CONFIG_NVME_SPEED_SWITCH` (below, under `-21`).
+
+Read and not taken: the AV1 encoder clock controller with its "XO clocks
+critical" change (`0a253c32a2`; a critical XO branch keeps the crystal
+vote, which deep sleep needs released, and nothing here uses AV1 encoding);
+the Glymur CRD regulator consolidation (CRD only; its L8B0 fix to 3.304 V
+confirms our HP value for the eUSB2 repeaters' rail, and Abel Vesa's
+ACPI-derived Mahua T14s fix sets L7B to 3.072 V, our value); "glymur: Drop
+L4F0" (we never declare it); the REFGEN supplies for the PCIe PHYs (needs
+LDOs we only declare from HP's votes); the Glymur eDP lane drive levels
+(HBR2 only; we run HBR); battmgr's USB connector temperature and input
+current limit (features). Candidates for a later kernel, each with a test:
+the two qmp-combo DisplayPort fixes ("delay Type-C mux switch while DP PHY
+is initializing", v2 of 2026-11-11; "Leave the USB PCS alone in DP-only
+mode", v3) for the external display step, and Vishnu Reddy's Iris power-off
+and runtime-PM fixes (v2, 2026-11-10/11) for the Mahua video trials. Not
+posted yet: Akhil P Oommen's GMU series v3 (the clock controllers'
+`sync_state`), anything new for the WCD9378 or the PMIC GLink RTC.
+
 Kernel `-21` (2026-11-10, `docs/linux-runbook-21-2026-11-10.md`), same
 base: qcom-next is still `17bbb4b37bbc` (fetched 2026-11-10), linux-next
 moved to `next-20261109` with nothing new for the drivers changed here.

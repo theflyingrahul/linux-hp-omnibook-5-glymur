@@ -3,11 +3,11 @@ set -euo pipefail
 
 # Install everything staged on the USB. See README.md.
 #   bash install-from-usb.sh [--keep-ubuntu-mesa] [kernel release]
-# Default kernel: 7.3.0-glymur-21.
+# Default kernel: 7.3.0-glymur-22.
 
 SYSTEM_MESA=1
 if [ "${1:-}" = --keep-ubuntu-mesa ]; then SYSTEM_MESA=0; shift; fi
-KREL="${1:-7.3.0-glymur-21}"
+KREL="${1:-7.3.0-glymur-22}"
 K="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 [ "$(id -u)" -ne 0 ] || { echo 'run as your normal user, not with sudo' >&2; exit 1; }
 [ "$(findmnt -n -o LABEL /)" = glymur-root ] || { echo 'not booted from the SSD install (glymur-root); refusing' >&2; exit 1; }
@@ -151,7 +151,7 @@ fi
 sync
 echo
 echo "Done. Reboot into \"Ubuntu on SSD: test device tree\" and follow"
-echo "docs/linux-runbook-21-2026-11-10.md. The checks, from a terminal:"
+echo "docs/linux-runbook-22-2026-11-11.md. The checks, from a terminal:"
 echo "  sudo bash ~/check-chid.sh       (hardware IDs for systemd-stub/stubble; no external monitor)"
 echo "  sudo bash ~/check-efivars-write.sh   (one EFI variable write; --verify after the reboot)"
 echo "  sudo bash ~/check-rtc.sh        (RTC time, UTC or local, one alarm)"
