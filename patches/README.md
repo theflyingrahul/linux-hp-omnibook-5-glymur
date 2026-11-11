@@ -146,6 +146,13 @@ Fixes from `-20`'s boots (`docs/runbook-results-20-2026-11-10.md`):
   Mahua's firmware rejects it on H.264, and every decoder session attaches
   it in mainline too.
 
+For `-22`, the config also leaves out `CONFIG_NVME_SPEED_SWITCH`: qcom-next
+carries a FROMLIST adaptive NVMe link-rate switching series (Liao Xuan,
+Hygon/Kylin, `565e1c0bc2d6` and two follow-ups; not in mainline) whose
+retrain to Gen5 failed every one to two seconds on `-21`, freezing NVMe I/O
+each time, and which has no suspend hook (`docs/runbook-results-21-2026-11-10.md`).
+On `-21` it is turned off at run time.
+
 A fresh `prepare` applies all of it (74 commits) and gives the same tree as
 the incremental work. Built on the 48-core cross-build host with kernel.org
 GCC 15.2 and binutils 2.45 (the WSL builds used Ubuntu's GCC 15.2 and

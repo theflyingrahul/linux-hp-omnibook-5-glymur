@@ -95,7 +95,10 @@ It checks every file against `SHA256SUMS`, then installs:
   staged;
 - HP's video firmware (`qcvss8480.mbn`), when `hp-fw/` is staged;
 - from `-20`, `efivarfs` read-write in `/etc/fstab` and HP's CDSP FastRPC
-  files; from `-21`, s2idle as the only suspend mode
+  files; from `-21`, NVMe adaptive link-rate switching off (a udev rule,
+  `/etc/udev/rules.d/90-glymur-nvme-speed.rules`: qcom-next's FROMLIST
+  feature failed every few seconds here and has no suspend hook), the
+  keyboard backlight timeout OSD extension, and s2idle as the only suspend mode
   (`/etc/systemd/sleep.conf.d/glymur-s2idle.conf`, `MemorySleepMode=s2idle`:
   the firmware refuses deep sleep);
 - the check scripts, into your home directory.
@@ -508,13 +511,17 @@ and `grub-install` and fwupd stay disabled.
 
 ### `check-efivars-write.sh`
 
-    sudo bash check-efivars-write.sh [--verify]
+    sudo bash check-efivars-write.sh [--verify | --delete]
 
 From kernel `-20`. Writes one non-volatile variable, `GlymurWriteTest`
 under this project's own GUID (32 bytes), reads it back and remembers its
 contents in `/var/lib/glymur/`. After a reboot, `--verify` checks that the
-variable survived unchanged and deletes it. It writes nothing else; if
-`efivarfs` is mounted read-only it remounts it for the test and back.
+variable survived unchanged and deletes it; `--delete` only deletes it.
+efivarfs deletes with attributes 0, which Qualcomm's TrustZone variable
+service refuses (`rm`: Invalid input, `-21`), so the script then writes only
+the variable's 4-byte attribute header, a `SetVariable` with its own
+attributes and no data. It writes nothing else; if `efivarfs` is mounted
+read-only it remounts it for the test and back.
 
 ### `check-rtc.sh`
 

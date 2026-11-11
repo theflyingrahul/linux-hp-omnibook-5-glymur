@@ -17,6 +17,35 @@ The rules of the `-20` runbook still hold (UEFI writes only through
 `check-efivars-write.sh`, no TPM tools, a monitor only at the end of B, the
 audio-session escape). "Ubuntu on SSD: previous kernel" now boots `-20`.
 
+## Next session (after November 11's afternoon), still on `-21`
+
+Done: A1 to A6, A9, A10 (power button), USB-A, suspend (four cycles resumed,
+the 10-minute battery cycle froze), boot B's UEFI check, boot options and
+video trials. In this order:
+
+1. **Refresh the kit:** `bash install-from-usb.sh` from the stick (scripts
+   only; it also installs a udev rule that turns NVMe link-rate switching
+   off, and turns it off now). Check:
+   `cat /sys/class/nvme/nvme0/speed/enable` prints 0.
+2. **Remove boot B's test variable:**
+   `sudo bash ~/check-efivars-write.sh --delete` (prints `deleted`).
+3. **Headset with the new path test:** `sudo bash ~/check-headset.sh` with the
+   combo headset: the tones through the RX macro, then the 12-input
+   microphone scan while you talk (`docs/runbook-results-21-2026-11-10.md`
+   has why).
+4. **USB-C:** the mouse in each USB-C port, then the USB-C stick in each
+   (`sudo bash ~/check-usb.sh` after each).
+5. **Charging:** `sudo bash ~/charging-watch.sh`, then
+   `sudo bash ~/check-battmgr-notify.sh`.
+6. **Suspend, from a text console** (Ctrl+Alt+F3, log in):
+   `sudo bash ~/check-suspend.sh --console`. It turns NVMe link-rate
+   switching off first. Do the cycles as before; at the end answer `y` to
+   the 10-minute drain cycle, **on battery**. If it freezes, the console
+   shows the last kernel line: photograph it, then hold the power button.
+   If it comes back: run it once more with `--sync-state` (charger in),
+   and hand back both logs: the residency lines say whether the SoC slept.
+7. Boot C (the daily entry) as below. B7 (external displays) stays last.
+
 ## Continuation, November 11 (still on `-21`, test device tree)
 
 Done on November 10: A1 to A6 and A9 (`docs/runbook-results-21-2026-11-10.md`).

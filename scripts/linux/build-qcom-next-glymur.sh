@@ -70,6 +70,9 @@ CONFIG_QCOM_CRYPTO_CORE=m
 CONFIG_HW_RANDOM_QCOM=m
 # RTC read through the ADSP's PMIC GLink service, as Windows does; read-only.
 CONFIG_RTC_DRV_QCOM_GLINK=m
+# qcom-next's FROMLIST adaptive NVMe link-rate switching (not in mainline),
+# from -22: it failed every few seconds here and has no suspend hook.
+# CONFIG_NVME_SPEED_SWITCH is not set
 CFG
 
 cp "$UBUNTU_CONFIG" "$OUT/.config"

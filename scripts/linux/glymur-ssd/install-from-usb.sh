@@ -101,6 +101,21 @@ if [ -d "$K/audio" ]; then
     sudo bash "$K/install-audio.sh"
 fi
 
+# qcom-next's FROMLIST adaptive NVMe link-rate switching (not in mainline)
+# fails every few seconds here (Gen5, -11), freezing NVMe I/O each time, and
+# has no suspend hook; its timer can retrain the link while PCIe suspends.
+# Off from -21 at run time; -22 builds without it.
+RULE=/etc/udev/rules.d/90-glymur-nvme-speed.rules
+if [ ! -f "$RULE" ]; then
+    echo "== NVMe: adaptive link-rate switching off"
+    echo 'ACTION=="add|change", SUBSYSTEM=="nvme", KERNEL=="nvme[0-9]*", ATTR{speed/enable}="0"' |
+        sudo tee "$RULE" >/dev/null
+fi
+for f in /sys/class/nvme/nvme*/speed/enable; do
+    [ -w "$f" ] || [ -e "$f" ] || continue
+    echo 0 | sudo tee "$f" >/dev/null && echo "$f: $(cat "$f")"
+done
+
 # GNOME shows the backlight level itself; the timeout (hold F5) needs this
 # extension. A new extension loads at the next login on Wayland.
 EXT=kbd-backlight-timeout-osd@hp-omnibook-5

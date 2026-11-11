@@ -111,7 +111,7 @@ blockers() {
         [ -r "$c/clk_prepare_count" ] || continue
         printf '%-28s prepared %s enabled %s  %s\n' "${c##*/}" \
             "$(cat "$c/clk_prepare_count" 2>/dev/null)" "$(cat "$c/clk_enable_count" 2>/dev/null)" \
-            "$(tr '\n' ' ' < "$c/clk_consumers" 2>/dev/null | tr -s ' ' | cut -c1-150)"
+            "$([ -r "$c/clk_consumers" ] && tr '\n' ' ' < "$c/clk_consumers" | tr -s ' ' | cut -c1-150)"
     done | head -24
     echo "-- interconnect paths with a non-zero vote"
     awk 'NF >= 3 && ($(NF-1) + 0 > 0 || $NF + 0 > 0)' "$D/interconnect/interconnect_summary" 2>/dev/null | head -40
@@ -236,6 +236,16 @@ pmtest() {
     journalctl -k --no-pager --since "@$t0" -o short-monotonic |
         grep -E 'PM:|suspend|resum|error|fail|timeout|Unbalanced|returns' | tail -40
 }
+# qcom-next's adaptive NVMe link-rate switching retrains the link from a
+# timer with no suspend hook, and failed every few seconds on -21; the
+# drain cycle froze right after a run of them. Off for the test (and from
+# install-from-usb.sh's udev rule for daily use).
+sect "NVMe adaptive link-rate switching"
+for f in /sys/class/nvme/nvme*/speed/enable; do
+    [ -e "$f" ] || { echo "not in this kernel"; break; }
+    echo "$f was $(cat "$f")"
+    echo 0 > "$f" && echo "$f now $(cat "$f")"
+done
 echo "pm_test levels: $(cat /sys/power/pm_test 2>&1)"
 pmtest freezer
 pmtest devices

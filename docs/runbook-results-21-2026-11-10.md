@@ -157,3 +157,32 @@ Captures: `video-test-20261111T152603.txt`, `efivar-write-20261111T152522.txt`,
 | B6 video, `--mahua` | The new first trial (partial-data buffer kept to AV1, `diag_partial_av1_only=1`) did not decode: ffmpeg was killed (137) like the other trials, and the firmware's "Buffer type 5 should be used for AV1 only" error is gone in it, so that complaint was not the stall. The same settings without the option (trial 2) still log the complaint and stall. Trials 3 to 5 then fail at `can't configure decoder` (exit 234), the core being wedged after the stall. Every trial also logs `power control was 0x3, status 0x3 after release (timed out, bit 0x10)`. |
 | B5 suspend without `pd_ignore_unused` | Not run (suspend: the 10-minute battery cycle froze in A; owner asked to leave it). |
 | B7 external display | Not run. |
+
+## Review on the development machine (November 11)
+
+- **NVMe link-rate switching.** `nvme nvme0: failed to set target rate Gen5
+  (-11), trying rollback to Gen1` appears 482 times in the boot that froze,
+  every one to two seconds. It comes from qcom-next's FROMLIST "nvme: Add
+  adaptive PCIe link rate switching" (Hygon/Kylin, `565e1c0bc2d6` and two
+  follow-ups; not in mainline), enabled in our config
+  (`CONFIG_NVME_SPEED_SWITCH=y`). Each attempt freezes all NVMe I/O and
+  retrains the PCIe link, fails, and retrains back. Its timer queues the
+  work on the system workqueue, which is not frozen for suspend, and
+  `nvme_suspend()` does not stop it, so a retrain can reach a PCIe host that
+  has already suspended. A retrain ran within a second of every suspend
+  entry of that boot, the five that resumed included, so it does not
+  explain why the drain cycle alone froze; it is a race that can hit any
+  cycle. It is off from now on: `install-from-usb.sh` installs a udev rule
+  that writes 0 to `/sys/class/nvme/nvme*/speed/enable`, `check-suspend.sh`
+  turns it off before the cycles, and `-22` builds without it.
+- **Shallow sleep.** The blocker snapshot is taken awake, so it lists the
+  normal awake votes (`bi_tcxo` prepared 29 times, the GPU's `gpu_cc_cxo_clk`,
+  the Bluetooth UART's QUP vote); what stays on in sleep needs the
+  `--sync-state` run. The script also printed a shell error per clock: this
+  kernel has no `clk_consumers` file (fixed).
+- **UEFI delete.** efivarfs deletes with attributes 0, which Qualcomm's
+  TrustZone variable service refuses (`EINVAL`; the Linux driver passes a
+  size-0 write through). `check-efivars-write.sh` now falls back to writing
+  only the variable's 4-byte attribute header (`SetVariable` with its own
+  attributes and no data, a delete in the UEFI specification), and
+  `--delete` removes the test variable left by boot B.
