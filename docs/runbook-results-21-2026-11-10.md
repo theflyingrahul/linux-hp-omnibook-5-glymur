@@ -84,3 +84,13 @@ lid open) to separate "long sleep" from "on battery"; with `--console`
 and the console on a text VT; then with `hp_omnibook_5_ec` unloaded
 (no standby message to the EC) if it still freezes. The drain figure
 without a working sleep depth is not yet useful.
+
+## USB, boot A (November 11, 15:05, nothing plugged in the USB-C ports)
+
+`captures/2026-11-10-k21/usb-test-20261111T150531.txt`. USB-A (right port,
+`a000000.usb`): the installer stick enumerates at SuperSpeed (5000M, mass
+storage). At boot it took five attempts with `error -71`, the flakiness of
+`-18`; it works once up. Camera (`a200000.usb`) fine. USB-C: both
+controllers (`a600000`, `a800000`) are bound, both ports in device role with
+no partner, because nothing was plugged in; the mouse and the USB-C stick in
+each USB-C port are still to do (they need hands).
