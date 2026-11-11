@@ -516,8 +516,8 @@ running after it ended. Found live, still running, on the next boot:
 ```
 root  17961  1  cat /sys/kernel/tracing/trace_pipe
 root  17963  1  journalctl -k -f -n 0 --no-pager -o short-monotonic
-root  17964  1  bash /home/rahul/charging-watch.sh   (the "TRACE" while-read loop, state D)
-root  17965  1  bash /home/rahul/charging-watch.sh   (the "KERN" while-read loop)
+root  17964  1  bash /home/user/charging-watch.sh   (the "TRACE" while-read loop, state D)
+root  17965  1  bash /home/user/charging-watch.sh   (the "KERN" while-read loop)
 ```
 
 All four have `ppid=1`: their original script invocation is gone, so the

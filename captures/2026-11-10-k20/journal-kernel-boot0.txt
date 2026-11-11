@@ -955,7 +955,7 @@ Oct 02 23:05:39.194096 glymur kernel: msm_dpu ae01000.display-controller: [drm] 
 Oct 02 23:05:39.275526 glymur kernel: usb 1-1: New USB device found, idVendor=30c9, idProduct=00d9, bcdDevice= 0.07
 Oct 02 23:05:39.279536 glymur kernel: usb 1-1: New USB device strings: Mfr=3, Product=1, SerialNumber=2
 Oct 02 23:05:39.279808 glymur kernel: usb 1-1: Product: HP True Vision FHD Camera
-Oct 02 23:05:39.279891 glymur kernel: usb 1-1: Manufacturer: DUKUF0A8PLT4ZB
+Oct 02 23:05:39.279891 glymur kernel: usb 1-1: Manufacturer: <id>
 Oct 02 23:05:39.279973 glymur kernel: usb 1-1: SerialNumber: <serial>
 Oct 02 23:05:39.297487 glymur kernel: remoteproc remoteproc1: remote processor adsp is now up
 Oct 02 23:05:39.336514 glymur kernel: qcom,apr 6800000.remoteproc:glink-edge.adsp_apps.-1.-1: Adding APR/GPR dev: gprsvc:service:2:1
@@ -1178,7 +1178,7 @@ Oct 02 23:05:46.913489 glymur kernel: nvme nvme0: failed to set target rate Gen5
 Oct 02 23:05:46.939487 glymur kernel: qcom-soundwire 6a80000.soundwire: swrm_wait_for_frame_gen_enabled: link status not disconnected
 Oct 02 23:05:46.941498 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: SWFT not available
 Oct 02 23:05:46.946490 glymur kernel: ------------[ cut here ]------------
-Oct 02 23:05:46.946518 glymur kernel: UBSAN: shift-out-of-bounds in /home/login/glymur-build/.work/linux-qcom-next-20/sound/soc/sdca/sdca_asoc.c:501:20
+Oct 02 23:05:46.946518 glymur kernel: UBSAN: shift-out-of-bounds in /home/user/glymur-build/.work/linux-qcom-next-20/sound/soc/sdca/sdca_asoc.c:501:20
 Oct 02 23:05:46.946528 glymur kernel: shift exponent 64 is too large for 64-bit type 'long unsigned int'
 Oct 02 23:05:46.946539 glymur kernel: CPU: 7 UID: 0 PID: 992 Comm: (udev-worker) Not tainted 7.3.0-glymur-20 #1 PREEMPT(lazy) 
 Oct 02 23:05:46.946552 glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
@@ -1797,7 +1797,7 @@ Nov 10 13:27:29.133867 glymur kernel: wlo1: associate with xx:xx:xx:xx:xx:xx (tr
 Nov 10 13:27:29.150880 glymur kernel: wlo1: RX AssocResp from xx:xx:xx:xx:xx:xx (capab=0x1511 status=0 aid=16)
 Nov 10 13:27:29.174906 glymur kernel: wlo1: associated
 Nov 10 13:27:42.594791 glymur kernel: ------------[ cut here ]------------
-Nov 10 13:27:42.594869 glymur kernel: UBSAN: shift-out-of-bounds in /home/login/glymur-build/.work/linux-qcom-next-20/sound/soc/soc-ops.c:169:10
+Nov 10 13:27:42.594869 glymur kernel: UBSAN: shift-out-of-bounds in /home/user/glymur-build/.work/linux-qcom-next-20/sound/soc/soc-ops.c:169:10
 Nov 10 13:27:42.594892 glymur kernel: shift exponent 64 is too large for 64-bit type 'long unsigned int'
 Nov 10 13:27:42.594903 glymur kernel: CPU: 11 UID: 0 PID: 13840 Comm: amixer Not tainted 7.3.0-glymur-20 #1 PREEMPT(lazy) 
 Nov 10 13:27:42.594918 glymur kernel: Hardware name: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026

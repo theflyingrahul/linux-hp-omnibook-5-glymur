@@ -3,7 +3,9 @@ set -euo pipefail
 
 # Replace personal identifiers in text captures before they are committed:
 # MAC and Bluetooth addresses, UUIDs (partition, filesystem, PARTUUID=, and
-# systemd's \x2d-escaped unit names), USB serial numbers, the Windows volume
+# systemd's \x2d-escaped unit names), USB serial numbers and
+# serial-like manufacturer strings (the camera's), user names in /home and
+# /media paths, the Windows volume
 # labels lsblk prints, e-mail and IPv4 addresses, and the user name
 # (SANITIZE_USER, default the running user). Edits the files in place, then
 # lists any line that still looks like an identifier so it can be checked by
@@ -20,6 +22,9 @@ for f in "$@"; do
         -e 's/[0-9A-Fa-f]{8}(\\x2d[0-9A-Fa-f]{4}){3}\\x2d[0-9A-Fa-f]{12}/<uuid>/g' \
         -e 's/(SerialNumber: ).*/\1<serial>/' \
         -e 's/(iSerial +[0-9]+ ).*/\1<serial>/' \
+        -e 's/(Manufacturer: )[A-Z0-9]{12,}$/\1<id>/' \
+        -e 's/(iManufacturer +[0-9]+ )[A-Z0-9]{12,}$/\1<id>/' \
+        -e 's#(/home/|/media/)[^/ ]+#\1user#g' \
         -e 's/(BitLocker +)[^ ]+/\1<label>/' \
         -e 's/([^ ]+)( +Windows +[0-9]+\/[0-9]+\/[0-9]+ +BitLocker)/<label>\2/' \
         -e 's/[A-Za-z0-9._+-]+@[A-Za-z0-9-]+\.[A-Za-z.]+/<email>/g' \

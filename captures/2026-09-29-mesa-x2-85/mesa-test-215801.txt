@@ -234,5 +234,5 @@ devfreq after: cur=310000000 trans_stat:
  1350000000:         1         0         0         0         0         0         0         0         0        52
 Total transition : 11
 
-Saved to /home/rahul/glymur-logs/mesa-test-20260929T215801.txt
+Saved to /home/user/glymur-logs/mesa-test-20260929T215801.txt
 If everything above rendered, try the whole desktop: mesa-glymur-run --desktop on, then log out and in.

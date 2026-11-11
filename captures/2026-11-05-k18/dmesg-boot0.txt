@@ -1113,7 +1113,7 @@
 [    4.929901] usb 1-1: New USB device found, idVendor=30c9, idProduct=00d9, bcdDevice= 0.07
 [    4.933361] usb 1-1: New USB device strings: Mfr=3, Product=1, SerialNumber=2
 [    4.933363] usb 1-1: Product: HP True Vision FHD Camera
-[    4.933364] usb 1-1: Manufacturer: DUKUF0A8PLT4ZB
+[    4.933364] usb 1-1: Manufacturer: <id>
 [    4.933365] usb 1-1: SerialNumber: <serial>
 [    4.934803] qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier a800000.usb for /pmic-glink/connector@1
 [    4.942266] tx_macro 6a90000.codec: Driver needs fixing: Unsorted reg_defaults, sorting the copy

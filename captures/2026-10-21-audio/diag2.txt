@@ -68,8 +68,8 @@ Oct 21 20:12:41 glymur kernel:  snd_soc_lpass_wsa_macro soundwire_bus qmi_tmd gp
 /sys/bus/soundwire/devices/sdw:1:0:0217:0204:00:1 active UNATTACHED
 == audio process users
                      USER        PID ACCESS COMMAND
-/dev/snd/controlC0:  rahul      3410 F.... pipewire
-                     rahul      3421 F.... wireplumber
-/dev/snd/pcmC0D0p:   rahul      3410 F...m pipewire
-/dev/snd/pcmC0D1c:   rahul      3410 F...m pipewire
-/dev/snd/seq:        rahul      3410 F.... pipewire
+/dev/snd/controlC0:  user      3410 F.... pipewire
+                     user      3421 F.... wireplumber
+/dev/snd/pcmC0D0p:   user      3410 F...m pipewire
+/dev/snd/pcmC0D1c:   user      3410 F...m pipewire
+/dev/snd/seq:        user      3410 F.... pipewire

@@ -1113,7 +1113,7 @@ Oct 02 23:05:42.252315 glymur kernel: msm_dpu ae01000.display-controller: [drm] 
 Oct 02 23:05:42.273288 glymur kernel: usb 1-1: New USB device found, idVendor=30c9, idProduct=00d9, bcdDevice= 0.07
 Oct 02 23:05:42.276286 glymur kernel: usb 1-1: New USB device strings: Mfr=3, Product=1, SerialNumber=2
 Oct 02 23:05:42.276386 glymur kernel: usb 1-1: Product: HP True Vision FHD Camera
-Oct 02 23:05:42.276454 glymur kernel: usb 1-1: Manufacturer: DUKUF0A8PLT4ZB
+Oct 02 23:05:42.276454 glymur kernel: usb 1-1: Manufacturer: <id>
 Oct 02 23:05:42.276510 glymur kernel: usb 1-1: SerialNumber: <serial>
 Oct 02 23:05:42.278004 glymur kernel: qcom_pmic_glink pmic-glink: Failed to create device link (0x180) with supplier a800000.usb for /pmic-glink/connector@1
 Oct 02 23:05:42.285287 glymur kernel: tx_macro 6a90000.codec: Driver needs fixing: Unsorted reg_defaults, sorting the copy

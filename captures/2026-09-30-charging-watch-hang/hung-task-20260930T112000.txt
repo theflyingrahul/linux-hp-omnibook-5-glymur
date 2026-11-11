@@ -1,8 +1,8 @@
 === orphaned processes, Wed Sep 30 11:28:31 IST 2026 ===
 root       17961       1  0 11:16 ?        00:00:00 cat /sys/kernel/tracing/trace_pipe
 root       17963       1  0 11:16 ?        00:00:00 journalctl -k -f -n 0 --no-pager -o short-monotonic
-root       17964       1  0 11:16 ?        00:00:00 bash /home/rahul/charging-watch.sh
-root       17965       1  0 11:16 ?        00:00:00 bash /home/rahul/charging-watch.sh
+root       17964       1  0 11:16 ?        00:00:00 bash /home/user/charging-watch.sh
+root       17965       1  0 11:16 ?        00:00:00 bash /home/user/charging-watch.sh
 
 === kernel hung-task warnings, journalctl -b 0, first through fifth occurrence ===
 Sep 30 11:20:02.886794 glymur kernel: INFO: task bash:17964 blocked for more than 122 seconds.

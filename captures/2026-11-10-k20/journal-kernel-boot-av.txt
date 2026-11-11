@@ -961,7 +961,7 @@ Oct 02 23:05:39.295323 glymur kernel: msm_dpu ae01000.display-controller: [drm:a
 Oct 02 23:05:39.307241 glymur kernel: usb 1-1: New USB device found, idVendor=30c9, idProduct=00d9, bcdDevice= 0.07
 Oct 02 23:05:39.311248 glymur kernel: usb 1-1: New USB device strings: Mfr=3, Product=1, SerialNumber=2
 Oct 02 23:05:39.311526 glymur kernel: usb 1-1: Product: HP True Vision FHD Camera
-Oct 02 23:05:39.311611 glymur kernel: usb 1-1: Manufacturer: DUKUF0A8PLT4ZB
+Oct 02 23:05:39.311611 glymur kernel: usb 1-1: Manufacturer: <id>
 Oct 02 23:05:39.311703 glymur kernel: usb 1-1: SerialNumber: <serial>
 Oct 02 23:05:39.330205 glymur kernel: remoteproc remoteproc1: remote processor adsp is now up
 Oct 02 23:05:39.378222 glymur kernel: qcom,apr 6800000.remoteproc:glink-edge.adsp_apps.-1.-1: Adding APR/GPR dev: gprsvc:service:2:1
@@ -1302,7 +1302,7 @@ Oct 02 23:05:47.222196 glymur kernel: nvme nvme0: failed to set target rate Gen5
 Oct 02 23:05:47.330249 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
 Oct 02 23:05:47.426215 glymur kernel: nvme nvme0: failed to set target rate Gen5 (-11), trying rollback to Gen1
 Oct 02 23:05:47.431399 glymur kernel: ------------[ cut here ]------------
-Oct 02 23:05:47.431429 glymur kernel: UBSAN: shift-out-of-bounds in /home/login/glymur-build/.work/linux-qcom-next-20/sound/soc/sdca/sdca_asoc.c:501:20
+Oct 02 23:05:47.431429 glymur kernel: UBSAN: shift-out-of-bounds in /home/user/glymur-build/.work/linux-qcom-next-20/sound/soc/sdca/sdca_asoc.c:501:20
 Oct 02 23:05:47.431436 glymur kernel: shift exponent 64 is too large for 64-bit type 'long unsigned int'
 Oct 02 23:05:47.432237 glymur kernel: CPU: 0 UID: 0 PID: 1449 Comm: (udev-worker) Tainted: G        W           7.3.0-glymur-20 #1 PREEMPT(lazy) 
 Oct 02 23:05:47.432251 glymur kernel: Tainted: [W]=WARN

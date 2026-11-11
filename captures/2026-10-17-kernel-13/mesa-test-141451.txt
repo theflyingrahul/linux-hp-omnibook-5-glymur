@@ -206,8 +206,8 @@ GPU0:
 	driverName         = turnip Mesa driver
 	driverInfo         = Mesa 26.3.0-devel (git-cec59b2997)
 	conformanceVersion = 1.4.6.1
-	deviceUUID         = e7e9ef2b-9ca1-f8ec-de2d-305159426551
-	driverUUID         = b91c90f1-2cd7-c043-2541-161b4bc376d4
+	deviceUUID         = <uuid>
+	driverUUID         = <uuid>
 
 ==== load: glmark2 (GLES 2, Wayland), about 50 s (14:14:51)
 $ mesa-glymur-run glmark2-es2-wayland --size 1280x800 -b build:use-vbo=true:duration=10 -b texture:duration=10 -b shading:shading=phong:duration=10 -b refract:duration=10 -b terrain:duration=10
@@ -253,5 +253,5 @@ devfreq after: cur=310000000 trans_stat:
  1350000000:        52         1         1         0         0         1        12        17         0     50879
 Total transition : 285
 
-Saved to /home/rahul/glymur-logs/mesa-test-20261017T141451.txt
+Saved to /home/user/glymur-logs/mesa-test-20261017T141451.txt
 If everything above rendered, try the whole desktop: mesa-glymur-run --desktop on, then log out and in.

@@ -1114,7 +1114,7 @@ Oct 02 23:05:41.888331 glymur kernel: hid-multitouch 0018:04F3:32EF.0002: input,
 Oct 02 23:05:41.936331 glymur kernel: usb 1-1: New USB device found, idVendor=30c9, idProduct=00d9, bcdDevice= 0.07
 Oct 02 23:05:41.939385 glymur kernel: usb 1-1: New USB device strings: Mfr=3, Product=1, SerialNumber=2
 Oct 02 23:05:41.939510 glymur kernel: usb 1-1: Product: HP True Vision FHD Camera
-Oct 02 23:05:41.939597 glymur kernel: usb 1-1: Manufacturer: DUKUF0A8PLT4ZB
+Oct 02 23:05:41.939597 glymur kernel: usb 1-1: Manufacturer: <id>
 Oct 02 23:05:41.939676 glymur kernel: usb 1-1: SerialNumber: <serial>
 Oct 02 23:05:41.950338 glymur kernel: audit: type=1400 audit(1790962541.948:2): apparmor="STATUS" operation="profile_load" profile="unconfined" name="Discord" pid=1137 comm="apparmor_parser"
 Oct 02 23:05:41.950378 glymur kernel: audit: type=1400 audit(1790962541.948:3): apparmor="STATUS" operation="profile_load" profile="unconfined" name=4D6F6E676F444220436F6D70617373 pid=1139 comm="apparmor_parser"

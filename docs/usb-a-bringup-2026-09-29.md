@@ -303,7 +303,7 @@ SuperSpeed side simply gave up retrying, and the device stayed usable
 afterward over the High-Speed pins of the same USB-A connector (`lsusb
 -t`: bus 2 "480M" with the mass-storage device attached, bus 3 "10000M"
 still a bare root hub with no device). The stick mounted at
-`/run/media/rahul/UBUNTU 26_0`, 86% used, 7.4G/1.1G avail — readable and
+`/run/media/user/UBUNTU 26_0`, 86% used, 7.4G/1.1G avail — readable and
 otherwise normal, just at roughly 1/10th its usual SuperSpeed throughput,
 and with the "not properly unmounted" FAT warning from the 13-minute gap
 with no clean unmount in between.

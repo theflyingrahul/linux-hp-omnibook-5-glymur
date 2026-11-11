@@ -1110,7 +1110,7 @@ Oct 02 23:05:41.860347 glymur kernel: tx_macro 6a90000.codec: Driver needs fixin
 Oct 02 23:05:41.876348 glymur kernel: usb 1-1: New USB device found, idVendor=30c9, idProduct=00d9, bcdDevice= 0.07
 Oct 02 23:05:41.880345 glymur kernel: usb 1-1: New USB device strings: Mfr=3, Product=1, SerialNumber=2
 Oct 02 23:05:41.880487 glymur kernel: usb 1-1: Product: HP True Vision FHD Camera
-Oct 02 23:05:41.880583 glymur kernel: usb 1-1: Manufacturer: DUKUF0A8PLT4ZB
+Oct 02 23:05:41.880583 glymur kernel: usb 1-1: Manufacturer: <id>
 Oct 02 23:05:41.880669 glymur kernel: usb 1-1: SerialNumber: <serial>
 Oct 02 23:05:41.885363 glymur kernel: audit: type=1400 audit(1790962541.883:2): apparmor="STATUS" operation="profile_load" profile="unconfined" name="buildah" pid=1131 comm="apparmor_parser"
 Oct 02 23:05:41.885392 glymur kernel: audit: type=1400 audit(1790962541.883:3): apparmor="STATUS" operation="profile_load" profile="unconfined" name=4D6F6E676F444220436F6D70617373 pid=1122 comm="apparmor_parser"

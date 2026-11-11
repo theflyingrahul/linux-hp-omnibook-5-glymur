@@ -951,7 +951,7 @@ Oct 02 23:05:39 glymur kernel: hid-multitouch 0018:04F3:32EF.0002: input,hidraw1
 Oct 02 23:05:39 glymur kernel: usb 1-1: New USB device found, idVendor=30c9, idProduct=00d9, bcdDevice= 0.07
 Oct 02 23:05:39 glymur kernel: usb 1-1: New USB device strings: Mfr=3, Product=1, SerialNumber=2
 Oct 02 23:05:39 glymur kernel: usb 1-1: Product: HP True Vision FHD Camera
-Oct 02 23:05:39 glymur kernel: usb 1-1: Manufacturer: DUKUF0A8PLT4ZB
+Oct 02 23:05:39 glymur kernel: usb 1-1: Manufacturer: <id>
 Oct 02 23:05:39 glymur kernel: usb 1-1: SerialNumber: <serial>
 Oct 02 23:05:39 glymur kernel: remoteproc remoteproc1: remote processor adsp is now up
 Oct 02 23:05:39 glymur kernel: qcom,apr 6800000.remoteproc:glink-edge.adsp_apps.-1.-1: Adding APR/GPR dev: gprsvc:service:2:1

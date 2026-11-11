@@ -22,7 +22,7 @@ BUS=9; ADDR=0x76
 DRV=/sys/bus/i2c/drivers/hp-omnibook-5-ec
 OUT="/var/log/glymur/ec-flags-$(date +%Y%m%dT%H%M%S).txt"
 mkdir -p /var/log/glymur
-U="${SUDO_USER:-rahul}"; XR="/run/user/$(id -u "$U")"
+U="${SUDO_USER:-$(logname 2>/dev/null)}"; XR="/run/user/$(id -u "$U")"
 note() {
     sudo -u "$U" XDG_RUNTIME_DIR="$XR" DBUS_SESSION_BUS_ADDRESS="unix:path=$XR/bus" \
         notify-send -u critical -t 9000 "$1" "$2" 2>/dev/null
