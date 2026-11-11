@@ -94,3 +94,15 @@ storage). At boot it took five attempts with `error -71`, the flakiness of
 controllers (`a600000`, `a800000`) are bound, both ports in device role with
 no partner, because nothing was plugged in; the mouse and the USB-C stick in
 each USB-C port are still to do (they need hands).
+
+## Power button, boot A (November 11, 15:14 to 15:16)
+
+The key works awake: `pmic_pwrkey` (`event9`) delivers `KEY_POWER` press and
+release (0.67 s apart in a raw capture), `systemd-logind` logs "Power key
+pressed short" for each press, and PON's interrupt registers are as the
+driver sets them (edge, both polarities, enabled). `gnome-shell` logs
+`endSessionDialog` for each short press, but the owner sees the power-off
+dialog only for a 2 to 3 s hold, not for a quick press, with
+`power-button-action` = `'interactive'`. Kernel side passes; the quick-press
+dialog is a GNOME 51 behaviour not explained yet. (My first interrupt-count
+reads of 0 were mistimed.)
