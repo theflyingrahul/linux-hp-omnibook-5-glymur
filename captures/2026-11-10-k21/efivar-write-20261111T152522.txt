@@ -1,0 +1,9 @@
+kernel: 7.3.0-glymur-21
+efivarfs: rw,nosuid,nodev,noexec,relatime
+99 variables visible
+attributes 00000007, data 676c796d7572203230323631313130543131353232305a202020202020202020
+PASS: survived the reboot unchanged
+rm: cannot remove '/sys/firmware/efi/efivars/GlymurWriteTest-<uuid>': Invalid input
+FAIL: delete
+99 variables visible now
+log: /var/log/glymur/efivar-write-20261111T152522.txt

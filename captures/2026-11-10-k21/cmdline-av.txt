@@ -1,0 +1,1 @@
+BOOT_IMAGE=(hd1,gpt5)/boot/vmlinuz-glymur root=PARTUUID=<uuid> rootfstype=ext4 ro rootwait

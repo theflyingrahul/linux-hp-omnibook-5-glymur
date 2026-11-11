@@ -143,3 +143,17 @@ tree, GRUB edit, WirePlumber file first): B3 `check-efivars-write.sh
 displays last (the machine crashed at this step on `-20`). Boot C: the
 daily entry (model without `(test)`, speakers and microphones, F6/F9,
 USB-C stick at SuperSpeed).
+
+## Boot B, A/V device tree without `$cmdline` (November 11, 15:22)
+
+The boot worked on the first try: model `(test, A/V)`, keyboard, Wi-Fi, desktop.
+Captures: `video-test-20261111T152603.txt`, `efivar-write-20261111T152522.txt`,
+`journal-kernel-boot-av-k21.txt`, `cmdline-av.txt`, the boot report.
+
+| Step | Result |
+| --- | --- |
+| B3 UEFI write | The variable written in A survived the reboot unchanged (attributes 0x7, same 32 bytes): `PASS`. The script's delete failed (`rm`: Invalid input): the firmware refuses to delete a variable this way; the test variable `GlymurWriteTest-…` stays in the store. Needs a different delete (write with an empty payload) in the script, or accepting the leftover. |
+| B4 boot options | Command line has no `clk_ignore_unused`, `pd_ignore_unused` or `arm64.nopauth`. `clk: Disabling unused clocks` and `PM: genpd: Disabling unused power domains` are logged; pointer authentication works (`paca`/`pacg` on all 12 CPUs); Wi-Fi connected. At boot Iris logs `power on failed` / `core init failed` with a `gdsc_toggle_logic` warning (first open by `v4l_id`). |
+| B6 video, `--mahua` | The new first trial (partial-data buffer kept to AV1, `diag_partial_av1_only=1`) did not decode: ffmpeg was killed (137) like the other trials, and the firmware's "Buffer type 5 should be used for AV1 only" error is gone in it, so that complaint was not the stall. The same settings without the option (trial 2) still log the complaint and stall. Trials 3 to 5 then fail at `can't configure decoder` (exit 234), the core being wedged after the stall. Every trial also logs `power control was 0x3, status 0x3 after release (timed out, bit 0x10)`. |
+| B5 suspend without `pd_ignore_unused` | Not run (suspend: the 10-minute battery cycle froze in A; owner asked to leave it). |
+| B7 external display | Not run. |
