@@ -1,0 +1,1249 @@
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Booting Linux on physical CPU 0x0000000000 [0x512f0021]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Linux version 7.3.0-41-omarchy (linux-omarchy@omarchy) (gcc (GCC) 16.1.1 20260430, GNU ld (GNU Binutils) 2.46.0) #1 SMP PREEMPT_DYNAMIC Sun, 08 Nov 2026 21:31:08 +0000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: KASLR enabled
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Machine model: HP OmniBook 5 Laptop 16-bf1xxx
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: efi: EFI v2.7 by INSYDE Corp.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: efi: SMBIOS=0xd6770000 SMBIOS 3.0=0xd6750000 TPMFinalLog=0xd6da0000 ACPI 2.0=0xd6ed3018 MEMATTR=0xc2251018 ESRT=0xc2617918 TPMEventLog=0xd6e18018 INITRD=0xc11d4d98 RNG=0xd6e3ff98 MEMRESERVE=0xc11d4d18 
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: random: crng init done
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: esrt: Reserving ESRT space from 0x00000000c2617918 to 0x00000000c26179c8.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Reserved memory: created CMA memory pool at 0x00000000ff400000, size 8 MiB
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: initialized node adsp-rpc-remote-heap, compatible id shared-dma-pool
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x00000000ff400000..0x00000000ffbfffff (8192 KiB) map reusable adsp-rpc-remote-heap
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000081400000..0x00000000814fffff (1024 KiB) nomap non-reusable pdp@81400000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000081c60000..0x0000000081c7ffff (128 KiB) nomap non-reusable aop-cmd-db@81c60000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000081e00000..0x0000000081ffffff (2048 KiB) nomap non-reusable pdp-ns-shared@81e00000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000086e10000..0x000000008716ffff (3456 KiB) nomap non-reusable oobdaretag@86e10000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000087170000..0x0000000087d2ffff (12032 KiB) nomap non-reusable oob-secure@87170000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000087d30000..0x0000000087d4ffff (128 KiB) nomap non-reusable oobdtbqc@87d30000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000087d50000..0x0000000087d6ffff (128 KiB) nomap non-reusable oobdtboem@87d50000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000087e00000..0x00000000889fffff (12288 KiB) nomap non-reusable oob-nonsecure@87e00000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000088a00000..0x0000000088dfffff (4096 KiB) nomap non-reusable spss@88a00000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000088e00000..0x00000000891fffff (4096 KiB) nomap non-reusable soccp@88e00000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000089200000..0x000000008921ffff (128 KiB) nomap non-reusable soccpdtb@89200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000089700000..0x0000000089dfffff (7168 KiB) nomap non-reusable cvp@89700000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000089e00000..0x000000008d7fffff (59392 KiB) nomap non-reusable adspslpi@89e00000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x000000008d800000..0x000000008d87ffff (512 KiB) nomap non-reusable q6-adsp-dtb@8d800000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x000000008d900000..0x00000000918fffff (65536 KiB) nomap non-reusable cdsp@8d900000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000091900000..0x000000009197ffff (512 KiB) nomap non-reusable q6-cdsp-dtb@91900000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x00000000919fe000..0x00000000919fffff (8 KiB) nomap non-reusable gpu-microcode@919fe000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000091a00000..0x00000000921fffff (8192 KiB) nomap non-reusable camera@91a00000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000092200000..0x00000000928fffff (7168 KiB) nomap non-reusable av1-encoder@92200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x0000000092900000..0x00000000934fffff (12288 KiB) nomap non-reusable video@92900000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: OF: reserved mem: 0x00000000ffe00000..0x00000000ffffffff (2048 KiB) nomap non-reusable smem@ffe00000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: NUMA: Faking a node at [mem 0x0000000081a60000-0x0000000fffffffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: NODE_DATA(0) allocated [mem 0xff26f95c0-0xff26febbf]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: psci: probing for conduit method from DT.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: psci: PSCIv1.1 detected in firmware.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: psci: Using standard PSCI v0.2 function IDs
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: psci: MIGRATE_INFO_TYPE not supported.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: psci: SMC Calling Convention v1.1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: psci: OSI mode supported.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: psci: [Firmware Bug]: failed to set PC mode: -3
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Zone ranges:
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   DMA      [mem 0x0000000081a60000-0x00000000ffffffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   DMA32    empty
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   Normal   [mem 0x0000000100000000-0x0000000fffffffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   Device   empty
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Movable zone start for each node
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Early memory node ranges
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x0000000081a60000-0x0000000081bbffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x0000000081bc0000-0x0000000081bfffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x0000000081d00000-0x0000000081d5ffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x0000000081db1000-0x0000000081dfffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x0000000082200000-0x000000008239ffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000000824e0000-0x00000000826fffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x0000000082800000-0x00000000829bffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000000829c0000-0x0000000083efffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x0000000083f00000-0x00000000843fffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x0000000084400000-0x00000000848fffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x0000000085300000-0x000000008536ffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x0000000085370000-0x0000000085d8ffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x0000000085d90000-0x0000000086e0ffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x0000000093f00000-0x00000000a8efffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000000a8f00000-0x00000000a8f0ffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000000a8f10000-0x00000000a8ffffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000000a9000000-0x00000000a90fffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000000a9100000-0x00000000d4dbffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000000d4dc0000-0x00000000d596ffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000000d5970000-0x00000000d5f5ffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000000d5f60000-0x00000000d6b0ffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000000d6b10000-0x00000000d6c9ffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000000d6ca0000-0x00000000d6deffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000000d6df0000-0x00000000d6efffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000000d9dc0000-0x00000000f9a1ffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000000f9a20000-0x00000000fbd1ffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000000fbd20000-0x00000000febfffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000000fed80000-0x00000000ffdfffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x0000000880000000-0x00000008bedfbfff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   node   0: [mem 0x00000008c0000000-0x0000000fffffffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Initmem setup node 0 [mem 0x0000000081a60000-0x0000000fffffffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: On node 0, zone DMA: 6752 pages in unavailable ranges
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: On node 0, zone DMA: 256 pages in unavailable ranges
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: On node 0, zone DMA: 81 pages in unavailable ranges
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: On node 0, zone DMA: 1024 pages in unavailable ranges
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: On node 0, zone DMA: 320 pages in unavailable ranges
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: On node 0, zone DMA: 256 pages in unavailable ranges
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: On node 0, zone DMA: 2560 pages in unavailable ranges
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: On node 0, zone DMA: 20720 pages in unavailable ranges
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: On node 0, zone DMA: 11968 pages in unavailable ranges
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: On node 0, zone DMA: 384 pages in unavailable ranges
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: On node 0, zone Normal: 512 pages in unavailable ranges
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: On node 0, zone Normal: 4612 pages in unavailable ranges
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: percpu: Embedded 59 pages/cpu s116312 r8192 d117160 u241664
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pcpu-alloc: s116312 r8192 d117160 u241664 alloc=59*4096
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pcpu-alloc: [0] 00 [0] 01 [0] 02 [0] 03 [0] 04 [0] 05 [0] 06 [0] 07 
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pcpu-alloc: [0] 08 [0] 09 [0] 10 [0] 11 
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Detected PIPT I-cache on CPU0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: SYS_ID_AA64ISAR1_EL1[31:28]: already set to 0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: SYS_ID_AA64ISAR1_EL1[27:24]: already set to 0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: SYS_ID_AA64ISAR1_EL1[11:8]: already set to 0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: SYS_ID_AA64ISAR1_EL1[7:4]: already set to 0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: SYS_ID_AA64ISAR2_EL1[15:12]: forced to 0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: SYS_ID_AA64ISAR2_EL1[11:8]: forced to 0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: GICv3 CPU interface
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: HCRX_EL2 register
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Virtualization Host Extensions
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Spectre-v4
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: alternatives: applying boot alternatives
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Kernel command line: archisobasedir=arch archisosearchuuid=2026-11-09-05-31-41-00 copytoram=n initramfs_options=size=90% quiet splash console=tty0 acpi=nospcr initramfs_async=0 clk_ignore_unused pd_ignore_unused arm64.nopauth systemd.tpm2_wait=0 iommu.passthrough=0 modprobe.blacklist=qcom_q6v5_pas omarchy.qcom_early=1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Unknown kernel command line parameters "splash archisobasedir=arch archisosearchuuid=2026-11-09-05-31-41-00 copytoram=n", will be passed to user space.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: printk: log buffer data + meta data: 262144 + 1114112 = 1376256 bytes
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Dentry cache hash table entries: 4194304 (order: 13, 33554432 bytes, linear)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Inode-cache hash table entries: 2097152 (order: 12, 16777216 bytes, linear)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: software IO TLB: area num 16.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: software IO TLB: mapped [mem 0x00000000f5a20000-0x00000000f9a20000] (64MB)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Fallback order for Node 0: 0 
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Built 1 zonelists, mobility grouping on.  Total pages: 8306395
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Policy zone: Normal
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: mem auto-init: stack:all(zero), heap alloc:on, heap free:off
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=12, Nodes=1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ftrace: allocating 71284 entries in 280 pages
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ftrace: allocated 280 pages with 3 groups
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: BORE CPU Scheduler modification 7.0.0 by Masahito Suzuki
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Dynamic Preempt: full
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: rcu: Preemptible hierarchical RCU implementation.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: rcu:         RCU restricting CPUs from NR_CPUS=512 to nr_cpu_ids=12.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:         Trampoline variant of Tasks RCU enabled.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:         Rude variant of Tasks RCU enabled.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:         Tracing variant of Tasks RCU enabled.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: rcu: RCU calculated value of scheduler-enlistment delay is 100 jiffies.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=12
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: RCU Tasks: Setting shift to 4 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=12.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: RCU Tasks Rude: Setting shift to 4 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=12.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: GIC: Using split EOI/Deactivate mode
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GIC: enabling workaround for GICv3: ARM64 erratum 2941627
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: 960 SPIs implemented
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: 1024 Extended SPIs implemented
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Root IRQ handler: gic_handle_irq
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: GICv3 features: 48 PPIs, DirectLPI
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: GICv4 features: DirectLPI RVPEID Valid+Dirty 
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: GICD_CTLR.DS=0, SCR_EL3.FIQ=1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU0: found redistributor 0 region 0:0x0000000017080000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ITS [mem 0x17040000-0x1707ffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ITS@0x0000000017040000: Single VMOVP capable
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ITS@0x0000000017040000: Using GICv4.1 mode 00000000 00000001
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ITS@0x0000000017040000: allocated 8192 Devices @880840000 (indirect, esz 8, psz 64K, shr 1)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ITS@0x0000000017040000: allocated 32768 Interrupt Collections @880850000 (flat, esz 2, psz 64K, shr 1)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ITS@0x0000000017040000: allocated 8192 Virtual CPUs @880860000 (flat, esz 8, psz 64K, shr 1)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: using LPI property table @0x0000000880870000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ITS: Using DirectLPI for VPE invalidation
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ITS: Enabling GICv4 support
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU0: using allocated LPI pending table @0x0000000880880000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: rcu: srcu_init: Setting srcu_struct sizes based on contention.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275000 ns
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arch_timer: cp15 timer running at 19.20MHz (hyp-virt).
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x46d987e47, max_idle_ns: 440795202767 ns
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: sched_clock: 56 bits at 19MHz, resolution 52ns, wraps every 4398046511078ns
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Console: colour dummy device 80x25
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: printk: legacy console [tty0] enabled
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Calibrating delay loop (skipped), value calculated using timer frequency.. 38.40 BogoMIPS (lpj=19200)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pid_max: default: 32768 minimum: 301
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: landlock: Up and running.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Yama: becoming mindful.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: LSM support for eBPF active
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Mount-cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Mountpoint-cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: VFS: Finished mounting rootfs on nullfs
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: rcu: Hierarchical SRCU implementation.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: rcu:         Max phase no-delay instances is 400.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Timer migration: 2 hierarchy levels; 8 children per group; 2 crossnode level
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Remapping and enabling EFI services.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: smp: Bringing up secondary CPUs ...
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Detected PIPT I-cache on CPU1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU1: found redistributor 100 region 0:0x00000000170c0000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU1: using allocated LPI pending table @0x0000000880890000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU1: Booted secondary processor 0x0000000100 [0x512f0021]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Detected PIPT I-cache on CPU2
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU2: found redistributor 200 region 0:0x0000000017100000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU2: using allocated LPI pending table @0x00000008808a0000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU2: Booted secondary processor 0x0000000200 [0x512f0021]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Detected PIPT I-cache on CPU3
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU3: found redistributor 300 region 0:0x0000000017140000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU3: using allocated LPI pending table @0x00000008808b0000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU3: Booted secondary processor 0x0000000300 [0x512f0021]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Detected PIPT I-cache on CPU4
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU4: found redistributor 400 region 0:0x0000000017180000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU4: using allocated LPI pending table @0x00000008808c0000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU4: Booted secondary processor 0x0000000400 [0x512f0021]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Detected PIPT I-cache on CPU5
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU5: found redistributor 500 region 0:0x00000000171c0000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU5: using allocated LPI pending table @0x00000008808d0000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU5: Booted secondary processor 0x0000000500 [0x512f0021]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Detected PIPT I-cache on CPU6
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU6: found redistributor 10000 region 0:0x0000000017200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU6: using allocated LPI pending table @0x00000008808e0000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU6: Booted secondary processor 0x0000010000 [0x511f0021]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Detected PIPT I-cache on CPU7
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU7: found redistributor 10100 region 0:0x0000000017240000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU7: using allocated LPI pending table @0x00000008808f0000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU7: Booted secondary processor 0x0000010100 [0x511f0021]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Detected PIPT I-cache on CPU8
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU8: found redistributor 10200 region 0:0x0000000017280000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU8: using allocated LPI pending table @0x0000000880900000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU8: Booted secondary processor 0x0000010200 [0x511f0021]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Detected PIPT I-cache on CPU9
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU9: found redistributor 10300 region 0:0x00000000172c0000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU9: using allocated LPI pending table @0x0000000880910000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU9: Booted secondary processor 0x0000010300 [0x511f0021]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Detected PIPT I-cache on CPU10
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU10: found redistributor 10400 region 0:0x0000000017300000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU10: using allocated LPI pending table @0x0000000880920000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU10: Booted secondary processor 0x0000010400 [0x511f0021]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Detected PIPT I-cache on CPU11
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU11: found redistributor 10500 region 0:0x0000000017340000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: CPU11: using allocated LPI pending table @0x0000000880930000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU11: Booted secondary processor 0x0000010500 [0x511f0021]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: smp: Brought up 1 node, 12 CPUs
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: SMP: Total of 12 processors activated.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU: All CPU(s) started at EL2
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Branch Target Identification
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: ARMv8.4 Translation Table Level
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Instruction cache invalidation not required for I/D coherence
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Data cache clean to the PoU not required for I/D coherence
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Common not Private translations
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: CRC32 instructions
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Data cache clean to Point of Deep Persistence
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Data cache clean to Point of Persistence
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Data independent timing control (DIT)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: E0PD
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Enhanced Counter Virtualization
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Enhanced Counter Virtualization (CNTPOFF)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Enhanced Privileged Access Never
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Enhanced Virtualization Traps
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Fine Grained Traps
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: RCpc load-acquire (LDAPR)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: LSE atomic instructions
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Privileged Access Never
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: PMUv3
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: RAS Extension Support
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: RASv1p1 Extension Support
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Random Number Generator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Speculation barrier (SB)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Stage-2 Force Write-Back
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: TLB range maintenance instructions
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: WFx with timeout
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: XNX
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Scalable Matrix Extension
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Speculative Store Bypassing Safe (SSBS)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Scalable Vector Extension
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: alternatives: applying system-wide alternatives
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Activity Monitors Unit (AMU) on CPU0-11
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: ICV_DIR_EL1 trapping
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPU features: detected: Hardware dirty bit management on CPU0-11
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: SVE: maximum available vector length 16 bytes per vector
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: SVE: default vector length 16 bytes per vector
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: SME: minimum available vector length 64 bytes per vector
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: SME: maximum available vector length 64 bytes per vector
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: SME: default vector length 64 bytes per vector
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Memory: 32189664K/33225580K available (29376K kernel code, 6802K rwdata, 21592K rodata, 4544K init, 1296K bss, 1007800K reserved, 8192K cma-reserved)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: devtmpfs: initialized
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: setend instruction emulation is not supported on this system
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: posixtimers hash table entries: 8192 (order: 5, 131072 bytes, linear)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: futex hash table entries: 4096 (262144 bytes on 1 NUMA nodes, total 256 KiB, linear).
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: 2G module region forced by RANDOMIZE_MODULE_REGION_FULL
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: 0 pages in range for non-PLT usage
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: 508320 pages in range for PLT usage
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: DMI: SMBIOS 3.8.0 present.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: DMI: HP HP OmniBook 5 Laptop 16-bf1xxx/8F47, BIOS F.06 07/14/2026
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: DMI: Memory slots populated: 1/1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: NET: Registered PF_NETLINK/PF_ROUTE protocol family
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: DMA: preallocated 4096 KiB GFP_KERNEL pool for atomic allocations
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: DMA: preallocated 4096 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: audit: initializing netlink subsys (disabled)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: audit: type=2000 audit(0.017:1): state=initialized audit_enabled=0 res=1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: thermal_sys: Registered thermal governor 'fair_share'
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: thermal_sys: Registered thermal governor 'bang_bang'
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: thermal_sys: Registered thermal governor 'step_wise'
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: thermal_sys: Registered thermal governor 'user_space'
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: thermal_sys: Registered thermal governor 'power_allocator'
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: cpuidle: using governor ladder
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: cpuidle: using governor menu
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: hw-breakpoint: found 6 breakpoint and 4 watchpoint registers.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ASID allocator initialised with 65536 entries
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Serial: AMBA PL011 UART driver
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: CPUidle PSCI: Initialized CPU PM domain topology using OSI mode
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/clock-controller@af00000: Fixed dependency cycle(s) with /soc@0/phy@faac00
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/phy@faac00: Fixed dependency cycle(s) with /soc@0/clock-controller@af00000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/usb@a600000: Fixed dependency cycle(s) with /soc@0/phy@fd5000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/phy@fd5000: Fixed dependency cycle(s) with /soc@0/usb@a600000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/usb@a800000: Fixed dependency cycle(s) with /soc@0/phy@fde000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/phy@fde000: Fixed dependency cycle(s) with /soc@0/usb@a800000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/usb@a000000: Fixed dependency cycle(s) with /soc@0/phy@88e1000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/phy@88e1000: Fixed dependency cycle(s) with /soc@0/usb@a000000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/display-subsystem@ae00000/displayport-controller@af6c000: Fixed dependency cycle(s) with /soc@0/display-subsystem@ae00000/display-controller@ae01000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/display-subsystem@ae00000/display-controller@ae01000: Fixed dependency cycle(s) with /soc@0/display-subsystem@ae00000/displayport-controller@af6c000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/display-subsystem@ae00000/displayport-controller@af6c000/aux-bus/panel: Fixed dependency cycle(s) with /soc@0/display-subsystem@ae00000/displayport-controller@af6c000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/display-subsystem@ae00000/displayport-controller@af6c000: Fixed dependency cycle(s) with /soc@0/display-subsystem@ae00000/displayport-controller@af6c000/aux-bus/panel
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tmc@1004f000: Fixed dependency cycle(s) with /soc@0/ctcu@10001000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tmc@10048000: Fixed dependency cycle(s) with /soc@0/ctcu@10001000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/replicator@1004e000: Fixed dependency cycle(s) with /soc@0/tmc@10048000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tmc@1004f000: Fixed dependency cycle(s) with /soc@0/replicator@1004e000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/ctcu@10001000: Fixed dependency cycle(s) with /soc@0/tmc@1004f000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/replicator@1004e000: Fixed dependency cycle(s) with /soc@0/tmc@1004f000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tmc@10048000: Fixed dependency cycle(s) with /soc@0/replicator@1004e000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/ctcu@10001000: Fixed dependency cycle(s) with /soc@0/tmc@10048000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/funnel@10041000: Fixed dependency cycle(s) with /soc@0/stm@10002000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/stm@10002000: Fixed dependency cycle(s) with /soc@0/funnel@10041000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/funnel@10041000: Fixed dependency cycle(s) with /soc@0/tpda@10004000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@10004000: Fixed dependency cycle(s) with /soc@0/funnel@10041000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@1000f000: Fixed dependency cycle(s) with /soc@0/tpda@10004000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@10004000: Fixed dependency cycle(s) with /soc@0/tpdm@1000f000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/funnel@11c04000: Fixed dependency cycle(s) with /soc@0/funnel@10041000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/funnel@10041000: Fixed dependency cycle(s) with /soc@0/funnel@11c04000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/funnel@10041000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/funnel@10041000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/replicator@1004e000: Fixed dependency cycle(s) with /soc@0/replicator@10046000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/replicator@10046000: Fixed dependency cycle(s) with /soc@0/replicator@1004e000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/replicator@11c06000: Fixed dependency cycle(s) with /soc@0/replicator@10046000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/replicator@10046000: Fixed dependency cycle(s) with /soc@0/replicator@11c06000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@1102c000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@1102c000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /soc@0/tpdm@11180000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@11180000: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /soc@0/tpdm@11185000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@11185000: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /soc@0/tpdm@11186000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@11186000: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/funnel@11189000: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /soc@0/funnel@11189000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/funnel@11189000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/funnel@11189000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@111d0000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@111d0000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@11220000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@11220000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@11228000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@11228000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@11224000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@11224000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@1121f000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@1121f000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@1121e000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@1121e000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@1121d000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@1121d000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@1121c000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@1121c000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@1121b000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@1121b000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@1121a000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@1121a000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@11219000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@11219000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11471000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/tpda@11471000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@11213000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@11213000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@1120b000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@1120b000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@11207000: Fixed dependency cycle(s) with /soc@0/itnoc@11200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/itnoc@11200000: Fixed dependency cycle(s) with /soc@0/tpdm@11207000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11471000: Fixed dependency cycle(s) with /soc@0/tpdm@11470000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@11470000: Fixed dependency cycle(s) with /soc@0/tpda@11471000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11c08000: Fixed dependency cycle(s) with /soc@0/tpdm@11c03000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@11c03000: Fixed dependency cycle(s) with /soc@0/tpda@11c08000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tmc@11c05000: Fixed dependency cycle(s) with /soc@0/funnel@11c04000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/funnel@11c04000: Fixed dependency cycle(s) with /soc@0/tmc@11c05000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11c08000: Fixed dependency cycle(s) with /soc@0/funnel@11c04000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/funnel@11c04000: Fixed dependency cycle(s) with /soc@0/tpda@11c08000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/replicator@11c06000: Fixed dependency cycle(s) with /soc@0/tmc@11c05000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tmc@11c05000: Fixed dependency cycle(s) with /soc@0/replicator@11c06000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /dummy-sink: Fixed dependency cycle(s) with /soc@0/replicator@11c06000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/replicator@11c06000: Fixed dependency cycle(s) with /dummy-sink
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@11c0d000: Fixed dependency cycle(s) with /soc@0/tpda@11c08000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11c08000: Fixed dependency cycle(s) with /soc@0/tpdm@11c0d000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@11c0c000: Fixed dependency cycle(s) with /soc@0/tpda@11c08000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11c08000: Fixed dependency cycle(s) with /soc@0/tpdm@11c0c000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@11c0b000: Fixed dependency cycle(s) with /soc@0/tpda@11c08000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11c08000: Fixed dependency cycle(s) with /soc@0/tpdm@11c0b000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@11c0a000: Fixed dependency cycle(s) with /soc@0/tpda@11c08000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11c08000: Fixed dependency cycle(s) with /soc@0/tpdm@11c0a000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpdm@11c09000: Fixed dependency cycle(s) with /soc@0/tpda@11c08000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11c08000: Fixed dependency cycle(s) with /soc@0/tpdm@11c09000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/interrupt-controller@17000000: Fixed dependency cycle(s) with /soc@0/interrupt-controller@17000000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /tpdm-cdsp-llm: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /tpdm-cdsp-llm
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /tpdm-cdsp-llm2: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /tpdm-cdsp-llm2
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /tpdm-cdsp-cmsr: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /tpdm-cdsp-cmsr
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /tpdm-cdsp-cmsr2: Fixed dependency cycle(s) with /soc@0/tpda@11188000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/tpda@11188000: Fixed dependency cycle(s) with /tpdm-cdsp-cmsr2
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/phy@fd5000: Fixed dependency cycle(s) with /pmic-glink/connector@0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/usb@a600000: Fixed dependency cycle(s) with /pmic-glink/connector@0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /pmic-glink/connector@0: Fixed dependency cycle(s) with /soc@0/phy@fd5000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /pmic-glink/connector@0: Fixed dependency cycle(s) with /soc@0/usb@a600000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/phy@fde000: Fixed dependency cycle(s) with /pmic-glink/connector@1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /soc@0/usb@a800000: Fixed dependency cycle(s) with /pmic-glink/connector@1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /pmic-glink/connector@1: Fixed dependency cycle(s) with /soc@0/phy@fde000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: /pmic-glink/connector@1: Fixed dependency cycle(s) with /soc@0/usb@a800000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: HugeTLB: registered 1.00 GiB page size, pre-allocated 0 pages
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: HugeTLB: 0 KiB vmemmap can be freed for a 1.00 GiB page
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: HugeTLB: registered 32.0 MiB page size, pre-allocated 0 pages
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: HugeTLB: 0 KiB vmemmap can be freed for a 32.0 MiB page
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: HugeTLB: registered 2.00 MiB page size, pre-allocated 0 pages
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: HugeTLB: 0 KiB vmemmap can be freed for a 2.00 MiB page
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: HugeTLB: registered 64.0 KiB page size, pre-allocated 0 pages
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: HugeTLB: 0 KiB vmemmap can be freed for a 64.0 KiB page
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: raid6: using neon recovery algorithm
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ACPI: Interpreter disabled.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: power_wrap_init driver register: 0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: iommu: Default domain type: Translated (set via kernel command line)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: iommu: DMA domain TLB invalidation policy: lazy mode
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: SCSI subsystem initialized
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: libata version 3.00 loaded.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usbcore: registered new interface driver usbfs
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usbcore: registered new interface driver hub
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usbcore: registered new device driver usb
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pps_core: LinuxPPS API ver. 1 registered
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: PTP clock support registered
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: EDAC MC: Ver: 3.0.0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: scmi_core: SCMI protocol bus registered
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: NetLabel: Initializing
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: NetLabel:  domain hash size = 128
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: NetLabel:  unlabeled traffic allowed by default
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: mctp: management component transport protocol core
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: NET: Registered PF_MCTP protocol family
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: vgaarb: loaded
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: clocksource: Switched to clocksource arch_sys_counter
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: VFS: Disk quotas dquot_6.6.0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: VFS: Dquot-cache hash table entries: 512 (4096 bytes)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pnp: PnP ACPI: disabled
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: NET: Registered PF_INET protocol family
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: IP idents hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcp_listen_portaddr_hash hash table entries: 16384 (order: 6, 262144 bytes, linear)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: TCP established hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: TCP bind hash table entries: 65536 (order: 9, 2097152 bytes, linear)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: TCP: Hash tables configured (established 262144 bind 65536)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: MPTCP token hash table entries: 32768 (order: 8, 786432 bytes, linear)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: UDP hash table entries: 16384 (order: 8, 1048576 bytes, linear)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: NET: Registered PF_UNIX/PF_LOCAL protocol family
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: NET: Registered PF_XDP protocol family
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: PCI: CLS 0 bytes, default 64
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Trying to unpack rootfs image as initramfs...
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Freeing initrd memory: 156404K
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: kvm [1]: nv: 571 coarse grained trap handlers
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: kvm [1]: nv: 710 fine grained trap handlers
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: kvm [1]: IPA Size Limit: 44 bits
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: kvm [1]: GICv4 support disabled
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: kvm [1]: GICv3: no GICV resource entry
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: kvm [1]: disabling GICv2 emulation
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: kvm [1]: GIC system register CPU interface enabled
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: kvm [1]: vgic interrupt IRQ9
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: kvm [1]: VHE mode initialized successfully
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Initialise system trusted keyrings
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Key type blacklist registered
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: workingset: timestamp_bits=40 (anon: 35) max_order=23 bucket_order=0 (anon: 0)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: squashfs: version 4.0 (2009/01/31) Phillip Lougher
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: fuse: init (API version 7.46)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: integrity: Platform Keyring initialized
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: integrity: Machine keyring initialized
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Key type asymmetric registered
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Asymmetric key parser 'x509' registered
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Block layer SCSI generic (bsg) driver version 0.4 loaded (major 241)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: io scheduler mq-deadline registered
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: io scheduler kyber registered
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: io scheduler bfq registered
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: xor: measuring software checksum speed
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:    eor3            : 84619 MB/sec
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:    32regs          : 79562 MB/sec
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:    8regs           : 83330 MB/sec
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: xor: using function: eor3 (84619 MB/sec)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: raid6: int64x1  gen()  8759 MB/s
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: raid6: int64x2  gen()  8767 MB/s
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: raid6: int64x4  gen() 10080 MB/s
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: raid6: int64x8  gen()  8005 MB/s
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: raid6: neonx1   gen() 31924 MB/s
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: raid6: neonx2   gen() 32881 MB/s
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: raid6: neonx4   gen() 31987 MB/s
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: raid6: neonx8   gen() 30661 MB/s
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: raid6: using algorithm neonx2 gen() 32881 MB/s
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: raid6: .... xor() 33603 MB/s, rmw enabled
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ledtrig-cpu: registered to indicate activity on CPUs
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Serial: 8250/16550 driver, 32 ports, IRQ sharing enabled
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: msm_serial: driver initialized
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: SuperH (H)SCI(F) driver initialized
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu-v3 15480000.iommu: oas 40-bit (features 0x001c1fcf)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu-v3 15480000.iommu: allocated 65536 entries for cmdq
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu-v3 15480000.iommu: allocated 32768 entries for evtq
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu-v3 15480000.iommu: SMMU currently enabled! Resetting...
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu-v3 15480000.iommu: msi_domain absent - falling back to wired irqs
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: loop: module loaded
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tun: Universal TUN/TAP device driver, 1.6
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: PPP generic driver version 2.4.2
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: mousedev: PS/2 mouse device common for all mice
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: i2c_dev: i2c /dev entries driver
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: device-mapper: core: CONFIG_IMA_DISABLE_HTABLE is disabled. Duplicate IMA measurements will not be recorded in the IMA log.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: device-mapper: uevent: version 1.0.3
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: device-mapper: ioctl: 4.50.0-ioctl (2025-04-28) initialised: dm-devel@lists.linux.dev
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: simple-framebuffer simple-framebuffer.0: [drm] Registered 1 planes with drm panic
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: [drm] Initialized simpledrm 1.0.0 for simple-framebuffer.0 on minor 0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: fbcon: Deferring console take-over
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: simple-framebuffer simple-framebuffer.0: [drm] fb0: simpledrmdrmfb frame buffer device
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: clocksource: arch_mmio_counter: mask: 0xffffffffffffff max_cycles: 0x46d987e47, max_idle_ns: 440795202767 ns
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arch-timer-mmio 17810000.timer: mmio timer running at 19.20MHz (virt)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: hw perfevents: enabled with armv8_pmuv3 PMU driver, 13 (0,80000fff) counters available
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: watchdog: NMI not fully supported
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: watchdog: Hard watchdog permanently disabled
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: drop_monitor: Initializing network drop monitor service
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: NET: Registered PF_INET6 protocol family
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Segment Routing with IPv6
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: In-situ OAM (IOAM) with IPv6
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: NET: Registered PF_PACKET protocol family
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Key type dns_resolver registered
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: registered taskstats version 1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Loading compiled-in X.509 certificates
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Loaded X.509 cert 'Build time autogenerated kernel key: 6bbe42ef9ecf226292e9a4cfd87ebd00653e9a79'
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: zswap: loaded using pool lzo
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Demotion targets for Node 0: null
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Key type .fscrypt registered
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Key type fscrypt-provisioning registered
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Btrfs loaded, zoned=yes, fsverity=yes
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Key type big_key registered
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Key type encrypted registered
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: integrity: secureboot mode unknown
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ima: No TPM chip found, activating TPM-bypass!
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Loading compiled-in module X.509 certificates
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Loaded X.509 cert 'Build time autogenerated kernel key: 6bbe42ef9ecf226292e9a4cfd87ebd00653e9a79'
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ima: Allocated hash algorithm: sha256
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ima: No architecture policies found
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: evm: Initialising EVM extended attributes:
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: evm: security.selinux
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: evm: security.SMACK64
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: evm: security.SMACK64EXEC
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: evm: security.SMACK64TRANSMUTE
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: evm: security.SMACK64MMAP
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: evm: security.apparmor
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: evm: security.ima
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: evm: security.capability
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: evm: HMAC attrs: 0x1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: integrity: Couldn't get size: 0x8000000000000003
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: integrity: MODSIGN: Couldn't get UEFI db list
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: integrity: Couldn't get size: 0x8000000000000003
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: integrity: Couldn't get UEFI dbx list
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: clk: Not disabling unused clocks
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: PM: genpd: Not disabling unused power domains
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Freeing unused kernel memory: 4544K
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Checked W+X mappings: passed, no W+X pages found
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Run /init as init process
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   with arguments:
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:     /init
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:     splash
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:   with environment:
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:     HOME=/
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:     TERM=linux
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:     archisobasedir=arch
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:     archisosearchuuid=2026-11-09-05-31-41-00
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:     copytoram=n
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: hid: raw HID events driver (C) Jiri Kosina
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx0-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt2-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx2-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt2-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx2-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx0-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt4-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt5-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-refgen3-1p2 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qreftx1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt0-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrpt1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: tcsrcc-glymur 1fd5000.clock-controller: supply vdda-qrefrx1-0p9 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom_scm firmware:scm: of_icc_get_by_index: invalid path=-517
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom_scm: convention: smc arm 64
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom_scm firmware:scm: qseecom: found qseecom with version 0x1402000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom_qseecom qcom_qseecom: setting up client for qcom.tz.uefisecapp
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: efivars: Registered efivars operations
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu 15000000.iommu: probing hardware configuration...
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu 15000000.iommu: SMMUv2 with:
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu 15000000.iommu:         stage 1 translation
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu 15000000.iommu:         stage 2 translation
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu 15000000.iommu:         nested translation
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu 15000000.iommu:         coherent table walk
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu 15000000.iommu:         stream matching with 186 register groups
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu 15000000.iommu:         111 context banks (0 stage-2 only)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu 15000000.iommu:         Supported page sizes: 0x61311000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu 15000000.iommu:         Stage-1: 40-bit VA -> 40-bit IPA
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu 15000000.iommu:         Stage-2: 40-bit IPA -> 40-bit PA
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-smmu 15000000.iommu:         preserved 0 boot mappings
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: platform 800000.dma-controller: Adding to iommu group 0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: platform 8c0000.geniqup: Adding to iommu group 1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: platform a00000.dma-controller: Adding to iommu group 2
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: platform ac0000.geniqup: Adding to iommu group 3
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: platform b00000.dma-controller: Adding to iommu group 4
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: platform bc0000.geniqup: Adding to iommu group 5
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: platform 1dc4000.dma-controller: Adding to iommu group 6
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: platform 6800000.remoteproc: Adding to iommu group 7
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: platform a600000.usb: Adding to iommu group 8
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: platform a800000.usb: Adding to iommu group 9
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: platform a000000.usb: Adding to iommu group 10
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: platform a200000.usb: Adding to iommu group 11
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: platform ae00000.display-subsystem: Adding to iommu group 12
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: platform 32300000.remoteproc: Adding to iommu group 13
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: amba 10048000.tmc: Adding to iommu group 14
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: amba 1004f000.tmc: Adding to iommu group 15
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: a98000.serial: ttyHS1 MMIO:0x0000000000a98000 (irq = 136, base_baud = 0) is a MSM
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: serial serial0: tty port ttyHS1 registered
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: i2c_hid_of 8-0010: supply vdd not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: i2c_hid_of 8-0010: supply vddl not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: i2c_hid_of 0-003a: supply vdd not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: i2c_hid_of 4-0015: supply vdd not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: i2c_hid_of 0-003a: supply vddl not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: i2c_hid_of 4-0015: supply vddl not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: i2c_hid_of 8-0010: i2c_hid_get_input: IRQ triggered but there's no data
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: input: hid-over-i2c 04F3:32EF Mouse as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: input: hid-over-i2c 04F3:44BF as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input4
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: input: hid-over-i2c 04F3:32EF Touchpad as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input2
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: input: hid-over-i2c 04F3:32EF Consumer Control as /devices/platform/soc@0/bc0000.geniqup/b90000.i2c/i2c-4/4-0015/0018:04F3:32EF.0002/input/input3
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: input: hid-over-i2c 04F3:44BF UNKNOWN as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input5
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: input: hid-over-i2c 04F3:44BF UNKNOWN as /devices/platform/soc@0/ac0000.geniqup/a80000.i2c/i2c-8/8-0010/0018:04F3:44BF.0001/input/input6
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: hid-multitouch 0018:04F3:32EF.0002: input,hidraw0: I2C HID v1.00 Mouse [hid-over-i2c 04F3:32EF] on 4-0015
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: hid-multitouch 0018:04F3:44BF.0001: input,hidraw1: I2C HID v1.00 Device [hid-over-i2c 04F3:44BF] on 8-0010
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: hid-generic 0018:0416:C300.0003: ignoring exceeding usage max
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: input: hid-over-i2c 0416:C300 Keyboard as /devices/platform/soc@0/bc0000.geniqup/b80000.i2c/i2c-0/0-003a/0018:0416:C300.0003/input/input8
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: hid-generic 0018:0416:C300.0003: input,hidraw2: I2C HID v1.00 Keyboard [hid-over-i2c 0416:C300] on 0-003a
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: spmi_pmic_arb c400000.arbiter: PMIC arbiter version v8 (0x80000002)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-smem ffe00000.smem: Found an unknown type of DRAM info struct (size = 872)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-qmp-pcie-phy 1bf6000.phy: supply vdda-phy not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-qmp-pcie-phy 1bf6000.phy: supply vdda-pll not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-qmp-pcie-phy 1b50000.phy: supply vdda-phy not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-qmp-pcie-phy 1b50000.phy: supply vdda-pll not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-qmp-combo-phy fd5000.phy: supply vdda-phy not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-qmp-combo-phy fd5000.phy: supply vdda-pll not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-qmp-combo-phy fd5000.phy: supply refgen not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: host bridge /soc@0/pcie@1bf0000 ranges:
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie:       IO 0x0078105000..0x0078204fff -> 0x0000000000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie:      MEM 0x0078205000..0x0079ffffff -> 0x0078205000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie:      MEM 0x0780000000..0x079fffffff -> 0x0780000000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-qmp-combo-phy fde000.phy: supply vdda-phy not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-qmp-combo-phy fde000.phy: supply vdda-pll not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-qmp-combo-phy fde000.phy: supply refgen not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vdda not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: supply vddpe-3v3 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: host bridge /soc@0/pcie@1b40000 ranges:
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie:       IO 0x007a200000..0x007a2fffff -> 0x0000000000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie:      MEM 0x007a300000..0x007dffffff -> 0x007a300000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie:      MEM 0x07a0000000..0x07dfffffff -> 0x07a0000000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-qmp-combo-phy 88e1000.phy: supply vdda-phy not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-qmp-combo-phy 88e1000.phy: supply vdda-pll not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-qmp-combo-phy 88e1000.phy: supply refgen not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: aux_bridge.aux_bridge aux_bridge.aux_bridge.2: error -ENODEV: failed to acquire drm_bridge
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.0.auto: Using scmi_mailbox_transport
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.0.auto: SCMI max-rx-timeout: 30ms / max-msg-size: 104bytes / max-msg: 20
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: scmi_protocol scmi_dev.1: Enabled polling mode TX channel - prot_id:16
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.0.auto: SCMI RAW Mode initialized for instance 0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.0.auto: SCMI RAW Mode COEX enabled !
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.0.auto: SCMI Notifications - Core Enabled.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.0.auto: SCMI Protocol v2.0 'Qualcomm:PDP0' Firmware version 0x0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.0.auto: Enabling SCMI Quirk [quirk_clock_rates_triplet_out_of_spec]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.0.auto: Failed to query supported version for protocol 0x13.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.0.auto: Trying version 0x40000. Backward compatibility is NOT assured.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.0.auto: Failed to get FC for protocol 13 [MSG_ID:6 / RES_ID:0] - ret:-22. Using regular messaging.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.0.auto: Failed to get FC for protocol 13 [MSG_ID:5 / RES_ID:0] - ret:-22. Using regular messaging.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.0.auto: Failed to get FC for protocol 13 [MSG_ID:6 / RES_ID:1] - ret:-22. Using regular messaging.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.0.auto: Failed to get FC for protocol 13 [MSG_ID:5 / RES_ID:1] - ret:-22. Using regular messaging.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: cpu cpu0: EM: OPP:355200 is inefficient
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: cpu cpu0: EM: created perf domain
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: cpu cpu6: EM: OPP:4569600 is inefficient
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: cpu cpu6: EM: created perf domain
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: energy_model: updating cpu0 cpu_cap=647 old capacity=764
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: scmi-perf-domain scmi_dev.4: Initialized 2 performance domains
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.1.auto: Using scmi_mailbox_transport
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.1.auto: SCMI max-rx-timeout: 30ms / max-msg-size: 104bytes / max-msg: 20
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.1.auto: SCMI RAW Mode initialized for instance 1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.1.auto: SCMI RAW Mode COEX enabled !
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.1.auto: SCMI Notifications - Core Enabled.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.1.auto: SCMI Protocol v2.0 'Qualcomm:' Firmware version 0x20000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: arm-scmi arm-scmi.1.auto: Enabling SCMI Quirk [quirk_perf_level_get_fc_force]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: scmi_module: Loaded SCMI Vendor Protocol 0x80 - Qualcomm  0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: iATU: unroll T, 32 ob, 8 ib, align 4K, limit 1024G
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: iATU: unroll T, 32 ob, 8 ib, align 4K, limit 1024G
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: PCIe Gen.3 x1 link up
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1bf0000.pcie: PCI host bridge to bus 0004:00
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0004:00: root bus resource [bus 00-ff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0004:00: root bus resource [io  0x0000-0xfffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0004:00: root bus resource [mem 0x78205000-0x79ffffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0004:00: root bus resource [mem 0x780000000-0x79fffffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0: [17cb:0120] type 01 class 0x060400 PCIe Root Port
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0: BAR 0 [mem 0x00000000-0x00000fff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0: PCI bridge to [bus 01-ff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0:   bridge window [io  0x0000-0x0fff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0:   bridge window [mem 0x00000000-0x000fffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0:   bridge window [mem 0x00000000-0x000fffff 64bit pref]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0: PME# supported from D0 D3hot D3cold
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: PCIe Gen.4 x4 link up
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0: Adding to iommu group 16
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:01:00.0: [17cb:1112] type 00 class 0x028000 PCIe Endpoint
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:01:00.0: BAR 0 [mem 0x00000000-0x001fffff 64bit]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:01:00.0: BAR 2 [mem 0x00000000-0x00007fff 64bit]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:01:00.0: PME# supported from D0 D3hot D3cold
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:01:00.0: Adding to iommu group 17
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:01:00.0: ASPM: default states L1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-pcie 1b40000.pcie: PCI host bridge to bus 0005:00
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0005:00: root bus resource [bus 00-ff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0005:00: root bus resource [io  0x100000-0x1fffff] (bus address [0x0000-0xfffff])
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0005:00: root bus resource [mem 0x7a300000-0x7dffffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0005:00: root bus resource [mem 0x7a0000000-0x7dfffffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:00:00.0: [17cb:0120] type 01 class 0x060400 PCIe Root Port
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:00:00.0: BAR 0 [mem 0x00000000-0x000fffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:00:00.0: PCI bridge to [bus 01-ff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:00:00.0:   bridge window [io  0x100000-0x100fff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:00:00.0:   bridge window [mem 0x00000000-0x000fffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:00:00.0:   bridge window [mem 0x00000000-0x000fffff 64bit pref]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:00:00.0: PME# supported from D0 D3hot D3cold
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0: bridge window [io  0x1000-0x0fff] to [bus 01-ff] add_size 1000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0: bridge window [mem 0x00100000-0x000fffff 64bit pref] to [bus 01-ff] add_size 200000 add_align 100000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0: bridge window [mem 0x78300000-0x785fffff]: assigned
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0: bridge window [mem 0x780000000-0x7801fffff 64bit pref]: assigned
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0: BAR 0 [mem 0x78205000-0x78205fff]: assigned
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0: bridge window [io  0x1000-0x1fff]: assigned
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:01:00.0: BAR 0 [mem 0x78400000-0x785fffff 64bit]: assigned
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:00:00.0: Adding to iommu group 18
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:01:00.0: BAR 2 [mem 0x78300000-0x78307fff 64bit]: assigned
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0: PCI bridge to [bus 01-ff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0:   bridge window [io  0x1000-0x1fff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0:   bridge window [mem 0x78300000-0x785fffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0004:00:00.0:   bridge window [mem 0x780000000-0x7801fffff 64bit pref]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0004:00: resource 4 [io  0x0000-0xfffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0004:00: resource 5 [mem 0x78205000-0x79ffffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0004:00: resource 6 [mem 0x780000000-0x79fffffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0004:01: resource 0 [io  0x1000-0x1fff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0004:01: resource 1 [mem 0x78300000-0x785fffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0004:01: resource 2 [mem 0x780000000-0x7801fffff 64bit pref]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:01:00.0: [144d:a80f] type 00 class 0x010802 PCIe Endpoint
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:01:00.0: BAR 0 [mem 0x00000000-0x00003fff 64bit]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:01:00.0: Adding to iommu group 19
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:01:00.0: ASPM: default states L1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:00:00.0: BAR 0 [mem 0x7a300000-0x7a3fffff]: assigned
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:00:00.0: bridge window [mem 0x7a400000-0x7a4fffff]: assigned
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:01:00.0: BAR 0 [mem 0x7a400000-0x7a403fff 64bit]: assigned
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:00:00.0: PCI bridge to [bus 01-ff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci 0005:00:00.0:   bridge window [mem 0x7a400000-0x7a4fffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0005:00: resource 4 [io  0x100000-0x1fffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0005:00: resource 5 [mem 0x7a300000-0x7dffffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0005:00: resource 6 [mem 0x7a0000000-0x7dfffffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pci_bus 0005:01: resource 1 [mem 0x7a400000-0x7a4fffff]
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pcieport 0004:00:00.0: PME: Signaling with IRQ 176
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pcieport 0004:00:00.0: AER: enabled with IRQ 171
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pcieport 0004:00:00.0: pciehp: Slot #0 AttnBtn- PwrCtrl+ MRL+ AttnInd+ PwrInd+ HotPlug+ Surprise+ Interlock+ NoCompl+ IbPresDis- LLActRep+
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pcieport 0005:00:00.0: PME: Signaling with IRQ 184
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pcieport 0005:00:00.0: AER: enabled with IRQ 179
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Key type psk registered
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-m31eusb2-phy fa0000.phy: supply vdd not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-m31eusb2-phy fa0000.phy: supply vdda12 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-m31eusb2-phy fd3000.phy: supply vdd not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-m31eusb2-phy fd3000.phy: supply vdda12 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-m31eusb2-phy fdd000.phy: supply vdd not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-m31eusb2-phy fdd000.phy: supply vdda12 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-m31eusb2-phy 88e0000.phy: supply vdd not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-m31eusb2-phy 88e0000.phy: supply vdda12 not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-edp-phy faac00.phy: supply vdda-phy not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom-edp-phy faac00.phy: supply vdda-pll not found, using dummy regulator
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: nvme nvme0: pci function 0005:01:00.0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: nvme 0005:01:00.0: enabling device (0000 -> 0002)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: nvme nvme0: D3 entry latency set to 10 seconds
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: hwmon hwmon69: temp1_input not attached to any thermal zone
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: hwmon hwmon69: temp2_input not attached to any thermal zone
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: hwmon hwmon69: temp3_input not attached to any thermal zone
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: nvme nvme0: passthrough uses implicit buffer lengths
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: nvme nvme0: allocated 64 MiB host memory buffer (1 segment).
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: nvme nvme0: 12/0/0 default/read/poll queues
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:  nvme0n1: p1 p2 p3 p4 p5
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.2.auto: xHCI Host Controller
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.2.auto: new USB bus registered, assigned bus number 1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.3.auto: xHCI Host Controller
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.3.auto: new USB bus registered, assigned bus number 2
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.2.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x000080a000000810
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.2.auto: irq 210, io mem 0x0a000000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.2.auto: xHCI Host Controller
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.2.auto: new USB bus registered, assigned bus number 3
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.2.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb1: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb1: Product: xHCI Host Controller
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb1: Manufacturer: Linux 7.3.0-41-omarchy xhci-hcd
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb1: SerialNumber: xhci-hcd.2.auto
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: hub 1-0:1.0: USB hub found
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: hub 1-0:1.0: 1 port detected
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.3.auto: USB0 root hub has no ports
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.3.auto: hcc params 0x0220fe65 hci version 0x110 quirks 0x000080a000000810
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.3.auto: irq 213, io mem 0x0a200000
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb3: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb3: Product: xHCI Host Controller
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb3: Manufacturer: Linux 7.3.0-41-omarchy xhci-hcd
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb3: SerialNumber: xhci-hcd.2.auto
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: hub 3-0:1.0: USB hub found
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: hub 3-0:1.0: 1 port detected
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb2: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb2: Product: xHCI Host Controller
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb2: Manufacturer: Linux 7.3.0-41-omarchy xhci-hcd
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb2: SerialNumber: xhci-hcd.3.auto
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: hub 2-0:1.0: USB hub found
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: hub 2-0:1.0: 1 port detected
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: NET: Registered PF_QIPCRTR protocol family
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: remoteproc remoteproc0: soccp is available
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: remoteproc remoteproc0: attaching to soccp
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: qcom_q6v5_pas d00000.remoteproc: failed to get shutdown_state: -22
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: remoteproc remoteproc0: remote processor soccp is now attached
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: remoteproc remoteproc1: adsp is available
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: remoteproc remoteproc1: Direct firmware load for qcom/glymur/HP/omnibook-5-16-bf1xxx/qcadsp8480.mbn failed with error -2
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: remoteproc remoteproc1: powering up adsp
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: remoteproc remoteproc1: Direct firmware load for qcom/glymur/HP/omnibook-5-16-bf1xxx/qcadsp8480.mbn failed with error -2
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: remoteproc remoteproc1: request_firmware failed: -2
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: remoteproc remoteproc2: cdsp is available
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: remoteproc remoteproc2: Direct firmware load for qcom/glymur/HP/omnibook-5-16-bf1xxx/qccdsp8480.mbn failed with error -2
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: remoteproc remoteproc2: powering up cdsp
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: remoteproc remoteproc2: Direct firmware load for qcom/glymur/HP/omnibook-5-16-bf1xxx/qccdsp8480.mbn failed with error -2
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: remoteproc remoteproc2: request_firmware failed: -2
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: GICv3: SPI 4115 out of range (use ESPI?)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: input: gpio-keys as /devices/platform/gpio-keys/input/input9
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: fbcon: Taking over console
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Console: switching to colour frame buffer device 240x75
+Nov 09 05:31:42 omarchy-n1x-rescue qcom-startup: firmware started: soccp=attached
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 1-1: new high-speed USB device number 2 using xhci-hcd
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 2-1: new high-speed USB device number 2 using xhci-hcd
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 2-1: New USB device found, idVendor=30c9, idProduct=00d9, bcdDevice= 0.07
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 1-1: New USB device found, idVendor=8564, idProduct=1000, bcdDevice= 1.00
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 2-1: New USB device strings: Mfr=3, Product=1, SerialNumber=2
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 2-1: Product: HP True Vision FHD Camera
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 2-1: Manufacturer: DUKUF0A8PLT4ZB
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 2-1: SerialNumber: 200901010001
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 1-1: Product: Mass Storage Device
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 1-1: Manufacturer: JetFlash
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 1-1: SerialNumber: <redacted>
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb-storage 1-1:1.0: USB Mass Storage device detected
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: scsi host0: usb-storage 1-1:1.0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usbcore: registered new interface driver usb-storage
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usbcore: registered new interface driver uas
+Nov 09 05:31:42 omarchy-n1x-rescue qcom-startup: starting Archiso disk search; downstream USB readiness is not asserted
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: scsi 0:0:0:0: Direct-Access     JetFlash Transcend 8GB    8.07 PQ: 0 ANSI: 4
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: sd 0:0:0:0: [sda] 15261696 512-byte logical blocks: (7.81 GB/7.28 GiB)
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: sd 0:0:0:0: [sda] Mode Sense: 23 00 00 00
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 09 05:31:42 omarchy-n1x-rescue kernel:  sda: sda1 sda2
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ISO 9660 Extensions: Microsoft Joliet Level 3
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: ISO 9660 Extensions: RRIP_1991A
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: loop0: detected capacity change from 0 to 4769472
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: overlayfs: null uuid in non-single lower fs '/', falling back to xino=off,index=off,nfs_export=off.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: System time advanced to timestamp on /usr/lib/clock-epoch: Mon 2026-11-09 05:31:41 UTC
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Inserted module 'autofs4'
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: systemd 262.1-1-arch running in system mode (+PAM +AUDIT -SELINUX +APPARMOR -IMA +IPE +SMACK +SECCOMP +GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 +KMOD +LIBCRYPTSETUP +LIBCRYPTSETUP_PLUGINS +LIBFDISK +PCRE2 +PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +BPF_FRAMEWORK -BTF +XKBCOMMON +UTMP +LIBARCHIVE)
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Detected architecture arm64.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Detected first boot.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Initializing machine ID from random generator.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: evm: overlay not supported
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Hostname set to <omarchy-n1x-rescue>.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: bpf-restrict-fs: LSM BPF program attached
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Applying preset policy.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/multi-user.target.wants/machines.target' → '/usr/lib/systemd/system/machines.target'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/ctrl-alt-del.target' → '/usr/lib/systemd/system/reboot.target'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/multi-user.target.wants/remote-cryptsetup.target' → '/usr/lib/systemd/system/remote-cryptsetup.target'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/multi-user.target.wants/remote-integritysetup.target' → '/usr/lib/systemd/system/remote-integritysetup.target'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/multi-user.target.wants/remote-veritysetup.target' → '/usr/lib/systemd/system/remote-veritysetup.target'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sysinit.target.wants/systemd-boot-clear-sysfail.service' → '/usr/lib/systemd/system/systemd-boot-clear-sysfail.service'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sysinit.target.wants/systemd-boot-update.service' → '/usr/lib/systemd/system/systemd-boot-update.service'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sysinit.target.wants/systemd-confext.service' → '/usr/lib/systemd/system/systemd-confext.service'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sysinit.target.wants/systemd-coredumpd.service' → '/usr/lib/systemd/system/systemd-coredumpd.service'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/systemd-homed.service.wants/systemd-homed-activate.service' → '/usr/lib/systemd/system/systemd-homed-activate.service'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/dbus-org.freedesktop.home1.service' → '/usr/lib/systemd/system/systemd-homed.service'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/multi-user.target.wants/systemd-homed.service' → '/usr/lib/systemd/system/systemd-homed.service'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-journalctl-metrics.socket' → '/usr/lib/systemd/system/systemd-journalctl-metrics.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-journald-audit.socket' → '/usr/lib/systemd/system/systemd-journald-audit.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/systemd-journald.service.wants/systemd-journald-audit.socket' → '/usr/lib/systemd/system/systemd-journald-audit.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-mountfsd.socket' → '/usr/lib/systemd/system/systemd-mountfsd.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sysinit.target.wants/systemd-network-generator.service' → '/usr/lib/systemd/system/systemd-network-generator.service'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-networkd-varlink.socket' → '/usr/lib/systemd/system/systemd-networkd-varlink.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-networkd-varlink-metrics.socket' → '/usr/lib/systemd/system/systemd-networkd-varlink-metrics.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-networkd-resolve-hook.socket' → '/usr/lib/systemd/system/systemd-networkd-resolve-hook.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-nsresourced.socket' → '/usr/lib/systemd/system/systemd-nsresourced.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sysinit.target.wants/systemd-pstore.service' → '/usr/lib/systemd/system/systemd-pstore.service'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-report-basic.socket' → '/usr/lib/systemd/system/systemd-report-basic.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-report-cgroup.socket' → '/usr/lib/systemd/system/systemd-report-cgroup.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-report-files.socket' → '/usr/lib/systemd/system/systemd-report-files.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-report-sign-plain.socket' → '/usr/lib/systemd/system/systemd-report-sign-plain.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-report-sign-tpm2.socket' → '/usr/lib/systemd/system/systemd-report-sign-tpm2.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-report-sign-tsm.socket' → '/usr/lib/systemd/system/systemd-report-sign-tsm.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-report.socket' → '/usr/lib/systemd/system/systemd-report.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sysinit.target.wants/systemd-resolved.service' → '/usr/lib/systemd/system/systemd-resolved.service'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-resolved-varlink.socket' → '/usr/lib/systemd/system/systemd-resolved-varlink.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-resolved-monitor.socket' → '/usr/lib/systemd/system/systemd-resolved-monitor.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sysinit.target.wants/systemd-sysext.service' → '/usr/lib/systemd/system/systemd-sysext.service'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-sysupdate-notify-bootctl.socket' → '/usr/lib/systemd/system/systemd-sysupdate-notify-bootctl.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-sysupdate-notify-pcrlock.socket' → '/usr/lib/systemd/system/systemd-sysupdate-notify-pcrlock.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/sockets.target.wants/systemd-sysupdate-notify-sysext.socket' → '/usr/lib/systemd/system/systemd-sysupdate-notify-sysext.socket'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created symlink '/etc/systemd/system/factory-reset.target.wants/systemd-tpm2-clear.service' → '/usr/lib/systemd/system/systemd-tpm2-clear.service'.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Populated /etc with preset unit settings.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Queued start job for default target Graphical Interface.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created slice Slice /system/dirmngr.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created slice Slice /system/getty.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created slice Slice /system/gpg-agent.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created slice Slice /system/gpg-agent-browser.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created slice Slice /system/gpg-agent-extra.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created slice Slice /system/gpg-agent-ssh.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created slice Slice /system/keyboxd.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created slice Slice /system/modprobe.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Created slice User and Session Slice.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Set up automount Arbitrary Executable File Formats File System Automount Point.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Reached target Local dm-clone Devices.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Reached target Image Downloads.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Reached target Local Integrity Protected Volumes.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Reached target Remote Encrypted Volumes.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Reached target Remote File Systems.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Reached target Remote Integrity Protected Volumes.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Reached target Remote Verity Protected Volumes.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Reached target Slice Units.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Reached target Swaps.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Reached target Local Verity Protected Volumes.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Device-mapper event daemon FIFOs.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on LVM2 poll daemon socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Query the User Interactively for a Password.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Process Core Dump Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Credential Encryption/Decryption.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Disk Encryption Enrollment Service Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Factory Reset Management.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Hostname Service Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Journal Audit Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Journal Socket (/dev/log).
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Journal Sockets.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on DDI File System Mounter Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Console Output Muting Service Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Network Management Metrics Varlink Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Network Management Varlink Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Network Management Netlink Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Namespace Resource Manager Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on TPM PCR Measurements.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Make TPM PCR Policy.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Disk Repartitioning Service Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Report System Basic Metrics Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on CGroup Report Varlink Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Report Files Metrics Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Report Signing Socket (Local Software Key).
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Report Signing Socket (TPM2).
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Report Signing Socket (configfs-tsm) skipped, unmet condition check ConditionSecurity=cvm
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on System Report Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Resolve Monitor Varlink Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Resolve Service Varlink Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Simple Block Device Backed Storage Provider.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Simple File System Backed Storage Provider.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on System Install Tool.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Recompute TPM PCR Policy on Completed System Update.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on System Updates.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on udev Kernel Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on udev Varlink Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on User Database Manager Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounting Huge Pages File System...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounting POSIX Message Queue File System...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounting Arbitrary Executable File Formats File System...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounting Kernel Debug File System...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounting Kernel Trace File System...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounting Temporary Directory /tmp...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Create List of Static Device Nodes...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Load Kernel Module configfs skipped, unmet condition check ConditionKernelModuleLoaded=!configfs
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounting Kernel Configuration File System...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Load Kernel Module drm skipped, unmet condition check ConditionKernelModuleLoaded=!drm
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Load Kernel Module efi_pstore...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Load Kernel Module fuse skipped, unmet condition check ConditionKernelModuleLoaded=!fuse
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounting FUSE Control File System...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Clear SysFail Entry If The Boot Is Successful skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/LoaderEntrySysFail-4a67b082-0a4c-41cf-b6c7-440b29bb8c4f
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Clear Stale Hibernate Storage Info skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/HibernateLocation-8cf2644b-4b0b-428f-9387-6d876050dc67
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Journal Service...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Load Kernel Modules...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Generate Network Units from Kernel Command Line...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting TPM PCR Machine ID Measurement...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: TPM PCR OS Separator skipped, unmet condition check ConditionPathExists=/etc/initrd-release
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Remount Root and Kernel File Systems...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Wait Until Kernel Time Synchronized...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Early TPM SRK Setup...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Load udev Rules from Credentials...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Coldplug All udev Devices...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Finished Create List of Static Device Nodes.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Create Static Device Nodes in /dev gracefully...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Finished Remount Root and Kernel File Systems.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Rebuild Hardware Database skipped, unmet condition check ConditionNeedsUpdate=/etc
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Load/Save OS Random Seed...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounted Huge Pages File System.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounted POSIX Message Queue File System.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounted Kernel Debug File System.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounted Kernel Trace File System.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounted Temporary Directory /tmp.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounted Kernel Configuration File System.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: modprobe@efi_pstore.service: Deactivated successfully.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Finished Load Kernel Module efi_pstore.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounted FUSE Control File System.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Finished Generate Network Units from Kernel Command Line.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounted Arbitrary Executable File Formats File System.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Finished Load udev Rules from Credentials.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Reached target Preparation for Network.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Listening on Network Management Resolve Hook Socket.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Platform Persistent Storage Archival skipped, unmet condition check ConditionDirectoryNotEmpty=/sys/fs/pstore
+Nov 09 05:31:42 omarchy-n1x-rescue systemd-journald[1039]: Collecting audit messages is enabled.
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Finished Load/Save OS Random Seed.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202302.835:2): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-random-seed comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: Asymmetric key parser 'pkcs8' registered
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Finished Load Kernel Modules.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202302.837:3): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-modules-load comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Apply Kernel Variables...
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Finished Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202302.864:4): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=lvm2-monitor comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Started Journal Service.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202302.869:5): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-journald comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202302.872:6): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-pcrmachine comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202302.872:7): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-tpm2-setup-early comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202302.891:8): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-pcrproduct comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202302.892:9): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-tpm2-setup comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:31:42 omarchy-n1x-rescue systemd-journald[1039]: Received client request to flush runtime journal.
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202302.901:10): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-journal-flush comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: audit: type=1334 audit(1794202302.974:11): prog-id=22 op=LOAD
+Nov 09 05:31:43 omarchy-n1x-rescue kernel: cfg80211: Loading compiled-in X.509 certificates for regulatory database
+Nov 09 05:31:43 omarchy-n1x-rescue kernel: Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+Nov 09 05:31:43 omarchy-n1x-rescue kernel: Loaded X.509 cert 'wens: 61c038651aabdcf94bd0ac7ff06c7248db18c600'
+Nov 09 05:31:43 omarchy-n1x-rescue kernel:  cs_system_cfg: CoreSight Configuration manager initialised
+Nov 09 05:31:43 omarchy-n1x-rescue kernel: qcomtee: QTEE version 5.2.0
+Nov 09 05:31:43 omarchy-n1x-rescue kernel: coresight cti_sys0: CTI initialized
+Nov 09 05:31:43 omarchy-n1x-rescue kernel: coresight stm0: STM32 initialized
+Nov 09 05:31:44 omarchy-n1x-rescue kernel: mc: Linux media interface: v0.10
+Nov 09 05:31:44 omarchy-n1x-rescue kernel: videodev: Linux video capture interface: v2.00
+Nov 09 05:31:44 omarchy-n1x-rescue kernel: uvcvideo 2-1:1.0: Found UVC 1.10 device HP True Vision FHD Camera (30c9:00d9)
+Nov 09 05:31:44 omarchy-n1x-rescue kernel: uvcvideo 2-1:1.2: Found UVC 1.50 device HP True Vision FHD Camera (30c9:00d9)
+Nov 09 05:31:44 omarchy-n1x-rescue kernel: usbcore: registered new interface driver uvcvideo
+Nov 09 05:31:44 omarchy-n1x-rescue kernel: ath12k_wifi7_pci 0004:01:00.0: BAR 0 [mem 0x78400000-0x785fffff 64bit]: assigned
+Nov 09 05:31:44 omarchy-n1x-rescue kernel: ath12k_wifi7_pci 0004:01:00.0: enabling device (0000 -> 0002)
+Nov 09 05:31:44 omarchy-n1x-rescue kernel: ath12k_wifi7_pci 0004:01:00.0: Wi-Fi 7 Hardware name: qcc2072 hw1.0
+Nov 09 05:31:44 omarchy-n1x-rescue kernel: ath12k_wifi7_pci 0004:01:00.0: MSI vectors: 16
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: mhi mhi0: Requested to power ON
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: mhi mhi0: Power on setup success
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: mhi mhi0: Direct firmware load for ath12k/QCC2072/hw1.0/amss.bin failed with error -2
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: mhi mhi0: Error loading firmware: -2
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: ath12k_wifi7_pci 0004:01:00.0: failed to set mhi state: POWER_ON(2)
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: ath12k_wifi7_pci 0004:01:00.0: failed to start mhi: -110
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: ath12k_wifi7_pci 0004:01:00.0: failed to power up :-110
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: ath12k_wifi7_pci 0004:01:00.0: failed to create soc 0 core: -110
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: ath12k_wifi7_pci 0004:01:00.0: unable to create hw group
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: ath12k_wifi7_pci 0004:01:00.0: failed to init core: -110
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: msm_dpu ae01000.display-controller: bound af6c000.displayport-controller (ops msm_dp_display_comp_ops [msm])
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: ath12k_wifi7_pci 0004:01:00.0: probe with driver ath12k_wifi7_pci failed with error -110
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: Console: switching to colour dummy device 80x25
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: [drm:dpu_kms_hw_init:1209] dpu hardware revision:0xc0020000
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: [drm] Initialized msm 1.13.0 for ae01000.display-controller on minor 1
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: msm_dpu ae01000.display-controller: no GPU device was found
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: NET: Registered PF_ALG protocol family
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: Console: switching to colour frame buffer device 240x75
+Nov 09 05:31:45 omarchy-n1x-rescue kernel: msm_dpu ae01000.display-controller: [drm] fb0: msmdrmfb frame buffer device
+Nov 09 05:31:49 omarchy-n1x-rescue kernel: kauditd_printk_skb: 58 callbacks suppressed
+Nov 09 05:31:49 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202309.277:70): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=ModemManager comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:31:49 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202309.476:71): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=plymouth-quit-wait comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:31:49 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202309.476:72): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=plymouth-quit comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:31:49 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202309.760:73): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=getty@tty1 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:31:52 omarchy-n1x-rescue kernel: audit: type=1101 audit(1794202312.302:74): pid=1372 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:accounting grantors=pam_access,pam_unix,pam_permit,pam_time acct="root" exe="/usr/bin/login" hostname=omarchy-n1x-rescue addr=? terminal=/dev/tty1 res=success'
+Nov 09 05:31:52 omarchy-n1x-rescue kernel: audit: type=1103 audit(1794202312.422:75): pid=1372 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:setcred grantors=pam_shells,pam_faillock,pam_permit,pam_env,pam_faillock acct="root" exe="/usr/bin/login" hostname=omarchy-n1x-rescue addr=? terminal=/dev/tty1 res=success'
+Nov 09 05:31:52 omarchy-n1x-rescue kernel: audit: type=1006 audit(1794202312.422:76): pid=1372 uid=0 old-auid=4294967295 auid=0 tty=tty1 old-ses=4294967295 ses=1 res=1
+Nov 09 05:31:52 omarchy-n1x-rescue kernel: audit: type=1300 audit(1794202312.422:76): arch=c00000b7 syscall=64 success=yes exit=1 a0=3 a1=fffff4446d50 a2=1 a3=0 items=0 ppid=1 pid=1372 auid=0 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=tty1 ses=1 comm="login" exe="/usr/bin/login" key=(null)
+Nov 09 05:31:52 omarchy-n1x-rescue kernel: audit: type=1327 audit(1794202312.422:76): proctitle=2F62696E2F6C6F67696E002D70002D66002D2D
+Nov 09 05:31:52 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202312.624:77): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-pcrlogin@0 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:31:54 omarchy-n1x-rescue kernel: kauditd_printk_skb: 97 callbacks suppressed
+Nov 09 05:31:54 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202314.381:113): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=user@0 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:31:54 omarchy-n1x-rescue kernel: audit: type=1105 audit(1794202314.394:114): pid=1372 uid=0 auid=0 ses=1 msg='op=PAM:session_open grantors=pam_loginuid,pam_keyinit,pam_systemd_home,pam_limits,pam_unix,pam_permit,pam_lastlog2,pam_mail,pam_umask,pam_systemd,pam_env acct="root" exe="/usr/bin/login" hostname=omarchy-n1x-rescue addr=? terminal=/dev/tty1 res=success'
+Nov 09 05:31:54 omarchy-n1x-rescue kernel: audit: type=1110 audit(1794202314.394:115): pid=1372 uid=0 auid=0 ses=1 msg='op=PAM:setcred grantors=pam_shells,pam_faillock,pam_permit,pam_env,pam_faillock acct="root" exe="/usr/bin/login" hostname=omarchy-n1x-rescue addr=? terminal=/dev/tty1 res=success'
+Nov 09 05:31:55 omarchy-n1x-rescue kernel: platform 6c90000.codec: deferred probe pending: platform: supplier 7660000.codec not ready
+Nov 09 05:31:55 omarchy-n1x-rescue kernel: platform 6cb0000.codec: deferred probe pending: platform: supplier 7660000.codec not ready
+Nov 09 05:31:55 omarchy-n1x-rescue kernel: platform 7660000.codec: deferred probe pending: va_macro: unable to get macro clock
+Nov 09 05:31:55 omarchy-n1x-rescue kernel: platform 7760000.pinctrl: deferred probe pending: (reason unknown)
+Nov 09 05:32:26 omarchy-n1x-rescue kernel: audit: type=1334 audit(1794202346.896:116): prog-id=58 op=LOAD
+Nov 09 05:32:26 omarchy-n1x-rescue kernel: audit: type=1334 audit(1794202346.896:117): prog-id=59 op=LOAD
+Nov 09 05:32:26 omarchy-n1x-rescue kernel: audit: type=1334 audit(1794202346.896:118): prog-id=60 op=LOAD
+Nov 09 05:32:27 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202347.099:119): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-timedated comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:32:55 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202375.137:120): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=getty@tty2 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:32:55 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202375.240:121): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=omarchy-mirror-verify comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:32:57 omarchy-n1x-rescue kernel: audit: type=1131 audit(1794202377.522:122): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=systemd-timedated comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:32:57 omarchy-n1x-rescue kernel: audit: type=1334 audit(1794202377.537:123): prog-id=60 op=UNLOAD
+Nov 09 05:32:57 omarchy-n1x-rescue kernel: audit: type=1334 audit(1794202377.537:124): prog-id=59 op=UNLOAD
+Nov 09 05:32:57 omarchy-n1x-rescue kernel: audit: type=1334 audit(1794202377.537:125): prog-id=58 op=UNLOAD
+Nov 09 05:33:06 omarchy-n1x-rescue kernel: audit: type=1100 audit(1794202386.697:126): pid=2245 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:authentication grantors=? acct="?" exe="/usr/bin/login" hostname=omarchy-n1x-rescue addr=? terminal=/dev/tty2 res=failed'
+Nov 09 05:33:13 omarchy-n1x-rescue kernel: audit: type=1100 audit(1794202393.397:127): pid=2245 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:authentication grantors=? acct="?" exe="/usr/bin/login" hostname=omarchy-n1x-rescue addr=? terminal=/dev/tty2 res=failed'
+Nov 09 05:34:05 omarchy-n1x-rescue kernel: audit: type=1131 audit(1794202445.791:128): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=getty@tty2 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:34:05 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202445.846:129): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=getty@tty2 comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:34:12 omarchy-n1x-rescue kernel: audit: type=1100 audit(1794202452.643:130): pid=2478 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:authentication grantors=pam_shells,pam_faillock,pam_permit,pam_faillock acct="root" exe="/usr/bin/login" hostname=omarchy-n1x-rescue addr=? terminal=/dev/tty2 res=success'
+Nov 09 05:34:12 omarchy-n1x-rescue kernel: audit: type=1101 audit(1794202452.644:131): pid=2478 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:accounting grantors=pam_access,pam_unix,pam_permit,pam_time acct="root" exe="/usr/bin/login" hostname=omarchy-n1x-rescue addr=? terminal=/dev/tty2 res=success'
+Nov 09 05:34:12 omarchy-n1x-rescue kernel: audit: type=1103 audit(1794202452.644:132): pid=2478 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:setcred grantors=pam_shells,pam_faillock,pam_permit,pam_faillock acct="root" exe="/usr/bin/login" hostname=omarchy-n1x-rescue addr=? terminal=/dev/tty2 res=success'
+Nov 09 05:34:12 omarchy-n1x-rescue kernel: audit: type=1006 audit(1794202452.644:133): pid=2478 uid=0 old-auid=4294967295 auid=0 tty=tty2 old-ses=4294967295 ses=3 res=1
+Nov 09 05:34:12 omarchy-n1x-rescue kernel: audit: type=1300 audit(1794202452.644:133): arch=c00000b7 syscall=64 success=yes exit=1 a0=4 a1=ffffec409eb0 a2=1 a3=0 items=0 ppid=1 pid=2478 auid=0 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=tty2 ses=3 comm="login" exe="/usr/bin/login" key=(null)
+Nov 09 05:34:12 omarchy-n1x-rescue kernel: audit: type=1327 audit(1794202452.644:133): proctitle=2F62696E2F6C6F67696E002D2D
+Nov 09 05:34:12 omarchy-n1x-rescue kernel: audit: type=1105 audit(1794202452.656:134): pid=2478 uid=0 auid=0 ses=3 msg='op=PAM:session_open grantors=pam_loginuid,pam_keyinit,pam_systemd_home,pam_limits,pam_unix,pam_permit,pam_lastlog2,pam_mail,pam_umask,pam_systemd,pam_env acct="root" exe="/usr/bin/login" hostname=omarchy-n1x-rescue addr=? terminal=/dev/tty2 res=success'
+Nov 09 05:34:12 omarchy-n1x-rescue kernel: audit: type=1110 audit(1794202452.656:135): pid=2478 uid=0 auid=0 ses=3 msg='op=PAM:setcred grantors=pam_shells,pam_faillock,pam_permit,pam_faillock acct="root" exe="/usr/bin/login" hostname=omarchy-n1x-rescue addr=? terminal=/dev/tty2 res=success'
+Nov 09 05:35:16 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202516.303:136): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=omarchy-root-image-verify comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:35:16 omarchy-n1x-rescue kernel: audit: type=1334 audit(1794202516.304:137): prog-id=61 op=LOAD
+Nov 09 05:35:16 omarchy-n1x-rescue kernel: audit: type=1130 audit(1794202516.325:138): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=omarchy-luks-calibrate comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:35:21 omarchy-n1x-rescue kernel: audit: type=1131 audit(1794202521.880:139): pid=1 uid=0 auid=4294967295 ses=4294967295 msg='unit=omarchy-luks-calibrate comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'
+Nov 09 05:35:21 omarchy-n1x-rescue kernel: audit: type=1334 audit(1794202521.890:140): prog-id=61 op=UNLOAD
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.4.auto: xHCI Host Controller
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.4.auto: new USB bus registered, assigned bus number 4
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.4.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x000080a000000810
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.4.auto: irq 205, io mem 0x0a600000
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.4.auto: xHCI Host Controller
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.4.auto: new USB bus registered, assigned bus number 5
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.4.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb4: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb4: Product: xHCI Host Controller
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb4: Manufacturer: Linux 7.3.0-41-omarchy xhci-hcd
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb4: SerialNumber: xhci-hcd.4.auto
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: hub 4-0:1.0: USB hub found
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: hub 4-0:1.0: 1 port detected
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb5: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb5: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb5: Product: xHCI Host Controller
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb5: Manufacturer: Linux 7.3.0-41-omarchy xhci-hcd
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb5: SerialNumber: xhci-hcd.4.auto
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: hub 5-0:1.0: USB hub found
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: hub 5-0:1.0: 1 port detected
+Nov 09 05:35:59 omarchy-n1x-rescue kernel: usb 5-1: new SuperSpeed USB device number 2 using xhci-hcd
+Nov 09 05:35:59 omarchy-n1x-rescue kernel: usb 5-1: New USB device found, idVendor=04e8, idProduct=6300, bcdDevice=11.00
+Nov 09 05:35:59 omarchy-n1x-rescue kernel: usb 5-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 09 05:35:59 omarchy-n1x-rescue kernel: usb 5-1: Product: Type-C
+Nov 09 05:35:59 omarchy-n1x-rescue kernel: usb 5-1: Manufacturer: Samsung
+Nov 09 05:35:59 omarchy-n1x-rescue kernel: usb 5-1: SerialNumber: <redacted>
+Nov 09 05:35:59 omarchy-n1x-rescue kernel: usb-storage 5-1:1.0: USB Mass Storage device detected
+Nov 09 05:35:59 omarchy-n1x-rescue kernel: scsi host1: usb-storage 5-1:1.0
+Nov 09 05:36:00 omarchy-n1x-rescue kernel: scsi 1:0:0:0: Direct-Access     Samsung  Type-C           1100 PQ: 0 ANSI: 6
+Nov 09 05:36:00 omarchy-n1x-rescue kernel: sd 1:0:0:0: Attached scsi generic sg1 type 0
+Nov 09 05:36:00 omarchy-n1x-rescue kernel: sd 1:0:0:0: [sdb] 1002506265 512-byte logical blocks: (513 GB/478 GiB)
+Nov 09 05:36:00 omarchy-n1x-rescue kernel: sd 1:0:0:0: [sdb] Write Protect is off
+Nov 09 05:36:00 omarchy-n1x-rescue kernel: sd 1:0:0:0: [sdb] Mode Sense: 43 00 00 00
+Nov 09 05:36:00 omarchy-n1x-rescue kernel: sd 1:0:0:0: [sdb] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+Nov 09 05:36:00 omarchy-n1x-rescue kernel:  sdb: sdb1
+Nov 09 05:36:00 omarchy-n1x-rescue kernel: sd 1:0:0:0: [sdb] Attached SCSI removable disk
+Nov 09 05:37:17 omarchy-n1x-rescue kernel: exFAT-fs (sdb1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
