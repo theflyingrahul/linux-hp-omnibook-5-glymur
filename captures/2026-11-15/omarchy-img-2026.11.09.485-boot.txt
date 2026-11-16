@@ -417,7 +417,7 @@ Nov 09 05:31:42 omarchy-n1x-rescue kernel: usbcore: registered new interface dri
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usbcore: registered new interface driver hub
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usbcore: registered new device driver usb
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: pps_core: LinuxPPS API ver. 1 registered
-Nov 09 05:31:42 omarchy-n1x-rescue kernel: pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <<email>>
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: PTP clock support registered
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: EDAC MC: Ver: 3.0.0
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: scmi_core: SCMI protocol bus registered
@@ -499,7 +499,7 @@ Nov 09 05:31:42 omarchy-n1x-rescue kernel: mousedev: PS/2 mouse device common fo
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: i2c_dev: i2c /dev entries driver
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: device-mapper: core: CONFIG_IMA_DISABLE_HTABLE is disabled. Duplicate IMA measurements will not be recorded in the IMA log.
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: device-mapper: uevent: version 1.0.3
-Nov 09 05:31:42 omarchy-n1x-rescue kernel: device-mapper: ioctl: 4.50.0-ioctl (2025-04-28) initialised: dm-devel@lists.linux.dev
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: device-mapper: ioctl: 4.50.0-ioctl (2025-04-28) initialised: <email>
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: simple-framebuffer simple-framebuffer.0: [drm] Registered 1 planes with drm panic
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: [drm] Initialized simpledrm 1.0.0 for simple-framebuffer.0 on minor 0
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: fbcon: Deferring console take-over
@@ -888,7 +888,7 @@ Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb1: New USB device found, idVen
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb1: Product: xHCI Host Controller
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb1: Manufacturer: Linux 7.3.0-41-omarchy xhci-hcd
-Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb1: SerialNumber: xhci-hcd.2.auto
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb1: SerialNumber: <serial>
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: hub 1-0:1.0: USB hub found
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: hub 1-0:1.0: 1 port detected
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: xhci-hcd xhci-hcd.3.auto: USB0 root hub has no ports
@@ -898,14 +898,14 @@ Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb3: New USB device found, idVen
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb3: New USB device strings: Mfr=3, Product=2, SerialNumber=1
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb3: Product: xHCI Host Controller
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb3: Manufacturer: Linux 7.3.0-41-omarchy xhci-hcd
-Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb3: SerialNumber: xhci-hcd.2.auto
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb3: SerialNumber: <serial>
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: hub 3-0:1.0: USB hub found
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: hub 3-0:1.0: 1 port detected
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb2: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb2: Product: xHCI Host Controller
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb2: Manufacturer: Linux 7.3.0-41-omarchy xhci-hcd
-Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb2: SerialNumber: xhci-hcd.3.auto
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb usb2: SerialNumber: <serial>
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: hub 2-0:1.0: USB hub found
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: hub 2-0:1.0: 1 port detected
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: NET: Registered PF_QIPCRTR protocol family
@@ -934,12 +934,12 @@ Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 2-1: New USB device found, idVend
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 1-1: New USB device found, idVendor=8564, idProduct=1000, bcdDevice= 1.00
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 2-1: New USB device strings: Mfr=3, Product=1, SerialNumber=2
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 2-1: Product: HP True Vision FHD Camera
-Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 2-1: Manufacturer: DUKUF0A8PLT4ZB
-Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 2-1: SerialNumber: 200901010001
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 2-1: Manufacturer: <id>
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 2-1: SerialNumber: <serial>
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 1-1: Product: Mass Storage Device
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 1-1: Manufacturer: JetFlash
-Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 1-1: SerialNumber: <redacted>
+Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb 1-1: SerialNumber: <serial>
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usb-storage 1-1:1.0: USB Mass Storage device detected
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: scsi host0: usb-storage 1-1:1.0
 Nov 09 05:31:42 omarchy-n1x-rescue kernel: usbcore: registered new interface driver usb-storage
@@ -1078,8 +1078,8 @@ Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Load Kernel Module drm skipped, u
 Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Load Kernel Module efi_pstore...
 Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Load Kernel Module fuse skipped, unmet condition check ConditionKernelModuleLoaded=!fuse
 Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Mounting FUSE Control File System...
-Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Clear SysFail Entry If The Boot Is Successful skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/LoaderEntrySysFail-4a67b082-0a4c-41cf-b6c7-440b29bb8c4f
-Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Clear Stale Hibernate Storage Info skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/HibernateLocation-8cf2644b-4b0b-428f-9387-6d876050dc67
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Clear SysFail Entry If The Boot Is Successful skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/LoaderEntrySysFail-<uuid>
+Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Clear Stale Hibernate Storage Info skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/HibernateLocation-<uuid>
 Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Journal Service...
 Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Load Kernel Modules...
 Nov 09 05:31:42 omarchy-n1x-rescue systemd[1]: Starting Generate Network Units from Kernel Command Line...
@@ -1220,14 +1220,14 @@ Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb4: New USB device found, idVen
 Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
 Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb4: Product: xHCI Host Controller
 Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb4: Manufacturer: Linux 7.3.0-41-omarchy xhci-hcd
-Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb4: SerialNumber: xhci-hcd.4.auto
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb4: SerialNumber: <serial>
 Nov 09 05:35:58 omarchy-n1x-rescue kernel: hub 4-0:1.0: USB hub found
 Nov 09 05:35:58 omarchy-n1x-rescue kernel: hub 4-0:1.0: 1 port detected
 Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb5: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
 Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb5: New USB device strings: Mfr=3, Product=2, SerialNumber=1
 Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb5: Product: xHCI Host Controller
 Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb5: Manufacturer: Linux 7.3.0-41-omarchy xhci-hcd
-Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb5: SerialNumber: xhci-hcd.4.auto
+Nov 09 05:35:58 omarchy-n1x-rescue kernel: usb usb5: SerialNumber: <serial>
 Nov 09 05:35:58 omarchy-n1x-rescue kernel: hub 5-0:1.0: USB hub found
 Nov 09 05:35:58 omarchy-n1x-rescue kernel: hub 5-0:1.0: 1 port detected
 Nov 09 05:35:59 omarchy-n1x-rescue kernel: usb 5-1: new SuperSpeed USB device number 2 using xhci-hcd
@@ -1235,7 +1235,7 @@ Nov 09 05:35:59 omarchy-n1x-rescue kernel: usb 5-1: New USB device found, idVend
 Nov 09 05:35:59 omarchy-n1x-rescue kernel: usb 5-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
 Nov 09 05:35:59 omarchy-n1x-rescue kernel: usb 5-1: Product: Type-C
 Nov 09 05:35:59 omarchy-n1x-rescue kernel: usb 5-1: Manufacturer: Samsung
-Nov 09 05:35:59 omarchy-n1x-rescue kernel: usb 5-1: SerialNumber: <redacted>
+Nov 09 05:35:59 omarchy-n1x-rescue kernel: usb 5-1: SerialNumber: <serial>
 Nov 09 05:35:59 omarchy-n1x-rescue kernel: usb-storage 5-1:1.0: USB Mass Storage device detected
 Nov 09 05:35:59 omarchy-n1x-rescue kernel: scsi host1: usb-storage 5-1:1.0
 Nov 09 05:36:00 omarchy-n1x-rescue kernel: scsi 1:0:0:0: Direct-Access     Samsung  Type-C           1100 PQ: 0 ANSI: 6
