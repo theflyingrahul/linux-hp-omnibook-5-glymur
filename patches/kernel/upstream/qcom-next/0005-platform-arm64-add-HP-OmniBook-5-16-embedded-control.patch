@@ -39,8 +39,8 @@ methods use on this laptop.
  .../ABI/testing/sysfs-driver-hp-omnibook-5-ec |  26 +
  drivers/platform/arm64/Kconfig                |  17 +
  drivers/platform/arm64/Makefile               |   1 +
- drivers/platform/arm64/hp-omnibook-5-ec.c     | 535 ++++++++++++++++++
- 4 files changed, 579 insertions(+)
+ drivers/platform/arm64/hp-omnibook-5-ec.c     | 555 ++++++++++++++++++
+ 4 files changed, 599 insertions(+)
  create mode 100644 Documentation/ABI/testing/sysfs-driver-hp-omnibook-5-ec
  create mode 100644 drivers/platform/arm64/hp-omnibook-5-ec.c
 
@@ -121,7 +121,7 @@ new file mode 100644
 index 000000000000..7d11352ab52b
 --- /dev/null
 +++ b/drivers/platform/arm64/hp-omnibook-5-ec.c
-@@ -0,0 +1,535 @@
+@@ -0,0 +1,555 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/*
 + * HP OmniBook 5 16 (Snapdragon X2) embedded controller
@@ -162,6 +162,8 @@ index 000000000000..7d11352ab52b
 +#define HPEC_STATUS_DONE	0xe0
 +#define HPEC_POLL_TRIES		20
 +#define HPEC_POLL_US		5000
++/* Attempts for transfers that must not be lost */
++#define HPEC_RETRIES		3
 +
 +/* OS state flags: sub-command is the flag, with bit 7 to set it */
 +#define HPEC_OS_FLAG		0x01
@@ -401,15 +403,33 @@ index 000000000000..7d11352ab52b
 +{
 +	struct hpec *ec = data;
 +	struct device *dev = &ec->client->dev;
-+	int event;
++	int event, ret, i;
 +
++	/*
++	 * The EC holds its event line asserted until the event is cleared, so
++	 * a failed read or clear would leave no edge for any later event.
++	 */
 +	scoped_guard(mutex, &ec->lock) {
-+		event = i2c_smbus_read_byte_data(ec->client, HPEC_EVENT);
++		for (i = 0; i < HPEC_RETRIES; i++) {
++			event = i2c_smbus_read_byte_data(ec->client, HPEC_EVENT);
++			if (event >= 0)
++				break;
++			msleep(20);
++		}
 +		if (event < 0) {
 +			dev_err_ratelimited(dev, "cannot read EC event: %d\n", event);
 +			return IRQ_HANDLED;
 +		}
-+		i2c_smbus_write_byte_data(ec->client, HPEC_EVENT, 0);
++
++		for (i = 0; i < HPEC_RETRIES; i++) {
++			ret = i2c_smbus_write_byte_data(ec->client, HPEC_EVENT, 0);
++			if (!ret)
++				break;
++			msleep(20);
++		}
++		if (ret)
++			dev_err_ratelimited(dev, "cannot clear EC event %#x: %d\n",
++					    event, ret);
 +	}
 +
 +	if (!event)
@@ -590,7 +610,7 @@ index 000000000000..7d11352ab52b
 +	int i, ret, err;
 +
 +	/* The first transfer after wake-up can fail on the EC's bus */
-+	for (i = 0; i < 3; i++) {
++	for (i = 0; i < HPEC_RETRIES; i++) {
 +		ret = hpec_standby(ec, false);
 +		if (!ret)
 +			break;

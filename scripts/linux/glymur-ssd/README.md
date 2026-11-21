@@ -547,6 +547,8 @@ read-only it remounts it for the test and back.
 
     sudo bash check-rtc.sh
 
+From `-24` it first reads the PMK8850 RTC, which the test device tree enables read-only as `rtc1`. It reads the raw counter and the RTC and alarm registers through the PMIC's debugfs regmap, saves all sixteen SDAM blocks to a private file, takes a reference time (chrony's, or an HTTP `Date` header), and lists any SDAM word that turns the counter into UTC or IST (`docs/rtc-2026-11-21.md`). Nothing is written.
+
 From kernel `-19` (`CONFIG_RTC_DRV_QCOM_GLINK`): the RTC that the ADSP's
 PMIC GLink service provides, which Windows reads as `\_SB.PRTC`. First, with
 `rtc_qcom_glink` and `pmic_glink` debug logging on, it reads the time once

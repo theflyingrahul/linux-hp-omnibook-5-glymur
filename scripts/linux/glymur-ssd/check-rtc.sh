@@ -2,7 +2,8 @@
 set -u
 
 # RTC report (kernel -19 on): the ADSP's PMIC GLink RTC service, which
-# Windows uses as \_SB.PRTC. See README.md.
+# Windows uses as \_SB.PRTC, and from -24 the PMK8850 RTC's raw counter
+# and SDAM. See README.md.
 #   sudo bash check-rtc.sh
 # Reads the time, works out whether the RTC holds UTC or local time (Windows
 # keeps local time unless RealTimeIsUniversal is set; this laptop's Windows
@@ -26,6 +27,79 @@ for r in /sys/class/rtc/rtc*; do
     [ -e "$r" ] || { echo 'no RTC device'; exit 1; }
     printf '%s: name=%s hctosys=%s\n' "${r##*/}" "$(cat "$r/name")" "$(cat "$r/hctosys" 2>/dev/null)"
 done
+# From -24: the PMK8850 RTC, read-only, as rtc1 (docs/rtc-2026-11-21.md).
+# Does its counter hold wall time (UTC or local), or does an SDAM hold the
+# offset the ADSP adds for Windows? Reads registers only, through the
+# PMIC's debugfs regmap; the SDAM dump goes to a private file.
+sect "PMK8850 RTC counter and SDAM (read-only)"
+for r in /sys/class/rtc/rtc*; do
+    case "$(cat "$r/name")" in
+        *pm8xxx*|*6100*) printf '%s: %s %s, since_epoch=%s\n' "${r##*/}" "$(cat "$r/date")" "$(cat "$r/time")" "$(cat "$r/since_epoch")" ;;
+    esac
+done
+journalctl -k -b --no-pager | grep -i 'pm8xxx\|6100.rtc\|rtc@6100' | tail -5
+RM=""
+for d in /sys/kernel/debug/regmap/*0-00*; do
+    [ -r "$d/registers" ] || continue
+    line=$(dd if="$d/registers" bs=9 skip=$((0x6100)) count=1 2>/dev/null)
+    [ "${line%%:*}" = 6100 ] && { RM=$d; break; }
+done
+if [ -z "$RM" ]; then
+    echo 'no PMK8850 regmap in debugfs with fixed-width lines; skipped'
+else
+    echo "regmap: $RM"
+    regs() { dd if="$RM/registers" bs=9 skip=$(($1)) count=$(($2)) 2>/dev/null; }
+    echo '-- RTC_RW (0x6100) and RTC_ALARM (0x6200) blocks'
+    regs 0x6100 256 | paste -d' ' - - - - - - - - | sed 's/^/  /'
+    regs 0x6200 256 | paste -d' ' - - - - - - - - | sed 's/^/  /'
+    SD="/var/log/glymur/pmk8850-sdam-$(date +%Y%m%dT%H%M%S).txt"
+    regs 0x7000 4096 > "$SD"
+    echo "SDAM 0x7000-0x7fff saved to $SD (private: copy to .work/, never commit)"
+    t_read=$(date +%s)
+    c1=$(regs 0x6148 4 | awk '{print $2}' | tac | tr -d '\n')
+    c2=$(regs 0x6148 4 | awk '{print $2}' | tac | tr -d '\n')
+    echo "raw counter (0x6148..0x614b, LE): 0x$c1 then 0x$c2"
+    # A trusted time: chrony's, or an HTTP Date header (no TLS, so no
+    # certificate check against the wrong clock).
+    ref=""; src=""
+    if [ "$(timedatectl show -p NTPSynchronized --value)" = yes ]; then
+        ref=$(date +%s); src="system clock (NTP synchronised)"
+    else
+        h=$(curl -sI --max-time 8 http://www.google.com/ | tr -d '\r' | sed -n 's/^[Dd]ate: //p')
+        [ -n "$h" ] && { ref=$(date -d "$h" +%s); src="HTTP Date header ($h)"; }
+    fi
+    echo "reference: ${src:-none}"
+    python3 - "$c2" "${ref:-0}" "$t_read" "$SD" <<'PY'
+import sys, datetime as dt
+c = int(sys.argv[1], 16); ref = int(sys.argv[2]); t_read = int(sys.argv[3])
+print("counter as seconds since 1970: %s" % dt.datetime.fromtimestamp(c, dt.timezone.utc))
+if not ref:
+    print("no reference time: compare the line above with a clock by hand")
+    sys.exit()
+ref += 0  # taken right after the read
+IST = 19800
+for name, want in (("UTC", ref), ("IST", ref + IST)):
+    print("counter - %s = %+d s" % (name, c - want))
+# An SDAM word that turns the counter into wall time?
+regs = {}
+for line in open(sys.argv[4]):
+    a, v = line.split(":")
+    regs[int(a, 16)] = int(v, 16)
+hits = []
+for a in range(0x7000, 0x7ffd):
+    if not all(a + i in regs for i in range(4)):
+        continue
+    w = sum(regs[a + i] << (8 * i) for i in range(4))
+    for name, want in (("UTC", ref), ("IST", ref + IST)):
+        if abs((c + w) % (1 << 32) - want) < 3600:
+            hits.append((a, w, name, (c + w) % (1 << 32) - want))
+for a, w, name, d in hits[:20]:
+    print("SDAM %#06x: %#010x, counter + word = %s %+d s" % (a, w, name, d))
+if not hits:
+    print("no SDAM word within an hour of counter + offset = UTC or IST")
+PY
+fi
+
 R=/sys/class/rtc/rtc0
 for r in /sys/class/rtc/rtc*; do
     case "$(cat "$r/name")" in *glink*) R=$r ;; esac

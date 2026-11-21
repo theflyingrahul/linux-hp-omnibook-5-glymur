@@ -1,0 +1,209 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
+Date: Fri, 13 Nov 2026 19:09:24 -0800
+Subject: [PATCH] media: iris: add mahua platform data and enable
+ qcom,mahua-iris
+
+Add qcom,mahua-iris compatible to initialize the hardware
+and necessary Mahua platform data describing the needed clock
+resets and powerdomain tables only for one core, vcodec0.
+Most of the data is leveraged from Glymur as they are the same
+Iris variant. Firmware, vpu ops, buffer sizes are the same as for
+Glymur.
+
+Signed-off-by: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
+Link: https://patch.msgid.link/20261113-mahua_iris_enable-v1-3-b7107e1cbcaa@oss.qualcomm.com
+---
+ drivers/media/platform/qcom/iris/Makefile     |  1 +
+ .../platform/qcom/iris/iris_platform_common.h |  1 +
+ .../platform/qcom/iris/iris_platform_mahua.c  | 44 +++++++++++++++++++
+ .../platform/qcom/iris/iris_platform_mahua.h  | 14 ++++++
+ .../platform/qcom/iris/iris_platform_vpu3x.c  | 34 ++++++++++++++
+ drivers/media/platform/qcom/iris/iris_probe.c |  4 ++
+ drivers/media/platform/qcom/iris/iris_vpu3x.c | 10 +++++
+ 7 files changed, 108 insertions(+)
+ create mode 100644 drivers/media/platform/qcom/iris/iris_platform_mahua.c
+ create mode 100644 drivers/media/platform/qcom/iris/iris_platform_mahua.h
+
+diff --git a/drivers/media/platform/qcom/iris/Makefile b/drivers/media/platform/qcom/iris/Makefile
+index 4ef45c1d8a45..40e611e72f99 100644
+--- a/drivers/media/platform/qcom/iris/Makefile
++++ b/drivers/media/platform/qcom/iris/Makefile
+@@ -16,6 +16,7 @@ qcom-iris-objs += iris_buffer.o \
+              iris_hfi_queue.o \
+              iris_platform_kaanapali.o \
+              iris_platform_glymur.o \
++             iris_platform_mahua.o \
+              iris_platform_vpu2.o \
+              iris_platform_vpu3x.o \
+              iris_platform_vpu4x.o \
+diff --git a/drivers/media/platform/qcom/iris/iris_platform_common.h b/drivers/media/platform/qcom/iris/iris_platform_common.h
+index 617de242b22b..950a54086ced 100644
+--- a/drivers/media/platform/qcom/iris/iris_platform_common.h
++++ b/drivers/media/platform/qcom/iris/iris_platform_common.h
+@@ -67,6 +67,7 @@ extern const struct platform_inst_slice_caps iris_vpu2_vpu3x_slice_caps;
+ extern const struct platform_inst_slice_caps iris_ar50lt_slice_caps;
+ 
+ extern const struct iris_platform_data eliza_data;
++extern const struct iris_platform_data mahua_data;
+ extern const struct iris_platform_data glymur_data;
+ extern const struct iris_platform_data hawi_data;
+ extern const struct iris_platform_data kaanapali_data;
+diff --git a/drivers/media/platform/qcom/iris/iris_platform_mahua.c b/drivers/media/platform/qcom/iris/iris_platform_mahua.c
+new file mode 100644
+index 000000000000..14b085426ac2
+--- /dev/null
++++ b/drivers/media/platform/qcom/iris/iris_platform_mahua.c
+@@ -0,0 +1,44 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Copyright (c) Qualcomm Innovation Center, Inc. All rights reserved.
++ */
++
++#include "iris_core.h"
++#include "iris_platform_common.h"
++
++const struct iris_power_domain_data iris_mahua_ctrl_data = {
++	.pd_names = (const char *[]) {
++		"venus",
++	},
++	.pd_cnt = 1,
++	.clk_names = (const char *[]) {
++		"core_iface", "core_freerun", "core",
++	},
++	.clk_cnt = 3,
++};
++
++const struct iris_power_domain_data iris_mahua_vcodec_data[] = {
++	{
++		.pd_names = (const char *[]) {
++			"vcodec0",
++		},
++		.pd_cnt = 1,
++		.clk_names = (const char *[]) {
++			"vcodec0_iface", "vcodec0_core_freerun", "vcodec0_core",
++		},
++		.clk_cnt = 3,
++	},
++};
++
++const char * const iris_mahua_clk_reset_table[] = {
++	"core_bus",
++	"vcodec0_bus",
++	"core",
++	"vcodec0_core",
++};
++
++const char * const iris_mahua_opp_clk_table[] = {
++	"vcodec0_core",
++	"core",
++	NULL,
++};
+diff --git a/drivers/media/platform/qcom/iris/iris_platform_mahua.h b/drivers/media/platform/qcom/iris/iris_platform_mahua.h
+new file mode 100644
+index 000000000000..fa30f33c5b03
+--- /dev/null
++++ b/drivers/media/platform/qcom/iris/iris_platform_mahua.h
+@@ -0,0 +1,14 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++/*
++ * Copyright (c) Qualcomm Innovation Center, Inc. All rights reserved.
++ */
++
++#ifndef __IRIS_PLATFORM_MAHUA_H__
++#define __IRIS_PLATFORM_MAHUA_H__
++
++extern const struct iris_power_domain_data iris_mahua_ctrl_data;
++extern const struct iris_power_domain_data iris_mahua_vcodec_data[1];
++extern const char * const iris_mahua_clk_reset_table[4];
++extern const char * const iris_mahua_opp_clk_table[2];
++
++#endif /* __IRIS_PLATFORM_MAHUA_H__ */
+diff --git a/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c b/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
+index 7ce6a394bda5..0bae8538adb5 100644
+--- a/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
++++ b/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
+@@ -13,6 +13,7 @@
+ #include "iris_vpu_common.h"
+ 
+ #include "iris_platform_glymur.h"
++#include "iris_platform_mahua.h"
+ #include "iris_platform_qcs8300.h"
+ #include "iris_platform_sm8550.h"
+ #include "iris_platform_sm8650.h"
+@@ -98,6 +99,39 @@ static const struct tz_cp_config tz_cp_config_vpu3[] = {
+ 	},
+ };
+ 
++/*
++ * Shares most of Glymur data except, num_cores
++ */
++
++const struct iris_platform_data mahua_data = {
++	.firmware_desc_gen2 = &iris_vpu36_p4_s7_gen2_desc,
++	.vpu_ops = &iris_vpu36_ops,
++	.icc_tbl = iris_icc_info_vpu3x,
++	.icc_tbl_size = ARRAY_SIZE(iris_icc_info_vpu3x),
++	.clk_rst_tbl = iris_mahua_clk_reset_table,
++	.clk_rst_tbl_size = ARRAY_SIZE(iris_mahua_clk_reset_table),
++	.bw_tbl_dec = iris_bw_table_dec_vpu3x,
++	.bw_tbl_dec_size = ARRAY_SIZE(iris_bw_table_dec_vpu3x),
++	.ctrl_data = &iris_mahua_ctrl_data,
++	.vcodec_data = iris_mahua_vcodec_data,
++	.opp_pd_tbl = iris_opp_pd_table_vpu3x,
++	.opp_pd_tbl_size = ARRAY_SIZE(iris_opp_pd_table_vpu3x),
++	.opp_clk_tbl = iris_mahua_opp_clk_table,
++	/* Upper bound of DMA address range */
++	.dma_mask = 0xffe00000 - 1,
++	.inst_iris_fmts = iris_fmts_vpu3x_dec,
++	.inst_iris_fmts_size = ARRAY_SIZE(iris_fmts_vpu3x_dec),
++	.inst_caps = &platform_inst_cap_sm8550,
++	.slice_caps = &iris_vpu2_vpu3x_slice_caps,
++	.tz_cp_config_data = iris_glymur_tz_cp_config,
++	.tz_cp_config_data_size = ARRAY_SIZE(iris_glymur_tz_cp_config),
++	.num_vpp_pipe = 4,
++	.max_session_count = 16,
++	.num_cores = 1,
++	.max_core_mbpf = NUM_MBS_8K * 2,
++	.max_core_mbps = ((7680 * 4320) / 256) * 60,
++};
++
+ const struct iris_platform_data glymur_data = {
+ 	.firmware_desc_gen2 = &iris_vpu36_p4_s7_gen2_desc,
+ 	.vpu_ops = &iris_vpu36_ops,
+diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
+index 8c629574cf96..bd8b2104d788 100644
+--- a/drivers/media/platform/qcom/iris/iris_probe.c
++++ b/drivers/media/platform/qcom/iris/iris_probe.c
+@@ -527,6 +527,10 @@ static const struct dev_pm_ops iris_pm_ops = {
+ };
+ 
+ static const struct of_device_id iris_dt_match[] = {
++	{
++		.compatible = "qcom,mahua-iris",
++		.data = &mahua_data,
++	},
+ 	{
+ 		.compatible = "qcom,eliza-iris",
+ 		.data = &eliza_data,
+diff --git a/drivers/media/platform/qcom/iris/iris_vpu3x.c b/drivers/media/platform/qcom/iris/iris_vpu3x.c
+index ae88ee8ee31d..a618bede9506 100644
+--- a/drivers/media/platform/qcom/iris/iris_vpu3x.c
++++ b/drivers/media/platform/qcom/iris/iris_vpu3x.c
+@@ -370,6 +370,16 @@ static int iris_vpu36_check_core_load(struct iris_inst *inst, bool mbpf)
+ 	new_load = mbpf ? iris_get_mbpf(inst) : iris_get_mbps(inst);
+ 
+ 	select_core0 = core0_load + new_load <= max_load && core0_session_cnt < max_session_cnt;
++
++	if (platform_data->num_cores == 1) {
++		if (select_core0) {
++			inst->core_id = IRIS_VCODEC0;
++			return 0;
++		}
++
++		return -ENOMEM;
++	}
++
+ 	select_core1 = core1_load + new_load <= max_load && core1_session_cnt < max_session_cnt;
+ 
+ 	if (select_core0 && select_core1)

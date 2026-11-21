@@ -65,6 +65,9 @@
  * its own); suspend, the M31 PHY's SE0 timeout and the xHCI reset on resume
  * are kernel changes. Iris and DisplayPort are in the -test-av device tree.
  *
+ * In test from kernel -24 (docs/rtc-2026-11-21.md):
+ * - the PMK8850 RTC again, read-only and without the UEFI offset, as rtc1.
+ *
  * In test from kernel -23 (docs/usb-a-superspeed-2026-11-11.md):
  * - HP's two USB3 PHY writes for the USB-A port (ACPI \_SB.USB2.PHYC),
  *   through the default-off glymur-bringup/0006 property.
@@ -78,6 +81,10 @@
 
 / {
 	model = "HP OmniBook 5 Laptop 16-bf1xxx (test)";
+
+	aliases {
+		rtc1 = &pmk8850_rtc;
+	};
 
 	/*
 	 * Headset additions to the daily device tree's sound card (from -19):
@@ -308,19 +315,17 @@
 };
 
 /*
- * PMK8850 RTC (PMIC "A", whose clocks HP's PEP tables vote): the counter
- * runs from the PMIC, the offset to wall time is the UEFI variable Windows
- * keeps (qcom,uefi-rtc-info), as on the ASUS Zenbook A16 and the Glymur
- * QCB. Without allow-set-time Linux only reads the variable. No alarm, as
- * on the Glymur CRD, the QCB and the Zenbook A16.
+ * PMK8850 RTC, read-only, for one measurement (-24,
+ * docs/rtc-2026-11-21.md). HP's firmware has no RTCInfo variable, and the
+ * ADSP's PMIC GLink RTC service does not answer Linux's requests; Windows
+ * reads the time through the ADSP (\_SB.PRTC, ABD offset 0x30200). Whether
+ * the ADSP keeps this counter at wall time, or keeps an offset to it in an
+ * SDAM, is what check-rtc.sh reads. No offset source, no alarm (its
+ * interrupt goes to the ADSP), no set-time. It is rtc1, so it cannot set
+ * the system clock until the counter is known.
  */
 &pmk8850_rtc {
-	qcom,uefi-rtc-info;
 	qcom,no-alarm;
 
-	/*
-	 * No RTCInfo on this firmware: off. From -19 the RTC is the ADSP's
-	 * PMIC GLink RTC service, which Windows uses (\_SB.PRTC).
-	 */
-	status = "disabled";
+	status = "okay";
 };

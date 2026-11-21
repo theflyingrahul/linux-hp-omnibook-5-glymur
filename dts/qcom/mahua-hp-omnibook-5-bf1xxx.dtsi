@@ -374,3 +374,12 @@
 		max-speed = <3200000>;
 	};
 };
+
+/*
+ * Qualcomm's Mahua description (backports/0090) turns Iris on in mahua.dtsi.
+ * Here it stays off: on -17 an open that failed stalled WirePlumber's
+ * camera monitor. The -test-av device tree turns it on.
+ */
+&iris {
+	status = "disabled";
+};

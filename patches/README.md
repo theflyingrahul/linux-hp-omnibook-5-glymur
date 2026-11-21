@@ -27,7 +27,7 @@ to `-17`, `6b4daa845239` for
 in order:
 `upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0006`,
 `0009` and `0010`, `glymur-bringup/0001–0006`, then `backports/` (`0001–0002`,
-`0023–0026`, `0030–0037`, `0040–0043`, `0047–0088`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
+`0023–0026`, `0030–0037`, `0040–0043`, `0047–0091`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
 `upstream/qcom-next/0001`; `-7` adds `upstream/qcom-next/0002`; `-8` moves
 to the new base and adds `upstream/qcom-next/0003`; `-9` adds `0004`–`0005`
@@ -118,6 +118,68 @@ tree. `0005` reads the EC's pending event from register `0x00`, where HP's
 `IC10.INTR` reads it (field `CMD5`, no offset), instead of `0x05`; the old
 value left a fan notice unacknowledged and the event line firing about nine
 times a second (`docs/audit-2026-10-22.md`).
+
+Kernel `-24` (2026-11-21, `docs/linux-runbook-24-2026-11-21.md`, package sha256
+`1f4d8ac1…`), same
+base, `17bbb4b37bbc`. qcom-next has moved to a 7.4-rc3 base (`c6989d230fe6`,
+tag `qcom-next-7.4-rc3-20261120`), but the owner decided on 2026-11-09 to
+move the base when Linux 7.4 is released, so its fixes come in one at a
+time. Also checked:
+- the laptops trees: `qcom-laptops` `65b1086d59`, `topic/glymur-laptops`
+  unchanged;
+- mainline `v7.4-rc3`;
+- linux-next `next-20261120`: 62 new commits since `next-20261110` in the
+  drivers and device trees this laptop uses;
+- Patchwork: linux-arm-msm, linux-phy, linux-usb, linux-rtc and
+  platform-driver-x86.
+
+Taken:
+- `backports/0089–0091`, Deepa Guthyappa Madivalara's "Enable Iris on
+  Mahua" (v1, posted 2026-11-13, not reviewed yet): the binding, the
+  `mahua.dtsi` node and the driver's Mahua data. That is one core,
+  `vcodec0`, with Glymur's firmware interface and ops. It is Qualcomm's
+  own form of what `glymur-bringup/0003–0005` probe, and how Windows uses
+  this die. `0091` is ported: three one-line insertions moved for context
+  our base lacks (the Makefile, the `mahua_data` declaration, the match
+  table). `0090` turns Iris on in `mahua.dtsi`, so the board `.dtsi` turns
+  it off again, and only the `-test-av` tree enables it.
+- `upstream/qcom-next/0005`, the EC driver: the event read and the write
+  that clears it each retry three times, 20 ms apart. Birk's review
+  bot on omacom/omarchy-pkgs#2903 found the unchecked clear. The EC holds
+  its event line asserted until the event is cleared, and the interrupt is
+  edge-triggered, so one failed transfer stopped every later hotkey and
+  backlight event. The standby-exit retry on resume uses the same
+  constant. The upstream v2 branch carries the same change
+  (`dfe65b2b25`); v2 is not sent yet.
+
+Checked and already in our tree: the GPI DMA fix "Set IEOB on linked I2C
+GO TRE" (`f7d9c8c1bd`, as `3a16c3f71114`; the EC bus uses GPI DMA), and
+"eusb2-repeater: Fix SMB Power leakage issue" (`a6d71ecf65`; ours has the
+register base the SMB2370 needs). Peter Chen's M31 SE0 recovery v3
+(2026-11-19) changes only the text of v2, which is `backports/0080`.
+
+Read and not taken:
+- Tyler Baker's "ASoC: qcom: x1e80100: recreate the headset jack on card
+  rebind" (`704251f9da`): it calls the generic jack helpers of Hongyang
+  Zhao's `7f8dd07370`, a refactor our base lacks. It matters only after a
+  card rebind, which nothing here does any more, so it comes with the base
+  move.
+- Charles Keepax's SDCA port constraints (`8bb24d8707` and the two before
+  it): they need SDCA refactors our base lacks. They may bear on the
+  headset's left/right swap; they come with the base move.
+- "Revert phy: qcom: qmp-pcie: Skip PHY reset if already up"
+  (`9a07dfa7f6`): the reverted commit broke a Dell whose UEFI boots from
+  the NVMe; ours works with it.
+- qmp-combo PCS-AON clamps for V3 to V6 PHYs (Glymur is V8).
+- Tapas Rana's M31 HS disconnect mask: spurious high-speed disconnects
+  under host-TX load have not been seen here.
+- Kamal Wadhwa's battmgr "stop faking battery presence" (for machines
+  without a battery).
+- The Glymur CRD lid pull-up (HP's lid is on the EC).
+- ath12k feature work.
+
+The test device tree enables the PMK8850 RTC read-only as `rtc1`, to
+measure its counter (`docs/rtc-2026-11-21.md`).
 
 Kernel `-23` (2026-11-11, `docs/linux-runbook-23-2026-11-11.md`), same
 base (package sha256 `7b951b11…`); it replaces `-22`, which was never booted. qcom-next fetched again

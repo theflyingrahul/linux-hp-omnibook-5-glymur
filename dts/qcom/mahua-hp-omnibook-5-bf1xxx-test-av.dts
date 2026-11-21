@@ -6,8 +6,10 @@
  * the test device tree. Replaces -19's -test-iris.
  *
  * - Iris, for the Mahua video trials (check-video.sh --mahua,
- *   docs/video-iris-windows-2026-11-06.md). Glymur's description (both
- *   vcodec domains); the trials power only vcodec 0, as Windows does here.
+ *   docs/video-iris-windows-2026-11-06.md). From -24 it is Qualcomm's own
+ *   Mahua description and data (backports/0089-0091, posted 2026-11-13):
+ *   one core, vcodec 0, as Windows uses here. Before -24 it was Glymur's
+ *   two-core node, with the trials powering only vcodec 0.
  * - DisplayPort over both USB-C ports. On -15 a monitor made the EDID read
  *   fail and the display controller then timed out until the machine reset
  *   (docs/runbook-results-2026-10-21.md). Since -17 the driver no longer
