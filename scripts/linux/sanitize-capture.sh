@@ -19,6 +19,7 @@ for f in "$@"; do
     sed -E -i \
         -e 's/\b([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}\b/xx:xx:xx:xx:xx:xx/g' \
         -e 's/\b[0-9A-Fa-f]{8}(-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}\b/<uuid>/g' \
+        -e 's/\benx[0-9a-f]{12}\b/enx<mac>/g' \
         -e 's/[0-9A-Fa-f]{8}(\\x2d[0-9A-Fa-f]{4}){3}\\x2d[0-9A-Fa-f]{12}/<uuid>/g' \
         -e 's/(SerialNumber: ).*/\1<serial>/' \
         -e 's/(iSerial +[0-9]+ ).*/\1<serial>/' \
