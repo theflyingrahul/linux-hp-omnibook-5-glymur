@@ -18,16 +18,18 @@ exec > >(tee "$OUT") 2>&1
 sect() { printf '\n==== %s\n' "$*"; }
 ask() { local a; while read -r -t 0.05 -n 4096 _ </dev/tty 2>/dev/null; do :; done; read -r -p "$1 " a </dev/tty; a=$(printf '%s' "$a" | sed -E 's/\x1b\[[0-9;]*[~A-Za-z]//g; s/\[[0-9]+~//g'); echo "answer: $a"; REPLY=$a; }
 asuser() { sudo -u "$SUDO_USER" XDG_RUNTIME_DIR="/run/user/$(id -u "$SUDO_USER")" "$@"; }
-cget() { amixer -c "$CARD" cget "name=$1" 2>&1 | sed -n 's/.*: values=//p'; }
-cset() { amixer -c "$CARD" -q cset "name=$1" "$2" 2>&1; echo "  $1 = $(cget "$1")"; }
+# hw: skips UCM's ctl remap (Speakers Volume), which loses name lookups and
+# shifts numids by one (-23, 2026-11-21).
+cget() { amixer -D "hw:$CARD" cget "name=$1" 2>&1 | sed -n 's/.*: values=//p'; }
+cset() { amixer -D "hw:$CARD" -q cset "name=$1" "$2" 2>&1; echo "  $1 = $(cget "$1")"; }
 # Jack controls are on the card interface (iface=CARD), so read them by numid;
 # GE 35 Detected Mode (the codec's jack type) as well.
 jacks() {
-    amixer -c "$CARD" controls 2>/dev/null | grep -i -E "jack|Detected Mode|Selected Mode" |
+    amixer -D "hw:$CARD" controls 2>/dev/null | grep -i -E "jack|Detected Mode|Selected Mode" |
         while IFS= read -r l; do
             n=${l%%,*}
             printf '  %-48s %s\n' "${l#*name=}" \
-                "$(amixer -c "$CARD" cget "$n" 2>&1 | sed -n 's/.*: values=//p' | head -1)"
+                "$(amixer -D "hw:$CARD" cget "$n" 2>&1 | sed -n 's/.*: values=//p' | head -1)"
         done
     journalctl -k --no-pager --since "-20s" | grep -i -E 'jack|wcd|sdca' | tail -5 || true
     grep -B1 -A4 -i 'jack\|headset\|headphone' /proc/bus/input/devices | grep -E '^N:|^H:' || true
@@ -73,7 +75,7 @@ echo "card: ${CARD:-none}"
 cat /proc/asound/card"$CARD"/pcm*/info 2>/dev/null | grep -E '^(card|device|id|name|stream):'
 
 sect "all controls with values (for the headset UCM)"
-amixer -c "$CARD" contents 2>&1
+amixer -D "hw:$CARD" contents 2>&1
 
 sect "jack state, nothing plugged"
 jacks
@@ -103,10 +105,10 @@ declare -A SAVED
 for c in "${SAVE[@]}"; do SAVED[$c]=$(cget "$c"); done
 restore() {
     for c in "${SAVE[@]}"; do
-        [ -n "${SAVED[$c]}" ] && amixer -c "$CARD" -q cset "name=$c" "${SAVED[$c]}" 2>/dev/null
+        [ -n "${SAVED[$c]}" ] && amixer -D "hw:$CARD" -q cset "name=$c" "${SAVED[$c]}" 2>/dev/null
     done
 }
-qset() { amixer -c "$CARD" -q cset "name=$1" "$2" 2>&1; }
+qset() { amixer -D "hw:$CARD" -q cset "name=$1" "$2" 2>&1; }
 PW_STOPPED=0
 pw_stop() {
     asuser systemctl --user stop pipewire.socket pipewire-pulse.socket pipewire pipewire-pulse wireplumber 2>&1 | tail -2
@@ -180,15 +182,20 @@ if [ "$REPLY" = y ]; then
     # The codec's volume is a two-byte write over SoundWire paging; -20's
     # backports/0085 keeps both bytes. Readback may be cached, so listen too.
     sect "headset volume writes (two-byte, SoundWire paging)"
-    info=$(amixer -c "$CARD" cget "name=FU 6 Channel Volume" 2>&1)
-    lo=$(echo "$info" | sed -n 's/.*min=\([-0-9]*\).*/\1/p')
-    hi=$(echo "$info" | sed -n 's/.*max=\([-0-9]*\).*/\1/p')
-    echo "FU 6 Channel Volume: min=$lo max=$hi now $(cget 'FU 6 Channel Volume')"
-    if [ -n "$lo" ] && [ -n "$hi" ]; then
-        for frac in 4 2; do
-            v=$(( lo + (hi - lo) / frac ))
+    # The range runs from -128 to +128 dB, linear in dB (Q7.8), so step in
+    # dB, not by fractions of it: -40 dB, then -20 dB.
+    info=$(amixer -D "hw:$CARD" cget "name=FU 6 Channel Volume" 2>&1)
+    lo=$(echo "$info" | sed -n 's/.*; type=.*,min=\([-0-9]*\),.*/\1/p')
+    hi=$(echo "$info" | sed -n 's/.*; type=.*,max=\([-0-9]*\),.*/\1/p')
+    dlo=$(echo "$info" | sed -n 's/.*dBminmax-min=\([-0-9.]*\)dB.*/\1/p')
+    dhi=$(echo "$info" | sed -n 's/.*dBminmax-min=.*,max=\([-0-9.]*\)dB.*/\1/p')
+    echo "FU 6 Channel Volume: $lo..$hi = ${dlo}..${dhi} dB, now $(cget 'FU 6 Channel Volume')"
+    if [ -n "$lo" ] && [ -n "$hi" ] && [ -n "$dlo" ] && [ -n "$dhi" ]; then
+        for db in -40 -20; do
+            v=$(awk -v l="$lo" -v h="$hi" -v a="$dlo" -v b="$dhi" -v d="$db" \
+                'BEGIN { printf "%d", l + (d - a) * (h - l) / (b - a) }')
             cset 'FU 6 Channel Volume' "$v,$v"
-            echo "playing left at 1/$frac of the range"
+            echo "playing left at $db dB"
             play "$WAV/left.wav"
         done
         ask "Was the second tone clearly louder than the first?"
@@ -208,7 +215,7 @@ if [ "$REPLY" = y ]; then
     cset 'TX DEC0 MUX' SWR_MIC
     cset 'TX_AIF1_CAP Mixer DEC0' 1
     cset 'DEC0 MODE' ADC_DEFAULT
-    cset 'TX_DEC0 Volume' 110
+    cset 'TX_DEC0 Volume' 96   # +12 dB; 110 (+26 dB) clipped on -23
     echo "Talk now."
     best=; bestpk=0
     for i in 0 1 2 3 4 5 6 7 8 9 10 11; do

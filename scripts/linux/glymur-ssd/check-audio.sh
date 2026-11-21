@@ -28,7 +28,7 @@ leds() {
 }
 switches() {
     for c in 'Speakers Switch' 'Mic LED Capture Switch'; do
-        printf '  %-24s %s\n' "$c" "$(amixer -c "$CARD" cget "name=$c" 2>&1 | sed -n 's/.*: values=//p')"
+        printf '  %-24s %s\n' "$c" "$(amixer -D "hw:$CARD" cget "name=$c" 2>&1 | sed -n 's/.*: values=//p')"
     done
 }
 mutes() {
