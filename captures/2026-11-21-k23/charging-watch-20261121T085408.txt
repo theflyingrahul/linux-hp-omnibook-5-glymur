@@ -1,0 +1,200 @@
+08:54:08.963 charging-watch on 7.3.0-glymur-23, HP OmniBook 5 Laptop 16-bf1xxx (test)
+08:54:08.967 cmdline: BOOT_IMAGE=(hd1,gpt5)/boot/vmlinuz-glymur root=… rootfstype=ext4 ro rootwait clk_ignore_unused pd_ignore_unused arm64.nopauth quiet splash log_buf_len=16M console=tty0 loglevel=4
+08:54:09.406 Watching. Type notes + Enter (e.g. "unplugged", "LED on"); q + Enter to stop.
+08:54:09.740 STATE port0:usb_power_delivery+partner port1:usb_power_delivery+partner 01:on=1,PD,3250000uA 02:on=0,PD,3000000uA ac=0 usb=0 bat=Charging
+08:54:10.281 TRACE            <...>-11674   [010] .....   683.043439: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:10.289 TRACE            <...>-11679   [003] .....   683.052146: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:10.293 FW con1:conn=1 opmode=3 dir=0 partner=1 con2:conn=1 opmode=3 dir=1 partner=2
+08:54:12.437 TRACE            <...>-11785   [007] .....   685.199688: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:12.447 TRACE            <...>-11789   [011] .....   685.209920: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:14.427 TRACE            <...>-11863   [001] .....   686.804469: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:14.501 TRACE            <...>-11867   [009] .....   686.812240: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:16.201 TRACE            <...>-11964   [011] .....   688.963418: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:16.209 TRACE            <...>-11968   [004] .....   688.970794: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:16.999 TRACE            <...>-11675   [000] .....   689.759096: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:17.197 TRACE      kworker/0:1-11675   [000] .....   689.759106: ucsi_connector_change: port0 status: change=5804, opmode=0, connected=0, sourcing=0, partner_flags=0, partner_type=0, request_data_obj=00000000, BC status=0
+08:54:17.282 STATE port0:default port1:usb_power_delivery+partner 01:on=0,C,0uA 02:on=0,PD,3000000uA ac=0 usb=0 bat=Discharging
+08:54:18.358 TRACE            <...>-12124   [010] .....   691.120003: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:18.368 TRACE            <...>-12128   [011] .....   691.129976: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:18.371 FW con1:conn=0 opmode=0 dir=0 partner=0 con2:conn=1 opmode=3 dir=1 partner=2
+08:54:20.509 TRACE            <...>-12227   [009] .....   693.270708: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:20.520 TRACE            <...>-12231   [001] .....   693.282016: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:22.114 TRACE            <...>-12305   [003] .....   694.876692: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:22.125 TRACE            <...>-12309   [011] .....   694.887660: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:24.142 TRACE      kworker/0:1-11675   [000] .....   696.904346: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:24.144 TRACE      kworker/0:1-11675   [000] .....   696.904352: ucsi_connector_change: port0 status: change=5a04, opmode=5, connected=1, sourcing=0, partner_flags=1, partner_type=1, request_data_obj=00000000, BC status=1
+08:54:24.260 STATE port0:3.0A+partner port1:usb_power_delivery+partner 01:on=1,C,3000000uA 02:on=0,PD,3000000uA ac=0 usb=0 bat=Discharging
+08:54:24.265 TRACE            <...>-12424   [001] .....   697.028176: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:24.272 TRACE            <...>-12428   [010] .....   697.034189: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:24.274 FW con1:conn=1 opmode=5 dir=0 partner=1 con2:conn=1 opmode=3 dir=1 partner=2
+08:54:24.377 TRACE            <...>-399     [000] .....   697.139817: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:24.381 TRACE      kworker/0:2-399     [000] .....   697.139824: ucsi_connector_change: port0 status: change=0804, opmode=3, connected=1, sourcing=0, partner_flags=0, partner_type=1, request_data_obj=43051545, BC status=1
+08:54:24.813 STATE port0:usb_power_delivery+partner port1:usb_power_delivery+partner 01:on=1,PD,3250000uA 02:on=0,PD,3000000uA ac=0 usb=0 bat=Charging
+08:54:25.205 TRACE    kworker/u48:2-9989    [002] .....   697.963248: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:25.403 TRACE    kworker/u48:2-9989    [001] .....   698.162444: ucsi_run_command: GET_CONNECTOR_CAPABILITY -> OK (err=0)
+08:54:25.407 TRACE    kworker/u48:2-9989    [002] .....   698.166757: ucsi_run_command: GET_ALTERNATE_MODES -> OK (err=0)
+08:54:26.428 TRACE            <...>-12540   [001] .....   699.189915: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:26.438 TRACE            <...>-12544   [006] .....   699.199815: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:26.440 FW con1:conn=1 opmode=3 dir=0 partner=1 con2:conn=1 opmode=3 dir=1 partner=2
+08:54:28.577 TRACE            <...>-12621   [001] .....   700.819562: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:28.644 TRACE            <...>-12625   [007] .....   700.826776: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:30.207 TRACE            <...>-12728   [002] .....   702.969130: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:30.218 TRACE            <...>-12732   [011] .....   702.979498: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:32.379 TRACE            <...>-12830   [004] .....   705.140008: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:32.388 TRACE            <...>-12834   [008] .....   705.149750: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:32.641 TRACE            <...>-409     [000] .....   705.402205: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:32.643 TRACE      kworker/0:3-409     [000] .....   705.402220: ucsi_connector_change: port0 status: change=5804, opmode=0, connected=0, sourcing=0, partner_flags=0, partner_type=0, request_data_obj=00000000, BC status=0
+08:54:32.920 STATE port0:default port1:usb_power_delivery+partner 01:on=0,C,0uA 02:on=0,PD,3000000uA ac=0 usb=0 bat=Discharging
+08:54:34.512 TRACE            <...>-12935   [002] .....   707.274875: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:34.519 TRACE            <...>-12939   [009] .....   707.281289: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:34.521 FW con1:conn=0 opmode=0 dir=0 partner=0 con2:conn=1 opmode=3 dir=1 partner=2
+08:54:36.128 TRACE            <...>-13016   [001] .....   708.890083: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:36.140 TRACE            <...>-13020   [009] .....   708.902272: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:37.993 TRACE      kworker/0:3-409     [000] .....   709.861087: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:37.101 TRACE      kworker/0:3-409     [000] .....   709.861095: ucsi_connector_change: port0 status: change=5a04, opmode=5, connected=1, sourcing=0, partner_flags=1, partner_type=1, request_data_obj=00000000, BC status=1
+08:54:37.203 STATE port0:3.0A+partner port1:usb_power_delivery+partner 01:on=1,C,3000000uA 02:on=0,PD,3000000uA ac=0 usb=0 bat=Discharging
+08:54:37.338 TRACE      kworker/0:2-399     [000] .....   710.099718: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:37.341 TRACE      kworker/0:2-399     [000] .....   710.099726: ucsi_connector_change: port0 status: change=0804, opmode=3, connected=1, sourcing=0, partner_flags=0, partner_type=1, request_data_obj=43051545, BC status=1
+08:54:37.732 STATE port0:usb_power_delivery+partner port1:usb_power_delivery+partner 01:on=1,PD,3250000uA 02:on=0,PD,3000000uA ac=0 usb=0 bat=Charging
+08:54:38.134 TRACE    kworker/u48:0-9137    [011] .....   710.895934: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:38.279 TRACE            <...>-13129   [010] .....   711.041487: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:38.290 TRACE            <...>-13133   [007] .....   711.051976: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:38.294 FW con1:conn=1 opmode=3 dir=0 partner=1 con2:conn=1 opmode=3 dir=1 partner=2
+08:54:38.303 BEAT bat_power_uW=-8328000 capacity=34
+08:54:38.394 TRACE    kworker/u48:0-9137    [001] .....   711.155278: ucsi_run_command: GET_CONNECTOR_CAPABILITY -> OK (err=0)
+08:54:38.397 TRACE    kworker/u48:0-9137    [001] .....   711.159430: ucsi_run_command: GET_ALTERNATE_MODES -> OK (err=0)
+08:54:40.448 TRACE            <...>-13241   [001] .....   713.210744: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:40.460 TRACE            <...>-13245   [010] .....   713.221191: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:42.476 TRACE            <...>-13319   [005] .....   714.810067: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:42.552 TRACE            <...>-13323   [004] .....   714.817631: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:42.697 TRACE      kworker/0:2-399     [000] .....   715.457283: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:42.699 TRACE      kworker/0:2-399     [000] .....   715.457288: ucsi_connector_change: port0 status: change=5804, opmode=0, connected=0, sourcing=0, partner_flags=0, partner_type=0, request_data_obj=00000000, BC status=0
+08:54:43.132 STATE port0:default port1:usb_power_delivery+partner 01:on=0,C,0uA 02:on=0,PD,3000000uA ac=0 usb=0 bat=Discharging
+08:54:44.201 TRACE            <...>-13424   [011] .....   716.961354: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:44.206 TRACE            <...>-13428   [011] .....   716.968303: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:44.209 FW con1:conn=0 opmode=0 dir=0 partner=0 con2:conn=1 opmode=3 dir=1 partner=2
+08:54:46.352 TRACE            <...>-13527   [001] .....   719.112012: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:46.357 TRACE            <...>-13531   [010] .....   719.119015: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:47.877 TRACE      kworker/0:2-399     [000] .....   720.637491: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:47.879 TRACE      kworker/0:2-399     [000] .....   720.637503: ucsi_connector_change: port0 status: change=5a04, opmode=5, connected=1, sourcing=0, partner_flags=1, partner_type=1, request_data_obj=00000000, BC status=1
+08:54:47.942 STATE port0:3.0A+partner port1:usb_power_delivery+partner 01:on=1,C,3000000uA 02:on=0,PD,3000000uA ac=0 usb=0 bat=Discharging
+08:54:48.100 TRACE      kworker/0:2-399     [000] .....   720.861641: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:48.104 TRACE      kworker/0:2-399     [000] .....   720.861648: ucsi_connector_change: port0 status: change=0804, opmode=3, connected=1, sourcing=0, partner_flags=0, partner_type=1, request_data_obj=43051545, BC status=1
+08:54:48.479 STATE port0:usb_power_delivery+partner port1:usb_power_delivery+partner 01:on=1,PD,3250000uA 02:on=0,PD,3000000uA ac=0 usb=0 bat=Charging
+08:54:48.487 TRACE            <...>-13640   [001] .....   721.249333: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:48.494 TRACE            <...>-13644   [010] .....   721.256125: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:48.496 FW con1:conn=1 opmode=3 dir=0 partner=1 con2:conn=1 opmode=3 dir=1 partner=2
+08:54:48.885 TRACE    kworker/u48:0-9137    [011] .....   721.645946: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:49.138 TRACE            <...>-474     [008] .....   721.898916: ucsi_run_command: GET_CONNECTOR_CAPABILITY -> OK (err=0)
+08:54:49.140 TRACE    kworker/u48:3-474     [008] .....   721.902090: ucsi_run_command: GET_ALTERNATE_MODES -> OK (err=0)
+08:54:50.106 TRACE            <...>-13723   [001] .....   722.868374: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:50.118 TRACE            <...>-13727   [010] .....   722.880104: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:52.251 TRACE            <...>-13824   [005] .....   725.013632: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:52.263 TRACE            <...>-13828   [011] .....   725.024668: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:54.400 TRACE            <...>-13925   [009] .....   727.161932: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:54.407 TRACE            <...>-13929   [007] .....   727.169317: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:56.257 TRACE            <...>-14004   [003] .....   728.787320: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:56.369 TRACE            <...>-14008   [009] .....   728.798532: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:57.546 NOTE everything reflects good so far
+08:54:58.111 TRACE            <...>-14107   [011] .....   730.873747: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:54:58.119 TRACE            <...>-14111   [000] .....   730.881708: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:00.269 TRACE            <...>-14208   [005] .....   733.031438: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:00.278 TRACE            <...>-14212   [007] .....   733.039938: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:01.507 TRACE      kworker/0:3-409     [000] .....   734.266788: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:01.509 TRACE      kworker/0:3-409     [000] .....   734.266798: ucsi_connector_change: port0 status: change=5804, opmode=0, connected=0, sourcing=0, partner_flags=0, partner_type=0, request_data_obj=00000000, BC status=0
+08:55:01.894 STATE port0:default port1:usb_power_delivery+partner 01:on=0,C,0uA 02:on=0,PD,3000000uA ac=0 usb=0 bat=Discharging
+08:55:02.428 TRACE            <...>-14313   [001] .....   735.190684: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:02.435 TRACE            <...>-14317   [007] .....   735.197825: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:02.439 FW con1:conn=0 opmode=0 dir=0 partner=0 con2:conn=1 opmode=3 dir=1 partner=2
+08:55:04.487 TRACE            <...>-14393   [004] .....   736.810322: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:04.598 TRACE            <...>-14397   [006] .....   736.821603: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:04.864 TRACE            <...>-9159    [000] .....   737.625845: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:04.867 TRACE      kworker/0:0-9159    [000] .....   737.625851: ucsi_connector_change: port1 status: change=5804, opmode=0, connected=0, sourcing=0, partner_flags=0, partner_type=0, request_data_obj=00000000, BC status=0
+08:55:05.123 STATE port0:default port1:default 01:on=0,C,0uA 02:on=0,C,0uA ac=0 usb=0 bat=Discharging
+08:55:05.134 KERN [  737.573066] glymur kernel: apple-mfi-fastcharge 4-1: USB disconnect, device number 2
+08:55:05.136 KERN [  737.585006] glymur kernel: ipheth 4-1:4.2: Apple iPhone USB Ethernet now disconnected
+08:55:05.139 KERN [  737.620010] glymur kernel: xhci-hcd xhci-hcd.4.auto: remove, state 4
+08:55:05.141 KERN [  737.620112] glymur kernel: usb usb5: USB disconnect, device number 1
+08:55:05.144 KERN [  737.620156] glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 5 deregistered
+08:55:05.146 KERN [  737.620203] glymur kernel: xhci-hcd xhci-hcd.4.auto: remove, state 1
+08:55:05.149 KERN [  737.620258] glymur kernel: usb usb4: USB disconnect, device number 1
+08:55:05.151 KERN [  737.645009] glymur kernel: xhci-hcd xhci-hcd.4.auto: USB bus 4 deregistered
+08:55:06.191 TRACE            <...>-14528   [006] .....   738.952803: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:06.199 TRACE            <...>-14532   [007] .....   738.960626: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:06.201 FW con1:conn=0 opmode=0 dir=0 partner=0 con2:conn=0 opmode=0 dir=0 partner=0
+08:55:08.339 TRACE            <...>-14632   [011] .....   741.100659: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:08.347 TRACE            <...>-14636   [011] .....   741.108359: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:08.356 BEAT bat_power_uW=-10590000 capacity=34
+08:55:09.492 TRACE      kworker/0:1-11675   [000] .....   741.810611: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:09.514 TRACE      kworker/0:1-11675   [000] .....   741.810617: ucsi_connector_change: port1 status: change=5a04, opmode=5, connected=1, sourcing=0, partner_flags=1, partner_type=1, request_data_obj=00000000, BC status=1
+08:55:09.279 TRACE      kworker/0:0-9159    [000] .....   742.039437: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:09.283 TRACE      kworker/0:0-9159    [000] .....   742.039443: ucsi_connector_change: port1 status: change=0804, opmode=3, connected=1, sourcing=0, partner_flags=0, partner_type=1, request_data_obj=43051545, BC status=1
+08:55:09.417 STATE port0:default port1:usb_power_delivery+partner 01:on=0,C,0uA 02:on=1,PD,3250000uA ac=0 usb=0 bat=Discharging
+08:55:09.959 STATE port0:default port1:usb_power_delivery+partner 01:on=0,C,0uA 02:on=1,PD,3250000uA ac=0 usb=0 bat=Charging
+08:55:10.681 TRACE    kworker/u48:0-9137    [011] .....   742.829356: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:10.321 TRACE    kworker/u48:0-9137    [002] .....   743.083050: ucsi_run_command: GET_CONNECTOR_CAPABILITY -> OK (err=0)
+08:55:10.323 TRACE    kworker/u48:0-9137    [002] .....   743.085796: ucsi_run_command: GET_ALTERNATE_MODES -> OK (err=0)
+08:55:10.504 TRACE            <...>-14753   [011] .....   743.265863: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:10.515 TRACE            <...>-14757   [010] .....   743.276290: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:10.517 FW con1:conn=0 opmode=0 dir=0 partner=0 con2:conn=1 opmode=3 dir=0 partner=1
+08:55:12.140 TRACE            <...>-14833   [009] .....   744.900973: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:12.149 TRACE            <...>-14837   [007] .....   744.910701: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:12.270 TRACE      kworker/0:1-11675   [000] .....   745.031435: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:12.273 TRACE      kworker/0:1-11675   [000] .....   745.031444: ucsi_connector_change: port1 status: change=5804, opmode=0, connected=0, sourcing=0, partner_flags=0, partner_type=0, request_data_obj=00000000, BC status=0
+08:55:12.688 STATE port0:default port1:default 01:on=0,C,0uA 02:on=0,C,0uA ac=0 usb=0 bat=Discharging
+08:55:14.289 TRACE            <...>-14938   [005] .....   747.051876: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:14.295 TRACE            <...>-14942   [005] .....   747.057742: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:14.298 FW con1:conn=0 opmode=0 dir=0 partner=0 con2:conn=0 opmode=0 dir=0 partner=0
+08:55:15.960 TRACE      kworker/0:1-11675   [000] .....   748.719594: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:15.964 TRACE      kworker/0:1-11675   [000] .....   748.719607: ucsi_connector_change: port1 status: change=5a04, opmode=5, connected=1, sourcing=0, partner_flags=1, partner_type=1, request_data_obj=00000000, BC status=1
+08:55:16.196 TRACE      kworker/0:4-14437   [000] .....   748.955900: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:16.198 TRACE      kworker/0:4-14437   [000] .....   748.955910: ucsi_connector_change: port1 status: change=0804, opmode=3, connected=1, sourcing=0, partner_flags=0, partner_type=1, request_data_obj=43051545, BC status=1
+08:55:16.435 STATE port0:default port1:usb_power_delivery+partner 01:on=0,C,0uA 02:on=1,PD,3250000uA ac=0 usb=0 bat=Charging
+08:55:16.446 TRACE            <...>-15050   [010] .....   749.207811: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:16.452 TRACE            <...>-15054   [008] .....   749.214243: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:16.455 FW con1:conn=0 opmode=0 dir=0 partner=0 con2:conn=1 opmode=3 dir=0 partner=1
+08:55:16.977 TRACE    kworker/u48:0-9137    [001] .....   749.738033: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:17.235 TRACE    kworker/u48:0-9137    [001] .....   749.996011: ucsi_run_command: GET_CONNECTOR_CAPABILITY -> OK (err=0)
+08:55:17.238 TRACE    kworker/u48:0-9137    [001] .....   749.999864: ucsi_run_command: GET_ALTERNATE_MODES -> OK (err=0)
+08:55:18.688 TRACE            <...>-15140   [010] .....   750.830588: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:18.799 TRACE            <...>-15144   [007] .....   750.841360: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:20.225 TRACE            <...>-15241   [005] .....   752.987306: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:20.237 TRACE            <...>-15245   [005] .....   752.998651: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:21.484 NOTE all good i guess
+08:55:22.512 TRACE            <...>-15344   [002] .....   754.813069: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:22.592 TRACE            <...>-15348   [010] .....   754.821358: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:24.192 TRACE            <...>-15445   [004] .....   756.954192: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:24.200 TRACE            <...>-15449   [006] .....   756.962635: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:26.349 TRACE            <...>-15547   [003] .....   759.111931: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:26.356 TRACE            <...>-15551   [005] .....   759.118631: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:28.511 TRACE            <...>-15648   [007] .....   761.272475: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:28.521 TRACE            <...>-15652   [009] .....   761.283092: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:30.133 TRACE            <...>-15726   [009] .....   762.894663: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:30.144 TRACE            <...>-15730   [008] .....   762.905433: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:32.304 TRACE            <...>-15828   [001] .....   765.066091: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:32.315 TRACE            <...>-15832   [011] .....   765.076449: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:34.441 TRACE            <...>-15929   [009] .....   767.202217: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:34.447 TRACE            <...>-15933   [007] .....   767.209138: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:36.533 TRACE            <...>-16007   [011] .....   768.813625: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:36.623 TRACE            <...>-16011   [011] .....   768.823166: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:38.199 TRACE            <...>-16108   [001] .....   770.961162: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:38.211 TRACE            <...>-16112   [010] .....   770.972873: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:38.220 BEAT bat_power_uW=36094000 capacity=34
+08:55:40.370 TRACE            <...>-16215   [001] .....   773.132410: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:40.381 TRACE            <...>-16219   [009] .....   773.142916: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:42.545 TRACE            <...>-16316   [001] .....   775.306897: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:42.556 TRACE            <...>-16320   [009] .....   775.317259: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:44.179 TRACE            <...>-16394   [007] .....   776.940108: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:44.188 TRACE            <...>-16398   [007] .....   776.950192: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:46.339 TRACE            <...>-16495   [008] .....   779.101176: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:46.351 TRACE            <...>-16499   [006] .....   779.111674: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:48.507 TRACE            <...>-16603   [011] .....   781.268021: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:48.516 TRACE            <...>-16607   [001] .....   781.277322: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:50.133 TRACE            <...>-16682   [009] .....   782.893548: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:50.141 TRACE            <...>-16686   [011] .....   782.902729: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:52.299 TRACE            <...>-16784   [001] .....   785.060988: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:52.311 TRACE            <...>-16788   [006] .....   785.072206: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:54.464 TRACE            <...>-16885   [003] .....   787.226044: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:54.475 TRACE            <...>-16889   [011] .....   787.236155: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:56.101 TRACE            <...>-16963   [011] .....   788.862400: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)
+08:55:56.111 TRACE            <...>-16967   [010] .....   788.872629: ucsi_run_command: GET_CONNECTOR_STATUS -> OK (err=0)

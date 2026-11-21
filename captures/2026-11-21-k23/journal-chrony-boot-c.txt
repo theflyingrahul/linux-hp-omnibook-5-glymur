@@ -1,0 +1,82 @@
+[    9.719715] glymur systemd[1]: Starting chrony.service - chrony, an NTP client/server...
+[    9.786130] glymur chronyd[1381]: chronyd version 4.8 starting (+CMDMON +REFCLOCK +RTC +PRIVDROP +SCFILTER +SIGND +NTS +SECHASH +IPV6 -DEBUG)
+[    9.791245] glymur chronyd[1381]: Loaded 0 symmetric keys
+[    9.792344] glymur chronyd[1381]: Using leap second list /usr/share/zoneinfo/leap-seconds.list
+[    9.792897] glymur chronyd[1381]: Frequency -3.361 +/- 26.883 ppm read from /var/lib/chrony/chrony.drift
+[    9.793433] glymur chronyd[1381]: Loaded seccomp filter (level 1)
+[    9.793531] glymur systemd[1]: Started chrony.service - chrony, an NTP client/server.
+[    9.794715] glymur chronyd[1381]: Added pool 1.ntp.ubuntu.com
+[    9.794726] glymur chronyd[1381]: Added pool 2.ntp.ubuntu.com
+[    9.794733] glymur chronyd[1381]: Added pool 3.ntp.ubuntu.com
+[    9.794742] glymur chronyd[1381]: Added pool 4.ntp.ubuntu.com
+[    9.794749] glymur chronyd[1381]: Added pool ntp-bootstrap.ubuntu.com
+[   18.769875] glymur chronyd[1381]: TLS handshake with <ip>:4460 (3.ntp.ubuntu.com) failed : Error in the certificate verification. The certificate is NOT trusted. The certificate chain uses not yet valid certificate.
+[   19.168460] glymur chronyd[1381]: TLS handshake with <ip>:4460 (4.ntp.ubuntu.com) failed : Error in the certificate verification. The certificate is NOT trusted. The certificate chain uses not yet valid certificate.
+[   26.397732] glymur chronyd[1381]: TLS handshake with <ip>:4460 (2.ntp.ubuntu.com) failed : Error in the certificate verification. The certificate is NOT trusted. The certificate chain uses not yet valid certificate.
+[   32.070938] glymur chronyd[1381]: Can't synchronise: no selectable sources (8 unreachable sources)
+[   65.235987] glymur chronyd[1381]: Source <ip> offline
+[   65.235994] glymur chronyd[1381]: Source <ip> offline
+[   65.236004] glymur chronyd[1381]: Source <ip> offline
+[   65.236010] glymur chronyd[1381]: Source <ip> offline
+[   65.236016] glymur chronyd[1381]: Source <ip> offline
+[   65.236023] glymur chronyd[1381]: Source <ip> offline
+[   73.811990] glymur chronyd[1381]: Source <ip> online
+[   73.811998] glymur chronyd[1381]: Source <ip> online
+[   73.812018] glymur chronyd[1381]: Source <ip> online
+[   73.812023] glymur chronyd[1381]: Source <ip> online
+[   73.812030] glymur chronyd[1381]: Source <ip> online
+[   73.812036] glymur chronyd[1381]: Source <ip> online
+[   86.133540] glymur chronyd[1381]: TLS handshake with <ip>:4460 (1.ntp.ubuntu.com) failed : Error in the certificate verification. The certificate is NOT trusted. The certificate chain uses not yet valid certificate.
+[  116.033267] glymur chronyd[1381]: Source <ip> offline
+[  116.033276] glymur chronyd[1381]: Source <ip> offline
+[  116.033281] glymur chronyd[1381]: Source <ip> offline
+[  116.033288] glymur chronyd[1381]: Source <ip> offline
+[  116.033292] glymur chronyd[1381]: Source <ip> offline
+[  116.033298] glymur chronyd[1381]: Source <ip> offline
+[  116.884974] glymur chronyd[1381]: Source <ip> online
+[  116.884988] glymur chronyd[1381]: Source <ip> online
+[  116.885003] glymur chronyd[1381]: Source <ip> online
+[  116.885018] glymur chronyd[1381]: Source <ip> online
+[  116.885028] glymur chronyd[1381]: Source <ip> online
+[  116.885038] glymur chronyd[1381]: Source <ip> online
+[  127.253962] glymur chronyd[1381]: TLS handshake with [2620:2d:4000:1::3123]:4460 (2.ntp.ubuntu.com) failed : Error in the certificate verification. The certificate is NOT trusted. The certificate chain uses not yet valid certificate.
+[  128.050040] glymur chronyd[1381]: TLS handshake with [2620:2d:4002:1::2123]:4460 (3.ntp.ubuntu.com) failed : Error in the certificate verification. The certificate is NOT trusted. The certificate chain uses not yet valid certificate.
+[  128.051012] glymur chronyd[1381]: TLS handshake with [2620:2d:4002:1::3123]:4460 (4.ntp.ubuntu.com) failed : Error in the certificate verification. The certificate is NOT trusted. The certificate chain uses not yet valid certificate.
+[  159.205994] glymur chronyd[1381]: Source <ip> offline
+[  159.206009] glymur chronyd[1381]: Source <ip> offline
+[  159.206031] glymur chronyd[1381]: Source 2620:2d:4000:1::3123 offline
+[  159.206041] glymur chronyd[1381]: Source 2620:2d:4002:1::3123 offline
+[  159.206049] glymur chronyd[1381]: Source <ip> offline
+[  159.206057] glymur chronyd[1381]: Source <ip> offline
+[  159.206065] glymur chronyd[1381]: Source <ip> offline
+[  159.206071] glymur chronyd[1381]: Source <ip> offline
+[  159.206080] glymur chronyd[1381]: Source 2620:2d:4002:1::2123 offline
+[  167.284126] glymur chronyd[1381]: Source <ip> online
+[  167.284139] glymur chronyd[1381]: Source <ip> online
+[  167.284173] glymur chronyd[1381]: Source <ip> online
+[  167.284183] glymur chronyd[1381]: Source <ip> online
+[  167.284193] glymur chronyd[1381]: Source <ip> online
+[  167.284201] glymur chronyd[1381]: Source <ip> online
+[  168.682619] glymur chronyd[1381]: Source 2620:2d:4000:1::3123 online
+[  168.682635] glymur chronyd[1381]: Source 2620:2d:4002:1::3123 online
+[  168.682678] glymur chronyd[1381]: Source 2620:2d:4002:1::2123 online
+[  176.826593] glymur systemd[1]: Stopping chrony.service - chrony, an NTP client/server...
+[  176.828181] glymur chronyd[1381]: chronyd exiting
+[  176.830496] glymur systemd[1]: chrony.service: Deactivated successfully.
+[  176.830630] glymur systemd[1]: Stopped chrony.service - chrony, an NTP client/server.
+[  207.009111] glymur systemd[1]: Starting chrony.service - chrony, an NTP client/server...
+[  207.037659] glymur chronyd[9010]: chronyd version 4.8 starting (+CMDMON +REFCLOCK +RTC +PRIVDROP +SCFILTER +SIGND +NTS +SECHASH +IPV6 -DEBUG)
+[  207.037959] glymur chronyd[9010]: Loaded 0 symmetric keys
+[  207.038067] glymur chronyd[9010]: Using leap second list /usr/share/zoneinfo/leap-seconds.list
+[  207.038088] glymur chronyd[9010]: Frequency -3.361 +/- 26.883 ppm read from /var/lib/chrony/chrony.drift
+[  207.038779] glymur chronyd[9010]: Loaded seccomp filter (level 1)
+[  207.038861] glymur systemd[1]: Started chrony.service - chrony, an NTP client/server.
+[  207.038880] glymur chronyd[9010]: Added pool 1.ntp.ubuntu.com
+[  207.038894] glymur chronyd[9010]: Added pool 2.ntp.ubuntu.com
+[  207.038902] glymur chronyd[9010]: Added pool 3.ntp.ubuntu.com
+[  207.038916] glymur chronyd[9010]: Added pool 4.ntp.ubuntu.com
+[  207.038925] glymur chronyd[9010]: Added pool ntp-bootstrap.ubuntu.com
+[  166.279956] glymur chronyd[9010]: Selected source <ip> (3.ntp.ubuntu.com)
+[  166.279992] glymur chronyd[9010]: System clock wrong by 48.773426 seconds
+[  215.055398] glymur chronyd[9010]: System clock was stepped by 48.773426 seconds
+[  215.055462] glymur chronyd[9010]: System clock TAI offset set to 37 seconds

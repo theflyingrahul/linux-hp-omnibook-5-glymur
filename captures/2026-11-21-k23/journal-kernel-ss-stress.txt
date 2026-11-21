@@ -1,0 +1,362 @@
+Nov 21 08:51:42.975134 glymur kernel: usb 3-1: reset SuperSpeed USB device number 2 using xhci-hcd
+Nov 21 08:51:45.368269 glymur kernel: usb 3-1: USB disconnect, device number 2
+Nov 21 08:51:45.755133 glymur kernel: usb 2-1: new high-speed USB device number 2 using xhci-hcd
+Nov 21 08:51:45.879133 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:51:45.879312 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:51:45.879422 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 08:51:45.879494 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 08:51:45.879559 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 08:51:45.879618 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 08:51:45.880092 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 08:51:46.928669 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:51:46.929311 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:51:46.936087 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:51:46.937097 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:51:46.937245 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:51:46.937401 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:51:46.973174 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:51:46.973312 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:51:47.261129 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:51:47.310138 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:51:51.613132 glymur kernel: usb 2-1: USB disconnect, device number 2
+Nov 21 08:51:51.725141 glymur kernel: usb 3-1: new SuperSpeed USB device number 3 using xhci-hcd
+Nov 21 08:51:51.736091 glymur kernel: usb 3-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:51:51.736296 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:51:51.736408 glymur kernel: usb 3-1: Product: Ultra
+Nov 21 08:51:51.736507 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Nov 21 08:51:51.736609 glymur kernel: usb 3-1: SerialNumber: <serial>
+Nov 21 08:51:51.736704 glymur kernel: usb-storage 3-1:1.0: USB Mass Storage device detected
+Nov 21 08:51:51.737086 glymur kernel: scsi host0: usb-storage 3-1:1.0
+Nov 21 08:51:52.770907 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:51:52.773087 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:51:52.778087 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:51:52.778207 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:51:52.778313 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:51:52.778408 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:51:52.809166 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:51:52.810130 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:51:53.085137 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:51:53.086038 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:51:54.366156 glymur kernel: usb 3-1: USB disconnect, device number 3
+Nov 21 08:51:54.751179 glymur kernel: usb 2-1: new high-speed USB device number 3 using xhci-hcd
+Nov 21 08:51:54.878174 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:51:54.878639 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:51:54.878785 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 08:51:54.878869 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 08:51:54.878958 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 08:51:54.879045 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 08:51:54.879185 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 08:51:55.892160 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:51:55.898843 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:51:55.898984 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:51:55.899073 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:51:55.899157 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:51:55.899232 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:51:55.934104 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:51:55.934225 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:51:56.201146 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:51:56.206125 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:00.692105 glymur kernel: usb 2-1: USB disconnect, device number 3
+Nov 21 08:52:00.804134 glymur kernel: usb 3-1: new SuperSpeed USB device number 4 using xhci-hcd
+Nov 21 08:52:00.815122 glymur kernel: usb 3-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:52:00.815336 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:52:00.815436 glymur kernel: usb 3-1: Product: Ultra
+Nov 21 08:52:00.815520 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Nov 21 08:52:00.815604 glymur kernel: usb 3-1: SerialNumber: <serial>
+Nov 21 08:52:00.816086 glymur kernel: usb-storage 3-1:1.0: USB Mass Storage device detected
+Nov 21 08:52:00.816205 glymur kernel: scsi host0: usb-storage 3-1:1.0
+Nov 21 08:52:01.842043 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:52:01.842595 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:52:01.847096 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:52:01.847333 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:52:01.847481 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:52:01.847644 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:52:01.876090 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:52:01.876119 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:52:02.136087 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:02.140099 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:03.384095 glymur kernel: usb 3-1: USB disconnect, device number 4
+Nov 21 08:52:03.767262 glymur kernel: usb 2-1: new high-speed USB device number 4 using xhci-hcd
+Nov 21 08:52:03.893167 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:52:03.893629 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:52:03.893747 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 08:52:03.893842 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 08:52:03.893930 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 08:52:03.894009 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 08:52:03.894156 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 08:52:04.910245 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:52:04.910898 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:52:04.918090 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:52:04.919088 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:52:04.919203 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:52:04.919317 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:52:04.940150 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:52:04.941144 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:52:05.235148 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:05.343095 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:09.942109 glymur kernel: usb 2-1: USB disconnect, device number 4
+Nov 21 08:52:10.055163 glymur kernel: usb 3-1: new SuperSpeed USB device number 5 using xhci-hcd
+Nov 21 08:52:10.066090 glymur kernel: usb 3-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:52:10.066147 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:52:10.066187 glymur kernel: usb 3-1: Product: Ultra
+Nov 21 08:52:10.066212 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Nov 21 08:52:10.066426 glymur kernel: usb 3-1: SerialNumber: <serial>
+Nov 21 08:52:10.067087 glymur kernel: usb-storage 3-1:1.0: USB Mass Storage device detected
+Nov 21 08:52:10.068088 glymur kernel: scsi host0: usb-storage 3-1:1.0
+Nov 21 08:52:11.115152 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:52:11.115607 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:52:11.122095 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:52:11.122266 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:52:11.122412 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:52:11.122534 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:52:11.148131 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:52:11.148171 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:52:11.402097 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:11.404094 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:12.772098 glymur kernel: usb 3-1: USB disconnect, device number 5
+Nov 21 08:52:13.139130 glymur kernel: usb 2-1: new high-speed USB device number 5 using xhci-hcd
+Nov 21 08:52:13.262134 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:52:13.262408 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:52:13.262518 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 08:52:13.262604 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 08:52:13.262688 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 08:52:13.262771 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 08:52:13.262891 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 08:52:14.317699 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:52:14.328753 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:52:14.328911 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:52:14.329055 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:52:14.329213 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:52:14.329365 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:52:14.366397 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:52:14.366569 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:52:14.864095 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:14.867086 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:19.180152 glymur kernel: usb 2-1: USB disconnect, device number 5
+Nov 21 08:52:19.292148 glymur kernel: usb 3-1: new SuperSpeed USB device number 6 using xhci-hcd
+Nov 21 08:52:19.303125 glymur kernel: usb 3-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:52:19.303333 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:52:19.303434 glymur kernel: usb 3-1: Product: Ultra
+Nov 21 08:52:19.303533 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Nov 21 08:52:19.303620 glymur kernel: usb 3-1: SerialNumber: <serial>
+Nov 21 08:52:19.303720 glymur kernel: usb-storage 3-1:1.0: USB Mass Storage device detected
+Nov 21 08:52:19.304087 glymur kernel: scsi host0: usb-storage 3-1:1.0
+Nov 21 08:52:20.331786 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:52:20.334088 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:52:20.337096 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:52:20.338097 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:52:20.338310 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:52:20.338401 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:52:20.364152 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:52:20.364182 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:52:20.633088 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:20.635661 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:21.933102 glymur kernel: usb 3-1: USB disconnect, device number 6
+Nov 21 08:52:22.324167 glymur kernel: usb 2-1: new high-speed USB device number 6 using xhci-hcd
+Nov 21 08:52:22.447110 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:52:22.447458 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:52:22.447567 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 08:52:22.447670 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 08:52:22.447769 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 08:52:22.447853 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 08:52:22.447978 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 08:52:23.471713 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:52:23.472179 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:52:23.476090 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:52:23.476249 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:52:23.476437 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:52:23.476622 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:52:23.517178 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:52:23.517297 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:52:23.782132 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:23.784086 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:28.292129 glymur kernel: usb 2-1: USB disconnect, device number 6
+Nov 21 08:52:28.404141 glymur kernel: usb 3-1: new SuperSpeed USB device number 7 using xhci-hcd
+Nov 21 08:52:28.415088 glymur kernel: usb 3-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:52:28.415225 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:52:28.415302 glymur kernel: usb 3-1: Product: Ultra
+Nov 21 08:52:28.415371 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Nov 21 08:52:28.415429 glymur kernel: usb 3-1: SerialNumber: <serial>
+Nov 21 08:52:28.416087 glymur kernel: usb-storage 3-1:1.0: USB Mass Storage device detected
+Nov 21 08:52:28.416181 glymur kernel: scsi host0: usb-storage 3-1:1.0
+Nov 21 08:52:29.419606 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:52:29.420020 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:52:29.424090 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:52:29.424245 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:52:29.424400 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:52:29.424594 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:52:29.460143 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:52:29.460182 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:52:29.745179 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:29.746093 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:30.941096 glymur kernel: usb 3-1: USB disconnect, device number 7
+Nov 21 08:52:31.315188 glymur kernel: usb 2-1: new high-speed USB device number 7 using xhci-hcd
+Nov 21 08:52:31.438134 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:52:31.438373 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:52:31.438474 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 08:52:31.438560 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 08:52:31.438642 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 08:52:31.438730 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 08:52:31.438847 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 08:52:32.491845 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:52:32.492265 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:52:32.497100 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:52:32.497412 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:52:32.497573 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:52:32.497808 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:52:32.535186 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:52:32.536091 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:52:32.814151 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:32.901131 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:37.132151 glymur kernel: usb 2-1: USB disconnect, device number 7
+Nov 21 08:52:37.245137 glymur kernel: usb 3-1: new SuperSpeed USB device number 8 using xhci-hcd
+Nov 21 08:52:37.256095 glymur kernel: usb 3-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:52:37.256144 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:52:37.256183 glymur kernel: usb 3-1: Product: Ultra
+Nov 21 08:52:37.256296 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Nov 21 08:52:37.256368 glymur kernel: usb 3-1: SerialNumber: <serial>
+Nov 21 08:52:37.257088 glymur kernel: usb-storage 3-1:1.0: USB Mass Storage device detected
+Nov 21 08:52:37.257238 glymur kernel: scsi host0: usb-storage 3-1:1.0
+Nov 21 08:52:38.315704 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:52:38.316231 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:52:38.323094 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:52:38.323222 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:52:38.323337 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:52:38.324089 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:52:38.359155 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:52:38.359309 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:52:38.635097 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:38.636089 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:40.490098 glymur kernel: usb 3-1: USB disconnect, device number 8
+Nov 21 08:52:40.868199 glymur kernel: usb 2-1: new high-speed USB device number 8 using xhci-hcd
+Nov 21 08:52:40.993104 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:52:40.993358 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:52:40.993479 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 08:52:40.993592 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 08:52:40.993706 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 08:52:40.994088 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 08:52:40.995087 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 08:52:42.043783 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:52:42.046231 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:52:42.053155 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:52:42.053300 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:52:42.053423 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:52:42.053530 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:52:42.097176 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:52:42.097315 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:52:42.603134 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:42.609128 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:46.941122 glymur kernel: usb 2-1: USB disconnect, device number 8
+Nov 21 08:52:47.051154 glymur kernel: usb 3-1: new SuperSpeed USB device number 9 using xhci-hcd
+Nov 21 08:52:47.062088 glymur kernel: usb 3-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:52:47.063086 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:52:47.063227 glymur kernel: usb 3-1: Product: Ultra
+Nov 21 08:52:47.063334 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Nov 21 08:52:47.063431 glymur kernel: usb 3-1: SerialNumber: <serial>
+Nov 21 08:52:47.063517 glymur kernel: usb-storage 3-1:1.0: USB Mass Storage device detected
+Nov 21 08:52:47.063634 glymur kernel: scsi host0: usb-storage 3-1:1.0
+Nov 21 08:52:48.126654 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:52:48.127029 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:52:48.133089 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:52:48.133240 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:52:48.133348 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:52:48.134087 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:52:48.155119 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:52:48.156138 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:52:48.433162 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:48.436101 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:50.182097 glymur kernel: usb 3-1: USB disconnect, device number 9
+Nov 21 08:52:50.564192 glymur kernel: usb 2-1: new high-speed USB device number 9 using xhci-hcd
+Nov 21 08:52:50.688141 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:52:50.688494 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:52:50.688601 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 08:52:50.688696 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 08:52:50.688777 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 08:52:50.688861 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 08:52:50.689090 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 08:52:51.697817 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:52:51.698178 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:52:51.709088 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:52:51.709201 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:52:51.709287 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:52:51.710086 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:52:51.737143 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:52:51.737168 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:52:52.263136 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:52.264093 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:56.171098 glymur kernel: usb 2-1: USB disconnect, device number 9
+Nov 21 08:52:56.283136 glymur kernel: usb 3-1: new SuperSpeed USB device number 10 using xhci-hcd
+Nov 21 08:52:56.294287 glymur kernel: usb 3-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:52:56.294453 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:52:56.294561 glymur kernel: usb 3-1: Product: Ultra
+Nov 21 08:52:56.294656 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Nov 21 08:52:56.294744 glymur kernel: usb 3-1: SerialNumber: <serial>
+Nov 21 08:52:56.294831 glymur kernel: usb-storage 3-1:1.0: USB Mass Storage device detected
+Nov 21 08:52:56.295086 glymur kernel: scsi host0: usb-storage 3-1:1.0
+Nov 21 08:52:57.326324 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:52:57.326846 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:52:57.333091 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:52:57.334088 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:52:57.334220 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:52:57.335089 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:52:57.375163 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:52:57.375323 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:52:57.647094 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:57.652089 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:52:59.422096 glymur kernel: usb 3-1: USB disconnect, device number 10
+Nov 21 08:52:59.803185 glymur kernel: usb 2-1: new high-speed USB device number 10 using xhci-hcd
+Nov 21 08:52:59.927134 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:52:59.927273 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:52:59.927350 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 08:52:59.927414 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 08:52:59.927470 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 08:52:59.928089 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 08:52:59.928182 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 08:53:00.978407 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:53:00.978835 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:53:00.985098 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:53:00.985329 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:53:00.985419 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:53:00.985500 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:53:01.029125 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:53:01.029155 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:53:01.594650 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:53:01.600122 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:53:05.652168 glymur kernel: usb 2-1: USB disconnect, device number 10
+Nov 21 08:53:05.765132 glymur kernel: usb 3-1: new SuperSpeed USB device number 11 using xhci-hcd
+Nov 21 08:53:05.776088 glymur kernel: usb 3-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:53:05.776153 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:53:05.776309 glymur kernel: usb 3-1: Product: Ultra
+Nov 21 08:53:05.776423 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Nov 21 08:53:05.776524 glymur kernel: usb 3-1: SerialNumber: <serial>
+Nov 21 08:53:05.777087 glymur kernel: usb-storage 3-1:1.0: USB Mass Storage device detected
+Nov 21 08:53:05.777236 glymur kernel: scsi host0: usb-storage 3-1:1.0
+Nov 21 08:53:06.818371 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:53:06.818774 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:53:06.826091 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:53:06.826239 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:53:06.826425 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:53:06.826573 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:53:06.866183 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:53:06.866347 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:53:07.136133 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:53:07.138117 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:53:08.981099 glymur kernel: usb 3-1: USB disconnect, device number 11
+Nov 21 08:53:09.367184 glymur kernel: usb 2-1: new high-speed USB device number 11 using xhci-hcd
+Nov 21 08:53:09.491100 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 08:53:09.491443 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 08:53:09.491544 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 08:53:09.491630 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 08:53:09.491709 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 08:53:09.493086 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 08:53:09.493202 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 08:53:10.518808 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 08:53:10.519145 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 08:53:10.525087 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 08:53:10.526086 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 08:53:10.526163 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 08:53:10.526267 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 08:53:10.552100 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 08:53:10.552188 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 08:53:11.061097 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 08:53:11.065088 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.

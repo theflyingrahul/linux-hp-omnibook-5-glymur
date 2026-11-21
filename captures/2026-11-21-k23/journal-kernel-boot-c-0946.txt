@@ -1,0 +1,447 @@
+Nov 22 09:40:00.048611 glymur systemd-journald[554]: Time jumped backwards, rotating.
+Nov 22 09:40:01.004298 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 22 09:40:02.031232 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+Nov 21 09:40:00.072130 glymur systemd-journald[554]: Time jumped backwards, rotating.
+Nov 21 09:40:01.016345 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 21 09:40:02.041088 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+Nov 21 09:46:00.128008 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 21 09:46:01.155014 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+Nov 21 09:46:02.180002 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 21 09:46:03.201206 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+Nov 21 09:47:11.677037 glymur kernel: usb 2-1: reset SuperSpeed USB device number 2 using xhci-hcd
+Nov 21 09:47:14.166971 glymur kernel: usb 2-1: USB disconnect, device number 2
+Nov 21 09:47:14.543971 glymur kernel: usb 1-1: new high-speed USB device number 2 using xhci-hcd
+Nov 21 09:47:14.639971 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR bus clsh detected
+Nov 21 09:47:14.666960 glymur kernel: usb 1-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:47:14.667141 glymur kernel: usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:47:14.667241 glymur kernel: usb 1-1: Product: Ultra
+Nov 21 09:47:14.667325 glymur kernel: usb 1-1: Manufacturer: SanDisk
+Nov 21 09:47:14.667414 glymur kernel: usb 1-1: SerialNumber: <serial>
+Nov 21 09:47:14.667966 glymur kernel: usb-storage 1-1:1.0: USB Mass Storage device detected
+Nov 21 09:47:14.668960 glymur kernel: scsi host0: usb-storage 1-1:1.0
+Nov 21 09:47:15.714460 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:47:15.714772 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:47:15.720959 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:47:15.721045 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:47:15.721121 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:47:15.721210 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:47:15.748004 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:47:15.748997 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:47:17.904037 glymur kernel: usb 1-1: USB disconnect, device number 2
+Nov 21 09:47:18.016027 glymur kernel: usb 2-1: new SuperSpeed USB device number 3 using xhci-hcd
+Nov 21 09:47:18.026968 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:47:18.027960 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:47:18.028093 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 09:47:18.028160 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 09:47:18.028239 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 09:47:18.028328 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 09:47:18.028459 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 09:47:19.049164 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:47:19.049496 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:47:19.055960 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:47:19.056071 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:47:19.056169 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:47:19.056245 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:47:19.089960 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:47:19.089997 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:47:20.851032 glymur kernel: usb 2-1: reset SuperSpeed USB device number 3 using xhci-hcd
+Nov 21 09:47:23.700971 glymur kernel: usb 2-1: USB disconnect, device number 3
+Nov 21 09:47:24.089010 glymur kernel: usb 1-1: new high-speed USB device number 3 using xhci-hcd
+Nov 21 09:47:24.214540 glymur kernel: usb 1-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:47:24.214895 glymur kernel: usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:47:24.215000 glymur kernel: usb 1-1: Product: Ultra
+Nov 21 09:47:24.215065 glymur kernel: usb 1-1: Manufacturer: SanDisk
+Nov 21 09:47:24.215151 glymur kernel: usb 1-1: SerialNumber: <serial>
+Nov 21 09:47:24.215218 glymur kernel: usb-storage 1-1:1.0: USB Mass Storage device detected
+Nov 21 09:47:24.215971 glymur kernel: scsi host0: usb-storage 1-1:1.0
+Nov 21 09:47:25.251695 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:47:25.252358 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:47:25.258962 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:47:25.259134 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:47:25.259260 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:47:25.259364 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:47:25.296038 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:47:25.296208 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:47:27.456035 glymur kernel: usb 1-1: USB disconnect, device number 3
+Nov 21 09:47:27.567969 glymur kernel: usb 2-1: new SuperSpeed USB device number 4 using xhci-hcd
+Nov 21 09:47:27.579966 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:47:27.580981 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:47:27.581125 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 09:47:27.581230 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 09:47:27.581334 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 09:47:27.581409 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 09:47:27.581524 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 09:47:28.648208 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:47:28.648713 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:47:28.654963 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:47:28.655059 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:47:28.655135 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:47:28.655209 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:47:28.687028 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:47:28.687062 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:47:30.369538 glymur kernel: usb 2-1: reset SuperSpeed USB device number 4 using xhci-hcd
+Nov 21 09:47:33.260004 glymur kernel: usb 2-1: USB disconnect, device number 4
+Nov 21 09:47:33.649045 glymur kernel: usb 1-1: new high-speed USB device number 4 using xhci-hcd
+Nov 21 09:47:33.773459 glymur kernel: usb 1-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:47:33.773710 glymur kernel: usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:47:33.773782 glymur kernel: usb 1-1: Product: Ultra
+Nov 21 09:47:33.773843 glymur kernel: usb 1-1: Manufacturer: SanDisk
+Nov 21 09:47:33.773897 glymur kernel: usb 1-1: SerialNumber: <serial>
+Nov 21 09:47:33.774963 glymur kernel: usb-storage 1-1:1.0: USB Mass Storage device detected
+Nov 21 09:47:33.775052 glymur kernel: scsi host0: usb-storage 1-1:1.0
+Nov 21 09:47:34.787584 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:47:34.789502 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:47:34.794964 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:47:34.795135 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:47:34.795275 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:47:34.795981 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:47:34.839972 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:47:34.840052 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:47:37.018056 glymur kernel: usb 1-1: USB disconnect, device number 4
+Nov 21 09:47:37.130021 glymur kernel: usb 2-1: new SuperSpeed USB device number 5 using xhci-hcd
+Nov 21 09:47:37.140685 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:47:37.141963 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:47:37.142154 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 09:47:37.142251 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 09:47:37.142346 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 09:47:37.142438 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 09:47:37.142960 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 09:47:38.176857 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:47:38.177374 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:47:38.181973 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:47:38.182243 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:47:38.182390 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:47:38.182508 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:47:38.207009 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:47:38.209020 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:47:39.973134 glymur kernel: usb 2-1: reset SuperSpeed USB device number 5 using xhci-hcd
+Nov 21 09:47:42.814016 glymur kernel: usb 2-1: USB disconnect, device number 5
+Nov 21 09:47:43.201062 glymur kernel: usb 1-1: new high-speed USB device number 5 using xhci-hcd
+Nov 21 09:47:43.324009 glymur kernel: usb 1-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:47:43.324268 glymur kernel: usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:47:43.324374 glymur kernel: usb 1-1: Product: Ultra
+Nov 21 09:47:43.324464 glymur kernel: usb 1-1: Manufacturer: SanDisk
+Nov 21 09:47:43.324546 glymur kernel: usb 1-1: SerialNumber: <serial>
+Nov 21 09:47:43.324634 glymur kernel: usb-storage 1-1:1.0: USB Mass Storage device detected
+Nov 21 09:47:43.324962 glymur kernel: scsi host0: usb-storage 1-1:1.0
+Nov 21 09:47:44.387542 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:47:44.388124 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:47:44.391962 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:47:44.392959 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:47:44.393149 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:47:44.393332 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:47:44.419020 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:47:44.419054 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:47:46.567973 glymur kernel: usb 1-1: USB disconnect, device number 5
+Nov 21 09:47:46.680046 glymur kernel: usb 2-1: new SuperSpeed USB device number 6 using xhci-hcd
+Nov 21 09:47:46.690971 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:47:46.691961 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:47:46.692151 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 09:47:46.692280 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 09:47:46.692381 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 09:47:46.692513 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 09:47:46.692678 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 09:47:47.712335 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:47:47.712779 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:47:47.716960 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:47:47.717101 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:47:47.717248 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:47:47.717366 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:47:47.757039 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:47:47.757210 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:47:49.456028 glymur kernel: usb 2-1: reset SuperSpeed USB device number 6 using xhci-hcd
+Nov 21 09:47:52.144006 glymur kernel: usb 2-1: USB disconnect, device number 6
+Nov 21 09:47:52.520015 glymur kernel: usb 1-1: new high-speed USB device number 6 using xhci-hcd
+Nov 21 09:47:52.644006 glymur kernel: usb 1-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:47:52.644288 glymur kernel: usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:47:52.644388 glymur kernel: usb 1-1: Product: Ultra
+Nov 21 09:47:52.644471 glymur kernel: usb 1-1: Manufacturer: SanDisk
+Nov 21 09:47:52.644561 glymur kernel: usb 1-1: SerialNumber: <serial>
+Nov 21 09:47:52.644644 glymur kernel: usb-storage 1-1:1.0: USB Mass Storage device detected
+Nov 21 09:47:52.644826 glymur kernel: scsi host0: usb-storage 1-1:1.0
+Nov 21 09:47:53.670123 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:47:53.670681 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:47:53.677962 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:47:53.678963 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:47:53.679128 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:47:53.679269 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:47:53.721241 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:47:53.721416 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:47:55.896047 glymur kernel: usb 1-1: USB disconnect, device number 6
+Nov 21 09:47:56.009100 glymur kernel: usb 2-1: new SuperSpeed USB device number 7 using xhci-hcd
+Nov 21 09:47:56.020964 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:47:56.021017 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:47:56.021052 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 09:47:56.021171 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 09:47:56.021240 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 09:47:56.021960 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 09:47:56.022097 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 09:47:57.062002 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:47:57.062374 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:47:57.066962 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:47:57.067076 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:47:57.067159 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:47:57.067251 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:47:57.096769 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:47:57.098017 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:47:58.667596 glymur kernel: usb 2-1: reset SuperSpeed USB device number 7 using xhci-hcd
+Nov 21 09:48:01.408966 glymur kernel: usb 2-1: USB disconnect, device number 7
+Nov 21 09:48:01.791976 glymur kernel: usb 1-1: new high-speed USB device number 7 using xhci-hcd
+Nov 21 09:48:01.915054 glymur kernel: usb 1-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:48:01.915441 glymur kernel: usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:48:01.915562 glymur kernel: usb 1-1: Product: Ultra
+Nov 21 09:48:01.915648 glymur kernel: usb 1-1: Manufacturer: SanDisk
+Nov 21 09:48:01.915736 glymur kernel: usb 1-1: SerialNumber: <serial>
+Nov 21 09:48:01.915820 glymur kernel: usb-storage 1-1:1.0: USB Mass Storage device detected
+Nov 21 09:48:01.917010 glymur kernel: scsi host0: usb-storage 1-1:1.0
+Nov 21 09:48:02.944716 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:48:02.945062 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:48:02.950960 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:48:02.951965 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:48:02.952040 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:48:02.952139 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:48:02.985000 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:48:02.986000 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:48:05.168035 glymur kernel: usb 1-1: USB disconnect, device number 7
+Nov 21 09:48:05.280060 glymur kernel: usb 2-1: new SuperSpeed USB device number 8 using xhci-hcd
+Nov 21 09:48:05.290964 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:48:05.291961 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:48:05.292126 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 09:48:05.292222 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 09:48:05.292312 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 09:48:05.292397 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 09:48:05.292500 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 09:48:06.336989 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:48:06.337506 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:48:06.344960 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:48:06.345102 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:48:06.345209 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:48:06.345312 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:48:06.373027 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:48:06.374013 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:48:08.124036 glymur kernel: usb 2-1: reset SuperSpeed USB device number 8 using xhci-hcd
+Nov 21 09:48:11.001980 glymur kernel: usb 2-1: USB disconnect, device number 8
+Nov 21 09:48:11.384061 glymur kernel: usb 1-1: new high-speed USB device number 8 using xhci-hcd
+Nov 21 09:48:11.507031 glymur kernel: usb 1-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:48:11.507249 glymur kernel: usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:48:11.507486 glymur kernel: usb 1-1: Product: Ultra
+Nov 21 09:48:11.507577 glymur kernel: usb 1-1: Manufacturer: SanDisk
+Nov 21 09:48:11.507658 glymur kernel: usb 1-1: SerialNumber: <serial>
+Nov 21 09:48:11.507959 glymur kernel: usb-storage 1-1:1.0: USB Mass Storage device detected
+Nov 21 09:48:11.511959 glymur kernel: scsi host0: usb-storage 1-1:1.0
+Nov 21 09:48:12.547604 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:48:12.548165 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:48:12.553961 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:48:12.554094 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:48:12.554211 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:48:12.554309 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:48:12.593009 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:48:12.593995 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:48:14.744541 glymur kernel: usb 1-1: USB disconnect, device number 8
+Nov 21 09:48:14.857023 glymur kernel: usb 2-1: new SuperSpeed USB device number 9 using xhci-hcd
+Nov 21 09:48:14.868970 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:48:14.869961 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:48:14.870079 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 09:48:14.870154 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 09:48:14.870227 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 09:48:14.870293 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 09:48:14.871960 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 09:48:15.939797 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:48:15.940318 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:48:15.945959 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:48:15.946076 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:48:15.946199 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:48:15.946324 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:48:15.970019 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:48:15.971016 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:48:17.672011 glymur kernel: usb 2-1: reset SuperSpeed USB device number 9 using xhci-hcd
+Nov 21 09:48:20.461977 glymur kernel: usb 2-1: USB disconnect, device number 9
+Nov 21 09:48:20.840016 glymur kernel: usb 1-1: new high-speed USB device number 9 using xhci-hcd
+Nov 21 09:48:20.963003 glymur kernel: usb 1-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:48:20.963291 glymur kernel: usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:48:20.963392 glymur kernel: usb 1-1: Product: Ultra
+Nov 21 09:48:20.963503 glymur kernel: usb 1-1: Manufacturer: SanDisk
+Nov 21 09:48:20.963586 glymur kernel: usb 1-1: SerialNumber: <serial>
+Nov 21 09:48:20.963672 glymur kernel: usb-storage 1-1:1.0: USB Mass Storage device detected
+Nov 21 09:48:20.963781 glymur kernel: scsi host0: usb-storage 1-1:1.0
+Nov 21 09:48:22.019414 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:48:22.019899 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:48:22.025962 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:48:22.026056 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:48:22.026137 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:48:22.026215 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:48:22.052028 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:48:22.053011 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:48:24.209740 glymur kernel: usb 1-1: USB disconnect, device number 9
+Nov 21 09:48:24.321968 glymur kernel: usb 2-1: new SuperSpeed USB device number 10 using xhci-hcd
+Nov 21 09:48:24.333963 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:48:24.334090 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:48:24.334176 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 09:48:24.334236 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 09:48:24.334302 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 09:48:24.334959 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 09:48:24.335073 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 09:48:25.343963 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:48:25.344287 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:48:25.349321 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:48:25.349963 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:48:25.350077 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:48:25.350157 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:48:25.376027 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:48:25.377021 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:48:27.071025 glymur kernel: usb 2-1: reset SuperSpeed USB device number 10 using xhci-hcd
+Nov 21 09:48:29.735980 glymur kernel: usb 2-1: USB disconnect, device number 10
+Nov 21 09:48:30.112005 glymur kernel: usb 1-1: new high-speed USB device number 10 using xhci-hcd
+Nov 21 09:48:30.235010 glymur kernel: usb 1-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:48:30.235247 glymur kernel: usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:48:30.235337 glymur kernel: usb 1-1: Product: Ultra
+Nov 21 09:48:30.235398 glymur kernel: usb 1-1: Manufacturer: SanDisk
+Nov 21 09:48:30.235465 glymur kernel: usb 1-1: SerialNumber: <serial>
+Nov 21 09:48:30.235533 glymur kernel: usb-storage 1-1:1.0: USB Mass Storage device detected
+Nov 21 09:48:30.236994 glymur kernel: scsi host0: usb-storage 1-1:1.0
+Nov 21 09:48:31.298433 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:48:31.298961 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:48:31.304831 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:48:31.304944 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:48:31.305021 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:48:31.305095 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:48:31.328960 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:48:31.328982 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:48:33.472034 glymur kernel: usb 1-1: USB disconnect, device number 10
+Nov 21 09:48:33.585013 glymur kernel: usb 2-1: new SuperSpeed USB device number 11 using xhci-hcd
+Nov 21 09:48:33.597967 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:48:33.598113 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:48:33.598205 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 09:48:33.598273 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 09:48:33.598329 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 09:48:33.598960 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 09:48:33.599174 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 09:48:34.625031 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:48:34.625280 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:48:34.629961 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:48:34.630960 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:48:34.631059 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:48:34.631148 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:48:34.663960 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:48:34.663989 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:48:36.470036 glymur kernel: usb 2-1: reset SuperSpeed USB device number 11 using xhci-hcd
+Nov 21 09:48:39.332525 glymur kernel: usb 2-1: USB disconnect, device number 11
+Nov 21 09:48:39.721046 glymur kernel: usb 1-1: new high-speed USB device number 11 using xhci-hcd
+Nov 21 09:48:39.844070 glymur kernel: usb 1-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:48:39.844391 glymur kernel: usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:48:39.844485 glymur kernel: usb 1-1: Product: Ultra
+Nov 21 09:48:39.844549 glymur kernel: usb 1-1: Manufacturer: SanDisk
+Nov 21 09:48:39.844632 glymur kernel: usb 1-1: SerialNumber: <serial>
+Nov 21 09:48:39.844708 glymur kernel: usb-storage 1-1:1.0: USB Mass Storage device detected
+Nov 21 09:48:39.845962 glymur kernel: scsi host0: usb-storage 1-1:1.0
+Nov 21 09:48:40.899581 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:48:40.899890 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:48:40.905966 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:48:40.906062 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:48:40.906139 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:48:40.907027 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:48:40.935970 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:48:40.937967 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:48:43.081035 glymur kernel: usb 1-1: USB disconnect, device number 11
+Nov 21 09:48:43.194069 glymur kernel: usb 2-1: new SuperSpeed USB device number 12 using xhci-hcd
+Nov 21 09:48:43.206024 glymur kernel: usb 2-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:48:43.206313 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:48:43.206447 glymur kernel: usb 2-1: Product: Ultra
+Nov 21 09:48:43.206554 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 21 09:48:43.206665 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 21 09:48:43.206776 glymur kernel: usb-storage 2-1:1.0: USB Mass Storage device detected
+Nov 21 09:48:43.207961 glymur kernel: scsi host0: usb-storage 2-1:1.0
+Nov 21 09:48:44.224319 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:48:44.224600 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:48:44.231958 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:48:44.232063 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:48:44.232149 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:48:44.232222 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:48:44.272016 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:48:44.272047 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:49:56.796040 glymur kernel: usb 2-1: USB disconnect, device number 12
+Nov 21 09:50:06.934016 glymur kernel: xhci-hcd xhci-hcd.5.auto: xHCI Host Controller
+Nov 21 09:50:06.934273 glymur kernel: xhci-hcd xhci-hcd.5.auto: new USB bus registered, assigned bus number 4
+Nov 21 09:50:06.935958 glymur kernel: xhci-hcd xhci-hcd.5.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x000080a000000890
+Nov 21 09:50:06.936056 glymur kernel: xhci-hcd xhci-hcd.5.auto: irq 271, io mem 0x0a600000
+Nov 21 09:50:06.936159 glymur kernel: xhci-hcd xhci-hcd.5.auto: xHCI Host Controller
+Nov 21 09:50:06.936244 glymur kernel: xhci-hcd xhci-hcd.5.auto: new USB bus registered, assigned bus number 5
+Nov 21 09:50:06.936338 glymur kernel: xhci-hcd xhci-hcd.5.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Nov 21 09:50:06.936454 glymur kernel: usb usb4: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Nov 21 09:50:06.936596 glymur kernel: usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Nov 21 09:50:06.936697 glymur kernel: usb usb4: Product: xHCI Host Controller
+Nov 21 09:50:06.936787 glymur kernel: usb usb4: Manufacturer: Linux 7.3.0-glymur-23 xhci-hcd
+Nov 21 09:50:06.936880 glymur kernel: usb usb4: SerialNumber: <serial>
+Nov 21 09:50:06.936974 glymur kernel: hub 4-0:1.0: USB hub found
+Nov 21 09:50:06.937121 glymur kernel: hub 4-0:1.0: 1 port detected
+Nov 21 09:50:06.937224 glymur kernel: usb usb5: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+Nov 21 09:50:06.937345 glymur kernel: usb usb5: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Nov 21 09:50:06.937438 glymur kernel: usb usb5: Product: xHCI Host Controller
+Nov 21 09:50:06.937525 glymur kernel: usb usb5: Manufacturer: Linux 7.3.0-glymur-23 xhci-hcd
+Nov 21 09:50:06.937619 glymur kernel: usb usb5: SerialNumber: <serial>
+Nov 21 09:50:06.937709 glymur kernel: hub 5-0:1.0: USB hub found
+Nov 21 09:50:06.937838 glymur kernel: hub 5-0:1.0: 1 port detected
+Nov 21 09:50:07.613024 glymur kernel: usb 5-1: new SuperSpeed USB device number 2 using xhci-hcd
+Nov 21 09:50:07.624000 glymur kernel: usb 5-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:50:07.624996 glymur kernel: usb 5-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:50:07.625159 glymur kernel: usb 5-1: Product: Ultra
+Nov 21 09:50:07.625250 glymur kernel: usb 5-1: Manufacturer: SanDisk
+Nov 21 09:50:07.625334 glymur kernel: usb 5-1: SerialNumber: <serial>
+Nov 21 09:50:07.625416 glymur kernel: usb-storage 5-1:1.0: USB Mass Storage device detected
+Nov 21 09:50:07.625963 glymur kernel: scsi host0: usb-storage 5-1:1.0
+Nov 21 09:50:08.643520 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:50:08.644029 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:50:08.647966 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:50:08.648963 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:50:08.649080 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:50:08.649189 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:50:08.666009 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:50:08.667005 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:50:08.913016 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 09:50:08.915962 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 09:50:14.375010 glymur kernel: usb 5-1: USB disconnect, device number 2
+Nov 21 09:50:14.425003 glymur kernel: xhci-hcd xhci-hcd.5.auto: remove, state 1
+Nov 21 09:50:14.425089 glymur kernel: usb usb5: USB disconnect, device number 1
+Nov 21 09:50:14.437961 glymur kernel: xhci-hcd xhci-hcd.5.auto: USB bus 5 deregistered
+Nov 21 09:50:14.438073 glymur kernel: xhci-hcd xhci-hcd.5.auto: remove, state 4
+Nov 21 09:50:14.438124 glymur kernel: usb usb4: USB disconnect, device number 1
+Nov 21 09:50:14.440965 glymur kernel: xhci-hcd xhci-hcd.5.auto: USB bus 4 deregistered
+Nov 21 09:50:17.747977 glymur kernel: xhci-hcd xhci-hcd.5.auto: xHCI Host Controller
+Nov 21 09:50:17.748223 glymur kernel: xhci-hcd xhci-hcd.5.auto: new USB bus registered, assigned bus number 4
+Nov 21 09:50:17.749959 glymur kernel: xhci-hcd xhci-hcd.5.auto: hcc params 0x0118ffc5 hci version 0x120 quirks 0x000080a000000890
+Nov 21 09:50:17.750108 glymur kernel: xhci-hcd xhci-hcd.5.auto: irq 272, io mem 0x0a800000
+Nov 21 09:50:17.750219 glymur kernel: xhci-hcd xhci-hcd.5.auto: xHCI Host Controller
+Nov 21 09:50:17.750340 glymur kernel: xhci-hcd xhci-hcd.5.auto: new USB bus registered, assigned bus number 5
+Nov 21 09:50:17.750442 glymur kernel: xhci-hcd xhci-hcd.5.auto: Host supports USB 3.1 Enhanced SuperSpeed
+Nov 21 09:50:17.750541 glymur kernel: usb usb4: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+Nov 21 09:50:17.750699 glymur kernel: usb usb4: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Nov 21 09:50:17.750807 glymur kernel: usb usb4: Product: xHCI Host Controller
+Nov 21 09:50:17.750901 glymur kernel: usb usb4: Manufacturer: Linux 7.3.0-glymur-23 xhci-hcd
+Nov 21 09:50:17.750999 glymur kernel: usb usb4: SerialNumber: <serial>
+Nov 21 09:50:17.751089 glymur kernel: hub 4-0:1.0: USB hub found
+Nov 21 09:50:17.751205 glymur kernel: hub 4-0:1.0: 1 port detected
+Nov 21 09:50:17.751308 glymur kernel: usb usb5: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+Nov 21 09:50:17.751422 glymur kernel: usb usb5: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+Nov 21 09:50:17.751512 glymur kernel: usb usb5: Product: xHCI Host Controller
+Nov 21 09:50:17.751593 glymur kernel: usb usb5: Manufacturer: Linux 7.3.0-glymur-23 xhci-hcd
+Nov 21 09:50:17.751680 glymur kernel: usb usb5: SerialNumber: <serial>
+Nov 21 09:50:17.751764 glymur kernel: hub 5-0:1.0: USB hub found
+Nov 21 09:50:17.751876 glymur kernel: hub 5-0:1.0: 1 port detected
+Nov 21 09:50:18.455980 glymur kernel: usb 5-1: new SuperSpeed USB device number 2 using xhci-hcd
+Nov 21 09:50:18.466962 glymur kernel: usb 5-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:50:18.467960 glymur kernel: usb 5-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:50:18.468114 glymur kernel: usb 5-1: Product: Ultra
+Nov 21 09:50:18.468197 glymur kernel: usb 5-1: Manufacturer: SanDisk
+Nov 21 09:50:18.468289 glymur kernel: usb 5-1: SerialNumber: <serial>
+Nov 21 09:50:18.468959 glymur kernel: usb-storage 5-1:1.0: USB Mass Storage device detected
+Nov 21 09:50:18.469963 glymur kernel: scsi host0: usb-storage 5-1:1.0
+Nov 21 09:50:19.522696 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:50:19.523099 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:50:19.527959 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:50:19.528152 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:50:19.528290 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:50:19.528413 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:50:19.555012 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:50:19.556000 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:50:19.802071 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 09:50:19.807000 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.

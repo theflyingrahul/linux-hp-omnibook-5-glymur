@@ -1,0 +1,111 @@
+Nov 21 09:31:15.401684 glymur kernel: usb 2-1: reset full-speed USB device number 24 using xhci-hcd
+Nov 21 09:31:16.762136 glymur kernel: usb 2-1: reset full-speed USB device number 24 using xhci-hcd
+Nov 21 09:31:19.008135 glymur kernel: usb 2-1: reset full-speed USB device number 24 using xhci-hcd
+Nov 21 09:31:19.131994 glymur kernel: usb 2-1: device firmware changed
+Nov 21 09:31:19.132374 glymur kernel: usb 2-1: USB disconnect, device number 24
+Nov 21 09:31:19.339198 glymur kernel: usb 2-1: new full-speed USB device number 25 using xhci-hcd
+Nov 21 09:31:19.463480 glymur kernel: usb 2-1: New USB device found, idVendor=413c, idProduct=301b, bcdDevice=11.23
+Nov 21 09:31:19.466134 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+Nov 21 09:31:19.466448 glymur kernel: usb 2-1: Product: Dell Universal Receiver
+Nov 21 09:31:19.466547 glymur kernel: usb 2-1: Manufacturer: Dell
+Nov 21 09:31:19.501132 glymur kernel: input: Dell Dell Universal Receiver as /devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/usb2/2-1/2-1:1.0/0003:413C:301B.0019/input/input49
+Nov 21 09:31:19.586140 glymur kernel: hid-generic 0003:413C:301B.0019: input,hidraw3: USB HID v1.11 Keyboard [Dell Dell Universal Receiver] on usb-xhci-hcd.3.auto-1/input0
+Nov 21 09:31:19.588093 glymur kernel: input: Dell Dell Universal Receiver Mouse as /devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/usb2/2-1/2-1:1.1/0003:413C:301B.001A/input/input50
+Nov 21 09:31:19.588108 glymur kernel: input: Dell Dell Universal Receiver Consumer Control as /devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/usb2/2-1/2-1:1.1/0003:413C:301B.001A/input/input51
+Nov 21 09:31:19.641029 glymur kernel: input: Dell Dell Universal Receiver System Control as /devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/usb2/2-1/2-1:1.1/0003:413C:301B.001A/input/input52
+Nov 21 09:31:19.641165 glymur kernel: hid-generic 0003:413C:301B.001A: input,hidraw4: USB HID v1.11 Mouse [Dell Dell Universal Receiver] on usb-xhci-hcd.3.auto-1/input1
+Nov 21 09:31:19.641361 glymur kernel: hid-generic 0003:413C:301B.001B: hiddev0,hidraw5: USB HID v1.11 Device [Dell Dell Universal Receiver] on usb-xhci-hcd.3.auto-1/input2
+Nov 21 09:31:24.153136 glymur kernel: usb 2-1: reset full-speed USB device number 25 using xhci-hcd
+Nov 21 09:31:24.265138 glymur kernel: usb 2-1: Device not responding to setup address.
+Nov 21 09:31:32.264137 glymur kernel: usb 2-1: reset full-speed USB device number 25 using xhci-hcd
+Nov 21 09:31:32.377136 glymur kernel: usb 2-1: Device not responding to setup address.
+Nov 21 09:31:42.224133 glymur kernel: usb 2-1: reset full-speed USB device number 25 using xhci-hcd
+Nov 21 09:31:47.360185 glymur kernel: usb 2-1: reset full-speed USB device number 25 using xhci-hcd
+Nov 21 09:31:55.177096 glymur kernel: usb 2-1: reset full-speed USB device number 25 using xhci-hcd
+Nov 21 09:31:57.048762 glymur kernel: usb 2-1: reset full-speed USB device number 25 using xhci-hcd
+Nov 21 09:31:58.969155 glymur kernel: usb 2-1: reset full-speed USB device number 25 using xhci-hcd
+Nov 21 09:32:01.641151 glymur kernel: usb 2-1: reset full-speed USB device number 25 using xhci-hcd
+Nov 21 09:32:05.363155 glymur kernel: usb 2-1: reset full-speed USB device number 25 using xhci-hcd
+Nov 21 09:32:09.499165 glymur kernel: usb 2-1: reset full-speed USB device number 25 using xhci-hcd
+Nov 21 09:32:11.697167 glymur kernel: usb 2-1: reset full-speed USB device number 25 using xhci-hcd
+Nov 21 09:32:13.411161 glymur kernel: usb 2-1: reset full-speed USB device number 25 using xhci-hcd
+Nov 21 09:32:15.393150 glymur kernel: usb 2-1: reset full-speed USB device number 25 using xhci-hcd
+Nov 21 09:32:18.587154 glymur kernel: usb 2-1: reset full-speed USB device number 25 using xhci-hcd
+Nov 21 09:32:22.313166 glymur kernel: usb 2-1: reset full-speed USB device number 25 using xhci-hcd
+Nov 21 09:32:24.347167 glymur kernel: usb 2-1: reset full-speed USB device number 25 using xhci-hcd
+Nov 21 09:32:24.473398 glymur kernel: usb 2-1: device firmware changed
+Nov 21 09:32:24.473921 glymur kernel: usb 2-1: USB disconnect, device number 25
+Nov 21 09:32:24.687143 glymur kernel: usb 2-1: new full-speed USB device number 26 using xhci-hcd
+Nov 21 09:32:24.815179 glymur kernel: usb 2-1: New USB device found, idVendor=413c, idProduct=301b, bcdDevice=11.23
+Nov 21 09:32:24.820154 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+Nov 21 09:32:24.820444 glymur kernel: usb 2-1: Product: Dell Universal Receiver
+Nov 21 09:32:24.820557 glymur kernel: usb 2-1: Manufacturer: Dell
+Nov 21 09:32:24.856158 glymur kernel: input: Dell Dell Universal Receiver as /devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/usb2/2-1/2-1:1.0/0003:413C:301B.001C/input/input53
+Nov 21 09:32:24.932148 glymur kernel: hid-generic 0003:413C:301B.001C: input,hidraw3: USB HID v1.11 Keyboard [Dell Dell Universal Receiver] on usb-xhci-hcd.3.auto-1/input0
+Nov 21 09:32:24.934088 glymur kernel: input: Dell Dell Universal Receiver Mouse as /devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/usb2/2-1/2-1:1.1/0003:413C:301B.001D/input/input54
+Nov 21 09:32:24.934112 glymur kernel: input: Dell Dell Universal Receiver Consumer Control as /devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/usb2/2-1/2-1:1.1/0003:413C:301B.001D/input/input55
+Nov 21 09:32:24.985200 glymur kernel: input: Dell Dell Universal Receiver System Control as /devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/usb2/2-1/2-1:1.1/0003:413C:301B.001D/input/input56
+Nov 21 09:32:24.985288 glymur kernel: hid-generic 0003:413C:301B.001D: input,hidraw4: USB HID v1.11 Mouse [Dell Dell Universal Receiver] on usb-xhci-hcd.3.auto-1/input1
+Nov 21 09:32:24.987087 glymur kernel: hid-generic 0003:413C:301B.001E: hiddev0,hidraw5: USB HID v1.11 Device [Dell Dell Universal Receiver] on usb-xhci-hcd.3.auto-1/input2
+Nov 21 09:32:26.538717 glymur kernel: usb 4-1: USB disconnect, device number 3
+Nov 21 09:32:30.923173 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:32:32.023156 glymur kernel: usb 4-1: new high-speed USB device number 4 using xhci-hcd
+Nov 21 09:32:32.146160 glymur kernel: usb 4-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:32:32.146623 glymur kernel: usb 4-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:32:32.146736 glymur kernel: usb 4-1: Product: Ultra
+Nov 21 09:32:32.146824 glymur kernel: usb 4-1: Manufacturer: SanDisk
+Nov 21 09:32:32.146910 glymur kernel: usb 4-1: SerialNumber: <serial>
+Nov 21 09:32:32.146992 glymur kernel: usb-storage 4-1:1.0: USB Mass Storage device detected
+Nov 21 09:32:32.149088 glymur kernel: scsi host0: usb-storage 4-1:1.0
+Nov 21 09:32:33.217973 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:32:33.219778 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:32:33.226094 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:32:33.226228 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:32:33.226339 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:32:33.226454 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:32:33.252091 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:32:33.252128 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:32:33.560144 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 09:32:33.618095 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 09:32:34.033159 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:32:37.819139 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:32:39.395169 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:32:41.225138 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:32:41.500166 glymur kernel: input: Dell Dell Universal Receiver Mouse as /devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/usb2/2-1/2-1:1.1/0003:413C:301B.001F/input/input57
+Nov 21 09:32:41.500229 glymur kernel: input: Dell Dell Universal Receiver Consumer Control as /devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/usb2/2-1/2-1:1.1/0003:413C:301B.001F/input/input58
+Nov 21 09:32:41.552148 glymur kernel: input: Dell Dell Universal Receiver System Control as /devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/usb2/2-1/2-1:1.1/0003:413C:301B.001F/input/input59
+Nov 21 09:32:41.552230 glymur kernel: hid-generic 0003:413C:301B.001F: input,hidraw4: USB HID v1.11 Mouse [Dell Dell Universal Receiver] on usb-xhci-hcd.3.auto-1/input1
+Nov 21 09:32:42.729138 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:32:42.842138 glymur kernel: usb 2-1: Device not responding to setup address.
+Nov 21 09:32:45.601134 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:32:46.921170 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:32:50.514158 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:32:57.019185 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:32:58.306137 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:33:02.099139 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:33:05.859138 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:33:09.290139 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:33:09.378131 glymur kernel: usb 4-1: USB disconnect, device number 4
+Nov 21 09:33:11.058134 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:33:11.170162 glymur kernel: usb 2-1: Device not responding to setup address.
+Nov 21 09:33:16.675167 glymur kernel: usb 4-1: new high-speed USB device number 5 using xhci-hcd
+Nov 21 09:33:16.798169 glymur kernel: usb 4-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:33:16.798616 glymur kernel: usb 4-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:33:16.798729 glymur kernel: usb 4-1: Product: Ultra
+Nov 21 09:33:16.798817 glymur kernel: usb 4-1: Manufacturer: SanDisk
+Nov 21 09:33:16.798901 glymur kernel: usb 4-1: SerialNumber: <serial>
+Nov 21 09:33:16.798982 glymur kernel: usb-storage 4-1:1.0: USB Mass Storage device detected
+Nov 21 09:33:16.800088 glymur kernel: scsi host0: usb-storage 4-1:1.0
+Nov 21 09:33:17.803684 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:33:17.804199 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:33:17.810094 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:33:17.810201 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:33:17.810404 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:33:17.810526 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:33:17.841125 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:33:17.841155 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:33:18.098155 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 09:33:18.102090 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 09:33:19.442100 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:33:25.172109 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd
+Nov 21 09:33:29.386113 glymur kernel: usb 2-1: reset full-speed USB device number 26 using xhci-hcd

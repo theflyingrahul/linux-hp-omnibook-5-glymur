@@ -1,0 +1,111 @@
+Nov 21 09:28:54.686828 glymur kernel: usb 6-1.4: new high-speed USB device number 5 using xhci-hcd
+Nov 21 09:28:54.770164 glymur kernel: usb 6-1.4: New USB device found, idVendor=05ac, idProduct=12a8, bcdDevice=17.05
+Nov 21 09:28:54.772568 glymur kernel: usb 6-1.4: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:28:54.772795 glymur kernel: usb 6-1.4: Product: iPhone
+Nov 21 09:28:54.772872 glymur kernel: usb 6-1.4: Manufacturer: Apple Inc.
+Nov 21 09:28:54.772943 glymur kernel: usb 6-1.4: SerialNumber: <serial>
+Nov 21 09:28:54.927114 glymur kernel: ipheth 6-1.4:4.2: ipheth_enable_ncm: usb_control_msg: 0
+Nov 21 09:28:54.927518 glymur kernel: ipheth 6-1.4:4.2: Apple iPhone USB Ethernet device attached
+Nov 21 09:28:54.931096 glymur kernel: ipheth 6-1.4:4.2 enx<mac>: renamed from eth0
+Nov 21 09:28:56.115091 glymur kernel: ipheth 6-1.4:4.2: ipheth_sndbulk_callback: urb status: -71
+Nov 21 09:28:56.298129 glymur kernel: apple-mfi-fastcharge 6-1.4: USB disconnect, device number 5
+Nov 21 09:28:56.310088 glymur kernel: ipheth 6-1.4:4.2: Apple iPhone USB Ethernet now disconnected
+Nov 21 09:29:13.336165 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 1, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.340088 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 2, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.344088 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 3, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.348157 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 4, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.352089 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 5, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.356087 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 6, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.360087 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 7, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.365086 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 8, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.369086 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 9, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.373086 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 10, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.377087 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 11, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.382087 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 12, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.386098 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 13, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.390086 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 14, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.394085 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 15, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.398087 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 16, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.402086 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 17, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.407089 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 18, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.411085 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 19, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.415086 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 20, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.419086 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 21, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.423086 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 22, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.427086 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 23, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.431084 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 24, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.435085 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 25, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.440085 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 26, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.444086 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 27, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.448085 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 28, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:29:13.452093 glymur kernel: ucsi_glink.pmic_glink_ucsi pmic_glink.ucsi.0: con2: Firmware bug: duplicate partner altmode SVID 0xff01 at offset 29, ignoring but please contact the BIOS vendor to fix this issue.
+Nov 21 09:30:01.837057 glymur kernel: usb 6-1.3: USB disconnect, device number 4
+Nov 21 09:30:06.527168 glymur kernel: usb 2-1: new full-speed USB device number 24 using xhci-hcd
+Nov 21 09:30:06.656114 glymur kernel: usb 2-1: New USB device found, idVendor=413c, idProduct=301b, bcdDevice=11.23
+Nov 21 09:30:06.661104 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+Nov 21 09:30:06.661392 glymur kernel: usb 2-1: Product: Dell Universal Receiver
+Nov 21 09:30:06.661497 glymur kernel: usb 2-1: Manufacturer: Dell
+Nov 21 09:30:06.691114 glymur kernel: input: Dell Dell Universal Receiver as /devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/usb2/2-1/2-1:1.0/0003:413C:301B.0016/input/input45
+Nov 21 09:30:06.768102 glymur kernel: hid-generic 0003:413C:301B.0016: input,hidraw3: USB HID v1.11 Keyboard [Dell Dell Universal Receiver] on usb-xhci-hcd.3.auto-1/input0
+Nov 21 09:30:06.770087 glymur kernel: input: Dell Dell Universal Receiver Mouse as /devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/usb2/2-1/2-1:1.1/0003:413C:301B.0017/input/input46
+Nov 21 09:30:06.770124 glymur kernel: input: Dell Dell Universal Receiver Consumer Control as /devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/usb2/2-1/2-1:1.1/0003:413C:301B.0017/input/input47
+Nov 21 09:30:06.821160 glymur kernel: input: Dell Dell Universal Receiver System Control as /devices/platform/soc@0/a000000.usb/xhci-hcd.3.auto/usb2/2-1/2-1:1.1/0003:413C:301B.0017/input/input48
+Nov 21 09:30:06.821260 glymur kernel: hid-generic 0003:413C:301B.0017: input,hidraw4: USB HID v1.11 Mouse [Dell Dell Universal Receiver] on usb-xhci-hcd.3.auto-1/input1
+Nov 21 09:30:06.822095 glymur kernel: hid-generic 0003:413C:301B.0018: hiddev0,hidraw5: USB HID v1.11 Device [Dell Dell Universal Receiver] on usb-xhci-hcd.3.auto-1/input2
+Nov 21 09:30:18.458479 glymur kernel: usb 5-1: USB disconnect, device number 2
+Nov 21 09:30:24.323107 glymur kernel: usb 5-1: new SuperSpeed USB device number 3 using xhci-hcd
+Nov 21 09:30:24.334101 glymur kernel: usb 5-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:30:24.335101 glymur kernel: usb 5-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:30:24.335271 glymur kernel: usb 5-1: Product: Ultra
+Nov 21 09:30:24.335374 glymur kernel: usb 5-1: Manufacturer: SanDisk
+Nov 21 09:30:24.335463 glymur kernel: usb 5-1: SerialNumber: <serial>
+Nov 21 09:30:24.335551 glymur kernel: usb-storage 5-1:1.0: USB Mass Storage device detected
+Nov 21 09:30:24.336087 glymur kernel: scsi host0: usb-storage 5-1:1.0
+Nov 21 09:30:25.387883 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:30:25.388450 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:30:25.393092 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:30:25.393234 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:30:25.393362 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:30:25.393535 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:30:25.412156 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:30:25.412241 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:30:25.665165 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 09:30:25.668087 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 09:30:31.235163 glymur kernel: usb 5-1: USB disconnect, device number 3
+Nov 21 09:30:37.191158 glymur kernel: usb 5-1: new SuperSpeed USB device number 4 using xhci-hcd
+Nov 21 09:30:37.202151 glymur kernel: usb 5-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:30:37.202369 glymur kernel: usb 5-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:30:37.202458 glymur kernel: usb 5-1: Product: Ultra
+Nov 21 09:30:37.202533 glymur kernel: usb 5-1: Manufacturer: SanDisk
+Nov 21 09:30:37.202594 glymur kernel: usb 5-1: SerialNumber: <serial>
+Nov 21 09:30:37.203092 glymur kernel: usb-storage 5-1:1.0: USB Mass Storage device detected
+Nov 21 09:30:37.204090 glymur kernel: scsi host0: usb-storage 5-1:1.0
+Nov 21 09:30:38.251109 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:30:38.251529 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:30:38.256094 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:30:38.256225 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:30:38.256316 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:30:38.257100 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:30:38.283090 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:30:38.283114 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:30:38.536233 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 09:30:38.539379 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 09:30:47.558270 glymur kernel: usb 5-1: USB disconnect, device number 4
+Nov 21 09:30:55.497154 glymur kernel: usb 4-1: new high-speed USB device number 3 using xhci-hcd
+Nov 21 09:30:55.620170 glymur kernel: usb 4-1: New USB device found, idVendor=0781, idProduct=558a, bcdDevice= 1.00
+Nov 21 09:30:55.620612 glymur kernel: usb 4-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 21 09:30:55.620733 glymur kernel: usb 4-1: Product: Ultra
+Nov 21 09:30:55.620831 glymur kernel: usb 4-1: Manufacturer: SanDisk
+Nov 21 09:30:55.620913 glymur kernel: usb 4-1: SerialNumber: <serial>
+Nov 21 09:30:55.620997 glymur kernel: usb-storage 4-1:1.0: USB Mass Storage device detected
+Nov 21 09:30:55.623086 glymur kernel: scsi host0: usb-storage 4-1:1.0
+Nov 21 09:30:56.698464 glymur kernel: scsi 0:0:0:0: Direct-Access     SanDisk  Ultra            1.00 PQ: 0 ANSI: 6
+Nov 21 09:30:56.699174 glymur kernel: sd 0:0:0:0: Attached scsi generic sg0 type 0
+Nov 21 09:30:56.705090 glymur kernel: sd 0:0:0:0: [sda] 120176640 512-byte logical blocks: (61.5 GB/57.3 GiB)
+Nov 21 09:30:56.705176 glymur kernel: sd 0:0:0:0: [sda] Write Protect is off
+Nov 21 09:30:56.705255 glymur kernel: sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+Nov 21 09:30:56.705357 glymur kernel: sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+Nov 21 09:30:56.728148 glymur kernel:  sda: sda1 sda2 sda3 sda4
+Nov 21 09:30:56.728172 glymur kernel: sd 0:0:0:0: [sda] Attached SCSI removable disk
+Nov 21 09:30:56.987182 glymur kernel: FAT-fs (sda1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+Nov 21 09:30:56.990108 glymur kernel: FAT-fs (sda2): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.

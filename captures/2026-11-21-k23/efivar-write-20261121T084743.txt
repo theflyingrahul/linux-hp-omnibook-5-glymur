@@ -1,0 +1,6 @@
+kernel: 7.3.0-glymur-23
+efivarfs: rw,nosuid,nodev,noexec,relatime
+99 variables visible
+deleted
+98 variables visible now
+log: /var/log/glymur/efivar-write-20261121T084743.txt

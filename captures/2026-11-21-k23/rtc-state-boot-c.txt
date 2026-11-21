@@ -1,0 +1,28 @@
+Failed to query server: Failed to read RTC: Input/output error
+
+/sys/class/rtc/rtc0 name=rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0 hctosys=0
+cat: /sys/class/rtc/rtc0/time: Input/output error
+
+efivars under <uuid> (names only):
+DPControllerModeType
+DisplayPanelConfiguration
+DisplaySplashBufferInfo
+EC_THERMAL_CAP
+EnableCapsulePartition
+EnableOnstorageDump
+RunCycles
+TZDIAG_DESCRIPTOR
+UefiSecAppId
+UefiSecAppVersionRT
+UefiVariableServiceSpecVersion
+UsbPort0Retimer
+UsbPort1Retimer
+
+RTCInfo present: 0
+
+-5 Fri 2026-10-02 23:05:38 IST Wed 2026-11-11 14:52:38
+-4 Fri 2026-10-02 23:05:38 IST Wed 2026-11-11 15:23:06
+-3 Fri 2026-10-02 23:05:38 IST Wed 2026-11-11 15:30:07
+-2 Fri 2026-10-02 23:05:38 IST Sat 2026-11-21 08:41:55
+-1 Fri 2026-10-02 23:05:38 IST Sat 2026-11-21 09:36:34
+0 Fri 2026-10-02 23:05:38 IST Sat 2026-11-21 09:46:03
