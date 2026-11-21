@@ -1,7 +1,7 @@
-From 15ef2b41067305ac1ecbe5aef7e5b2286ffdc26f Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Tyler Baker <forcedinductionz@gmail.com>
 Date: Sat, 26 Sep 2026 20:01:33 -0400
-Subject: [PATCH 23/26] power: supply: qcom_battmgr: refresh on Glymur state
+Subject: [PATCH] power: supply: qcom_battmgr: refresh on Glymur state
  notifications
 
 On Glymur (ASUS Zenbook A16) the battery manager firmware acknowledges
@@ -30,7 +30,7 @@ Link: https://github.com/EmbeddedAndroid/linux/commit/0473e2eaf7499349316736611f
  1 file changed, 37 insertions(+)
 
 diff --git a/drivers/power/supply/qcom_battmgr.c b/drivers/power/supply/qcom_battmgr.c
-index be20880e3f90..028b39f3da15 100644
+index 80c55ef26167..227653e12ce9 100644
 --- a/drivers/power/supply/qcom_battmgr.c
 +++ b/drivers/power/supply/qcom_battmgr.c
 @@ -41,6 +41,13 @@ enum qcom_battmgr_variant {
@@ -55,7 +55,7 @@ index be20880e3f90..028b39f3da15 100644
  
  	enum qcom_battmgr_variant variant;
  
-@@ -1980,6 +1988,27 @@ static void qcom_battmgr_callback(const void *data, size_t len, void *priv)
+@@ -2006,6 +2014,27 @@ static void qcom_battmgr_callback(const void *data, size_t len, void *priv)
  		qcom_battmgr_sm8350_callback(battmgr, data, len);
  }
  
@@ -83,7 +83,7 @@ index be20880e3f90..028b39f3da15 100644
  static char *qcom_battmgr_battery[] = { "battery" };
  
  static void qcom_battmgr_enable_worker(struct work_struct *work)
-@@ -2182,7 +2211,15 @@ static int qcom_battmgr_probe(struct auxiliary_device *adev,
+@@ -2208,7 +2237,15 @@ static int qcom_battmgr_probe(struct auxiliary_device *adev,
  	if (IS_ERR(battmgr->client))
  		return PTR_ERR(battmgr->client);
  
@@ -99,6 +99,3 @@ index be20880e3f90..028b39f3da15 100644
  
  	return 0;
  }
--- 
-2.53.0
-

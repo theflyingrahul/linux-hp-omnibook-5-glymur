@@ -1,4 +1,4 @@
-From 66cc0eecf279ce8f583fab13468889c49cd273de Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Tue, 10 Nov 2026 01:48:25 -0800
 Subject: [PATCH] media: iris: bring-up option to attach the partial-data
@@ -17,7 +17,7 @@ is what stalls H.264 decoding. Default off: nothing changes without it.
  3 files changed, 18 insertions(+)
 
 diff --git a/drivers/media/platform/qcom/iris/iris_buffer.c b/drivers/media/platform/qcom/iris/iris_buffer.c
-index 6e03d13ac1a7..9af5c1188f4e 100644
+index 3ad382dff6e5..5d90c0d6f892 100644
 --- a/drivers/media/platform/qcom/iris/iris_buffer.c
 +++ b/drivers/media/platform/qcom/iris/iris_buffer.c
 @@ -7,6 +7,7 @@
@@ -87,6 +87,3 @@ index 25a5194a155a..a143c56b633e 100644
 +bool iris_diag_skip_partial(struct iris_inst *inst);
  
  #endif
--- 
-2.53.0
-

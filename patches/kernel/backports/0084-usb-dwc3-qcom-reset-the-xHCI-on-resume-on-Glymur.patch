@@ -1,4 +1,4 @@
-From 12b940c257d0f94bf656240c95b0ad35d15eb9f5 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Tyler Baker <forcedinductionz@gmail.com>
 Date: Sun, 27 Sep 2026 10:37:28 -0400
 Subject: [PATCH] usb: dwc3: qcom: reset the xHCI on resume on Glymur
@@ -38,7 +38,7 @@ Link: https://github.com/EmbeddedAndroid/linux/commit/12b940c257d0f94bf656240c95
  5 files changed, 22 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
-index d9f4e4109abb..d782d5ef9c57 100644
+index cf48748cb233..0f3c7c6c2455 100644
 --- a/drivers/usb/dwc3/core.c
 +++ b/drivers/usb/dwc3/core.c
 @@ -1697,6 +1697,9 @@ static void dwc3_get_software_properties(struct dwc3 *dwc,
@@ -64,18 +64,18 @@ index 1c8d441ea9f8..ae8b6548615e 100644
  	unsigned		disable_scramble_quirk:1;
  	unsigned		u2exit_lfps_quirk:1;
 diff --git a/drivers/usb/dwc3/dwc3-qcom.c b/drivers/usb/dwc3/dwc3-qcom.c
-index 8116dc94c181..4d1deaeb4620 100644
+index 170f6e4fc242..e484494150f4 100644
 --- a/drivers/usb/dwc3/dwc3-qcom.c
 +++ b/drivers/usb/dwc3/dwc3-qcom.c
-@@ -654,6 +654,7 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
- 	int			ret;
+@@ -671,6 +671,7 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
  	bool			ignore_pipe_clk;
  	bool			wakeup_source;
+ 	struct phy		*phy;
 +	bool			glymur;
  
- 	qcom = devm_kzalloc(&pdev->dev, sizeof(*qcom), GFP_KERNEL);
+ 	qcom = devm_kzalloc_obj(&pdev->dev, *qcom);
  	if (!qcom)
-@@ -747,6 +748,13 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
+@@ -775,6 +776,13 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
  	probe_data.ignore_clocks_and_resets = true;
  	probe_data.properties = DWC3_DEFAULT_PROPERTIES;
  	probe_data.properties.skip_phy_init = true;
@@ -89,7 +89,7 @@ index 8116dc94c181..4d1deaeb4620 100644
  	ret = dwc3_core_probe(&probe_data);
  	if (ret)  {
  		ret = dev_err_probe(dev, ret, "failed to register DWC3 Core\n");
-@@ -757,7 +765,9 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
+@@ -785,7 +793,9 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
  	if (ret)
  		goto remove_core;
  
@@ -142,6 +142,3 @@ index 3fb8be8be590..512cc187c420 100644
  	if (dwc->skip_phy_init)
  		props[prop_idx++] = PROPERTY_ENTRY_BOOL("xhci-skip-phy-init-quirk");
  
--- 
-2.53.0
-

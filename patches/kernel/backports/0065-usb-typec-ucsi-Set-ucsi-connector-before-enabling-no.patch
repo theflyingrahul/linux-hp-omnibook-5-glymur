@@ -1,4 +1,4 @@
-From 5b4b83c2ffe8740f6f3e54ea4d4962a62c063ef1 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Uttkarsh Aggarwal <uttkarsh.aggarwal@oss.qualcomm.com>
 Date: Tue, 29 Sep 2026 14:59:39 +0530
 Subject: [PATCH] usb: typec: ucsi: Set ucsi->connector before enabling
@@ -34,7 +34,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  1 file changed, 9 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/usb/typec/ucsi/ucsi.c b/drivers/usb/typec/ucsi/ucsi.c
-index 5aab8ab9f0..2f9adf4f8b 100644
+index 5aab8ab9f013..2f9adf4f8bde 100644
 --- a/drivers/usb/typec/ucsi/ucsi.c
 +++ b/drivers/usb/typec/ucsi/ucsi.c
 @@ -2134,6 +2134,14 @@ static int ucsi_init(struct ucsi *ucsi)
@@ -68,6 +68,3 @@ index 5aab8ab9f0..2f9adf4f8b 100644
  	for (con = connector; con->port; con++)
  		ucsi_unregister_port(con);
  	for (i = 0; i < ucsi->cap.num_connectors; i++)
--- 
-2.53.0
-

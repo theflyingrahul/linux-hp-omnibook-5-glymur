@@ -1,4 +1,4 @@
-From 0dde75ce87d04ebfd8b4233174d42983f8a5acb3 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Maulik Shah <maulik.shah@oss.qualcomm.com>
 Date: Mon, 14 Sep 2026 12:29:37 +0530
 Subject: [PATCH] arm64: dts: qcom: glymur: Add domain idle state names
@@ -17,10 +17,10 @@ Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
  1 file changed, 2 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
-index d348814dad..b6ee1cca72 100644
+index 66cadca9e7c6..a027c39ae461 100644
 --- a/arch/arm64/boot/dts/qcom/glymur.dtsi
 +++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
-@@ -369,6 +369,7 @@
+@@ -369,6 +369,7 @@ cpu_c4: cpu-sleep-0 {
  		domain-idle-states {
  			cluster_cl5: cluster-sleep-0 {
  				compatible = "domain-idle-state";
@@ -28,7 +28,7 @@ index d348814dad..b6ee1cca72 100644
  				arm,psci-suspend-param = <0x01000054>;
  				entry-latency-us = <2000>;
  				exit-latency-us = <2000>;
-@@ -377,6 +378,7 @@
+@@ -377,6 +378,7 @@ cluster_cl5: cluster-sleep-0 {
  
  			domain_ss3: domain-sleep-0 {
  				compatible = "domain-idle-state";
@@ -36,6 +36,3 @@ index d348814dad..b6ee1cca72 100644
  				arm,psci-suspend-param = <0x0200c354>;
  				entry-latency-us = <2800>;
  				exit-latency-us = <4400>;
--- 
-2.53.0
-

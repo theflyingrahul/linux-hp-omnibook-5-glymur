@@ -1,7 +1,7 @@
-From e98c4a338e2a1d73528ddcdab57b986b2a87ee91 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Sat, 26 Sep 2026 15:33:46 -0700
-Subject: [PATCH 2/3] dmaengine: qcom: gpi: add ACPI support for the Glymur GPI
+Subject: [PATCH] dmaengine: qcom: gpi: add ACPI support for the Glymur GPI
  engine
 
 Snapdragon X2 (Glymur) laptops that boot through ACPI describe the GPI DMA
@@ -23,7 +23,7 @@ leaves in GSI mode, transfers through this engine.
  2 files changed, 133 insertions(+), 13 deletions(-)
 
 diff --git a/drivers/dma/qcom/gpi.c b/drivers/dma/qcom/gpi.c
-index 6ef72dffd..6a47407c9 100644
+index 096a657fc79b..14df390a6e29 100644
 --- a/drivers/dma/qcom/gpi.c
 +++ b/drivers/dma/qcom/gpi.c
 @@ -6,6 +6,7 @@
@@ -34,7 +34,7 @@ index 6ef72dffd..6a47407c9 100644
  #include <linux/bitfield.h>
  #include <linux/dma-mapping.h>
  #include <linux/dmaengine.h>
-@@ -2201,6 +2202,91 @@ static struct dma_chan *gpi_of_dma_xlate(struct of_phandle_args *args,
+@@ -2206,6 +2207,91 @@ static struct dma_chan *gpi_of_dma_xlate(struct of_phandle_args *args,
  	return dma_get_slave_channel(&gchan->vc.chan);
  }
  
@@ -126,7 +126,7 @@ index 6ef72dffd..6a47407c9 100644
  static int gpi_probe(struct platform_device *pdev)
  {
  	struct gpi_dev *gpi_dev;
-@@ -2218,21 +2304,27 @@ static int gpi_probe(struct platform_device *pdev)
+@@ -2223,21 +2309,27 @@ static int gpi_probe(struct platform_device *pdev)
  		return PTR_ERR(gpi_dev->regs);
  	gpi_dev->ee_base = gpi_dev->regs;
  
@@ -167,7 +167,7 @@ index 6ef72dffd..6a47407c9 100644
  	gpi_dev->ee_base = gpi_dev->ee_base - ee_offset;
  
  	gpi_dev->ev_factor = EV_FACTOR;
-@@ -2328,6 +2420,10 @@ static int gpi_probe(struct platform_device *pdev)
+@@ -2333,6 +2425,10 @@ static int gpi_probe(struct platform_device *pdev)
  		return ret;
  	}
  
@@ -178,7 +178,7 @@ index 6ef72dffd..6a47407c9 100644
  	ret = of_dma_controller_register(gpi_dev->dev->of_node,
  					 gpi_of_dma_xlate, gpi_dev);
  	if (ret) {
-@@ -2355,11 +2451,18 @@ static const struct of_device_id gpi_of_match[] = {
+@@ -2360,11 +2456,18 @@ static const struct of_device_id gpi_of_match[] = {
  };
  MODULE_DEVICE_TABLE(of, gpi_of_match);
  
@@ -198,7 +198,7 @@ index 6ef72dffd..6a47407c9 100644
  };
  
 diff --git a/include/linux/dma/qcom-gpi-dma.h b/include/linux/dma/qcom-gpi-dma.h
-index f10fa9371..28f15001f 100644
+index f10fa93713f9..28f15001f3cf 100644
 --- a/include/linux/dma/qcom-gpi-dma.h
 +++ b/include/linux/dma/qcom-gpi-dma.h
 @@ -7,6 +7,9 @@

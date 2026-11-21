@@ -1,7 +1,7 @@
-From e3312b43a7d3d7f486c9831b844b487ff965fdfd Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Sat, 26 Sep 2026 15:33:47 -0700
-Subject: [PATCH 1/2] gpio: add an interim Glymur ACPI TLMM driver (bring-up)
+Subject: [PATCH] gpio: add an interim Glymur ACPI TLMM driver (bring-up)
 
 Standalone ACPI (QCOM0F0C) GPIO and interrupt provider for the Snapdragon
 X2 TLMM, following OpenBSD qcgpio(4): PDC-encoded GpioInt pins are
@@ -21,10 +21,10 @@ Board-specific pin lists belong to the board's boot configuration.
  create mode 100644 drivers/gpio/glymur_acpi_gpio.c
 
 diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-index a48586bb8..418d9942a 100644
+index 55e4280029d8..5a50cf18976e 100644
 --- a/drivers/gpio/Kconfig
 +++ b/drivers/gpio/Kconfig
-@@ -360,6 +360,16 @@ config GPIO_GENERIC_PLATFORM
+@@ -381,6 +381,16 @@ config GPIO_GENERIC_PLATFORM
  	help
  	  Say yes here to support basic platform_device memory-mapped GPIO controllers.
  
@@ -42,10 +42,10 @@ index a48586bb8..418d9942a 100644
  	tristate "Intel Granite Rapids-D vGPIO support"
  	depends on X86 || COMPILE_TEST
 diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
-index dc9e6d643..0f633cfa1 100644
+index 88f748846e60..a5a6f74ed1c8 100644
 --- a/drivers/gpio/Makefile
 +++ b/drivers/gpio/Makefile
-@@ -74,6 +74,7 @@ obj-$(CONFIG_GPIO_FTGPIO010)		+= gpio-ftgpio010.o
+@@ -77,6 +77,7 @@ obj-$(CONFIG_GPIO_FTGPIO010)		+= gpio-ftgpio010.o
  obj-$(CONFIG_GPIO_FXL6408)		+= gpio-fxl6408.o
  obj-$(CONFIG_GPIO_GE_FPGA)		+= gpio-ge.o
  obj-$(CONFIG_GPIO_GPIO_MM)		+= gpio-gpio-mm.o
@@ -55,7 +55,7 @@ index dc9e6d643..0f633cfa1 100644
  obj-$(CONFIG_GPIO_GW_PLD)		+= gpio-gw-pld.o
 diff --git a/drivers/gpio/glymur_acpi_gpio.c b/drivers/gpio/glymur_acpi_gpio.c
 new file mode 100644
-index 000000000..5b03309f4
+index 000000000000..5b03309f45f1
 --- /dev/null
 +++ b/drivers/gpio/glymur_acpi_gpio.c
 @@ -0,0 +1,558 @@

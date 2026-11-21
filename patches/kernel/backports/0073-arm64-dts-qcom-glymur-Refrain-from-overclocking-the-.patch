@@ -1,4 +1,4 @@
-From 29a70f3d2325e8ac84a33e93d906aecd639f4552 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Date: Tue, 28 Jul 2026 13:02:11 +0200
 Subject: [PATCH] arm64: dts: qcom: glymur: Refrain from overclocking the USB2
@@ -14,10 +14,10 @@ Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
  1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
-index 24debee879..ec060ed6e2 100644
+index dbd38f47909d..ce2a59187364 100644
 --- a/arch/arm64/boot/dts/qcom/glymur.dtsi
 +++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
-@@ -5751,7 +5751,8 @@
+@@ -5864,7 +5864,8 @@ usb_hs: usb@a200000 {
  
  			assigned-clocks = <&gcc GCC_USB20_MOCK_UTMI_CLK>,
  					  <&gcc GCC_USB20_MASTER_CLK>;
@@ -27,7 +27,7 @@ index 24debee879..ec060ed6e2 100644
  
  			interrupts-extended = <&intc GIC_SPI 240 IRQ_TYPE_LEVEL_HIGH>,
  					      <&intc GIC_SPI 246 IRQ_TYPE_LEVEL_HIGH>,
-@@ -5767,7 +5768,7 @@
+@@ -5880,7 +5881,7 @@ usb_hs: usb@a200000 {
  			resets = <&gcc GCC_USB20_PRIM_BCR>;
  
  			power-domains = <&gcc GCC_USB20_PRIM_GDSC>;
@@ -36,6 +36,3 @@ index 24debee879..ec060ed6e2 100644
  
  			iommus = <&apps_smmu 0x0ce0 0x0>;
  
--- 
-2.53.0
-

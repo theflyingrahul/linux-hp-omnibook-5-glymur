@@ -28,7 +28,7 @@ Signed-off-by: Bjorn Andersson <andersson@kernel.org>
  1 file changed, 11 insertions(+)
 
 diff --git a/drivers/clk/qcom/gcc-glymur.c b/drivers/clk/qcom/gcc-glymur.c
-index 086c9d2081d0..f55f116d8d57 100644
+index 0aff9fbd6ca8..7b8cdc842b23 100644
 --- a/drivers/clk/qcom/gcc-glymur.c
 +++ b/drivers/clk/qcom/gcc-glymur.c
 @@ -8523,6 +8523,17 @@ static void clk_glymur_regs_configure(struct device *dev, struct regmap *regmap)
@@ -49,6 +49,3 @@ index 086c9d2081d0..f55f116d8d57 100644
  }
  
  static const struct qcom_cc_driver_data gcc_glymur_driver_data = {
--- 
-2.53.0
-

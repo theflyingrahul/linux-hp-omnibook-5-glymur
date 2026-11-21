@@ -63,8 +63,8 @@ CONFIG_SND_SOC_SDCA_CLASS=m
 CONFIG_SND_SOC_WCD9378_SDCA=m
 # Crypto engine core (binds the node, drops its bandwidth vote when idle) and
 # TRNG, from -19. CRYPTO_DEV_QCE (=m in Ubuntu's config) is turned off:
-# qcom-next 17bbb4b37bbc's drivers/crypto/qce/core.c does not compile (two
-# "res" declarations).
+# qcom-next 17bbb4b37bbc's drivers/crypto/qce/core.c did not compile (two
+# "res" declarations); not retried on 7.4 yet.
 CONFIG_QCOM_CRYPTO_CORE=m
 # CONFIG_CRYPTO_DEV_QCE is not set
 CONFIG_HW_RANDOM_QCOM=m
@@ -73,6 +73,9 @@ CONFIG_RTC_DRV_QCOM_GLINK=m
 # qcom-next's FROMLIST adaptive NVMe link-rate switching (not in mainline),
 # from -22: it failed every few seconds here and has no suspend hook.
 # CONFIG_NVME_SPEED_SWITCH is not set
+# IPQ PCIe PHY: qcom-next 7.4-rc3's (-25) does not compile (PHY_TYPE_PCIE
+# from dt-bindings/phy/phy.h clashes with its own enum). Not on this SoC.
+# CONFIG_PHY_QCOM_UNIPHY_PCIE_28LP is not set
 CFG
 
 cp "$UBUNTU_CONFIG" "$OUT/.config"

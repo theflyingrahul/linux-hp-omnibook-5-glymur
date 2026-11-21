@@ -1,4 +1,4 @@
-From f5fb8b1b600a0fa59575905263a74f340d3e0f32 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Faisal Hassan <faisal.hassan@oss.qualcomm.com>
 Date: Thu, 3 Sep 2026 21:08:24 +0530
 Subject: [PATCH] usb: host: xhci-plat: Support XHCI_RESET_ON_RESUME via device
@@ -37,6 +37,3 @@ index 6fd595f81a30..0093ed24ac3f 100644
  		device_property_read_u32(tmpdev, "imod-interval-ns",
  					 &xhci->imod_interval);
  		device_property_read_u16(tmpdev, "num-hc-interrupters",
--- 
-2.53.0
-

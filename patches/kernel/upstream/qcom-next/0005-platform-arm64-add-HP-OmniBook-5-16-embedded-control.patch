@@ -1,7 +1,7 @@
-From a2d076929b034dc9cc188ca76973f4d3b1ddb174 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Wed, 30 Sep 2026 04:33:53 -0700
-Subject: [PATCH 5/5] platform: arm64: Add HP OmniBook 5 16 embedded controller
+Subject: [PATCH] platform: arm64: Add HP OmniBook 5 16 embedded controller
  driver
 
 The embedded controller of the HP OmniBook 5 16 (Snapdragon X2) sits on
@@ -77,12 +77,12 @@ index 000000000000..ca1e2ed34137
 +		is notified on the EC's keyboard backlight events, so a change
 +		made from the keyboard can be shown.
 diff --git a/drivers/platform/arm64/Kconfig b/drivers/platform/arm64/Kconfig
-index e32e01b2a9bd..72fd07c5ea1d 100644
+index 3f879410b311..2b34f5ab1b48 100644
 --- a/drivers/platform/arm64/Kconfig
 +++ b/drivers/platform/arm64/Kconfig
-@@ -33,6 +33,23 @@ config EC_ACER_ASPIRE1
- 	  laptop where this information is not properly exposed via the
- 	  standard ACPI devices.
+@@ -48,6 +48,23 @@ config EC_ASUS_GLYMUR
+ 	  temperature sensors readout, fan monitoring, keyboard and EC event
+ 	  reporting.
  
 +config EC_HP_OMNIBOOK5
 +	tristate "HP OmniBook 5 16 Embedded Controller driver"
@@ -105,20 +105,20 @@ index e32e01b2a9bd..72fd07c5ea1d 100644
  	tristate "Huawei Matebook E Go Embedded Controller driver"
  	depends on ARCH_QCOM || COMPILE_TEST
 diff --git a/drivers/platform/arm64/Makefile b/drivers/platform/arm64/Makefile
-index 7681be4a46e9..a809abf45d37 100644
+index 3bc3d4669c27..6c72726eaeb2 100644
 --- a/drivers/platform/arm64/Makefile
 +++ b/drivers/platform/arm64/Makefile
-@@ -6,6 +6,7 @@
- #
+@@ -7,6 +7,7 @@
  
  obj-$(CONFIG_EC_ACER_ASPIRE1)	+= acer-aspire1-ec.o
+ obj-$(CONFIG_EC_ASUS_GLYMUR) += asus-glymur-ec.o
 +obj-$(CONFIG_EC_HP_OMNIBOOK5)	+= hp-omnibook-5-ec.o
  obj-$(CONFIG_EC_HUAWEI_GAOKUN)	+= huawei-gaokun-ec.o
  obj-$(CONFIG_EC_LENOVO_YOGA_C630) += lenovo-yoga-c630.o
  obj-$(CONFIG_EC_LENOVO_THINKPAD_T14S) += lenovo-thinkpad-t14s.o
 diff --git a/drivers/platform/arm64/hp-omnibook-5-ec.c b/drivers/platform/arm64/hp-omnibook-5-ec.c
 new file mode 100644
-index 000000000000..7d11352ab52b
+index 000000000000..33650266eca9
 --- /dev/null
 +++ b/drivers/platform/arm64/hp-omnibook-5-ec.c
 @@ -0,0 +1,555 @@
@@ -677,6 +677,3 @@ index 000000000000..7d11352ab52b
 +MODULE_AUTHOR("Rahul Pon <theflyingrahul@gmail.com>");
 +MODULE_DESCRIPTION("HP OmniBook 5 16 embedded controller");
 +MODULE_LICENSE("GPL");
--- 
-2.53.0
-

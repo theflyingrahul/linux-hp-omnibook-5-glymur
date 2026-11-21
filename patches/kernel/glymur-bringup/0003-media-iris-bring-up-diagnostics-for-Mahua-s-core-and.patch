@@ -1,4 +1,4 @@
-From f879e9692305c032e52871cef8b40fc8733b74a5 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Thu, 22 Oct 2026 12:47:25 -0700
 Subject: [PATCH] media: iris: bring-up diagnostics for Mahua's core and pipe
@@ -29,7 +29,7 @@ boots when any of them is set. Not for upstream.
  create mode 100644 drivers/media/platform/qcom/iris/iris_diag.h
 
 diff --git a/drivers/media/platform/qcom/iris/Makefile b/drivers/media/platform/qcom/iris/Makefile
-index fb75d8e35c59..8ace5f0eab3f 100644
+index 7fc93b8e2cee..e6ffd61fd7d6 100644
 --- a/drivers/media/platform/qcom/iris/Makefile
 +++ b/drivers/media/platform/qcom/iris/Makefile
 @@ -3,6 +3,7 @@ qcom-iris-objs += iris_buffer.o \
@@ -41,7 +41,7 @@ index fb75d8e35c59..8ace5f0eab3f 100644
               iris_hfi_common.o \
               iris_hfi_gen1.o \
 diff --git a/drivers/media/platform/qcom/iris/iris_common.c b/drivers/media/platform/qcom/iris/iris_common.c
-index abea6807a59e..f88177d5edc5 100644
+index 4e1e7d38e3fb..72726b2a5212 100644
 --- a/drivers/media/platform/qcom/iris/iris_common.c
 +++ b/drivers/media/platform/qcom/iris/iris_common.c
 @@ -7,6 +7,7 @@
@@ -58,8 +58,8 @@ index abea6807a59e..f88177d5edc5 100644
  	const struct iris_hfi_session_ops *hfi_ops = inst->hfi_session_ops;
 +	u32 core_id = iris_diag_core_id(inst->core, inst->core_id);
  
--	if (!inst->core_id)
-+	if (!core_id)
+-	if (!inst->core_id || !hfi_ops->session_set_core_id)
++	if (!core_id || !hfi_ops->session_set_core_id)
  		return 0;
  
 -	return hfi_ops->session_set_core_id(inst, inst->core_id);
@@ -68,18 +68,18 @@ index abea6807a59e..f88177d5edc5 100644
  
  int iris_process_streamon_input(struct iris_inst *inst)
 diff --git a/drivers/media/platform/qcom/iris/iris_core.c b/drivers/media/platform/qcom/iris/iris_core.c
-index e239ca23154d..99f12e769e5f 100644
+index 0284a234482f..1c2346cf05a1 100644
 --- a/drivers/media/platform/qcom/iris/iris_core.c
 +++ b/drivers/media/platform/qcom/iris/iris_core.c
-@@ -6,6 +6,7 @@
- #include <linux/pm_runtime.h>
+@@ -7,6 +7,7 @@
  
  #include "iris_core.h"
+ #include "iris_ctrls.h"
 +#include "iris_diag.h"
  #include "iris_firmware.h"
  #include "iris_state.h"
  #include "iris_vpu_common.h"
-@@ -81,6 +82,8 @@ int iris_core_init(struct iris_core *core)
+@@ -82,6 +83,8 @@ int iris_core_init(struct iris_core *core)
  	if (ret)
  		goto error_unload_fw;
  
@@ -89,10 +89,10 @@ index e239ca23154d..99f12e769e5f 100644
  	if (ret)
  		goto error_unload_fw;
 diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.c b/drivers/media/platform/qcom/iris/iris_ctrls.c
-index 8c4c47944f22..70e7cab5c3d5 100644
+index edd60f635265..15e131e5391f 100644
 --- a/drivers/media/platform/qcom/iris/iris_ctrls.c
 +++ b/drivers/media/platform/qcom/iris/iris_ctrls.c
-@@ -7,6 +7,7 @@
+@@ -8,6 +8,7 @@
  #include <media/v4l2-mem2mem.h>
  
  #include "iris_ctrls.h"
@@ -100,7 +100,7 @@ index 8c4c47944f22..70e7cab5c3d5 100644
  #include "iris_hfi_gen1_defines.h"
  #include "iris_hfi_gen2_defines.h"
  #include "iris_instance.h"
-@@ -552,7 +553,7 @@ int iris_set_stage(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id
+@@ -585,7 +586,7 @@ int iris_set_stage(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id
  int iris_set_pipe(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id)
  {
  	const struct iris_hfi_session_ops *hfi_ops = inst->hfi_session_ops;
@@ -217,7 +217,7 @@ index 000000000000..5b45bb9ecd7d
 +
 +#endif
 diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
-index db13ea4308a5..f7af2b3a2d6f 100644
+index 69235de7abdd..394e9546a7ac 100644
 --- a/drivers/media/platform/qcom/iris/iris_probe.c
 +++ b/drivers/media/platform/qcom/iris/iris_probe.c
 @@ -13,6 +13,7 @@
@@ -228,7 +228,7 @@ index db13ea4308a5..f7af2b3a2d6f 100644
  #include "iris_core.h"
  #include "iris_ctrls.h"
  #include "iris_vidc.h"
-@@ -380,6 +381,10 @@ static int iris_probe(struct platform_device *pdev)
+@@ -528,6 +529,10 @@ static int iris_probe(struct platform_device *pdev)
  
  	core->iris_platform_data = of_device_get_match_data(core->dev);
  

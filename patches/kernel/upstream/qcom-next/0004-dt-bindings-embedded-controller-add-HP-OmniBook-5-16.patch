@@ -1,7 +1,7 @@
-From 7af166d4ae78df22b59580fe2c08b9558677f360 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Wed, 30 Sep 2026 04:33:53 -0700
-Subject: [PATCH 4/5] dt-bindings: embedded-controller: Add HP OmniBook 5 16 EC
+Subject: [PATCH] dt-bindings: embedded-controller: Add HP OmniBook 5 16 EC
 
 The HP OmniBook 5 16 (Snapdragon X2) has an embedded controller on I2C
 at address 0x76. It runs the fan and the keyboard backlight and reports
@@ -71,6 +71,3 @@ index 000000000000..c87a3781261f
 +        };
 +    };
 +...
--- 
-2.53.0
-

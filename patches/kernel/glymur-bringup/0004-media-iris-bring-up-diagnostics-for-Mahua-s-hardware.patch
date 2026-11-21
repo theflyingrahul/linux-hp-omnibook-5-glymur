@@ -1,4 +1,4 @@
-From a5ae0892aeea0eb1489ea17bea58e0f47311b1e3 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Thu, 5 Nov 2026 10:59:11 -0800
 Subject: [PATCH] media: iris: bring-up diagnostics for Mahua's hardware core
@@ -21,8 +21,8 @@ Not for upstream.
 ---
  drivers/media/platform/qcom/iris/iris_diag.c  | 43 ++++++++++++++++++-
  drivers/media/platform/qcom/iris/iris_diag.h  |  2 +
- drivers/media/platform/qcom/iris/iris_vpu3x.c | 20 +++++----
- 3 files changed, 56 insertions(+), 9 deletions(-)
+ drivers/media/platform/qcom/iris/iris_vpu3x.c | 23 ++++++----
+ 3 files changed, 59 insertions(+), 9 deletions(-)
 
 diff --git a/drivers/media/platform/qcom/iris/iris_diag.c b/drivers/media/platform/qcom/iris/iris_diag.c
 index f3fd83c1bef5..6f455d1dfcfa 100644
@@ -116,7 +116,7 @@ index 5b45bb9ecd7d..25a5194a155a 100644
  
  #endif
 diff --git a/drivers/media/platform/qcom/iris/iris_vpu3x.c b/drivers/media/platform/qcom/iris/iris_vpu3x.c
-index e1b1216b251c..ae88ee8ee31d 100644
+index 43b2caf94c71..d6bc98701a96 100644
 --- a/drivers/media/platform/qcom/iris/iris_vpu3x.c
 +++ b/drivers/media/platform/qcom/iris/iris_vpu3x.c
 @@ -7,6 +7,7 @@
@@ -165,16 +165,19 @@ index e1b1216b251c..ae88ee8ee31d 100644
  
  		if (handshake_done || !handshake_busy)
  			break;
-@@ -268,15 +270,15 @@ static void iris_vpu36_power_off_vcodec(struct iris_core *core, u32 core_id)
- 		goto disable_power;
+@@ -264,15 +266,18 @@ static void iris_vpu36_power_off_vcodec(struct iris_core *core, u32 core_id)
+ 		usleep_range(15, 20);
+ 	} while (++count < 1000);
  
- 	ret = readl_poll_timeout(core->reg_base + AON_WRAPPER_MVP_NOC_LPI_STATUS, value,
--				 value & lpi_status_done[core_id], 200, 2000);
-+				 value & lpi_status_done[hw], 200, 2000);
++	if (!handshake_done && handshake_busy)
++		goto disable_power;
++
+ 	ret = readl_poll_timeout(core->reg_base + AON_WRAPPER_MVP_NOC_LPI_STATUS,
+-				 value, value & lpi_status_done[core_id], 200, 2000);
++				 value, value & lpi_status_done[hw], 200, 2000);
+ 	writel(0, core->reg_base + AON_WRAPPER_MVP_NOC_LPI_CONTROL);
  	if (ret)
  		goto disable_power;
- 
- 	writel(0, core->reg_base + AON_WRAPPER_MVP_NOC_LPI_CONTROL);
  
 -	writel(bridge_sw_reset[core_id] | bridge_hw_reset[core_id],
 +	writel(bridge_sw_reset[hw] | bridge_hw_reset[hw],
@@ -184,7 +187,7 @@ index e1b1216b251c..ae88ee8ee31d 100644
  	writel(0x0, core->reg_base + CPU_CS_AHB_BRIDGE_SYNC_RESET);
  
  disable_power:
-@@ -324,6 +326,8 @@ static int iris_vpu36_set_hwmode(struct iris_core *core)
+@@ -320,6 +325,8 @@ static int iris_vpu36_set_hwmode(struct iris_core *core)
  			goto error;
  	}
  
@@ -193,6 +196,3 @@ index e1b1216b251c..ae88ee8ee31d 100644
  	return 0;
  
  error:
--- 
-2.53.0
-

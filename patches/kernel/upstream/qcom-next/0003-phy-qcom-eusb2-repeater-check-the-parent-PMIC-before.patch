@@ -1,4 +1,4 @@
-From 14b3b78fc3f3b432f367c1c219ea4bfcd8c81131 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Wed, 30 Sep 2026 00:42:47 -0700
 Subject: [PATCH] phy: qcom: eusb2-repeater: check the parent PMIC before using
@@ -24,30 +24,30 @@ qcom_pmic_get() comes from the SPMI PMIC core, so depend on it.
  2 files changed, 21 insertions(+)
 
 diff --git a/drivers/phy/qualcomm/Kconfig b/drivers/phy/qualcomm/Kconfig
-index 935054f146eb..60ced21f4f88 100644
+index 44a805361e35..0954b995f24e 100644
 --- a/drivers/phy/qualcomm/Kconfig
 +++ b/drivers/phy/qualcomm/Kconfig
-@@ -152,6 +152,7 @@ config PHY_QCOM_QUSB2
- config PHY_QCOM_EUSB2_REPEATER
+@@ -155,6 +155,7 @@ config PHY_QCOM_EUSB2_REPEATER
  	tristate "Qualcomm PMIC eUSB2 Repeater Driver"
  	depends on OF && (ARCH_QCOM || COMPILE_TEST)
+ 	depends on SPMI
 +	depends on MFD_SPMI_PMIC
  	select GENERIC_PHY
+ 	select REGMAP_SPMI
  	help
- 	  Enable support for the USB high-speed eUSB2 repeater on Qualcomm
 diff --git a/drivers/phy/qualcomm/phy-qcom-eusb2-repeater.c b/drivers/phy/qualcomm/phy-qcom-eusb2-repeater.c
-index efeec4709a15..838833eebc4a 100644
+index ae0085473886..760cee2d5d59 100644
 --- a/drivers/phy/qualcomm/phy-qcom-eusb2-repeater.c
 +++ b/drivers/phy/qualcomm/phy-qcom-eusb2-repeater.c
-@@ -9,6 +9,7 @@
- #include <linux/regmap.h>
+@@ -10,6 +10,7 @@
  #include <linux/of.h>
  #include <linux/phy/phy.h>
+ #include <linux/spmi.h>
 +#include <soc/qcom/qcom-spmi-pmic.h>
  
  /* eUSB2 status registers */
  #define EUSB2_RPTR_STATUS		0x08
-@@ -58,6 +59,8 @@ struct eusb2_repeater_cfg {
+@@ -59,6 +60,8 @@ struct eusb2_repeater_cfg {
  	int init_tbl_num;
  	const char * const *vreg_list;
  	int num_vregs;
@@ -64,9 +64,9 @@ index efeec4709a15..838833eebc4a 100644
  };
  
  static int eusb2_repeater_init_vregs(struct eusb2_repeater *rptr)
-@@ -270,6 +274,22 @@ static int eusb2_repeater_probe(struct platform_device *pdev)
- 
- 	rptr->base = res;
+@@ -281,6 +285,22 @@ static int eusb2_repeater_probe(struct platform_device *pdev)
+ 	if (IS_ERR(rptr->regmap))
+ 		return PTR_ERR(rptr->regmap);
  
 +	/* Never write to a different PMIC at this SPMI address */
 +	if (rptr->cfg->pmic_subtype) {
@@ -87,6 +87,3 @@ index efeec4709a15..838833eebc4a 100644
  	ret = eusb2_repeater_init_vregs(rptr);
  	if (ret < 0) {
  		dev_err(dev, "unable to get supplies\n");
--- 
-2.53.0
-

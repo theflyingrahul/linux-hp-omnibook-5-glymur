@@ -31,7 +31,7 @@ Link: https://patch.msgid.link/20261102-pmic-glink-altmode-teardown-uaf-v1-1-377
  1 file changed, 29 insertions(+)
 
 diff --git a/drivers/soc/qcom/pmic_glink_altmode.c b/drivers/soc/qcom/pmic_glink_altmode.c
-index 544d74b91edc..9f72bf07bc90 100644
+index 9f4113f2a4af..7f2d4f9b1546 100644
 --- a/drivers/soc/qcom/pmic_glink_altmode.c
 +++ b/drivers/soc/qcom/pmic_glink_altmode.c
 @@ -617,6 +617,23 @@ static void pmic_glink_altmode_put_switch(void *data)
@@ -77,6 +77,3 @@ index 544d74b91edc..9f72bf07bc90 100644
  	pmic_glink_client_register(altmode->client);
  
  	return 0;
--- 
-2.53.0
-

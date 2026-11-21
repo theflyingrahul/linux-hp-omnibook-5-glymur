@@ -1,55 +1,103 @@
-From d3fecdd52a9e849def0a39adca3eedad3ea11758 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Tue, 10 Nov 2026 01:40:48 -0800
 Subject: [PATCH] ASoC: SDCA: give statically described controls their widths
  and types
 
-A codec without DisCo properties, such as the WCD9378 on device-tree
-platforms, fills its SDCA function from static tables and then calls
-sdca_apply_default_control_classifiers() for what sdca_parse_function()
-would have derived. That helper sets the volatile and reset fields but
-not the width and data type, which sdca_parse_function() takes from the
-specification for every control.
+A codec that describes its SDCA function through static tables
+(populate_function, as the WCD9378 does) skips sdca_parse_function(), so
+its Controls never get the fields the DisCo path derives: the width and
+data type, whether the Control is volatile, and its reset value. A
+Control left with nbits 0 gets a 0..0 range, and the ASoC control built
+on it can never change; on the HP OmniBook 5 that made the WCD9378's
+jack and detected-mode controls useless.
 
-The WCD9378 tables set them for two controls only, so every other control
-has nbits 0 and the one-bit type. GENMASK(nbits - 1, 0) then shifts by 64
-for the power domain entities' Requested PS (UBSAN at module load in
-sdca_asoc_populate_dapm()), and the Detected Mode control of the jack's
-group entity gets a range of 0, so jack insertion can never be reported.
+Add sdca_apply_default_control_classifiers(), which runs the parse
+path's classifiers on a statically populated function without
+overriding what the codec set, and call it from the WCD9378's
+populate_function.
 
-Give every control without a width the specification's width and type.
-A width of 0 is never valid, so codec-set values are kept.
+Qualcomm's earlier version of the static-table support (qcom-next 7.3)
+had this helper without the width and type step; its 7.4 version has
+neither.
+
+Signed-off-by: Rahul Pon <theflyingrahul@gmail.com>
 ---
- sound/soc/sdca/sdca_functions.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ include/sound/sdca_function.h   |  1 +
+ sound/soc/codecs/wcd9378-sdca.c |  3 +++
+ sound/soc/sdca/sdca_functions.c | 36 +++++++++++++++++++++++++++++++++
+ 3 files changed, 40 insertions(+)
 
+diff --git a/include/sound/sdca_function.h b/include/sound/sdca_function.h
+index e580201d69d5..f6d8989917c9 100644
+--- a/include/sound/sdca_function.h
++++ b/include/sound/sdca_function.h
+@@ -1463,6 +1463,7 @@ static inline u32 sdca_range_search(struct sdca_control_range *range,
+ }
+ 
+ int sdca_parse_function(struct device *dev, struct sdca_function_data *function);
++void sdca_apply_default_control_classifiers(struct sdca_function_data *function);
+ 
+ const char *sdca_find_terminal_name(enum sdca_terminal_type type);
+ 
+diff --git a/sound/soc/codecs/wcd9378-sdca.c b/sound/soc/codecs/wcd9378-sdca.c
+index 2a8965e7ba56..105c2808c3a7 100644
+--- a/sound/soc/codecs/wcd9378-sdca.c
++++ b/sound/soc/codecs/wcd9378-sdca.c
+@@ -980,6 +980,9 @@ static int wcd9378_sdca_populate_function(struct device *dev,
+ 	function->init_table      = wcd9378_sdca_data.init_table;
+ 	function->reset_max_delay = wcd9378_sdca_data.reset_max_delay;
+ 
++	/* What the DisCo path derives: widths, types, volatile, reset */
++	sdca_apply_default_control_classifiers(function);
++
+ 	return 0;
+ }
+ 
 diff --git a/sound/soc/sdca/sdca_functions.c b/sound/soc/sdca/sdca_functions.c
-index 6da65e1bd334..cb54114cd068 100644
+index 4f529216000e..81f6e864d59d 100644
 --- a/sound/soc/sdca/sdca_functions.c
 +++ b/sound/soc/sdca/sdca_functions.c
-@@ -2274,7 +2274,9 @@ EXPORT_SYMBOL_NS(sdca_parse_function, "SND_SOC_SDCA");
-  * @function: Function populated via static tables (populate_function path).
-  *
-  * Runs the same per-Control classifiers as sdca_parse_function() so both
-- * entry paths land on identical @is_volatile and @has_reset/@reset fields.
+@@ -2265,6 +2265,42 @@ int sdca_parse_function(struct device *dev, struct sdca_function_data *function)
+ }
+ EXPORT_SYMBOL_NS(sdca_parse_function, "SND_SOC_SDCA");
+ 
++/**
++ * sdca_apply_default_control_classifiers - apply framework-known Control fields
++ * @function: Function populated via static tables (populate_function path).
++ *
++ * Runs the same per-Control classifiers as sdca_parse_function() so both
 + * entry paths land on identical @is_volatile and @has_reset/@reset fields,
 + * and gives a Control the codec left without a width (@nbits 0, never
 + * valid) the @type and @nbits the specification defines for it.
-  * Elevate-only: codec-set flags/values are preserved.
-  */
- void sdca_apply_default_control_classifiers(struct sdca_function_data *function)
-@@ -2287,6 +2289,11 @@ void sdca_apply_default_control_classifiers(struct sdca_function_data *function)
- 		for (j = 0; j < entity->num_controls; j++) {
- 			struct sdca_control *control = &entity->controls[j];
- 
++ * Elevate-only: codec-set flags/values are preserved.
++ */
++void sdca_apply_default_control_classifiers(struct sdca_function_data *function)
++{
++	int i, j;
++
++	for (i = 0; i < function->num_entities; i++) {
++		struct sdca_entity *entity = &function->entities[i];
++
++		for (j = 0; j < entity->num_controls; j++) {
++			struct sdca_control *control = &entity->controls[j];
++
 +			if (!control->nbits) {
 +				control->type = find_sdca_control_datatype(entity, control);
 +				control->nbits = find_sdca_control_bits(entity, control);
 +			}
 +
- 			if (!control->is_volatile)
- 				control->is_volatile =
- 					find_sdca_control_volatile(entity, control);
--- 
-2.53.0
-
++			if (!control->is_volatile)
++				control->is_volatile =
++					find_sdca_control_volatile(entity, control);
++
++			if (!control->has_reset)
++				find_sdca_control_reset(entity, control);
++		}
++	}
++}
++EXPORT_SYMBOL_NS(sdca_apply_default_control_classifiers, "SND_SOC_SDCA");
++
+ const char *sdca_find_terminal_name(enum sdca_terminal_type type)
+ {
+ 	switch (type) {

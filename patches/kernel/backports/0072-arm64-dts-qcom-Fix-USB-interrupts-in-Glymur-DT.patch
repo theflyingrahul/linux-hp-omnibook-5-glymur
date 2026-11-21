@@ -1,4 +1,4 @@
-From eab4913e40d5a219b1cb68d101426daef0be633d Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
 Date: Mon, 3 Aug 2026 09:56:03 +0530
 Subject: [PATCH] arm64: dts: qcom: Fix USB interrupts in Glymur DT
@@ -18,10 +18,10 @@ Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
  1 file changed, 14 insertions(+), 8 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
-index 3c69bca99b..c84ca13929 100644
+index 5d1d596ef931..dbd38f47909d 100644
 --- a/arch/arm64/boot/dts/qcom/glymur.dtsi
 +++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
-@@ -5468,11 +5468,13 @@
+@@ -5589,11 +5589,13 @@ usb_0: usb@a600000 {
  
  			interrupts-extended = <&intc GIC_SPI 140 IRQ_TYPE_LEVEL_HIGH>,
  					      <&intc GIC_SPI 371 IRQ_TYPE_LEVEL_HIGH>,
@@ -35,7 +35,7 @@ index 3c69bca99b..c84ca13929 100644
  					  "dp_hs_phy_irq",
  					  "dm_hs_phy_irq",
  					  "ss_phy_irq";
-@@ -5558,11 +5560,13 @@
+@@ -5680,11 +5682,13 @@ usb_1: usb@a800000 {
  
  			interrupts-extended = <&intc GIC_SPI 875 IRQ_TYPE_LEVEL_HIGH>,
  					      <&intc GIC_SPI 369 IRQ_TYPE_LEVEL_HIGH>,
@@ -49,7 +49,7 @@ index 3c69bca99b..c84ca13929 100644
  					  "dp_hs_phy_irq",
  					  "dm_hs_phy_irq",
  					  "ss_phy_irq";
-@@ -5648,11 +5652,13 @@
+@@ -5771,11 +5775,13 @@ usb_2: usb@a000000 {
  
  			interrupts-extended = <&intc GIC_SPI 871 IRQ_TYPE_LEVEL_HIGH>,
  					      <&intc GIC_SPI 370 IRQ_TYPE_LEVEL_HIGH>,
@@ -63,7 +63,7 @@ index 3c69bca99b..c84ca13929 100644
  					  "dp_hs_phy_irq",
  					  "dm_hs_phy_irq",
  					  "ss_phy_irq";
-@@ -5738,14 +5744,14 @@
+@@ -5862,14 +5868,14 @@ usb_hs: usb@a200000 {
  
  			interrupts-extended = <&intc GIC_SPI 240 IRQ_TYPE_LEVEL_HIGH>,
  					      <&intc GIC_SPI 246 IRQ_TYPE_LEVEL_HIGH>,
@@ -82,7 +82,7 @@ index 3c69bca99b..c84ca13929 100644
  
  			resets = <&gcc GCC_USB20_PRIM_BCR>;
  
-@@ -5809,10 +5815,10 @@
+@@ -5934,10 +5940,10 @@ usb_mp: usb@a400000 {
  			assigned-clock-rates = <19200000>, <200000000>;
  
  			interrupts-extended = <&intc GIC_SPI 132 IRQ_TYPE_LEVEL_HIGH>,
@@ -97,6 +97,3 @@ index 3c69bca99b..c84ca13929 100644
  					      <&pdc 12 IRQ_TYPE_LEVEL_HIGH>,
  					      <&pdc 11 IRQ_TYPE_LEVEL_HIGH>,
  					      <&pdc 14 IRQ_TYPE_LEVEL_HIGH>,
--- 
-2.53.0
-

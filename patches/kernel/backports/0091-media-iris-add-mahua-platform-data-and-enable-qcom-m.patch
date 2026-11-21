@@ -26,19 +26,19 @@ Link: https://patch.msgid.link/20261113-mahua_iris_enable-v1-3-b7107e1cbcaa@oss.
  create mode 100644 drivers/media/platform/qcom/iris/iris_platform_mahua.h
 
 diff --git a/drivers/media/platform/qcom/iris/Makefile b/drivers/media/platform/qcom/iris/Makefile
-index 4ef45c1d8a45..40e611e72f99 100644
+index e6ffd61fd7d6..9d1e13bd8f0a 100644
 --- a/drivers/media/platform/qcom/iris/Makefile
 +++ b/drivers/media/platform/qcom/iris/Makefile
-@@ -16,6 +16,7 @@ qcom-iris-objs += iris_buffer.o \
-              iris_hfi_queue.o \
+@@ -29,6 +29,7 @@ qcom-iris-objs += iris_buffer.o \
+              iris_venc.o \
               iris_platform_kaanapali.o \
               iris_platform_glymur.o \
 +             iris_platform_mahua.o \
-              iris_platform_vpu2.o \
-              iris_platform_vpu3x.o \
-              iris_platform_vpu4x.o \
+              iris_vpu2.o \
+              iris_vpu3x.o \
+              iris_vpu4x.o \
 diff --git a/drivers/media/platform/qcom/iris/iris_platform_common.h b/drivers/media/platform/qcom/iris/iris_platform_common.h
-index 617de242b22b..950a54086ced 100644
+index 762ecec15163..33b32d5c39c2 100644
 --- a/drivers/media/platform/qcom/iris/iris_platform_common.h
 +++ b/drivers/media/platform/qcom/iris/iris_platform_common.h
 @@ -67,6 +67,7 @@ extern const struct platform_inst_slice_caps iris_vpu2_vpu3x_slice_caps;
@@ -172,10 +172,10 @@ index 7ce6a394bda5..0bae8538adb5 100644
  	.firmware_desc_gen2 = &iris_vpu36_p4_s7_gen2_desc,
  	.vpu_ops = &iris_vpu36_ops,
 diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
-index 8c629574cf96..bd8b2104d788 100644
+index 394e9546a7ac..9d708f49adb9 100644
 --- a/drivers/media/platform/qcom/iris/iris_probe.c
 +++ b/drivers/media/platform/qcom/iris/iris_probe.c
-@@ -527,6 +527,10 @@ static const struct dev_pm_ops iris_pm_ops = {
+@@ -662,6 +662,10 @@ static const struct dev_pm_ops iris_pm_ops = {
  };
  
  static const struct of_device_id iris_dt_match[] = {
@@ -187,10 +187,10 @@ index 8c629574cf96..bd8b2104d788 100644
  		.compatible = "qcom,eliza-iris",
  		.data = &eliza_data,
 diff --git a/drivers/media/platform/qcom/iris/iris_vpu3x.c b/drivers/media/platform/qcom/iris/iris_vpu3x.c
-index ae88ee8ee31d..a618bede9506 100644
+index d6bc98701a96..eff1f67f14f2 100644
 --- a/drivers/media/platform/qcom/iris/iris_vpu3x.c
 +++ b/drivers/media/platform/qcom/iris/iris_vpu3x.c
-@@ -370,6 +370,16 @@ static int iris_vpu36_check_core_load(struct iris_inst *inst, bool mbpf)
+@@ -372,6 +372,16 @@ static int iris_vpu36_check_core_load(struct iris_inst *inst, bool mbpf)
  	new_load = mbpf ? iris_get_mbpf(inst) : iris_get_mbps(inst);
  
  	select_core0 = core0_load + new_load <= max_load && core0_session_cnt < max_session_cnt;

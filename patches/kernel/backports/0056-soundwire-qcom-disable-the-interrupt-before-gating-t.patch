@@ -1,4 +1,4 @@
-From 6c067677192f054bbfa815caf04f536bb8dcdee2 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Oleg Keri <okerixx@gmail.com>
 Date: Fri, 9 Oct 2026 10:26:39 +0200
 Subject: [PATCH] soundwire: qcom: disable the interrupt before gating the
@@ -25,10 +25,10 @@ Signed-off-by: Vinod Koul <vkoul@kernel.org>
  1 file changed, 2 insertions(+)
 
 diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
-index 6e0c5fb10e..147e55b7a6 100644
+index db15fb69abee..b89ba95924dd 100644
 --- a/drivers/soundwire/qcom.c
 +++ b/drivers/soundwire/qcom.c
-@@ -1801,6 +1801,7 @@ static int __maybe_unused swrm_runtime_resume(struct device *dev)
+@@ -2344,6 +2344,7 @@ static int __maybe_unused swrm_runtime_resume(struct device *dev)
  	}
  
  	clk_prepare_enable(ctrl->hclk);
@@ -36,7 +36,7 @@ index 6e0c5fb10e..147e55b7a6 100644
  
  	if (ctrl->clock_stop_not_supported) {
  		reinit_completion(&ctrl->enumeration);
-@@ -1887,6 +1888,7 @@ static int __maybe_unused swrm_runtime_suspend(struct device *dev)
+@@ -2441,6 +2442,7 @@ static int __maybe_unused swrm_runtime_suspend(struct device *dev)
  		}
  	}
  
@@ -44,6 +44,3 @@ index 6e0c5fb10e..147e55b7a6 100644
  	clk_disable_unprepare(ctrl->hclk);
  
  	usleep_range(300, 305);
--- 
-2.53.0
-

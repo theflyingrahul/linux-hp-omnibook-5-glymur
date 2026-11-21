@@ -1,4 +1,4 @@
-From d1312675c9f810534dcbf72170f3dbddb5f265f2 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Sat, 17 Oct 2026 07:50:53 -0700
 Subject: [PATCH] ASoC: qcom: audioreach: send static calibration for every
@@ -21,10 +21,10 @@ without calibration data are unaffected.
  1 file changed, 10 insertions(+), 3 deletions(-)
 
 diff --git a/sound/soc/qcom/qdsp6/audioreach.c b/sound/soc/qcom/qdsp6/audioreach.c
-index 0350afb5995a..5cf0775e0b74 100644
+index 3f1ec6bb3ace..4c908344d6a5 100644
 --- a/sound/soc/qcom/qdsp6/audioreach.c
 +++ b/sound/soc/qcom/qdsp6/audioreach.c
-@@ -1447,6 +1447,16 @@ int audioreach_set_media_format(struct q6apm_graph *graph,
+@@ -1421,6 +1421,16 @@ int audioreach_set_media_format(struct q6apm_graph *graph,
  {
  	int rc;
  
@@ -41,7 +41,7 @@ index 0350afb5995a..5cf0775e0b74 100644
  	switch (module->module_id) {
  	case MODULE_ID_DATA_LOGGING:
  		rc = audioreach_module_enable(graph, module, true);
-@@ -1463,9 +1473,6 @@ int audioreach_set_media_format(struct q6apm_graph *graph,
+@@ -1437,9 +1447,6 @@ int audioreach_set_media_format(struct q6apm_graph *graph,
  	case MODULE_ID_DISPLAY_PORT_SINK:
  		rc = audioreach_display_port_set_media_format(graph, module, cfg);
  		break;

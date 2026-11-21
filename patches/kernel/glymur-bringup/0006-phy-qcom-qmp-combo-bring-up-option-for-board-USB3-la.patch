@@ -20,14 +20,14 @@ property nothing changes.
 Bring-up only: the property is a register list, not a binding; the values
 belong in the PHY's tables or in a described tuning property upstream.
 ---
- drivers/phy/qualcomm/phy-qcom-qmp-combo.c | 42 +++++++++++++++++++++++
- 1 file changed, 42 insertions(+)
+ drivers/phy/qualcomm/phy-qcom-qmp-combo.c | 43 +++++++++++++++++++++++
+ 1 file changed, 43 insertions(+)
 
 diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-index e8f31c7854b9..a2962a343fd4 100644
+index 58beb65c93ec..5343fc2c6474 100644
 --- a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
 +++ b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
-@@ -2632,6 +2632,8 @@ struct qmp_combo {
+@@ -2663,6 +2663,8 @@ struct qmp_combo {
  	enum typec_orientation orientation;
  
  	struct typec_mux_dev *mux;
@@ -36,7 +36,7 @@ index e8f31c7854b9..a2962a343fd4 100644
  };
  
  static void qmp_v3_dp_aux_init(struct qmp_combo *qmp);
-@@ -4322,6 +4324,44 @@ static int qmp_combo_dp_power_off(struct phy *phy)
+@@ -4383,6 +4385,44 @@ static int qmp_combo_dp_power_off(struct phy *phy)
  	return 0;
  }
  
@@ -81,12 +81,13 @@ index e8f31c7854b9..a2962a343fd4 100644
  static int qmp_combo_usb_power_on(struct phy *phy)
  {
  	struct qmp_combo *qmp = phy_get_drvdata(phy);
-@@ -4346,6 +4386,8 @@ static int qmp_combo_usb_power_on(struct phy *phy)
- 	qmp_configure_lane(qmp->dev, rx, cfg->rx_tbl, cfg->rx_tbl_num, 1);
- 	qmp_configure_lane(qmp->dev, rx2, cfg->rx_tbl, cfg->rx_tbl_num, 2);
+@@ -4440,6 +4480,9 @@ static int qmp_combo_usb_power_on(struct phy *phy)
+ 	qmp_configure_lane(qmp->dev, rx, rx_tbl, rx_tbl_num, 1);
+ 	qmp_configure_lane(qmp->dev, rx2, rx_tbl, rx_tbl_num, 2);
  
-+	qmp_combo_usb3_board_overrides(qmp);
++	if (qmp->qmpphy_mode != QMPPHY_MODE_USB4)
++		qmp_combo_usb3_board_overrides(qmp);
 +
- 	qmp_configure(qmp->dev, pcs, cfg->pcs_tbl, cfg->pcs_tbl_num);
+ 	qmp_configure(qmp->dev, pcs, pcs_tbl, pcs_tbl_num);
  	qmp_configure(qmp->dev, qmp->pcs_misc, cfg->pcs_misc_tbl, cfg->pcs_misc_tbl_num);
  

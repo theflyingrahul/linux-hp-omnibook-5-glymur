@@ -22,7 +22,7 @@ Link: https://patch.msgid.link/20261028-gcc_glymur_pcie-v1-1-a2163e1d2b9b@oss.qu
  1 file changed, 26 insertions(+)
 
 diff --git a/drivers/clk/qcom/gcc-glymur.c b/drivers/clk/qcom/gcc-glymur.c
-index fe4d8d91cdd7..086c9d2081d0 100644
+index 857596210f71..0aff9fbd6ca8 100644
 --- a/drivers/clk/qcom/gcc-glymur.c
 +++ b/drivers/clk/qcom/gcc-glymur.c
 @@ -7581,6 +7581,8 @@ static struct gdsc gcc_pcie_0_tunnel_gdsc = {
@@ -142,6 +142,3 @@ index fe4d8d91cdd7..086c9d2081d0 100644
  	.pd = {
  		.name = "gcc_pcie_6_phy_gdsc",
  	},
--- 
-2.53.0
-

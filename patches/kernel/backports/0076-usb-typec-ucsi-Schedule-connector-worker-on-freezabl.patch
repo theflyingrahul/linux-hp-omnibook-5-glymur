@@ -1,4 +1,4 @@
-From d3b9973eb89b7280c37cecfc9f5bc412ae795850 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Abel Vesa <abel.vesa@linaro.org>
 Date: Wed, 5 Feb 2025 13:45:05 +0200
 Subject: [PATCH] usb: typec: ucsi: Schedule connector worker on freezable
@@ -22,7 +22,7 @@ Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/usb/typec/ucsi/ucsi.c b/drivers/usb/typec/ucsi/ucsi.c
-index 4debac1cafaa..fcfcb949a479 100644
+index 2f9adf4f8bde..5f759deef918 100644
 --- a/drivers/usb/typec/ucsi/ucsi.c
 +++ b/drivers/usb/typec/ucsi/ucsi.c
 @@ -1576,7 +1576,7 @@ void ucsi_connector_change(struct ucsi *ucsi, u8 num)
@@ -34,6 +34,3 @@ index 4debac1cafaa..fcfcb949a479 100644
  }
  EXPORT_SYMBOL_GPL(ucsi_connector_change);
  
--- 
-2.53.0
-

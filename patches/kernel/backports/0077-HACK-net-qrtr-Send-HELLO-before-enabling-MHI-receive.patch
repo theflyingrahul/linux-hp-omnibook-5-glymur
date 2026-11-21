@@ -1,4 +1,4 @@
-From 848e04855fa85ff41effe73a25fe7d590a0cf6ec Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Abel Vesa <abel.vesa@oss.qualcomm.com>
 Date: Wed, 30 Sep 2026 13:58:48 +0300
 Subject: [PATCH] HACK net: qrtr: Send HELLO before enabling MHI receive on
@@ -21,10 +21,10 @@ Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
  2 files changed, 6 insertions(+), 3 deletions(-)
 
 diff --git a/net/qrtr/af_qrtr.c b/net/qrtr/af_qrtr.c
-index e7b3647424b8..96f62f8f2443 100644
+index f45ac819cbaf..2923a5c1a70e 100644
 --- a/net/qrtr/af_qrtr.c
 +++ b/net/qrtr/af_qrtr.c
-@@ -632,7 +632,9 @@ void qrtr_endpoint_hello(struct qrtr_endpoint *ep)
+@@ -771,7 +771,9 @@ void qrtr_endpoint_hello(struct qrtr_endpoint *ep)
  	node->hello_sent = false;
  	mutex_unlock(&node->ep_lock);
  
@@ -36,10 +36,10 @@ index e7b3647424b8..96f62f8f2443 100644
  EXPORT_SYMBOL_GPL(qrtr_endpoint_hello);
  
 diff --git a/net/qrtr/mhi.c b/net/qrtr/mhi.c
-index e9a4bb92ce76..0ce051084814 100644
+index e9377f818b4d..33a5315b7cff 100644
 --- a/net/qrtr/mhi.c
 +++ b/net/qrtr/mhi.c
-@@ -202,12 +202,13 @@ static int __maybe_unused qcom_mhi_qrtr_pm_resume_early(struct device *dev)
+@@ -204,12 +204,13 @@ static int __maybe_unused qcom_mhi_qrtr_pm_resume_early(struct device *dev)
  		return rc;
  	}
  
@@ -55,6 +55,3 @@ index e9a4bb92ce76..0ce051084814 100644
  	return 0;
  }
  
--- 
-2.53.0
-

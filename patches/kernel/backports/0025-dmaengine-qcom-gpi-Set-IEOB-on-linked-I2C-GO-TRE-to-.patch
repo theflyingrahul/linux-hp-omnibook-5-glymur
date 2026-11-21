@@ -1,8 +1,8 @@
-From 084d8a72894ebac5c814d1e094fd456d9009d5c8 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Vsevolod Nevorotov <sevanevorotov29@gmail.com>
 Date: Thu, 10 Sep 2026 00:53:32 +0700
-Subject: [PATCH 25/26] dmaengine: qcom: gpi: Set IEOB on linked I2C GO TRE to
- retire TX descriptor
+Subject: [PATCH] dmaengine: qcom: gpi: Set IEOB on linked I2C GO TRE to retire
+ TX descriptor
 
 In GPI mode, an I2C read transaction consists of a command phase on the
 TX channel (issuing CONFIG0 and GO TREs) linked to a data phase on the RX
@@ -46,7 +46,7 @@ Signed-off-by: Tyler Baker <forcedinductionz@gmail.com>
  1 file changed, 11 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/dma/qcom/gpi.c b/drivers/dma/qcom/gpi.c
-index 7584067416d6..b95064fa4608 100644
+index eedb1acb3b31..064d89b13573 100644
 --- a/drivers/dma/qcom/gpi.c
 +++ b/drivers/dma/qcom/gpi.c
 @@ -1061,6 +1061,13 @@ static void gpi_process_xfer_compl_event(struct gchan *gchan,
@@ -78,6 +78,3 @@ index 7584067416d6..b95064fa4608 100644
  	}
  
  	if (i2c->op == I2C_READ || i2c->multi_msg == false) {
--- 
-2.53.0
-

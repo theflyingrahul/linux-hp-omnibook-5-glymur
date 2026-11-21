@@ -9,17 +9,18 @@ fields clocks, power-domains, resets and opp-table reflecting single core.
 Signed-off-by: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
 Link: https://patch.msgid.link/20261113-mahua_iris_enable-v1-2-b7107e1cbcaa@oss.qualcomm.com
 ---
- arch/arm64/boot/dts/qcom/mahua.dtsi | 66 +++++++++++++++++++++++++++++
- 1 file changed, 66 insertions(+)
+ arch/arm64/boot/dts/qcom/mahua.dtsi | 67 +++++++++++++++++++++++++++++
+ 1 file changed, 67 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/qcom/mahua.dtsi b/arch/arm64/boot/dts/qcom/mahua.dtsi
-index 640f023f8094..c39cb879971e 100644
+index 511a872dce3e..5c4b7f2cdd6b 100644
 --- a/arch/arm64/boot/dts/qcom/mahua.dtsi
 +++ b/arch/arm64/boot/dts/qcom/mahua.dtsi
-@@ -424,3 +424,69 @@ &tsens5 {
+@@ -447,3 +447,70 @@ &tsens4 {
+ &tsens5 {
  	#qcom,sensors = <15>;
  };
- 
++
 +&iris {
 +	compatible = "qcom,mahua-iris";
 +	status = "okay";

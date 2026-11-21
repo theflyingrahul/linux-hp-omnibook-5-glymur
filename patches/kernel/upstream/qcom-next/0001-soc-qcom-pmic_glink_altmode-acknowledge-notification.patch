@@ -1,4 +1,4 @@
-From e39d9c1d38b7f02dab7b602f83bc465e2789c887 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Rahul Pon <theflyingrahul@gmail.com>
 Date: Tue, 29 Sep 2026 10:16:24 -0700
 Subject: [PATCH] soc: qcom: pmic_glink_altmode: acknowledge notifications on
@@ -26,7 +26,7 @@ callback must not.
  1 file changed, 40 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/soc/qcom/pmic_glink_altmode.c b/drivers/soc/qcom/pmic_glink_altmode.c
-index a839ec4e0376..2b359d7cc585 100644
+index 79d3bb170773..9f4113f2a4af 100644
 --- a/drivers/soc/qcom/pmic_glink_altmode.c
 +++ b/drivers/soc/qcom/pmic_glink_altmode.c
 @@ -6,6 +6,7 @@
@@ -37,7 +37,7 @@ index a839ec4e0376..2b359d7cc585 100644
  #include <linux/module.h>
  #include <linux/of.h>
  #include <linux/of_device.h>
-@@ -138,6 +139,10 @@ struct pmic_glink_altmode {
+@@ -144,6 +145,10 @@ struct pmic_glink_altmode {
  
  	struct work_struct enable_work;
  
@@ -48,7 +48,7 @@ index a839ec4e0376..2b359d7cc585 100644
  	struct pmic_glink_altmode_port ports[PMIC_GLINK_MAX_PORTS];
  };
  
-@@ -401,6 +406,35 @@ static void pmic_glink_altmode_worker(struct work_struct *work)
+@@ -433,6 +438,35 @@ static void pmic_glink_altmode_worker(struct work_struct *work)
  	pmic_glink_altmode_request(altmode, ALTMODE_PAN_ACK, alt_port->index);
  }
  
@@ -84,7 +84,7 @@ index a839ec4e0376..2b359d7cc585 100644
  static enum typec_orientation pmic_glink_altmode_orientation(unsigned int orientation)
  {
  	if (orientation == 0)
-@@ -449,7 +483,7 @@ static void pmic_glink_altmode_sc8180xp_notify(struct pmic_glink_altmode *altmod
+@@ -481,7 +515,7 @@ static void pmic_glink_altmode_sc8180xp_notify(struct pmic_glink_altmode *altmod
  	svid = mux == 2 ? USB_TYPEC_DP_SID : 0;
  
  	if (port >= ARRAY_SIZE(altmode->ports) || !altmode->ports[port].altmode) {
@@ -93,7 +93,7 @@ index a839ec4e0376..2b359d7cc585 100644
  		return;
  	}
  
-@@ -488,7 +522,7 @@ static void pmic_glink_altmode_sc8280xp_notify(struct pmic_glink_altmode *altmod
+@@ -520,7 +554,7 @@ static void pmic_glink_altmode_sc8280xp_notify(struct pmic_glink_altmode *altmod
  	orientation = notify->orientation;
  
  	if (port >= ARRAY_SIZE(altmode->ports) || !altmode->ports[port].altmode) {
@@ -102,7 +102,7 @@ index a839ec4e0376..2b359d7cc585 100644
  		return;
  	}
  
-@@ -601,6 +635,10 @@ static int pmic_glink_altmode_probe(struct auxiliary_device *adev,
+@@ -633,6 +667,10 @@ static int pmic_glink_altmode_probe(struct auxiliary_device *adev,
  	init_completion(&altmode->pan_ack);
  	mutex_init(&altmode->lock);
  
@@ -113,6 +113,3 @@ index a839ec4e0376..2b359d7cc585 100644
  	device_for_each_child_node(dev, fwnode) {
  		ret = fwnode_property_read_u32(fwnode, "reg", &port);
  		if (ret < 0) {
--- 
-2.53.0
-

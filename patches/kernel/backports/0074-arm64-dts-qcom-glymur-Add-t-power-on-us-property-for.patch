@@ -1,4 +1,4 @@
-From 77e3c2981a06ca50aaa8c0afc6fe91bc1e610bc8 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 Date: Fri, 11 Sep 2026 12:20:06 +0530
 Subject: [PATCH] arm64: dts: qcom: glymur: Add t-power-on-us property for PCIe
@@ -13,49 +13,55 @@ Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 Link: https://patch.msgid.link/20260911-t_pwr_on-v1-5-c9eee197d082@oss.qualcomm.com
 Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/glymur.dtsi | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ arch/arm64/boot/dts/qcom/glymur.dtsi | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
-index b6ee1cca72..35c591946c 100644
+index ce2a59187364..66cadca9e7c6 100644
 --- a/arch/arm64/boot/dts/qcom/glymur.dtsi
 +++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
-@@ -3408,6 +3408,8 @@
+@@ -3419,6 +3419,8 @@ pcie4_port0: pcie@0 {
+ 				#address-cells = <3>;
  				#size-cells = <2>;
  				ranges;
- 
-+				t-power-on-us = <80>;
 +
- 				port {
- 					pcie4_port0_ep: endpoint {
- 					};
-@@ -3680,6 +3682,8 @@
++				t-power-on-us = <80>;
+ 			};
+ 		};
+ 
+@@ -3686,6 +3688,8 @@ pcie5_port0: pcie@0 {
+ 				#address-cells = <3>;
  				#size-cells = <2>;
  				ranges;
- 
-+				t-power-on-us = <80>;
 +
- 				port {
- 					pcie5_port0_ep: endpoint {
- 					};
-@@ -3896,6 +3900,8 @@
++				t-power-on-us = <80>;
+ 			};
+ 		};
+ 
+@@ -3897,6 +3901,8 @@ pcie6_port0: pcie@0 {
+ 				#address-cells = <3>;
  				#size-cells = <2>;
  				ranges;
- 
-+				t-power-on-us = <80>;
 +
- 				port {
- 					pcie6_port0_ep: endpoint {
- 					};
-@@ -4168,6 +4174,8 @@
++				t-power-on-us = <80>;
+ 			};
+ 		};
+ 
+@@ -4164,6 +4170,8 @@ pcie3b_port0: pcie@0 {
+ 				#address-cells = <3>;
  				#size-cells = <2>;
  				ranges;
- 
-+				t-power-on-us = <80>;
 +
- 				port {
- 					pcie3b_port0_ep: endpoint {
- 					};
--- 
-2.53.0
-
++				t-power-on-us = <80>;
+ 			};
+ 		};
+ 
+@@ -4438,6 +4446,8 @@ pcie3a_port0: pcie@0 {
+ 				#address-cells = <3>;
+ 				#size-cells = <2>;
+ 				ranges;
++
++				t-power-on-us = <80>;
+ 			};
+ 		};
+ 

@@ -19,15 +19,17 @@ Wi-Fi board data, firmware) are not kernel code. They live in
 
 ## Boot series (built by `scripts/linux/build-qcom-next-glymur.sh`)
 
-Apply to qcom-next `17bbb4b37bbc` (tag `qcom-next-7.3-20261031`, 7.3, from
-kernel `-19`; it was `c7896917e523` (`qcom-next-7.3-rc6-20261023`) for
+Apply to qcom-next `c6989d230fe6` (tag `qcom-next-7.4-rc3-20261120`, 7.4-rc3,
+from kernel `-25`; it was `17bbb4b37bbc` (`qcom-next-7.3-20261031`) for
+`-19` to `-24`, `c7896917e523` (`qcom-next-7.3-rc6-20261023`) for
 `-18`, `1a0586064ee1` (`qcom-next-7.3-rc4-20261014`) for `-13`
 to `-17`, `6b4daa845239` for
 `-8` to `-12`, `e428097a36d` for `-5` to `-7` and `a47c4c5aa` up to `-4`)
 in order:
-`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001–0006`,
-`0009` and `0010`, `glymur-bringup/0001–0006`, then `backports/` (`0001–0002`,
-`0023–0026`, `0030–0037`, `0040–0043`, `0047–0091`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
+`upstream/qcom-next-acpi/0001–0003`, `upstream/qcom-next/0001` and
+`0003–0006`, `0009` and `0010`, `glymur-bringup/0001–0006`, then `backports/`
+(`0001`, `0023–0025`, `0056`, `0065`, `0072–0082`, `0084`, `0086`,
+`0088–0091`) (`scripts/linux/prepare-qcom-next-glymur.sh`). Kernel `-4` carried
 backports 0001–0002; `-5` carries all twelve; `-6` adds
 `upstream/qcom-next/0001`; `-7` adds `upstream/qcom-next/0002`; `-8` moves
 to the new base and adds `upstream/qcom-next/0003`; `-9` adds `0004`–`0005`
@@ -118,6 +120,72 @@ tree. `0005` reads the EC's pending event from register `0x00`, where HP's
 `IC10.INTR` reads it (field `CMD5`, no offset), instead of `0x05`; the old
 value left a fan notice unacknowledged and the event line firing about nine
 times a second (`docs/audit-2026-10-22.md`).
+
+Kernel `-25` (2026-11-21, `docs/linux-runbook-25-2026-11-21.md`, package sha256
+`c6477f54…`): the base
+moves to qcom-next `c6989d230fe6`, tag `qcom-next-7.4-rc3-20261120`, at the
+owner's request. That is Qualcomm's first-party tree on Linux 7.4-rc3;
+qcom-next is rebuilt for each release, so `17bbb4b37bbc` is not an ancestor.
+Each of the 80 carried patches was checked against the new tree.
+
+**In the new base, dropped (39):**
+- `upstream/qcom-next/0002`: the a8xx GMEM fix, ours, accepted.
+- `backports/0030–0037`, `0040–0043`, `0047–0055`, `0057–0064`,
+  `0066–0071`, `0083`, `0085`, `0087`: the same subjects are in 7.4 or
+  qcom-next. That covers the GPU, DP, battery manager, pmic_glink, SCM,
+  AudioReach, WSA884x and macro, clock, PCIe, UCSI, SPMI and ath12k fixes,
+  the Glymur USB 3 settings, the SoundWire page cache and the USB2 resume
+  terminations.
+
+**Carried, rebased onto 7.4 (39).** Mostly context:
+- the tree-wide `devm_kzalloc_obj()` change;
+- designated initializers in the GENI I2C ACPI table;
+- new neighbours: the ASUS Zenbook A16 EC in the arm64 platform Kconfig,
+  the EliteBook X G2q in the QSEECOM list;
+- the eUSB2 repeater driver's new SPMI sub-device regmap: our parent-PMIC
+  check keeps working, because `qcom_pmic_get()` still finds the PMIC as
+  the device's parent;
+- the Iris power-off path, which now clears the LPI control before checking
+  the poll;
+- the PCIe root ports, which lost their `port {}` subnode;
+- the combo PHY's new USB4 mode: our USB3 lane-A writes apply only outside
+  it;
+- the Iris platform files, reorganised.
+
+Three needed more than context:
+- `backports/0001`: Bjorn Andersson's "update v8 power-on programming
+  sequence" (with "split power-on sequencing by PHY version" and Abel
+  Vesa's fixup, formerly `0001`, `0002` and `0026`), which makes the eDP
+  PHY lock at 1.62 and 2.7 Gb/s and with two lanes. It is not in 7.4. The
+  driver there has a generalized power-on path for Nord (posted v3,
+  2026-11-16), and Glymur's v8 table still has the old AUX values. It is
+  ported as a Glymur-only path: Glymur's own ops, AUX table and PLL/SSC
+  functions behind the split power-on hooks, taken unchanged from `-24`.
+  The other PHYs keep 7.4's path. The internal display depends on it.
+- `upstream/qcom-next/0010`, SDCA: in 7.4 Qualcomm's WCD9378 static-table
+  support no longer has `sdca_apply_default_control_classifiers()`. The
+  driver's tables still leave 34 of 35 Controls without a width, so the
+  helper comes back (width and type, volatile, reset, from 7.4's own
+  `find_sdca_control_*()`) and the WCD9378's `populate_function` calls it,
+  as the 7.3 driver did.
+- `backports/0086`, the revert of the GENI I2C early-resume FROMLIST: the
+  same FROMLIST is in 7.4's qcom-next as `73d4ea5777de`, so the revert is
+  redone against it.
+
+Config: nothing in `glymur.config` changed meaning (the build's config
+check passed). `CRYPTO_DEV_QCE` stays off until it is tried on the new base.
+
+Device trees (owner's request, 2026-11-21): the daily tree takes what the
+test tree proved:
+- the PMK8850 (power key, PMIC GPIOs, ADC; working since `-21`), with its
+  RTC off;
+- LDO7_B at 3.072 V and the USB-C repeaters' `vdd18`/`vdd3` supplies
+  (full speed on both USB-C ports since `-23`).
+
+The test tree keeps the headset, HP's USB-A PHY values and the RTC
+measurement. The USB stick gains a GRUB entry, "Ubuntu on SSD: A/V test
+device tree": the `-test-av.dtb` without the board command line, as the
+runbooks had it typed.
 
 Kernel `-24` (2026-11-21, `docs/linux-runbook-24-2026-11-21.md`, package sha256
 `1f4d8ac1…`), same

@@ -1,8 +1,8 @@
-From 8baf63b3f6a7df5f761501f06c7cf9da0a23c2f9 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Tyler Baker <forcedinductionz@gmail.com>
 Date: Sun, 27 Sep 2026 15:56:32 -0400
-Subject: [PATCH 24/26] dmaengine: qcom: gpi: order ring memory against
- register access
+Subject: [PATCH] dmaengine: qcom: gpi: order ring memory against register
+ access
 
 gpi_read_reg() and gpi_write_reg() use the relaxed MMIO accessors for
 every register, including the channel and event ring doorbells and the
@@ -31,7 +31,7 @@ Link: https://github.com/EmbeddedAndroid/linux/commit/7c8b59e172a5c34db27fc1433e
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/dma/qcom/gpi.c b/drivers/dma/qcom/gpi.c
-index 6a47407c95b0..7584067416d6 100644
+index 14df390a6e29..eedb1acb3b31 100644
 --- a/drivers/dma/qcom/gpi.c
 +++ b/drivers/dma/qcom/gpi.c
 @@ -571,12 +571,12 @@ static inline void *to_virtual(const struct gpi_ring *const ring, phys_addr_t ad
@@ -49,6 +49,3 @@ index 6a47407c95b0..7584067416d6 100644
  }
  
  static __always_inline void
--- 
-2.53.0
-
