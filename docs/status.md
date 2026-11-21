@@ -1,20 +1,16 @@
 # Project Status
 
-## Current state (2026-11-05)
+## Current state (2026-11-21)
 
-Ubuntu 26.10 on the internal SSD (upgraded from 26.04 on 2026-10-21), kernel
-`7.3.0-rc6-glymur-18` (Qualcomm's qcom-next `c7896917e523` plus
-`patches/kernel/`; results in `docs/runbook-results-18-2026-11-05.md`), booted
+Ubuntu 26.10 on the internal SSD (upgraded from 26.04 on 2026-10-21), booted
 from the USB stick's GRUB with the daily device tree
 (`dts/qcom/mahua-hp-omnibook-5-bf1xxx.dts`) or the test tree, which adds what
-is being tested (audio, the EC event line, skin temperature).
-Kernel `-20` (built 2026-11-09, not booted; `docs/kernel-20-plan-2026-11-09.md`)
-replaces `-19`, which was never booted: suspend, UEFI writes, the RTC, the
-NPU's userspace, USB full and low speed, video and external displays are
-all tested in two boots (`docs/linux-runbook-20-2026-11-09.md`). From `-20`
-the daily device tree also carries what the test tree proved: the EC event
-line, the skin-temperature zones, the speakers and microphones and the USB-C
-repeaters.
+is being tested. The last kernel booted is `7.3.0-glymur-23` (results in
+`docs/runbook-results-23-2026-11-21.md`). Kernel `-25` (`7.4.0-rc3-glymur-25`)
+moves the base to Qualcomm's qcom-next on Linux 7.4-rc3 (`c6989d230fe6`), with
+`patches/kernel/` rebased; it supersedes `-24`, which was never booted. From
+`-25` the daily tree also carries the PMK8850 (power key) and the USB-C
+repeaters' supplies. Tests: `docs/linux-runbook-25-2026-11-21.md`.
 Evidence for each line is in the linked notes; the sections after this one
 are the history. Open work is tracked as GitHub issues: issue #28 maps
 every device Windows enumerates to its Linux state and its issue.
@@ -37,7 +33,7 @@ every device Windows enumerates to its Linux state and its issue.
 | Bluetooth | Working | QCC2072, `hci0`; A2DP playback to headphones works (2026-10-21). Firmware compared on 2026-11-06 (issue #23): HP's patch (`BTFW.ORNE.1.1.0-00206`) and linux-firmware's `qca/ornbtfw11.tlv` (`00355`, newer) are the same chip and ROM 1.1; each NVM carries its patch build in tag 1, so HP's and linux-firmware's generic NVMs differ in 21 of 92 tags by release; HP's board-0x17 NVM (`clnbtnv10.b17`, installed as `ornnv11.b17`) differs from HP's generic one only in tag 56 (`PPP` → `PC7`) and one byte of tag 224. This laptop runs HP's matched pair; linux-firmware's pair also works, and it ships `ornbcscal11.bin`, which ours lacks |
 | Battery, AC, USB-C charging | Working | PMIC GLink on the ADSP; `upstream/qcom-next/0001` fixes charging; a battery-manager hang seen on `-11` did not recur on `-12`. The charger unplug/replug test has no record since 2026-09-30 and was not run on `-18` |
 | USB-A | Working, intermittent at SuperSpeed | The boot stick enumerates at SuperSpeed, but on 2 of 13 logged boots it did not stay there from power-on: `-14` fell back to high speed after 13 minutes; on `-21` it was gone for the whole boot. HP's ACPI tunes this port's USB3 receiver (`PHYC`, two lane-A values) and Linux did not. `-23` applies HP's values in the test device tree only, as an A/B test against the daily tree; the boot report counts link errors on every boot. On `-23`, `--ss-stress` retrained SuperSpeed 20 of 20 times with HP's values (test tree) and with Linux's (daily tree), so the test does not tell them apart; the boot report's per-boot count decides. **Full speed fails on USB-A:** a receiver works for about a minute, then resets every few seconds and reads corrupted descriptors. The USB-A eUSB2 PHY has no repeater in the device tree, and its repeater is not identified (`docs/runbook-results-23-2026-11-21.md`). `docs/usb-a-superspeed-2026-11-11.md`, `docs/usb-a-bringup-2026-09-29.md` |
-| USB-C data | Partly | both ports work at high speed and SuperSpeed, and role switches are stable since `-12` (`backports/0015–0016`). Full- and low-speed devices failed with `error -71` up to `-18` (`docs/usb-dwc3-crash-2026-09-30.md`); on `-23` a full-speed receiver enumerated at the first attempt on both ports (one plug each, the first test since `-20`'s PHY SE0 timeout and repeater rail; `docs/runbook-results-23-2026-11-21.md`) |
+| USB-C data | Partly | both ports work at high speed and SuperSpeed, and role switches are stable since `-12` (`backports/0015–0016`). Full- and low-speed devices failed with `error -71` up to `-18` (`docs/usb-dwc3-crash-2026-09-30.md`); on `-23` a full-speed receiver enumerated at the first attempt on both ports (one plug each, the first test since `-20`'s PHY SE0 timeout and repeater rail; `docs/runbook-results-23-2026-11-21.md`). From `-25` the daily device tree has the repeaters' supplies (LDO7_B, L15B) that the test tree had then |
 | Camera | Working | RGB (640x480 colour) and IR (400x400 grey) frames captured with ffmpeg on 2026-10-21; Camera app not tried |
 | Audio | Partly | Kernel `-16` test device tree: the speakers play (both WSA884x on `swr0`, reset through LPASS TLMM 12, supplies L15B and L18B always on at HP's voltages) and the two microphones record. The speaker and microphone names and the F6/F9 LEDs follow the desktop's mute; the card's Windows name did not apply (rule fixed, not yet installed). After the SoundWire bus idles, the amplifiers detach and take about 25 s to re-attach, so a first sound can be lost. HP's DSP tuning is not carried yet (#2); the speakers are quiet because the card driver caps them (PA 0 dB, digital −3 dB) until speaker protection runs, planned in `docs/speaker-protection-2026-11-10.md`; the headset jack (WCD9378) waits on unposted LPASS patches. **`-23`, 2026-11-21:** with the full RX and TX route set directly on the card, the headset plays (left and right possibly swapped, to recheck) and its microphone records on `SWR_MIC0`; jack detection (`GE 35 Detected Mode` stays 0) and the button do not work yet (`docs/runbook-results-23-2026-11-21.md`). Notes: `docs/audio-headset-path-2026-10-17.md`, `docs/audio-mute-leds-2026-10-20.md`, `docs/audio-speakers-down-2026-10-21.md`, `docs/runbook-results-16-2026-10-21.md` **`-17`, 2026-10-23:** the DSP's APM and power manager stopped answering at 815 s on the first boot; on the second, WirePlumber's v4l2 monitor (blocked by the Iris codec) stalled the session until it was disabled; once the session ran, the DSP stalled again, and a DSP stall freezes input and the GPU through the clock prepare lock (`docs/runbook-results-17-2026-10-23.md`). **`-18`, 2026-11-05** (`backports/0038–0039` out, Qualcomm's GPR probe-race fix in the base): no `CMD timeout` at boot or later and no parity error in three boots (about 4 and 24 minutes, and at least 12), nor across three WirePlumber restarts with a tone playing; left and right tones on the right sides, muted recording silent, both mute LEDs follow the desktop. One SoundWire bus clash at 17 s on the first `-18` boot. Short runs against `-17`'s stall at 815 s, so the bisect is not settled. |
 | Video decode/encode | Failing | Iris with HP's `qcvss8480.mbn`: on `-15` the second video core's GDSC stayed off; on `-16`, with one core, the firmware answered "Configured core 0 is not supported". Iris is off again in the test device tree and the one-core patch is dropped. Software decoding works (Firefox). `docs/video-iris-2026-10-20.md`, `docs/audit-2026-10-22.md`. Off in `-18`'s test device tree (it blocked WirePlumber on `-17`). `-24`'s A/V tree uses Qualcomm's posted Mahua Iris data (one core, `backports/0089–0091`) |

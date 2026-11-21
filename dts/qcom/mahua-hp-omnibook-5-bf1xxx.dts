@@ -7,6 +7,7 @@
 #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
 #include <dt-bindings/sound/qcom,q6dsp-lpass-ports.h>
 #include "mahua-hp-omnibook-5-bf1xxx.dtsi"
+#include "pmk8850.dtsi"
 
 / {
 	model = "HP OmniBook 5 Laptop 16-bf1xxx";
@@ -284,6 +285,24 @@
 		compatible = "qcom,pmh0101-rpmh-regulators";
 		qcom,pmic-id = "B_E0";
 
+		/*
+		 * LDO7_B at 3.072 V, which HP's PEP tables vote for every USB
+		 * port and nothing else (\_SB.URS0.USB0, URS1.USB1, URS2.USB2
+		 * and their device-mode functions; off only in D3): the 3 V side
+		 * of the eUSB2 repeaters, which full and low speed need (the
+		 * CRD's vdd3, there at 2.79 V). Shared by all ports, so always on.
+		 * From the test device tree of -19 to -24; full speed on both
+		 * USB-C ports from -23.
+		 */
+		vreg_l7b_e0_3p07: ldo7 {
+			regulator-name = "vreg_l7b_e0_3p07";
+			regulator-min-microvolt = <3072000>;
+			regulator-max-microvolt = <3072000>;
+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
+			regulator-always-on;
+			regulator-boot-on;
+		};
+
 		/* Shared with the USB PHYs and repeaters */
 		vreg_l15b_e0_1p8: ldo15 {
 			regulator-name = "vreg_l15b_e0_1p8";
@@ -407,6 +426,16 @@
 	status = "okay";
 };
 
+/*
+ * The PMK8850 (power key, PMIC GPIOs, ADC) is in the daily device tree from
+ * -25. Its RTC stays off here: HP's firmware has no RTCInfo variable, and
+ * whether its counter holds wall time is measured in the test device tree
+ * (docs/rtc-2026-11-21.md).
+ */
+&pmk8850_rtc {
+	status = "disabled";
+};
+
 &spmi_bus2 {
 	smb2370_j_e2: pmic@9 {
 		compatible = "qcom,smb2370", "qcom,spmi-pmic";
@@ -417,6 +446,10 @@
 		smb2370_j_e2_eusb2_repeater: phy@fd00 {
 			compatible = "qcom,smb2370-eusb2-repeater";
 			reg = <0xfd00>;
+
+			vdd18-supply = <&vreg_l15b_e0_1p8>;
+			vdd3-supply = <&vreg_l7b_e0_3p07>;
+
 			#phy-cells = <0>;
 		};
 	};
@@ -430,6 +463,10 @@
 		smb2370_k_e2_eusb2_repeater: phy@fd00 {
 			compatible = "qcom,smb2370-eusb2-repeater";
 			reg = <0xfd00>;
+
+			vdd18-supply = <&vreg_l15b_e0_1p8>;
+			vdd3-supply = <&vreg_l7b_e0_3p07>;
+
 			#phy-cells = <0>;
 		};
 	};

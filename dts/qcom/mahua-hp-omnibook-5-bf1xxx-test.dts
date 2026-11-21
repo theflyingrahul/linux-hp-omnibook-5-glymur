@@ -65,6 +65,10 @@
  * its own); suspend, the M31 PHY's SE0 timeout and the xHCI reset on resume
  * are kernel changes. Iris and DisplayPort are in the -test-av device tree.
  *
+ * Kernel -25: the PMK8850 (without its RTC), LDO7_B and the USB-C
+ * repeaters' supplies moved to the daily device tree. What stays here:
+ * the headset, HP's USB-A PHY values and the RTC measurement.
+ *
  * In test from kernel -24 (docs/rtc-2026-11-21.md):
  * - the PMK8850 RTC again, read-only and without the UEFI offset, as rtc1.
  *
@@ -77,7 +81,6 @@
 #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
 #include <dt-bindings/sound/qcom,q6dsp-lpass-ports.h>
 #include "mahua-hp-omnibook-5-bf1xxx.dts"
-#include "pmk8850.dtsi"
 
 / {
 	model = "HP OmniBook 5 Laptop 16-bf1xxx (test)";
@@ -215,32 +218,6 @@
 };
 
 /*
- * LDO7_B for the eUSB2 repeaters' 3 V side (from -19), added to the daily
- * device tree's PMH0101 regulators.
- */
-&apps_rsc {
-	regulators-0 {
-		/*
-		 * From kernel -19, for USB full and low speed: LDO7_B at
-		 * 3.072 V, which HP's PEP tables vote for every USB port and
-		 * nothing else (\_SB.URS0.USB0, URS1.USB1, URS2.USB2 and their
-		 * device-mode functions; off only in D3). It is the 3 V side of
-		 * an eUSB2 repeater (the CRD's vdd3, there at 2.79 V), which
-		 * full- and low-speed signalling needs. Shared by all ports, so
-		 * always on.
-		 */
-		vreg_l7b_e0_3p07: ldo7 {
-			regulator-name = "vreg_l7b_e0_3p07";
-			regulator-min-microvolt = <3072000>;
-			regulator-max-microvolt = <3072000>;
-			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-			regulator-always-on;
-			regulator-boot-on;
-		};
-	};
-};
-
-/*
  * DisplayPort over USB-C (docs/external-display-2026-10-20.md) is off again
  * after kernel -15: with &mdss_dp0 and &mdss_dp1 enabled, plugging a monitor
  * made the EDID read fail, then the display controller timed out until the
@@ -269,30 +246,6 @@
 	video-firmware {
 		iommus = <&apps_smmu 0x19e2 0x0>;
 	};
-};
-
-/*
- * The USB-C repeaters are in the daily device tree from -20. From -19 they
- * get HP's USB rails here: L15B 1.8 V and L7B 3.072 V (vdd18, vdd3).
- */
-/*
- * USB-A: HP's ACPI PHYC method writes 0xa0 to 0x088e5158 and 0x90 to
- * 0x088e5178 after the PHY's init sequence; in lane A (0x088e5000) those
- * are RX_MODE_RATE_0_1_B1 and RX_MODE_RATE2_B1, receiver mode settings
- * (Linux writes 0xa2 and 0x93). The USB-C PHYs have empty PHYC packages.
- */
-&usb_2_qmpphy {
-	qcom,usb3-lane-a-overrides = <0x158 0xa0>, <0x178 0x90>;
-};
-
-&smb2370_j_e2_eusb2_repeater {
-	vdd18-supply = <&vreg_l15b_e0_1p8>;
-	vdd3-supply = <&vreg_l7b_e0_3p07>;
-};
-
-&smb2370_k_e2_eusb2_repeater {
-	vdd18-supply = <&vreg_l15b_e0_1p8>;
-	vdd3-supply = <&vreg_l7b_e0_3p07>;
 };
 
 &tlmm {

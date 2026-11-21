@@ -186,6 +186,7 @@ same way, and the one before it stays available as "previous kernel".
 |---|---|
 | Ubuntu on SSD | daily use: everything that is proven |
 | Ubuntu on SSD: test device tree | the daily tree plus items under test |
+| Ubuntu on SSD: A/V test device tree | the test tree plus the video codec and external displays, without the board command line (from 2026-11-21) |
 | Ubuntu on SSD: previous kernel | going back after a bad kernel |
 | Ubuntu on SSD: fallback, firmware display (minimal device tree) | if the display or GPU fails |
 | Ubuntu on SSD: ACPI (no device tree) | last resort; fewer devices |
