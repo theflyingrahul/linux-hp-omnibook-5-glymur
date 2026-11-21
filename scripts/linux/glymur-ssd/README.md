@@ -194,9 +194,16 @@ From `-23`: the USB-A port's SuperSpeed link, which failed on two boots
 (`docs/usb-a-superspeed-2026-11-11.md`). It never writes to the stick in
 the port. After asking, it unmounts the stick and reads 1 GiB. Then it runs
 the cycles (default 20), alternating a USB device reset with a power cycle
-of the SuperSpeed port, each followed by a 64 MiB read. It counts how
-often the stick came back at SuperSpeed, at high speed, or not at all, and
-the link errors. Run it on the test device tree (HP's PHY values) and on
+of the SuperSpeed port, each followed by a 64 MiB read. After the power
+cycle the stick is on the high-speed port, as USB 3 devices do when their
+SuperSpeed link drops, so the script resets it there; the stick then tries
+SuperSpeed again and the link trains from scratch. Every cycle should end
+at SuperSpeed. It counts how often the stick came back at SuperSpeed, at
+high speed, or not at all, and the link errors. Automounting is off for
+that stick while it runs (a rule in `/run/udev/rules.d/`, removed at the
+end). Before 2026-11-21 there was no reset after the power cycle, so every
+power cycle ended at high speed by design and half the cycles counted as
+high speed. Run it on the test device tree (HP's PHY values) and on
 the daily one (Linux's) with the same stick, and compare the two.
 
 ### `check-chid.sh`

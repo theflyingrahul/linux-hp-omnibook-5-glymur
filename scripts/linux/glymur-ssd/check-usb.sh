@@ -63,6 +63,17 @@ if [ "$STRESS" = 1 ]; then
     dev=$(blk)
     [ -n "$dev" ] || { echo 'no block device on the USB-A port'; exit 1; }
     echo "block device: /dev/$dev ($(lsblk -dno SIZE,MODEL "/dev/$dev" | xargs))"
+    # Each cycle re-enumerates the stick, and the desktop would mount it
+    # again and lose it mounted (2026-11-21). No automount until the end.
+    RULE=/run/udev/rules.d/90-glymur-ss-stress.rules
+    serial=$(udevadm info -q property --property=ID_SERIAL --value "/dev/$dev")
+    if [ -n "$serial" ]; then
+        mkdir -p /run/udev/rules.d
+        printf 'SUBSYSTEM=="block", ENV{ID_SERIAL}=="%s", ENV{UDISKS_AUTO}="0"\n' "$serial" > "$RULE"
+        udevadm control --reload
+        trap 'rm -f "$RULE"; udevadm control --reload' EXIT
+        echo 'automount off for this stick until the test ends'
+    fi
     mnt=$(lsblk -nro MOUNTPOINTS "/dev/$dev" | grep -v '^$')
     if [ -n "$mnt" ]; then
         echo "mounted: $(echo $mnt)"
@@ -81,25 +92,40 @@ if [ "$STRESS" = 1 ]; then
     echo "link errors during the read: $(errs "$t0"); stick: $(where)"
     reset_dev() {
         python3 - "$1" <<'PY'
-import fcntl, os, sys
+import errno, fcntl, os, sys
 fd = os.open(sys.argv[1], os.O_WRONLY)
 try:
     fcntl.ioctl(fd, 0x5514)   # USBDEVFS_RESET
     print("ok")
 except OSError as e:
-    print("failed:", e)
+    # From high speed, the reset sends the stick back to SuperSpeed.
+    print("ok, re-enumerated" if e.errno == errno.ENODEV else "failed: %s" % e)
 PY
     }
-    ok_ss=0; ok_hs=0; gone=0
+    devnode() { echo "/dev/bus/usb/$(printf %03d "$(cat "$1/busnum")")/$(printf %03d "$(cat "$1/devnum")")"; }
+    # The script's own resets on the SuperSpeed link log "reset SuperSpeed";
+    # they are subtracted from the error counts.
+    ok_ss=0; ok_hs=0; gone=0; ours=0
     for i in $(seq 1 "$CYCLES"); do
-        t=$(date +%s)
+        t=$(date +%s); mine=0
         u="/sys/bus/usb/devices/$ss-1"; [ -e "$u" ] || u="/sys/bus/usb/devices/$hs-1"
         if [ $((i % 2)) = 1 ] && [ -e "$u" ]; then
-            how="device reset $(reset_dev "/dev/bus/usb/$(printf %03d "$(cat "$u/busnum")")/$(printf %03d "$(cat "$u/devnum")")")"
+            [ "$u" = "/sys/bus/usb/devices/$ss-1" ] && mine=1 && ours=$((ours + 1))
+            how="device reset $(reset_dev "$(devnode "$u")")"
         else
+            # Powering the SuperSpeed port off drops the link, and the
+            # stick falls back to the high-speed port, where a USB 3 device
+            # stays until a USB 2 reset makes it try SuperSpeed again. So
+            # reset it there: the link then trains from scratch.
             echo 1 > "/sys/bus/usb/devices/$ss-0:1.0/usb$ss-port1/disable"; sleep 1
             echo 0 > "/sys/bus/usb/devices/$ss-0:1.0/usb$ss-port1/disable"
-            how="port disable/enable"
+            how="SS port off/on"
+            for _ in $(seq 1 20); do sleep 0.5; [ "$(where)" != none ] && break; done
+            sleep 1
+            if [ -e "/sys/bus/usb/devices/$hs-1" ]; then
+                r=$(reset_dev "$(devnode "/sys/bus/usb/devices/$hs-1")")
+                how="$how, HS reset ${r%%,*}"
+            fi
         fi
         for _ in $(seq 1 20); do sleep 0.5; [ "$(where)" != none ] && break; done
         sleep 1; w=$(where)
@@ -110,9 +136,9 @@ PY
             [ -n "$d" ] && r=$(dd if="/dev/$d" of=/dev/null bs=1M count=64 iflag=direct 2>&1 | tail -1 | sed 's/.*copied, //')
         fi
         case "$w" in SS*) ok_ss=$((ok_ss + 1)) ;; HS*) ok_hs=$((ok_hs + 1)) ;; *) gone=$((gone + 1)) ;; esac
-        printf '%2d %-24s -> %-9s errors=%s %s\n' "$i" "$how" "$w" "$(errs "$t")" "$r"
+        printf '%2d %-30s -> %-9s errors=%s %s\n' "$i" "$how" "$w" "$(( $(errs "$t") - mine ))" "$r"
     done
-    echo "-- summary: back at SuperSpeed $ok_ss, at high speed $ok_hs, gone $gone of $CYCLES; link errors in all: $(errs "$t0")"
+    echo "-- summary: back at SuperSpeed $ok_ss, at high speed $ok_hs, gone $gone of $CYCLES; link errors in all: $(( $(errs "$t0") - ours ))"
     [ "$gone" -gt 0 ] && echo 'The stick is gone: unplug it and plug it back in.'
     journalctl -k --no-pager --since "@$t0" |
         grep -E "usb ($ss|$hs)-1|usb$ss-port1|usb$hs-port1|a000000|qmp" | tail -60
