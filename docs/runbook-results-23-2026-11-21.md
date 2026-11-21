@@ -188,7 +188,7 @@ test. A read-only `fsck.vfat -n` of both is due before the next write to the
 stick. After the run, the stick stayed on the high-speed port (cycle 20 was
 a power cycle) until the next replug or reboot.
 
-## A5. USB-C (partly done)
+## A5. USB-C
 
 `usb-test-20261121T085802.txt`:
 - A Dell Universal Receiver (full speed, 12 Mb/s) plugged straight into
@@ -377,8 +377,12 @@ Each boot starts at the same fake time, `Fri 2026-10-02 23:05:38 IST`
       (a channel-slot alignment at stream start; find which block);
     - jack detection: the `SimpleJack` read of `0x40c00908` fails with
       `-16` every time, and the `vdd-mic-bias` supply is missing.
-2. A4 with a second USB 3 device, if there is one.
-3. The rest of A5, then A7 (suspend from a text console, the 10-minute drain
-   cycle on battery) and A8 (hold F5).
-4. Boot C (daily entry), `--ss-stress` with the same stick, for the
-   comparison with HP's values.
+2. USB-A full and low speed: identify the port's eUSB2 repeater. HP's ACPI,
+   Windows' device list and the driver pack's INF files name none, so the
+   evidence has to come from the firmware or the USB PHY driver binaries.
+3. A4 with a second USB 3 device, if there is one.
+4. A7 (suspend from a text console, the 10-minute drain cycle on battery),
+   then B.
+5. The clock: on every boot, chrony's NTS fails until the time is set
+   another way. `fake-hwclock` (Ubuntu universe) would restore the last
+   saved time at boot.
