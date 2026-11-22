@@ -1,0 +1,1690 @@
+
+==== system
+7.4.0-rc3-glymur-26
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+BOOT_IMAGE=(hd1,gpt5)/boot/vmlinuz-glymur root=… rootfstype=ext4 ro rootwait clk_ignore_unused pd_ignore_unused arm64.nopauth quiet splash log_buf_len=16M console=tty0 loglevel=4
+EC event logging on
+mem_sleep: s2idle [deep]   state: freeze mem
+targets: masked masked
+
+==== sync_state still pending at boot
+
+==== power domains still on
+PDP1_1                          on                              0
+PDP0_0                          on                              0
+disp_cc_mdss_core_int2_gdsc     on                              0
+disp_cc_mdss_core_gdsc          on                              0
+gcc_usb_2_phy_gdsc              on                              0
+gcc_usb_1_phy_gdsc              on                              0
+gcc_usb_0_phy_gdsc              on                              0
+gcc_usb30_tert_gdsc             on                              256
+gcc_usb30_sec_gdsc              on                              256
+gcc_usb30_prim_gdsc             on                              256
+gcc_usb20_prim_gdsc             on                              64
+gcc_pcie_5_phy_gdsc             on                              0
+gcc_pcie_5_gdsc                 on                              128
+gcc_pcie_4_phy_gdsc             on                              0
+gcc_pcie_4_gdsc                 on                              64
+mx                              on                              64
+mmcx                            on                              64
+cx                              on                              256
+power-domain-system             on                              0
+power-domain-cpu-cluster1       on                              0
+power-domain-cpu-cluster0       on                              0
+power-domain-cpu11              on                              0
+power-domain-cpu10              on                              0
+power-domain-cpu9               on                              0
+power-domain-cpu8               on                              0
+power-domain-cpu7               on                              0
+power-domain-cpu6               on                              0
+power-domain-cpu5               on                              0
+power-domain-cpu4               on                              0
+power-domain-cpu3               on                              0
+power-domain-cpu2               on                              0
+power-domain-cpu1               on                              0
+power-domain-cpu0               on                              0
+
+==== wakeup sources enabled
+auxiliary/devices/pmic_glink.rtc-glink.0
+auxiliary/devices/pmic_glink.ucsi.0
+i2c/devices/0-003a
+i2c/devices/4-0015
+mhi/devices/mhi0
+pci/devices/0004:00:00.0
+pci/devices/0005:00:00.0
+platform/devices/32300000.remoteproc
+platform/devices/6800000.remoteproc
+platform/devices/alarmtimer.4.auto
+platform/devices/c22c000.thermal-sensor
+platform/devices/c22d000.thermal-sensor
+platform/devices/c22e000.thermal-sensor
+platform/devices/c22f000.thermal-sensor
+platform/devices/c230000.thermal-sensor
+platform/devices/c231000.thermal-sensor
+platform/devices/c426000.spmi:pmic@0:pon@1300:pwrkey
+platform/devices/d00000.remoteproc
+platform/devices/gpio-keys
+
+==== devices (before)
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+    |__ Port 001: Dev 002, If 0, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 1, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 2, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 3, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 4, Class=Application Specific Interface, Driver=[none], 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 003.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+    |__ Port 001: Dev 002, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
+wlo1             UP             xx:xx:xx:xx:xx:xx <BROADCAST,MULTICAST,UP,LOWER_UP> 
+		type P2P-device
+	Interface wlo1
+		type managed
+		channel 112 (5560 MHz), width: 40 MHz, center1: 5550 MHz
+network: connected:full
+card 0: MAHUAHPOmniBook [MAHUA-HP-OmniBook-5-16-bf1xxx], device 0: MultiMedia1 Playback (*) []
+qcom-battmgr-ac:  
+qcom-battmgr-bat: Charging 53
+qcom-battmgr-usb:  
+qcom-battmgr-wls:  
+ucsi-source-psy-pmic_glink.ucsi.01: Not charging 
+ucsi-source-psy-pmic_glink.ucsi.02: Not charging 
+card1-Writeback-1: unknown disabled
+card1-eDP-1: connected enabled
+EC fan 0 rpm, temp1 39000
+/dev/rtc
+/dev/rtc0
+/dev/rtc1
+
+==== sleep counters (before)
+adsp: Count: 9 Last Entered At: 5507053058 Last Exited At: 5507038645 Accumulated Duration: 4469427906 
+adsp_island: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+aosd: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+apss: Count: 7478 Last Entered At: 5860295435 Last Exited At: 5860831345 Accumulated Duration: 1467593855 
+cdsp1: 
+cdsp_nsp: Count: 11 Last Entered At: 1263565108 Last Exited At: 1263415639 Accumulated Duration: 4758689738 
+cdsp_nsp_1: 
+cdsp_nsp_2: 
+cdsp_nsp_3: 
+cxsd: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+dcp: 
+ddr: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+ddr_stats: DDR LPM Stat Name:0xd4	count:0	Duration (ticks):0 DDR LPM Stat Name:0xd3	count:0	Duration (ticks):0 DDR LPM Stat Name:0x11	count:0	Duration (ticks):0 DDR LPM Stat Name:0xd0	count:0	Duration (ticks):0 DDR Freq 200Mhz:	CP IDX:1	count:1	Duration (ticks):0 DDR Freq 547Mhz:	CP IDX:2	count:1	Duration (ticks):0 DDR Freq 1353Mhz:	CP IDX:3	count:1	Duration (ticks):0 DDR Freq 1555Mhz:	CP IDX:4	count:1	Duration (ticks):0 DDR Freq 1708Mhz:	CP IDX:5	count:1	Duration (ticks):0 DDR Freq 2092Mhz:	CP IDX:6	count:1	Duration (ticks):0 DDR Freq 2736Mhz:	CP IDX:7	count:1	Duration (ticks):0 DDR Freq 3187Mhz:	CP IDX:8	count:1	Duration (ticks):0 DDR Freq 3686Mhz:	CP IDX:9	count:1	Duration (ticks):0 DDR Freq 4224Mhz:	CP IDX:10	count:1	Duration (ticks):0 DDR Freq 4761Mhz:	CP IDX:11	count:1	Duration (ticks):0 
+display: 
+gpdsp0: 
+gpdsp1: 
+gpu: 
+modem: 
+slpi: 
+slpi_island: 
+soccp: Count: 3470 Last Entered At: 5863879466 Last Exited At: 5863854944 Accumulated Duration: 5392637717 
+wpss: 
+fail:0
+failed_freeze:0
+failed_prepare:0
+failed_resume:0
+failed_resume_early:0
+failed_resume_noirq:0
+failed_suspend:0
+failed_suspend_late:0
+failed_suspend_noirq:0
+last_failed_errno:0
+success:0
+
+==== possible sleep blockers (before)
+-- clocks: crystal and RPMh (enable/prepare counts, consumers)
+bi_tcxo                      prepared 28 enabled 28  
+bi_tcxo_ao                   prepared 0 enabled 0  
+cam_cc_camnoc_dcd_xo_clk     prepared 0 enabled 0  
+cam_cc_camnoc_xo_clk         prepared 0 enabled 0  
+cam_cc_qdss_debug_xo_clk     prepared 0 enabled 0  
+cam_cc_xo_clk_src            prepared 0 enabled 0  
+disp_cc_xo_clk_src           prepared 0 enabled 0  
+eva_cc_xo_clk_src            prepared 0 enabled 0  
+gcc_av1e_xo_clk              prepared 0 enabled 0  
+gcc_pcie_rscc_xo_clk         prepared 0 enabled 0  
+gcc_pdm_xo4_clk              prepared 0 enabled 0  
+gcc_qupv3_oob_tcxo_clk       prepared 0 enabled 0  
+gpu_cc_cxo_clk               prepared 0 enabled 0  
+video_cc_xo_clk_src          prepared 0 enabled 0  
+xo-board                     prepared 1 enabled 1  
+-- interconnect paths with a non-zero vote
+qup1_core_master@interconnect-0                   25000        25000
+  a98000.serial                          7        25000        25000
+qup1_core_slave@interconnect-0                    25000        25000
+  a98000.serial                          7        25000        25000
+llcc_mc@interconnect-1                          3930094      7876000
+  a800000.usb                            7      1000000      2500000
+  a600000.usb                            7      1000000      2500000
+  ae00000.display-subsystem              7       690094       800000
+  ae00000.display-subsystem              7            0       400000
+  a000000.usb                            7      1000000      2500000
+  a200000.usb                            7       240000       700000
+  1bf0000.pcie                           7            0       984500
+  1b40000.pcie                           7            0      7876000
+  100d400.pmu                            3            0      2188800
+  100c400.pmu                            3            0      6220800
+ebi@interconnect-1                              3930094      7876000
+  a800000.usb                            7      1000000      2500000
+  a600000.usb                            7      1000000      2500000
+  ae00000.display-subsystem              7       690094       800000
+  ae00000.display-subsystem              7            0       400000
+  a000000.usb                            7      1000000      2500000
+  a200000.usb                            7       240000       700000
+  1bf0000.pcie                           7            0       984500
+  1b40000.pcie                           7            0      7876000
+  100d400.pmu                            3            0      2188800
+  100c400.pmu                            3            0      6220800
+<email>               3200        57000
+  a800000.usb                            3            0        40000
+  a600000.usb                            3            0        40000
+  ae00000.display-subsystem              3            0        57000
+  a000000.usb                            3            0        40000
+  a200000.usb                            3            0        40000
+  a98000.serial                          7         3200         3200
+<email>                       3200        57000
+  a800000.usb                            3            0        40000
+  a600000.usb                            3            0        40000
+  ae00000.display-subsystem              3            0        57000
+  a000000.usb                            3            0        40000
+  a200000.usb                            3            0        40000
+  a98000.serial                          7         3200         3200
+-- regulators enabled
+ regulator-dummy                 25   33      0 unknown     0mV     0mA     0mV     0mV 
+    sdw:3:0:0217:0110:00:3-vdd-mic-bias   1                                 0mA     0mV     0mV
+    4-0015-vddl                   1                                 0mA     0mV     0mV
+    4-0015-vdd                    1                                 0mA     0mV     0mV
+    0-003a-vddl                   1                                 0mA     0mV     0mV
+    0-003a-vdd                    1                                 0mA     0mV     0mV
+    8-0010-vddl                   1                                 0mA     0mV     0mV
+    8-0010-vdd                    1                                 0mA     0mV     0mV
+    1bf0000.pcie-vddpe-3v3        1                                 0mA     0mV     0mV
+    1bf0000.pcie-vdda             1                                 0mA     0mV     0mV
+    1b40000.pcie-vddpe-3v3        1                                 0mA     0mV     0mV
+    1b40000.pcie-vdda             1                                 0mA     0mV     0mV
+    vreg_l1b0                     0    1      0 standby  1800mV     0mA  1800mV  1800mV 
+    vreg_l1f1                    11   27      0    fast   904mV     0mA   904mV   904mV 
+       1fd5000.clock-controller-vdda-qreftx1-0p9   1                                 0mA     0mV     0mV
+       1fd5000.clock-controller-vdda-refgen3-0p9   1                                 0mA     0mV     0mV
+       1fd5000.clock-controller-vdda-qreftx1-0p9   1                                 0mA     0mV     0mV
+       1fd5000.clock-controller-vdda-refgen3-0p9   1                                 0mA     0mV     0mV
+       1fd5000.clock-controller-vdda-qrefrpt3-0p9   1                                 0mA     0mV     0mV
+       1fd5000.clock-controller-vdda-qreftx1-0p9   1                                 0mA     0mV     0mV
+       1fd5000.clock-controller-vdda-refgen3-0p9   1                                 0mA     0mV     0mV
+       1fd5000.clock-controller-vdda-qreftx1-0p9   1                                 0mA     0mV     0mV
+       1fd5000.clock-controller-vdda-refgen3-0p9   1                                 0mA     0mV     0mV
+       1fd5000.clock-controller-vdda-qreftx1-0p9   1                                 0mA     0mV     0mV
+       1fd5000.clock-controller-vdda-refgen3-0p9   1                                 0mA     0mV     0mV
+    vreg_l2f0                     3    3      0 standby   944mV     0mA   944mV   944mV 
+       fde000.phy-refgen          1                                 3mA     0mV     0mV
+       1b50000.phy-vdda-phy       1                                 0mA     0mV     0mV
+       fd5000.phy-refgen          1                                 3mA     0mV     0mV
+    vreg_l1h0                     1    1      0    fast   936mV     0mA   936mV   936mV 
+       fde000.phy-vdda-phy        1                                21mA     0mV     0mV
+    vreg_l2h0                     4   16      0 standby   880mV     0mA   880mV   880mV 
+       fa0000.phy-vdd             1                                 0mA     0mV     0mV
+       1fd5000.clock-controller-vdda-qrefrx3-0p9   1                                 0mA     0mV     0mV
+       1fd5000.clock-controller-vdda-qrefrpt5-0p9   1                                 0mA     0mV     0mV
+       1fd5000.clock-controller-vdda-qrefrpt4-0p9   1                                 0mA     0mV     0mV
+    vreg_l2f1                    11   19      0    fast   880mV     0mA   880mV   880mV 
+       faac00.phy-vdda-phy        1                                21mA     0mV     0mV
+       1fd5000.clock-controller-vdda-qrefrx1-0p9   1                                 0mA     0mV     0mV
+       1fd5000.clock-controller-vdda-qrefrpt1-0p9   1                                 0mA     0mV     0mV
+-- remote processors
+remoteproc0 soccp attached
+remoteproc1 adsp running
+remoteproc2 cdsp running
+-- PCIe link power management
+0004:00:00.0 PCI bridge: Qualcomm Technologies, Inc SC8480XP PCIe Root Complex [Snapdragon X2] (prog-if 00 [Normal decode])
+		LnkCtl:	ASPM L1 Enabled; RCB 128 bytes, LnkDisable- CommClk+
+		L1SubCtl1: PCI-PM_L1.2+ PCI-PM_L1.1+ ASPM_L1.2+ ASPM_L1.1+
+0004:01:00.0 Network controller: Qualcomm Technologies, Inc QCC2072 Wi-Fi 7(802.11be) 320MHz [FastConnect C7700] (rev 01)
+		LnkCtl:	ASPM L1 Enabled; RCB 128 bytes, LnkDisable- CommClk+
+		L1SubCtl1: PCI-PM_L1.2+ PCI-PM_L1.1+ ASPM_L1.2+ ASPM_L1.1+
+0005:00:00.0 PCI bridge: Qualcomm Technologies, Inc SC8480XP PCIe Root Complex [Snapdragon X2] (prog-if 00 [Normal decode])
+		LnkCtl:	ASPM L1 Enabled; RCB 64 bytes, LnkDisable- CommClk+
+		L1SubCtl1: PCI-PM_L1.2+ PCI-PM_L1.1+ ASPM_L1.2+ ASPM_L1.1+
+0005:01:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd BM9C1 QLC NVME SSD (DRAM-less) (prog-if 02 [NVM Express])
+		LnkCtl:	ASPM L1 Enabled; RCB 64 bytes, LnkDisable- CommClk+
+		L1SubCtl1: PCI-PM_L1.2+ PCI-PM_L1.1+ ASPM_L1.2+ ASPM_L1.1+
+
+Suspend is about to be unmasked for this test (sleep.target suspend.target).
+  Q: Continue? (y/n)
+  A: y
+mem_sleep set to s2idle (was deep): [s2idle] deep
+Created symlink '/etc/systemd/system/sysinit.target.wants/glymur-suspend-guard.service' → '/etc/systemd/system/glymur-suspend-guard.service'.
+Removed '/etc/systemd/system/sleep.target'.
+Removed '/etc/systemd/system/suspend.target'.
+
+==== NVMe adaptive link-rate switching
+not in this kernel
+pm_test levels: [none] core processors platform devices freezer
+
+==== pm_test: freezer
+came back after 5 s, rc=0
+[  252.878015] glymur kernel: PM: suspend entry (s2idle)
+[  258.177121] glymur kernel: PM: suspend debug: Waiting for 5 second(s).
+[  258.365011] glymur kernel: PM: suspend exit
+
+==== pm_test: devices
+came back after 9 s, rc=0
+[  266.916970] glymur kernel: wsa_macro 6cb0000.codec: PM: platform_pm_resume returned 0 after 0 usecs
+[  266.917034] glymur kernel: wsa_macro 6c90000.codec: PM: calling platform_pm_resume @ 9460, parent: soc@0
+[  266.917098] glymur kernel: wsa_macro 6c90000.codec: PM: platform_pm_resume returned 0 after 768 usecs
+[  266.917157] glymur kernel: qcom-soundwire 6c80000.soundwire: PM: calling platform_pm_resume @ 9460, parent: soc@0
+[  266.917363] glymur kernel: qcom-soundwire 6c80000.soundwire: PM: platform_pm_resume returned 0 after 162 usecs
+[  266.917420] glymur kernel: tx_macro 6a90000.codec: PM: calling platform_pm_resume @ 9460, parent: soc@0
+[  266.917480] glymur kernel: tx_macro 6a90000.codec: PM: platform_pm_resume returned 0 after 516 usecs
+[  266.917534] glymur kernel: rx_macro 6a70000.codec: PM: calling platform_pm_resume @ 9460, parent: soc@0
+[  266.917594] glymur kernel: rx_macro 6a70000.codec: PM: platform_pm_resume returned 0 after 544 usecs
+[  266.917652] glymur kernel: qcom-soundwire 6a80000.soundwire: PM: calling platform_pm_resume @ 9460, parent: soc@0
+[  266.917716] glymur kernel: qcom-soundwire 6a80000.soundwire: PM: platform_pm_resume returned 0 after 49 usecs
+[  266.917770] glymur kernel: qcom-soundwire 7630000.soundwire: PM: calling platform_pm_resume @ 9460, parent: soc@0
+[  266.917832] glymur kernel: qcom-soundwire 7630000.soundwire: PM: platform_pm_resume returned 0 after 170 usecs
+[  266.917887] glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: PM: calling wcd9378_sdca_system_resume [snd_soc_wcd9378] @ 9460, parent: sdw-master-3-0
+[  266.917967] glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: PM: wcd9378_sdca_system_resume [snd_soc_wcd9378] returned 0 after 20 usecs
+[  266.918041] glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: PM: calling class_function_resume [snd_soc_sdca_class_function] @ 9460, parent: sdw:3:0:0217:0110:00:3
+[  266.918138] glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: PM: class_function_resume [snd_soc_sdca_class_function] returned 0 after 3277 usecs
+[  266.918195] glymur kernel: snd-x1e80100 sound: PM: calling platform_pm_resume @ 9460, parent: platform
+[  266.918257] glymur kernel: snd-x1e80100 sound: PM: platform_pm_resume returned 0 after 0 usecs
+[  266.918308] glymur kernel: input input20: PM: calling input_dev_resume @ 9460, parent: card0
+[  266.918389] glymur kernel: input input20: PM: input_dev_resume returned 0 after 0 usecs
+[  266.918459] glymur kernel: ieee80211 phy0: PM: wiphy_resume [cfg80211] returned 0 after 102350 usecs
+[  266.918518] glymur kernel: rfkill rfkill1: PM: calling rfkill_resume @ 9460, parent: phy0
+[  266.918591] glymur kernel: rfkill rfkill1: PM: rfkill_resume returned 0 after 1 usecs
+[  266.918656] glymur kernel: platform c426000.spmi:pmic@7:temp-alarm@a00: PM: calling platform_pm_resume @ 9460, parent: 0-07
+[  266.918730] glymur kernel: platform c426000.spmi:pmic@7:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  266.918795] glymur kernel: usb usb1: PM: usb_dev_resume returned 0 after 126605 usecs
+[  266.918938] glymur kernel: usb 1-1: PM: calling usb_dev_resume @ 1062, parent: usb1
+[  266.919041] glymur kernel: usb usb3: PM: usb_dev_resume returned 0 after 207477 usecs
+[  266.919130] glymur kernel: usb 3-1: PM: calling usb_dev_resume @ 1065, parent: usb3
+[  266.919402] glymur kernel: usb 3-1: PM: usb_dev_resume returned 0 after 135862 usecs
+[  266.919487] glymur kernel: scsi host0: PM: calling scsi_bus_resume @ 10549, parent: 3-1:1.0
+[  266.919557] glymur kernel: scsi host0: PM: scsi_bus_resume returned 0 after 0 usecs
+[  266.919614] glymur kernel: scsi target0:0:0: PM: calling scsi_bus_resume @ 10553, parent: host0
+[  266.919683] glymur kernel: scsi target0:0:0: PM: scsi_bus_resume returned 0 after 0 usecs
+[  266.919761] glymur kernel: sd 0:0:0:0: PM: calling scsi_bus_resume @ 391, parent: target0:0:0
+[  266.919886] glymur kernel: sd 0:0:0:0: PM: scsi_bus_resume returned 0 after 2 usecs
+[  266.919953] glymur kernel: usb 1-1: PM: usb_dev_resume returned 0 after 261976 usecs
+[  266.920043] glymur kernel: PM: resume of devices complete after 398.101 msecs
+[  267.017918] glymur kernel: PM: suspend exit
+
+==== cycle: rtc
+Suspending now; the RTC alarm wakes it in about 40 s. If it is still asleep after 90 s, press the power button.
+While it sleeps, look at: the fan, the keyboard backlight, the power LED. You are asked afterwards.
+rtcwake: read rtc time failed: Input/output error
+rtcwake: assuming RTC uses UTC ...
+No RTC alarm (the RTC has no time source): wake it yourself after 20 s with a key or the touchpad.
+resumed after 18 s; suspend successes 2 -> 3
+residency cxsd: entries +1, 10965818 ticks = 0 s of 18 s
+residency aosd: entries +1, 10951168 ticks = 0 s of 18 s
+residency ddr : entries +1, 11020618 ticks = 0 s of 18 s
+battery: 32220000 -> 32430000 uWh, -42000 mW average (meaningful on battery only)
+wake IRQ: 163 ( 1 0 0 0 0 0 0 0 0 0 0 0 msmgpio 92 Edge lid)
+
+==== kernel log of the cycle
+[  276.867136] glymur kernel: nvme 0005:01:00.0: PM: pci_pm_resume returned 0 after 2 usecs
+[  276.867205] glymur kernel: dwc3-qcom a200000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 1391 usecs
+[  276.867262] glymur kernel: qcom-qmp-combo-phy fde000.phy: PM: calling qmp_combo_pm_resume [phy_qcom_qmp_combo] @ 10729, parent: soc@0
+[  276.867318] glymur kernel: qcom-qmp-combo-phy fde000.phy: PM: qmp_combo_pm_resume [phy_qcom_qmp_combo] returned 0 after 0 usecs
+[  276.867373] glymur kernel: qcom-qmp-combo-phy 88e1000.phy: PM: calling qmp_combo_pm_resume [phy_qcom_qmp_combo] @ 10729, parent: soc@0
+[  276.867432] glymur kernel: qcom-qmp-combo-phy 88e1000.phy: PM: qmp_combo_pm_resume [phy_qcom_qmp_combo] returned 0 after 0 usecs
+[  276.867490] glymur kernel: msm-mdss ae00000.display-subsystem: PM: calling platform_pm_resume @ 10729, parent: soc@0
+[  276.867567] glymur kernel: xhci-hcd xhci-hcd.2.auto: PM: calling platform_pm_resume @ 412, parent: a200000.usb
+[  276.867622] glymur kernel: usb usb1: root hub lost power or was reset
+[  276.867720] glymur kernel: msm-mdss ae00000.display-subsystem: PM: platform_pm_resume returned 0 after 281 usecs
+[  276.867777] glymur kernel: dwc3-qcom a000000.usb: PM: calling dwc3_qcom_pm_resume [dwc3_qcom] @ 10729, parent: soc@0
+[  276.867833] glymur kernel: xhci-hcd xhci-hcd.2.auto: PM: platform_pm_resume returned 0 after 1238 usecs
+[  276.867886] glymur kernel: usb usb1: PM: calling usb_dev_resume @ 412, parent: xhci-hcd.2.auto
+[  276.867997] glymur kernel: nvme nvme0: D3 entry latency set to 10 seconds
+[  276.868060] glymur kernel: dwc3-qcom a000000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 5085 usecs
+[  276.868116] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@2:temp-alarm@a00: PM: calling platform_pm_resume @ 10729, parent: 0-02
+[  276.868181] glymur kernel: xhci-hcd xhci-hcd.3.auto: PM: calling platform_pm_resume @ 10794, parent: a000000.usb
+[  276.868233] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@2:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.868301] glymur kernel: usb usb2: root hub lost power or was reset
+[  276.868398] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@2:gpio@8800: PM: calling platform_pm_resume @ 10729, parent: 0-02
+[  276.868476] glymur kernel: usb usb3: root hub lost power or was reset
+[  276.868569] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@2:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.868634] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@1:temp-alarm@a00: PM: calling platform_pm_resume @ 10729, parent: 0-01
+[  276.868699] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@1:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.868764] glymur kernel: qcom-bcl-hwmon c426000.spmi:pmic@1:sensor@4700: PM: calling platform_pm_resume @ 10729, parent: 0-01
+[  276.868831] glymur kernel: qcom-bcl-hwmon c426000.spmi:pmic@1:sensor@4700: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.868895] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@1:gpio@8800: PM: calling platform_pm_resume @ 10729, parent: 0-01
+[  276.868960] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@1:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.869029] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@5:temp-alarm@a00: PM: calling platform_pm_resume @ 10729, parent: 0-05
+[  276.869097] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@5:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.869162] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@5:gpio@8800: PM: calling platform_pm_resume @ 10729, parent: 0-05
+[  276.869252] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@5:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.869320] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@7:gpio@8800: PM: calling platform_pm_resume @ 10729, parent: 0-07
+[  276.869389] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@7:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.869454] glymur kernel: qcom-pon c426000.spmi:pmic@0:pon@1300: PM: calling platform_pm_resume @ 10729, parent: 0-00
+[  276.869517] glymur kernel: qcom-pon c426000.spmi:pmic@0:pon@1300: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.869581] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@0:gpio@b800: PM: calling platform_pm_resume @ 10729, parent: 0-00
+[  276.869649] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@0:gpio@b800: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.869716] glymur kernel: platform c426000.spmi:pmic@0:adc@9000: PM: calling platform_pm_resume @ 10729, parent: 0-00
+[  276.869778] glymur kernel: platform c426000.spmi:pmic@0:adc@9000: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.869841] glymur kernel: rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: PM: calling platform_pm_resume @ 10729, parent: 0-00
+[  276.869905] glymur kernel: rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.869972] glymur kernel: qcom,spmi-sdam c426000.spmi:pmic@0:nvram@7100: PM: calling platform_pm_resume @ 10729, parent: 0-00
+[  276.870040] glymur kernel: qcom,spmi-sdam c426000.spmi:pmic@0:nvram@7100: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.870117] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@2:temp-alarm@a00: PM: calling platform_pm_resume @ 10729, parent: 1-02
+[  276.870184] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@2:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.870248] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@2:gpio@8800: PM: calling platform_pm_resume @ 10729, parent: 1-02
+[  276.870312] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@2:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.870386] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@3:temp-alarm@a00: PM: calling platform_pm_resume @ 10729, parent: 1-03
+[  276.870450] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@3:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.870515] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@3:gpio@8800: PM: calling platform_pm_resume @ 10729, parent: 1-03
+[  276.870579] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@3:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.870646] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@5:temp-alarm@a00: PM: calling platform_pm_resume @ 10729, parent: 1-05
+[  276.870713] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@5:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.870777] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@5:gpio@8800: PM: calling platform_pm_resume @ 10729, parent: 1-05
+[  276.870841] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@5:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.870906] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@b:temp-alarm@a00: PM: calling platform_pm_resume @ 10729, parent: 1-0b
+[  276.870971] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@b:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.871047] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@b:gpio@8800: PM: calling platform_pm_resume @ 10729, parent: 1-0b
+[  276.871124] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@b:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.871189] glymur kernel: qcom-bcl-hwmon c448000.spmi:pmic@9:sensor@4700: PM: calling platform_pm_resume @ 10729, parent: 2-09
+[  276.871256] glymur kernel: qcom-bcl-hwmon c448000.spmi:pmic@9:sensor@4700: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.871319] glymur kernel: msm_dpu ae01000.display-controller: PM: calling pm_runtime_force_resume @ 10729, parent: ae00000.display-subsystem
+[  276.871377] glymur kernel: msm_dpu ae01000.display-controller: PM: pm_runtime_force_resume returned 0 after 0 usecs
+[  276.871435] glymur kernel: msm-dp-display af6c000.displayport-controller: PM: calling pm_runtime_force_resume @ 10729, parent: ae00000.display-subsystem
+[  276.871496] glymur kernel: msm-dp-display af6c000.displayport-controller: PM: pm_runtime_force_resume returned 0 after 0 usecs
+[  276.871558] glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: PM: calling platform_pm_resume @ 10729, parent: 2-09
+[  276.871622] glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.871685] glymur kernel: pm8941-pwrkey c426000.spmi:pmic@0:pon@1300:pwrkey: PM: calling platform_pm_resume @ 10729, parent: c426000.spmi:pmic@0:pon@1300
+[  276.871752] glymur kernel: pm8941-pwrkey c426000.spmi:pmic@0:pon@1300:pwrkey: PM: platform_pm_resume returned 0 after 1 usecs
+[  276.871822] glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: PM: calling platform_pm_resume @ 10729, parent: 2-0a
+[  276.871891] glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.871972] glymur kernel: qcom-m31eusb2-phy fd3000.phy: PM: calling platform_pm_resume @ 10729, parent: soc@0
+[  276.872032] glymur kernel: qcom-m31eusb2-phy fd3000.phy: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.872094] glymur kernel: qcom-m31eusb2-phy fdd000.phy: PM: calling platform_pm_resume @ 10729, parent: soc@0
+[  276.872152] glymur kernel: qcom-m31eusb2-phy fdd000.phy: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.872208] glymur kernel: dwc3-qcom a600000.usb: PM: calling dwc3_qcom_pm_resume [dwc3_qcom] @ 10729, parent: soc@0
+[  276.872263] glymur kernel: xhci-hcd xhci-hcd.3.auto: PM: platform_pm_resume returned 0 after 2630 usecs
+[  276.872315] glymur kernel: usb usb2: PM: calling usb_dev_resume @ 147, parent: xhci-hcd.3.auto
+[  276.872412] glymur kernel: usb usb3: PM: calling usb_dev_resume @ 10797, parent: xhci-hcd.3.auto
+[  276.872504] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: chip_id 0x21 chip_family 0x4 board_id 0xff soc_id 0x40292100
+[  276.872572] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: fw_version 0x100581de fw_build_timestamp 2024-09-11 23:52 fw_build_id QC_IMAGE_VERSION_STRING=WLAN.COL.1.0.c2-00277-QCACOLSWPL_V1_TO_SILICONZ-1
+[  276.872642] glymur kernel: hp-omnibook-5-ec 9-0076: PM: hpec_resume [hp_omnibook_5_ec] returned 0 after 31104 usecs
+[  276.872717] glymur kernel: usb usb2: PM: usb_dev_resume returned 0 after 20663 usecs
+[  276.872815] glymur kernel: dwc3-qcom a600000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 25161 usecs
+[  276.872874] glymur kernel: rtc rtc1: PM: calling rtc_resume @ 10729, parent: c426000.spmi:pmic@0:rtc@6100
+[  276.872928] glymur kernel: rtc rtc1: PM: rtc_resume returned 0 after 0 usecs
+[  276.872980] glymur kernel: dwc3-qcom a800000.usb: PM: calling dwc3_qcom_pm_resume [dwc3_qcom] @ 10729, parent: soc@0
+[  276.873038] glymur kernel: nvme nvme0: 12/0/0 default/read/poll queues
+[  276.873090] glymur kernel: dwc3-qcom a800000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 24982 usecs
+[  276.873154] glymur kernel: samsung_atana33xc20 aux-af6c000.displayport-controller: PM: calling pm_runtime_force_resume @ 10729, parent: af6c000.displayport-controller
+[  276.873216] glymur kernel: samsung_atana33xc20 aux-af6c000.displayport-controller: PM: pm_runtime_force_resume returned 0 after 0 usecs
+[  276.873274] glymur kernel: backlight dp_aux_backlight: PM: calling backlight_resume @ 10729, parent: aux-af6c000.displayport-controller
+[  276.873338] glymur kernel: backlight dp_aux_backlight: PM: backlight_resume returned 0 after 0 usecs
+[  276.873402] glymur kernel: adreno 3d00000.gpu: PM: calling platform_pm_resume @ 10729, parent: soc@0
+[  276.873461] glymur kernel: adreno 3d00000.gpu: PM: platform_pm_resume returned 0 after 9 usecs
+[  276.873528] glymur kernel: adreno_gmu 3d6c000.gmu: PM: calling platform_pm_resume @ 10729, parent: soc@0
+[  276.873586] glymur kernel: adreno_gmu 3d6c000.gmu: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.873645] glymur kernel: i2c_hid_of 8-0010: PM: i2c_hid_core_pm_resume [i2c_hid] returned 0 after 63125 usecs
+[  276.873706] glymur kernel: i2c_hid_of 0-003a: PM: i2c_hid_core_pm_resume [i2c_hid] returned 0 after 62293 usecs
+[  276.873765] glymur kernel: input input9: PM: calling input_dev_resume @ 10729, parent: 0018:0416:C300.0003
+[  276.873864] glymur kernel: input input9: PM: input_dev_resume returned 0 after 8 usecs
+[  276.873966] glymur kernel: input input10: PM: calling input_dev_resume @ 10729, parent: 0018:04F3:44BF.0001
+[  276.874047] glymur kernel: input input10: PM: input_dev_resume returned 0 after 0 usecs
+[  276.874126] glymur kernel: input input11: PM: calling input_dev_resume @ 10729, parent: 0018:04F3:44BF.0001
+[  276.874204] glymur kernel: input input11: PM: input_dev_resume returned 0 after 0 usecs
+[  276.874281] glymur kernel: input input12: PM: calling input_dev_resume @ 10729, parent: 0018:04F3:44BF.0001
+[  276.874366] glymur kernel: input input12: PM: input_dev_resume returned 0 after 0 usecs
+[  276.874439] glymur kernel: i2c_hid_of 4-0015: PM: i2c_hid_core_pm_resume [i2c_hid] returned 0 after 63678 usecs
+[  276.874501] glymur kernel: input input14: PM: calling input_dev_resume @ 10729, parent: 0018:04F3:32EF.0002
+[  276.874581] glymur kernel: input input14: PM: input_dev_resume returned 0 after 0 usecs
+[  276.874660] glymur kernel: input input16: PM: calling input_dev_resume @ 10729, parent: 0018:04F3:32EF.0002
+[  276.874747] glymur kernel: input input16: PM: input_dev_resume returned 0 after 0 usecs
+[  276.874830] glymur kernel: input input17: PM: calling input_dev_resume @ 10729, parent: 0018:04F3:32EF.0002
+[  276.874915] glymur kernel: input input17: PM: input_dev_resume returned 0 after 0 usecs
+[  276.874999] glymur kernel: rtc rtc0: PM: calling rtc_resume @ 10729, parent: pmic_glink.rtc-glink.0
+[  276.875053] glymur kernel: rtc rtc0: PM: rtc_resume returned 0 after 0 usecs
+[  276.875098] glymur kernel: alarmtimer alarmtimer.4.auto: PM: calling platform_pm_resume @ 10729, parent: rtc0
+[  276.875161] glymur kernel: alarmtimer alarmtimer.4.auto: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.875233] glymur kernel: leds input9::numlock: PM: calling led_resume @ 10729, parent: input9
+[  276.875301] glymur kernel: leds input9::numlock: PM: led_resume returned 0 after 0 usecs
+[  276.875368] glymur kernel: leds input9::capslock: PM: calling led_resume @ 10729, parent: input9
+[  276.875433] glymur kernel: leds input9::capslock: PM: led_resume returned 0 after 0 usecs
+[  276.875499] glymur kernel: leds input9::scrolllock: PM: calling led_resume @ 10729, parent: input9
+[  276.875564] glymur kernel: leds input9::scrolllock: PM: led_resume returned 0 after 0 usecs
+[  276.875631] glymur kernel: leds input9::compose: PM: calling led_resume @ 10729, parent: input9
+[  276.875699] glymur kernel: leds input9::compose: PM: led_resume returned 0 after 0 usecs
+[  276.875763] glymur kernel: leds input9::kana: PM: calling led_resume @ 10729, parent: input9
+[  276.875827] glymur kernel: leds input9::kana: PM: led_resume returned 0 after 0 usecs
+[  276.875893] glymur kernel: scmi-perf-domain scmi_dev.3: PM: calling scmi_pm_resume @ 10729, parent: arm-scmi.0.auto
+[  276.875964] glymur kernel: scmi-perf-domain scmi_dev.3: PM: scmi_pm_resume returned 0 after 0 usecs
+[  276.876028] glymur kernel: scmi-cpufreq scmi_dev.4: PM: calling scmi_pm_resume @ 10729, parent: arm-scmi.0.auto
+[  276.876081] glymur kernel: scmi-cpufreq scmi_dev.4: PM: scmi_pm_resume returned 0 after 0 usecs
+[  276.876136] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@1: PM: calling platform_pm_resume @ 10729, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.876157] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@1: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876176] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@2: PM: calling platform_pm_resume @ 10729, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.876195] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@2: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876214] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: calling platform_pm_resume @ 10729, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.876233] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876253] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: calling platform_pm_resume @ 10729, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.876273] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876292] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: calling platform_pm_resume @ 10729, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.876312] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876330] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: calling platform_pm_resume @ 10729, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.876349] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876369] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: calling platform_pm_resume @ 10729, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.876389] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876409] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: calling platform_pm_resume @ 10729, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.876428] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876449] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@10: PM: calling platform_pm_resume @ 10729, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.876469] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@10: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876487] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@11: PM: calling platform_pm_resume @ 10729, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.876506] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@11: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876525] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@12: PM: calling platform_pm_resume @ 10729, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.876544] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@12: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876562] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: calling platform_pm_resume @ 10729, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.876582] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876601] glymur kernel: q6apm-lpass-dais 6800000.remoteproc:glink-edge:gpr:service@1:bedais: PM: calling platform_pm_resume @ 10729, parent: gprsvc:service:2:1
+[  276.876620] glymur kernel: q6apm-lpass-dais 6800000.remoteproc:glink-edge:gpr:service@1:bedais: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876639] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: calling platform_pm_resume @ 10729, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.876658] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876679] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: calling platform_pm_resume @ 10729, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.876698] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876717] glymur kernel: q6apm-dai 6800000.remoteproc:glink-edge:gpr:service@1:dais: PM: calling platform_pm_resume @ 10729, parent: gprsvc:service:2:1
+[  276.876735] glymur kernel: q6apm-dai 6800000.remoteproc:glink-edge:gpr:service@1:dais: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876756] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: calling platform_pm_resume @ 10729, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.876776] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.876821] glymur kernel: input input18: PM: calling input_dev_resume @ 10729, parent: 9-0076
+[  276.876900] glymur kernel: input input18: PM: input_dev_resume returned 0 after 0 usecs
+[  276.876976] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: calling platform_pm_resume @ 10729, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.876995] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.877016] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: calling platform_pm_resume @ 10729, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  276.877036] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.877057] glymur kernel: q6prm-lpass-clock 6800000.remoteproc:glink-edge:gpr:service@2:clock-controller: PM: calling platform_pm_resume @ 10729, parent: gprsvc:service:2:2
+[  276.877076] glymur kernel: q6prm-lpass-clock 6800000.remoteproc:glink-edge:gpr:service@2:clock-controller: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.877095] glymur kernel: input input19: PM: calling input_dev_resume @ 10729, parent: c426000.spmi:pmic@0:pon@1300:pwrkey
+[  276.877173] glymur kernel: input input19: PM: input_dev_resume returned 0 after 0 usecs
+[  276.877249] glymur kernel: rfkill rfkill0: PM: calling rfkill_resume @ 10729, parent: hci0
+[  276.877321] glymur kernel: rfkill rfkill0: PM: rfkill_resume returned 0 after 3 usecs
+[  276.877393] glymur kernel: leds platform::mute: PM: calling led_resume @ 10729, parent: 9-0076
+[  276.877457] glymur kernel: leds platform::mute: PM: led_resume returned 0 after 0 usecs
+[  276.877516] glymur kernel: usb usb1: PM: usb_dev_resume returned 0 after 147339 usecs
+[  276.877608] glymur kernel: usb 1-1: PM: calling usb_dev_resume @ 147, parent: usb1
+[  276.877701] glymur kernel: usb usb3: PM: usb_dev_resume returned 0 after 209705 usecs
+[  276.877806] glymur kernel: usb 3-1: PM: calling usb_dev_resume @ 10796, parent: usb3
+[  276.877910] glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+[  276.877999] glymur kernel: usb 3-1: reset SuperSpeed USB device number 2 using xhci-hcd
+[  276.878090] glymur kernel: usb 3-1: PM: usb_dev_resume returned 0 after 135933 usecs
+[  276.878175] glymur kernel: scsi host0: PM: calling scsi_bus_resume @ 10800, parent: 3-1:1.0
+[  276.878233] glymur kernel: scsi host0: PM: scsi_bus_resume returned 0 after 0 usecs
+[  276.878293] glymur kernel: scsi target0:0:0: PM: calling scsi_bus_resume @ 1069, parent: host0
+[  276.878356] glymur kernel: scsi target0:0:0: PM: scsi_bus_resume returned 0 after 0 usecs
+[  276.878423] glymur kernel: sd 0:0:0:0: PM: calling scsi_bus_resume @ 98, parent: target0:0:0
+[  276.878488] glymur kernel: sd 0:0:0:0: PM: scsi_bus_resume returned 0 after 1 usecs
+[  276.878552] glymur kernel: usb 1-1: PM: usb_dev_resume returned 0 after 265216 usecs
+[  276.878643] glymur kernel: debugfs: 'simulate_fw_crash' already exists in 'pci-0004:01:00.0'
+[  276.878648] glymur kernel: debugfs: 'device_dp_stats' already exists in 'pci-0004:01:00.0'
+[  276.878652] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: PM: pci_pm_resume returned 0 after 963254 usecs
+[  276.878747] glymur kernel: leds platform::micmute: PM: calling led_resume @ 10729, parent: 9-0076
+[  276.878811] glymur kernel: leds platform::micmute: PM: led_resume returned 0 after 0 usecs
+[  276.878874] glymur kernel: leds platform::kbd_backlight: PM: calling led_resume @ 10729, parent: 9-0076
+[  276.878938] glymur kernel: ieee80211 phy0: PM: calling wiphy_resume [cfg80211] @ 129, parent: 0004:01:00.0
+[  276.878994] glymur kernel: leds platform::kbd_backlight: PM: led_resume returned 0 after 0 usecs
+[  276.879057] glymur kernel: qcom-sm8650-lpass-lpi-pinctrl 7760000.pinctrl: PM: calling platform_pm_resume @ 10729, parent: soc@0
+[  276.879116] glymur kernel: ieee80211 phy0: PM: wiphy_resume [cfg80211] returned 0 after 32 usecs
+[  276.879173] glymur kernel: qcom-sm8650-lpass-lpi-pinctrl 7760000.pinctrl: PM: platform_pm_resume returned 0 after 1890 usecs
+[  276.879233] glymur kernel: va_macro 7660000.codec: PM: calling platform_pm_resume @ 10729, parent: soc@0
+[  276.879291] glymur kernel: va_macro 7660000.codec: PM: platform_pm_resume returned 0 after 733 usecs
+[  276.879348] glymur kernel: wsa_macro 6cb0000.codec: PM: calling platform_pm_resume @ 10729, parent: soc@0
+[  276.879404] glymur kernel: wsa_macro 6cb0000.codec: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.879463] glymur kernel: wsa_macro 6c90000.codec: PM: calling platform_pm_resume @ 10729, parent: soc@0
+[  276.879522] glymur kernel: wsa_macro 6c90000.codec: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.879617] glymur kernel: qcom-soundwire 6c80000.soundwire: PM: calling platform_pm_resume @ 10729, parent: soc@0
+[  276.879695] glymur kernel: qcom-soundwire 6c80000.soundwire: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.879751] glymur kernel: tx_macro 6a90000.codec: PM: calling platform_pm_resume @ 10729, parent: soc@0
+[  276.879810] glymur kernel: tx_macro 6a90000.codec: PM: platform_pm_resume returned 0 after 527 usecs
+[  276.879864] glymur kernel: rx_macro 6a70000.codec: PM: calling platform_pm_resume @ 10729, parent: soc@0
+[  276.879919] glymur kernel: rx_macro 6a70000.codec: PM: platform_pm_resume returned 0 after 471 usecs
+[  276.879973] glymur kernel: qcom-soundwire 6a80000.soundwire: PM: calling platform_pm_resume @ 10729, parent: soc@0
+[  276.880030] glymur kernel: qcom-soundwire 6a80000.soundwire: PM: platform_pm_resume returned 0 after 45 usecs
+[  276.880088] glymur kernel: qcom-soundwire 7630000.soundwire: PM: calling platform_pm_resume @ 10729, parent: soc@0
+[  276.880146] glymur kernel: qcom-soundwire 7630000.soundwire: PM: platform_pm_resume returned 0 after 161 usecs
+[  276.880203] glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: PM: calling wcd9378_sdca_system_resume [snd_soc_wcd9378] @ 10729, parent: sdw-master-3-0
+[  276.880263] glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: PM: wcd9378_sdca_system_resume [snd_soc_wcd9378] returned 0 after 22 usecs
+[  276.880323] glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: PM: calling class_function_resume [snd_soc_sdca_class_function] @ 10729, parent: sdw:3:0:0217:0110:00:3
+[  276.880380] glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: PM: class_function_resume [snd_soc_sdca_class_function] returned 0 after 822 usecs
+[  276.880435] glymur kernel: snd-x1e80100 sound: PM: calling platform_pm_resume @ 10729, parent: platform
+[  276.880514] glymur kernel: snd-x1e80100 sound: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.880571] glymur kernel: input input20: PM: calling input_dev_resume @ 10729, parent: card0
+[  276.880644] glymur kernel: input input20: PM: input_dev_resume returned 0 after 0 usecs
+[  276.880716] glymur kernel: rfkill rfkill1: PM: calling rfkill_resume @ 10729, parent: phy0
+[  276.880782] glymur kernel: rfkill rfkill1: PM: rfkill_resume returned 0 after 1 usecs
+[  276.880848] glymur kernel: platform c426000.spmi:pmic@7:temp-alarm@a00: PM: calling platform_pm_resume @ 10729, parent: 0-07
+[  276.880913] glymur kernel: platform c426000.spmi:pmic@7:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  276.880980] glymur kernel: PM: resume of devices complete after 971.561 msecs
+[  276.880985] glymur kernel: GFP mask restored
+[  276.880990] glymur kernel: OOM killer enabled.
+[  276.880995] glymur kernel: Restarting tasks: Starting
+[  276.881008] glymur kernel: Restarting tasks: Done
+[  276.881013] glymur kernel: efivarfs: resyncing variable state
+[  276.966498] glymur kernel: efivarfs: finished resyncing variable state
+[  276.987010] glymur kernel: PM: suspend exit
+[  283.489112] glymur kernel: wlo1: authenticate with xx:xx:xx:xx:xx:xx (local address=xx:xx:xx:xx:xx:xx)
+[  283.489247] glymur kernel: wlo1: send auth to xx:xx:xx:xx:xx:xx (try 1/3)
+[  283.495013] glymur kernel: wlo1: authenticated
+[  283.495031] glymur kernel: wlo1: associate with xx:xx:xx:xx:xx:xx (try 1/3)
+[  283.503003] glymur kernel: wlo1: RX AssocResp from xx:xx:xx:xx:xx:xx (capab=0x1511 status=0 aid=4)
+[  283.521032] glymur kernel: wlo1: associated
+[  283.567084] glymur kernel: wlo1: Limiting TX power to 24 (24 - 0) dBm as advertised by xx:xx:xx:xx:xx:xx
+[  285.057494] glymur systemd-journald[577]: Received client request to sync journal (with offlining).
+
+==== devices (after rtc)
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+    |__ Port 001: Dev 002, If 0, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 1, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 2, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 3, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 4, Class=Application Specific Interface, Driver=[none], 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 003.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+    |__ Port 001: Dev 002, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
+wlo1             UP             xx:xx:xx:xx:xx:xx <BROADCAST,MULTICAST,UP,LOWER_UP> 
+		type P2P-device
+	Interface wlo1
+		type managed
+		channel 112 (5560 MHz), width: 40 MHz, center1: 5550 MHz
+network: connected:full
+card 0: MAHUAHPOmniBook [MAHUA-HP-OmniBook-5-16-bf1xxx], device 0: MultiMedia1 Playback (*) []
+qcom-battmgr-ac:  
+qcom-battmgr-bat: Charging 54
+qcom-battmgr-usb:  
+qcom-battmgr-wls:  
+ucsi-source-psy-pmic_glink.ucsi.01: Not charging 
+ucsi-source-psy-pmic_glink.ucsi.02: Not charging 
+card1-Writeback-1: unknown disabled
+card1-eDP-1: connected enabled
+EC fan 0 rpm, temp1 39000
+/dev/rtc
+/dev/rtc0
+/dev/rtc1
+
+==== sleep counters (after rtc)
+adsp: Count: 16 Last Entered At: 6475192433 Last Exited At: 6475177645 Accumulated Duration: 5010110273 
+adsp_island: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+aosd: Count: 1 Last Entered At: 6347192960 Last Exited At: 6358144128 Accumulated Duration: 10951168 
+apss: Count: 8258 Last Entered At: 6570543856 Last Exited At: 6570790642 Accumulated Duration: 1670676401 
+cdsp1: 
+cdsp_nsp: Count: 14 Last Entered At: 6408240159 Last Exited At: 6408208573 Accumulated Duration: 5471008612 
+cdsp_nsp_1: 
+cdsp_nsp_2: 
+cdsp_nsp_3: 
+cxsd: Count: 1 Last Entered At: 6347184170 Last Exited At: 6358149988 Accumulated Duration: 10965818 
+dcp: 
+ddr: Count: 1 Last Entered At: 6347158734 Last Exited At: 6358179352 Accumulated Duration: 11020618 
+ddr_stats: DDR LPM Stat Name:0xd4	count:1	Duration (ticks):11023730 DDR LPM Stat Name:0xd3	count:0	Duration (ticks):0 DDR LPM Stat Name:0x11	count:0	Duration (ticks):0 DDR LPM Stat Name:0xd0	count:1	Duration (ticks):6347154265 DDR Freq 200Mhz:	CP IDX:1	count:1	Duration (ticks):29662208 DDR Freq 547Mhz:	CP IDX:2	count:1	Duration (ticks):131584 DDR Freq 1353Mhz:	CP IDX:3	count:1	Duration (ticks):0 DDR Freq 1555Mhz:	CP IDX:4	count:1	Duration (ticks):0 DDR Freq 1708Mhz:	CP IDX:5	count:1	Duration (ticks):0 DDR Freq 2092Mhz:	CP IDX:6	count:1	Duration (ticks):4380459520 DDR Freq 2736Mhz:	CP IDX:7	count:1	Duration (ticks):80247296 DDR Freq 3187Mhz:	CP IDX:8	count:1	Duration (ticks):1156428800 DDR Freq 3686Mhz:	CP IDX:9	count:1	Duration (ticks):29197312 DDR Freq 4224Mhz:	CP IDX:10	count:1	Duration (ticks):671027712 DDR Freq 4761Mhz:	CP IDX:11	count:1	Duration (ticks):0 
+display: 
+gpdsp0: 
+gpdsp1: 
+gpu: 
+modem: 
+slpi: 
+slpi_island: 
+soccp: Count: 3890 Last Entered At: 6574260812 Last Exited At: 6574236412 Accumulated Duration: 6061140900 
+wpss: 
+fail:0
+failed_freeze:0
+failed_prepare:0
+failed_resume:0
+failed_resume_early:0
+failed_resume_noirq:0
+failed_suspend:0
+failed_suspend_late:0
+failed_suspend_noirq:0
+last_failed_errno:0
+success:3
+
+  Q: Cycle rtc: fan while it slept? (on / off / unsure)
+  A: unsure
+  Q: Cycle rtc: keyboard backlight while it slept? (on / off / unsure)
+  A: off
+  Q: Cycle rtc: power LED while it slept? (steady / breathing / off / unsure)
+  A: breathing
+  Q: Cycle rtc: did the screen come back? (y / n)
+  A: y
+  Q: Cycle rtc: did the keyboard and touchpad work after? (y / n)
+  A: y
+  Q: Cycle rtc: USB mouse moves the pointer? (y / n / none plugged in)
+  A: console mode, unsure of pointer
+  Q: Cycle rtc: Wi-Fi back, a web page loads? (y / n / unsure)
+  A: console mode, unsure
+owner: y
+
+==== cycle: lid
+Close the lid now. While it sleeps, unplug the charger, wait 10 s, plug it back in, wait 10 s more, then open the lid.
+While it sleeps, look at: the fan, the keyboard backlight, the power LED. You are asked afterwards.
+resumed after 32 s; suspend successes 3 -> 4
+residency cxsd: entries +4, 33785830 ticks = 1 s of 32 s
+residency aosd: entries +4, 33738368 ticks = 1 s of 32 s
+residency ddr : entries +4, 34235222 ticks = 1 s of 32 s
+battery: 32900000 -> 33170000 uWh, -30375 mW average (meaningful on battery only)
+wake IRQ: 238 ( 87 0 0 0 0 0 0 0 0 0 0 0 msmgpio 148 Level 0004:00:00.0:wakeup)
+
+==== kernel log of the cycle
+[  352.326706] glymur kernel: qcom-qmp-combo-phy fde000.phy: PM: calling qmp_combo_pm_resume [phy_qcom_qmp_combo] @ 11385, parent: soc@0
+[  352.326762] glymur kernel: xhci-hcd xhci-hcd.2.auto: PM: calling platform_pm_resume @ 10551, parent: a200000.usb
+[  352.326826] glymur kernel: qcom-qmp-combo-phy fde000.phy: PM: qmp_combo_pm_resume [phy_qcom_qmp_combo] returned 0 after 0 usecs
+[  352.326885] glymur kernel: qcom-qmp-combo-phy 88e1000.phy: PM: calling qmp_combo_pm_resume [phy_qcom_qmp_combo] @ 11385, parent: soc@0
+[  352.326990] glymur kernel: usb usb1: root hub lost power or was reset
+[  352.327106] glymur kernel: qcom-qmp-combo-phy 88e1000.phy: PM: qmp_combo_pm_resume [phy_qcom_qmp_combo] returned 0 after 0 usecs
+[  352.327163] glymur kernel: msm-mdss ae00000.display-subsystem: PM: calling platform_pm_resume @ 11385, parent: soc@0
+[  352.327225] glymur kernel: msm-mdss ae00000.display-subsystem: PM: platform_pm_resume returned 0 after 278 usecs
+[  352.327280] glymur kernel: dwc3-qcom a000000.usb: PM: calling dwc3_qcom_pm_resume [dwc3_qcom] @ 11385, parent: soc@0
+[  352.327336] glymur kernel: xhci-hcd xhci-hcd.2.auto: PM: platform_pm_resume returned 0 after 1337 usecs
+[  352.327389] glymur kernel: usb usb1: PM: calling usb_dev_resume @ 10551, parent: xhci-hcd.2.auto
+[  352.327483] glymur kernel: dwc3-qcom a000000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 5266 usecs
+[  352.327541] glymur kernel: xhci-hcd xhci-hcd.3.auto: PM: calling platform_pm_resume @ 10550, parent: a000000.usb
+[  352.327600] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@2:temp-alarm@a00: PM: calling platform_pm_resume @ 11385, parent: 0-02
+[  352.327677] glymur kernel: usb usb2: root hub lost power or was reset
+[  352.327779] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@2:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.327897] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@2:gpio@8800: PM: calling platform_pm_resume @ 11385, parent: 0-02
+[  352.327974] glymur kernel: usb usb3: root hub lost power or was reset
+[  352.328078] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@2:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.328143] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@1:temp-alarm@a00: PM: calling platform_pm_resume @ 11385, parent: 0-01
+[  352.328216] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@1:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.328280] glymur kernel: qcom-bcl-hwmon c426000.spmi:pmic@1:sensor@4700: PM: calling platform_pm_resume @ 11385, parent: 0-01
+[  352.328353] glymur kernel: qcom-bcl-hwmon c426000.spmi:pmic@1:sensor@4700: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.328419] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@1:gpio@8800: PM: calling platform_pm_resume @ 11385, parent: 0-01
+[  352.328493] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@1:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.328559] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@5:temp-alarm@a00: PM: calling platform_pm_resume @ 11385, parent: 0-05
+[  352.328633] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@5:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.328698] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@5:gpio@8800: PM: calling platform_pm_resume @ 11385, parent: 0-05
+[  352.328821] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@5:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.328889] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@7:gpio@8800: PM: calling platform_pm_resume @ 11385, parent: 0-07
+[  352.328963] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@7:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.329033] glymur kernel: qcom-pon c426000.spmi:pmic@0:pon@1300: PM: calling platform_pm_resume @ 11385, parent: 0-00
+[  352.329104] glymur kernel: qcom-pon c426000.spmi:pmic@0:pon@1300: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.329170] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@0:gpio@b800: PM: calling platform_pm_resume @ 11385, parent: 0-00
+[  352.329241] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@0:gpio@b800: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.329309] glymur kernel: platform c426000.spmi:pmic@0:adc@9000: PM: calling platform_pm_resume @ 11385, parent: 0-00
+[  352.329376] glymur kernel: platform c426000.spmi:pmic@0:adc@9000: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.329439] glymur kernel: rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: PM: calling platform_pm_resume @ 11385, parent: 0-00
+[  352.329512] glymur kernel: rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.329579] glymur kernel: qcom,spmi-sdam c426000.spmi:pmic@0:nvram@7100: PM: calling platform_pm_resume @ 11385, parent: 0-00
+[  352.329714] glymur kernel: qcom,spmi-sdam c426000.spmi:pmic@0:nvram@7100: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.329781] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@2:temp-alarm@a00: PM: calling platform_pm_resume @ 11385, parent: 1-02
+[  352.329857] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@2:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.329921] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@2:gpio@8800: PM: calling platform_pm_resume @ 11385, parent: 1-02
+[  352.329993] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@2:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.330063] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@3:temp-alarm@a00: PM: calling platform_pm_resume @ 11385, parent: 1-03
+[  352.330136] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@3:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.330203] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@3:gpio@8800: PM: calling platform_pm_resume @ 11385, parent: 1-03
+[  352.330274] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@3:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.330337] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@5:temp-alarm@a00: PM: calling platform_pm_resume @ 11385, parent: 1-05
+[  352.330410] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@5:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.330479] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@5:gpio@8800: PM: calling platform_pm_resume @ 11385, parent: 1-05
+[  352.330594] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@5:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.330663] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@b:temp-alarm@a00: PM: calling platform_pm_resume @ 11385, parent: 1-0b
+[  352.330736] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@b:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.330803] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@b:gpio@8800: PM: calling platform_pm_resume @ 11385, parent: 1-0b
+[  352.330877] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@b:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.330942] glymur kernel: qcom-bcl-hwmon c448000.spmi:pmic@9:sensor@4700: PM: calling platform_pm_resume @ 11385, parent: 2-09
+[  352.331023] glymur kernel: qcom-bcl-hwmon c448000.spmi:pmic@9:sensor@4700: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.331088] glymur kernel: msm_dpu ae01000.display-controller: PM: calling pm_runtime_force_resume @ 11385, parent: ae00000.display-subsystem
+[  352.331148] glymur kernel: msm_dpu ae01000.display-controller: PM: pm_runtime_force_resume returned 0 after 0 usecs
+[  352.331206] glymur kernel: msm-dp-display af6c000.displayport-controller: PM: calling pm_runtime_force_resume @ 11385, parent: ae00000.display-subsystem
+[  352.331265] glymur kernel: msm-dp-display af6c000.displayport-controller: PM: pm_runtime_force_resume returned 0 after 0 usecs
+[  352.331327] glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: PM: calling platform_pm_resume @ 11385, parent: 2-09
+[  352.331399] glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.331522] glymur kernel: pm8941-pwrkey c426000.spmi:pmic@0:pon@1300:pwrkey: PM: calling platform_pm_resume @ 11385, parent: c426000.spmi:pmic@0:pon@1300
+[  352.331603] glymur kernel: pm8941-pwrkey c426000.spmi:pmic@0:pon@1300:pwrkey: PM: platform_pm_resume returned 0 after 1 usecs
+[  352.331674] glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: PM: calling platform_pm_resume @ 11385, parent: 2-0a
+[  352.331744] glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.331807] glymur kernel: qcom-m31eusb2-phy fd3000.phy: PM: calling platform_pm_resume @ 11385, parent: soc@0
+[  352.331871] glymur kernel: qcom-m31eusb2-phy fd3000.phy: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.331931] glymur kernel: qcom-m31eusb2-phy fdd000.phy: PM: calling platform_pm_resume @ 11385, parent: soc@0
+[  352.331997] glymur kernel: qcom-m31eusb2-phy fdd000.phy: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.332056] glymur kernel: dwc3-qcom a600000.usb: PM: calling dwc3_qcom_pm_resume [dwc3_qcom] @ 11385, parent: soc@0
+[  352.332113] glymur kernel: xhci-hcd xhci-hcd.3.auto: PM: platform_pm_resume returned 0 after 2696 usecs
+[  352.332165] glymur kernel: usb usb2: PM: calling usb_dev_resume @ 10552, parent: xhci-hcd.3.auto
+[  352.332260] glymur kernel: usb usb3: PM: calling usb_dev_resume @ 10554, parent: xhci-hcd.3.auto
+[  352.332373] glymur kernel: nvme nvme0: D3 entry latency set to 10 seconds
+[  352.332440] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: chip_id 0x21 chip_family 0x4 board_id 0xff soc_id 0x40292100
+[  352.332512] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: fw_version 0x100581de fw_build_timestamp 2024-09-11 23:52 fw_build_id QC_IMAGE_VERSION_STRING=WLAN.COL.1.0.c2-00277-QCACOLSWPL_V1_TO_SILICONZ-1
+[  352.332580] glymur kernel: hp-omnibook-5-ec 9-0076: PM: hpec_resume [hp_omnibook_5_ec] returned 0 after 19495 usecs
+[  352.332641] glymur kernel: usb usb2: PM: usb_dev_resume returned 0 after 20587 usecs
+[  352.332733] glymur kernel: dwc3-qcom a600000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 25106 usecs
+[  352.332792] glymur kernel: rtc rtc1: PM: calling rtc_resume @ 11385, parent: c426000.spmi:pmic@0:rtc@6100
+[  352.332851] glymur kernel: rtc rtc1: PM: rtc_resume returned 0 after 0 usecs
+[  352.332901] glymur kernel: dwc3-qcom a800000.usb: PM: calling dwc3_qcom_pm_resume [dwc3_qcom] @ 11385, parent: soc@0
+[  352.332957] glymur kernel: dwc3-qcom a800000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 25970 usecs
+[  352.333019] glymur kernel: samsung_atana33xc20 aux-af6c000.displayport-controller: PM: calling pm_runtime_force_resume @ 11385, parent: af6c000.displayport-controller
+[  352.333090] glymur kernel: samsung_atana33xc20 aux-af6c000.displayport-controller: PM: pm_runtime_force_resume returned 0 after 0 usecs
+[  352.333149] glymur kernel: backlight dp_aux_backlight: PM: calling backlight_resume @ 11385, parent: aux-af6c000.displayport-controller
+[  352.333265] glymur kernel: backlight dp_aux_backlight: PM: backlight_resume returned 0 after 0 usecs
+[  352.333327] glymur kernel: adreno 3d00000.gpu: PM: calling platform_pm_resume @ 11385, parent: soc@0
+[  352.333397] glymur kernel: adreno 3d00000.gpu: PM: platform_pm_resume returned 0 after 6 usecs
+[  352.333456] glymur kernel: adreno_gmu 3d6c000.gmu: PM: calling platform_pm_resume @ 11385, parent: soc@0
+[  352.333518] glymur kernel: adreno_gmu 3d6c000.gmu: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.333576] glymur kernel: nvme nvme0: 12/0/0 default/read/poll queues
+[  352.333628] glymur kernel: i2c_hid_of 0-003a: PM: i2c_hid_core_pm_resume [i2c_hid] returned 0 after 61177 usecs
+[  352.333687] glymur kernel: i2c_hid_of 8-0010: PM: i2c_hid_core_pm_resume [i2c_hid] returned 0 after 61951 usecs
+[  352.333746] glymur kernel: input input9: PM: calling input_dev_resume @ 11385, parent: 0018:0416:C300.0003
+[  352.333864] glymur kernel: input input9: PM: input_dev_resume returned 0 after 10 usecs
+[  352.333962] glymur kernel: input input10: PM: calling input_dev_resume @ 11385, parent: 0018:04F3:44BF.0001
+[  352.334056] glymur kernel: input input10: PM: input_dev_resume returned 0 after 0 usecs
+[  352.334139] glymur kernel: input input11: PM: calling input_dev_resume @ 11385, parent: 0018:04F3:44BF.0001
+[  352.334225] glymur kernel: input input11: PM: input_dev_resume returned 0 after 0 usecs
+[  352.334343] glymur kernel: input input12: PM: calling input_dev_resume @ 11385, parent: 0018:04F3:44BF.0001
+[  352.334425] glymur kernel: input input12: PM: input_dev_resume returned 0 after 0 usecs
+[  352.334502] glymur kernel: i2c_hid_of 4-0015: PM: i2c_hid_core_pm_resume [i2c_hid] returned 0 after 62961 usecs
+[  352.334563] glymur kernel: input input14: PM: calling input_dev_resume @ 11385, parent: 0018:04F3:32EF.0002
+[  352.334653] glymur kernel: input input14: PM: input_dev_resume returned 0 after 0 usecs
+[  352.334734] glymur kernel: input input16: PM: calling input_dev_resume @ 11385, parent: 0018:04F3:32EF.0002
+[  352.334827] glymur kernel: input input16: PM: input_dev_resume returned 0 after 0 usecs
+[  352.334910] glymur kernel: input input17: PM: calling input_dev_resume @ 11385, parent: 0018:04F3:32EF.0002
+[  352.335003] glymur kernel: input input17: PM: input_dev_resume returned 0 after 0 usecs
+[  352.335091] glymur kernel: rtc rtc0: PM: calling rtc_resume @ 11385, parent: pmic_glink.rtc-glink.0
+[  352.335149] glymur kernel: rtc rtc0: PM: rtc_resume returned 0 after 0 usecs
+[  352.335293] glymur kernel: alarmtimer alarmtimer.4.auto: PM: calling platform_pm_resume @ 11385, parent: rtc0
+[  352.335366] glymur kernel: alarmtimer alarmtimer.4.auto: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.335426] glymur kernel: leds input9::numlock: PM: calling led_resume @ 11385, parent: input9
+[  352.335504] glymur kernel: leds input9::numlock: PM: led_resume returned 0 after 0 usecs
+[  352.335569] glymur kernel: leds input9::capslock: PM: calling led_resume @ 11385, parent: input9
+[  352.335643] glymur kernel: leds input9::capslock: PM: led_resume returned 0 after 0 usecs
+[  352.335713] glymur kernel: leds input9::scrolllock: PM: calling led_resume @ 11385, parent: input9
+[  352.335788] glymur kernel: leds input9::scrolllock: PM: led_resume returned 0 after 0 usecs
+[  352.335853] glymur kernel: leds input9::compose: PM: calling led_resume @ 11385, parent: input9
+[  352.335924] glymur kernel: leds input9::compose: PM: led_resume returned 0 after 0 usecs
+[  352.335988] glymur kernel: leds input9::kana: PM: calling led_resume @ 11385, parent: input9
+[  352.336063] glymur kernel: leds input9::kana: PM: led_resume returned 0 after 0 usecs
+[  352.336130] glymur kernel: scmi-perf-domain scmi_dev.3: PM: calling scmi_pm_resume @ 11385, parent: arm-scmi.0.auto
+[  352.336225] glymur kernel: scmi-perf-domain scmi_dev.3: PM: scmi_pm_resume returned 0 after 0 usecs
+[  352.336283] glymur kernel: scmi-cpufreq scmi_dev.4: PM: calling scmi_pm_resume @ 11385, parent: arm-scmi.0.auto
+[  352.336341] glymur kernel: scmi-cpufreq scmi_dev.4: PM: scmi_pm_resume returned 0 after 0 usecs
+[  352.336393] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@1: PM: calling platform_pm_resume @ 11385, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.336417] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@1: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.336437] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@2: PM: calling platform_pm_resume @ 11385, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.336457] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@2: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.336476] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: calling platform_pm_resume @ 11385, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.336495] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.336515] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: calling platform_pm_resume @ 11385, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.336534] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.336556] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: calling platform_pm_resume @ 11385, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.336575] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.336594] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: calling platform_pm_resume @ 11385, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.336613] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.336632] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: calling platform_pm_resume @ 11385, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.336651] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.336672] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: calling platform_pm_resume @ 11385, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.336691] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.336712] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@10: PM: calling platform_pm_resume @ 11385, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.336735] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@10: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.336755] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@11: PM: calling platform_pm_resume @ 11385, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.336774] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@11: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.336793] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@12: PM: calling platform_pm_resume @ 11385, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.336812] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@12: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.336832] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: calling platform_pm_resume @ 11385, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.336852] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.336872] glymur kernel: q6apm-lpass-dais 6800000.remoteproc:glink-edge:gpr:service@1:bedais: PM: calling platform_pm_resume @ 11385, parent: gprsvc:service:2:1
+[  352.336892] glymur kernel: q6apm-lpass-dais 6800000.remoteproc:glink-edge:gpr:service@1:bedais: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.336911] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: calling platform_pm_resume @ 11385, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.336930] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.336949] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: calling platform_pm_resume @ 11385, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.336972] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.336991] glymur kernel: q6apm-dai 6800000.remoteproc:glink-edge:gpr:service@1:dais: PM: calling platform_pm_resume @ 11385, parent: gprsvc:service:2:1
+[  352.337012] glymur kernel: q6apm-dai 6800000.remoteproc:glink-edge:gpr:service@1:dais: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.337033] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: calling platform_pm_resume @ 11385, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.337053] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.337073] glymur kernel: input input18: PM: calling input_dev_resume @ 11385, parent: 9-0076
+[  352.337183] glymur kernel: input input18: PM: input_dev_resume returned 0 after 0 usecs
+[  352.337261] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: calling platform_pm_resume @ 11385, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.337282] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.337302] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: calling platform_pm_resume @ 11385, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  352.337323] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.337342] glymur kernel: q6prm-lpass-clock 6800000.remoteproc:glink-edge:gpr:service@2:clock-controller: PM: calling platform_pm_resume @ 11385, parent: gprsvc:service:2:2
+[  352.337361] glymur kernel: q6prm-lpass-clock 6800000.remoteproc:glink-edge:gpr:service@2:clock-controller: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.337381] glymur kernel: input input19: PM: calling input_dev_resume @ 11385, parent: c426000.spmi:pmic@0:pon@1300:pwrkey
+[  352.337471] glymur kernel: input input19: PM: input_dev_resume returned 0 after 0 usecs
+[  352.337550] glymur kernel: rfkill rfkill0: PM: calling rfkill_resume @ 11385, parent: hci0
+[  352.337640] glymur kernel: rfkill rfkill0: PM: rfkill_resume returned 0 after 2 usecs
+[  352.337711] glymur kernel: leds platform::mute: PM: calling led_resume @ 11385, parent: 9-0076
+[  352.337780] glymur kernel: leds platform::mute: PM: led_resume returned 0 after 0 usecs
+[  352.337841] glymur kernel: usb usb1: PM: usb_dev_resume returned 0 after 128517 usecs
+[  352.337937] glymur kernel: usb 1-1: PM: calling usb_dev_resume @ 10552, parent: usb1
+[  352.338091] glymur kernel: usb usb3: PM: usb_dev_resume returned 0 after 208636 usecs
+[  352.338195] glymur kernel: usb 3-1: PM: calling usb_dev_resume @ 391, parent: usb3
+[  352.338292] glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+[  352.338380] glymur kernel: usb 3-1: reset SuperSpeed USB device number 2 using xhci-hcd
+[  352.338468] glymur kernel: usb 3-1: PM: usb_dev_resume returned 0 after 135858 usecs
+[  352.338556] glymur kernel: scsi host0: PM: calling scsi_bus_resume @ 10550, parent: 3-1:1.0
+[  352.338629] glymur kernel: scsi host0: PM: scsi_bus_resume returned 0 after 0 usecs
+[  352.338687] glymur kernel: scsi target0:0:0: PM: calling scsi_bus_resume @ 222, parent: host0
+[  352.338755] glymur kernel: scsi target0:0:0: PM: scsi_bus_resume returned 0 after 0 usecs
+[  352.338833] glymur kernel: sd 0:0:0:0: PM: calling scsi_bus_resume @ 10549, parent: target0:0:0
+[  352.338906] glymur kernel: sd 0:0:0:0: PM: scsi_bus_resume returned 0 after 2 usecs
+[  352.339020] glymur kernel: usb 1-1: PM: usb_dev_resume returned 0 after 260083 usecs
+[  352.339112] glymur kernel: debugfs: 'simulate_fw_crash' already exists in 'pci-0004:01:00.0'
+[  352.339118] glymur kernel: debugfs: 'device_dp_stats' already exists in 'pci-0004:01:00.0'
+[  352.339123] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: PM: pci_pm_resume returned 0 after 956076 usecs
+[  352.339191] glymur kernel: ieee80211 phy0: PM: calling wiphy_resume [cfg80211] @ 10553, parent: 0004:01:00.0
+[  352.339259] glymur kernel: leds platform::micmute: PM: calling led_resume @ 11385, parent: 9-0076
+[  352.339328] glymur kernel: leds platform::micmute: PM: led_resume returned 0 after 0 usecs
+[  352.339390] glymur kernel: leds platform::kbd_backlight: PM: calling led_resume @ 11385, parent: 9-0076
+[  352.339461] glymur kernel: leds platform::kbd_backlight: PM: led_resume returned 0 after 0 usecs
+[  352.339522] glymur kernel: qcom-sm8650-lpass-lpi-pinctrl 7760000.pinctrl: PM: calling platform_pm_resume @ 11385, parent: soc@0
+[  352.339588] glymur kernel: ieee80211 phy0: PM: wiphy_resume [cfg80211] returned 0 after 43 usecs
+[  352.339646] glymur kernel: qcom-sm8650-lpass-lpi-pinctrl 7760000.pinctrl: PM: platform_pm_resume returned 0 after 1878 usecs
+[  352.339704] glymur kernel: va_macro 7660000.codec: PM: calling platform_pm_resume @ 11385, parent: soc@0
+[  352.339768] glymur kernel: va_macro 7660000.codec: PM: platform_pm_resume returned 0 after 750 usecs
+[  352.339824] glymur kernel: wsa_macro 6cb0000.codec: PM: calling platform_pm_resume @ 11385, parent: soc@0
+[  352.339887] glymur kernel: wsa_macro 6cb0000.codec: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.339947] glymur kernel: wsa_macro 6c90000.codec: PM: calling platform_pm_resume @ 11385, parent: soc@0
+[  352.340036] glymur kernel: wsa_macro 6c90000.codec: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.340096] glymur kernel: qcom-soundwire 6c80000.soundwire: PM: calling platform_pm_resume @ 11385, parent: soc@0
+[  352.340158] glymur kernel: qcom-soundwire 6c80000.soundwire: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.340216] glymur kernel: tx_macro 6a90000.codec: PM: calling platform_pm_resume @ 11385, parent: soc@0
+[  352.340275] glymur kernel: tx_macro 6a90000.codec: PM: platform_pm_resume returned 0 after 525 usecs
+[  352.340329] glymur kernel: rx_macro 6a70000.codec: PM: calling platform_pm_resume @ 11385, parent: soc@0
+[  352.340387] glymur kernel: rx_macro 6a70000.codec: PM: platform_pm_resume returned 0 after 650 usecs
+[  352.340443] glymur kernel: qcom-soundwire 6a80000.soundwire: PM: calling platform_pm_resume @ 11385, parent: soc@0
+[  352.340508] glymur kernel: qcom-soundwire 6a80000.soundwire: PM: platform_pm_resume returned 0 after 53 usecs
+[  352.340563] glymur kernel: qcom-soundwire 7630000.soundwire: PM: calling platform_pm_resume @ 11385, parent: soc@0
+[  352.340625] glymur kernel: qcom-soundwire 7630000.soundwire: PM: platform_pm_resume returned 0 after 160 usecs
+[  352.340680] glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: PM: calling wcd9378_sdca_system_resume [snd_soc_wcd9378] @ 11385, parent: sdw-master-3-0
+[  352.340756] glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: PM: wcd9378_sdca_system_resume [snd_soc_wcd9378] returned 0 after 21 usecs
+[  352.340817] glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: PM: calling class_function_resume [snd_soc_sdca_class_function] @ 11385, parent: sdw:3:0:0217:0110:00:3
+[  352.340925] glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: PM: class_function_resume [snd_soc_sdca_class_function] returned 0 after 832 usecs
+[  352.340982] glymur kernel: snd-x1e80100 sound: PM: calling platform_pm_resume @ 11385, parent: platform
+[  352.341045] glymur kernel: snd-x1e80100 sound: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.341100] glymur kernel: input input20: PM: calling input_dev_resume @ 11385, parent: card0
+[  352.341185] glymur kernel: input input20: PM: input_dev_resume returned 0 after 0 usecs
+[  352.341255] glymur kernel: rfkill rfkill1: PM: calling rfkill_resume @ 11385, parent: phy0
+[  352.341348] glymur kernel: rfkill rfkill1: PM: rfkill_resume returned 0 after 1 usecs
+[  352.341419] glymur kernel: platform c426000.spmi:pmic@7:temp-alarm@a00: PM: calling platform_pm_resume @ 11385, parent: 0-07
+[  352.341496] glymur kernel: platform c426000.spmi:pmic@7:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  352.341561] glymur kernel: PM: resume of devices complete after 965.005 msecs
+[  352.341566] glymur kernel: GFP mask restored
+[  352.341571] glymur kernel: OOM killer enabled.
+[  352.341576] glymur kernel: Restarting tasks: Starting
+[  352.341583] glymur kernel: Restarting tasks: Done
+[  352.341588] glymur kernel: efivarfs: resyncing variable state
+[  352.405550] glymur kernel: efivarfs: finished resyncing variable state
+[  352.459124] glymur kernel: PM: suspend exit
+[  352.520009] glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:1: Parity error detected
+[  352.753330] glymur kernel: wsa884x-codec sdw:1:0:0217:0204:00:0: Parity error detected
+[  358.926369] glymur kernel: wlo1: authenticate with xx:xx:xx:xx:xx:xx (local address=xx:xx:xx:xx:xx:xx)
+[  358.926482] glymur kernel: wlo1: send auth to xx:xx:xx:xx:xx:xx (try 1/3)
+[  358.932069] glymur kernel: wlo1: authenticated
+[  358.932090] glymur kernel: wlo1: associate with xx:xx:xx:xx:xx:xx (try 1/3)
+[  358.940015] glymur kernel: wlo1: RX AssocResp from xx:xx:xx:xx:xx:xx (capab=0x1511 status=0 aid=4)
+[  358.959004] glymur kernel: wlo1: associated
+[  358.959022] glymur kernel: wlo1: Limiting TX power to 24 (24 - 0) dBm as advertised by xx:xx:xx:xx:xx:xx
+[  360.520895] glymur systemd-journald[577]: Received client request to sync journal (with offlining).
+
+==== devices (after lid)
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+    |__ Port 001: Dev 002, If 0, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 1, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 2, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 3, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 4, Class=Application Specific Interface, Driver=[none], 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 003.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+    |__ Port 001: Dev 002, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
+wlo1             UP             xx:xx:xx:xx:xx:xx <BROADCAST,MULTICAST,UP,LOWER_UP> 
+		type P2P-device
+	Interface wlo1
+		type managed
+		channel 112 (5560 MHz), width: 40 MHz, center1: 5550 MHz
+network: connected:full
+card 0: MAHUAHPOmniBook [MAHUA-HP-OmniBook-5-16-bf1xxx], device 0: MultiMedia1 Playback (*) []
+qcom-battmgr-ac:  
+qcom-battmgr-bat: Discharging 55
+qcom-battmgr-usb:  
+qcom-battmgr-wls:  
+ucsi-source-psy-pmic_glink.ucsi.01: Not charging 
+ucsi-source-psy-pmic_glink.ucsi.02: Not charging 
+card1-Writeback-1: unknown disabled
+card1-eDP-1: connected enabled
+EC fan 0 rpm, temp1 39000
+/dev/rtc
+/dev/rtc0
+/dev/rtc1
+
+==== sleep counters (after lid)
+adsp: Count: 18 Last Entered At: 8023717886 Last Exited At: 8023688622 Accumulated Duration: 6379698538 
+adsp_island: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+aosd: Count: 5 Last Entered At: 7854936384 Last Exited At: 7854961584 Accumulated Duration: 44689536 
+apss: Count: 11222 Last Entered At: 8068918208 Last Exited At: 8068954273 Accumulated Duration: 2450768523 
+cdsp1: 
+cdsp_nsp: Count: 18 Last Entered At: 7905680883 Last Exited At: 7905656525 Accumulated Duration: 6967959663 
+cdsp_nsp_1: 
+cdsp_nsp_2: 
+cdsp_nsp_3: 
+cxsd: Count: 5 Last Entered At: 7854928183 Last Exited At: 7854967445 Accumulated Duration: 44751648 
+dcp: 
+ddr: Count: 5 Last Entered At: 7854902085 Last Exited At: 7854996922 Accumulated Duration: 45255840 
+ddr_stats: DDR LPM Stat Name:0xd4	count:5	Duration (ticks):45270008 DDR LPM Stat Name:0xd3	count:0	Duration (ticks):0 DDR LPM Stat Name:0x11	count:0	Duration (ticks):0 DDR LPM Stat Name:0xd0	count:5	Duration (ticks):7809725556 DDR Freq 200Mhz:	CP IDX:1	count:1	Duration (ticks):29662208 DDR Freq 547Mhz:	CP IDX:2	count:1	Duration (ticks):14040064 DDR Freq 1353Mhz:	CP IDX:3	count:1	Duration (ticks):0 DDR Freq 1555Mhz:	CP IDX:4	count:1	Duration (ticks):0 DDR Freq 1708Mhz:	CP IDX:5	count:1	Duration (ticks):0 DDR Freq 2092Mhz:	CP IDX:6	count:1	Duration (ticks):5813547008 DDR Freq 2736Mhz:	CP IDX:7	count:1	Duration (ticks):84359168 DDR Freq 3187Mhz:	CP IDX:8	count:1	Duration (ticks):1157540864 DDR Freq 3686Mhz:	CP IDX:9	count:1	Duration (ticks):30603776 DDR Freq 4224Mhz:	CP IDX:10	count:1	Duration (ticks):679972864 DDR Freq 4761Mhz:	CP IDX:11	count:1	Duration (ticks):0 
+display: 
+gpdsp0: 
+gpdsp1: 
+gpu: 
+modem: 
+slpi: 
+slpi_island: 
+soccp: Count: 4745 Last Entered At: 8070312516 Last Exited At: 8070292958 Accumulated Duration: 7483239398 
+wpss: 
+fail:0
+failed_freeze:0
+failed_prepare:0
+failed_resume:0
+failed_resume_early:0
+failed_resume_noirq:0
+failed_suspend:0
+failed_suspend_late:0
+failed_suspend_noirq:0
+last_failed_errno:0
+success:4
+
+  Q: Cycle lid: fan while it slept? (on / off / unsure)
+  A: unsure
+  Q: Cycle lid: keyboard backlight while it slept? (on / off / unsure)
+  A: lid was closed, how would I know?
+  Q: Cycle lid: power LED while it slept? (steady / breathing / off / unsure)
+  A: same, lid was closed, how can I know?
+  Q: Cycle lid: did the screen come back? (y / n)
+  A: y
+  Q: Cycle lid: did the keyboard and touchpad work after? (y / n)
+  A: y
+  Q: Cycle lid: USB mouse moves the pointer? (y / n / none plugged in)
+  A: console mode, unsure
+  Q: Cycle lid: Wi-Fi back, a web page loads? (y / n / unsure)
+  A: console mode, unsure
+owner: y
+
+==== cycle: button
+Suspending in 3 s; wait 20 s, then press the power button briefly.
+While it sleeps, look at: the fan, the keyboard backlight, the power LED. You are asked afterwards.
+resumed after 18 s; suspend successes 5 -> 6
+residency cxsd: entries +1, 18482440 ticks = 0 s of 18 s
+residency aosd: entries +1, 18473648 ticks = 0 s of 18 s
+residency ddr : entries +1, 18544100 ticks = 0 s of 18 s
+battery: 33580000 -> 33810000 uWh, -46000 mW average (meaningful on battery only)
+wake IRQ: 163 ( 4 0 0 0 0 0 0 0 0 0 0 0 msmgpio 92 Edge lid)
+
+==== kernel log of the cycle
+[  442.064493] glymur kernel: nvme 0005:01:00.0: PM: pci_pm_resume returned 0 after 2 usecs
+[  442.064561] glymur kernel: dwc3-qcom a200000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 955 usecs
+[  442.064618] glymur kernel: qcom-qmp-combo-phy fde000.phy: PM: calling qmp_combo_pm_resume [phy_qcom_qmp_combo] @ 12240, parent: soc@0
+[  442.064677] glymur kernel: xhci-hcd xhci-hcd.2.auto: PM: calling platform_pm_resume @ 1062, parent: a200000.usb
+[  442.064742] glymur kernel: qcom-qmp-combo-phy fde000.phy: PM: qmp_combo_pm_resume [phy_qcom_qmp_combo] returned 0 after 0 usecs
+[  442.064801] glymur kernel: qcom-qmp-combo-phy 88e1000.phy: PM: calling qmp_combo_pm_resume [phy_qcom_qmp_combo] @ 12240, parent: soc@0
+[  442.064856] glymur kernel: usb usb1: root hub lost power or was reset
+[  442.064974] glymur kernel: qcom-qmp-combo-phy 88e1000.phy: PM: qmp_combo_pm_resume [phy_qcom_qmp_combo] returned 0 after 0 usecs
+[  442.065036] glymur kernel: msm-mdss ae00000.display-subsystem: PM: calling platform_pm_resume @ 12240, parent: soc@0
+[  442.065101] glymur kernel: msm-mdss ae00000.display-subsystem: PM: platform_pm_resume returned 0 after 278 usecs
+[  442.065184] glymur kernel: dwc3-qcom a000000.usb: PM: calling dwc3_qcom_pm_resume [dwc3_qcom] @ 12240, parent: soc@0
+[  442.065242] glymur kernel: xhci-hcd xhci-hcd.2.auto: PM: platform_pm_resume returned 0 after 1310 usecs
+[  442.065298] glymur kernel: usb usb1: PM: calling usb_dev_resume @ 1062, parent: xhci-hcd.2.auto
+[  442.065393] glymur kernel: dwc3-qcom a000000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 5344 usecs
+[  442.065451] glymur kernel: xhci-hcd xhci-hcd.3.auto: PM: calling platform_pm_resume @ 12033, parent: a000000.usb
+[  442.065514] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@2:temp-alarm@a00: PM: calling platform_pm_resume @ 12240, parent: 0-02
+[  442.065597] glymur kernel: usb usb2: root hub lost power or was reset
+[  442.065701] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@2:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.065766] glymur kernel: usb usb3: root hub lost power or was reset
+[  442.065867] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@2:gpio@8800: PM: calling platform_pm_resume @ 12240, parent: 0-02
+[  442.065944] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@2:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.066030] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@1:temp-alarm@a00: PM: calling platform_pm_resume @ 12240, parent: 0-01
+[  442.066127] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@1:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.066192] glymur kernel: qcom-bcl-hwmon c426000.spmi:pmic@1:sensor@4700: PM: calling platform_pm_resume @ 12240, parent: 0-01
+[  442.066268] glymur kernel: qcom-bcl-hwmon c426000.spmi:pmic@1:sensor@4700: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.066332] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@1:gpio@8800: PM: calling platform_pm_resume @ 12240, parent: 0-01
+[  442.066406] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@1:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.066474] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@5:temp-alarm@a00: PM: calling platform_pm_resume @ 12240, parent: 0-05
+[  442.066552] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@5:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.066616] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@5:gpio@8800: PM: calling platform_pm_resume @ 12240, parent: 0-05
+[  442.066690] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@5:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.066754] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@7:gpio@8800: PM: calling platform_pm_resume @ 12240, parent: 0-07
+[  442.066830] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@7:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.066930] glymur kernel: qcom-pon c426000.spmi:pmic@0:pon@1300: PM: calling platform_pm_resume @ 12240, parent: 0-00
+[  442.067008] glymur kernel: qcom-pon c426000.spmi:pmic@0:pon@1300: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.067078] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@0:gpio@b800: PM: calling platform_pm_resume @ 12240, parent: 0-00
+[  442.067151] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@0:gpio@b800: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.067215] glymur kernel: platform c426000.spmi:pmic@0:adc@9000: PM: calling platform_pm_resume @ 12240, parent: 0-00
+[  442.067286] glymur kernel: platform c426000.spmi:pmic@0:adc@9000: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.067349] glymur kernel: rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: PM: calling platform_pm_resume @ 12240, parent: 0-00
+[  442.067425] glymur kernel: rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.067492] glymur kernel: qcom,spmi-sdam c426000.spmi:pmic@0:nvram@7100: PM: calling platform_pm_resume @ 12240, parent: 0-00
+[  442.067563] glymur kernel: qcom,spmi-sdam c426000.spmi:pmic@0:nvram@7100: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.067626] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@2:temp-alarm@a00: PM: calling platform_pm_resume @ 12240, parent: 1-02
+[  442.067704] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@2:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.067792] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@2:gpio@8800: PM: calling platform_pm_resume @ 12240, parent: 1-02
+[  442.067868] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@2:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.067935] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@3:temp-alarm@a00: PM: calling platform_pm_resume @ 12240, parent: 1-03
+[  442.068010] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@3:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.068076] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@3:gpio@8800: PM: calling platform_pm_resume @ 12240, parent: 1-03
+[  442.068147] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@3:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.068219] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@5:temp-alarm@a00: PM: calling platform_pm_resume @ 12240, parent: 1-05
+[  442.068297] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@5:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.068364] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@5:gpio@8800: PM: calling platform_pm_resume @ 12240, parent: 1-05
+[  442.068437] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@5:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.068504] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@b:temp-alarm@a00: PM: calling platform_pm_resume @ 12240, parent: 1-0b
+[  442.068578] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@b:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.068649] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@b:gpio@8800: PM: calling platform_pm_resume @ 12240, parent: 1-0b
+[  442.068758] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@b:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.068831] glymur kernel: qcom-bcl-hwmon c448000.spmi:pmic@9:sensor@4700: PM: calling platform_pm_resume @ 12240, parent: 2-09
+[  442.068909] glymur kernel: qcom-bcl-hwmon c448000.spmi:pmic@9:sensor@4700: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.068974] glymur kernel: msm_dpu ae01000.display-controller: PM: calling pm_runtime_force_resume @ 12240, parent: ae00000.display-subsystem
+[  442.069037] glymur kernel: msm_dpu ae01000.display-controller: PM: pm_runtime_force_resume returned 0 after 0 usecs
+[  442.069097] glymur kernel: msm-dp-display af6c000.displayport-controller: PM: calling pm_runtime_force_resume @ 12240, parent: ae00000.display-subsystem
+[  442.069156] glymur kernel: msm-dp-display af6c000.displayport-controller: PM: pm_runtime_force_resume returned 0 after 0 usecs
+[  442.069219] glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: PM: calling platform_pm_resume @ 12240, parent: 2-09
+[  442.069296] glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.069359] glymur kernel: pm8941-pwrkey c426000.spmi:pmic@0:pon@1300:pwrkey: PM: calling platform_pm_resume @ 12240, parent: c426000.spmi:pmic@0:pon@1300
+[  442.069435] glymur kernel: pm8941-pwrkey c426000.spmi:pmic@0:pon@1300:pwrkey: PM: platform_pm_resume returned 0 after 1 usecs
+[  442.069502] glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: PM: calling platform_pm_resume @ 12240, parent: 2-0a
+[  442.069578] glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.069725] glymur kernel: qcom-m31eusb2-phy fd3000.phy: PM: calling platform_pm_resume @ 12240, parent: soc@0
+[  442.069791] glymur kernel: qcom-m31eusb2-phy fd3000.phy: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.069850] glymur kernel: qcom-m31eusb2-phy fdd000.phy: PM: calling platform_pm_resume @ 12240, parent: soc@0
+[  442.069916] glymur kernel: qcom-m31eusb2-phy fdd000.phy: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.069973] glymur kernel: dwc3-qcom a600000.usb: PM: calling dwc3_qcom_pm_resume [dwc3_qcom] @ 12240, parent: soc@0
+[  442.070031] glymur kernel: nvme nvme0: D3 entry latency set to 10 seconds
+[  442.070096] glymur kernel: xhci-hcd xhci-hcd.3.auto: PM: platform_pm_resume returned 0 after 2672 usecs
+[  442.070150] glymur kernel: usb usb3: PM: calling usb_dev_resume @ 10551, parent: xhci-hcd.3.auto
+[  442.070243] glymur kernel: usb usb2: PM: calling usb_dev_resume @ 1061, parent: xhci-hcd.3.auto
+[  442.070335] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: chip_id 0x21 chip_family 0x4 board_id 0xff soc_id 0x40292100
+[  442.070405] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: fw_version 0x100581de fw_build_timestamp 2024-09-11 23:52 fw_build_id QC_IMAGE_VERSION_STRING=WLAN.COL.1.0.c2-00277-QCACOLSWPL_V1_TO_SILICONZ-1
+[  442.070476] glymur kernel: hp-omnibook-5-ec 9-0076: PM: hpec_resume [hp_omnibook_5_ec] returned 0 after 17506 usecs
+[  442.070538] glymur kernel: usb usb2: PM: usb_dev_resume returned 0 after 20439 usecs
+[  442.070682] glymur kernel: dwc3-qcom a600000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 24931 usecs
+[  442.070739] glymur kernel: rtc rtc1: PM: calling rtc_resume @ 12240, parent: c426000.spmi:pmic@0:rtc@6100
+[  442.070805] glymur kernel: rtc rtc1: PM: rtc_resume returned 0 after 0 usecs
+[  442.070856] glymur kernel: dwc3-qcom a800000.usb: PM: calling dwc3_qcom_pm_resume [dwc3_qcom] @ 12240, parent: soc@0
+[  442.070912] glymur kernel: nvme nvme0: 12/0/0 default/read/poll queues
+[  442.070964] glymur kernel: dwc3-qcom a800000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 24974 usecs
+[  442.071023] glymur kernel: samsung_atana33xc20 aux-af6c000.displayport-controller: PM: calling pm_runtime_force_resume @ 12240, parent: af6c000.displayport-controller
+[  442.071101] glymur kernel: samsung_atana33xc20 aux-af6c000.displayport-controller: PM: pm_runtime_force_resume returned 0 after 0 usecs
+[  442.071164] glymur kernel: backlight dp_aux_backlight: PM: calling backlight_resume @ 12240, parent: aux-af6c000.displayport-controller
+[  442.071244] glymur kernel: backlight dp_aux_backlight: PM: backlight_resume returned 0 after 0 usecs
+[  442.071305] glymur kernel: adreno 3d00000.gpu: PM: calling platform_pm_resume @ 12240, parent: soc@0
+[  442.071370] glymur kernel: adreno 3d00000.gpu: PM: platform_pm_resume returned 0 after 7 usecs
+[  442.071427] glymur kernel: adreno_gmu 3d6c000.gmu: PM: calling platform_pm_resume @ 12240, parent: soc@0
+[  442.071530] glymur kernel: adreno_gmu 3d6c000.gmu: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.071595] glymur kernel: i2c_hid_of 8-0010: PM: i2c_hid_core_pm_resume [i2c_hid] returned 0 after 61817 usecs
+[  442.071656] glymur kernel: i2c_hid_of 0-003a: PM: i2c_hid_core_pm_resume [i2c_hid] returned 0 after 61203 usecs
+[  442.071718] glymur kernel: input input9: PM: calling input_dev_resume @ 12240, parent: 0018:0416:C300.0003
+[  442.071831] glymur kernel: input input9: PM: input_dev_resume returned 0 after 11 usecs
+[  442.071930] glymur kernel: input input10: PM: calling input_dev_resume @ 12240, parent: 0018:04F3:44BF.0001
+[  442.072027] glymur kernel: input input10: PM: input_dev_resume returned 0 after 0 usecs
+[  442.072107] glymur kernel: input input11: PM: calling input_dev_resume @ 12240, parent: 0018:04F3:44BF.0001
+[  442.072192] glymur kernel: input input11: PM: input_dev_resume returned 0 after 0 usecs
+[  442.072267] glymur kernel: input input12: PM: calling input_dev_resume @ 12240, parent: 0018:04F3:44BF.0001
+[  442.072352] glymur kernel: input input12: PM: input_dev_resume returned 0 after 0 usecs
+[  442.072457] glymur kernel: i2c_hid_of 4-0015: PM: i2c_hid_core_pm_resume [i2c_hid] returned 0 after 62888 usecs
+[  442.072520] glymur kernel: input input14: PM: calling input_dev_resume @ 12240, parent: 0018:04F3:32EF.0002
+[  442.072614] glymur kernel: input input14: PM: input_dev_resume returned 0 after 0 usecs
+[  442.072694] glymur kernel: input input16: PM: calling input_dev_resume @ 12240, parent: 0018:04F3:32EF.0002
+[  442.072784] glymur kernel: input input16: PM: input_dev_resume returned 0 after 0 usecs
+[  442.072868] glymur kernel: input input17: PM: calling input_dev_resume @ 12240, parent: 0018:04F3:32EF.0002
+[  442.072960] glymur kernel: input input17: PM: input_dev_resume returned 0 after 0 usecs
+[  442.073048] glymur kernel: rtc rtc0: PM: calling rtc_resume @ 12240, parent: pmic_glink.rtc-glink.0
+[  442.073106] glymur kernel: rtc rtc0: PM: rtc_resume returned 0 after 0 usecs
+[  442.073153] glymur kernel: alarmtimer alarmtimer.4.auto: PM: calling platform_pm_resume @ 12240, parent: rtc0
+[  442.073223] glymur kernel: alarmtimer alarmtimer.4.auto: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.073285] glymur kernel: leds input9::numlock: PM: calling led_resume @ 12240, parent: input9
+[  442.073413] glymur kernel: leds input9::numlock: PM: led_resume returned 0 after 0 usecs
+[  442.073479] glymur kernel: leds input9::capslock: PM: calling led_resume @ 12240, parent: input9
+[  442.073558] glymur kernel: leds input9::capslock: PM: led_resume returned 0 after 0 usecs
+[  442.073625] glymur kernel: leds input9::scrolllock: PM: calling led_resume @ 12240, parent: input9
+[  442.073698] glymur kernel: leds input9::scrolllock: PM: led_resume returned 0 after 0 usecs
+[  442.073764] glymur kernel: leds input9::compose: PM: calling led_resume @ 12240, parent: input9
+[  442.073840] glymur kernel: leds input9::compose: PM: led_resume returned 0 after 0 usecs
+[  442.073905] glymur kernel: leds input9::kana: PM: calling led_resume @ 12240, parent: input9
+[  442.073978] glymur kernel: leds input9::kana: PM: led_resume returned 0 after 0 usecs
+[  442.074046] glymur kernel: scmi-perf-domain scmi_dev.3: PM: calling scmi_pm_resume @ 12240, parent: arm-scmi.0.auto
+[  442.074109] glymur kernel: scmi-perf-domain scmi_dev.3: PM: scmi_pm_resume returned 0 after 0 usecs
+[  442.074165] glymur kernel: scmi-cpufreq scmi_dev.4: PM: calling scmi_pm_resume @ 12240, parent: arm-scmi.0.auto
+[  442.074238] glymur kernel: scmi-cpufreq scmi_dev.4: PM: scmi_pm_resume returned 0 after 0 usecs
+[  442.074313] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@1: PM: calling platform_pm_resume @ 12240, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.074335] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@1: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074355] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@2: PM: calling platform_pm_resume @ 12240, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.074374] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@2: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074396] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: calling platform_pm_resume @ 12240, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.074420] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074441] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: calling platform_pm_resume @ 12240, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.074459] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074479] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: calling platform_pm_resume @ 12240, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.074499] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074517] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: calling platform_pm_resume @ 12240, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.074538] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074558] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: calling platform_pm_resume @ 12240, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.074576] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074596] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: calling platform_pm_resume @ 12240, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.074616] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074635] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@10: PM: calling platform_pm_resume @ 12240, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.074656] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@10: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074677] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@11: PM: calling platform_pm_resume @ 12240, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.074696] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@11: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074716] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@12: PM: calling platform_pm_resume @ 12240, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.074737] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@12: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074756] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: calling platform_pm_resume @ 12240, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.074777] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074797] glymur kernel: q6apm-lpass-dais 6800000.remoteproc:glink-edge:gpr:service@1:bedais: PM: calling platform_pm_resume @ 12240, parent: gprsvc:service:2:1
+[  442.074818] glymur kernel: q6apm-lpass-dais 6800000.remoteproc:glink-edge:gpr:service@1:bedais: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074837] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: calling platform_pm_resume @ 12240, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.074856] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074875] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: calling platform_pm_resume @ 12240, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.074895] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074914] glymur kernel: q6apm-dai 6800000.remoteproc:glink-edge:gpr:service@1:dais: PM: calling platform_pm_resume @ 12240, parent: gprsvc:service:2:1
+[  442.074932] glymur kernel: q6apm-dai 6800000.remoteproc:glink-edge:gpr:service@1:dais: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074956] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: calling platform_pm_resume @ 12240, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.074976] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.074996] glymur kernel: input input18: PM: calling input_dev_resume @ 12240, parent: 9-0076
+[  442.075085] glymur kernel: input input18: PM: input_dev_resume returned 0 after 0 usecs
+[  442.075209] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: calling platform_pm_resume @ 12240, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.075230] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.075249] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: calling platform_pm_resume @ 12240, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  442.075269] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.075288] glymur kernel: q6prm-lpass-clock 6800000.remoteproc:glink-edge:gpr:service@2:clock-controller: PM: calling platform_pm_resume @ 12240, parent: gprsvc:service:2:2
+[  442.075311] glymur kernel: q6prm-lpass-clock 6800000.remoteproc:glink-edge:gpr:service@2:clock-controller: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.075331] glymur kernel: input input19: PM: calling input_dev_resume @ 12240, parent: c426000.spmi:pmic@0:pon@1300:pwrkey
+[  442.075421] glymur kernel: input input19: PM: input_dev_resume returned 0 after 0 usecs
+[  442.075498] glymur kernel: rfkill rfkill0: PM: calling rfkill_resume @ 12240, parent: hci0
+[  442.075589] glymur kernel: rfkill rfkill0: PM: rfkill_resume returned 0 after 3 usecs
+[  442.075662] glymur kernel: leds platform::mute: PM: calling led_resume @ 12240, parent: 9-0076
+[  442.075733] glymur kernel: leds platform::mute: PM: led_resume returned 0 after 0 usecs
+[  442.075794] glymur kernel: usb usb1: PM: usb_dev_resume returned 0 after 144610 usecs
+[  442.075890] glymur kernel: usb 1-1: PM: calling usb_dev_resume @ 1061, parent: usb1
+[  442.076015] glymur kernel: usb usb3: PM: usb_dev_resume returned 0 after 241497 usecs
+[  442.076109] glymur kernel: usb 3-1: PM: calling usb_dev_resume @ 1071, parent: usb3
+[  442.076208] glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+[  442.076296] glymur kernel: usb 3-1: reset SuperSpeed USB device number 2 using xhci-hcd
+[  442.076384] glymur kernel: usb 3-1: PM: usb_dev_resume returned 0 after 135120 usecs
+[  442.076470] glymur kernel: scsi host0: PM: calling scsi_bus_resume @ 223, parent: 3-1:1.0
+[  442.076545] glymur kernel: scsi host0: PM: scsi_bus_resume returned 0 after 0 usecs
+[  442.076604] glymur kernel: scsi target0:0:0: PM: calling scsi_bus_resume @ 234, parent: host0
+[  442.076673] glymur kernel: scsi target0:0:0: PM: scsi_bus_resume returned 0 after 0 usecs
+[  442.076736] glymur kernel: sd 0:0:0:0: PM: calling scsi_bus_resume @ 10553, parent: target0:0:0
+[  442.076809] glymur kernel: sd 0:0:0:0: PM: scsi_bus_resume returned 0 after 1 usecs
+[  442.076904] glymur kernel: usb 1-1: PM: usb_dev_resume returned 0 after 259699 usecs
+[  442.076991] glymur kernel: debugfs: 'simulate_fw_crash' already exists in 'pci-0004:01:00.0'
+[  442.076997] glymur kernel: debugfs: 'device_dp_stats' already exists in 'pci-0004:01:00.0'
+[  442.077008] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: PM: pci_pm_resume returned 0 after 961454 usecs
+[  442.077080] glymur kernel: ieee80211 phy0: PM: calling wiphy_resume [cfg80211] @ 10552, parent: 0004:01:00.0
+[  442.077150] glymur kernel: leds platform::micmute: PM: calling led_resume @ 12240, parent: 9-0076
+[  442.077222] glymur kernel: leds platform::micmute: PM: led_resume returned 0 after 0 usecs
+[  442.077309] glymur kernel: leds platform::kbd_backlight: PM: calling led_resume @ 12240, parent: 9-0076
+[  442.077386] glymur kernel: leds platform::kbd_backlight: PM: led_resume returned 0 after 0 usecs
+[  442.077452] glymur kernel: ieee80211 phy0: PM: wiphy_resume [cfg80211] returned 0 after 40 usecs
+[  442.077506] glymur kernel: qcom-sm8650-lpass-lpi-pinctrl 7760000.pinctrl: PM: calling platform_pm_resume @ 12240, parent: soc@0
+[  442.077572] glymur kernel: qcom-sm8650-lpass-lpi-pinctrl 7760000.pinctrl: PM: platform_pm_resume returned 0 after 1869 usecs
+[  442.077630] glymur kernel: va_macro 7660000.codec: PM: calling platform_pm_resume @ 12240, parent: soc@0
+[  442.077697] glymur kernel: va_macro 7660000.codec: PM: platform_pm_resume returned 0 after 927 usecs
+[  442.077796] glymur kernel: wsa_macro 6cb0000.codec: PM: calling platform_pm_resume @ 12240, parent: soc@0
+[  442.077877] glymur kernel: wsa_macro 6cb0000.codec: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.077934] glymur kernel: wsa_macro 6c90000.codec: PM: calling platform_pm_resume @ 12240, parent: soc@0
+[  442.078004] glymur kernel: wsa_macro 6c90000.codec: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.078060] glymur kernel: qcom-soundwire 6c80000.soundwire: PM: calling platform_pm_resume @ 12240, parent: soc@0
+[  442.078122] glymur kernel: qcom-soundwire 6c80000.soundwire: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.078177] glymur kernel: tx_macro 6a90000.codec: PM: calling platform_pm_resume @ 12240, parent: soc@0
+[  442.078239] glymur kernel: tx_macro 6a90000.codec: PM: platform_pm_resume returned 0 after 518 usecs
+[  442.078296] glymur kernel: rx_macro 6a70000.codec: PM: calling platform_pm_resume @ 12240, parent: soc@0
+[  442.078356] glymur kernel: rx_macro 6a70000.codec: PM: platform_pm_resume returned 0 after 603 usecs
+[  442.078414] glymur kernel: qcom-soundwire 6a80000.soundwire: PM: calling platform_pm_resume @ 12240, parent: soc@0
+[  442.078477] glymur kernel: qcom-soundwire 6a80000.soundwire: PM: platform_pm_resume returned 0 after 52 usecs
+[  442.078533] glymur kernel: qcom-soundwire 7630000.soundwire: PM: calling platform_pm_resume @ 12240, parent: soc@0
+[  442.078596] glymur kernel: qcom-soundwire 7630000.soundwire: PM: platform_pm_resume returned 0 after 164 usecs
+[  442.078652] glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: PM: calling wcd9378_sdca_system_resume [snd_soc_wcd9378] @ 12240, parent: sdw-master-3-0
+[  442.078729] glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: PM: wcd9378_sdca_system_resume [snd_soc_wcd9378] returned 0 after 23 usecs
+[  442.078839] glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: PM: calling class_function_resume [snd_soc_sdca_class_function] @ 12240, parent: sdw:3:0:0217:0110:00:3
+[  442.078929] glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: PM: class_function_resume [snd_soc_sdca_class_function] returned 0 after 835 usecs
+[  442.078984] glymur kernel: snd-x1e80100 sound: PM: calling platform_pm_resume @ 12240, parent: platform
+[  442.079049] glymur kernel: snd-x1e80100 sound: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.079102] glymur kernel: input input20: PM: calling input_dev_resume @ 12240, parent: card0
+[  442.079187] glymur kernel: input input20: PM: input_dev_resume returned 0 after 0 usecs
+[  442.079256] glymur kernel: rfkill rfkill1: PM: calling rfkill_resume @ 12240, parent: phy0
+[  442.079336] glymur kernel: rfkill rfkill1: PM: rfkill_resume returned 0 after 1 usecs
+[  442.079408] glymur kernel: platform c426000.spmi:pmic@7:temp-alarm@a00: PM: calling platform_pm_resume @ 12240, parent: 0-07
+[  442.079482] glymur kernel: platform c426000.spmi:pmic@7:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  442.079548] glymur kernel: PM: resume of devices complete after 970.549 msecs
+[  442.079554] glymur kernel: GFP mask restored
+[  442.079559] glymur kernel: OOM killer enabled.
+[  442.079563] glymur kernel: Restarting tasks: Starting
+[  442.079568] glymur kernel: Restarting tasks: Done
+[  442.079573] glymur kernel: efivarfs: resyncing variable state
+[  442.150202] glymur kernel: efivarfs: finished resyncing variable state
+[  442.179009] glymur kernel: PM: suspend exit
+[  448.644112] glymur kernel: wlo1: authenticate with xx:xx:xx:xx:xx:xx (local address=xx:xx:xx:xx:xx:xx)
+[  448.644194] glymur kernel: wlo1: send auth to xx:xx:xx:xx:xx:xx (try 1/3)
+[  448.649062] glymur kernel: wlo1: authenticated
+[  448.649083] glymur kernel: wlo1: associate with xx:xx:xx:xx:xx:xx (try 1/3)
+[  448.657079] glymur kernel: wlo1: RX AssocResp from xx:xx:xx:xx:xx:xx (capab=0x1511 status=0 aid=4)
+[  448.675056] glymur kernel: wlo1: associated
+[  448.691056] glymur kernel: wlo1: Limiting TX power to 24 (24 - 0) dBm as advertised by xx:xx:xx:xx:xx:xx
+[  450.234040] glymur systemd-journald[577]: Received client request to sync journal (with offlining).
+
+==== devices (after button)
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+    |__ Port 001: Dev 002, If 0, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 1, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 2, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 3, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 4, Class=Application Specific Interface, Driver=[none], 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 003.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+    |__ Port 001: Dev 002, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
+wlo1             UP             xx:xx:xx:xx:xx:xx <BROADCAST,MULTICAST,UP,LOWER_UP> 
+		type P2P-device
+	Interface wlo1
+		type managed
+		channel 112 (5560 MHz), width: 40 MHz, center1: 5550 MHz
+network: connected:full
+card 0: MAHUAHPOmniBook [MAHUA-HP-OmniBook-5-16-bf1xxx], device 0: MultiMedia1 Playback (*) []
+qcom-battmgr-ac:  
+qcom-battmgr-bat: Charging 56
+qcom-battmgr-usb:  
+qcom-battmgr-wls:  
+ucsi-source-psy-pmic_glink.ucsi.01: Not charging 
+ucsi-source-psy-pmic_glink.ucsi.02: Not charging 
+card1-Writeback-1: unknown disabled
+card1-eDP-1: connected enabled
+EC fan 0 rpm, temp1 38000
+/dev/rtc
+/dev/rtc0
+/dev/rtc1
+
+==== sleep counters (after button)
+adsp: Count: 23 Last Entered At: 10303168752 Last Exited At: 10303160304 Accumulated Duration: 8365511496 
+adsp_island: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+aosd: Count: 19 Last Entered At: 10170699392 Last Exited At: 10189173040 Accumulated Duration: 576949824 
+apss: Count: 14331 Last Entered At: 10401903877 Last Exited At: 10402152785 Accumulated Duration: 3826432409 
+cdsp1: 
+cdsp_nsp: Count: 21 Last Entered At: 10239208985 Last Exited At: 10239183448 Accumulated Duration: 9301186827 
+cdsp_nsp_1: 
+cdsp_nsp_2: 
+cdsp_nsp_3: 
+cxsd: Count: 19 Last Entered At: 10170696465 Last Exited At: 10189178905 Accumulated Duration: 577178356 
+dcp: 
+ddr: Count: 19 Last Entered At: 10170664120 Last Exited At: 10189208220 Accumulated Duration: 578885213 
+ddr_stats: DDR LPM Stat Name:0xd4	count:19	Duration (ticks):578938389 DDR LPM Stat Name:0xd3	count:0	Duration (ticks):0 DDR LPM Stat Name:0x11	count:0	Duration (ticks):0 DDR LPM Stat Name:0xd0	count:19	Duration (ticks):9610268474 DDR Freq 200Mhz:	CP IDX:1	count:1	Duration (ticks):29662208 DDR Freq 547Mhz:	CP IDX:2	count:1	Duration (ticks):52475904 DDR Freq 1353Mhz:	CP IDX:3	count:1	Duration (ticks):20662272 DDR Freq 1555Mhz:	CP IDX:4	count:1	Duration (ticks):0 DDR Freq 1708Mhz:	CP IDX:5	count:1	Duration (ticks):0 DDR Freq 2092Mhz:	CP IDX:6	count:1	Duration (ticks):7535253504 DDR Freq 2736Mhz:	CP IDX:7	count:1	Duration (ticks):85999104 DDR Freq 3187Mhz:	CP IDX:8	count:1	Duration (ticks):1157926400 DDR Freq 3686Mhz:	CP IDX:9	count:1	Duration (ticks):31928320 DDR Freq 4224Mhz:	CP IDX:10	count:1	Duration (ticks):696361472 DDR Freq 4761Mhz:	CP IDX:11	count:1	Duration (ticks):0 
+display: 
+gpdsp0: 
+gpdsp1: 
+gpu: 
+modem: 
+slpi: 
+slpi_island: 
+soccp: Count: 5802 Last Entered At: 10405145591 Last Exited At: 10405121096 Accumulated Duration: 9664154809 
+wpss: 
+fail:0
+failed_freeze:0
+failed_prepare:0
+failed_resume:0
+failed_resume_early:0
+failed_resume_noirq:0
+failed_suspend:0
+failed_suspend_late:0
+failed_suspend_noirq:0
+last_failed_errno:0
+success:6
+
+  Q: Cycle button: fan while it slept? (on / off / unsure)
+  A: unsure
+  Q: Cycle button: keyboard backlight while it slept? (on / off / unsure)
+  A: off
+  Q: Cycle button: power LED while it slept? (steady / breathing / off / unsure)
+  A: breathing
+  Q: Cycle button: did the screen come back? (y / n)
+  A: y
+  Q: Cycle button: did the keyboard and touchpad work after? (y / n)
+  A: y
+  Q: Cycle button: USB mouse moves the pointer? (y / n / none plugged in)
+  A: console mode
+  Q: Cycle button: Wi-Fi back, a web page loads? (y / n / unsure)
+  A: console
+owner: y
+
+==== cycle: lid-ac
+With the charger plugged in, close the lid and leave it closed for 2 minutes, then open it.
+While it sleeps, look at: the fan, the keyboard backlight, the power LED. You are asked afterwards.
+resumed after 157 s; suspend successes 6 -> 7
+residency cxsd: entries +51, 2127651144 ticks = 110 s of 157 s
+residency aosd: entries +51, 2127017088 ticks = 110 s of 157 s
+residency ddr : entries +51, 2131296631 ticks = 111 s of 157 s
+battery: 34150000 -> 35780000 uWh, -37375 mW average (meaningful on battery only)
+wake IRQ: 163 ( 6 0 0 0 0 0 0 0 0 0 0 0 msmgpio 92 Edge lid)
+
+==== kernel log of the cycle
+[  502.797742] glymur kernel: nvme 0005:01:00.0: PM: pci_pm_resume returned 0 after 2 usecs
+[  502.797813] glymur kernel: dwc3-qcom a200000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 989 usecs
+[  502.797905] glymur kernel: qcom-qmp-combo-phy fde000.phy: PM: calling qmp_combo_pm_resume [phy_qcom_qmp_combo] @ 12834, parent: soc@0
+[  502.798007] glymur kernel: qcom-qmp-combo-phy fde000.phy: PM: qmp_combo_pm_resume [phy_qcom_qmp_combo] returned 0 after 0 usecs
+[  502.798066] glymur kernel: xhci-hcd xhci-hcd.2.auto: PM: calling platform_pm_resume @ 10795, parent: a200000.usb
+[  502.798126] glymur kernel: usb usb1: root hub lost power or was reset
+[  502.798236] glymur kernel: qcom-qmp-combo-phy 88e1000.phy: PM: calling qmp_combo_pm_resume [phy_qcom_qmp_combo] @ 12834, parent: soc@0
+[  502.798293] glymur kernel: qcom-qmp-combo-phy 88e1000.phy: PM: qmp_combo_pm_resume [phy_qcom_qmp_combo] returned 0 after 0 usecs
+[  502.798349] glymur kernel: msm-mdss ae00000.display-subsystem: PM: calling platform_pm_resume @ 12834, parent: soc@0
+[  502.798409] glymur kernel: msm-mdss ae00000.display-subsystem: PM: platform_pm_resume returned 0 after 277 usecs
+[  502.798464] glymur kernel: dwc3-qcom a000000.usb: PM: calling dwc3_qcom_pm_resume [dwc3_qcom] @ 12834, parent: soc@0
+[  502.798523] glymur kernel: xhci-hcd xhci-hcd.2.auto: PM: platform_pm_resume returned 0 after 1272 usecs
+[  502.798579] glymur kernel: usb usb1: PM: calling usb_dev_resume @ 10795, parent: xhci-hcd.2.auto
+[  502.798672] glymur kernel: dwc3-qcom a000000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 5118 usecs
+[  502.798730] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@2:temp-alarm@a00: PM: calling platform_pm_resume @ 12834, parent: 0-02
+[  502.798810] glymur kernel: xhci-hcd xhci-hcd.3.auto: PM: calling platform_pm_resume @ 114, parent: a000000.usb
+[  502.798870] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@2:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.799017] glymur kernel: usb usb2: root hub lost power or was reset
+[  502.799125] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@2:gpio@8800: PM: calling platform_pm_resume @ 12834, parent: 0-02
+[  502.799201] glymur kernel: usb usb3: root hub lost power or was reset
+[  502.799298] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@2:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.799363] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@1:temp-alarm@a00: PM: calling platform_pm_resume @ 12834, parent: 0-01
+[  502.799440] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@1:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.799507] glymur kernel: qcom-bcl-hwmon c426000.spmi:pmic@1:sensor@4700: PM: calling platform_pm_resume @ 12834, parent: 0-01
+[  502.799581] glymur kernel: qcom-bcl-hwmon c426000.spmi:pmic@1:sensor@4700: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.799645] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@1:gpio@8800: PM: calling platform_pm_resume @ 12834, parent: 0-01
+[  502.799720] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@1:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.799790] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@5:temp-alarm@a00: PM: calling platform_pm_resume @ 12834, parent: 0-05
+[  502.799876] glymur kernel: spmi-temp-alarm c426000.spmi:pmic@5:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.799994] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@5:gpio@8800: PM: calling platform_pm_resume @ 12834, parent: 0-05
+[  502.800072] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@5:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.800140] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@7:gpio@8800: PM: calling platform_pm_resume @ 12834, parent: 0-07
+[  502.800214] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@7:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.800280] glymur kernel: qcom-pon c426000.spmi:pmic@0:pon@1300: PM: calling platform_pm_resume @ 12834, parent: 0-00
+[  502.800355] glymur kernel: qcom-pon c426000.spmi:pmic@0:pon@1300: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.800424] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@0:gpio@b800: PM: calling platform_pm_resume @ 12834, parent: 0-00
+[  502.800497] glymur kernel: qcom-spmi-gpio c426000.spmi:pmic@0:gpio@b800: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.800564] glymur kernel: platform c426000.spmi:pmic@0:adc@9000: PM: calling platform_pm_resume @ 12834, parent: 0-00
+[  502.800634] glymur kernel: platform c426000.spmi:pmic@0:adc@9000: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.800700] glymur kernel: rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: PM: calling platform_pm_resume @ 12834, parent: 0-00
+[  502.800773] glymur kernel: rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.800910] glymur kernel: qcom,spmi-sdam c426000.spmi:pmic@0:nvram@7100: PM: calling platform_pm_resume @ 12834, parent: 0-00
+[  502.800982] glymur kernel: qcom,spmi-sdam c426000.spmi:pmic@0:nvram@7100: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.801048] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@2:temp-alarm@a00: PM: calling platform_pm_resume @ 12834, parent: 1-02
+[  502.801124] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@2:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.801190] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@2:gpio@8800: PM: calling platform_pm_resume @ 12834, parent: 1-02
+[  502.801262] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@2:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.801327] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@3:temp-alarm@a00: PM: calling platform_pm_resume @ 12834, parent: 1-03
+[  502.801398] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@3:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.801467] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@3:gpio@8800: PM: calling platform_pm_resume @ 12834, parent: 1-03
+[  502.801539] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@3:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.801606] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@5:temp-alarm@a00: PM: calling platform_pm_resume @ 12834, parent: 1-05
+[  502.801678] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@5:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.801746] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@5:gpio@8800: PM: calling platform_pm_resume @ 12834, parent: 1-05
+[  502.801823] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@5:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.801960] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@b:temp-alarm@a00: PM: calling platform_pm_resume @ 12834, parent: 1-0b
+[  502.802036] glymur kernel: spmi-temp-alarm c437000.spmi:pmic@b:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.802101] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@b:gpio@8800: PM: calling platform_pm_resume @ 12834, parent: 1-0b
+[  502.802176] glymur kernel: qcom-spmi-gpio c437000.spmi:pmic@b:gpio@8800: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.802241] glymur kernel: qcom-bcl-hwmon c448000.spmi:pmic@9:sensor@4700: PM: calling platform_pm_resume @ 12834, parent: 2-09
+[  502.802315] glymur kernel: qcom-bcl-hwmon c448000.spmi:pmic@9:sensor@4700: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.802382] glymur kernel: msm_dpu ae01000.display-controller: PM: calling pm_runtime_force_resume @ 12834, parent: ae00000.display-subsystem
+[  502.802444] glymur kernel: msm_dpu ae01000.display-controller: PM: pm_runtime_force_resume returned 0 after 0 usecs
+[  502.802504] glymur kernel: msm-dp-display af6c000.displayport-controller: PM: calling pm_runtime_force_resume @ 12834, parent: ae00000.display-subsystem
+[  502.802563] glymur kernel: msm-dp-display af6c000.displayport-controller: PM: pm_runtime_force_resume returned 0 after 0 usecs
+[  502.802625] glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: PM: calling platform_pm_resume @ 12834, parent: 2-09
+[  502.802702] glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.802769] glymur kernel: pm8941-pwrkey c426000.spmi:pmic@0:pon@1300:pwrkey: PM: calling platform_pm_resume @ 12834, parent: c426000.spmi:pmic@0:pon@1300
+[  502.802876] glymur kernel: pm8941-pwrkey c426000.spmi:pmic@0:pon@1300:pwrkey: PM: platform_pm_resume returned 0 after 2 usecs
+[  502.802947] glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: PM: calling platform_pm_resume @ 12834, parent: 2-0a
+[  502.803026] glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.803090] glymur kernel: qcom-m31eusb2-phy fd3000.phy: PM: calling platform_pm_resume @ 12834, parent: soc@0
+[  502.803154] glymur kernel: qcom-m31eusb2-phy fd3000.phy: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.803213] glymur kernel: qcom-m31eusb2-phy fdd000.phy: PM: calling platform_pm_resume @ 12834, parent: soc@0
+[  502.803281] glymur kernel: qcom-m31eusb2-phy fdd000.phy: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.803341] glymur kernel: dwc3-qcom a600000.usb: PM: calling dwc3_qcom_pm_resume [dwc3_qcom] @ 12834, parent: soc@0
+[  502.803397] glymur kernel: nvme nvme0: D3 entry latency set to 10 seconds
+[  502.803458] glymur kernel: xhci-hcd xhci-hcd.3.auto: PM: platform_pm_resume returned 0 after 2625 usecs
+[  502.803514] glymur kernel: usb usb2: PM: calling usb_dev_resume @ 10798, parent: xhci-hcd.3.auto
+[  502.803609] glymur kernel: usb usb3: PM: calling usb_dev_resume @ 412, parent: xhci-hcd.3.auto
+[  502.803734] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: chip_id 0x21 chip_family 0x4 board_id 0xff soc_id 0x40292100
+[  502.803814] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: fw_version 0x100581de fw_build_timestamp 2024-09-11 23:52 fw_build_id QC_IMAGE_VERSION_STRING=WLAN.COL.1.0.c2-00277-QCACOLSWPL_V1_TO_SILICONZ-1
+[  502.803882] glymur kernel: hp-omnibook-5-ec 9-0076: PM: hpec_resume [hp_omnibook_5_ec] returned 0 after 18742 usecs
+[  502.803945] glymur kernel: usb usb2: PM: usb_dev_resume returned 0 after 21069 usecs
+[  502.804037] glymur kernel: dwc3-qcom a600000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 25568 usecs
+[  502.804092] glymur kernel: rtc rtc1: PM: calling rtc_resume @ 12834, parent: c426000.spmi:pmic@0:rtc@6100
+[  502.804152] glymur kernel: rtc rtc1: PM: rtc_resume returned 0 after 0 usecs
+[  502.804205] glymur kernel: dwc3-qcom a800000.usb: PM: calling dwc3_qcom_pm_resume [dwc3_qcom] @ 12834, parent: soc@0
+[  502.804264] glymur kernel: nvme nvme0: 12/0/0 default/read/poll queues
+[  502.804320] glymur kernel: dwc3-qcom a800000.usb: PM: dwc3_qcom_pm_resume [dwc3_qcom] returned 0 after 25929 usecs
+[  502.804376] glymur kernel: samsung_atana33xc20 aux-af6c000.displayport-controller: PM: calling pm_runtime_force_resume @ 12834, parent: af6c000.displayport-controller
+[  502.804446] glymur kernel: samsung_atana33xc20 aux-af6c000.displayport-controller: PM: pm_runtime_force_resume returned 0 after 0 usecs
+[  502.804507] glymur kernel: backlight dp_aux_backlight: PM: calling backlight_resume @ 12834, parent: aux-af6c000.displayport-controller
+[  502.804587] glymur kernel: backlight dp_aux_backlight: PM: backlight_resume returned 0 after 0 usecs
+[  502.804715] glymur kernel: adreno 3d00000.gpu: PM: calling platform_pm_resume @ 12834, parent: soc@0
+[  502.804783] glymur kernel: adreno 3d00000.gpu: PM: platform_pm_resume returned 0 after 5 usecs
+[  502.804842] glymur kernel: adreno_gmu 3d6c000.gmu: PM: calling platform_pm_resume @ 12834, parent: soc@0
+[  502.804906] glymur kernel: adreno_gmu 3d6c000.gmu: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.804965] glymur kernel: i2c_hid_of 0-003a: PM: i2c_hid_core_pm_resume [i2c_hid] returned 0 after 61260 usecs
+[  502.805030] glymur kernel: i2c_hid_of 8-0010: PM: i2c_hid_core_pm_resume [i2c_hid] returned 0 after 62192 usecs
+[  502.805090] glymur kernel: input input9: PM: calling input_dev_resume @ 12834, parent: 0018:0416:C300.0003
+[  502.805206] glymur kernel: input input9: PM: input_dev_resume returned 0 after 7 usecs
+[  502.805304] glymur kernel: input input10: PM: calling input_dev_resume @ 12834, parent: 0018:04F3:44BF.0001
+[  502.805397] glymur kernel: input input10: PM: input_dev_resume returned 0 after 0 usecs
+[  502.805481] glymur kernel: input input11: PM: calling input_dev_resume @ 12834, parent: 0018:04F3:44BF.0001
+[  502.805608] glymur kernel: input input11: PM: input_dev_resume returned 0 after 0 usecs
+[  502.805687] glymur kernel: input input12: PM: calling input_dev_resume @ 12834, parent: 0018:04F3:44BF.0001
+[  502.805769] glymur kernel: input input12: PM: input_dev_resume returned 0 after 0 usecs
+[  502.805842] glymur kernel: i2c_hid_of 4-0015: PM: i2c_hid_core_pm_resume [i2c_hid] returned 0 after 62965 usecs
+[  502.805901] glymur kernel: input input14: PM: calling input_dev_resume @ 12834, parent: 0018:04F3:32EF.0002
+[  502.805993] glymur kernel: input input14: PM: input_dev_resume returned 0 after 0 usecs
+[  502.806079] glymur kernel: input input16: PM: calling input_dev_resume @ 12834, parent: 0018:04F3:32EF.0002
+[  502.806171] glymur kernel: input input16: PM: input_dev_resume returned 0 after 0 usecs
+[  502.806252] glymur kernel: input input17: PM: calling input_dev_resume @ 12834, parent: 0018:04F3:32EF.0002
+[  502.806346] glymur kernel: input input17: PM: input_dev_resume returned 0 after 0 usecs
+[  502.806442] glymur kernel: rtc rtc0: PM: calling rtc_resume @ 12834, parent: pmic_glink.rtc-glink.0
+[  502.806521] glymur kernel: rtc rtc0: PM: rtc_resume returned 0 after 0 usecs
+[  502.806567] glymur kernel: alarmtimer alarmtimer.4.auto: PM: calling platform_pm_resume @ 12834, parent: rtc0
+[  502.806636] glymur kernel: alarmtimer alarmtimer.4.auto: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.806695] glymur kernel: leds input9::numlock: PM: calling led_resume @ 12834, parent: input9
+[  502.806774] glymur kernel: leds input9::numlock: PM: led_resume returned 0 after 0 usecs
+[  502.806841] glymur kernel: leds input9::capslock: PM: calling led_resume @ 12834, parent: input9
+[  502.806919] glymur kernel: leds input9::capslock: PM: led_resume returned 0 after 0 usecs
+[  502.806988] glymur kernel: leds input9::scrolllock: PM: calling led_resume @ 12834, parent: input9
+[  502.807062] glymur kernel: leds input9::scrolllock: PM: led_resume returned 0 after 0 usecs
+[  502.807128] glymur kernel: leds input9::compose: PM: calling led_resume @ 12834, parent: input9
+[  502.807203] glymur kernel: leds input9::compose: PM: led_resume returned 0 after 0 usecs
+[  502.807268] glymur kernel: leds input9::kana: PM: calling led_resume @ 12834, parent: input9
+[  502.807340] glymur kernel: leds input9::kana: PM: led_resume returned 0 after 0 usecs
+[  502.807458] glymur kernel: scmi-perf-domain scmi_dev.3: PM: calling scmi_pm_resume @ 12834, parent: arm-scmi.0.auto
+[  502.807523] glymur kernel: scmi-perf-domain scmi_dev.3: PM: scmi_pm_resume returned 0 after 0 usecs
+[  502.807581] glymur kernel: scmi-cpufreq scmi_dev.4: PM: calling scmi_pm_resume @ 12834, parent: arm-scmi.0.auto
+[  502.807639] glymur kernel: scmi-cpufreq scmi_dev.4: PM: scmi_pm_resume returned 0 after 0 usecs
+[  502.807692] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@1: PM: calling platform_pm_resume @ 12834, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.807714] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@1: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.807733] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@2: PM: calling platform_pm_resume @ 12834, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.807752] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@2: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.807774] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: calling platform_pm_resume @ 12834, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.807794] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.807816] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: calling platform_pm_resume @ 12834, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.807837] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.807859] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: calling platform_pm_resume @ 12834, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.807881] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.807902] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: calling platform_pm_resume @ 12834, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.807923] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.807942] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: calling platform_pm_resume @ 12834, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.807961] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.807981] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: calling platform_pm_resume @ 12834, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.808004] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.808026] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@10: PM: calling platform_pm_resume @ 12834, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.808046] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@10: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.808065] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@11: PM: calling platform_pm_resume @ 12834, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.808085] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@11: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.808106] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@12: PM: calling platform_pm_resume @ 12834, parent: 32300000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.808128] glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@12: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.808149] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: calling platform_pm_resume @ 12834, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.808169] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@3: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.808189] glymur kernel: q6apm-lpass-dais 6800000.remoteproc:glink-edge:gpr:service@1:bedais: PM: calling platform_pm_resume @ 12834, parent: gprsvc:service:2:1
+[  502.808210] glymur kernel: q6apm-lpass-dais 6800000.remoteproc:glink-edge:gpr:service@1:bedais: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.808229] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: calling platform_pm_resume @ 12834, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.808249] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@4: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.808272] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: calling platform_pm_resume @ 12834, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.808299] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@5: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.808341] glymur kernel: q6apm-dai 6800000.remoteproc:glink-edge:gpr:service@1:dais: PM: calling platform_pm_resume @ 12834, parent: gprsvc:service:2:1
+[  502.808365] glymur kernel: q6apm-dai 6800000.remoteproc:glink-edge:gpr:service@1:dais: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.808388] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: calling platform_pm_resume @ 12834, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.808408] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@6: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.808428] glymur kernel: input input18: PM: calling input_dev_resume @ 12834, parent: 9-0076
+[  502.808516] glymur kernel: input input18: PM: input_dev_resume returned 0 after 0 usecs
+[  502.808590] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: calling platform_pm_resume @ 12834, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.808609] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@7: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.808629] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: calling platform_pm_resume @ 12834, parent: 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1
+[  502.808659] glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@8: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.808680] glymur kernel: q6prm-lpass-clock 6800000.remoteproc:glink-edge:gpr:service@2:clock-controller: PM: calling platform_pm_resume @ 12834, parent: gprsvc:service:2:2
+[  502.808699] glymur kernel: q6prm-lpass-clock 6800000.remoteproc:glink-edge:gpr:service@2:clock-controller: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.808720] glymur kernel: input input19: PM: calling input_dev_resume @ 12834, parent: c426000.spmi:pmic@0:pon@1300:pwrkey
+[  502.808815] glymur kernel: input input19: PM: input_dev_resume returned 0 after 0 usecs
+[  502.808894] glymur kernel: rfkill rfkill0: PM: calling rfkill_resume @ 12834, parent: hci0
+[  502.808981] glymur kernel: rfkill rfkill0: PM: rfkill_resume returned 0 after 2 usecs
+[  502.809059] glymur kernel: leds platform::mute: PM: calling led_resume @ 12834, parent: 9-0076
+[  502.809129] glymur kernel: leds platform::mute: PM: led_resume returned 0 after 0 usecs
+[  502.809192] glymur kernel: usb usb1: PM: usb_dev_resume returned 0 after 143204 usecs
+[  502.809335] glymur kernel: usb 1-1: PM: calling usb_dev_resume @ 10798, parent: usb1
+[  502.809436] glymur kernel: usb usb3: PM: usb_dev_resume returned 0 after 242134 usecs
+[  502.809530] glymur kernel: usb 3-1: PM: calling usb_dev_resume @ 90, parent: usb3
+[  502.809628] glymur kernel: usb 1-1: reset high-speed USB device number 2 using xhci-hcd
+[  502.809717] glymur kernel: usb 3-1: reset SuperSpeed USB device number 2 using xhci-hcd
+[  502.809806] glymur kernel: usb 3-1: PM: usb_dev_resume returned 0 after 135959 usecs
+[  502.809893] glymur kernel: scsi host0: PM: calling scsi_bus_resume @ 114, parent: 3-1:1.0
+[  502.809961] glymur kernel: scsi host0: PM: scsi_bus_resume returned 0 after 0 usecs
+[  502.810024] glymur kernel: scsi target0:0:0: PM: calling scsi_bus_resume @ 1069, parent: host0
+[  502.810094] glymur kernel: scsi target0:0:0: PM: scsi_bus_resume returned 0 after 0 usecs
+[  502.810168] glymur kernel: sd 0:0:0:0: PM: calling scsi_bus_resume @ 10799, parent: target0:0:0
+[  502.810259] glymur kernel: sd 0:0:0:0: PM: scsi_bus_resume returned 0 after 1 usecs
+[  502.810328] glymur kernel: usb 1-1: PM: usb_dev_resume returned 0 after 265228 usecs
+[  502.810418] glymur kernel: debugfs: 'simulate_fw_crash' already exists in 'pci-0004:01:00.0'
+[  502.810425] glymur kernel: debugfs: 'device_dp_stats' already exists in 'pci-0004:01:00.0'
+[  502.810430] glymur kernel: ath12k_wifi7_pci 0004:01:00.0: PM: pci_pm_resume returned 0 after 957914 usecs
+[  502.810501] glymur kernel: leds platform::micmute: PM: calling led_resume @ 12834, parent: 9-0076
+[  502.810571] glymur kernel: leds platform::micmute: PM: led_resume returned 0 after 0 usecs
+[  502.810633] glymur kernel: ieee80211 phy0: PM: calling wiphy_resume [cfg80211] @ 166, parent: 0004:01:00.0
+[  502.810703] glymur kernel: leds platform::kbd_backlight: PM: calling led_resume @ 12834, parent: 9-0076
+[  502.810777] glymur kernel: leds platform::kbd_backlight: PM: led_resume returned 0 after 0 usecs
+[  502.810839] glymur kernel: qcom-sm8650-lpass-lpi-pinctrl 7760000.pinctrl: PM: calling platform_pm_resume @ 12834, parent: soc@0
+[  502.810903] glymur kernel: ieee80211 phy0: PM: wiphy_resume [cfg80211] returned 0 after 39 usecs
+[  502.810962] glymur kernel: qcom-sm8650-lpass-lpi-pinctrl 7760000.pinctrl: PM: platform_pm_resume returned 0 after 1883 usecs
+[  502.811026] glymur kernel: va_macro 7660000.codec: PM: calling platform_pm_resume @ 12834, parent: soc@0
+[  502.811092] glymur kernel: va_macro 7660000.codec: PM: platform_pm_resume returned 0 after 980 usecs
+[  502.811173] glymur kernel: wsa_macro 6cb0000.codec: PM: calling platform_pm_resume @ 12834, parent: soc@0
+[  502.811252] glymur kernel: wsa_macro 6cb0000.codec: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.811312] glymur kernel: wsa_macro 6c90000.codec: PM: calling platform_pm_resume @ 12834, parent: soc@0
+[  502.811378] glymur kernel: wsa_macro 6c90000.codec: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.811436] glymur kernel: qcom-soundwire 6c80000.soundwire: PM: calling platform_pm_resume @ 12834, parent: soc@0
+[  502.811497] glymur kernel: qcom-soundwire 6c80000.soundwire: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.811554] glymur kernel: tx_macro 6a90000.codec: PM: calling platform_pm_resume @ 12834, parent: soc@0
+[  502.811617] glymur kernel: tx_macro 6a90000.codec: PM: platform_pm_resume returned 0 after 476 usecs
+[  502.811673] glymur kernel: rx_macro 6a70000.codec: PM: calling platform_pm_resume @ 12834, parent: soc@0
+[  502.811734] glymur kernel: rx_macro 6a70000.codec: PM: platform_pm_resume returned 0 after 559 usecs
+[  502.811788] glymur kernel: qcom-soundwire 6a80000.soundwire: PM: calling platform_pm_resume @ 12834, parent: soc@0
+[  502.811848] glymur kernel: qcom-soundwire 6a80000.soundwire: PM: platform_pm_resume returned 0 after 43 usecs
+[  502.811908] glymur kernel: qcom-soundwire 7630000.soundwire: PM: calling platform_pm_resume @ 12834, parent: soc@0
+[  502.811973] glymur kernel: qcom-soundwire 7630000.soundwire: PM: platform_pm_resume returned 0 after 160 usecs
+[  502.812052] glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: PM: calling wcd9378_sdca_system_resume [snd_soc_wcd9378] @ 12834, parent: sdw-master-3-0
+[  502.812156] glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: PM: wcd9378_sdca_system_resume [snd_soc_wcd9378] returned 0 after 22 usecs
+[  502.812217] glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: PM: calling class_function_resume [snd_soc_sdca_class_function] @ 12834, parent: sdw:3:0:0217:0110:00:3
+[  502.812282] glymur kernel: snd_soc_sdca_class_function snd_soc_sdca.SimpleJack.0: PM: class_function_resume [snd_soc_sdca_class_function] returned 0 after 817 usecs
+[  502.812337] glymur kernel: snd-x1e80100 sound: PM: calling platform_pm_resume @ 12834, parent: platform
+[  502.812395] glymur kernel: snd-x1e80100 sound: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.812449] glymur kernel: input input20: PM: calling input_dev_resume @ 12834, parent: card0
+[  502.812532] glymur kernel: input input20: PM: input_dev_resume returned 0 after 0 usecs
+[  502.812605] glymur kernel: rfkill rfkill1: PM: calling rfkill_resume @ 12834, parent: phy0
+[  502.812679] glymur kernel: rfkill rfkill1: PM: rfkill_resume returned 0 after 1 usecs
+[  502.812744] glymur kernel: platform c426000.spmi:pmic@7:temp-alarm@a00: PM: calling platform_pm_resume @ 12834, parent: 0-07
+[  502.812817] glymur kernel: platform c426000.spmi:pmic@7:temp-alarm@a00: PM: platform_pm_resume returned 0 after 0 usecs
+[  502.812885] glymur kernel: PM: resume of devices complete after 966.538 msecs
+[  502.812891] glymur kernel: GFP mask restored
+[  502.812897] glymur kernel: OOM killer enabled.
+[  502.812904] glymur kernel: Restarting tasks: Starting
+[  502.812911] glymur kernel: Restarting tasks: Done
+[  502.812916] glymur kernel: efivarfs: resyncing variable state
+[  502.877620] glymur kernel: efivarfs: finished resyncing variable state
+[  502.898007] glymur kernel: PM: suspend exit
+[  509.381174] glymur kernel: wlo1: authenticate with xx:xx:xx:xx:xx:xx (local address=xx:xx:xx:xx:xx:xx)
+[  509.381263] glymur kernel: wlo1: send auth to xx:xx:xx:xx:xx:xx (try 1/3)
+[  509.385884] glymur kernel: wlo1: authenticated
+[  509.389065] glymur kernel: wlo1: associate with xx:xx:xx:xx:xx:xx (try 1/3)
+[  509.397011] glymur kernel: wlo1: RX AssocResp from xx:xx:xx:xx:xx:xx (capab=0x1511 status=0 aid=5)
+[  509.415005] glymur kernel: wlo1: associated
+[  509.437006] glymur kernel: wlo1: Limiting TX power to 24 (24 - 0) dBm as advertised by xx:xx:xx:xx:xx:xx
+[  510.971878] glymur systemd-journald[577]: Received client request to sync journal (with offlining).
+
+==== devices (after lid-ac)
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+    |__ Port 001: Dev 002, If 0, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 1, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 2, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 3, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 4, Class=Application Specific Interface, Driver=[none], 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 003.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+    |__ Port 001: Dev 002, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
+wlo1             UP             xx:xx:xx:xx:xx:xx <BROADCAST,MULTICAST,UP,LOWER_UP> 
+		type P2P-device
+	Interface wlo1
+		type managed
+		channel 112 (5560 MHz), width: 40 MHz, center1: 5550 MHz
+network: connected:full
+card 0: MAHUAHPOmniBook [MAHUA-HP-OmniBook-5-16-bf1xxx], device 0: MultiMedia1 Playback (*) []
+qcom-battmgr-ac:  
+qcom-battmgr-bat: Charging 60
+qcom-battmgr-usb:  
+qcom-battmgr-wls:  
+ucsi-source-psy-pmic_glink.ucsi.01: Not charging 
+ucsi-source-psy-pmic_glink.ucsi.02: Not charging 
+card1-Writeback-1: unknown disabled
+card1-eDP-1: connected enabled
+EC fan 0 rpm, temp1 37000
+/dev/rtc
+/dev/rtc0
+/dev/rtc1
+
+==== sleep counters (after lid-ac)
+adsp: Count: 26 Last Entered At: 13941218634 Last Exited At: 13941204155 Accumulated Duration: 11923892390 
+adsp_island: Count: 0 Last Entered At: 0 Last Exited At: 0 Accumulated Duration: 0 
+aosd: Count: 70 Last Entered At: 13818989488 Last Exited At: 13824254112 Accumulated Duration: 2703966912 
+apss: Count: 16557 Last Entered At: 14036634872 Last Exited At: 14037067473 Accumulated Duration: 6931176972 
+cdsp1: 
+cdsp_nsp: Count: 22 Last Entered At: 13874313888 Last Exited At: 13874283562 Accumulated Duration: 12935866119 
+cdsp_nsp_1: 
+cdsp_nsp_2: 
+cdsp_nsp_3: 
+cxsd: Count: 70 Last Entered At: 13818981297 Last Exited At: 13824259985 Accumulated Duration: 2704829500 
+dcp: 
+ddr: Count: 70 Last Entered At: 13818955029 Last Exited At: 13824289307 Accumulated Duration: 2710181844 
+ddr_stats: DDR LPM Stat Name:0xd4	count:70	Duration (ticks):2710376437 DDR LPM Stat Name:0xd3	count:0	Duration (ticks):0 DDR LPM Stat Name:0x11	count:0	Duration (ticks):0 DDR LPM Stat Name:0xd0	count:70	Duration (ticks):11113911513 DDR Freq 200Mhz:	CP IDX:1	count:1	Duration (ticks):29662208 DDR Freq 547Mhz:	CP IDX:2	count:1	Duration (ticks):390322176 DDR Freq 1353Mhz:	CP IDX:3	count:1	Duration (ticks):20662784 DDR Freq 1555Mhz:	CP IDX:4	count:1	Duration (ticks):0 DDR Freq 1708Mhz:	CP IDX:5	count:1	Duration (ticks):0 DDR Freq 2092Mhz:	CP IDX:6	count:1	Duration (ticks):8690938368 DDR Freq 2736Mhz:	CP IDX:7	count:1	Duration (ticks):87185920 DDR Freq 3187Mhz:	CP IDX:8	count:1	Duration (ticks):1158309888 DDR Freq 3686Mhz:	CP IDX:9	count:1	Duration (ticks):32159232 DDR Freq 4224Mhz:	CP IDX:10	count:1	Duration (ticks):704674304 DDR Freq 4761Mhz:	CP IDX:11	count:1	Duration (ticks):0 
+display: 
+gpdsp0: 
+gpdsp1: 
+gpu: 
+modem: 
+slpi: 
+slpi_island: 
+soccp: Count: 7035 Last Entered At: 14040318516 Last Exited At: 14040293975 Accumulated Duration: 13151718346 
+wpss: 
+fail:0
+failed_freeze:0
+failed_prepare:0
+failed_resume:0
+failed_resume_early:0
+failed_resume_noirq:0
+failed_suspend:0
+failed_suspend_late:0
+failed_suspend_noirq:0
+last_failed_errno:0
+success:7
+
+  Q: Cycle lid-ac: fan while it slept? (on / off / unsure)
+  A: unsure, and you really measure this from the machine instead of asking me because fans on this machine is ridiculously quiet and I've almose never heard the fans come up
+  Q: Cycle lid-ac: keyboard backlight while it slept? (on / off / unsure)
+  A: off
+  Q: Cycle lid-ac: power LED while it slept? (steady / breathing / off / unsure)
+  A: cant say, but when I opened the lid, the LED was off and then came up at wake
+  Q: Cycle lid-ac: did the screen come back? (y / n)
+  A: y
+  Q: Cycle lid-ac: did the keyboard and touchpad work after? (y / n)
+  A: y
+  Q: Cycle lid-ac: USB mouse moves the pointer? (y / n / none plugged in)
+  A: console
+  Q: Cycle lid-ac: Wi-Fi back, a web page loads? (y / n / unsure)
+  A: console
+owner: y
+  Q: Measure the sleep drain: 10 minutes on battery with the lid closed? (y / n)
+  A: y
+
+==== cycle: drain
+Unplug the charger now, close the lid, wait 10 minutes, then open it and plug the charger back in.
+While it sleeps, look at: the fan, the keyboard backlight, the power LED. You are asked afterwards.

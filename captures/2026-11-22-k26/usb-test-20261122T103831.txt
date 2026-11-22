@@ -1,0 +1,95 @@
+
+==== USB-A SuperSpeed stress, 20 cycles
+7.4.0-rc3-glymur-26
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+HP PHYC overrides in this device tree: none
+USB-A buses: SuperSpeed 3, high speed 2
+this boot so far: 0 link errors; stick now: SS 5000
+block device: /dev/sda (57.3G Ultra)
+automount off for this stick until the test ends
+-- read 1 GiB (O_DIRECT)
+1073741824 bytes (1.1 GB, 1.0 GiB) copied, 7.5237 s, 143 MB/s
+link errors during the read: 0; stick: SS 5000
+ 1 device reset ok                -> SS 5000   errors=0 0.613719 s, 109 MB/s
+ 2 SS port off/on, HS reset ok    -> SS 5000   errors=0 1.0046 s, 67 MB/s
+ 3 device reset ok                -> SS 5000   errors=0 1.03484 s, 65 MB/s
+ 4 SS port off/on, HS reset ok    -> SS 5000   errors=0 1.02713 s, 65 MB/s
+ 5 device reset ok                -> SS 5000   errors=0 1.00724 s, 67 MB/s
+ 6 SS port off/on, HS reset ok    -> SS 5000   errors=0 1.02124 s, 66 MB/s
+ 7 device reset ok                -> SS 5000   errors=0 1.02089 s, 66 MB/s
+ 8 SS port off/on, HS reset ok    -> SS 5000   errors=0 1.01685 s, 66 MB/s
+ 9 device reset ok                -> SS 5000   errors=0 1.0018 s, 67 MB/s
+10 SS port off/on, HS reset ok    -> SS 5000   errors=0 1.02504 s, 65 MB/s
+11 device reset ok                -> SS 5000   errors=0 1.00533 s, 67 MB/s
+12 SS port off/on, HS reset ok    -> SS 5000   errors=0 1.05985 s, 63 MB/s
+13 device reset ok                -> SS 5000   errors=0 1.04633 s, 64 MB/s
+14 SS port off/on, HS reset ok    -> SS 5000   errors=0 1.05592 s, 64 MB/s
+15 device reset ok                -> SS 5000   errors=0 1.03162 s, 65 MB/s
+16 SS port off/on, HS reset ok    -> SS 5000   errors=0 1.05716 s, 63 MB/s
+17 device reset ok                -> SS 5000   errors=0 1.03002 s, 65 MB/s
+18 SS port off/on, HS reset ok    -> SS 5000   errors=0 1.02118 s, 66 MB/s
+19 device reset ok                -> SS 5000   errors=0 1.01094 s, 66 MB/s
+20 SS port off/on, HS reset ok    -> SS 5000   errors=0 1.03574 s, 65 MB/s
+-- summary: back at SuperSpeed 20, at high speed 0, gone 0 of 20; link errors in all: 0
+Nov 22 10:39:33 glymur kernel: usb 3-1: reset SuperSpeed USB device number 8 using xhci-hcd
+Nov 22 10:39:35 glymur kernel: usb 3-1: USB disconnect, device number 8
+Nov 22 10:39:36 glymur kernel: usb 2-1: new high-speed USB device number 8 using xhci-hcd
+Nov 22 10:39:36 glymur kernel: usb 2-1: New USB device found: idVendor=0781, idProduct=558a, bcdDevice=1.00
+Nov 22 10:39:36 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 22 10:39:36 glymur kernel: usb 2-1: Product: Ultra
+Nov 22 10:39:36 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 22 10:39:36 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 22 10:39:39 glymur kernel: usb 2-1: USB disconnect, device number 8
+Nov 22 10:39:39 glymur kernel: usb 3-1: new SuperSpeed USB device number 9 using xhci-hcd
+Nov 22 10:39:39 glymur kernel: usb 3-1: New USB device found: idVendor=0781, idProduct=558a, bcdDevice=1.00
+Nov 22 10:39:39 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 22 10:39:39 glymur kernel: usb 3-1: Product: Ultra
+Nov 22 10:39:39 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Nov 22 10:39:39 glymur kernel: usb 3-1: SerialNumber: <serial>
+Nov 22 10:39:42 glymur kernel: usb 3-1: reset SuperSpeed USB device number 9 using xhci-hcd
+Nov 22 10:39:44 glymur kernel: usb 3-1: USB disconnect, device number 9
+Nov 22 10:39:45 glymur kernel: usb 2-1: new high-speed USB device number 9 using xhci-hcd
+Nov 22 10:39:45 glymur kernel: usb 2-1: New USB device found: idVendor=0781, idProduct=558a, bcdDevice=1.00
+Nov 22 10:39:45 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 22 10:39:45 glymur kernel: usb 2-1: Product: Ultra
+Nov 22 10:39:45 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 22 10:39:45 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 22 10:39:48 glymur kernel: usb 2-1: USB disconnect, device number 9
+Nov 22 10:39:48 glymur kernel: usb 3-1: new SuperSpeed USB device number 10 using xhci-hcd
+Nov 22 10:39:48 glymur kernel: usb 3-1: New USB device found: idVendor=0781, idProduct=558a, bcdDevice=1.00
+Nov 22 10:39:48 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 22 10:39:48 glymur kernel: usb 3-1: Product: Ultra
+Nov 22 10:39:48 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Nov 22 10:39:48 glymur kernel: usb 3-1: SerialNumber: <serial>
+Nov 22 10:39:51 glymur kernel: usb 3-1: reset SuperSpeed USB device number 10 using xhci-hcd
+Nov 22 10:39:53 glymur kernel: usb 3-1: USB disconnect, device number 10
+Nov 22 10:39:54 glymur kernel: usb 2-1: new high-speed USB device number 10 using xhci-hcd
+Nov 22 10:39:54 glymur kernel: usb 2-1: New USB device found: idVendor=0781, idProduct=558a, bcdDevice=1.00
+Nov 22 10:39:54 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 22 10:39:54 glymur kernel: usb 2-1: Product: Ultra
+Nov 22 10:39:54 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 22 10:39:54 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 22 10:39:57 glymur kernel: usb 2-1: USB disconnect, device number 10
+Nov 22 10:39:57 glymur kernel: usb 3-1: new SuperSpeed USB device number 11 using xhci-hcd
+Nov 22 10:39:57 glymur kernel: usb 3-1: New USB device found: idVendor=0781, idProduct=558a, bcdDevice=1.00
+Nov 22 10:39:57 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 22 10:39:57 glymur kernel: usb 3-1: Product: Ultra
+Nov 22 10:39:57 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Nov 22 10:39:57 glymur kernel: usb 3-1: SerialNumber: <serial>
+Nov 22 10:40:00 glymur kernel: usb 3-1: reset SuperSpeed USB device number 11 using xhci-hcd
+Nov 22 10:40:02 glymur kernel: usb 3-1: USB disconnect, device number 11
+Nov 22 10:40:03 glymur kernel: usb 2-1: new high-speed USB device number 11 using xhci-hcd
+Nov 22 10:40:03 glymur kernel: usb 2-1: New USB device found: idVendor=0781, idProduct=558a, bcdDevice=1.00
+Nov 22 10:40:03 glymur kernel: usb 2-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 22 10:40:03 glymur kernel: usb 2-1: Product: Ultra
+Nov 22 10:40:03 glymur kernel: usb 2-1: Manufacturer: SanDisk
+Nov 22 10:40:03 glymur kernel: usb 2-1: SerialNumber: <serial>
+Nov 22 10:40:06 glymur kernel: usb 2-1: USB disconnect, device number 11
+Nov 22 10:40:06 glymur kernel: usb 3-1: new SuperSpeed USB device number 12 using xhci-hcd
+Nov 22 10:40:06 glymur kernel: usb 3-1: New USB device found: idVendor=0781, idProduct=558a, bcdDevice=1.00
+Nov 22 10:40:06 glymur kernel: usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Nov 22 10:40:06 glymur kernel: usb 3-1: Product: Ultra
+Nov 22 10:40:06 glymur kernel: usb 3-1: Manufacturer: SanDisk
+Nov 22 10:40:06 glymur kernel: usb 3-1: SerialNumber: <serial>
+
+Saved to /var/log/glymur/usb-test-20261122T103831.txt

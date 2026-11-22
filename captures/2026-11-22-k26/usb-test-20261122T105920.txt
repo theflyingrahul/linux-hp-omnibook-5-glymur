@@ -1,0 +1,335 @@
+
+==== system
+Linux glymur 7.4.0-rc3-glymur-26 #2 SMP PREEMPT_DYNAMIC Sat Nov 21 14:58:44 IST 2026 aarch64 GNU/Linux
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+Oct 02 23:05:38 glymur kernel: Machine model: HP OmniBook 5 Laptop 16-bf1xxx (test)
+Oct 02 23:05:38 glymur kernel: Kernel command line: BOOT_IMAGE=(hd1,gpt5)/boot/vmlinuz-glymur root=… rootfstype=ext4 ro rootwait clk_ignore_unused pd_ignore_unused arm64.nopauth quiet splash log_buf_len=16M console=tty0 loglevel=4
+
+==== kernel log: USB controllers, PHYs, Type-C, enumeration
+Nov 22 10:59:16 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:16 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:16 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:16 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:16 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:16 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:17 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:18 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:19 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+Nov 22 10:59:20 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Reached MAX_RETRY on alert read
+
+==== kernel warnings and errors, in full
+
+==== SPMI PMICs and eUSB2 repeaters
+0-00           driver=pmic-spmi of_node=pmic@00000000
+/home/user/check-usb.sh: line 203: /sys/bus/spmi/devices/0-00.0.auto/of_node/name: No such file or directory
+0-00.0.auto    driver=driver of_node=@
+/home/user/check-usb.sh: line 203: /sys/bus/spmi/devices/0-00.3.auto/of_node/name: No such file or directory
+0-00.3.auto    driver=driver of_node=@
+0-01           driver=pmic-spmi of_node=pmic@00000001
+0-02           driver=pmic-spmi of_node=pmic@00000002
+0-05           driver=pmic-spmi of_node=pmic@00000005
+0-07           driver=pmic-spmi of_node=pmic@00000007
+1-02           driver=pmic-spmi of_node=pmic@00000002
+1-03           driver=pmic-spmi of_node=pmic@00000003
+1-05           driver=pmic-spmi of_node=pmic@00000005
+1-0b           driver=pmic-spmi of_node=pmic@0000000b
+2-09           driver=pmic-spmi of_node=pmic@00000009
+/home/user/check-usb.sh: line 203: /sys/bus/spmi/devices/2-09.1.auto/of_node/name: No such file or directory
+2-09.1.auto    driver=driver of_node=@
+2-0a           driver=pmic-spmi of_node=pmic@0000000a
+/home/user/check-usb.sh: line 203: /sys/bus/spmi/devices/2-0a.2.auto/of_node/name: No such file or directory
+2-0a.2.auto    driver=driver of_node=@
+spmi-0         driver=driver of_node=spmi@00000000
+spmi-1         driver=driver of_node=spmi@00000000
+spmi-2         driver=driver of_node=spmi@00000000
+c448000.spmi:pmic@9:phy@fd00 -> qcom-eusb2-repeater
+c448000.spmi:pmic@a:phy@fd00 -> qcom-eusb2-repeater
+Oct 02 23:05:38 glymur kernel: spmi_pmic_arb c400000.arbiter: PMIC arbiter version v8 (0x80000002)
+Oct 02 23:05:39 glymur kernel: rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: registered as rtc1
+Oct 02 23:05:39 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@9:phy@fd00: parent PMIC subtype 0x5f v2.0
+Oct 02 23:05:39 glymur kernel: qcom-eusb2-repeater c448000.spmi:pmic@a:phy@fd00: parent PMIC subtype 0x5f v2.0
+Oct 02 23:05:45 glymur kernel: input: pmic_pwrkey as /devices/platform/soc@0/c400000.arbiter/spmi-0/0-00/c426000.spmi:pmic@0:pon@1300/c426000.spmi:pmic@0:pon@1300:pwrkey/input/input19
+Nov 22 10:31:00 glymur kernel: platform c426000.spmi:pmic@7:temp-alarm@a00: deferred probe pending: (reason unknown)
+
+==== drivers bound
+a000000.usb    -> dwc3-qcom
+88e0000.phy    -> qcom-m31eusb2-phy
+88e1000.phy    -> qcom-qmp-combo-phy
+a600000.usb    -> dwc3-qcom
+fd3000.phy     -> qcom-m31eusb2-phy
+fd5000.phy     -> qcom-qmp-combo-phy
+a800000.usb    -> dwc3-qcom
+fdd000.phy     -> qcom-m31eusb2-phy
+fde000.phy     -> qcom-qmp-combo-phy
+a200000.usb    -> dwc3-qcom
+fa0000.phy     -> qcom-m31eusb2-phy
+phy_qcom_eusb2_repeater    12288  2
+uas                    28672  0
+usb_storage            90112  4 uas
+ucsi_glink             16384  0
+pmic_glink_altmode     20480  0
+xhci_plat_hcd          24576  0
+typec_ucsi             69632  1 ucsi_glink
+dwc3_qcom              24576  2
+phy_qcom_qmp_combo    167936  13
+dwc3                  225280  1 dwc3_qcom
+typec                 118784  4 pmic_glink_altmode,phy_qcom_qmp_combo,typec_ucsi,ucsi_glink
+phy_qcom_edp           77824  1
+phy_qcom_m31_eusb2     16384  8
+pmic_glink             16384  4 pmic_glink_altmode,qcom_battmgr,ucsi_glink,rtc_qcom_glink
+
+==== USB-C: ports, partners, data roles
+port0: data_role=[host] device power_role=[source] sink opmode=usb_power_delivery orientation=reverse partner=yes
+    partner: type= accessory=none usb_pd=yes
+port1: data_role=[host] device power_role=[source] sink opmode=3.0A orientation=reverse partner=yes
+    partner: type= accessory=none usb_pd=no
+a600000.usb-role-switch: role=host
+a800000.usb-role-switch: role=host
+
+==== USB topology and speeds
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+    |__ Port 001: Dev 002, If 0, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 1, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 2, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 3, Class=Video, Driver=uvcvideo, 480M
+    |__ Port 001: Dev 002, If 4, Class=Application Specific Interface, Driver=[none], 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 003.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+/:  Bus 004.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+/:  Bus 005.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+    |__ Port 001: Dev 002, If 0, Class=Mass Storage, Driver=usb-storage, 5000M
+/:  Bus 006.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 480M
+    |__ Port 001: Dev 002, If 0, Class=Hub, Driver=hub/4p, 480M
+        |__ Port 001: Dev 003, If 0, Class=Mass Storage, Driver=usb-storage, 480M
+        |__ Port 003: Dev 004, If 0, Class=Human Interface Device, Driver=usbhid, 12M
+        |__ Port 003: Dev 004, If 1, Class=Human Interface Device, Driver=usbhid, 12M
+        |__ Port 003: Dev 004, If 2, Class=Human Interface Device, Driver=usbhid, 12M
+/:  Bus 007.Port 001: Dev 001, Class=root_hub, Driver=xhci-hcd/1p, 10000M
+1-1          a200000.usb    speed=480    <id> HP True Vision FHD Camera
+5-1          a800000.usb    speed=5000   SanDisk Ultra
+6-1          a600000.usb    speed=480    USB Device   USB 2.0 Hub            
+6-1.1        a600000.usb    speed=480    Generic Mass Storage Device
+6-1.3        a600000.usb    speed=12     Dell Dell Universal Receiver
+usb1         a200000.usb    speed=480    Linux 7.4.0-rc3-glymur-26 xhci-hcd xHCI Host Controller
+usb2         a000000.usb    speed=480    Linux 7.4.0-rc3-glymur-26 xhci-hcd xHCI Host Controller
+usb3         a000000.usb    speed=10000  Linux 7.4.0-rc3-glymur-26 xhci-hcd xHCI Host Controller
+usb4         a800000.usb    speed=480    Linux 7.4.0-rc3-glymur-26 xhci-hcd xHCI Host Controller
+usb5         a800000.usb    speed=10000  Linux 7.4.0-rc3-glymur-26 xhci-hcd xHCI Host Controller
+usb6         a600000.usb    speed=480    Linux 7.4.0-rc3-glymur-26 xhci-hcd xHCI Host Controller
+usb7         a600000.usb    speed=10000  Linux 7.4.0-rc3-glymur-26 xhci-hcd xHCI Host Controller
+
+==== camera (usb_hs, from kernel -8)
+Bus 001 Device 002: ID 30c9:00d9 Luxvisions Innotech Limited HP True Vision FHD Camera
+video0: HP True Vision FHD Camera: HP T
+video1: HP True Vision FHD Camera: HP T
+video2: HP True Vision FHD Camera: HP I
+video3: HP True Vision FHD Camera: HP I
+
+==== block devices and mounts
+NAME          SIZE TRAN FSTYPE    MOUNTPOINTS
+sda          57.3G usb            
+├─sda1        7.3G      vfat      /run/media/user/UBUNTU 26_0
+├─sda2          4G      vfat      /run/media/user/OCINSTALL
+├─sda3       31.1G      ext4      
+└─sda4       14.9G      ntfs      /run/media/user/opencoredev
+sdb         119.1G usb            
+└─sdb1      119.1G      ntfs      
+zram0           0B                
+nvme0n1     953.9G nvme           
+├─nvme0n1p1   512M nvme vfat      
+├─nvme0n1p2    16M nvme           
+├─nvme0n1p3 695.4G nvme BitLocker 
+├─nvme0n1p4   1.1G nvme ntfs      
+└─nvme0n1p5   256G nvme ext4      /
+
+Saved to /var/log/glymur/usb-test-20261122T105920.txt

@@ -1,0 +1,177 @@
+
+==== driver
+Oct 02 23:05:45 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@8: Adding to iommu group 30
+Oct 02 23:05:45 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@10: Adding to iommu group 31
+Oct 02 23:05:45 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@11: Adding to iommu group 32
+Oct 02 23:05:45 glymur kernel: platform 32300000.remoteproc:glink-edge:fastrpc:compute-cb@12: Adding to iommu group 33
+Oct 02 23:05:45 glymur kernel: qcom,fastrpc 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1: reserved memory is beyond device's set DMA address range
+Oct 02 23:05:45 glymur kernel: qcom,fastrpc 6800000.remoteproc:glink-edge.fastrpcglink-apps-dsp.-1.-1: assigned reserved memory node adsp-rpc-remote-heap
+Oct 02 23:05:45 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@3: Adding to iommu group 34
+Oct 02 23:05:45 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@4: Adding to iommu group 35
+Oct 02 23:05:45 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@5: Adding to iommu group 36
+Oct 02 23:05:45 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@6: Adding to iommu group 37
+Oct 02 23:05:45 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@7: Adding to iommu group 38
+Oct 02 23:05:45 glymur kernel: platform 6800000.remoteproc:glink-edge:fastrpc:compute-cb@8: Adding to iommu group 39
+Oct 02 23:05:57 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Oct 02 23:05:58 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+Nov 22 10:31:05 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 22 10:31:06 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+Nov 22 10:31:07 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 22 10:31:08 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+Nov 22 10:34:57 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 22 10:34:58 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+rtc0: name=rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0 hctosys=0
+rtc1: name=rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100 hctosys=0
+
+==== PMK8850 RTC counter and SDAM (read-only)
+rtc1: 1970-04-17 01:38:15, since_epoch=9164295
+Oct 02 23:05:39 glymur kernel: rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: registered as rtc1
+regmap: /sys/kernel/debug/regmap/0-00
+-- RTC_RW (0x6100) and RTC_ALARM (0x6200) blocks
+  6100: 01 6101: 05 6102: 00 6103: 00 6104: 07 6105: 01 6106: 00 6107: 00
+  6108: 80 6109: 00 610a: 00 610b: 00 610c: 00 610d: 00 610e: 00 610f: 00
+  6110: 01 6111: 00 6112: 00 6113: 00 6114: 00 6115: 00 6116: 00 6117: 00
+  6118: 00 6119: 00 611a: 00 611b: 00 611c: 00 611d: 00 611e: 00 611f: 00
+  6120: 00 6121: 00 6122: 00 6123: 00 6124: 00 6125: 00 6126: 00 6127: 00
+  6128: 00 6129: 00 612a: 00 612b: 00 612c: 00 612d: 00 612e: 00 612f: 00
+  6130: 00 6131: 00 6132: 00 6133: 00 6134: 00 6135: 00 6136: 00 6137: 00
+  6138: 00 6139: 00 613a: 00 613b: 00 613c: 00 613d: 00 613e: 00 613f: 00
+  6140: 00 6141: 00 6142: 00 6143: 00 6144: 40 6145: 00 6146: 80 6147: 00
+  6148: 07 6149: d6 614a: 8b 614b: 00 614c: 00 614d: 00 614e: 00 614f: 00
+  6150: 00 6151: 00 6152: 00 6153: 00 6154: 00 6155: 00 6156: 00 6157: 00
+  6158: 00 6159: 00 615a: 00 615b: 00 615c: 00 615d: 00 615e: 00 615f: 00
+  6160: 00 6161: 00 6162: 00 6163: 00 6164: 00 6165: 00 6166: 00 6167: 00
+  6168: 00 6169: 00 616a: 00 616b: 00 616c: 00 616d: 00 616e: 00 616f: 00
+  6170: 00 6171: 00 6172: 00 6173: 00 6174: 00 6175: 00 6176: 00 6177: 00
+  6178: 00 6179: 00 617a: 00 617b: 00 617c: 00 617d: 00 617e: 00 617f: 00
+  6180: 00 6181: 00 6182: 00 6183: 00 6184: 00 6185: 00 6186: 00 6187: 00
+  6188: 00 6189: 00 618a: 00 618b: 00 618c: 00 618d: 00 618e: 00 618f: 00
+  6190: 00 6191: 00 6192: 00 6193: 00 6194: 00 6195: 00 6196: 00 6197: 00
+  6198: 00 6199: 00 619a: 00 619b: 00 619c: 00 619d: 00 619e: 00 619f: 00
+  61a0: 00 61a1: 00 61a2: 00 61a3: 00 61a4: 00 61a5: 00 61a6: 00 61a7: 00
+  61a8: 00 61a9: 00 61aa: 00 61ab: 00 61ac: 00 61ad: 00 61ae: 00 61af: 00
+  61b0: 00 61b1: 00 61b2: 00 61b3: 00 61b4: 00 61b5: 00 61b6: 00 61b7: 00
+  61b8: 00 61b9: 00 61ba: 00 61bb: 00 61bc: 00 61bd: 00 61be: 00 61bf: 00
+  61c0: 00 61c1: 00 61c2: 00 61c3: 00 61c4: 00 61c5: 00 61c6: 00 61c7: 00
+  61c8: 00 61c9: 00 61ca: 00 61cb: 00 61cc: 00 61cd: 00 61ce: 00 61cf: 00
+  61d0: 00 61d1: 03 61d2: 00 61d3: 00 61d4: 00 61d5: 00 61d6: 00 61d7: 00
+  61d8: 00 61d9: 01 61da: 0f 61db: 00 61dc: 00 61dd: 00 61de: 00 61df: 00
+  61e0: 00 61e1: 00 61e2: 00 61e3: 00 61e4: 00 61e5: 00 61e6: 00 61e7: 00
+  61e8: 00 61e9: 00 61ea: 00 61eb: 00 61ec: 00 61ed: 00 61ee: 00 61ef: 00
+  61f0: 00 61f1: 00 61f2: 00 61f3: 00 61f4: 00 61f5: 00 61f6: 00 61f7: 00
+  61f8: 00 61f9: 00 61fa: 00 61fb: 00 61fc: 00 61fd: 00 61fe: 00 61ff: 00
+  6200: 02 6201: 05 6202: 00 6203: 00 6204: 07 6205: 03 6206: 00 6207: 00
+  6208: 00 6209: 00 620a: 00 620b: 00 620c: 00 620d: 00 620e: 00 620f: 00
+  6210: 00 6211: 02 6212: 02 6213: 00 6214: 00 6215: 02 6216: 02 6217: 00
+  6218: 00 6219: 00 621a: 00 621b: 00 621c: 00 621d: 00 621e: 00 621f: 00
+  6220: 00 6221: 00 6222: 00 6223: 00 6224: 00 6225: 00 6226: 00 6227: 00
+  6228: 00 6229: 00 622a: 00 622b: 00 622c: 00 622d: 00 622e: 00 622f: 00
+  6230: 00 6231: 00 6232: 00 6233: 00 6234: 00 6235: 00 6236: 00 6237: 00
+  6238: 00 6239: 00 623a: 00 623b: 00 623c: 00 623d: 00 623e: 00 623f: 00
+  6240: df 6241: 32 6242: 8c 6243: 00 6244: 00 6245: 00 6246: 00 6247: 01
+  6248: 00 6249: 00 624a: 00 624b: 00 624c: 00 624d: 00 624e: 00 624f: 00
+  6250: 00 6251: 00 6252: 00 6253: 00 6254: 00 6255: 00 6256: 00 6257: 00
+  6258: 00 6259: 00 625a: 00 625b: 00 625c: 00 625d: 00 625e: 00 625f: 00
+  6260: 00 6261: 00 6262: 00 6263: 00 6264: 00 6265: 00 6266: 00 6267: 00
+  6268: 00 6269: 00 626a: 00 626b: 00 626c: 00 626d: 00 626e: 00 626f: 00
+  6270: 00 6271: 00 6272: 00 6273: 00 6274: 00 6275: 00 6276: 00 6277: 00
+  6278: 00 6279: 00 627a: 00 627b: 00 627c: 00 627d: 00 627e: 00 627f: 00
+  6280: 00 6281: 00 6282: 00 6283: 00 6284: 00 6285: 00 6286: 00 6287: 00
+  6288: 00 6289: 00 628a: 00 628b: 00 628c: 00 628d: 00 628e: 00 628f: 00
+  6290: 00 6291: 00 6292: 00 6293: 00 6294: 00 6295: 00 6296: 00 6297: 00
+  6298: 00 6299: 00 629a: 00 629b: 00 629c: 00 629d: 00 629e: 00 629f: 00
+  62a0: 00 62a1: 00 62a2: 00 62a3: 00 62a4: 00 62a5: 00 62a6: 00 62a7: 00
+  62a8: 00 62a9: 00 62aa: 00 62ab: 00 62ac: 00 62ad: 00 62ae: 00 62af: 00
+  62b0: 00 62b1: 00 62b2: 00 62b3: 00 62b4: 00 62b5: 00 62b6: 00 62b7: 00
+  62b8: 00 62b9: 00 62ba: 00 62bb: 00 62bc: 00 62bd: 00 62be: 00 62bf: 00
+  62c0: 00 62c1: 00 62c2: 00 62c3: 00 62c4: 00 62c5: 00 62c6: 00 62c7: 00
+  62c8: 00 62c9: 00 62ca: 00 62cb: 00 62cc: 00 62cd: 00 62ce: 00 62cf: 00
+  62d0: 00 62d1: 03 62d2: 00 62d3: 00 62d4: 00 62d5: 00 62d6: 00 62d7: 00
+  62d8: 00 62d9: 01 62da: 0f 62db: 00 62dc: 00 62dd: 00 62de: 00 62df: 00
+  62e0: 00 62e1: 00 62e2: 00 62e3: 00 62e4: 00 62e5: 00 62e6: 00 62e7: 00
+  62e8: 00 62e9: 00 62ea: 00 62eb: 00 62ec: 00 62ed: 00 62ee: 00 62ef: 00
+  62f0: 00 62f1: 00 62f2: 00 62f3: 00 62f4: 00 62f5: 00 62f6: 00 62f7: 00
+  62f8: 00 62f9: 00 62fa: 00 62fb: 00 62fc: 00 62fd: 00 62fe: 00 62ff: 00
+SDAM 0x7000-0x7fff saved to /var/log/glymur/pmk8850-sdam-20261122T103713.txt (private: copy to .work/, never commit)
+raw counter (0x6148..0x614b, LE): 0x008bd607 then 0x008bd607
+Failed to parse bus message: Input/output error
+reference: HTTP Date header (Sun, 22 Nov 2026 05:07:16 GMT)
+counter as seconds since 1970: 1970-04-17 01:38:15+00:00
+counter - UTC = -1786159741 s
+counter - IST = -1786179541 s
+no SDAM word within an hour of counter + offset = UTC or IST
+using /dev/rtc0
+
+==== PMIC GLink RTC requests, with debug logging
+debug on: rtc_qcom_glink
+debug on: pmic_glink
+time read: cat: /sys/class/rtc/rtc0/time: Input/output error
+since_epoch read: cat: /sys/class/rtc/rtc0/since_epoch: Input/output error
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x67
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x65 property=0
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: RX opcode=0x65 type=0x1 owner=0x8010 len=16
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: ACK opcode=0x65 resp_value=4294967295
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x68
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x67
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x65 property=0
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: RX opcode=0x65 type=0x1 owner=0x8010 len=16
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: ACK opcode=0x65 resp_value=4294967295
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x68
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x67
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x65 property=0
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: RX opcode=0x65 type=0x1 owner=0x8010 len=16
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: ACK opcode=0x65 resp_value=4294967295
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x68
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x67
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x65 property=0
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: RX opcode=0x65 type=0x1 owner=0x8010 len=16
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: ACK opcode=0x65 resp_value=4294967295
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x68
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x67
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x65 property=0
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: RX opcode=0x65 type=0x1 owner=0x8010 len=16
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: ACK opcode=0x65 resp_value=4294967295
+rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+
+==== time
+cat: /sys/class/rtc/rtc0/since_epoch: Input/output error
+cat: /sys/class/rtc/rtc0/date: Input/output error
+cat: /sys/class/rtc/rtc0/time: Input/output error
+RTC        (since_epoch )
+system  2026-11-22 05:07:39 UTC, 2026-11-22 10:37:39 IST local, offset +0530
+RTC - UTC = -1795324051 s
+=> neither UTC nor local time (off by -1795324051 s): is the system clock synced?
+  Failed to query server: Failed to read RTC: Input/output error
+
+==== raw words from the service (dynamic debug)
+cat: /sys/class/rtc/rtc0/time: Input/output error
+Nov 22 10:37:41 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+Nov 22 10:37:41 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x68
+Nov 22 10:37:42 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 22 10:37:42 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x67
+Nov 22 10:37:43 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x65 property=0
+Nov 22 10:37:43 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: RX opcode=0x65 type=0x1 owner=0x8010 len=16
+Nov 22 10:37:43 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: ACK opcode=0x65 resp_value=4294967295
+Nov 22 10:37:43 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+Nov 22 10:37:43 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x68
+Nov 22 10:37:44 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 22 10:37:44 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x67
+Nov 22 10:37:45 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: TX opcode=0x65 property=0
+Nov 22 10:37:45 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: RX opcode=0x65 type=0x1 owner=0x8010 len=16
+Nov 22 10:37:45 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: ACK opcode=0x65 resp_value=4294967295
+Nov 22 10:37:45 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+
+==== alarm, 20 s ahead, no suspend
+/home/user/check-rtc.sh: line 164: echo: write error: Input/output error
+setting the alarm failed
+log: /var/log/glymur/rtc-test-20261122T103711.txt

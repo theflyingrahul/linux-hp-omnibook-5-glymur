@@ -1,0 +1,298 @@
+Nov 22 11:44:37 glymur kernel: platform non-pixel.7.auto: Adding to iommu group 40
+Nov 22 11:44:37 glymur kernel: platform pixel.8.auto: Adding to iommu group 41
+Nov 22 11:44:37 glymur kernel: platform video-firmware.9.auto: Adding to iommu group 42
+Nov 22 11:44:37 glymur kernel: arm-smmu 15000000.iommu: Unhandled context fault: fsr=0x402, iova=0x00050e00, fsynr=0x10020, cbfrsynra=0x19e2, cb=38
+Nov 22 11:44:37 glymur kernel: arm-smmu 15000000.iommu: FSR    = 00000402 [Format=2 TF], SID=0x19e2
+Nov 22 11:44:37 glymur kernel: arm-smmu 15000000.iommu: FSYNR0 = 00010020 [S1CBNDX=1 PNU PLVL=0]
+Nov 22 11:44:37 glymur kernel: arm-smmu 15000000.iommu: Unhandled context fault: fsr=0x402, iova=0xf77f0dc0, fsynr=0x3f0032, cbfrsynra=0x19e0, cb=36
+Nov 22 11:44:37 glymur kernel: arm-smmu 15000000.iommu: FSR    = 00000402 [Format=2 TF], SID=0x19e0
+Nov 22 11:44:37 glymur kernel: arm-smmu 15000000.iommu: FSYNR0 = 003f0032 [S1CBNDX=63 PNU WNR PLVL=2]
+Nov 22 11:44:37 glymur kernel: qcom-iris aa00000.video-codec: error booting up iris firmware
+Nov 22 11:44:37 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+Nov 22 11:44:38 glymur kernel: arm-smmu 15000000.iommu: TLB sync timed out -- SMMU may be deadlocked
+Nov 22 11:44:38 glymur kernel: arm-smmu 15000000.iommu: Failed to read TBU power status: -22
+Nov 22 11:44:38 glymur kernel: arm-smmu 15000000.iommu: Failed to read TBU sync/inv ack status: -22
+Nov 22 11:44:38 glymur kernel: arm-smmu 15000000.iommu: Failed to read TCU syn/inv progress: -22
+Nov 22 11:44:38 glymur kernel: arm-smmu 15000000.iommu: TBU: power_status 0x0 sync_inv_ack 0x0 sync_inv_progress 0x0
+Nov 22 11:44:38 glymur kernel: rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+Nov 22 11:44:39 glymur kernel: [drm:dpu_crtc_frame_event_cb [msm]] *ERROR* crtc112 event 1 overflow
+Nov 22 11:44:39 glymur kernel: [drm:dpu_crtc_frame_event_cb [msm]] *ERROR* crtc112 event 1 overflow
+Nov 22 11:44:39 glymur kernel: [drm:dpu_crtc_frame_event_cb [msm]] *ERROR* crtc112 event 1 overflow
+Nov 22 11:44:39 glymur kernel: arm-smmu 15000000.iommu: TLB sync timed out -- SMMU may be deadlocked
+Nov 22 11:44:39 glymur kernel: arm-smmu 15000000.iommu: Failed to read TBU power status: -22
+Nov 22 11:44:39 glymur kernel: arm-smmu 15000000.iommu: Failed to read TBU sync/inv ack status: -22
+Nov 22 11:44:39 glymur kernel: arm-smmu 15000000.iommu: Failed to read TCU syn/inv progress: -22
+Nov 22 11:44:39 glymur kernel: arm-smmu 15000000.iommu: TBU: power_status 0x0 sync_inv_ack 0x0 sync_inv_progress 0x0
+Nov 22 11:44:40 glymur kernel: arm-smmu 15000000.iommu: TLB sync timed out -- SMMU may be deadlocked
+Nov 22 11:44:40 glymur kernel: arm-smmu 15000000.iommu: Failed to read TBU power status: -22
+Nov 22 11:44:40 glymur kernel: arm-smmu 15000000.iommu: Failed to read TBU sync/inv ack status: -22
+Nov 22 11:44:40 glymur kernel: arm-smmu 15000000.iommu: Failed to read TCU syn/inv progress: -22
+Nov 22 11:44:40 glymur kernel: arm-smmu 15000000.iommu: TBU: power_status 0x0 sync_inv_ack 0x0 sync_inv_progress 0x0
+Nov 22 11:44:44 glymur kernel: dpu_crtc_frame_event_cb: 11 callbacks suppressed
+Nov 22 11:44:46 glymur kernel: qcom-iris aa00000.video-codec: core init failed
+Nov 22 11:45:24 glymur kernel: thermal thermal_zone49: Temperature check failed (-110)
+Nov 22 11:46:09 glymur kernel: thermal thermal_zone42: Temperature check failed (-110)
+Nov 22 11:46:54 glymur kernel: thermal thermal_zone23: Temperature check failed (-110)
+Nov 22 11:47:39 glymur kernel: INFO: task kworker/u48:0:13 blocked for more than 123 seconds.
+Nov 22 11:47:39 glymur kernel:       Not tainted 7.4.0-rc3-glymur-26 #2
+Nov 22 11:47:39 glymur kernel: "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+Nov 22 11:47:39 glymur kernel: task:kworker/u48:0   state:D stack:0     pid:13    tgid:13    ppid:2      task_flags:0x4208060 flags:0x00000010
+Nov 22 11:47:39 glymur kernel: Workqueue: ring0 drm_sched_run_job_work [gpu_sched]
+Nov 22 11:47:39 glymur kernel: Call trace:
+Nov 22 11:47:39 glymur kernel:  __switch_to+0x17c/0x428 (T)
+Nov 22 11:47:39 glymur kernel:  __schedule+0x450/0x1ec8
+Nov 22 11:47:39 glymur kernel:  schedule+0x40/0x110
+Nov 22 11:47:39 glymur kernel:  schedule_preempt_disabled+0x30/0x70
+Nov 22 11:47:39 glymur kernel:  __mutex_lock.constprop.0+0x5bc/0xe00
+Nov 22 11:47:39 glymur kernel:  __mutex_lock_slowpath+0x20/0x48
+Nov 22 11:47:39 glymur kernel:  mutex_lock+0x70/0xa8
+Nov 22 11:47:39 glymur kernel:  msm_job_run+0x98/0x180 [msm]
+Nov 22 11:47:39 glymur kernel:  drm_sched_run_job_work+0x118/0x428 [gpu_sched]
+Nov 22 11:47:39 glymur kernel:  process_one_work+0x1c4/0x508
+Nov 22 11:47:39 glymur kernel:  worker_thread+0x19c/0x338
+Nov 22 11:47:39 glymur kernel:  kthread+0x12c/0x150
+Nov 22 11:47:39 glymur kernel:  ret_from_fork+0x10/0x20
+Nov 22 11:47:39 glymur kernel: INFO: task kworker/u48:0:13 is blocked on a mutex likely owned by task kworker/u48:2:471.
+Nov 22 11:47:39 glymur kernel: INFO: task kworker/u50:0:90 blocked for more than 123 seconds.
+Nov 22 11:47:39 glymur kernel:       Not tainted 7.4.0-rc3-glymur-26 #2
+Nov 22 11:47:39 glymur kernel: "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+Nov 22 11:47:39 glymur kernel: task:kworker/u50:0   state:D stack:0     pid:90    tgid:90    ppid:2      task_flags:0x4208160 flags:0x00000010
+Nov 22 11:47:39 glymur kernel: Workqueue: thermal_events thermal_zone_device_check
+Nov 22 11:47:39 glymur kernel: Call trace:
+Nov 22 11:47:39 glymur kernel:  __switch_to+0x17c/0x428 (T)
+Nov 22 11:47:39 glymur kernel:  __schedule+0x450/0x1ec8
+Nov 22 11:47:39 glymur kernel:  schedule+0x40/0x110
+Nov 22 11:47:39 glymur kernel:  schedule_preempt_disabled+0x30/0x70
+Nov 22 11:47:39 glymur kernel:  __mutex_lock.constprop.0+0x5bc/0xe00
+Nov 22 11:47:39 glymur kernel:  __mutex_lock_slowpath+0x20/0x48
+Nov 22 11:47:39 glymur kernel:  mutex_lock+0x70/0xa8
+Nov 22 11:47:39 glymur kernel:  hwmon_thermal_get_temp+0x50/0xf0
+Nov 22 11:47:39 glymur kernel:  __thermal_zone_get_temp+0x2c/0x168
+Nov 22 11:47:39 glymur kernel:  __thermal_zone_device_update+0xd4/0x578
+Nov 22 11:47:39 glymur kernel:  thermal_zone_device_check+0x38/0x70
+Nov 22 11:47:39 glymur kernel:  process_one_work+0x1c4/0x508
+Nov 22 11:47:39 glymur kernel:  worker_thread+0x19c/0x338
+Nov 22 11:47:39 glymur kernel:  kthread+0x12c/0x150
+Nov 22 11:47:39 glymur kernel:  ret_from_fork+0x10/0x20
+Nov 22 11:47:39 glymur kernel: INFO: task kworker/u50:0:90 is blocked on a mutex likely owned by task kworker/u49:12:1485.
+Nov 22 11:47:39 glymur kernel: task:kworker/u49:12  state:D stack:0     pid:1485  tgid:1485  ppid:2      task_flags:0x4208060 flags:0x00000010
+Nov 22 11:47:39 glymur kernel: Workqueue: thermal_events thermal_zone_device_check
+Nov 22 11:47:39 glymur kernel: Call trace:
+Nov 22 11:47:39 glymur kernel:  __switch_to+0x17c/0x428 (T)
+Nov 22 11:47:39 glymur kernel:  __schedule+0x450/0x1ec8
+Nov 22 11:47:39 glymur kernel:  schedule+0x40/0x110
+Nov 22 11:47:39 glymur kernel:  schedule_timeout+0x8c/0x148
+Nov 22 11:47:39 glymur kernel:  wait_for_completion_timeout+0x88/0x1f0
+Nov 22 11:47:39 glymur kernel:  geni_i2c_gpi_xfer+0x204/0x5a8 [i2c_qcom_geni]
+Nov 22 11:47:39 glymur kernel:  geni_i2c_xfer+0x29c/0x7b8 [i2c_qcom_geni]
+Nov 22 11:47:39 glymur kernel:  __i2c_transfer+0x1d0/0x7e0
+Nov 22 11:47:39 glymur kernel:  i2c_smbus_xfer_emulated+0x1ec/0x7d8
+Nov 22 11:47:39 glymur kernel:  __i2c_smbus_xfer+0x178/0x648
+Nov 22 11:47:39 glymur kernel:  i2c_smbus_xfer+0xa0/0x198
+Nov 22 11:47:39 glymur kernel:  i2c_smbus_read_byte_data+0x5c/0xc0
+Nov 22 11:47:39 glymur kernel:  hpec_command+0x104/0x168 [hp_omnibook_5_ec]
+Nov 22 11:47:39 glymur kernel:  hpec_hwmon_read+0xec/0x150 [hp_omnibook_5_ec]
+Nov 22 11:47:39 glymur kernel:  hwmon_thermal_get_temp+0x74/0xf0
+Nov 22 11:47:39 glymur kernel:  __thermal_zone_get_temp+0x2c/0x168
+Nov 22 11:47:39 glymur kernel:  __thermal_zone_device_update+0xd4/0x578
+Nov 22 11:47:39 glymur kernel:  thermal_zone_device_check+0x38/0x70
+Nov 22 11:47:39 glymur kernel:  process_one_work+0x1c4/0x508
+Nov 22 11:47:39 glymur kernel:  worker_thread+0x19c/0x338
+Nov 22 11:47:39 glymur kernel:  kthread+0x12c/0x150
+Nov 22 11:47:39 glymur kernel:  ret_from_fork+0x10/0x20
+Nov 22 11:47:39 glymur kernel: INFO: task kworker/u48:2:471 blocked for more than 123 seconds.
+Nov 22 11:47:39 glymur kernel:       Not tainted 7.4.0-rc3-glymur-26 #2
+Nov 22 11:47:39 glymur kernel: "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+Nov 22 11:47:39 glymur kernel: task:kworker/u48:2   state:D stack:0     pid:471   tgid:471   ppid:2      task_flags:0x4208060 flags:0x00000010
+Nov 22 11:47:39 glymur kernel: Workqueue: ring2 drm_sched_run_job_work [gpu_sched]
+Nov 22 11:47:39 glymur kernel: Call trace:
+Nov 22 11:47:39 glymur kernel:  __switch_to+0x17c/0x428 (T)
+Nov 22 11:47:39 glymur kernel:  __schedule+0x450/0x1ec8
+Nov 22 11:47:39 glymur kernel:  schedule+0x40/0x110
+Nov 22 11:47:39 glymur kernel:  schedule_preempt_disabled+0x30/0x70
+Nov 22 11:47:39 glymur kernel:  __mutex_lock.constprop.0+0x5bc/0xe00
+Nov 22 11:47:39 glymur kernel:  __mutex_lock_slowpath+0x20/0x48
+Nov 22 11:47:39 glymur kernel:  mutex_lock+0x70/0xa8
+Nov 22 11:47:39 glymur kernel:  __scm_smc_do+0x80/0x340
+Nov 22 11:47:39 glymur kernel:  __scm_smc_call+0xd4/0x460
+Nov 22 11:47:39 glymur kernel:  qcom_scm_call+0x58/0xd8
+Nov 22 11:47:39 glymur kernel:  __qcom_scm_is_call_available+0x90/0x130
+Nov 22 11:47:39 glymur kernel:  qcom_scm_set_gpu_smmu_aperture_is_available+0x30/0x60
+Nov 22 11:47:39 glymur kernel:  adreno_hw_init+0xe4/0x158 [msm]
+Nov 22 11:47:39 glymur kernel:  a8xx_hw_init+0xb74/0x1a60 [msm]
+Nov 22 11:47:39 glymur kernel:  msm_gpu_hw_init+0x80/0xf0 [msm]
+Nov 22 11:47:39 glymur kernel:  msm_gpu_submit+0x50/0x1f8 [msm]
+Nov 22 11:47:39 glymur kernel:  msm_job_run+0xc0/0x180 [msm]
+Nov 22 11:47:39 glymur kernel:  drm_sched_run_job_work+0x118/0x428 [gpu_sched]
+Nov 22 11:47:39 glymur kernel:  process_one_work+0x1c4/0x508
+Nov 22 11:47:39 glymur kernel:  worker_thread+0x19c/0x338
+Nov 22 11:47:39 glymur kernel:  kthread+0x12c/0x150
+Nov 22 11:47:39 glymur kernel:  ret_from_fork+0x10/0x20
+Nov 22 11:47:39 glymur kernel: INFO: task kworker/u48:2:471 is blocked on a mutex likely owned by task v4l_id:9098.
+Nov 22 11:47:39 glymur kernel: task:v4l_id          state:R  running task     stack:0     pid:9098  tgid:9098  ppid:9075   task_flags:0x400100 flags:0x00000819
+Nov 22 11:47:39 glymur kernel: Call trace:
+Nov 22 11:47:39 glymur kernel:  __switch_to+0x17c/0x428 (T)
+Nov 22 11:47:39 glymur kernel:  __schedule+0x454/0x1ec8
+Nov 22 11:47:39 glymur kernel:  preempt_schedule_irq+0x60/0x210
+Nov 22 11:47:39 glymur kernel:  __irq_exit_rcu+0x44/0x190
+Nov 22 11:47:39 glymur kernel:  el1_interrupt+0x58/0xf0
+Nov 22 11:47:39 glymur kernel:  el1h_64_irq_handler+0x1c/0x40
+Nov 22 11:47:39 glymur kernel:  el1h_64_irq+0x90/0x98
+Nov 22 11:47:39 glymur kernel:  __arm_smccc_smc+0x8/0x30 (P)
+Nov 22 11:47:39 glymur kernel:  __scm_smc_do+0xa0/0x340
+Nov 22 11:47:39 glymur kernel:  __scm_smc_call+0xd4/0x460
+Nov 22 11:47:39 glymur kernel:  qcom_scm_call+0x58/0xd8
+Nov 22 11:47:39 glymur kernel:  __qcom_scm_pas_init_image+0xe0/0x108
+Nov 22 11:47:39 glymur kernel:  qcom_scm_pas_init_image+0x1cc/0x240
+Nov 22 11:47:39 glymur kernel:  qcom_pas_init_image+0x48/0x110
+Nov 22 11:47:39 glymur kernel:  __qcom_mdt_pas_init+0x134/0x250 [mdt_loader]
+Nov 22 11:47:39 glymur kernel:  qcom_mdt_pas_load+0x48/0x3d8 [mdt_loader]
+Nov 22 11:47:39 glymur kernel:  iris_fw_load+0x124/0x570 [qcom_iris]
+Nov 22 11:47:39 glymur kernel:  iris_core_init+0xc8/0x1a0 [qcom_iris]
+Nov 22 11:47:39 glymur kernel:  iris_open+0x88/0x4e8 [qcom_iris]
+Nov 22 11:47:39 glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+Nov 22 11:47:39 glymur kernel:  chrdev_open+0xbc/0x270
+Nov 22 11:47:39 glymur kernel:  do_dentry_open+0x124/0x530
+Nov 22 11:47:39 glymur kernel:  vfs_open_consume+0x38/0x138
+Nov 22 11:47:39 glymur kernel:  path_openat+0x5e0/0x980
+Nov 22 11:47:39 glymur kernel:  do_file_open+0xbc/0x198
+Nov 22 11:47:39 glymur kernel:  do_sys_openat2+0xdc/0x128
+Nov 22 11:47:39 glymur kernel:  __arm64_sys_openat+0x80/0xf0
+Nov 22 11:47:39 glymur kernel:  invoke_syscall.constprop.0+0xa0/0x128
+Nov 22 11:47:39 glymur kernel:  el0_svc_common.constprop.0+0x114/0x140
+Nov 22 11:47:39 glymur kernel:  do_el0_svc+0x28/0x58
+Nov 22 11:47:39 glymur kernel:  el0_svc+0x48/0x310
+Nov 22 11:47:39 glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+Nov 22 11:47:39 glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+Nov 22 11:47:39 glymur kernel: INFO: task gsd-housekeepin:4185 blocked for more than 123 seconds.
+Nov 22 11:47:39 glymur kernel:       Not tainted 7.4.0-rc3-glymur-26 #2
+Nov 22 11:47:39 glymur kernel: "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+Nov 22 11:47:39 glymur kernel: task:gsd-housekeepin state:D stack:0     pid:4185  tgid:4185  ppid:3711   task_flags:0x400000 flags:0x00800000
+Nov 22 11:47:39 glymur kernel: Call trace:
+Nov 22 11:47:39 glymur kernel:  __switch_to+0x17c/0x428 (T)
+Nov 22 11:47:39 glymur kernel:  __schedule+0x450/0x1ec8
+Nov 22 11:47:39 glymur kernel:  schedule+0x40/0x110
+Nov 22 11:47:39 glymur kernel:  schedule_preempt_disabled+0x30/0x70
+Nov 22 11:47:39 glymur kernel:  __mutex_lock.constprop.0+0x5bc/0xe00
+Nov 22 11:47:39 glymur kernel:  __mutex_lock_slowpath+0x20/0x48
+Nov 22 11:47:39 glymur kernel:  mutex_lock+0x70/0xa8
+Nov 22 11:47:39 glymur kernel:  __scm_smc_do+0x80/0x340
+Nov 22 11:47:39 glymur kernel:  __scm_smc_call+0xd4/0x460
+Nov 22 11:47:39 glymur kernel:  qcom_scm_call+0x58/0xd8
+Nov 22 11:47:39 glymur kernel:  qcom_scm_qseecom_call+0x6c/0x198
+Nov 22 11:47:39 glymur kernel:  qcom_scm_qseecom_app_send+0xa0/0x118
+Nov 22 11:47:39 glymur kernel:  qcuefi_query_variable_info+0x9c/0x1c0
+Nov 22 11:47:39 glymur kernel:  efivar_query_variable_info+0x30/0x80
+Nov 22 11:47:39 glymur kernel:  efivarfs_statfs+0x194/0x240
+Nov 22 11:47:39 glymur kernel:  statfs_by_dentry+0x68/0xb0
+Nov 22 11:47:39 glymur kernel:  user_statfs+0x78/0x118
+Nov 22 11:47:39 glymur kernel:  __do_sys_statfs+0x48/0xb0
+Nov 22 11:47:39 glymur kernel:  __arm64_sys_statfs+0x24/0x40
+Nov 22 11:47:39 glymur kernel:  invoke_syscall.constprop.0+0xa0/0x128
+Nov 22 11:47:39 glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+Nov 22 11:47:39 glymur kernel:  do_el0_svc+0x28/0x58
+Nov 22 11:47:39 glymur kernel:  el0_svc+0x48/0x310
+Nov 22 11:47:39 glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+Nov 22 11:47:39 glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+Nov 22 11:47:39 glymur kernel: INFO: task gsd-housekeepin:4185 is blocked on a mutex likely owned by task v4l_id:9098.
+Nov 22 11:47:39 glymur kernel: task:v4l_id          state:R  running task     stack:0     pid:9098  tgid:9098  ppid:9075   task_flags:0x400100 flags:0x00000819
+Nov 22 11:47:39 glymur kernel: Call trace:
+Nov 22 11:47:39 glymur kernel:  __switch_to+0x17c/0x428 (T)
+Nov 22 11:47:39 glymur kernel:  __schedule+0x454/0x1ec8
+Nov 22 11:47:39 glymur kernel:  preempt_schedule_irq+0x60/0x210
+Nov 22 11:47:39 glymur kernel:  __irq_exit_rcu+0x44/0x190
+Nov 22 11:47:39 glymur kernel:  el1_interrupt+0x58/0xf0
+Nov 22 11:47:39 glymur kernel:  el1h_64_irq_handler+0x1c/0x40
+Nov 22 11:47:39 glymur kernel:  el1h_64_irq+0x90/0x98
+Nov 22 11:47:39 glymur kernel:  __arm_smccc_smc+0x8/0x30 (P)
+Nov 22 11:47:39 glymur kernel:  __scm_smc_do+0xa0/0x340
+Nov 22 11:47:39 glymur kernel:  __scm_smc_call+0xd4/0x460
+Nov 22 11:47:39 glymur kernel:  qcom_scm_call+0x58/0xd8
+Nov 22 11:47:39 glymur kernel:  __qcom_scm_pas_init_image+0xe0/0x108
+Nov 22 11:47:39 glymur kernel:  qcom_scm_pas_init_image+0x1cc/0x240
+Nov 22 11:47:39 glymur kernel:  qcom_pas_init_image+0x48/0x110
+Nov 22 11:47:39 glymur kernel:  __qcom_mdt_pas_init+0x134/0x250 [mdt_loader]
+Nov 22 11:47:39 glymur kernel:  qcom_mdt_pas_load+0x48/0x3d8 [mdt_loader]
+Nov 22 11:47:39 glymur kernel:  iris_fw_load+0x124/0x570 [qcom_iris]
+Nov 22 11:47:39 glymur kernel:  iris_core_init+0xc8/0x1a0 [qcom_iris]
+Nov 22 11:47:39 glymur kernel:  iris_open+0x88/0x4e8 [qcom_iris]
+Nov 22 11:47:39 glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+Nov 22 11:47:39 glymur kernel:  chrdev_open+0xbc/0x270
+Nov 22 11:47:39 glymur kernel:  do_dentry_open+0x124/0x530
+Nov 22 11:47:39 glymur kernel:  vfs_open_consume+0x38/0x138
+Nov 22 11:47:39 glymur kernel:  path_openat+0x5e0/0x980
+Nov 22 11:47:39 glymur kernel:  do_file_open+0xbc/0x198
+Nov 22 11:47:39 glymur kernel:  do_sys_openat2+0xdc/0x128
+Nov 22 11:47:39 glymur kernel:  __arm64_sys_openat+0x80/0xf0
+Nov 22 11:47:39 glymur kernel:  invoke_syscall.constprop.0+0xa0/0x128
+Nov 22 11:47:39 glymur kernel:  el0_svc_common.constprop.0+0x114/0x140
+Nov 22 11:47:39 glymur kernel:  do_el0_svc+0x28/0x58
+Nov 22 11:47:39 glymur kernel:  el0_svc+0x48/0x310
+Nov 22 11:47:39 glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+Nov 22 11:47:39 glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+Nov 22 11:47:39 glymur kernel: INFO: task ffmpeg:9106 blocked for more than 123 seconds.
+Nov 22 11:47:39 glymur kernel:       Not tainted 7.4.0-rc3-glymur-26 #2
+Nov 22 11:47:39 glymur kernel: "echo 0 > /proc/sys/kernel/hung_task_timeout_secs" disables this message.
+Nov 22 11:47:39 glymur kernel: task:ffmpeg          state:D stack:0     pid:9106  tgid:9106  ppid:9104   task_flags:0x400000 flags:0x00800001
+Nov 22 11:47:39 glymur kernel: Call trace:
+Nov 22 11:47:39 glymur kernel:  __switch_to+0x17c/0x428 (T)
+Nov 22 11:47:39 glymur kernel:  __schedule+0x450/0x1ec8
+Nov 22 11:47:39 glymur kernel:  schedule+0x40/0x110
+Nov 22 11:47:39 glymur kernel:  schedule_preempt_disabled+0x30/0x70
+Nov 22 11:47:39 glymur kernel:  __mutex_lock.constprop.0+0x5bc/0xe00
+Nov 22 11:47:39 glymur kernel:  __mutex_lock_slowpath+0x20/0x48
+Nov 22 11:47:39 glymur kernel:  mutex_lock+0x70/0xa8
+Nov 22 11:47:39 glymur kernel:  iris_core_init+0x34/0x1a0 [qcom_iris]
+Nov 22 11:47:39 glymur kernel:  iris_open+0x88/0x4e8 [qcom_iris]
+Nov 22 11:47:39 glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+Nov 22 11:47:39 glymur kernel:  chrdev_open+0xbc/0x270
+Nov 22 11:47:39 glymur kernel:  do_dentry_open+0x124/0x530
+Nov 22 11:47:39 glymur kernel:  vfs_open_consume+0x38/0x138
+Nov 22 11:47:39 glymur kernel:  path_openat+0x5e0/0x980
+Nov 22 11:47:39 glymur kernel:  do_file_open+0xbc/0x198
+Nov 22 11:47:39 glymur kernel:  do_sys_openat2+0xdc/0x128
+Nov 22 11:47:39 glymur kernel:  __arm64_sys_openat+0x80/0xf0
+Nov 22 11:47:39 glymur kernel:  invoke_syscall.constprop.0+0xa0/0x128
+Nov 22 11:47:39 glymur kernel:  el0_svc_common.constprop.0+0x44/0x140
+Nov 22 11:47:39 glymur kernel:  do_el0_svc+0x28/0x58
+Nov 22 11:47:39 glymur kernel:  el0_svc+0x48/0x310
+Nov 22 11:47:39 glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+Nov 22 11:47:39 glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+Nov 22 11:47:39 glymur kernel: INFO: task ffmpeg:9106 is blocked on a mutex likely owned by task v4l_id:9098.
+Nov 22 11:47:39 glymur kernel: task:v4l_id          state:R  running task     stack:0     pid:9098  tgid:9098  ppid:9075   task_flags:0x400100 flags:0x00000819
+Nov 22 11:47:39 glymur kernel: Call trace:
+Nov 22 11:47:39 glymur kernel:  __switch_to+0x17c/0x428 (T)
+Nov 22 11:47:39 glymur kernel:  __schedule+0x454/0x1ec8
+Nov 22 11:47:39 glymur kernel:  preempt_schedule_irq+0x60/0x210
+Nov 22 11:47:39 glymur kernel:  __irq_exit_rcu+0x44/0x190
+Nov 22 11:47:39 glymur kernel:  el1_interrupt+0x58/0xf0
+Nov 22 11:47:39 glymur kernel:  el1h_64_irq_handler+0x1c/0x40
+Nov 22 11:47:39 glymur kernel:  el1h_64_irq+0x90/0x98
+Nov 22 11:47:39 glymur kernel:  __arm_smccc_smc+0x8/0x30 (P)
+Nov 22 11:47:39 glymur kernel:  __scm_smc_do+0xa0/0x340
+Nov 22 11:47:39 glymur kernel:  __scm_smc_call+0xd4/0x460
+Nov 22 11:47:39 glymur kernel:  qcom_scm_call+0x58/0xd8
+Nov 22 11:47:39 glymur kernel:  __qcom_scm_pas_init_image+0xe0/0x108
+Nov 22 11:47:39 glymur kernel:  qcom_scm_pas_init_image+0x1cc/0x240
+Nov 22 11:47:39 glymur kernel:  qcom_pas_init_image+0x48/0x110
+Nov 22 11:47:39 glymur kernel:  __qcom_mdt_pas_init+0x134/0x250 [mdt_loader]
+Nov 22 11:47:39 glymur kernel:  qcom_mdt_pas_load+0x48/0x3d8 [mdt_loader]
+Nov 22 11:47:39 glymur kernel:  iris_fw_load+0x124/0x570 [qcom_iris]
+Nov 22 11:47:39 glymur kernel:  iris_core_init+0xc8/0x1a0 [qcom_iris]
+Nov 22 11:47:39 glymur kernel:  iris_open+0x88/0x4e8 [qcom_iris]
+Nov 22 11:47:39 glymur kernel:  v4l2_open+0x84/0x1c8 [videodev]
+Nov 22 11:47:39 glymur kernel:  chrdev_open+0xbc/0x270
+Nov 22 11:47:39 glymur kernel:  do_dentry_open+0x124/0x530
+Nov 22 11:47:39 glymur kernel:  vfs_open_consume+0x38/0x138
+Nov 22 11:47:39 glymur kernel:  path_openat+0x5e0/0x980
+Nov 22 11:47:39 glymur kernel:  do_file_open+0xbc/0x198
+Nov 22 11:47:39 glymur kernel:  do_sys_openat2+0xdc/0x128
+Nov 22 11:47:39 glymur kernel:  __arm64_sys_openat+0x80/0xf0
+Nov 22 11:47:39 glymur kernel:  invoke_syscall.constprop.0+0xa0/0x128
+Nov 22 11:47:39 glymur kernel:  el0_svc_common.constprop.0+0x114/0x140
+Nov 22 11:47:39 glymur kernel:  do_el0_svc+0x28/0x58
+Nov 22 11:47:39 glymur kernel:  el0_svc+0x48/0x310
+Nov 22 11:47:39 glymur kernel:  el0t_64_sync_handler+0xc0/0x110
+Nov 22 11:47:39 glymur kernel:  el0t_64_sync+0x1b8/0x1c0
+Nov 22 11:47:40 glymur kernel: thermal thermal_zone18: Temperature check failed (-110)
+TLB sync timeouts until reboot: 445 (last at Nov 22 11:52:04)

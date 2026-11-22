@@ -1,0 +1,65 @@
+[  502.918386] glymur systemd[1]: Finished systemd-suspend.service - System Suspend.
+[  502.918911] glymur systemd[1]: Stopped target sleep.target - Sleep.
+[  502.919029] glymur systemd[1]: Reached target suspend.target - Suspend.
+[  502.919102] glymur systemd-logind[1439]: Operation 'suspend' finished.
+[  502.919187] glymur systemd[1]: Stopped target suspend.target - Suspend.
+[  502.919269] glymur ModemManager[1588]: <msg> [sleep-monitor-systemd] system is resuming
+[  502.919512] glymur rtkit-daemon[1807]: Resuming known real-time threads.
+[  502.919825] glymur rtkit-daemon[1807]: Successfully made thread 3955 of process 3890 owned by '1000' high priority at nice level -15.
+[  502.919886] glymur rtkit-daemon[1807]: Successfully made thread 3511 of process 3463 owned by '1000' RT at priority 20.
+[  502.920126] glymur rtkit-daemon[1807]: Successfully made thread 3497 of process 3463 owned by '1000' RT at priority 20.
+[  502.920156] glymur rtkit-daemon[1807]: Successfully made thread 3463 of process 3463 owned by '1000' high priority at nice level -11.
+[  502.920205] glymur rtkit-daemon[1807]: Successfully made thread 3491 of process 3465 owned by '1000' RT at priority 20.
+[  502.920236] glymur rtkit-daemon[1807]: Successfully made thread 3465 of process 3465 owned by '1000' high priority at nice level -11.
+[  502.920288] glymur rtkit-daemon[1807]: Successfully made thread 3482 of process 3459 owned by '1000' RT at priority 20.
+[  502.920317] glymur rtkit-daemon[1807]: Successfully made thread 3459 of process 3459 owned by '1000' high priority at nice level -11.
+[  502.920348] glymur rtkit-daemon[1807]: Resumed scheduling 8 threads.
+[  506.941587] glymur ModemManager[1588]: <msg> [base-manager] couldn't check support for device '/sys/devices/platform/soc@0/1bf0000.pcie/pci0004:00/0004:00:00.0/0004:01:00.0': not supported by any plugin
+[  509.381174] glymur kernel: wlo1: authenticate with xx:xx:xx:xx:xx:xx (local address=xx:xx:xx:xx:xx:xx)
+[  509.381263] glymur kernel: wlo1: send auth to xx:xx:xx:xx:xx:xx (try 1/3)
+[  509.385884] glymur kernel: wlo1: authenticated
+[  509.389065] glymur kernel: wlo1: associate with xx:xx:xx:xx:xx:xx (try 1/3)
+[  509.397011] glymur kernel: wlo1: RX AssocResp from xx:xx:xx:xx:xx:xx (capab=0x1511 status=0 aid=5)
+[  509.415005] glymur kernel: wlo1: associated
+[  509.437006] glymur kernel: wlo1: Limiting TX power to 24 (24 - 0) dBm as advertised by xx:xx:xx:xx:xx:xx
+[  509.954235] glymur gsd-sharing[4034]: Failed to stop gnome-user-share-webdav.service: GDBus.Error:org.freedesktop.systemd1.NoSuchUnit: Unit gnome-user-share-webdav.service not loaded.
+[  510.930351] glymur check-suspend[13081]: cycle lid-ac: resumed after 157 s
+[  510.971878] glymur systemd-journald[577]: Received client request to sync journal (with offlining).
+[  553.273585] glymur CRON[13375]: pam_unix(cron:session): session opened for user root(uid=0) by root(uid=0)
+[  553.275506] glymur CRON[13377]: (root) CMD (cd / && run-parts --report /etc/cron.hourly)
+[  553.277730] glymur CRON[13375]: pam_unix(cron:session): session closed for user root
+[  603.242125] glymur systemd[1]: Starting sysstat-collect.service - system activity accounting tool...
+[  603.244095] glymur systemd[1]: Starting upki-fetch.service - upki periodic fetcher...
+[  603.261134] glymur systemd[1]: sysstat-collect.service: Deactivated successfully.
+[  603.261413] glymur systemd[1]: Finished sysstat-collect.service - system activity accounting tool.
+[  603.288428] glymur systemd-journald[577]: Received client request to sync journal (with offlining).
+[  603.289458] glymur check-suspend[13414]: cycle drain: suspending now
+[  603.296330] glymur systemd-journald[577]: Received client request to sync journal (with offlining).
+[  609.757821] glymur systemd-logind[1439]: Lid closed.
+[  609.758749] glymur systemd-logind[1439]: Suspending...
+[  609.759640] glymur rtkit-daemon[1807]: Demoting known real-time threads.
+[  609.759665] glymur ModemManager[1588]: <msg> [sleep-monitor-systemd] system is about to suspend
+[  609.759700] glymur ModemManager[1588]: <msg> [sleep-monitor-systemd] ready to sleep; dropping inhibitor
+[  609.759706] glymur rtkit-daemon[1807]: Successfully demoted thread 3955 of process 3890.
+[  609.759743] glymur rtkit-daemon[1807]: Successfully demoted thread 3511 of process 3463.
+[  609.759766] glymur rtkit-daemon[1807]: Successfully demoted thread 3497 of process 3463.
+[  609.759783] glymur rtkit-daemon[1807]: Successfully demoted thread 3463 of process 3463.
+[  609.759807] glymur rtkit-daemon[1807]: Successfully demoted thread 3491 of process 3465.
+[  609.759825] glymur rtkit-daemon[1807]: Successfully demoted thread 3465 of process 3465.
+[  609.759851] glymur rtkit-daemon[1807]: Successfully demoted thread 3482 of process 3459.
+[  609.759867] glymur rtkit-daemon[1807]: Successfully demoted thread 3459 of process 3459.
+[  609.759890] glymur rtkit-daemon[1807]: Demoted 8 threads.
+[  609.780012] glymur kernel: wlo1: deauthenticating from xx:xx:xx:xx:xx:xx by local choice (Reason: 3=DEAUTH_LEAVING)
+[  609.926051] glymur gsd-sharing[4034]: Failed to stop gnome-user-share-webdav.service: GDBus.Error:org.freedesktop.systemd1.NoSuchUnit: Unit gnome-user-share-webdav.service not loaded.
+[  609.934601] glymur systemd[1]: upki-fetch.service: Deactivated successfully.
+[  609.934847] glymur systemd[1]: Finished upki-fetch.service - upki periodic fetcher.
+[  609.982317] glymur systemd[1]: Reached target sleep.target - Sleep.
+[  609.983142] glymur systemd[1]: Starting systemd-suspend.service - System Suspend...
+[  609.989943] glymur systemd[1]: <email>: Unit now frozen-by-parent.
+[  609.989950] glymur systemd[1]: session-4.scope: Unit now frozen-by-parent.
+[  609.989955] glymur systemd[1]: user-1000.slice: Unit now frozen-by-parent.
+[  609.989961] glymur systemd[1]: user.slice: Unit now frozen.
+[  609.989969] glymur systemd[1]: session-2.scope: Unit now frozen-by-parent.
+[  609.989978] glymur systemd-sleep[13517]: Successfully froze unit 'user.slice'.
+[  609.994483] glymur systemd-sleep[13517]: Performing sleep operation 'suspend'...
+[  609.995009] glymur kernel: PM: suspend entry (s2idle)

@@ -1,0 +1,16 @@
+
+==== USB-A repeater: i2c5 (0xb94000) scan, read-only
+7.4.0-rc3-glymur-26
+HP OmniBook 5 Laptop 16-bf1xxx (test)
+i2c5 is i2c-10
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:                                                 
+10:                                                 
+20:                                                 
+30:                                                 
+40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+50:                                                 
+60:                                                 
+70:                                                 
+
+Saved to /var/log/glymur/usb-test-20261122T103652.txt

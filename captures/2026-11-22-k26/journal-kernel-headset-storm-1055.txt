@@ -1,0 +1,78 @@
+Nov 22 10:56:45 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:56:45 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:56:45 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:56:45 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:56:45 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:56:45 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:56:45 glymur kernel: qcom-soundwire 7630000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x40000026
+Nov 22 10:56:45 glymur kernel: qcom-soundwire 7630000.soundwire: swrm_wait_for_rd_fifo_avail err read underflow
+Nov 22 10:56:45 glymur kernel: soundwire sdw-master-3-0: trf on Slave 1 failed:-5 read addr 42 count 2
+Nov 22 10:56:45 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: SDW_SCP_INT2/3 recheck read failed:-5
+Nov 22 10:56:45 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Slave 1 alert handling failed: -5
+Nov 22 10:56:45 glymur kernel: qcom-soundwire 7630000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000002d
+Nov 22 10:56:45 glymur kernel: qcom-soundwire 7630000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x40000029
+Nov 22 10:56:49 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:56:49 glymur kernel: qcom-soundwire 7630000.soundwire: swrm_wait_for_rd_fifo_avail err read underflow
+Nov 22 10:56:49 glymur kernel: soundwire sdw-master-3-0: trf on Slave 1 failed:-5 read addr 40 count 1
+Nov 22 10:56:49 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: SDW_SCP_INT1 recheck read failed:-5
+Nov 22 10:56:49 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Slave 1 alert handling failed: -5
+Nov 22 10:56:49 glymur kernel: qcom-soundwire 7630000.soundwire: swrm_wait_for_rd_fifo_avail err read underflow
+Nov 22 10:56:49 glymur kernel: soundwire sdw-master-3-0: trf on Slave 1 failed:-5 read addr 0 count 1
+Nov 22 10:56:49 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: SDW_DP0_INT read failed:-5
+Nov 22 10:56:49 glymur kernel: qcom-soundwire 7630000.soundwire: swrm_wait_for_rd_fifo_avail err read underflow
+Nov 22 10:56:49 glymur kernel: soundwire sdw-master-3-0: trf on Slave 1 failed:-5 read addr 42 count 2
+Nov 22 10:56:49 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: SDW_SCP_INT2/3 recheck read failed:-5
+Nov 22 10:56:49 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Slave 1 alert handling failed: -5
+Nov 22 10:56:53 glymur kernel: qcom_swrm_irq_handler: 7 callbacks suppressed
+Nov 22 10:56:53 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:56:53 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:56:53 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:56:53 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:56:53 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:56:53 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:56:53 glymur kernel: qcom-soundwire 7630000.soundwire: swrm_wait_for_rd_fifo_avail err read underflow
+Nov 22 10:56:53 glymur kernel: soundwire sdw-master-3-0: trf on Slave 1 failed:-5 read addr 40 count 1
+Nov 22 10:56:53 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: SDW_SCP_INT1 recheck read failed:-5
+Nov 22 10:56:53 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Slave 1 alert handling failed: -5
+Nov 22 10:56:53 glymur kernel: qcom-soundwire 7630000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x40000028
+Nov 22 10:56:53 glymur kernel: qcom-soundwire 7630000.soundwire: swrm_wait_for_rd_fifo_avail err read underflow
+Nov 22 10:56:53 glymur kernel: soundwire sdw-master-3-0: trf on Slave 1 failed:-5 read addr 0 count 1
+Nov 22 10:56:53 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: SDW_DP0_INT read failed:-5
+Nov 22 10:56:53 glymur kernel: qcom-soundwire 7630000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x40000024
+Nov 22 10:56:56 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:56:56 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:56:56 glymur kernel: qcom-soundwire 7630000.soundwire: swrm_wait_for_rd_fifo_avail err read underflow
+Nov 22 10:56:56 glymur kernel: soundwire sdw-master-3-0: trf on Slave 1 failed:-5 read addr 42 count 2
+Nov 22 10:56:56 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: SDW_SCP_INT2/3 recheck read failed:-5
+Nov 22 10:56:56 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Slave 1 alert handling failed: -5
+Nov 22 10:56:56 glymur kernel: qcom-soundwire 7630000.soundwire: swrm_wait_for_rd_fifo_avail err read underflow
+Nov 22 10:56:56 glymur kernel: soundwire sdw-master-3-0: trf on Slave 1 failed:-5 read addr 40 count 1
+Nov 22 10:56:56 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: SDW_SCP_INT1 recheck read failed:-5
+Nov 22 10:56:56 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Slave 1 alert handling failed: -5
+Nov 22 10:57:00 glymur kernel: qcom_swrm_irq_handler: 5 callbacks suppressed
+Nov 22 10:57:00 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:57:00 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:57:00 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:57:00 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:57:00 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:57:00 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:57:00 glymur kernel: qcom-soundwire 7630000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x40000026
+Nov 22 10:57:00 glymur kernel: qcom-soundwire 7630000.soundwire: swrm_wait_for_rd_fifo_avail err read underflow
+Nov 22 10:57:00 glymur kernel: soundwire sdw-master-3-0: trf on Slave 1 failed:-5 read addr 0 count 1
+Nov 22 10:57:00 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: SDW_DP0_INT read failed:-5
+Nov 22 10:57:00 glymur kernel: qcom-soundwire 7630000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000002d
+Nov 22 10:57:00 glymur kernel: qcom-soundwire 7630000.soundwire: swrm_wait_for_rd_fifo_avail err read underflow
+Nov 22 10:57:00 glymur kernel: soundwire sdw-master-3-0: trf on Slave 1 failed:-5 read addr 42 count 2
+Nov 22 10:57:00 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: SDW_SCP_INT2/3 recheck read failed:-5
+Nov 22 10:57:00 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Slave 1 alert handling failed: -5
+Nov 22 10:57:04 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:57:04 glymur kernel: qcom-soundwire 6c80000.soundwire: qcom_swrm_irq_handler: SWR read FIFO underflow fifo status 0x4000000f
+Nov 22 10:57:04 glymur kernel: qcom-soundwire 7630000.soundwire: swrm_wait_for_rd_fifo_avail err read underflow
+Nov 22 10:57:04 glymur kernel: soundwire sdw-master-3-0: trf on Slave 1 failed:-5 read addr 42 count 2
+Nov 22 10:57:04 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: SDW_SCP_INT2/3 recheck read failed:-5
+Nov 22 10:57:04 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Slave 1 alert handling failed: -5
+Nov 22 10:57:04 glymur kernel: qcom-soundwire 7630000.soundwire: swrm_wait_for_rd_fifo_avail err read underflow
+Nov 22 10:57:04 glymur kernel: soundwire sdw-master-3-0: trf on Slave 1 failed:-5 read addr 42 count 2
+Nov 22 10:57:04 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: SDW_SCP_INT2/3 read failed:-5
+Nov 22 10:57:04 glymur kernel: wcd9378 sdw:3:0:0217:0110:00:3: Slave 1 alert handling failed: -5
+MAX_RETRY lines in boot bed40973: 31083 (first Nov 22 10:56:01, last Nov 22 11:06:16)

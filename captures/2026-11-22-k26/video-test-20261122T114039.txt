@@ -1,0 +1,154 @@
+
+==== system
+7.4.0-rc3-glymur-26
+HP OmniBook 5 Laptop 16-bf1xxx (test, A/V)
+-rw-r--r-- 1 root root 2503368 Oct  2 23:07 /usr/lib/firmware/updates/qcom/glymur/HP/omnibook-5-16-bf1xxx/qcvss8480.mbn
+fbb439d77b977a2dc29a52d3771b7925c8af278d5ce55374d331ef2178b8b758  /usr/lib/firmware/updates/qcom/glymur/HP/omnibook-5-16-bf1xxx/qcvss8480.mbn
+
+==== kernel log: iris, videocc
+Oct 02 23:05:58 glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(999): QC_IMAGE_VERSION_STRING=video-firmware.3.6-aeb98f00ce9fd019d4902f480bfe2f73a56f7c4d
+Oct 02 23:05:58 glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1001): IMAGE_VARIANT_STRING=PROD
+Oct 02 23:05:58 glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1003): OEM_IMAGE_VERSION_STRING=hyd-lablnx446
+Oct 02 23:05:58 glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1005): BUILD_TIME: Jan  5 2026 14:07:39
+qcom_iris             286720  0
+v4l2_mem2mem           53248  1 qcom_iris
+videobuf2_dma_contig    24576  1 qcom_iris
+videobuf2_v4l2         36864  3 qcom_iris,uvcvideo,v4l2_mem2mem
+videobuf2_common       81920  7 qcom_iris,videobuf2_vmalloc,videobuf2_dma_contig,videobuf2_v4l2,uvcvideo,v4l2_mem2mem,videobuf2_memops
+videodev              376832  4 qcom_iris,videobuf2_v4l2,uvcvideo,v4l2_mem2mem
+ubwc_config            24576  2 qcom_iris,msm
+videocc_glymur         20480  8
+mdt_loader             12288  4 qcom_iris,ath12k,msm,qcom_q6v5_pas
+
+==== V4L2 devices
+Iris Decoder (platform:aa00000.video-codec:de):
+	/dev/video0
+
+Iris Encoder (platform:aa00000.video-codec:en):
+	/dev/video1
+
+HP True Vision FHD Camera: HP T (usb-xhci-hcd.2.auto-1):
+	/dev/video2
+	/dev/video3
+	/dev/video4
+	/dev/video5
+	/dev/media0
+	/dev/media1
+-- /dev/video0 (iris_driver)
+Driver Info:
+	Driver name      : iris_driver
+	Card type        : Iris Decoder
+	Bus info         : platform:aa00000.video-codec:de
+	Driver version   : 7.4.0
+	Capabilities     : 0x84204000
+		Video Memory-to-Memory Multiplanar
+		Streaming
+		Extended Pix Format
+		Device Capabilities
+	Device Caps      : 0x04204000
+		Video Memory-to-Memory Multiplanar
+		Streaming
+		Extended Pix Format
+ioctl: VIDIOC_ENUM_FMT
+	Type: Video Capture Multiplanar
+
+	[0]: 'NV12' (Y/UV 4:2:0)
+	[1]: 'Q08C' (QCOM Compressed 8-bit Format, compressed)
+	[2]: 'P010' (10-bit Y/UV 4:2:0)
+	[3]: 'Q10C' (QCOM Compressed 10-bit Format, compressed)
+ioctl: VIDIOC_ENUM_FMT
+	Type: Video Output Multiplanar
+
+	[0]: 'H264' (H.264, compressed, dyn-resolution)
+	[1]: 'HEVC' (HEVC, compressed, dyn-resolution)
+	[2]: 'VP90' (VP9, compressed, dyn-resolution)
+	[3]: 'AV01' (AV1 OBU Stream, compressed, dyn-resolution)
+-- /dev/video1 (iris_driver)
+Driver Info:
+	Driver name      : iris_driver
+	Card type        : Iris Encoder
+	Bus info         : platform:aa00000.video-codec:en
+	Driver version   : 7.4.0
+	Capabilities     : 0x84204000
+		Video Memory-to-Memory Multiplanar
+		Streaming
+		Extended Pix Format
+		Device Capabilities
+	Device Caps      : 0x04204000
+		Video Memory-to-Memory Multiplanar
+		Streaming
+		Extended Pix Format
+ioctl: VIDIOC_ENUM_FMT
+	Type: Video Capture Multiplanar
+
+	[0]: 'H264' (H.264, compressed, enc-cap-frame-interval)
+	[1]: 'HEVC' (HEVC, compressed, enc-cap-frame-interval)
+ioctl: VIDIOC_ENUM_FMT
+	Type: Video Output Multiplanar
+
+	[0]: 'NV12' (Y/UV 4:2:0)
+	[1]: 'Q08C' (QCOM Compressed 8-bit Format, compressed)
+
+==== decode test (H.264, 1080p, 10 s)
+software:
+  0.247 s elapsed, 1.345 s user CPU
+hardware (h264_v4l2m2m):
+[h264_v4l2m2m @ 0xc552a252b7d0] output POLLERR
+[vist#0:0/h264 @ 0xc552a252a4e0] [dec:h264_v4l2m2m @ 0xc552a252b570] Error submitting packet to decoder: Input/output error
+[h264_v4l2m2m @ 0xc552a252b7d0] output POLLERR
+[vist#0:0/h264 @ 0xc552a252a4e0] [dec:h264_v4l2m2m @ 0xc552a252b570] Error submitting packet to decoder: Input/output error
+[h264_v4l2m2m @ 0xc552a252b7d0] output POLLERR
+[vist#0:0/h264 @ 0xc552a252a4e0] [dec:h264_v4l2m2m @ 0xc552a252b570] Error submitting packet to decoder: Input/output error
+[h264_v4l2m2m @ 0xc552a252b7d0] output POLLERR
+[vist#0:0/h264 @ 0xc552a252a4e0] [dec:h264_v4l2m2m @ 0xc552a252b570] Error submitting packet to decoder: Input/output error
+[h264_v4l2m2m @ 0xc552a252b7d0] output POLLERR
+[vist#0:0/h264 @ 0xc552a252a4e0] [dec:h264_v4l2m2m @ 0xc552a252b570] Error submitting packet to decoder: Input/output error
+[vist#0:0/h264 @ 0xc552a252a4e0] [dec:h264_v4l2m2m @ 0xc552a252b570] Decode error rate 1 exceeds maximum 0.666667
+[vf#0:0 @ 0xc552a252b220] No filtered frames for output stream, trying to initialize anyway.
+[vist#0:0/h264 @ 0xc552a252a4e0] [dec:h264_v4l2m2m @ 0xc552a252b570] Task finished with error code: -1145393733 (Error number -1145393733 occurred)
+[vist#0:0/h264 @ 0xc552a252a4e0] [dec:h264_v4l2m2m @ 0xc552a252b570] Terminating thread with return code -1145393733 (Error number -1145393733 occurred)
+[out#0/null @ 0xc552a25b7360] Output file is empty, nothing was encoded(check -ss / -t / -frames parameters if used)
+  0.049 s elapsed, 0.024 s user CPU
+
+==== kernel log after the test
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1005): BUILD_TIME: Jan  5 2026 14:07:39
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(999): QC_IMAGE_VERSION_STRING=video-firmware.3.6-aeb98f00ce9fd019d4902f480bfe2f73a56f7c4d
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: <VFW_E:HostDr:unkn:--------:--> VenusHostDriver_ParseC2SysPacket(1001): IMAGE_VARIANT_STRING=PROD
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000003: fatal error
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000009: unknown
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000009: unknown
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000009: unknown
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000009: unknown
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000007: unknown
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000007: unknown
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000007: unknown
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000007: unknown
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000006: unknown
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000006: unknown
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000006: unknown
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x1000006: unknown
+Nov 22 11:40:41 glymur kernel: qcom-iris aa00000.video-codec: session error received 0x4000004: invalid operation for current state
+Saved to /var/log/glymur/video-test-20261122T114039.txt
