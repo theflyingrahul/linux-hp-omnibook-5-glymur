@@ -13,6 +13,10 @@ set -u
 # on Mahua (docs/video-iris-windows-2026-11-06.md): one core on vcodec 0's
 # power domain, HFI core ID 2, hardware core 1's register bits, and the
 # wrapper power control released; each trial leaves one of these out.
+# From -26 the trial without the hardware core's bits is gone: on -26 the
+# firmware failed to boot in it and the apps SMMU deadlocked until a
+# reboot (2026-11-22). The trials also stop at the first boot failure or
+# SMMU fault.
 #   sudo bash check-video.sh [--diag | --mahua]
 
 [ "$(id -u)" -eq 0 ] || { echo 'run with sudo' >&2; exit 1; }
@@ -79,7 +83,7 @@ if [ "${1:-}" = --mahua ]; then
     # hw_core pwr_ctl pipes partial_av1_only: the Windows-like set with the
     # partial-data buffer kept to AV1 (glymur-bringup/0005, from -21) first,
     # since -20's firmware rejected it on H.264; then one change each.
-    for t in "1 1 0 1" "1 1 0 0" "1 1 2 0" "-1 1 0 0" "1 0 0 0"; do
+    for t in "1 1 0 1" "1 1 0 0" "1 1 2 0" "1 0 0 0"; do
         set -- $t
         echo; echo "-- trial: diag_hw_core=$1 diag_pwr_ctl=$2 diag_pipes=$3 diag_partial_av1_only=$4 (diag_cores=1 diag_core_id=2)"
         if ! modprobe -r qcom_iris 2>&1; then
@@ -87,6 +91,7 @@ if [ "${1:-}" = --mahua ]; then
             break
         fi
         sleep 1
+        loaded=$(date '+%Y-%m-%d %H:%M:%S')
         modprobe qcom_iris diag_cores=1 diag_core_id=2 diag_hw_core="$1" diag_pwr_ctl="$2" diag_pipes="$3" \
             diag_partial_av1_only="$4" 2>&1
         sleep 2
@@ -98,6 +103,13 @@ if [ "${1:-}" = --mahua ]; then
         journalctl -k --no-pager --since "$since" |
             grep -E 'diag:|not supported|fatal|power on failed|stuck|failed to suspend|Oops|timeout|Buffer type' |
             sed 's/^.*qcom-iris [^ ]* //' | sort | uniq -c | head -16
+        if journalctl -k --no-pager --since "$loaded" |
+                grep -qE 'error booting up iris firmware|Unhandled context fault|SMMU may be deadlocked'; then
+            echo 'firmware boot failure or SMMU fault: stopping the trials (reboot before more video tests)'
+            journalctl -k --no-pager --since "$loaded" | grep -E 'iris firmware|arm-smmu' | head -8
+            sync; echo "Saved to $OUT"
+            exit 1
+        fi
     done
     modprobe -r qcom_iris 2>&1
     modprobe qcom_iris 2>&1

@@ -112,14 +112,22 @@ qset() { amixer -D "hw:$CARD" -q cset "name=$1" "$2" 2>&1; }
 PW_STOPPED=0
 pw_stop() {
     asuser systemctl --user stop pipewire.socket pipewire-pulse.socket pipewire pipewire-pulse wireplumber 2>&1 | tail -2
-    PW_STOPPED=1; sleep 1
+    PW_STOPPED=1; MEDIA_KEYS=1; sleep 1
 }
 pw_start() {
     [ "$PW_STOPPED" = 1 ] || return 0
     asuser systemctl --user start pipewire.socket pipewire-pulse.socket wireplumber 2>&1 | tail -2
     PW_STOPPED=0
 }
-trap 'restore; pw_start' EXIT
+# gsd-media-keys never reconnects to a stopped PulseAudio socket, leaving F6
+# and F9 dead (2026-11-22). Its unit restarts it on failure.
+MEDIA_KEYS=0
+media_keys_reconnect() {
+    [ "$MEDIA_KEYS" = 1 ] || return 0
+    asuser systemctl --user start pipewire-pulse 2>&1 | tail -2
+    pkill -KILL -u "$SUDO_USER" -x gsd-media-keys && echo 'gsd-media-keys restarted (F6/F9)'
+}
+trap 'restore; pw_start; media_keys_reconnect' EXIT
 peak() {
     python3 -c '
 import array, sys, wave
