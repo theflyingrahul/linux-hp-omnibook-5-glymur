@@ -200,6 +200,77 @@ if [ "$REPLY" = y ]; then
         done
         ask "Was the second tone clearly louder than the first?"
     fi
+    # From -26: where does the left/right swap come from? On -23 the same
+    # left.wav played on either side from one stream to the next. Six
+    # streams of it, with both SoundWire controllers' registers and the
+    # codec's read while each plays (debugfs, read-only); the registers
+    # that differ between "left" and "right" streams say which block
+    # starts out of step. Identical registers put it upstream (codec DMA
+    # or RX macro).
+    sect "left/right: six streams of the left tone, registers per stream"
+    ask "Six short tones, all meant for the LEFT ear. Wear the headset the right way round and answer left or right after each. (y/N)"
+    if [ "$REPLY" = y ]; then
+        SNAP="/var/log/glymur/headset-swap-$(date +%Y%m%dT%H%M%S)"
+        mkdir -p "$SNAP"
+        swsnap() {
+            local d="$SNAP/$1" m s
+            mkdir -p "$d"
+            for m in /sys/kernel/debug/soundwire/master-*; do
+                [ -r "$m/qualcomm-sdw/qualcomm-registers" ] &&
+                    cat "$m/qualcomm-sdw/qualcomm-registers" > "$d/${m##*/}.txt" 2>/dev/null
+                for s in "$m"/sdw:*0217:0110*; do
+                    [ -r "$s/registers" ] && cat "$s/registers" > "$d/${m##*/}-codec.txt" 2>/dev/null
+                done
+            done
+        }
+        for i in 1 2 3 4 5 6; do
+            timeout -k 2 12 aplay -q -D "plughw:$CARD,0" "$WAV/left.wav" >/dev/null 2>&1 &
+            p=$!
+            sleep 0.8
+            swsnap "t$i"
+            wait "$p"
+            ask "Tone $i: left or right?"
+            echo "$REPLY" > "$SNAP/t$i/heard"
+        done
+        python3 - "$SNAP" <<'PY'
+import os, re, sys
+root = sys.argv[1]
+pat = re.compile(r"^\s*(?:0x)?([0-9a-fA-F]+)\s*:?\s+(?:0x)?([0-9a-fA-F]+)\s*$")
+streams = {}
+for t in sorted(os.listdir(root)):
+    d = os.path.join(root, t)
+    if not os.path.isdir(d):
+        continue
+    heard = open(os.path.join(d, "heard")).read().strip().lower()
+    side = "left" if heard.startswith("l") else "right" if heard.startswith("r") else heard
+    regs = {}
+    for f in sorted(os.listdir(d)):
+        if f.endswith(".txt"):
+            for line in open(os.path.join(d, f)):
+                m = pat.match(line)
+                if m:
+                    regs[(f[:-4], int(m.group(1), 16))] = m.group(2)
+    streams[t] = (side, regs)
+print("heard:", ", ".join("%s=%s" % (t, s) for t, (s, _) in streams.items()))
+sides = {s for s, _ in streams.values()}
+if not {"left", "right"} <= sides:
+    print("no swap among these streams; nothing to compare")
+    sys.exit()
+keys = set().union(*(r.keys() for _, r in streams.values()))
+found = 0
+for k in sorted(keys):
+    by = {}
+    for s, r in streams.values():
+        by.setdefault(s, set()).add(r.get(k))
+    if "left" in by and "right" in by and len(by["left"]) == 1 and len(by["right"]) == 1 and by["left"] != by["right"]:
+        print("%-28s %#06x  left-streams %s  right-streams %s" % (k[0], k[1], by["left"].pop(), by["right"].pop()))
+        found += 1
+print("registers that tell the two apart: %d" % found)
+if not found:
+    print("same registers either way: the swap is upstream of SoundWire (codec DMA or RX macro)")
+PY
+        echo "snapshots: $SNAP (copy to .work/)"
+    fi
     journalctl -k -b --no-pager --since "-90s" | grep -iE 'wcd|sdca|swr|sdw|q6apm|CMD timeout|error' | tail -20 || true
     restore
     pw_start

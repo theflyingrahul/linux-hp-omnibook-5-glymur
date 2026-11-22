@@ -4,12 +4,15 @@ set -u
 # USB report for the device-tree boots with USB. See README.md.
 #   sudo bash check-usb.sh [--previous]
 #   sudo bash check-usb.sh --ss-stress [cycles]   (USB-A SuperSpeed, from -23)
+#   sudo bash check-usb.sh --repeater            (USB-A repeater on i2c5, from -26)
 
 [ "$(id -u)" -eq 0 ] || { echo 'run with sudo' >&2; exit 1; }
 B=0
 STRESS=0
+REPEATER=0
 [ "${1:-}" = --previous ] && B=-1
 if [ "${1:-}" = --ss-stress ]; then STRESS=1; CYCLES="${2:-20}"; fi
+[ "${1:-}" = --repeater ] && REPEATER=1
 OUT="/var/log/glymur/usb-test-$(date +%Y%m%dT%H%M%S).txt"
 mkdir -p /var/log/glymur
 # Personal identifiers stay out of the log (it may end up in the
@@ -24,6 +27,35 @@ redact() {
 }
 exec > >(redact | tee "$OUT") 2>&1
 sect() { printf '\n==== %s\n' "$*"; }
+
+# --repeater (from -26): is the USB-A port's eUSB2 repeater an NXP PTN3222 on
+# i2c5 (HP's I2C6, QUP0 SE5), as on Qualcomm's Glymur CRD and the Mahua
+# ThinkPad T14s? The test device tree enables i2c5 at HP's 100 kHz with no
+# devices on it. Read-only: a read probe of the redriver addresses
+# 0x40-0x4f (HP's PMIC on this bus, PML0, is at 0x08 and is not touched),
+# then a byte dump of each address that answers.
+# docs/usb-a-repeater-2026-11-21.md
+if [ "$REPEATER" = 1 ]; then
+    sect "USB-A repeater: i2c5 (0xb94000) scan, read-only"
+    uname -r
+    tr -d '\0' < /sys/firmware/devicetree/base/model 2>/dev/null; echo
+    command -v i2cdetect >/dev/null || { echo 'i2cdetect missing: sudo apt install i2c-tools'; exit 1; }
+    modprobe i2c-dev
+    bus=""
+    for a in /sys/bus/i2c/devices/i2c-*; do
+        readlink -f "$a" | grep -q 'b94000\.i2c' && { bus=${a##*/i2c-}; break; }
+    done
+    [ -n "$bus" ] || { echo 'no adapter for b94000.i2c: the test device tree has i2c5 from -26'; journalctl -k -b | grep -i 'b94000' | tail -5; exit 1; }
+    echo "i2c5 is i2c-$bus"
+    journalctl -k -b --no-pager | grep -i 'b94000' | tail -5
+    i2cdetect -y -r "$bus" 0x40 0x4f
+    for addr in $(i2cdetect -y -r "$bus" 0x40 0x4f | awk 'NR>1 {for (i=2;i<=NF;i++) if ($i ~ /^[0-9a-f][0-9a-f]$/) print $i}'); do
+        echo "-- 0x$addr: byte dump"
+        i2cdump -y -r 0x00-0x3f "$bus" "0x$addr" b
+    done
+    sync; echo; echo "Saved to $OUT"
+    exit 0
+fi
 
 # --ss-stress: the USB-A port's SuperSpeed link (a000000.usb, usb_2_qmpphy),
 # which failed on 2 of ~15 boots. Run it on the test device tree (HP's PHYC

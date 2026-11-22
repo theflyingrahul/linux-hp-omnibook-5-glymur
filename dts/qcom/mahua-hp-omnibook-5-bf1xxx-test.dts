@@ -65,6 +65,9 @@
  * its own); suspend, the M31 PHY's SE0 timeout and the xHCI reset on resume
  * are kernel changes. Iris and DisplayPort are in the -test-av device tree.
  *
+ * Kernel -26: the headset codec node as 7.4 wants it (qcom,sdca-compliant),
+ * and i2c5 for a read-only scan for the USB-A repeater.
+ *
  * Kernel -25: the PMK8850 (without its RTC), LDO7_B and the USB-C
  * repeaters' supplies moved to the daily device tree. What stays here:
  * the headset, HP's USB-A PHY values and the RTC measurement.
@@ -199,8 +202,15 @@
 	status = "okay";
 
 	wcd9378c: codec@3,0 {
-		compatible = "qcom,wcd9378c", "sdw20217011000";
+		compatible = "sdw20217011000";
 		reg = <0 3>;
+
+		/*
+		 * From -26 (Linux 7.4): the SDCA driver binds only with this;
+		 * the same ID's non-SDCA variant has another driver. On -23 this
+		 * codec played and recorded through the SDCA class driver.
+		 */
+		qcom,sdca-compliant;
 
 		pinctrl-0 = <&wcd_default>;
 		pinctrl-names = "default";
@@ -248,11 +258,26 @@
 	};
 };
 
+/*
+ * i2c5 (HP's I2C6, QUP0 SE5 at 0xb94000, its SDA/SCL on GPIO 20 and 21), from
+ * -26, with nothing on it: a read-only scan for the USB-A port's eUSB2
+ * repeater (check-usb.sh --repeater; docs/usb-a-repeater-2026-11-21.md).
+ * Qualcomm's Glymur CRD and the Mahua ThinkPad T14s put their PTN3222
+ * repeaters on this bus. HP's ACPI has its PMIC PML0 (QCOM0FC6) at 0x08
+ * here, at 100 kHz, which Windows drives.
+ */
+&i2c5 {
+	clock-frequency = <100000>;
+
+	status = "okay";
+};
+
 &tlmm {
 	/*
 	 * The daily allow-list plus the headset codec's reset (GPIO 191)
+	 * and, from -26, i2c5's SDA/SCL (GPIO 20, 21)
 	 */
-	gpio-reserved-ranges = <2 1>, <4 12>, <19 13>, <34 2>, <38 13>,
+	gpio-reserved-ranges = <2 1>, <4 12>, <19 1>, <22 10>, <34 2>, <38 13>,
 			       <52 4>, <60 6>, <68 2>, <71 21>, <93 23>,
 			       <117 2>, <120 26>, <149 3>, <155 36>,
 			       <192 59>;

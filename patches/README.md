@@ -121,6 +121,17 @@ tree. `0005` reads the EC's pending event from register `0x00`, where HP's
 value left a fan notice unacknowledged and the event line firing about nine
 times a second (`docs/audit-2026-10-22.md`).
 
+Kernel `-26` (2026-11-21, `docs/linux-runbook-26-2026-11-21.md`, package sha256
+`568bc434…`): the `-25`
+kernel and patches unchanged, with two test device tree changes. They replace
+`-25`, which was not booted:
+- the headset codec node in 7.4's form (`qcom,sdca-compliant`, compatible
+  `sdw20217011000`). 7.4's WCD9378 SDCA driver binds only with the property
+  (`docs/headset-2026-11-21.md`);
+- `i2c5` (HP's `I2C6`) enabled with no devices, and its pins (GPIO 20, 21)
+  allowed, for a read-only scan for the USB-A port's repeater
+  (`docs/usb-a-repeater-2026-11-21.md`).
+
 Kernel `-25` (2026-11-21, `docs/linux-runbook-25-2026-11-21.md`, package sha256
 `c6477f54…`): the base
 moves to qcom-next `c6989d230fe6`, tag `qcom-next-7.4-rc3-20261120`, at the

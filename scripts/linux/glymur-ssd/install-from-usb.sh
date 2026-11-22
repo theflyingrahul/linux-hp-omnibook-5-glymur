@@ -3,11 +3,11 @@ set -euo pipefail
 
 # Install everything staged on the USB. See README.md.
 #   bash install-from-usb.sh [--keep-ubuntu-mesa] [kernel release]
-# Default kernel: 7.4.0-rc3-glymur-25.
+# Default kernel: 7.4.0-rc3-glymur-26.
 
 SYSTEM_MESA=1
 if [ "${1:-}" = --keep-ubuntu-mesa ]; then SYSTEM_MESA=0; shift; fi
-KREL="${1:-7.4.0-rc3-glymur-25}"
+KREL="${1:-7.4.0-rc3-glymur-26}"
 K="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 [ "$(id -u)" -ne 0 ] || { echo 'run as your normal user, not with sudo' >&2; exit 1; }
 [ "$(findmnt -n -o LABEL /)" = glymur-root ] || { echo 'not booted from the SSD install (glymur-root); refusing' >&2; exit 1; }
@@ -133,8 +133,8 @@ if [ -d "$K/gnome-shell/$EXT" ]; then
     echo "enabled from the next login: $(gsettings get org.gnome.shell enabled-extensions 2>/dev/null)"
 fi
 
-echo "== test tools from Ubuntu (glxinfo/eglinfo, vulkaninfo/vkcube, glmark2, kmscube)"
-sudo apt-get install -y mesa-utils mesa-utils-bin vulkan-tools glmark2-es2-wayland kmscube ||
+echo "== test tools from Ubuntu (glxinfo/eglinfo, vulkaninfo/vkcube, glmark2, kmscube, i2c-tools)"
+sudo apt-get install -y mesa-utils mesa-utils-bin vulkan-tools glmark2-es2-wayland kmscube i2c-tools ||
     echo 'apt failed (offline?); install them later, check-mesa.sh names them'
 
 for f in check-gpu-test.sh check-mesa.sh charging-watch.sh check-usb.sh check-ec.sh gpu-corruption-test.sh \
@@ -151,7 +151,7 @@ fi
 sync
 echo
 echo "Done. Reboot into \"Ubuntu on SSD: test device tree\" and follow"
-echo "docs/linux-runbook-25-2026-11-21.md. The checks, from a terminal:"
+echo "docs/linux-runbook-26-2026-11-21.md. The checks, from a terminal:"
 echo "  sudo bash ~/check-chid.sh       (hardware IDs for systemd-stub/stubble; no external monitor)"
 echo "  sudo bash ~/check-efivars-write.sh   (one EFI variable write; --verify after the reboot)"
 echo "  sudo bash ~/check-rtc.sh        (RTC: the PMK8850 counter and SDAM, then the GLink RTC; Wi-Fi on)"
